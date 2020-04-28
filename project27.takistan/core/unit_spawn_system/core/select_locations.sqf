@@ -8,7 +8,7 @@ private ["_safe_radius","_distance","_all_locations","_types_locations","_delete
 
 _safe_radius = 2000;
 _distance = 600;
-uss_debug = false;
+prj_debug = false;
 
 _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 
@@ -29,7 +29,7 @@ _types_locations = [
 
 _delete_locations = nearestLocations [position Checkpoint1, _all_locations, _safe_radius] + nearestLocations [position Checkpoint2, _all_locations, _safe_radius];
 
-_house_ieds_class = ["Claymore_F","rhs_mine_stockmine43_2m","APERSTripMine"];
+_house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
 
 for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 
@@ -53,7 +53,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 				for "_i" from 1 to (round ((count _useful) / 5)) do {
 					private _allpositions = (selectRandom _useful) buildingPos -1;
 					private _house_ied = createMine [selectRandom _house_ieds_class, selectRandom _allpositions,[],1];
-					if (uss_debug) then {
+					if (prj_debug) then {
 						private _marker_house = createMarker ["house_ied_" + str (position _house_ied), position _house_ied];
 						_marker_house setMarkerType "mil_dot";
 						_marker_house setMarkerAlpha 1;
@@ -63,7 +63,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 			};
 		};
 
-		if (uss_debug) then {
+		if (prj_debug) then {
 			private _marker_area = createMarker ["_area_marker_" + str _pos, _pos]; 
 			_marker_area setMarkerSize [_spawn_area,_spawn_area];
 			_marker_area setMarkerShape "ELLIPSE";
@@ -98,7 +98,7 @@ for "_i" from 1 to _number_of_ied do {
 	_junk = selectRandom _junk_class createVehicle (position (selectRandom _roads));
 	_junk enableSimulationGlobal false;
 
-	if (uss_debug) then {
+	if (prj_debug) then {
 		private _marker_junk = createMarker ["junk_" + str (position _junk), position _junk];
 		_marker_junk setMarkerType "mil_dot";
 		_marker_junk setMarkerAlpha 1;

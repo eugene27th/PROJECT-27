@@ -8,7 +8,7 @@ params [
 	"_trigger"
 ];
 
-if (uss_debug) then {
+if (prj_debug) then {
 	[format ["%1 activated\nenemy - %2\nciv - %3",_trigger,(_trigger getVariable "config") select 0,(_trigger getVariable "config") select 1]] remoteExec ["hint",0];
 };
 
@@ -354,6 +354,6 @@ _units_deleted = _enemy_house_units + _civilian_house_units + _enemy_patrols_uni
 
 {deleteVehicle _x} forEach _enemy_house_units + _civilian_house_units + _enemy_patrols_units + _civilian_patrols_units + _global_vehicles;
 
-if (uss_debug) then {
+if (prj_debug) then {
 	[format ["%1 deactivated\n%2 entities deleted",_trigger,count _units_deleted]] remoteExec ["hint",0];
 };

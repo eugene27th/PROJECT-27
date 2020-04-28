@@ -19,14 +19,6 @@ class Params
 		texts[] = { "On", "Off" };
 		default = 1;
 	};
-
-	class patrol_failure_time
-	{
-		title = "Patrols failure time";
-		values[] = { 3600, 7200, 10800, 14400,  18000 };
-		texts[] = { "1 hour", "2 hour", "3 hour", "4 hour", "5 hour" };
-		default = 10800;
-	};
 	
 	class number_of_ied
 	{
