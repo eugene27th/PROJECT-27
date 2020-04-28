@@ -3,7 +3,7 @@
 	1.3.0
 */
 
-actiondeploy = [
+private _actiondeploy = [
 	"a_hq_terminal_deploy",
 	"Deploy MHQ",
 	"\A3\Ui_f\data\Map\Markers\NATO\b_hq.paa",
@@ -15,9 +15,9 @@ actiondeploy = [
 	{true}
 ] call ace_interact_menu_fnc_createAction;
 
-[mhqterminal, 0, ["ACE_MainActions"], actiondeploy] call ace_interact_menu_fnc_addActionToObject;
+[mhqterminal, 0, ["ACE_MainActions"], _actiondeploy] call ace_interact_menu_fnc_addActionToObject;
 
-actionundeploy = [
+private _actionundeploy = [
 	"a_hq_terminal_undeploy",
 	"Undeploy MHQ",
 	"\A3\Ui_f\data\Map\Markers\NATO\b_hq.paa",
@@ -29,4 +29,4 @@ actionundeploy = [
 	{true}
 ] call ace_interact_menu_fnc_createAction;
 
-[mhqterminal, 0, ["ACE_MainActions"], actionundeploy] call ace_interact_menu_fnc_addActionToObject;
+[mhqterminal, 0, ["ACE_MainActions"], _actionundeploy] call ace_interact_menu_fnc_addActionToObject;
