@@ -1,6 +1,6 @@
 /*
 	written by eugene27.
-	server onlyf
+	server only
 	1.3.0
 */
 
