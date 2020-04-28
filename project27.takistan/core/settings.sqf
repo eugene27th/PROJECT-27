@@ -1,43 +1,6 @@
 /*
 	written by eugene27.
 	1.3.0
-	___________________
-	russian (original):
-
-	____________
-	> параметры:
-
-	• предустановка карты:
-		"european_aggressor" - рекомендуется для таких карт как: rosche, chernarus, livonia и т.д. (европейские карты)
-		"middle_east" - рекомендуется для таких карт как: takistan, fallujah, lithium и т.д. (средне-восточные карты)
-
-	*о редактировании конфигурации спавна юнитов можно узнать в файле "core\unit_spawn_system\configuration.sqf"
-
-	_______________________________________________
-	> переход на карту, которая есть в папке "mission_sqm":
-
-	• переименуйте нужный вам файл из папки "missions_sqm" в "mission.sqm" и замените им оригинальный
-	• измените "расширение" папки (директории) миссии в зависимости от выбранной карты
-	• расширения карт, которые есть в "missions_sqm":
-		- takistan - .takistan
-		- fallujah - .fallujah
-		- lithium - .Lythium
-		- rosche - .WL_Rosche
-		- chernarus - .chernarus
-		- chernarus summer - .chernarus_summer
-		- chernarus winter - .Chernarus_Winter
-	• (по усмотрению) измените предустановку карты (_map_preset), в зависимости от выбранной карты
-	• (не обязательно. если знаете как.) можете изменить (или добавить свой) пресет конфигурации спавна юнитов в файле "core\unit_spawn_system\configuration.sqf"
-	• играть :)
-
-	______________________________________________________________
-	> портирование на другие карты, которых нет в папке "mission_sqm":
-
-	• в редакторе расставьте объекты на базах
-	• (по усмотрению) измените предустановку карты (_map_preset), в зависимости от выбранной карты
-	• (не обязательно. если знаете как.) можете изменить (или добавить свой) пресет конфигурации спавна юнитов в файле "core\unit_spawn_system\configuration.sqf"
-	• играть
-	• сообщать о багах, если они появятся
 */
 
 if (isServer) then {
@@ -45,7 +8,7 @@ if (isServer) then {
 	//////// map preset / предустановка карты \\\\\\\\
 	_map_preset = "middle_east";
 
-	////// preset configuration. don’t know? don’t change. \\\\\\
+	////// units configuration. don’t know? don’t change. \\\\\\
 	switch (_map_preset) do {
 		case "european_aggressor": {
 			box_ammo_cache = "Box_FIA_Ammo_F";
