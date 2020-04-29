@@ -4,5 +4,4 @@
 * ## [Multi-map mission release.](https://github.com/eugene27r/PROJECT-27/releases)
 * ## [Report a problem in different languages.](https://github.com/eugene27r/PROJECT-27/issues)
 * ## [Required mods.](https://github.com/eugene27r/PROJECT-27/wiki/Required-mods.)
-* ## [Mission parameters.](https://github.com/eugene27r/PROJECT-27/wiki/Mission-parameters.)
-* ## [Porting to other map.](https://github.com/eugene27r/PROJECT-27/wiki/Porting-to-other-map.)
+* ## [Wiki.](https://github.com/eugene27r/PROJECT-27/wiki)
