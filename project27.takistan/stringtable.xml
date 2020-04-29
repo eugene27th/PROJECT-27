@@ -4,6 +4,33 @@
 
     <Package name="Civil_Info">
 
+        <Container name="PRJ_HQ_MENU">
+            <Key ID="STR_PRJ_STATISTICS_KILLED">
+                <Original>KILLED</Original>
+		        <Russian>УБИТО</Russian>
+                <English>KILLED</English>
+		        <German>GETÖTET</German>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_CIVILIANS">
+                <Original>CIVILIANS</Original>
+		        <Russian>ГРАЖДАНСКИХ</Russian>
+                <English>CIVILIANS</English>
+		        <German>ZIVILISTEN</German>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_ENEMIES">
+                <Original>ENEMIES</Original>
+		        <Russian>ПРОТИВНИК</Russian>
+                <English>ENEMIES</English>
+		        <German>FEINDE</German>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_FRIENDLY">
+                <Original>FRIENDLY</Original>
+		        <Russian>СОЮЗНИКИ</Russian>
+                <English>FREUNDLICH</English>
+		        <German>GETÖTET</German>
+            </Key>
+	    </Container>
+
         <Container name="PRJ_CIVIL">
             <Key ID="STR_PRJ_CIVIL">
                 <Original>Civilian</Original>

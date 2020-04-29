@@ -13,7 +13,7 @@ _civ = player getVariable "civ_killings";
 _enemy = player getVariable "enemy_killings";
 _friend = player getVariable "friend_killings";
 
-_stats_text = "УБИТО:<br/>" + "ПРОТИВНИК: " + str _enemy + "<br/>" + "СОЮЗНИКИ: " + str _friend + "<br/>" + "ГРАЖДАНСКИЕ: " + str _civ + "<br/>";
+_stats_text = localize "STR_PRJ_STATISTICS_KILLED" + ":<br/>" + localize "STR_PRJ_STATISTICS_ENEMIES" + ": " + str _enemy + "<br/>" + localize "STR_PRJ_STATISTICS_FRIENDLY" + ": " + str _friend + "<br/>" + localize "STR_PRJ_STATISTICS_CIVILIANS" + ": " + str _civ + "<br/>";
 
 _stat_p = (_enemy * 10) - (_friend * 50) - (_civ * 25);
 

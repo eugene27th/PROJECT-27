@@ -14,9 +14,7 @@ while {alive _civ && !_scan_end} do {
         if (side _x == west) then {
             if (((random 1) < 0.3) && alive _civ && [_civ] call ace_common_fnc_isAwake) then {
                 [_civ] join (createGroup independent);
-                _civ addItemToUniform "ACE_DeadManSwitch";
-                _civ addItemToUniform "ACE_Cellphone";
-                _civ addItemToUniform "DemoCharge_Remote_Mag";          
+                {_civ addItemToUniform _x} forEach ["ACE_DeadManSwitch","ACE_Cellphone"];       
                 if (random 1 < 0.5) then {
                     _civ addMagazine [selectRandom ["acex_intelitems_photo","acex_intelitems_document","acex_intelitems_notepad"], 1];
                 };
@@ -31,7 +29,6 @@ while {alive _civ && !_scan_end} do {
                 _civ forceSpeed 15;				  
                 (group _civ) setBehaviour "CARELESS";
                 (group _civ) setSpeedMode "FULL";
-                sleep 1;
 
                 while {(_civ distance _x) > 10} do {
                     _civ domove position _x;
@@ -45,7 +42,6 @@ while {alive _civ && !_scan_end} do {
                         private _blast = ["Bo_Mk82","Rocket_03_HE_F","M_Mo_82mm_AT_LG","Bo_GBU12_LGB","Bo_GBU12_LGB_MI10","HelicopterExploSmall"];
                         createVehicle [selectRandom _blast,(getPosATL _civ),[],0,""];
                         createVehicle ["Crater",(getPosATL _civ),[],0,""];
-                        _civ removeItem "DemoCharge_Remote_Mag";
                     };
                 };
             }
@@ -68,7 +64,7 @@ while {alive _civ && !_scan_end} do {
                     _civ action ["eject",vehicle _civ];
                     _civ allowfleeing 0;
 
-                    while {(_civ distance _x) > 60} do {
+                    while {(_civ distance _x) > 40} do {
                         _civ domove position _x;
                         sleep 5;
                     };
