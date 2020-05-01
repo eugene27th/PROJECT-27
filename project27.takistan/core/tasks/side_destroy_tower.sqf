@@ -15,7 +15,7 @@ _taskID = "SIDE_" + str _taskID;
 _center_pos = [1,false] call prj_fnc_select_position;
 _pos = [_center_pos, 200, 500, 3, 0] call BIS_fnc_findSafePos;
 
-_tower_class = selectRandom towers_array;
+_tower_class = selectRandom towers;
 _tower = (_tower_class select 0) createVehicle _pos;
 _generator = (_tower_class select 1) createVehicle ((position _tower) findEmptyPosition [0,20,_tower_class select 1]);
 

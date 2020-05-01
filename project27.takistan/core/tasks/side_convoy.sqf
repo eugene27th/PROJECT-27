@@ -26,10 +26,10 @@ _vehicles = [];
 _crews = [];
 
 for "_i" from 1 to 3 do {
-	private _vehicle = selectRandom (enemy_heavy_armed_vehicle_array + enemy_cars_array) createVehicle _pos;
+	private _vehicle = selectRandom (enemy_vehicles_heavy + enemy_vehicles_light) createVehicle _pos;
 	_vehicle setDir _direction;
 	_vehicle lock true;
-	private _crew = [_vehicle,enemy_units_array,true] call prj_fnc_create_crew;
+	private _crew = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
 	_crews = _crews + _crew;
 	crew _vehicle doMove _finish_pos;
 	_vehicles pushBack _vehicle;

@@ -15,8 +15,8 @@ _taskID = "SIDE_" + str _taskID;
 _center_pos = [1,false] call prj_fnc_select_position;
 _pos = [_center_pos, 200] call prj_fnc_select_house_position;
 
-_hostage = (createGroup civilian) createUnit [selectRandom civilian_units_array, _pos, [], 0, "NONE"];
-_enemy = (createGroup independent) createUnit [selectRandom enemy_units_array, position _hostage, [], 0, "NONE"];
+_hostage = (createGroup civilian) createUnit [selectRandom civilian_units, _pos, [], 0, "NONE"];
+_enemy = (createGroup independent) createUnit [selectRandom enemy_infantry, position _hostage, [], 0, "NONE"];
 [_hostage, true] call ACE_captives_fnc_setHandcuffed;
 _hostage setCaptive true;
 {_x setBehaviour "CARELESS"} forEach [_hostage,_enemy];

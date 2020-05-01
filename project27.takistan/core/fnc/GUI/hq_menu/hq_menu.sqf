@@ -3,21 +3,19 @@
 	1.3.0
 */
 
-private ["_arrayUIDs","_ctrl","_disp","_picture","_civ","_enemy","_friend","_stats_text","_ctrl_name"];
-
-_arrayUIDs = ["76561198141746661","76561198138702011","76561198343937417","76561198061237087"];
-
 private _dialog_hq = createDialog "dialogHQmenu";
 
-_civ = player getVariable "civ_killings";
-_enemy = player getVariable "enemy_killings";
-_friend = player getVariable "friend_killings";
+private _civ = player getVariable "civ_killings";
+private _enemy = player getVariable "enemy_killings";
+private _friend = player getVariable "friend_killings";
 
-_stats_text = localize "STR_PRJ_STATISTICS_KILLED" + ":<br/>" + localize "STR_PRJ_STATISTICS_ENEMIES" + ": " + str _enemy + "<br/>" + localize "STR_PRJ_STATISTICS_FRIENDLY" + ": " + str _friend + "<br/>" + localize "STR_PRJ_STATISTICS_CIVILIANS" + ": " + str _civ + "<br/>";
+private _stats_text = localize "STR_PRJ_STATISTICS_KILLED" + ":<br/>" + localize "STR_PRJ_STATISTICS_ENEMIES" + ": " + str _enemy + "<br/>" + localize "STR_PRJ_STATISTICS_FRIENDLY" + ": " + str _friend + "<br/>" + localize "STR_PRJ_STATISTICS_CIVILIANS" + ": " + str _civ + "<br/>";
 
-_stat_p = (_enemy * 10) - (_friend * 50) - (_civ * 25);
+private _stat_p = (_enemy * 10) - (_friend * 50) - (_civ * 25);
 
-_ctrl_name = (findDisplay 3000) displayCtrl 1001;
+private _ctrl_name = (findDisplay 3000) displayCtrl 1001;
+
+private ["_picture"];
 
 switch (true) do {
 	case (_stat_p >= 250) : {
@@ -47,7 +45,7 @@ switch (true) do {
 };
 ctrlSetText [1029, _picture];
 
-_ctrl = (findDisplay 3000) displayCtrl 1002;
+private _ctrl = (findDisplay 3000) displayCtrl 1002;
 _ctrl ctrlSetStructuredText parseText _stats_text;
 _ctrl ctrlSetTextColor [0.8, 0.8, 0, 1];
 

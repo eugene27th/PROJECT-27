@@ -15,7 +15,7 @@ _taskID = "SIDE_" + str _taskID;
 _center_pos = [1] call prj_fnc_select_position;
 _pos = [_center_pos, 300, 900, 5, 0] call BIS_fnc_findSafePos;
 
-_heli = (selectRandom friendly_heli_array) createVehicle _pos;
+_heli = (selectRandom friendly_helicopters) createVehicle _pos;
 _heli setVariable ["ace_cookoff_enableAmmoCookoff", false, true];
 _heli setDamage 1;
 
@@ -50,7 +50,7 @@ _enemies = [];
 for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
     private _grpname = createGroup independent;
     private _pos = [position _pilot, 50, 150, 1, 0] call BIS_fnc_findSafePos;
-    private _unit = _grpname createUnit [selectRandom enemy_units_array, _pos, [], 0, "NONE"];
+    private _unit = _grpname createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
     _enemies pushBack _unit;
 };
 

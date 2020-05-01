@@ -14,7 +14,7 @@ if (_civilian getVariable ["interviewed",false]) exitWith {
 	[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_INTERVIEWED_1","STR_PRJ_CIVIL_INFO_INTERVIEWED_2","STR_PRJ_CIVIL_INFO_INTERVIEWED_3"])] spawn BIS_fnc_showSubtitle;
 };
 
-_array = _position nearEntities [enemy_units_array, 1500];
+_array = _position nearEntities [enemy_infantry, 1500];
 if (!(_array isEqualTo []) && (random 1 < 0.5)) then {
 	_man = _array select 0;
 	_distance = (_position distance _man) + (round (random 150)) - (round (random 150));

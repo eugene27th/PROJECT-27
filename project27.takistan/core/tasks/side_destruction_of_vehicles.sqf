@@ -21,12 +21,12 @@ _pos = [_center_pos, 200, 550, 5, 0] call BIS_fnc_findSafePos;
 _enemy_grp = createGroup independent;
 
 for [{private _i = 0 }, { _i < [5,10] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
-    _vehicle = (selectRandom enemy_cars_array) createVehicle _pos;
+    _vehicle = (selectRandom enemy_vehicles_light) createVehicle _pos;
     _vehicle setDir (round (random 359));
     _vehicle lock true;
     _vehicles pushBack _vehicle;
     uisleep 0.2;
-    _unit = _enemy_grp createUnit [selectRandom enemy_units_array, (position _vehicle) findEmptyPosition [0,30,"C_IDAP_Man_AidWorker_01_F"], [], 0, "NONE"];
+    _unit = _enemy_grp createUnit [selectRandom enemy_infantry, (position _vehicle) findEmptyPosition [0,30,"C_IDAP_Man_AidWorker_01_F"], [], 0, "NONE"];
     _enemies pushBack _unit;
 };
 

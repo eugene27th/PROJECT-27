@@ -16,7 +16,7 @@ for [{private _i = 0 }, { _i < ([5,15] call BIS_fnc_randomInt) }, { _i = _i + 1 
     private _road = selectRandom _roads;
     _pos = getPos _road;
 
-    _mine = createMine [selectRandom mines_array, _pos, [], 0];
+    _mine = createMine [selectRandom ied, _pos, [], 0];
     _mines pushBack _mine;
 
     if (prj_debug) then {

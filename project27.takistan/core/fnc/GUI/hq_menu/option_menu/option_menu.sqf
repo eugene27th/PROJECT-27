@@ -5,8 +5,6 @@
 
 createDialog "dialogOptionMenu";
 
-private _arrayUIDs = ["76561198141746661","76561198138702011","76561198343937417","76561198061237087"];
-
-if !((getPlayerUID player) in _arrayUIDs || player getVariable ["officer",false]) then {
+if !((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then {
 	ctrlEnable [1021, false];
 };

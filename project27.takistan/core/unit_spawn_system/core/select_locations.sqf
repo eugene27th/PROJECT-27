@@ -4,15 +4,16 @@
 	1.3.0
 */
 
-private ["_safe_radius","_distance","_all_locations","_types_locations","_delete_locations","_locations","_spawn_area","_pos","_trigger","_number_of_ied","_safe_radius","_ieds_class","_junk_class","_roads","_ied","_junk","_house_ieds_class","_buildings","_useful"];
-
-_safe_radius = 2000;
-_distance = 600;
+private _safe_radius = 2000;
+private _distance = 600;
 prj_debug = false;
 
-_all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
+private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 
-_types_locations = [
+systemChat format ["%1",cities_enemy];
+systemChat format ["%1",ied];
+
+private _types_locations = [
 	["NameCityCapital",325,[cities_enemy,cities_civilian]],
 	["NameCity",325,[cities_enemy,cities_civilian]],
 	["NameVillage",325,[villages_enemy,villages_civilian]],
@@ -27,28 +28,28 @@ _types_locations = [
 	["BorderCrossing",100,[other_enemy,other_civilian]]
 ];
 
-_delete_locations = nearestLocations [position Checkpoint1, _all_locations, _safe_radius] + nearestLocations [position Checkpoint2, _all_locations, _safe_radius];
+private _delete_locations = nearestLocations [position Checkpoint1, _all_locations, _safe_radius] + nearestLocations [position Checkpoint2, _all_locations, _safe_radius];
 
-_house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
+private _house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
 
 for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 
-	_locations = (nearestLocations [[worldSize / 2, worldsize / 2, 0], [(_types_locations select _i) select 0], worldSize * 1.5]) - _delete_locations;
+	private _locations = (nearestLocations [[worldSize / 2, worldsize / 2, 0], [(_types_locations select _i) select 0], worldSize * 1.5]) - _delete_locations;
 
-	_spawn_area = (_types_locations select _i) select 1;
+	private _spawn_area = (_types_locations select _i) select 1;
 
 	{
-		_pos = locationPosition _x;
-		_trigger = createTrigger ["EmptyDetector",_pos,false];
+		private _pos = locationPosition _x;
+		private _trigger = createTrigger ["EmptyDetector",_pos,false];
 		_trigger setTriggerArea [(_distance + _spawn_area),(_distance + _spawn_area),0,false]; 
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [1, 1, 1, true];
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) select 2) < 150 && (speed _x < 180)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",(_types_locations select _i) select 2];
 
-		_buildings = nearestObjects [_pos, ["Building"], _spawn_area];
+		private _buildings = nearestObjects [_pos, ["Building"], _spawn_area];
 		if (!(_buildings isEqualTo [])) then {
-			_useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
+			private _useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
 			if ((count _useful) > 5) then {
 				for "_i" from 1 to (round ((count _useful) / 5)) do {
 					private _allpositions = (selectRandom _useful) buildingPos -1;
@@ -80,22 +81,20 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 };
 
 //create ied on the roads
-_ieds_class = ["APERSBoundingMine","ATMine","APERSMine","ACE_IEDLandBig_Range","ACE_IEDUrbanBig_Range","ACE_IEDLandSmall_Range","ACE_IEDUrbanSmall_Range"];
+private _junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
 
-_junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
+private _number_of_ied = "number_of_ied" call BIS_fnc_getParamValue;
+private _safe_radius = "ied_safe_radius" call BIS_fnc_getParamValue;
 
-_number_of_ied = "number_of_ied" call BIS_fnc_getParamValue;
-_safe_radius = "ied_safe_radius" call BIS_fnc_getParamValue;
-
-_roads = ([worldSize / 2, worldsize / 2, 0] nearRoads (worldSize * 1.5)) - (position Checkpoint1 nearRoads _safe_radius) - (position Checkpoint2 nearRoads _safe_radius);
+private _roads = ([worldSize / 2, worldsize / 2, 0] nearRoads (worldSize * 1.5)) - (position Checkpoint1 nearRoads _safe_radius) - (position Checkpoint2 nearRoads _safe_radius);
 
 for "_i" from 1 to _number_of_ied do {
-	_ied = createMine [selectRandom _ieds_class, (position (selectRandom _roads)),[],3];
+	private _ied = createMine [selectRandom ied, (position (selectRandom _roads)),[],3];
 	if ((random 1) < 0.7) then {
 		_junk = selectRandom _junk_class createVehicle position _ied;
 		_junk enableSimulationGlobal false;
 	};
-	_junk = selectRandom _junk_class createVehicle (position (selectRandom _roads));
+	private _junk = selectRandom _junk_class createVehicle (position (selectRandom _roads));
 	_junk enableSimulationGlobal false;
 
 	if (prj_debug) then {

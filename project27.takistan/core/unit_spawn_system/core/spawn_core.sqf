@@ -260,29 +260,29 @@ private ["_enemy_house_units","_enemy_patrols_units","_enemy_light_vehicles","_c
 
 /////////////////////SPAWN ENEMY\\\\\\\\\\\\\\\\\\\\\\\\
 //spawn house groups
-_enemy_house_units = [independent,enemy_units_array,(_trigger getVariable "config") select 0] call prj_fnc_spawn_house_groups;
+_enemy_house_units = [independent,enemy_infantry,(_trigger getVariable "config") select 0] call prj_fnc_spawn_house_groups;
 
 //spawn patrol group
-_enemy_patrols_units = [independent,enemy_units_array,(_trigger getVariable "config") select 0] call prj_fnc_spawn_patrols_groups;
+_enemy_patrols_units = [independent,enemy_infantry,(_trigger getVariable "config") select 0] call prj_fnc_spawn_patrols_groups;
 
 //spawn light vehicles
-_enemy_light_vehicles = [independent,enemy_units_array,enemy_cars_array + civilian_cars_array,(_trigger getVariable "config") select 0] call prj_fnc_spawn_vehicles;
+_enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,(_trigger getVariable "config") select 0] call prj_fnc_spawn_vehicles;
 
 //spawn heavy vehicles
-_enemy_heavy_vehicles = [independent,enemy_units_array,enemy_heavy_armed_vehicle_array,(_trigger getVariable "config") select 0,3] call prj_fnc_spawn_vehicles;
+_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,(_trigger getVariable "config") select 0,3] call prj_fnc_spawn_vehicles;
 
 //spawn statics
-_enemy_statics = [independent,enemy_units_array,enemy_static_array,(_trigger getVariable "config") select 0] call prj_fnc_spawn_static;
+_enemy_statics = [independent,enemy_infantry,enemy_turrets,(_trigger getVariable "config") select 0] call prj_fnc_spawn_static;
 
 /////////////////////SPAWN CIVILIAN\\\\\\\\\\\\\\\\\\\\\\\\
 //spawn house groups
-_civilian_house_units = [civilian,civilian_units_array,(_trigger getVariable "config") select 1] call prj_fnc_spawn_house_groups;
+_civilian_house_units = [civilian,civilian_units,(_trigger getVariable "config") select 1] call prj_fnc_spawn_house_groups;
 
 //spawn patrol group
-_civilian_patrols_units = [civilian,civilian_units_array,(_trigger getVariable "config") select 1] call prj_fnc_spawn_patrols_groups;
+_civilian_patrols_units = [civilian,civilian_units,(_trigger getVariable "config") select 1] call prj_fnc_spawn_patrols_groups;
 
 //spawn vehicles
-_civilian_light_vehicles = [civilian,civilian_units_array,civilian_cars_array,(_trigger getVariable "config") select 1,2,"CARELESS"] call prj_fnc_spawn_vehicles;
+_civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,(_trigger getVariable "config") select 1,2,"CARELESS"] call prj_fnc_spawn_vehicles;
 
 {
 	if (side _x == civilian) then {

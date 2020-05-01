@@ -16,8 +16,8 @@ _center_pos = [1,false] call prj_fnc_select_position;
 
 _pos = [_center_pos, 200] call prj_fnc_select_house_position;
 
-_leader = (createGroup independent) createUnit [selectRandom enemy_leaders_array, _pos, [], 0, "NONE"];
-_enemy = (createGroup independent) createUnit [selectRandom enemy_units_array, position _leader, [], 0, "NONE"];
+_leader = (createGroup independent) createUnit [selectRandom enemy_leaders, _pos, [], 0, "NONE"];
+_enemy = (createGroup independent) createUnit [selectRandom enemy_infantry, position _leader, [], 0, "NONE"];
 {_x setBehaviour "CARELESS"} forEach [_leader,_enemy];
 
 [_taskID + "_red_base",position Checkpoint1,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;

@@ -7,11 +7,9 @@ createDialog "dialogUpgradesMenu";
 
 private ["_ctrl_arsenal","_text_arsenal","_ctrl_a_grg","_text_a_grg","_ctrl_g_grg","_text_g_grg","_next_arsenal_level","_next_a_garage_level","_next_g_garage_level","_ctrl_intel","_text_intel"];
 
-private _arrayUIDs = ["76561198141746661","76561198138702011","76561198343937417","76561198061237087"];
-
 ctrlEnable [1026, false];
 
-if !((getPlayerUID player) in _arrayUIDs || player getVariable ["officer",false]) then {
+if !((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then {
 	{ctrlEnable [_x, false]} forEach [1027,1028];
 };
 

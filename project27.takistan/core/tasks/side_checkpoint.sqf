@@ -25,17 +25,17 @@ _trg setTriggerStatements ["this", "", ""];
 
 _vehicles = [];
 
-_vehicle = selectRandom (enemy_cars_array + enemy_heavy_armed_vehicle_array) createVehicle _pos;
+_vehicle = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy) createVehicle _pos;
 _vehicle setDir _direction + 90;
 _vehicle lock true;
-_crew_units = [_vehicle,enemy_units_array] call prj_fnc_create_crew;
+_crew_units = [_vehicle,enemy_infantry] call prj_fnc_create_crew;
 _vehicles pushBack _vehicle;
 
 for "_i" from 1 to 2 do {
-	private _static = (selectRandom enemy_static_array) createVehicle (_pos findEmptyPosition [(10 * _i), 150, "B_HMG_01_high_F"]);
+	private _static = (selectRandom enemy_turrets) createVehicle (_pos findEmptyPosition [(10 * _i), 150, "B_HMG_01_high_F"]);
 	_static lock true;
 	_vehicles pushBack _static;
-	private _crew = [_static,enemy_units_array] call prj_fnc_create_crew;
+	private _crew = [_static,enemy_infantry] call prj_fnc_create_crew;
 	_crew_units = _crew_units + _crew;
 };
 
