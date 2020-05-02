@@ -8,8 +8,8 @@
 ["Initialize"] call BIS_fnc_dynamicGroups; 
 
 // friendly units
-east setFriend [west, 1];
-west setFriend [east, 1];
+// east setFriend [west, 1];
+// west setFriend [east, 1];
 
 // local fnc
 pgn_fnc_create_markers = {

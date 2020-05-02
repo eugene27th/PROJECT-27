@@ -4,9 +4,9 @@ author			= "eugene27";
 OnLoadName		= "PROJECT 27";
 OnLoadMission	= "Fictional armed conflict. Tactical military sandbox.";
 // loadScreen = __EVAL(["img\logomis.paa", "img\logomis1.paa"] select floor random 2);
-loadScreen = "img\prevmis.paa";
+loadScreen = "img\preview.paa";
 overviewText    = "Fictional armed conflict. Tactical military sandbox.";
-overviewPicture = "img\prevmis.paa";
+overviewPicture = "img\preview.paa";
 
 enableDebugConsole[] = { "76561198141746661", "76561198138702011", "76561198061237087" };
 
