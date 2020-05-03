@@ -6,7 +6,6 @@
 
 private _safe_radius = 2000;
 private _distance = 600;
-prj_debug = false;
 
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 

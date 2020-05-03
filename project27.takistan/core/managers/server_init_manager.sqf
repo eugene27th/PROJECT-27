@@ -107,11 +107,12 @@ addMissionEventHandler  ["Entitykilled", {
 	]
 ] call pgn_fnc_create_markers;
 
-// other
+// create arsenal
 {
 	[_x, [[], 1]] call ace_arsenal_fnc_attributeInit;
 } forEach [arsenalboxonbluebase,arsenalboxonredbase];
 
+// time acceleration
 [] spawn {
 	while {true} do {
 		if (daytime >= 21 || daytime < 4) then

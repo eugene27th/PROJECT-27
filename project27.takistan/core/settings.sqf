@@ -69,5 +69,8 @@ switch (_map_preset) do {
 	};
 };
 
+// debug mode
+prj_debug = false;
+
 // do not change
 friendly_UAV_array = "B_UAV_02_dynamicLoadout_F";
