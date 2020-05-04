@@ -9,8 +9,6 @@ if (isServer) then {
 	[] call compile preprocessFileLineNumbers "core\unit_spawn_system\configuration.sqf";
 	// only server fnc
 	[] call compile preprocessFileLineNumbers "core\fnc\fn_server.sqf";
-	// tasks list
-	[] call compile preprocessFileLineNumbers "core\tasks\tasks.sqf";
 };
 
 [] call compile preprocessFileLineNumbers "core\settings.sqf";
