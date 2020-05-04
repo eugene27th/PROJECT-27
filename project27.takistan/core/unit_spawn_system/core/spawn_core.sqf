@@ -342,12 +342,7 @@ _global_vehicles_cargo = (_enemy_light_vehicles select 2) + (_civilian_light_veh
 _vehicles_players = [];
 {_vehicles_players pushBack (vehicle _x)} forEach allPlayers;
 
-// systemChat format ["%1",_vehicles_players];
-// systemChat format ["%1",count _global_vehicles];
-
 _global_vehicles = _global_vehicles - _vehicles_players;
-
-// systemChat format ["%1",count _global_vehicles];
 
 //delete house and patrols groups
 _units_deleted = _enemy_house_units + _civilian_house_units + _enemy_patrols_units + _civilian_patrols_units + _global_vehicles + _global_vehicles_cargo;

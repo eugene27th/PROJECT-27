@@ -9,9 +9,6 @@ private _distance = 600;
 
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 
-systemChat format ["%1",cities_enemy];
-systemChat format ["%1",ied];
-
 private _types_locations = [
 	["NameCityCapital",325,[cities_enemy,cities_civilian]],
 	["NameCity",325,[cities_enemy,cities_civilian]],
@@ -49,8 +46,9 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		private _buildings = nearestObjects [_pos, ["Building"], _spawn_area];
 		if (!(_buildings isEqualTo [])) then {
 			private _useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
+
 			if ((count _useful) > 5) then {
-				for "_i" from 1 to (round ((count _useful) / 5)) do {
+				for "_i" from 1 to (round ((count _useful) * 0.2)) do {
 					private _allpositions = (selectRandom _useful) buildingPos -1;
 					private _house_ied = createMine [selectRandom _house_ieds_class, selectRandom _allpositions,[],1];
 					if (prj_debug) then {
@@ -60,6 +58,10 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 						_marker_house setMarkerColor "ColorWEST";
 					};
 				};
+			};
+
+			if (prj_debug) then {
+				systemChat format ["%1 - %2 - %3", text _x, count _useful, round ((count _useful) * 0.2)];
 			};
 		};
 

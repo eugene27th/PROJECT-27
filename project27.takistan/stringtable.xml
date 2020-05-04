@@ -2,7 +2,30 @@
 
 <Project name="PROJECT27">
 
-    <Package name="PRJ_MESSAGES">
+    <Package name="PRJ_GUI_AND_MESSAGES">
+
+        <Container name="PRJ_HQ_MENU">
+            <Key ID="STR_PRJ_STATISTICS_KILLED">
+                <Original>Kill statistics</Original>
+		        <Russian>Статистика убийств</Russian>
+                <English>Kill statistics</English>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_ENEMIES">
+                <Original>Enemies</Original>
+		        <Russian>Противник</Russian>
+                <English>Enemies</English>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_FRIENDLY">
+                <Original>Friendly</Original>
+		        <Russian>Союзники</Russian>
+                <English>Friendly</English>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_CIVILIANS">
+                <Original>Civilians</Original>
+		        <Russian>Гражданские</Russian>
+                <English>Civilians</English>
+            </Key>
+	    </Container>
 
         <Container name="PRJ_BANK_MENU">
             <Key ID="STR_PRJ_NUMBER_OF_POINTS">

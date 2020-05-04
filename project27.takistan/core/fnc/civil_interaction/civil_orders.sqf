@@ -10,7 +10,6 @@ _list = _position nearEntities [["Man"], 60];
 _units = _list select {!(_x isEqualTo player) && ((side _x) isEqualTo civilian)};
 
 if (_units isEqualTo []) exitWith {true};
-// // systemChat format ["%1",_units];
 {
 	for "_i" from (count waypoints (group _x)) - 1 to 0 step -1 do {
 		deleteWaypoint [group _x, _i];

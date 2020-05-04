@@ -75,14 +75,10 @@ prj_fnc_select_house_position = {
 	private ["_buildings","_useful","_allpositions","_pos"];
 
 	_buildings = nearestObjects [_pos, ["Building"], _radius];
-	// systemChat format ["buildings - %1",count _buildings];
 	_useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
-	// systemChat format ["useful - %1",count _useful];
 	if ((count _useful) > 5) then {
 		_allpositions = (selectRandom _useful) buildingPos -1;
-		// systemChat format ["allpositions - %1",count _allpositions];
 		_pos = selectRandom _allpositions;
-		// systemChat format ["pos - %1",_pos];
 	};
 	if (isNil "_pos") then {
 		_pos = [_pos, (_radius / 100) * 10, _radius, 2, 0] call BIS_fnc_findSafePos;
