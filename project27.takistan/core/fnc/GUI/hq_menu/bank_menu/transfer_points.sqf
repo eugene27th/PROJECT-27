@@ -9,5 +9,5 @@ params [
 
 if ((getPlayerUID player) in _player) then {
 	player setVariable ["money",((player getVariable "money") + _value),true];
-	hint format ["Вы получили %1 пойнтов.",_value];
+	hint format [localize "STR_PRJ_GET_POINTS",_value];
 };

@@ -10,15 +10,15 @@ _player = lbData [1003, _index];
 _player = [_player];
 _value = parseNumber (ctrlText 1004);
 
-if (_value isEqualTo 0) exitWith {hint "Укажите количество пойнтов."};
-if (_value > (player getVariable "money")) exitWith {hint "У Вас не хватает пойнтов."};
-if ((_value <= 0) || ((typeName _value) != "SCALAR" )) exitWith {hint "Некорректное значение."};
+if (_value isEqualTo 0) exitWith {hint localize "STR_PRJ_NUMBER_OF_POINTS"};
+if (_value > (player getVariable "money")) exitWith {hint localize "STR_PRJ_DONT_HAVE_POINTS"};
+if ((_value <= 0) || ((typeName _value) != "SCALAR" )) exitWith {hint localize "STR_PRJ_INVALID_VALUE"};
 
 _value = round _value;
 
 [_player,_value] remoteExec ["prj_fnc_transfer_points", 0];
 player setVariable ["money",((player getVariable "money") - _value),true];
-hint format ["Вы отправили %1 пойнтов.",_value];
+hint format [localize "STR_PRJ_SENT_POINTS",_value];
 
 _ctrl = (findDisplay 3001) displayCtrl 1007;
 ctrlSetText [1007, str (player getVariable "money")];

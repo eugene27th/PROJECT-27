@@ -2,34 +2,72 @@
 
 <Project name="PROJECT27">
 
-    <Package name="Civil_Info">
+    <Package name="PRJ_MESSAGES">
 
-        <Container name="PRJ_HQ_MENU">
-            <Key ID="STR_PRJ_STATISTICS_KILLED">
-                <Original>KILLED</Original>
-		        <Russian>УБИТО</Russian>
-                <English>KILLED</English>
-		        <German>GETÖTET</German>
+        <Container name="PRJ_BANK_MENU">
+            <Key ID="STR_PRJ_NUMBER_OF_POINTS">
+                <Original>Indicate the number of points.</Original>
+		        <Russian>Укажите количество пойнтов.</Russian>
+                <English>Indicate the number of points.</English>
             </Key>
-            <Key ID="STR_PRJ_STATISTICS_CIVILIANS">
-                <Original>CIVILIANS</Original>
-		        <Russian>ГРАЖДАНСКИХ</Russian>
-                <English>CIVILIANS</English>
-		        <German>ZIVILISTEN</German>
+            <Key ID="STR_PRJ_DONT_HAVE_POINTS">
+                <Original>You do not have enough points.</Original>
+		        <Russian>У Вас не хватает пойнтов.</Russian>
+                <English>You do not have enough points.</English>
             </Key>
-            <Key ID="STR_PRJ_STATISTICS_ENEMIES">
-                <Original>ENEMIES</Original>
-		        <Russian>ПРОТИВНИК</Russian>
-                <English>ENEMIES</English>
-		        <German>FEINDE</German>
+            <Key ID="STR_PRJ_INVALID_VALUE">
+                <Original>Invalid value.</Original>
+		        <Russian>Некорректное значение.</Russian>
+                <English>Invalid value.</English>
             </Key>
-            <Key ID="STR_PRJ_STATISTICS_FRIENDLY">
-                <Original>FRIENDLY</Original>
-		        <Russian>СОЮЗНИКИ</Russian>
-                <English>FREUNDLICH</English>
-		        <German>GETÖTET</German>
+            <Key ID="STR_PRJ_SENT_POINTS">
+                <Original>You have sent %1 points.</Original>
+		        <Russian>Вы отправили %1 пойнтов.</Russian>
+                <English>You have sent %1 points.</English>
+            </Key>
+            <Key ID="STR_PRJ_GET_POINTS">
+                <Original>You got %1 points.</Original>
+		        <Russian>Вы получили %1 пойнтов.</Russian>
+                <English>You got %1 points.</English>
             </Key>
 	    </Container>
+
+        <Container name="PRJ_UPGRADE_MENU">
+            <Key ID="STR_PRJ_DONT_HAVE_IS">
+                <Original>Your team lacks an Intel Score.</Original>
+		        <Russian>У Вашей команды не хватает Intel Score.</Russian>
+                <English>Your team lacks an Intel Score.</English>
+            </Key>
+            <Key ID="STR_PRJ_UPGRADED">
+                <Original>You have upgraded</Original>
+		        <Russian>Вы модернизировали</Russian>
+                <English>You have upgraded</English>
+            </Key>
+            <Key ID="STR_PRJ_TO_LEVEL">
+                <Original>to level %1.</Original>
+		        <Russian>до %1 уровня.</Russian>
+                <English>to level %1.</English>
+            </Key>
+            <Key ID="STR_PRJ_ARSENAL">
+                <Original>your arsenal</Original>
+		        <Russian>арсенал</Russian>
+                <English>your arsenal</English>
+            </Key>
+            <Key ID="STR_PRJ_G_GARAGE">
+                <Original>the ground vehicle garage</Original>
+		        <Russian>гараж наземной техники</Russian>
+                <English>the ground vehicle garage</English>
+            </Key>
+            <Key ID="STR_PRJ_A_GARAGE">
+                <Original>the aircraft garage</Original>
+		        <Russian>гараж воздушной техники</Russian>
+                <English>the aircraft garage</English>
+            </Key>
+	    </Container>
+
+    </Package>
+
+    <Package name="Civil_Info">
 
         <Container name="PRJ_CIVIL">
             <Key ID="STR_PRJ_CIVIL">
