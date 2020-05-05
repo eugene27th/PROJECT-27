@@ -19,13 +19,13 @@ class Params
 		texts[] = { "On", "Off" };
 		default = 1;
 	};
-	
-	class number_of_ied
+
+	class ied_on_roads
 	{
-		title = "The number of mines on the road";
-		values[] = { 100, 150, 200, 250, 300, 400 };
-		texts[] = { "100", "150", "200", "250", "300", "400" };
-		default = 100;
+		title = "IED on the roads";
+		values[] = { 1, 0 };
+		texts[] = { "On", "Off" };
+		default = 1;
 	};
 
 	class ied_safe_radius
@@ -35,6 +35,31 @@ class Params
 		texts[] = { "1000m", "1500m", "2000m", "2500m", "3000m" };
 		default = 1000;
 	};
+	
+	class number_of_ied
+	{
+		title = "The number of mines on the road";
+		values[] = { 100, 150, 200, 250, 300, 400 };
+		texts[] = { "100", "150", "200", "250", "300", "400" };
+		default = 100;
+	};
+
+	class ied_in_houses
+	{
+		title = "IED in houses";
+		values[] = { 1, 0 };
+		texts[] = { "On", "Off" };
+		default = 1;
+	};
+
+	class percentage_of_ied_in_houses
+	{
+		title = "Percentage of IED in houses";
+		values[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 };
+		texts[] = { "10%", "20%", "30%", "40%", "50%", "60%", "70%" };
+		default = 0.2;
+	};
+	
 };
 
 #include "taw_vd\GUI.h"

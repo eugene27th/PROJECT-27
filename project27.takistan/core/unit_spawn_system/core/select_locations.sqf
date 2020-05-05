@@ -1,7 +1,7 @@
 /*
 	written by eugene27.
 	server only
-	1.3.0
+	1.3.0.1
 */
 
 private _safe_radius = 2000;
@@ -26,7 +26,9 @@ private _types_locations = [
 
 private _delete_locations = nearestLocations [position Checkpoint1, _all_locations, _safe_radius] + nearestLocations [position Checkpoint2, _all_locations, _safe_radius];
 
+private _house_ieds = "ied_in_houses" call BIS_fnc_getParamValue;
 private _house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
+private _house_ieds_percentage = "percentage_of_ied_in_houses" call BIS_fnc_getParamValue;
 
 for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 
@@ -43,25 +45,27 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) select 2) < 150 && (speed _x < 180)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",(_types_locations select _i) select 2];
 
-		private _buildings = nearestObjects [_pos, ["Building"], _spawn_area];
-		if (!(_buildings isEqualTo [])) then {
-			private _useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
+		if (_house_ieds == 1) then {
+			private _buildings = nearestObjects [_pos, ["Building"], _spawn_area];
+			if (!(_buildings isEqualTo [])) then {
+				private _useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
 
-			if ((count _useful) > 5) then {
-				for "_i" from 1 to (round ((count _useful) * 0.2)) do {
-					private _allpositions = (selectRandom _useful) buildingPos -1;
-					private _house_ied = createMine [selectRandom _house_ieds_class, selectRandom _allpositions,[],1];
-					if (prj_debug) then {
-						private _marker_house = createMarker ["house_ied_" + str (position _house_ied), position _house_ied];
-						_marker_house setMarkerType "mil_dot";
-						_marker_house setMarkerAlpha 1;
-						_marker_house setMarkerColor "ColorWEST";
+				if ((count _useful) > 5) then {
+					for "_i" from 1 to (round ((count _useful) * _house_ieds_percentage)) do {
+						private _allpositions = (selectRandom _useful) buildingPos -1;
+						private _house_ied = createMine [selectRandom _house_ieds_class, selectRandom _allpositions,[],1];
+						if (prj_debug) then {
+							private _marker_house = createMarker ["house_ied_" + str (position _house_ied), position _house_ied];
+							_marker_house setMarkerType "mil_dot";
+							_marker_house setMarkerAlpha 1;
+							_marker_house setMarkerColor "ColorWEST";
+						};
 					};
 				};
-			};
 
-			if (prj_debug) then {
-				systemChat format ["%1 - %2 - %3", text _x, count _useful, round ((count _useful) * 0.2)];
+				if (prj_debug) then {
+					systemChat format ["%1 - %2 - %3", text _x, count _useful, round ((count _useful) * 0.2)];
+				};
 			};
 		};
 
@@ -82,8 +86,9 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 };
 
 //create ied on the roads
-private _junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
+if (("ied_on_roads" call BIS_fnc_getParamValue) == 1) exitWith {};
 
+private _junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
 private _number_of_ied = "number_of_ied" call BIS_fnc_getParamValue;
 private _safe_radius = "ied_safe_radius" call BIS_fnc_getParamValue;
 

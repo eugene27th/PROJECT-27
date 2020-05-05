@@ -7,10 +7,6 @@
 // Initializes the Dynamic Groups framework
 ["Initialize"] call BIS_fnc_dynamicGroups; 
 
-// friendly units
-// east setFriend [west, 1];
-// west setFriend [east, 1];
-
 // local fnc
 pgn_fnc_create_markers = {
 	params [
@@ -48,10 +44,6 @@ addMissionEventHandler  ["Entitykilled", {
 		if (side _killer == west) then {
 			switch (_victim getVariable "oldSide") do {
 				case west: {
-					_killer setVariable ["money",(_killer getVariable "money") - 50,true];
-					_killer setVariable ["friend_killings",(_killer getVariable "friend_killings") + 1,true];
-				};
-				case east: {
 					_killer setVariable ["money",(_killer getVariable "money") - 50,true];
 					_killer setVariable ["friend_killings",(_killer getVariable "friend_killings") + 1,true];
 				};
