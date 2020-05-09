@@ -21,7 +21,7 @@ prj_fnc_select_position = {
 
 	_safe_radius = "spawnunitsradiusaroundthebase" call BIS_fnc_getParamValue;
 
-	_locations = nearestLocations [[worldSize / 2, worldsize / 2, 0], _types_location, worldSize * 1.5] - (nearestLocations [position Checkpoint1, ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"], _safe_radius] + nearestLocations [position Checkpoint2, ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"], _safe_radius]);
+	_locations = nearestLocations [[worldSize / 2, worldsize / 2, 0], _types_location, worldSize * 1.5] - (nearestLocations [position spawn_zone_red, ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"], _safe_radius] + nearestLocations [position spawn_zone_blue, ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"], _safe_radius]);
 
 	switch (_position_around) do {
 		case true: {

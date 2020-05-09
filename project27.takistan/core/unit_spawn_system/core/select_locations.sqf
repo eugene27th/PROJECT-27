@@ -24,11 +24,13 @@ private _types_locations = [
 	["BorderCrossing",100,[other_enemy,other_civilian]]
 ];
 
-private _delete_locations = nearestLocations [position Checkpoint1, _all_locations, _safe_radius] + nearestLocations [position Checkpoint2, _all_locations, _safe_radius];
+private _delete_locations = nearestLocations [position spawn_zone_red, _all_locations, _safe_radius] + nearestLocations [position spawn_zone_blue, _all_locations, _safe_radius];
 
 private _house_ieds = "ied_in_houses" call BIS_fnc_getParamValue;
 private _house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
-private _house_ieds_percentage = "percentage_of_ied_in_houses" call BIS_fnc_getParamValue;
+private _house_ieds_percentage = ("percentage_of_ied_in_houses" call BIS_fnc_getParamValue) * 0.1;
+
+hint format ["%1",_house_ieds_percentage];
 
 for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 
@@ -92,7 +94,7 @@ private _junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_G
 private _number_of_ied = "number_of_ied" call BIS_fnc_getParamValue;
 private _safe_radius = "ied_safe_radius" call BIS_fnc_getParamValue;
 
-private _roads = ([worldSize / 2, worldsize / 2, 0] nearRoads (worldSize * 1.5)) - (position Checkpoint1 nearRoads _safe_radius) - (position Checkpoint2 nearRoads _safe_radius);
+private _roads = ([worldSize / 2, worldsize / 2, 0] nearRoads (worldSize * 1.5)) - (position spawn_zone_red nearRoads _safe_radius) - (position spawn_zone_blue nearRoads _safe_radius);
 
 for "_i" from 1 to _number_of_ied do {
 	private _ied = createMine [selectRandom ied, (position (selectRandom _roads)),[],3];

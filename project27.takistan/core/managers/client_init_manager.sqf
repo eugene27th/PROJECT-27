@@ -41,21 +41,21 @@ pgn_fnc_set_textures = {
 
 // start screen
 private _start_screen = [
-	position Checkpoint2, 
+	position spawn_zone_blue, 
 	"WELCOME TO PROJECT 27", 
 	50, 
 	80, 
 	0, 
 	0, 
 	[
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heal_ca.paa",[0,0.35,1,1],treatment_tr_b,1,1,0,"heal"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],vehserviceb,1,1,0,"repair/rearm"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],airserviceb_tr,1,1,0,"repair/rearm"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\rifle_ca.paa",[0,0.35,1,1],arsenalboxonbluebase,1,1,0,"arsenal"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\run_ca.paa",[0,0.35,1,1],infteleportB,1,1,0,"teleport"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\whiteboard_ca.paa",[0,0.35,1,1],laptophq,1,1,0,"HQ"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\car_ca.paa",[0,0.35,1,1],vgaragemonitor2,1,1,0,"vehicles"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heli_ca.paa",[0,0.35,1,1],vgaragemonitor2a,1,1,0,"air vehicles"]
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heal_ca.paa",[0,0.35,1,1],tr_treatment_blue,1,1,0,"treatment"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],tr_g_service_blue,1,1,0,"repair/rearm"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],tr_a_service_blue,1,1,0,"repair/rearm"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\rifle_ca.paa",[0,0.35,1,1],arsenal_blue,1,1,0,"arsenal"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\run_ca.paa",[0,0.35,1,1],inf_teleport_monitor_blue,1,1,0,"teleport"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\whiteboard_ca.paa",[0,0.35,1,1],laptop_hq,1,1,0,"HQ"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\car_ca.paa",[0,0.35,1,1],g_garage_monitor_blue,1,1,0,"ground garage"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heli_ca.paa",[0,0.35,1,1],a_garage_monitor_blue,1,1,0,"air garage"]
 	], 
 	0, 
 	true, 
@@ -85,10 +85,10 @@ player setPos getMarkerPos "respawn_west";
 // set textures
 [
 	[
-		["vservice.paa",[board_vehservice_b,board_vehservice_r]],
-		["inftp.paa",[infteleportB,infteleportR]],
-		["landv.paa",[vgaragemonitor1,vgaragemonitor2]],
-		["airv.paa",[vgaragemonitor1a,vgaragemonitor2a]]
+		["vservice.paa",[service_board_blue,service_board_red]],
+		["inftp.paa",[inf_teleport_monitor_blue,inf_teleport_monitor_red]],
+		["landv.paa",[g_garage_monitor_red,g_garage_monitor_blue]],
+		["airv.paa",[a_garage_monitor_red,a_garage_monitor_blue]]
 	]
 ] call pgn_fnc_set_textures;
 
@@ -96,11 +96,11 @@ player setPos getMarkerPos "respawn_west";
 // actions manager
 private ["_action"];
 
-vgaragemonitor1 addAction ["Land vehicle", { [true,shed1] call prj_fnc_vehicle_shop_window }];
-vgaragemonitor2 addAction ["Land vehicle", { [true,shed2] call prj_fnc_vehicle_shop_window }];
-vgaragemonitor1a addAction ["Air vehicle", { [false,airdepotplace1] call prj_fnc_vehicle_shop_window }];
-vgaragemonitor2a addAction ["Air vehicle", { [false,airdepotplace2] call prj_fnc_vehicle_shop_window }];
-laptophq addAction ["HQ menu", { call prj_fnc_hq_menu }];
+g_garage_monitor_red addAction ["Land vehicle", { [true,g_garage_depot_red] call prj_fnc_vehicle_shop_window }];
+g_garage_monitor_blue addAction ["Land vehicle", { [true,g_garage_depot_blue] call prj_fnc_vehicle_shop_window }];
+a_garage_monitor_red addAction ["Air vehicle", { [false,a_garage_depot_red] call prj_fnc_vehicle_shop_window }];
+a_garage_monitor_blue addAction ["Air vehicle", { [false,a_garage_depot_blue] call prj_fnc_vehicle_shop_window }];
+laptop_hq addAction ["HQ menu", { call prj_fnc_hq_menu }];
 
 if (!isNil "mhqterminal") then {call prj_fnc_add_mhq_action};
 
@@ -234,7 +234,7 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 // ARSENAL
 {
 	[_x, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
-} forEach [arsenalboxonbluebase,arsenalboxonredbase];
+} forEach [arsenal_blue,arsenal_red];
 
 sleep 10;
 

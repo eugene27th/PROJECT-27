@@ -79,22 +79,22 @@ addMissionEventHandler  ["Entitykilled", {
 // create markers
 [
 	[
-		["hq_blue",position laptophq,"mil_dot","ColorWEST","command center"],
+		["hq_blue",position laptop_hq,"mil_dot","ColorWEST","command center"],
 
-		["respawn_west",position Checkpoint2,"b_hq","ColorWEST","BLUE BASE"],
-		["land_vehicle_b",position shed2,"mil_dot","ColorWEST","land vehicle"],
-		["air_vehicle_b",position airdepotplace2,"mil_dot","ColorWEST","air vehicle"],
-		["vehicle_service_b",position vehserviceb,"mil_dot","ColorWEST","vehicle service"],
-		["airserviceb_tr",position airserviceb_tr,"mil_dot","ColorWEST","air service"],
-		["treatment_b",position medbuildb,"mil_dot","ColorWEST","treatment"],
+		["respawn_west",position spawn_zone_blue,"b_hq","ColorWEST","BLUE BASE"],
+		["land_vehicle_b",position g_garage_depot_blue,"mil_dot","ColorWEST","land vehicle"],
+		["air_vehicle_b",position a_garage_depot_blue,"mil_dot","ColorWEST","air vehicle"],
+		["vehicle_service_b",position tr_g_service_blue,"mil_dot","ColorWEST","ground service"],
+		["tr_a_service_blue",position tr_a_service_blue,"mil_dot","ColorWEST","air service"],
+		["treatment_b",position tr_treatment_blue,"mil_dot","ColorWEST","treatment"],
 		["vehicle_tp_from_r",position tp_veh_blue,"mil_dot","ColorWEST","vehicle tp from redbase"],
 		
-		["red_base",position Checkpoint1,"o_hq","ColorEAST","RED BASE"],
-		["land_vehicle_r",position shed1,"mil_dot","ColorEAST","land vehicle"],
-		["air_vehicle_r",position airdepotplace1,"mil_dot","ColorEAST","air vehicle"],
-		["vehicle_service_r",position vehserviceo,"mil_dot","ColorEAST","vehicle service"],
-		["airserviceo_tr",position airserviceo_tr,"mil_dot","ColorEAST","air service"],
-		["treatment_r",position medbuildo,"mil_dot","ColorEAST","treatment"],	
+		["red_base",position spawn_zone_red,"o_hq","ColorEAST","RED BASE"],
+		["land_vehicle_r",position g_garage_depot_red,"mil_dot","ColorEAST","land vehicle"],
+		["air_vehicle_r",position a_garage_depot_red,"mil_dot","ColorEAST","air vehicle"],
+		["vehicle_service_r",position tr_g_service_red,"mil_dot","ColorEAST","ground service"],
+		["airserviceo_tr",position tr_a_service_red,"mil_dot","ColorEAST","air service"],
+		["treatment_r",position tr_treatment_red,"mil_dot","ColorEAST","treatment"],	
 		["vehicle_tp_from_b",position tp_veh_red,"mil_dot","ColorEAST","vehicle tp from bluebase"]
 	]
 ] call pgn_fnc_create_markers;
@@ -102,7 +102,7 @@ addMissionEventHandler  ["Entitykilled", {
 // create arsenal
 {
 	[_x, [[], 1]] call ace_arsenal_fnc_attributeInit;
-} forEach [arsenalboxonbluebase,arsenalboxonredbase];
+} forEach [arsenal_blue,arsenal_red];
 
 // time acceleration
 [] spawn {

@@ -20,22 +20,22 @@ _leader = (createGroup independent) createUnit [selectRandom enemy_leaders, _pos
 _enemy = (createGroup independent) createUnit [selectRandom enemy_infantry, position _leader, [], 0, "NONE"];
 {_x setBehaviour "CARELESS"} forEach [_leader,_enemy];
 
-[_taskID + "_red_base",position Checkpoint1,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
-[_taskID + "_blue_base",position Checkpoint2,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID + "_red_base",position spawn_zone_red,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID + "_blue_base",position spawn_zone_blue,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
 [_taskID + "_center",_center_pos,"ColorEAST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_create_marker;
 
 _picture = getText(configfile >> "CfgVehicles" >> typeOf _leader >> "editorPreview");
 
 [west, [_taskID], [format [localize "STR_SIDE_CAPTURE_LEADER_DESCRIPTION",_picture], "STR_SIDE_CAPTURE_LEADER_TITLE", ""], _center_pos, "CREATED", 0, true, "intel"] call BIS_fnc_taskCreate;
 
-waitUntil {sleep 5; !alive _leader || _leader distance position Checkpoint1 < 50 || _leader distance position Checkpoint2 < 50 || _taskID call BIS_fnc_taskCompleted};
+waitUntil {sleep 5; !alive _leader || _leader distance position spawn_zone_red < 50 || _leader distance position spawn_zone_blue < 50 || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _leader) then {
     [_taskID,"FAILED"] call BIS_fnc_taskSetState;
 	sleep 2;
 };
 
-if (_leader distance position Checkpoint1 < 50 || _leader distance position Checkpoint2 < 50) then {
+if (_leader distance position spawn_zone_red < 50 || _leader distance position spawn_zone_blue < 50) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
 	[player,["money",(player getVariable "money") + _reward]] remoteExec ["setVariable",0];
 	sleep 2;

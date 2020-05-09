@@ -19,7 +19,7 @@ _pos = [_pos, 100, 500, 5, 0] call BIS_fnc_findSafePos;
 
 [west, [_taskID], ["STR_SIDE_HUMANITARIAN_AID_DESCRIPTION", "STR_SIDE_HUMANITARIAN_AID_TITLE", ""], _pos, "CREATED", 0, true, "container"] call BIS_fnc_taskCreate;
 
-_pos_box = position selectRandom [Checkpoint1,Checkpoint2];
+_pos_box = position selectRandom [spawn_zone_red,spawn_zone_blue];
 _boxes = [];
 
 for "_i" from 1 to (round ((count (allPlayers - (entities "HeadlessClient_F"))) / 2)) do {
