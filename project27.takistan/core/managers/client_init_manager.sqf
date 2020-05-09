@@ -238,7 +238,7 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 
 sleep 10;
 
-[[player call BIS_fnc_locationDescription,2,2],[getText(configFile >> "CfgWorlds" >> worldName >> "description"),2,2],[[daytime, "HH:MM"] call BIS_fnc_timeToString,2,2,5]] spawn BIS_fnc_EXP_camp_SITREP;
+[[toUpper (player call BIS_fnc_locationDescription),2,2],[toUpper (getText(configFile >> "CfgWorlds" >> worldName >> "description")),2,2],[[daytime, "HH:MM"] call BIS_fnc_timeToString,2,2,5]] spawn BIS_fnc_EXP_camp_SITREP;
 
 sleep 17;
 [parseText "<t font='PuristaBold' size='1.6'>PROJECT 27</t><br />by eugene27", true, nil, 10, 2, 0] spawn BIS_fnc_textTiles;

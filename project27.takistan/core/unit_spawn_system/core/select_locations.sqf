@@ -30,8 +30,6 @@ private _house_ieds = "ied_in_houses" call BIS_fnc_getParamValue;
 private _house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
 private _house_ieds_percentage = ("percentage_of_ied_in_houses" call BIS_fnc_getParamValue) * 0.1;
 
-hint format ["%1",_house_ieds_percentage];
-
 for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 
 	private _locations = (nearestLocations [[worldSize / 2, worldsize / 2, 0], [(_types_locations select _i) select 0], worldSize * 1.5]) - _delete_locations;
