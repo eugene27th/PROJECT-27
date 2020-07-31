@@ -1,25 +1,20 @@
 /*
 	written by eugene27.
 	server only
-	1.3.0
 */
 
 
-params [
-    "_taskID","_reward"
-];
+params ["_taskID","_reward"];
 
-private ["_taskID","_pos","_trg"];
+private _taskID = "SIDE_" + str _taskID;
 
-_taskID = "SIDE_" + str _taskID;
-
-_pos = [1,false] call prj_fnc_select_position;
+private _pos = [1,false] call prj_fnc_select_position;
 
 [_taskID,_pos,"ColorEAST",0.7,[[220,220],"ELLIPSE"]] call prj_fnc_create_marker;
 
 [west, [_taskID], ["STR_SIDE_CAPTURE_ZONE_DESCRIPTION", "STR_SIDE_CAPTURE_ZONE_TITLE", ""], _pos, "CREATED", 0, true, "attack"] call BIS_fnc_taskCreate;
 
-_trg = createTrigger ["EmptyDetector", _pos, true];
+private _trg = createTrigger ["EmptyDetector", _pos, true];
 _trg setTriggerArea [220, 220, 0, false, 20];
 _trg setTriggerActivation ["WEST SEIZED", "PRESENT", false];
 _trg setTriggerStatements ["this", "",""];

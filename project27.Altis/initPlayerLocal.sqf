@@ -3,5 +3,5 @@ if (!isServer) then {
 };
 
 if (!isNull player) then {
-	execVM "core\managers\client_init_manager.sqf";
+	execVM "core\main\client.sqf";
 };

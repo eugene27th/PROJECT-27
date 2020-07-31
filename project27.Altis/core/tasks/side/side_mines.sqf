@@ -1,21 +1,16 @@
 /*
 	written by eugene27.
 	server only
-	1.3.0
 */
 
 
-params [
-    "_taskID","_reward"
-];
+params ["_taskID","_reward"];
 
-private ["_taskID","_pos","_mine","_mines"];
+private _taskID = "SIDE_" + str _taskID;
 
-_taskID = "SIDE_" + str _taskID;
+private _pos = ([3] call prj_fnc_select_road_position) select 0;
 
-_pos = ([3] call prj_fnc_select_road_position) select 0;
-
-_mines = [];
+private _mines = [];
 
 for [{private _i = 0 }, { _i < ([5,15] call BIS_fnc_randomInt) }, { _i = _i + 1 }] do {
     private _roads = _pos nearRoads 250;
@@ -23,7 +18,7 @@ for [{private _i = 0 }, { _i < ([5,15] call BIS_fnc_randomInt) }, { _i = _i + 1 
     private _road = selectRandom _roads;
     _pos = getPos _road;
 
-    _mine = createMine [selectRandom ied, _pos, [], 0];
+    private _mine = createMine [selectRandom ied, _pos, [], 0];
     _mines pushBack _mine;
 
     if (prj_debug) then {

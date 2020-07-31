@@ -1,27 +1,22 @@
 /*
 	written by eugene27.
 	server only
-    1.3.0
 */
 
-params [
-    "_taskID","_reward"
-];
+params ["_taskID","_reward"];
 
-private ["_taskID","_center_pos","_pos"];
+private _taskID = "SIDE_" + str _taskID;
 
-_taskID = "SIDE_" + str _taskID;
+private _center_pos = [1] call prj_fnc_select_position;
 
-_center_pos = [1] call prj_fnc_select_position;
+private _enemies = [];
+private _vehicles = [];
+private _pos = [_center_pos, 200, 550, 5, 0] call BIS_fnc_findSafePos;
 
-_enemies = [];
-_vehicles = [];
-_pos = [_center_pos, 200, 550, 5, 0] call BIS_fnc_findSafePos;
-
-_enemy_grp = createGroup independent;
+private _enemy_grp = createGroup independent;
 
 for [{private _i = 0 }, { _i < [5,10] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
-    _vehicle = (selectRandom enemy_vehicles_light) createVehicle _pos;
+    private _vehicle = (selectRandom enemy_vehicles_light) createVehicle _pos;
     _vehicle setDir (round (random 359));
     _vehicle lock true;
     _vehicles pushBack _vehicle;

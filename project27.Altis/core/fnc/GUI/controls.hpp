@@ -925,19 +925,7 @@ class dialogVehicleService
 
 			action = "_car = (vehicle player);clearItemCargoGlobal _car;clearMagazineCargoGlobal _car;clearWeaponCargoGlobal _car;clearBackpackCargoGlobal _car;";
 		};
-		class RscButton_1610: prjRscButton
-		{
-			idc = 1016;
-			text = "";
-			x = 0.3075 * safezoneW + safezoneX;
-			y = 0.618125 * safezoneH + safezoneY;
-			w = 0.20125 * safezoneW;
-			h = 0.039375 * safezoneH;
-
-			font = "PuristaMedium";
-			sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
-		};
-		class RscStructuredText_1100: prjRscStructuredText
+		class RscStructuredText_1100: prjRscListbox
 		{
 			idc = 1017;
 			text = "";
@@ -948,6 +936,8 @@ class dialogVehicleService
 
 			font = "RobotoCondensed";
 			size = 0.023;
+
+			onLBSelChanged = call prj_fnc_btn_load_enable;
 		};
 	};
 };

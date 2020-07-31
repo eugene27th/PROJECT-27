@@ -1,28 +1,23 @@
 /*
 	written by eugene27.
 	server only
-	1.3.0
 */
 
-params [
-    "_taskID","_reward"
-];
+params ["_taskID","_reward"];
 
-private ["_taskID","_center_pos","_pos","_leader","_enemy","_picture"];
+private _taskID = "SIDE_" + str _taskID;
 
-_taskID = "SIDE_" + str _taskID;
+private _center_pos = [1,false] call prj_fnc_select_position;
 
-_center_pos = [1,false] call prj_fnc_select_position;
+private _pos = [_center_pos, 200] call prj_fnc_select_house_position;
 
-_pos = [_center_pos, 200] call prj_fnc_select_house_position;
-
-_leader = (createGroup independent) createUnit [selectRandom enemy_leaders, _pos, [], 0, "NONE"];
-_enemy = (createGroup independent) createUnit [selectRandom enemy_infantry, position _leader, [], 0, "NONE"];
+private _leader = (createGroup independent) createUnit [selectRandom enemy_leaders, _pos, [], 0, "NONE"];
+private _enemy = (createGroup independent) createUnit [selectRandom enemy_infantry, position _leader, [], 0, "NONE"];
 {_x setBehaviour "CARELESS"} forEach [_leader,_enemy];
 
 [_taskID,_center_pos,"ColorEAST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_create_marker;
 
-_picture = getText(configfile >> "CfgVehicles" >> typeOf _leader >> "editorPreview");
+private _picture = getText(configfile >> "CfgVehicles" >> typeOf _leader >> "editorPreview");
 
 [west, [_taskID], [format [localize "STR_SIDE_LIQUIDATION_LEADER_DESCRIPTION",_picture], "STR_SIDE_LIQUIDATION_LEADER_TITLE", ""], _center_pos, "CREATED", 0, true, "kill"] call BIS_fnc_taskCreate;
 

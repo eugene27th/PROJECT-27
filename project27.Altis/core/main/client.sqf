@@ -1,7 +1,6 @@
 /*
 	written by eugene27.
 	only client
-	1.3.0
 */
 
 // local fnc
@@ -17,14 +16,14 @@ pgn_fnc_set_textures = {
 };
 
 // Initializes the player/client side Dynamic Groups framework
-["InitializePlayer", [player]] call BIS_fnc_dynamicGroups; 
+["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
 
 // print version on screen
 [] spawn {
 	disableSerialization;
 	waitUntil{ !isNull (findDisplay 46) };
 	private _ctrlText = (findDisplay 46) ctrlCreate ["RscStructuredText",-1];
-	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.3.0.1 | PROJECT 27</t>";
+	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.3.0.5 | PROJECT 27</t>";
 	_ctrlText ctrlSetStructuredText parseText _text;
 	_ctrlText ctrlSetTextColor [1,1,1,0.7];
 	_ctrlText ctrlSetBackgroundColor [0,0,0,0];
@@ -52,10 +51,9 @@ private _start_screen = [
 		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],tr_g_service_blue,1,1,0,"repair/rearm"],
 		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],tr_a_service_blue,1,1,0,"repair/rearm"],
 		["\A3\ui_f\data\igui\cfg\simpleTasks\types\rifle_ca.paa",[0,0.35,1,1],arsenal_blue,1,1,0,"arsenal"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\run_ca.paa",[0,0.35,1,1],inf_teleport_monitor_blue,1,1,0,"teleport"],
 		["\A3\ui_f\data\igui\cfg\simpleTasks\types\whiteboard_ca.paa",[0,0.35,1,1],laptop_hq,1,1,0,"HQ"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\car_ca.paa",[0,0.35,1,1],g_garage_monitor_blue,1,1,0,"ground garage"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heli_ca.paa",[0,0.35,1,1],a_garage_monitor_blue,1,1,0,"air garage"]
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\car_ca.paa",[0,0.35,1,1],g_garage_depot_blue,1,1,0,"ground garage"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heli_ca.paa",[0,0.35,1,1],a_garage_depot_blue,1,1,0,"air garage"]
 	], 
 	0, 
 	true, 
@@ -75,35 +73,36 @@ player setPos getMarkerPos "respawn_west";
 // set variables
 [
 	[
-		["player",["money",0,true]],
-		["player",["enemy_killings",0,true]],
-		["player",["friend_killings",0,true]],
-		["player",["civ_killings",0,true]]
+		[
+			"missionNamespace",
+			[
+				getPlayerUID player,
+				[
+					["money",0],
+					["enemy_killings",0],
+					["friend_killings",0],
+					["civ_killings",0]
+				],
+				true
+			],
+			false
+		]
 	]
 ] call prj_fnc_set_variables;
 
 // set textures
 [
 	[
-		["vservice.paa",[service_board_blue,service_board_red]],
-		["inftp.paa",[inf_teleport_monitor_blue,inf_teleport_monitor_red]],
-		["landv.paa",[g_garage_monitor_red,g_garage_monitor_blue]],
-		["airv.paa",[a_garage_monitor_red,a_garage_monitor_blue]]
+		["vservice.paa",[service_board_blue]]
 	]
 ] call pgn_fnc_set_textures;
 
-
-// actions manager
-private ["_action"];
-
-g_garage_monitor_red addAction ["Land vehicle", { [true,g_garage_depot_red] call prj_fnc_vehicle_shop_window }];
-g_garage_monitor_blue addAction ["Land vehicle", { [true,g_garage_depot_blue] call prj_fnc_vehicle_shop_window }];
-a_garage_monitor_red addAction ["Air vehicle", { [false,a_garage_depot_red] call prj_fnc_vehicle_shop_window }];
-a_garage_monitor_blue addAction ["Air vehicle", { [false,a_garage_depot_blue] call prj_fnc_vehicle_shop_window }];
+// actions
 laptop_hq addAction ["HQ menu", { call prj_fnc_hq_menu }];
 
 if (!isNil "mhqterminal") then {call prj_fnc_add_mhq_action};
 
+private "_action";
 if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then {
 	_action = [
 		"hq_menu",
@@ -232,13 +231,10 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 } forEach civilian_units;
 
 // ARSENAL
-{
-	[_x, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
-} forEach [arsenal_blue,arsenal_red];
+[arsenal_blue, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
 
-sleep 10;
-
+//sitrep, texttiles
+uiSleep 10;
 [[toUpper (player call BIS_fnc_locationDescription),2,2],[toUpper (getText(configFile >> "CfgWorlds" >> worldName >> "description")),2,2],[[daytime, "HH:MM"] call BIS_fnc_timeToString,2,2,5]] spawn BIS_fnc_EXP_camp_SITREP;
-
-sleep 17;
+uiSleep 17;
 [parseText "<t font='PuristaBold' size='1.6'>PROJECT 27</t><br />by eugene27", true, nil, 10, 2, 0] spawn BIS_fnc_textTiles;

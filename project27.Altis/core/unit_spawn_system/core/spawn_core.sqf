@@ -1,30 +1,21 @@
 /* 
 	written by eugene27.
 	server only
-	1.3.0
 */
 
-params [
-	"_trigger"
-];
+params ["_trigger"];
 
 if (prj_debug) then {
-	[format ["%1 activated\nenemy - %2\nciv - %3",_trigger,(_trigger getVariable "config") select 0,(_trigger getVariable "config") select 1]] remoteExec ["hint",0];
+	[format ["%1 activated\nenemy - %2\nciv - %3",_trigger,(_trigger getVariable "config") # 0,(_trigger getVariable "config") # 1]] remoteExec ["hint",0];
 };
 
-private ["_distance"];
-
-_distance = 600;
+private _distance = 600;
 
 //functions
 prj_fnc_number_of_units = {
-	params [
-		"_number"
-	];
+	params ["_number"];
 
-	private ["_number_result"];
-
-	_number_result = switch (_number) do {
+	private _number_result = switch (_number) do {
 		case 0: {1};
 		case 1: {[2,4] call BIS_fnc_randomInt};
 		case 2: {[4,8] call BIS_fnc_randomInt};
@@ -35,18 +26,18 @@ prj_fnc_number_of_units = {
 };
 
 prj_fnc_spawn_house_groups = {
-	params [
-		"_side","_class_units","_config"
-	];
+	params ["_side","_class_units","_config"];
 
-	private ["_house_units","_house_pos","_group"];
+	if (((_config # 0) # 0) == 0) exitWith {};
 
-	_house_units = [];
+	private "_house_pos";
 
-	for [{private _i = 0 }, { _i < ((_config select 0) select 0) }, { _i = _i + 1 }] do {
-		_group = createGroup _side;
-		for [{private _i = 0 }, { _i < [((_config select 0) select 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
-			_buildings = nearestObjects [position _trigger, ["Building"], ((triggerArea _trigger) select 0) - _distance];
+	private _house_units = [];
+
+	for [{private _i = 0 }, { _i < ((_config # 0) # 0) }, { _i = _i + 1 }] do {
+		private _group = createGroup _side;
+		for [{private _i = 0 }, { _i < [((_config # 0) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
+			_buildings = nearestObjects [position _trigger, ["Building"], ((triggerArea _trigger) # 0) - _distance];
 			_useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
 			if ((count _useful) > 5) then {
 				_allpositions = (selectRandom _useful) buildingPos -1;
@@ -57,27 +48,27 @@ prj_fnc_spawn_house_groups = {
 				doStop _unit;
 				_house_units pushBack _unit;
 			};
+			uiSleep 1;
 		};
 	};
 	_house_units
 };
 
 prj_fnc_spawn_patrols_groups = {
-	params [
-		"_side","_class_units","_config"
-	];
+	params ["_side","_class_units","_config"];
 
-	private ["_patrols_units","_pos","_group"];
+	if (((_config # 1) # 0) == 0) exitWith {};
 
-	_patrols_units = [];
+	private _patrols_units = [];
 
-	for [{private _i = 0 }, { _i < ((_config select 1) select 0) }, { _i = _i + 1 }] do {
-		_group = createGroup _side;
-		_pos = [position _trigger, 10, ((triggerArea _trigger) select 0) - _distance, 1, 0] call BIS_fnc_findSafePos;
+	for [{private _i = 0 }, { _i < ((_config # 1) # 0) }, { _i = _i + 1 }] do {
+		private _group = createGroup _side;
+		private _pos = [position _trigger, 10, ((triggerArea _trigger) # 0) - _distance, 1, 0] call BIS_fnc_findSafePos;
 		if (!isNil "_pos") then {
-			for [{private _i = 0 }, { _i < [((_config select 1) select 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
+			for [{private _i = 0 }, { _i < [((_config # 1) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
 				private _unit = _group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				_patrols_units pushBack _unit;
+				uiSleep 1;
 			};
 			_group setBehaviour "SAFE";
 			_group setSpeedMode "LIMITED";
@@ -86,53 +77,52 @@ prj_fnc_spawn_patrols_groups = {
 
 			//create waypoints
 			for "_i" from 1 to ([4,8] call BIS_fnc_randomInt) do {
-				private _pos = [position _trigger, 10, ((triggerArea _trigger) select 0) - _distance, 1, 0] call BIS_fnc_findSafePos;
+				private _pos = [position _trigger, 10, ((triggerArea _trigger) # 0) - _distance, 1, 0] call BIS_fnc_findSafePos;
 				private _wp = _group addWaypoint [_pos, 0];
 				_wp setWaypointType "MOVE";
 				_wp setWaypointCompletionRadius 50;
 				_wp setWaypointTimeout [0,2,6];
 			};
 
-			private _pos_wp = [position _trigger, 10, ((triggerArea _trigger) select 0) - _distance, 1, 0] call BIS_fnc_findSafePos;
+			private _pos_wp = [position _trigger, 10, ((triggerArea _trigger) # 0) - _distance, 1, 0] call BIS_fnc_findSafePos;
 
 			private _wp_cycle = _group addWaypoint [_pos_wp, 0];
 			_wp_cycle setWaypointType "CYCLE";
 			_wp_cycle setWaypointCompletionRadius 50;
 		};
+		uiSleep 1;
 	};
 	_patrols_units
 };
 
 prj_fnc_spawn_vehicles = {
-	params [
-		"_side","_class_units","_class_vehicles","_config",["_index_config",2],["_behaviour","SAFE"]
-	];
+	params ["_side","_class_units","_class_vehicles","_config",["_index_config",2],["_behaviour","SAFE"]];
 
-	private ["_vehicles","_vehicle_crew_units","_vehicle_cargo_units","_vehicle_crew_group"];
+	if (((_config # _index_config) # 0) == 0) exitWith {};
 
-	_vehicles = [];
-	_vehicle_crew_units = [];
-	_vehicle_cargo_units = [];
+	private _vehicles = [];
+	private _vehicle_crew_units = [];
+	private _vehicle_cargo_units = [];
 
-	for [{private _i = 0 }, { _i < ((_config select _index_config) select 0) }, { _i = _i + 1 }] do {
+	for [{private _i = 0 }, { _i < ((_config # _index_config) # 0) }, { _i = _i + 1 }] do {
 
-		if ((random 1) < (_config select _index_config) select 1) then {
+		if ((random 1) < (_config # _index_config) # 1) then {
 
 			private ["_pos","_pos_wp","_direction"];
 
-			_roads = (position _trigger) nearRoads ((triggerArea _trigger) select 0) - _distance;
+			_roads = (position _trigger) nearRoads ((triggerArea _trigger) # 0) - _distance;
 			if ((count _roads) > 5) then {
 				_roads = _roads select {isOnRoad _x};
 				_road = selectRandom _roads;
 				_pos = getPos _road;
 				_pos set [2, 0];
 				_roadConnectedTo = roadsConnectedTo _road;
-				_connectedRoad = _roadConnectedTo select 0;
+				_connectedRoad = _roadConnectedTo # 0;
 				_direction = _road getDir _connectedRoad;
 			}
 			else
 			{
-				_pos = [position _trigger, 0, ((triggerArea _trigger) select 0) - _distance, 5, 0] call BIS_fnc_findSafePos;
+				_pos = [position _trigger, 0, ((triggerArea _trigger) # 0) - _distance, 5, 0] call BIS_fnc_findSafePos;
 				_direction = 0;
 			};
 
@@ -142,8 +132,10 @@ prj_fnc_spawn_vehicles = {
 				_vehicle setDir _direction;
 				_vehicles pushBack _vehicle;
 
+				uiSleep 0.5;
+
 				//create crew
-				_vehicle_crew_group = createGroup _side;
+				private _vehicle_crew_group = createGroup _side;
 
 				if ((_vehicle emptyPositions "commander") != 0) then {
 					private _unit = _vehicle_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
@@ -163,6 +155,8 @@ prj_fnc_spawn_vehicles = {
 					_vehicle_crew_units pushBack _unit;
 				};
 				
+				uiSleep 0.5;
+
 				//create passengers
 				private _empty_seats = round (random (_vehicle emptyPositions "cargo"));
 
@@ -170,15 +164,18 @@ prj_fnc_spawn_vehicles = {
 					private _unit = _vehicle_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 					_unit moveInCargo _vehicle;
 					_vehicle_cargo_units pushBack _unit;
+					uiSleep 0.2;
 				};
 
 				_vehicle_crew_group setBehaviour _behaviour;
 				_vehicle_crew_group setSpeedMode "LIMITED";
 				_vehicle_crew_group setCombatMode "YELLOW";
 
+				uiSleep 0.5;
+
 				//create waypoints
 				for "_i" from 1 to ([4,8] call BIS_fnc_randomInt) do {
-					_roads = (position _trigger) nearRoads ((triggerArea _trigger) select 0) - _distance;
+					_roads = (position _trigger) nearRoads ((triggerArea _trigger) # 0) - _distance;
 					if ((count _roads) > 5) then {
 						private _roads = _roads select {isOnRoad _x};
 						private _road = selectRandom _roads;
@@ -187,14 +184,15 @@ prj_fnc_spawn_vehicles = {
 					}
 					else
 					{
-						_pos = [position _trigger, 0, ((triggerArea _trigger) select 0) - _distance, 5, 0] call BIS_fnc_findSafePos;
+						_pos = [position _trigger, 0, ((triggerArea _trigger) # 0) - _distance, 5, 0] call BIS_fnc_findSafePos;
 					};
 					_wp = _vehicle_crew_group addWaypoint [_pos, 0];
 					_wp setWaypointType "MOVE";
 					_wp setWaypointCompletionRadius 50;
+					uiSleep 1;
 				};
 
-				_roads = (position _trigger) nearRoads ((triggerArea _trigger) select 0) - _distance;
+				_roads = (position _trigger) nearRoads ((triggerArea _trigger) # 0) - _distance;
 				if ((count _roads) > 5) then {
 					_roads = _roads select {isOnRoad _x};
 					private _road = selectRandom _roads;
@@ -203,7 +201,7 @@ prj_fnc_spawn_vehicles = {
 				}
 				else
 				{
-					_pos_wp = [position _trigger, 0, ((triggerArea _trigger) select 0) - _distance, 5, 0] call BIS_fnc_findSafePos;
+					_pos_wp = [position _trigger, 0, ((triggerArea _trigger) # 0) - _distance, 5, 0] call BIS_fnc_findSafePos;
 				};
 				private _wp_cycle = _vehicle_crew_group addWaypoint [_pos_wp, 0];
 				_wp_cycle setWaypointType "CYCLE";
@@ -215,22 +213,18 @@ prj_fnc_spawn_vehicles = {
 };
 
 prj_fnc_spawn_static = {
-	params [
-		"_side","_class_units","_class_static","_config"
-	];
+	params ["_side","_class_units","_class_static","_config"];
 
-	private ["_statics"];
+	if (((_config # 4) # 0) == 0) exitWith {};
 
-	_statics = [];
-	_static_crew_units = [];
+	private _statics = [];
+	private _static_crew_units = [];
 
-	for [{private _i = 0 }, { _i < ((_config select 4) select 0) }, { _i = _i + 1 }] do {
+	for [{private _i = 0 }, { _i < ((_config # 4) # 0) }, { _i = _i + 1 }] do {
 
-		if ((random 1) < (_config select 4) select 1) then {
+		if ((random 1) < (_config # 4) # 1) then {
 
-			private ["_pos"];
-
-			_pos = [position _trigger, 0, ((triggerArea _trigger) select 0) - _distance, 5, 0] call BIS_fnc_findSafePos;
+			private _pos = [position _trigger, 0, ((triggerArea _trigger) # 0) - _distance, 5, 0] call BIS_fnc_findSafePos;
 
 			if (!isNil "_pos") then {
 				_static = (selectRandom _class_static) createVehicle _pos;
@@ -252,47 +246,44 @@ prj_fnc_spawn_static = {
 				};
 			};
 		};
+		uiSleep 1;
 	};
 	[_statics,_static_crew_units]
 };
 
-private ["_enemy_house_units","_enemy_patrols_units","_enemy_light_vehicles","_civilian_house_units","_civilian_patrols_units","_civilian_light_vehicles","_global_vehicles","_global_vehicles_cargo","_players_array","_units_deleted","_vehicles_players"];
-
 /////////////////////SPAWN ENEMY\\\\\\\\\\\\\\\\\\\\\\\\
 //spawn house groups
-_enemy_house_units = [independent,enemy_infantry,(_trigger getVariable "config") select 0] call prj_fnc_spawn_house_groups;
+private _enemy_house_units = [independent,enemy_infantry,(_trigger getVariable "config") # 0] call prj_fnc_spawn_house_groups;
 
 //spawn patrol group
-_enemy_patrols_units = [independent,enemy_infantry,(_trigger getVariable "config") select 0] call prj_fnc_spawn_patrols_groups;
+private _enemy_patrols_units = [independent,enemy_infantry,(_trigger getVariable "config") # 0] call prj_fnc_spawn_patrols_groups;
 
 //spawn light vehicles
-_enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,(_trigger getVariable "config") select 0] call prj_fnc_spawn_vehicles;
+private _enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,(_trigger getVariable "config") # 0] call prj_fnc_spawn_vehicles;
 
 //spawn heavy vehicles
-_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,(_trigger getVariable "config") select 0,3] call prj_fnc_spawn_vehicles;
+private _enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,(_trigger getVariable "config") # 0,3] call prj_fnc_spawn_vehicles;
 
 //spawn statics
-_enemy_statics = [independent,enemy_infantry,enemy_turrets,(_trigger getVariable "config") select 0] call prj_fnc_spawn_static;
+private _enemy_statics = [independent,enemy_infantry,enemy_turrets,(_trigger getVariable "config") # 0] call prj_fnc_spawn_static;
 
 /////////////////////SPAWN CIVILIAN\\\\\\\\\\\\\\\\\\\\\\\\
 //spawn house groups
-_civilian_house_units = [civilian,civilian_units,(_trigger getVariable "config") select 1] call prj_fnc_spawn_house_groups;
+private _civilian_house_units = [civilian,civilian_units,(_trigger getVariable "config") # 1] call prj_fnc_spawn_house_groups;
 
 //spawn patrol group
-_civilian_patrols_units = [civilian,civilian_units,(_trigger getVariable "config") select 1] call prj_fnc_spawn_patrols_groups;
+private _civilian_patrols_units = [civilian,civilian_units,(_trigger getVariable "config") # 1] call prj_fnc_spawn_patrols_groups;
 
 //spawn vehicles
-_civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,(_trigger getVariable "config") select 1,2,"CARELESS"] call prj_fnc_spawn_vehicles;
+private _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,(_trigger getVariable "config") # 1,2,"CARELESS"] call prj_fnc_spawn_vehicles;
 
 {
 	if (side _x == civilian) then {
 		_x execVM "core\unit_spawn_system\core\bad_civ.sqf";
 		_x addEventHandler ["FiredNear", {
 			params [
-				"_unit", "_firer", "_distance", "_weapon", "_muzzle", "_mode", "_ammo", "_gunner"
+				"_unit"
 			];
-
-			private ["_unit"];
 
 			if ((animationState _unit) == "amovpercmstpssurwnondnon") exitWith {};
 
@@ -320,35 +311,35 @@ _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,(_trigger 
 			_wp setWaypointStatements ["true", "[unit_civ_runner, 'Acts_CivilHiding_2'] remoteExec ['switchMove', 0]"];
 		}];
 	};
+	uiSleep 0.3;
 } forEach _civilian_house_units + _civilian_patrols_units;
 
-waitUntil {sleep 1;!triggerActivated _trigger};
+waitUntil {sleep 3;!triggerActivated _trigger};
 
 /////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\
 
-_global_vehicles = (_enemy_light_vehicles select 0) + (_civilian_light_vehicles select 0) + (_enemy_heavy_vehicles select 0) + (_enemy_statics select 0);
+private _global_vehicles = (_enemy_light_vehicles # 0) + (_civilian_light_vehicles # 0) + (_enemy_heavy_vehicles # 0) + (_enemy_statics # 0);
 
 //delete vehicle crew
-_global_vehicles_crew = (_enemy_light_vehicles select 1) + (_civilian_light_vehicles select 1) + (_enemy_heavy_vehicles select 1) + (_enemy_statics select 1);
+_global_vehicles_crew = (_enemy_light_vehicles # 1) + (_civilian_light_vehicles # 1) + (_enemy_heavy_vehicles # 1) + (_enemy_statics # 1);
 
 {deleteVehicle _x} forEach _global_vehicles_crew;
 
 //delete passengers
-_global_vehicles_cargo = (_enemy_light_vehicles select 2) + (_civilian_light_vehicles select 2) + (_enemy_heavy_vehicles select 2);
+private _global_vehicles_cargo = (_enemy_light_vehicles # 2) + (_civilian_light_vehicles # 2) + (_enemy_heavy_vehicles # 2);
 
 {deleteVehicle _x} forEach _global_vehicles_cargo;
 
 //delete vehicle without player
-_vehicles_players = [];
+private _vehicles_players = [];
 {_vehicles_players pushBack (vehicle _x)} forEach allPlayers;
 
-_global_vehicles = _global_vehicles - _vehicles_players;
+private _global_vehicles = _global_vehicles - _vehicles_players;
 
 //delete house and patrols groups
-_units_deleted = _enemy_house_units + _civilian_house_units + _enemy_patrols_units + _civilian_patrols_units + _global_vehicles + _global_vehicles_cargo;
-
 {deleteVehicle _x} forEach _enemy_house_units + _civilian_house_units + _enemy_patrols_units + _civilian_patrols_units + _global_vehicles;
 
 if (prj_debug) then {
+	private _units_deleted = _enemy_house_units + _civilian_house_units + _enemy_patrols_units + _civilian_patrols_units + _global_vehicles + _global_vehicles_cargo;
 	[format ["%1 deactivated\n%2 entities deleted",_trigger,count _units_deleted]] remoteExec ["hint",0];
 };

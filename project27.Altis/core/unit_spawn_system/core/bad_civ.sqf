@@ -1,15 +1,12 @@
 /*
 	written by eugene27.
-	1.3.0
 */
 
-private ["_civ","_scan_end","_nearestunits"];
-
-_civ = _this;
-_scan_end = false;
+private _civ = _this;
+private _scan_end = false;
 
 while {alive _civ && !_scan_end} do {
-    _nearestunits = nearestObjects [getPos _civ,["Man"],30];
+    private _nearestunits = nearestObjects [getPos _civ,["Man"],30];
     {
         if (side _x == west) then {
             if (((random 1) < 0.3) && alive _civ && [_civ] call ace_common_fnc_isAwake) then {
@@ -82,9 +79,9 @@ while {alive _civ && !_scan_end} do {
                         ["rhs_weap_type94_new","rhs_mag_6x8mm_mhp"]
                     ];
 
-                    _civ addWeapon (_weaponchoice select 0);
-                    _civ addHandgunItem (_weaponchoice select 1);
-                    for "_i" from 1 to 4 do {_civ addMagazine (_weaponchoice select 1)};					
+                    _civ addWeapon (_weaponchoice # 0);
+                    _civ addHandgunItem (_weaponchoice # 1);
+                    for "_i" from 1 to 4 do {_civ addMagazine (_weaponchoice # 1)};					
                     _civ dotarget _x;
                     _civ dofire _x;
                 };
@@ -92,12 +89,5 @@ while {alive _civ && !_scan_end} do {
             _scan_end = true;
         };
     } forEach _nearestunits;
-    sleep 10;
+    uiSleep 15;
 };
-
-
-
-
-
-
-

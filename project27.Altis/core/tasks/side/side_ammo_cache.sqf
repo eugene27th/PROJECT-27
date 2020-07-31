@@ -1,29 +1,24 @@
 /*
 	written by eugene27.
 	server only
-	1.3.0
 */
 
-params [
-    "_taskID","_reward"
-];
+params ["_taskID","_reward"];
 
-private ["_taskID","_pos","_ammo_cache","_marker"];
+private _taskID = "SIDE_" + str _taskID;
 
-_taskID = "SIDE_" + str _taskID;
-
-_pos = [4] call prj_fnc_select_position;
+private _pos = [4] call prj_fnc_select_position;
 
 [_taskID,_pos,"ColorOrange",0.7,[[300,300],"ELLIPSE"]] call prj_fnc_create_marker;
 
-_ammo_cache = box_ammo_cache createVehicle ([_pos, 150, 300, 3, 0] call BIS_fnc_findSafePos);
+private _ammo_cache = box_ammo_cache createVehicle ([_pos, 150, 300, 3, 0] call BIS_fnc_findSafePos);
 clearItemCargoGlobal _ammo_cache;
 clearMagazineCargoGlobal _ammo_cache;
 clearWeaponCargoGlobal _ammo_cache;
 clearBackpackCargoGlobal _ammo_cache;
 _ammo_cache setVariable ["ace_cookoff_enable", false, true];
 
-_marker = createMarker ["cache_" + _taskID, position _ammo_cache];
+private _marker = createMarker ["cache_" + _taskID, position _ammo_cache];
 _marker setMarkerType "mil_dot";
 _marker setMarkerAlpha 1;
 _marker setMarkerColor "ColorBLACK";

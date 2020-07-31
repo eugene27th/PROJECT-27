@@ -1,7 +1,6 @@
 /*
 	written by eugene27.
 	global
-	1.3.0.1
 */
 
 // map preset / предустановка карты // presets: "middle_east", "european_aggressor"

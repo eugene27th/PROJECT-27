@@ -1,29 +1,24 @@
 /*
 	written by eugene27.
 	server only
-	1.3.0
 */
 
-params [
-    "_taskID","_reward"
-];
+params ["_taskID","_reward"];
 
-private ["_taskID","_roadpos","_pos","_direction","_finish_pos","_vehicles","_crews"];
+private _taskID = "SIDE_" + str _taskID;
 
-_taskID = "SIDE_" + str _taskID;
+private _roadpos = [1] call prj_fnc_select_road_position;
+private _pos = _roadpos select 0;
+private _direction = _roadpos select 1;
 
-_roadpos = [1] call prj_fnc_select_road_position;
-_pos = _roadpos select 0;
-_direction = _roadpos select 1;
-
-_finish_pos = [_pos, 5000, round (random 359)] call BIS_fnc_relPos;
-_finish_pos = getPos ([_finish_pos, 5000] call BIS_fnc_nearestRoad); 
+private _finish_pos = [_pos, 5000, round (random 359)] call BIS_fnc_relPos;
+private _finish_pos = getPos ([_finish_pos, 5000] call BIS_fnc_nearestRoad); 
 _finish_pos set [2, 0];
 
 [west, [_taskID], ["STR_SIDE_CONVOY_DESCRIPTION", "STR_SIDE_CONVOY_TITLE", ""], objNull, "CREATED", 0, true, "destroy"] call BIS_fnc_taskCreate;
 
-_vehicles = [];
-_crews = [];
+private _vehicles = [];
+private _crews = [];
 
 for "_i" from 1 to 3 do {
 	private _vehicle = selectRandom (enemy_vehicles_heavy + enemy_vehicles_light) createVehicle _pos;

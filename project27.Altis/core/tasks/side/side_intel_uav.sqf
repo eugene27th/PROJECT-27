@@ -1,40 +1,37 @@
 /*
 	written by eugene27.
 	server only
-	1.3.0
 */
 
-params [
-    "_taskID","_reward"
-];
+params ["_taskID","_reward"];
 
-private ["_taskID","_center_pos","_pos","_trg","_enemy"];
+private _taskID = "SIDE_" + str _taskID;
 
-_taskID = "SIDE_" + str _taskID;
+private _center_pos = [3] call prj_fnc_select_position;
+private _pos = [_center_pos, 200, 500, 5, 0] call BIS_fnc_findSafePos;
 
-_center_pos = [3] call prj_fnc_select_position;
-_pos = [_center_pos, 200, 500, 5, 0] call BIS_fnc_findSafePos;
-
-_uav = friendly_UAV_array createVehicle _pos;
+private _uav = friendly_UAV_array createVehicle _pos;
 _uav setDamage 0.8;
 _uav allowDamage false;
 _uav_pylons = "true" configClasses (configFile >> "CfgVehicles" >> friendly_UAV_array >> "Components" >> "TransportPylonsComponent" >> "pylons") apply {configName _x};
 {_uav setPylonLoadout [_x, ""]} forEach _uav_pylons;
 
-_uav_smoke = createVehicle ["test_EmptyObjectForSmoke", position _uav, [], 0, "CAN_COLLIDE"];
+private _uav_smoke = createVehicle ["test_EmptyObjectForSmoke", position _uav, [], 0, "CAN_COLLIDE"];
 _uav_smoke attachTo [_uav, [0, 0, 0]];
 
 [west, [_taskID], ["STR_SIDE_INTEL_UAV_DESCRIPTION", "STR_SIDE_INTEL_UAV_TITLE", ""], _center_pos, "CREATED", 0, true, "intel"] call BIS_fnc_taskCreate;
 
 [_taskID,_center_pos,"ColorWEST",0.7,[[500,500],"ELLIPSE"]] call prj_fnc_create_marker;
 
-_trg = createTrigger ["EmptyDetector", position _uav, true];
+private _trg = createTrigger ["EmptyDetector", position _uav, true];
 _trg setTriggerArea [10, 10, 0, false, 20];
 _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _trg setTriggerStatements ["this", "",""];
 _trg attachTo [_uav, [0, 0, 0]];
 
 waitUntil {sleep 5; triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
+
+private "_enemy";
 
 if (triggerActivated _trg) then {
 	_enemy = [];

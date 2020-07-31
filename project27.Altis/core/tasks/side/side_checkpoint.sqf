@@ -1,34 +1,29 @@
 /*
 	written by eugene27.
 	server only
-    1.3.0
 */
 
-params [
-    "_taskID","_reward"
-];
+params ["_taskID","_reward"];
 
-private ["_taskID","_roadpos","_pos","_direction","_trg","_vehicle","_composition","_crew_units","_crew_group","_vehicles"];
+private _taskID = "SIDE_" + str _taskID;
 
-_taskID = "SIDE_" + str _taskID;
-
-_roadpos = [4] call prj_fnc_select_road_position;
-_pos = _roadpos select 0;
-_direction = _roadpos select 1;
+private _roadpos = [4] call prj_fnc_select_road_position;
+private _pos = _roadpos select 0;
+private _direction = _roadpos select 1;
 
 [_taskID,_pos,"ColorEAST",0.7,[[30,30],"ELLIPSE"]] call prj_fnc_create_marker;
 
-_trg = createTrigger ["EmptyDetector", _pos, true];
+private _trg = createTrigger ["EmptyDetector", _pos, true];
 _trg setTriggerArea [30, 30, 0, false, 20];
 _trg setTriggerActivation ["WEST SEIZED", "PRESENT", false];
 _trg setTriggerStatements ["this", "", ""];
 
-_vehicles = [];
+private _vehicles = [];
 
-_vehicle = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy) createVehicle _pos;
+private _vehicle = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy) createVehicle _pos;
 _vehicle setDir _direction + 90;
 _vehicle lock true;
-_crew_units = [_vehicle,enemy_infantry] call prj_fnc_create_crew;
+private _crew_units = [_vehicle,enemy_infantry] call prj_fnc_create_crew;
 _vehicles pushBack _vehicle;
 
 for "_i" from 1 to 2 do {

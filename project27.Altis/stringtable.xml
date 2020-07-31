@@ -4,6 +4,14 @@
 
     <Package name="PRJ_GUI_AND_MESSAGES">
 
+        <Container name="PRJ_MISC_MESSAGES">
+            <Key ID="STR_PRJ_SELECT_TASK_ON_MAP">
+                <Original>Select a task in the task list.</Original>
+		        <Russian>Выберите задание в списке задач.</Russian>
+                <English>Select a task in the task list.</English>
+            </Key>
+	    </Container>
+
         <Container name="PRJ_HQ_MENU">
             <Key ID="STR_PRJ_STATISTICS_KILLED">
                 <Original>Kill statistics</Original>
