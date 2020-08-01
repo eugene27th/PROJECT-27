@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15164.241,47.491249,17204.152};
-		dir[]={-0.60128647,-0.79799849,0.043813564};
-		up[]={-0.79588318,0.60273099,0.057990555};
-		aside[]={0.072673067,-3.9257575e-006,0.99745715};
+		pos[]={15219.323,47.491249,17265.982};
+		dir[]={-0.38881913,-0.40979066,0.82532501};
+		up[]={-0.17467675,0.91219056,0.37077087};
+		aside[]={0.90472341,4.1141175e-007,0.42623433};
 	};
 };
 binarizationWanted=0;
@@ -1021,7 +1021,7 @@ class Mission
 		{
 			dataType="Trigger";
 			position[]={15141.266,17.91,17203.109};
-			angle=3.8992348;
+			angle=3.8992245;
 			class Attributes
 			{
 				name="tr_a_service_blue";
@@ -1093,6 +1093,7 @@ class Mission
 			};
 			id=1503;
 			type="Land_LampHalogen_F";
+			atlOffset=-7.6293945e-006;
 			class CustomAttributes
 			{
 				class Attribute0

@@ -2,6 +2,153 @@
 
 <Project name="PROJECT27">
 
+    <Package name="PRJ_DOCUMENTATION_BRIEFING">
+
+        <Container name="PRJ_DOCUMENTATION_BASICS">
+            <Key ID="STR_DOCUMENTATION_BASICS_TITLE">
+                <Original></Original>
+		        <Russian>Основы</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_BASICS_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Снаряжение.&lt;/font&gt;&lt;br/&gt;Вы можете снарядиться всем необходимым у &lt;marker name='arsenal'&gt;ящиков на главной базе&lt;/marker&gt;. Открытие виртуального арсенала происходит через меню взаимодействия ACE (Win).&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Ранения.&lt;/font&gt;&lt;br/&gt;Используя меню взаимодействия ACE, Вы можете лечить свои и чужие ранения.&lt;br/&gt;Помните, что Вам всегда доступны все действия, даже те, в которых Вы не нуждаетесь, поэтому рекомендуется перед началом лечения поставить диагноз.&lt;br/&gt;Так же Вы можете вылечить себя и своего сокомандника, войдя в &lt;marker name='treatment_building'&gt;медицинское сооружение&lt;/marker&gt; на главной базе.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Потеря слуха.&lt;/font&gt;&lt;br/&gt;Используйте беруши или наушники с активным шумоподавлением для защиты от потери слуха.&lt;br/&gt;Беруши Вы можете использовать через меню взаимодействия ACE с собой.&lt;br/&gt;</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+        
+        <Container name="PRJ_DOCUMENTATION_VEHICLES">
+            <Key ID="STR_DOCUMENTATION_VEHICLES_TITLE">
+                <Original></Original>
+		        <Russian>Техника. Сервис</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_VEHICLES_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Магазин техники.&lt;/font&gt;&lt;br/&gt;Вам доступны магазины &lt;marker name='ground_vehicle_shop'&gt;наземной&lt;/marker&gt; и &lt;marker name='air_vehicle_shop'&gt;воздушной&lt;/marker&gt; техники.&lt;br/&gt;Для покупки техники у Вас на личном балансе должно быть достаточное количество очков.&lt;br/&gt;&lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;Где хранятся мои очки.&lt;/execute&gt;&lt;br/&gt;Изначально в магазине доступна не вся техника. Улучшайте уровень своего гаража для открытия новых видов техники.&lt;br/&gt;Как улучшать гараж и что для этого нужно.&lt;br/&gt;Предложение открытия меню магазина появляется при вхождении игрока в зону магазина.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Сервис.&lt;/font&gt;&lt;br/&gt;Сервис предоставляет возможности быстрой загрузки различных вещей, очистки инвентаря, починки и заправки, а также удаления Вашего транспорта.&lt;br/&gt;На карте присутствуют две сервисных зоны для удобства их использования. Как правило, для &lt;marker name='ground_vehicle_service'&gt;наземной&lt;/marker&gt; и &lt;marker name='air_vehicle_service'&gt;воздушной&lt;/marker&gt; техники.&lt;br/&gt;Предложение открытия меню сервиса появляется при заезде машины с игроком в зону сервиса.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_LAPTOP">
+            <Key ID="STR_DOCUMENTATION_LAPTOP_TITLE">
+                <Original></Original>
+		        <Russian>Ноутбук, меню</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_LAPTOP_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Ноутбук.&lt;/font&gt;&lt;br/&gt;&lt;marker name='hq'&gt;Ноутбук, стоящий на главной базе в командном центре&lt;/marker&gt;, предоставляет доступ к меню с различными опциями. Чтобы открыть меню, посмотрите на ноутбук и выполните нужное действие.&lt;br/&gt;&lt;br/&gt;Меню открылось, отлично. Перейдём к содержимому.&lt;br/&gt;Пункты кликабельны. Не стесняйтесь нажимать.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_stat call prj_fnc_ProcessDiaryLink'&gt;Cтатистика игрока.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Первое что мы увидим. Рассчитывается исходя из убийств и поведения игрока.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_mhq call prj_fnc_ProcessDiaryLink'&gt;MHQ.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Позволяет команде быстро перебросить пехоту.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;Банк.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Здесь отображаются заработанные очки игрока, а также меню перевода их другому игроку.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'&gt;Разведданные.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Отображается количество очков разведданных.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;Улучшение магазина техники.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Улучшайте магазин с помощью очков разведданных для открытия доступа к покупке новой техники.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;Другие опции.&lt;/font&gt;&lt;br/&gt;Доступны не всем. Отключение дождя, тумана и возможность узнать о транспорте на карте.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_STAT">
+            <Key ID="STR_DOCUMENTATION_STAT_TITLE">
+                <Original></Original>
+		        <Russian>Статистика игрока</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_STAT_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Статистика игрока.&lt;/font&gt;&lt;br/&gt;Статистика персональна и каждый игрок сам зарабатывает её для себя. Она рассчитывается исходя из ваших убийств (противника, гражданских и союзников) и вашего поведения. Хорошо себя вели и стреляли только в противника? Вам должен улыбнуться зелёный смайлик. Всё очень плохо и вы постоянно попадали только в союзников? Перед вами будет чёрно-красный смайлик. Что-то вроде цветной градации. Но не ради смайликов мы здесь. За хорошую игру вы получаете очки, которые отправляются в &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;банк&lt;/execute&gt;.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_MHQ">
+            <Key ID="STR_DOCUMENTATION_MHQ_TITLE">
+                <Original></Original>
+		        <Russian>MHQ</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_MHQ_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;MHQ.&lt;/font&gt;&lt;br/&gt;С помощью терминала MHQ ваша команда может быстро перебросить юнитов в нужное место.&lt;br/&gt;Терминал можно взять в любом магазине техники, он бесплатный и всегда будет ждать вас там. Одно важное "но" - &lt;font color='#41DAEC'&gt;терминал может быть только в единственном экземпляре, т.е. при взятии нового терминала старый пропадёт&lt;/font&gt;. Терминал немного весит, его можно перемещать и загружать в транспорт с помощью меню взаимодействия ACE (win).&lt;br/&gt;Перевезли и выгрузили терминал? Молодцы.&lt;br/&gt;Теперь его нужно активировать с помощью всё того же меню ACE. После активации игроки могут перемещаться на MHQ. Сделать это можно, открыв &lt;execute expression='doc_laptop call prj_fnc_ProcessDiaryLink'>меню ноутбука&lt;/execute&gt; на основной базе и выбрав соответствующий раздел.&lt;br/&gt;Перед следующей загрузкой терминала в транспорт деактивируйте его тем же способом и вперёд к приключениям!</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_BANK">
+            <Key ID="STR_DOCUMENTATION_BANK_TITLE">
+                <Original></Original>
+		        <Russian>Банк</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_BANK_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Банк.&lt;/font&gt;&lt;br/&gt;Здесь хранятся все ваши очки. Вы получаете их за хорошую игру или же переводом от других. Потратить очки можно в &lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;магазине транспорта&lt;/execute&gt;, прикупив хорошую машину или быстрый вертолёт.&lt;br/&gt;Посмотреть сколько у вас очков и отправить их другому игроку можно в &lt;execute expression='doc_laptop call prj_fnc_ProcessDiaryLink'>меню ноутбука&lt;/execute&gt; в соответствующем разделе. Для перевода, вам нужно выбрать никнейм игрока, ввести сумму очков снизу и отправить их получателю.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_INTEL">
+            <Key ID="STR_DOCUMENTATION_INTEL_TITLE">
+                <Original></Original>
+		        <Russian>Разведданные</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_INTEL_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Разведданные.&lt;/font&gt;&lt;br/&gt;Ничего сложного. Разведданные можно найти у противника: бумажки, фотографии, блокноты, документы. Их нужно привезти на базу и поместить в инвентарь &lt;marker name='hq'&gt;стола&lt;/marker&gt;, того, на котором стоит ноутбук. После чего, у вашей команды появляются очки разведданных, которые вы можете потратить на &lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;улучшение магазина техники&lt;/execute&gt;.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_VEHSHOP">
+            <Key ID="STR_DOCUMENTATION_VEHSHOP_TITLE">
+                <Original></Original>
+		        <Russian>Улучшение магазина техники</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_VEHSHOP_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Улучшение магазина техники.&lt;/font&gt;&lt;br/&gt;На старте магазин техники первого уровня, который необходимо улучшать, если вы хотите купить технику уровня выше.&lt;br/&gt;Улучшение проиходит за счёт &lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'>очков разведданных&lt;/execute&gt; в меню ноутбука. Всего у магазина 10 уровней.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_TASKS">
+            <Key ID="STR_DOCUMENTATION_TASKS_TITLE">
+                <Original></Original>
+		        <Russian>Задания и патрули</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_TASKS_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Задания.&lt;/font&gt;&lt;br/&gt;Задания может запрашивать и отменять командир или HQ игрок.&lt;br/&gt;Запросить доступное задание или отменить его можно в меню взаимодействия ACE. При отмене задания, его нужно назначить, т.е. сделать активным в списке задач, находящемся в верхнем левом углу при открытой карте (M). Для управления заданиями карту закрывать необязательно.&lt;br/&gt;За выполнение заданий каждому игроку дают &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;награду&lt;/execute&gt;, соответствующую типу выполненного задания.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Патрулирование.&lt;/font&gt;&lt;br/&gt;Здесь всё просто. Вы можете выключить/включить патрули в параметрах миссии при её старте.&lt;br/&gt;Сектора для патрулирования будут назначаться автоматически. Для выполнения задания, необходимо патрулировать обозначенный сектор на протяжении 10-ти минут. Из машины придётся выйти, хотя бы одному из вас.&lt;br/&gt;По окончании патрулирования вы так же получите &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;награду&lt;/execute&gt;.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_TALKANDORDER">
+            <Key ID="STR_DOCUMENTATION_TALKANDORDER_TITLE">
+                <Original></Original>
+		        <Russian>Общение/приказы</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_TALKANDORDER_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Общение с гражданскими/приказы.&lt;/font&gt;&lt;br/&gt;Гражданским можно отдавать приказы, которые будут понятны всем: стоять, лежать, поднять руки и другие.&lt;br/&gt;Вы можете общаться с гражданскими для получения информации о противнике, о подозрительных действиях или просто о погоде. Но не всё так просто в этом мире. Многие гражданские попросту не говорят на вашем языке. Поэтому в вашей команде есть такие ребята как переводчики. О них далее.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Переводчик.&lt;/font&gt;&lt;br/&gt;Понимает гражданских и даже может с ними разговаривать. Спросить о действиях и местоположении противника, поговорить о ситуации вокруг или спросить где туалет - уже на усмотрение переводчика. Стоит помнить, что некоторые могут оказаться не такими мирными и с ними придётся разбираться. Будьте начеку.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_ENEMY">
+            <Key ID="STR_DOCUMENTATION_ENEMY_TITLE">
+                <Original></Original>
+		        <Russian>Противник</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_ENEMY_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Силы противника, СВУ.&lt;/font&gt;&lt;br/&gt;Противник будет поджидать вас повсюду. Он будет в строениях, на дорогах и на пересечённой местности, может патрулировать или ожидать ваш неспешный конвой в засаде.&lt;br/&gt;Но сначала вам нужно до него доехать, чему помешают самодельные взрывные устройства, которые могут быть разбросаны на дорогах и тропинках. Доехали до населённого пункта и решили зайти в дом? Смотрите под ноги, СВУ могут поджидать вас и там.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Секторы.&lt;/font&gt;&lt;br/&gt;Вы можете выселить противника, дав понять, что это ваш сектор. Когда вы это сделаете, сектор будет отмечен на карте и вы получите награду. Больших скоплений противника вы там больше не увидите. Но не стоит расслаблятся. В любое время противник может начать контрнаступление.</Russian>
+                <English></English>
+            </Key>
+	    </Container>
+
+    </Package>
+
     <Package name="PRJ_GUI_AND_MESSAGES">
 
         <Container name="PRJ_MISC_MESSAGES">
@@ -478,10 +625,10 @@
                 <German>Patrouille</German>
             </Key>
             <Key ID="STR_PATROL_DESCRIPTION">
-                <Original>Task: patrol the designated sector for &lt;font color='#FF8001'>10&lt;/font&gt; minutes.</Original>
-		        <Russian>Задача: осмотр/патруль обозначенного сектора на протяжении &lt;font color='#FF8001'>10-ти&lt;/font&gt; минут.</Russian>
-                <English>Task: patrol the designated sector for &lt;font color='#FF8001'>10&lt;/font&gt; minutes.</English>
-                <German>Aufgabe: patrouillieren Sie &lt;font color='#FF8001'>10&lt;/font&gt; Minuten lang den zugewiesenen Sektor.</German>
+                <Original>Task: patrol the designated sector for &lt;font color='#33FF9C'&gt;10&lt;/font&gt; minutes.</Original>
+		        <Russian>Задача: осмотр/патруль обозначенного сектора на протяжении &lt;font color='#33FF9C'&gt;10-ти&lt;/font&gt; минут.</Russian>
+                <English>Task: patrol the designated sector for &lt;font color='#33FF9C'&gt;10&lt;/font&gt; minutes.</English>
+                <German>Aufgabe: patrouillieren Sie &lt;font color='#33FF9C'&gt;10&lt;/font&gt; Minuten lang den zugewiesenen Sektor.</German>
             </Key>    
 	    </Container>  
     </Package>

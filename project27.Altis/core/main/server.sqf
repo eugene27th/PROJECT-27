@@ -70,13 +70,14 @@ private _trg_a_garage = [position a_garage_depot_blue, [10, 10, 3], "ANYPLAYER",
 // create markers
 [
 	[
-		["hq_blue",position laptop_hq,"mil_dot","ColorWEST","command center"],
-		["respawn_west",position spawn_zone_blue,"b_hq","ColorWEST","BLUE BASE"],
-		["land_vehicle_b",position g_garage_depot_blue,"mil_dot","ColorWEST","land vehicle"],
-		["air_vehicle_b",position a_garage_depot_blue,"mil_dot","ColorWEST","air vehicle"],
-		["vehicle_service_b",position tr_g_service_blue,"mil_dot","ColorWEST","ground service"],
-		["tr_a_service_blue",position tr_a_service_blue,"mil_dot","ColorWEST","air service"],
-		["treatment_b",position tr_treatment_blue,"mil_dot","ColorWEST","treatment"]
+		["hq",position laptop_hq,"mil_dot","ColorWEST","command center"],
+		["arsenal",position arsenal_blue,"mil_dot","ColorWEST","arsenal"],
+		["respawn_west",position spawn_zone_blue,"b_hq","ColorWEST","main base"],
+		["ground_vehicle_shop",position g_garage_depot_blue,"mil_dot","ColorWEST","land vehicle"],
+		["air_vehicle_shop",position a_garage_depot_blue,"mil_dot","ColorWEST","air vehicle"],
+		["ground_vehicle_service",position tr_g_service_blue,"mil_dot","ColorWEST","ground service"],
+		["air_vehicle_service",position tr_a_service_blue,"mil_dot","ColorWEST","air service"],
+		["treatment_building",position tr_treatment_blue,"mil_dot","ColorWEST","treatment"]
 	]
 ] call prj_fnc_create_markers;
 
