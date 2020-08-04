@@ -3,6 +3,17 @@
 	only server functions
 */
 
+prj_fnc_changeVariable = {
+	params ["_space", "_name", "_value"];
+
+	_oldValue = (call (compile _space)) getVariable _name;
+	(call (compile _space)) setVariable [_name, _oldValue + _value, true];
+
+	if (prj_debug) then {
+		[format ["%1 изменена на: %2",_name,_oldValue + _value]] remoteExec ["hint"]
+	};
+};
+
 prj_fnc_select_position = {
 	
 	params ["_type_location",["_position_around", true]];
@@ -80,12 +91,12 @@ prj_fnc_select_house_position = {
 
 prj_fnc_create_trg = {
 	params [
-		"_position", "_area", "_by", "_type", ["_activation",""], ["_repeating",false], ["_rectangle",false], ["_angle",0]
+		"_position", "_area", "_by", "_type", ["_global",true], ["_activation",""], ["_repeating",false], ["_rectangle",false], ["_angle",0]
 	];
 
 	_area params ["_a", "_b", "_c"];
 
-	private _trg = createTrigger ["EmptyDetector", _position, true];
+	private _trg = createTrigger ["EmptyDetector", _position, _global];
 	_trg setTriggerArea [_a, _b, _angle, _rectangle, _c];
 	_trg setTriggerActivation [_by, _type, _repeating];
 	_trg setTriggerStatements ["this", _activation,""];
@@ -172,4 +183,164 @@ prj_fnc_create_crew = {
 	};
 
 	_vehicle_crew + _vehicle_cargo
+};
+
+prj_fnc_capt_zone = {
+	params ["_capt_trigger"];
+
+	private _parent_trigger = _capt_trigger getVariable "parent_trigger";
+	private _trigger_pos = position _capt_trigger;
+	private _trigger_grid_pos = mapGridPosition _capt_trigger;
+	private _trigger_radius = (triggerArea _capt_trigger) # 0;
+	private _trigger_str_name = str _parent_trigger;
+
+	[_trigger_str_name,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
+
+	_parent_trigger setVariable ["captured", true];
+
+	[_parent_trigger,_trigger_grid_pos,_trigger_str_name] spawn {
+		params ["_parent_trigger","_trigger_grid_pos","_trigger_str_name"];
+
+		[west, [_trigger_str_name + "_captured"], ["", format [localize "STR_SECTOR_CAPTURED_TITLE",_trigger_grid_pos], ""], objNull, "CREATED", 0, true, "map"] call BIS_fnc_taskCreate;
+		uiSleep 1;
+		[_trigger_str_name + "_captured"] call BIS_fnc_deleteTask;
+
+		private _time_remaining = 60;// * ([30,60] call BIS_fnc_randomInt);
+		uiSleep _time_remaining;
+		_parent_trigger setVariable ["captured", false];
+		_trigger_str_name setMarkerColor "ColorOPFOR";
+		_trigger_str_name setMarkerAlpha 0.8;
+		[_trigger_str_name, 2, 10] spawn BIS_fnc_blinkMarker;
+
+		[west, [_trigger_str_name + "_lost"], ["", format [localize "STR_SECTOR_LOST_TITLE",_trigger_grid_pos], ""], position _parent_trigger, "CREATED", 0, true, "danger"] call BIS_fnc_taskCreate;
+
+		uiSleep 20;
+		deleteMarker (_trigger_str_name);
+		[_trigger_str_name + "_lost"] call BIS_fnc_deleteTask;
+	};
+};
+
+prj_fnc_civ = {
+	private _civ = _this;
+
+	_civ addEventHandler ["FiredNear", {
+		params [
+			"_unit"
+		];
+
+		if ((animationState _unit) == "amovpercmstpssurwnondnon") exitWith {};
+		if ((random 1) > 0.5) exitWith {};
+
+		unAssignVehicle _unit;
+		_unit action ["eject",vehicle _unit];
+		_unit allowfleeing 0;
+		[_unit] join (createGroup civilian);
+
+		(group _unit) setBehaviour "CARELESS";
+		(group _unit) setSpeedMode "FULL";
+
+		for "_i" from (count waypoints (group _unit)) - 1 to 0 step -1 do {
+			deleteWaypoint [group _unit, _i];
+		};
+
+		_pos = [position _unit, [70,100] call BIS_fnc_randomInt, [0,359] call BIS_fnc_randomInt] call BIS_fnc_relPos;
+		_pos set [2, 0];
+
+		unit_civ_runner = _unit;
+
+		private _wp = (group _unit) addWaypoint [_pos, 0];  
+		_wp setWaypointSpeed "FULL";  
+		_wp setWaypointType "MOVE";
+		_wp setWaypointCompletionRadius 10;
+		_wp setWaypointStatements ["true", "[unit_civ_runner, 'Acts_CivilHiding_2'] remoteExec ['switchMove', 0]"];
+	}];
+
+	private _scan_end = false;
+	while {alive _civ && !_scan_end} do {
+		private _nearestunits = nearestObjects [getPos _civ,["Man"],30];
+		{
+			if (side _x == west) then {
+				if (((random 1) < 0.3) && alive _civ && [_civ] call ace_common_fnc_isAwake) then {
+					[_civ] join (createGroup independent);
+					{_civ addItemToUniform _x} forEach ["ACE_DeadManSwitch","ACE_Cellphone"];       
+					if (random 1 < 0.5) then {
+						_civ addMagazine [selectRandom ["acex_intelitems_photo","acex_intelitems_document","acex_intelitems_notepad"], 1];
+					};
+					_civ removeAllEventHandlers "FiredNear";
+					if ((animationState _civ) == "amovpercmstpssurwnondnon") then {
+						[_civ, "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"] remoteExec ["switchMove", 0];
+					};
+					_civ setUnitPos "UP";
+					unAssignVehicle _civ;
+					_civ action ["eject",vehicle _civ];
+					_civ allowfleeing 0;
+					_civ forceSpeed 15;				  
+					(group _civ) setBehaviour "CARELESS";
+					(group _civ) setSpeedMode "FULL";
+
+					while {(_civ distance _x) > 10} do {
+						_civ domove position _x;
+						uiSleep 2;
+					};
+
+					if (alive _civ && [_civ] call ace_common_fnc_isAwake) then {
+						[_civ, ["allah",50,1]] remoteExec ["say3D"];
+						uiSleep 3;
+						if (alive _civ && [_civ] call ace_common_fnc_isAwake && !(_civ getVariable ["ace_captives_isHandcuffed", false])) then {
+							private _blast = ["Bo_Mk82","Rocket_03_HE_F","M_Mo_82mm_AT_LG","Bo_GBU12_LGB","Bo_GBU12_LGB_MI10","HelicopterExploSmall"];
+							createVehicle [selectRandom _blast,(getPosATL _civ),[],0,""];
+							createVehicle ["Crater",(getPosATL _civ),[],0,""];
+							deleteVehicle _civ;
+						};
+					};
+				}
+				else
+				{	
+					if ((random 1) < 0.3 && alive _civ && [_civ] call ace_common_fnc_isAwake) then {
+						[_civ] join (createGroup independent);
+						if (random 1 < 0.5) then {
+							_civ addMagazine [selectRandom ["acex_intelitems_photo","acex_intelitems_document","acex_intelitems_notepad"], 1];
+						};
+						if (random 1 < 0.5) then {
+							_civ addItemToUniform "ACE_Cellphone";
+						};			
+						_civ removeAllEventHandlers "FiredNear";
+						if ((animationState _civ) == "amovpercmstpssurwnondnon") then {
+							[_civ, "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"] remoteExec ["switchMove", 0];
+						};
+						unAssignVehicle _civ;
+						_civ setUnitPos "UP";							
+						_civ action ["eject",vehicle _civ];
+						_civ allowfleeing 0;
+
+						while {(_civ distance _x) > 40} do {
+							_civ domove position _x;
+							sleep 5;
+						};
+
+						(group _civ) setBehaviour "CARELESS";
+						(group _civ) setSpeedMode "FULL";
+
+						_weaponchoice = selectRandom [
+							["rhsusf_weap_m9","rhsusf_mag_15Rnd_9x19_JHP"],
+							["rhs_weap_tt33","rhs_mag_762x25_8"],
+							["rhsusf_weap_m1911a1","rhsusf_mag_7x45acp_MHP"],
+							["rhs_weap_makarov_pm","rhs_mag_9x18_8_57N181S"],
+							["rhs_weap_makarov_pm","rhs_mag_9x18_8_57N181S"],
+							["rhs_weap_savz61_folded","rhsgref_20rnd_765x17_vz61"],
+							["rhs_weap_type94_new","rhs_mag_6x8mm_mhp"]
+						];
+
+						_civ addWeapon (_weaponchoice # 0);
+						_civ addHandgunItem (_weaponchoice # 1);
+						for "_i" from 1 to 4 do {_civ addMagazine (_weaponchoice # 1)};					
+						_civ dotarget _x;
+						_civ dofire _x;
+					};
+				};
+				_scan_end = true;
+			};
+		} forEach _nearestunits;
+		uiSleep 15;
+	};
 };

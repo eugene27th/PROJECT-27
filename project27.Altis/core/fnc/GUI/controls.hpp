@@ -37,20 +37,19 @@ class dialogHQmenu
 			idc = 1001;
 			text = ""; // hello
 			x = 0.418 * safezoneW + safezoneX;
-			y = 0.318 * safezoneH + safezoneY;
+			y = 0.328 * safezoneH + safezoneY;
 			w = 0.175 * safezoneW;
 			h = 0.039375 * safezoneH;
 
 			size = 0.03;
 		};
 
-
 		class HQ_Statistic_Pct: prjRscPicture
 		{
 			idc = 1029;
 			text = "";
 			x = 0.415 * safezoneW + safezoneX;
-			y = 0.31 * safezoneH + safezoneY;
+			y = 0.32 * safezoneH + safezoneY;
 			w = 0.035 * safezoneW;
 			h = 0.055 * safezoneH;
 		};
@@ -59,20 +58,19 @@ class dialogHQmenu
 			idc = 1002;
 			text = "";
 			x = 0.4125 * safezoneW + safezoneX;
-			y = 0.376 * safezoneH + safezoneY;
+			y = 0.395 * safezoneH + safezoneY;
 			w = 0.15 * safezoneW;
-			h = 0.091875 * safezoneH;
+			h = 0.096 * safezoneH;
 
 			size = 0.026;
 		};
-
 
 		class HQ_To_MHQ_Back: prjRscText
 		{
 			colorBackground[] = { 0, 0, 0, 0.3 };
 			idc = -1;
 			x = 0.415 * safezoneW + safezoneX;
-			y = 0.46 * safezoneH + safezoneY;
+			y = 0.504 * safezoneH + safezoneY;
 			w = 0.02625 * safezoneW;
 			h = 0.039375 * safezoneH;
 		};
@@ -81,7 +79,7 @@ class dialogHQmenu
 			idc = -1;
 			text = "img\icons\icon_to_mhq.paa";
 			x = 0.415 * safezoneW + safezoneX;
-			y = 0.46 * safezoneH + safezoneY;
+			y = 0.504 * safezoneH + safezoneY;
 			w = 0.02625 * safezoneW;
 			h = 0.039375 * safezoneH;
 		};
@@ -90,7 +88,7 @@ class dialogHQmenu
 			idc = -1;
 			text = "TO MHQ";
 			x = 0.444 * safezoneW + safezoneX;
-			y = 0.46 * safezoneH + safezoneY;
+			y = 0.504 * safezoneH + safezoneY;
 			w = 0.142 * safezoneW;
 			h = 0.039375 * safezoneH;
 
@@ -101,7 +99,7 @@ class dialogHQmenu
 			colorBackground[] = { 0, 0, 0, 0.3 };
 			idc = -1;
 			x = 0.415 * safezoneW + safezoneX;
-			y = 0.504 * safezoneH + safezoneY;
+			y = 0.548 * safezoneH + safezoneY;
 			w = 0.02625 * safezoneW;
 			h = 0.039375 * safezoneH;
 		};
@@ -110,7 +108,7 @@ class dialogHQmenu
 			idc = -1;
 			text = "img\icons\icon_bank.paa";
 			x = 0.415 * safezoneW + safezoneX;
-			y = 0.504 * safezoneH + safezoneY;
+			y = 0.548 * safezoneH + safezoneY;
 			w = 0.02625 * safezoneW;
 			h = 0.039375 * safezoneH;
 
@@ -121,40 +119,11 @@ class dialogHQmenu
 			idc = -1;
 			text = "BANK";
 			x = 0.444 * safezoneW + safezoneX;
-			y = 0.504 * safezoneH + safezoneY;
+			y = 0.548 * safezoneH + safezoneY;
 			w = 0.142 * safezoneW;
 			h = 0.039375 * safezoneH;
 
 			action = "call prj_fnc_bank_menu";
-		};
-
-		class HQ_Intels_Back: prjRscText {
-			colorBackground[] = { 0, 0, 0, 0.3 };
-			idc = -1;
-			x = 0.415 * safezoneW + safezoneX;
-			y = 0.548 * safezoneH + safezoneY;
-			w = 0.02625 * safezoneW;
-			h = 0.039375 * safezoneH;
-		};
-		class HQ_Intels_Pct: prjRscPicture
-		{
-			idc = -1;
-			text = "img\icons\icon_intels.paa";
-			x = 0.415 * safezoneW + safezoneX;
-			y = 0.548 * safezoneH + safezoneY;
-			w = 0.02625 * safezoneW;
-			h = 0.039375 * safezoneH;
-		};
-		class HQ_Intels_Btn: prjRscButtonHQ
-		{
-			idc = -1;
-			text = "INTELS"; //--- ToDo: Localize;
-			x = 0.444 * safezoneW + safezoneX;
-			y = 0.548 * safezoneH + safezoneY;
-			w = 0.142 * safezoneW;
-			h = 0.039375 * safezoneH;
-
-			action = "call prj_fnc_intel_menu";
 		};
 
 		class HQ_Upgrades_Back: prjRscText {
@@ -351,30 +320,6 @@ class dialogIntelMenu
 			w = 0.21 * safezoneW;
 			h = 0.40 * safezoneH;
 		};
-
-		class Intel_LB: prjRscListbox
-		{
-			idc = 1018;
-			
-			x = 0.4125 * safezoneW + safezoneX;
-			y = 0.381875 * safezoneH + safezoneY;
-			w = 0.175 * safezoneW;
-			h = 0.23625 * safezoneH;
-
-			onLBSelChanged = call prj_fnc_show_intel_trade;
-		};
-		class Intel_Btn: prjRscButton
-		{
-			idc = 1019;
-
-			x = 0.4125 * safezoneW + safezoneX;
-			y = 0.63125 * safezoneH + safezoneY;
-			w = 0.175 * safezoneW;
-			h = 0.039375 * safezoneH;
-
-			text = "SELECT INTEL"
-			action = "call prj_fnc_intel_trade_btn";
-		};
 		class Intel_Score: prjRscStructuredText
 		{
 			idc = 1020;
@@ -451,7 +396,7 @@ class dialogOptionMenu
 			w = 0.142 * safezoneW;
 			h = 0.039375 * safezoneH;
 
-			action = "[0,0] remoteExec ['setRain'];[0,0] remoteExec ['setOvercast']";
+			action = "[0,0] remoteExec ['setRain'];[0,0] remoteExec ['setOvercast'];remoteExec ['forceWeatherChange']";
 		};
 
 		class Options_OffFog_Back: prjRscText {
@@ -480,7 +425,7 @@ class dialogOptionMenu
 			w = 0.142 * safezoneW;
 			h = 0.039375 * safezoneH;
 
-			action = "[0,0] remoteExec ['setFog']";
+			action = "[0,0] remoteExec ['setFog'];remoteExec ['forceWeatherChange']";
 		};
 
 		class Options_VehInfo_Back: prjRscText {
@@ -510,6 +455,35 @@ class dialogOptionMenu
 			h = 0.039375 * safezoneH;
 
 			action = "{if (((vehicle _x) isKindOf 'Car') || ((vehicle _x) isKindOf 'Tank') || ((vehicle _x) isKindOf 'Air')) then {systemChat format ['%1 - GPS:%2',(getText (configFile >> 'CfgVehicles' >> (typeOf _x) >> 'displayName')),(mapGridPosition _x)];};} forEach vehicles;";
+		};
+
+		class Options_TotalKillInfo_Back: prjRscText {
+			colorBackground[] = { 0, 0, 0, 0.5 };
+			idc = -1;
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.462 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_TotalKillInfo_Pct: prjRscPicture
+		{
+			idc = -1;
+			text = "img\icons\icon_total_kills.paa";
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.462 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_TotalKillInfo_Btn: prjRscButtonHQ
+		{
+			idc = 1030;
+			text = "TOTAL KILLS";
+			x = 0.444 * safezoneW + safezoneX;
+			y = 0.462 * safezoneH + safezoneY;
+			w = 0.142 * safezoneW;
+			h = 0.039375 * safezoneH;
+
+			action = "hint format ['ENEMY - %1\nCIVILIAN - %2\nFRIEND - %3',missionNamespace getVariable 'total_kill_enemy',missionNamespace getVariable 'total_kill_civ',missionNamespace getVariable 'total_kill_friend']";
 		};
 
 	};
@@ -569,7 +543,7 @@ class dialogUpgradesMenu
 			w = 0.1575 * safezoneW;
 			h = 0.02625 * safezoneH;
 			font = "EtelkaMonospacePro";
-			size = 0.028;
+			size = 0.024;
 		};
 		class Upgrades_Arsenal: prjRscStructuredText
 		{
@@ -579,7 +553,7 @@ class dialogUpgradesMenu
 			w = 0.1575 * safezoneW;
 			h = 0.02625 * safezoneH;
 			font = "EtelkaMonospacePro";
-			size = 0.028;
+			size = 0.024;
 		};
 		class Upgrades_GarageA: prjRscStructuredText
 		{
@@ -589,7 +563,7 @@ class dialogUpgradesMenu
 			w = 0.1575 * safezoneW;
 			h = 0.02625 * safezoneH;
 			font = "EtelkaMonospacePro";
-			size = 0.028;
+			size = 0.024;
 		};
 		class Upgrades_GarageL: prjRscStructuredText
 		{
@@ -599,7 +573,7 @@ class dialogUpgradesMenu
 			w = 0.1575 * safezoneW;
 			h = 0.02625 * safezoneH;
 			font = "EtelkaMonospacePro";
-			size = 0.028;
+			size = 0.024;
 		};
 
 		class Upgrades_Arsenal_Btn_Back: prjRscText
@@ -624,7 +598,7 @@ class dialogUpgradesMenu
 		class Upgrades_Arsenal_Btn: prjRscButtonHQ
 		{
 			idc = 1026;
-			text = "ARSENAL (WIP)"; //--- ToDo: Localize;
+			text = "";
 			x = 0.444 * safezoneW + safezoneX;
 			y = 0.5 * safezoneH + safezoneY;
 			w = 0.142 * safezoneW;
@@ -632,8 +606,8 @@ class dialogUpgradesMenu
 
 			sizeEx = 0.032;
 
-			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'arsenal_level') + 1);_control ctrlSetText str _next + ' LVL / ' + str (_next * 100) + ' IS';";
-			onMouseExit = "params ['_control'];_control ctrlSetText 'ARSENAL'";
+			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'arsenal_level') + 1);if (_next < 10) then {_control ctrlSetText str _next + ' / ' + str (_next * 100)} else {_control ctrlSetText 'MAX'}";
+			onMouseExit = "params ['_control'];_control ctrlSetText localize 'STR_PRJ_STATISTICS_ARSENAL'";
 
 			action = "[1] call prj_fnc_upgrade";
 		};
@@ -660,7 +634,7 @@ class dialogUpgradesMenu
 		class Upgrades_GarageA_Btn: prjRscButtonHQ
 		{
 			idc = 1027;
-			text = "AIR GARAGE"; //--- ToDo: Localize;
+			text = "";
 			x = 0.444 * safezoneW + safezoneX;
 			y = 0.5525 * safezoneH + safezoneY;
 			w = 0.142 * safezoneW;
@@ -668,8 +642,8 @@ class dialogUpgradesMenu
 
 			sizeEx = 0.032;
 
-			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'a_garage_level') + 1);_control ctrlSetText str _next + ' LVL / ' + str (_next * 100) + ' IS';";
-			onMouseExit = "params ['_control'];_control ctrlSetText 'AIR GARAGE'";
+			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'a_garage_level') + 1);if (_next < 10) then {_control ctrlSetText str _next + ' / ' + str (_next * 100)} else {_control ctrlSetText 'MAX'}";
+			onMouseExit = "params ['_control'];_control ctrlSetText localize 'STR_PRJ_STATISTICS_AIRSHOP'";
 
 			action = "[2] call prj_fnc_upgrade";
 		};
@@ -697,7 +671,7 @@ class dialogUpgradesMenu
 		class Upgrades_GarageG_Btn: prjRscButtonHQ
 		{
 			idc = 1028;
-			text = "GROUND GARAGE"; //--- ToDo: Localize;
+			text = "";
 			x = 0.444 * safezoneW + safezoneX;
 			y = 0.605 * safezoneH + safezoneY;
 			w = 0.142 * safezoneW;
@@ -705,8 +679,8 @@ class dialogUpgradesMenu
 
 			sizeEx = 0.032;
 
-			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'g_garage_level') + 1);_control ctrlSetText str _next + ' LVL / ' + str (_next * 100) + ' IS';";
-			onMouseExit = "params ['_control'];_control ctrlSetText 'GROUND GARAGE'";
+			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'g_garage_level') + 1);if (_next < 10) then {_control ctrlSetText str _next + ' / ' + str (_next * 100)} else {_control ctrlSetText 'MAX'}";
+			onMouseExit = "params ['_control'];_control ctrlSetText localize 'STR_PRJ_STATISTICS_GROUNDSHOP'";
 
 			action = "[3] call prj_fnc_upgrade";
 		};

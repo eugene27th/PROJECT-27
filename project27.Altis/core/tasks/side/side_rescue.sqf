@@ -59,7 +59,7 @@ if (!alive _pilot) then {
 
 if (_pilot distance position spawn_zone_blue < 50) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-	[player,["money",(player getVariable "money") + _reward]] remoteExec ["setVariable",0];
+	["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
 	sleep 2;
 };
 

@@ -55,7 +55,7 @@ if ({!alive _x} forEach _idap_units) then {
 
 if (triggerActivated _trg) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-	[player,["money",(player getVariable "money") + _reward]] remoteExec ["setVariable",0];
+	["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
     {[_x, ""] remoteExec ["switchMove", 0]} forEach _idap_units;
     (_idap_units select 0) assignAsDriver _idap_vehicle; 
     [(_idap_units select 0)] orderGetIn true; 

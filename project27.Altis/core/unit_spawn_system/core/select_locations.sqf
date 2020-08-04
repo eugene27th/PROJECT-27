@@ -9,10 +9,10 @@ private _distance = 600;
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 
 private _types_locations = [
-	["NameCityCapital",325,[cities_enemy,cities_civilian]],
-	["NameCity",325,[cities_enemy,cities_civilian]],
-	["NameVillage",325,[villages_enemy,villages_civilian]],
-	["NameLocal",325,[local_enemy,local_civilian]],
+	["NameCityCapital",350,[cities_enemy,cities_civilian]],
+	["NameCity",300,[cities_enemy,cities_civilian]],
+	["NameVillage",250,[villages_enemy,villages_civilian]],
+	["NameLocal",150,[local_enemy,local_civilian]],
 	["Hill",50,[hills_enemy,hills_civilian]],
 	["RockArea",125,[rock_enemy,rock_civilian]],
 	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian]],
@@ -43,6 +43,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setTriggerTimeout [3, 3, 3, true];
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 150 && (speed _x < 180)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
+		_trigger setVariable ["captured",false];
 
 		if (_house_ieds == 1) then {
 			private _buildings = nearestObjects [_pos, ["Building"], _spawn_area];
@@ -54,10 +55,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 						private _allpositions = (selectRandom _useful) buildingPos -1;
 						private _house_ied = createMine [selectRandom _house_ieds_class, selectRandom _allpositions,[],1];
 						if (prj_debug) then {
-							private _marker_house = createMarker ["house_ied_" + str (position _house_ied), position _house_ied];
-							_marker_house setMarkerType "mil_dot";
-							_marker_house setMarkerAlpha 1;
-							_marker_house setMarkerColor "ColorWEST";
+							["house_ied_" + str (position _house_ied),position _house_ied,"ColorWEST",1,[],"mil_dot"] call prj_fnc_create_marker;
 						};
 					};
 				};
@@ -69,17 +67,8 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		};
 
 		if (prj_debug) then {
-			private _marker_area = createMarker ["_area_marker_" + str _pos, _pos]; 
-			_marker_area setMarkerSize [_spawn_area,_spawn_area];
-			_marker_area setMarkerShape "ELLIPSE";
-			_marker_area setMarkerColor "ColorOPFOR";
-			_marker_area setMarkerAlpha 0.7;
-
-			private _marker_trg = createMarker ["_area_trigger_marker_" + str _pos, _pos];
-			_marker_trg setMarkerSize [(_distance + _spawn_area),(_distance + _spawn_area)];
-			_marker_trg setMarkerShape "ELLIPSE";
-			_marker_trg setMarkerColor "ColorBLUFOR";
-			_marker_trg setMarkerAlpha 0.3;
+			["_area_marker_" + str _pos,_pos,"ColorOPFOR",0.7,[[_spawn_area,_spawn_area],"ELLIPSE"]] call prj_fnc_create_marker;
+			["_area_trigger_marker_" + str _pos,_pos,"ColorBLUFOR",0.3,[[(_distance + _spawn_area),(_distance + _spawn_area)],"ELLIPSE"]] call prj_fnc_create_marker;
 		};
 	} forEach _locations;
 };
@@ -103,15 +92,8 @@ for "_i" from 1 to _number_of_ied do {
 	_junk enableSimulationGlobal false;
 
 	if (prj_debug) then {
-		private _marker_junk = createMarker ["junk_" + str (position _junk), position _junk];
-		_marker_junk setMarkerType "mil_dot";
-		_marker_junk setMarkerAlpha 1;
-		_marker_junk setMarkerColor "ColorWEST";
-
-		private _marker_ied = createMarker ["ied_" + str (position _ied), position _ied];
-		_marker_ied setMarkerType "mil_dot";
-		_marker_ied setMarkerAlpha 1;
-		_marker_ied setMarkerColor "ColorOPFOR";
+		["junk_" + str (position _junk),position _junk,"ColorWEST",1,[],"mil_dot"] call prj_fnc_create_marker;
+		["ied_" + str (position _ied),position _ied,"ColorOPFOR",1,[],"mil_dot"] call prj_fnc_create_marker;
 	};
 };
 

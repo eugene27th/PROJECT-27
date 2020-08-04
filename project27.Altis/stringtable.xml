@@ -2,7 +2,38 @@
 
 <Project name="PROJECT27">
 
+    <Package name="PRJ_SECTORS">
+
+        <Container name="PRJ_SECTOR_CAPTURED_AND_LOST">
+            <Key ID="STR_SECTOR_CAPTURED_TITLE">
+                <Original>Sector %1 is captured.</Original>
+		        <Russian>Сектор %1 захвачен.</Russian>
+                <English>Sector %1 is captured.</English>
+            </Key>
+            <Key ID="STR_SECTOR_LOST_TITLE">
+                <Original>Sector %1 is lost.</Original>
+		        <Russian>Сектор %1 потерян.</Russian>
+                <English>Sector %1 is lost.</English>
+            </Key>
+	    </Container>
+
+    </Package>
+
+
     <Package name="PRJ_DOCUMENTATION_BRIEFING">
+
+        <Container name="PRJ_DOCUMENTATION_START">
+            <Key ID="STR_DOCUMENTATION_START_TITLE">
+                <Original></Original>
+		        <Russian>Добро пожаловать.</Russian>
+                <English></English>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_START_DESC">
+                <Original></Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'>Добро пожаловать!&lt;/font&gt;&lt;br/&gt;PROJECT27 - это военная тактическая песочница с экономикой, статистикой и взаимодействием.&lt;br/&gt;Более подробно о данной миссии вы сможете узнать в инструктаже, который будет доступен после вашей загрузки.&lt;br/&gt;Удачи на полях сражений! И не обижайте гражданских :)</Russian>
+                <English></English>
+            </Key>
+	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_BASICS">
             <Key ID="STR_DOCUMENTATION_BASICS_TITLE">
@@ -103,7 +134,7 @@
             </Key>
             <Key ID="STR_DOCUMENTATION_VEHSHOP_DESC">
                 <Original></Original>
-		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Улучшение магазина техники.&lt;/font&gt;&lt;br/&gt;На старте магазин техники первого уровня, который необходимо улучшать, если вы хотите купить технику уровня выше.&lt;br/&gt;Улучшение проиходит за счёт &lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'>очков разведданных&lt;/execute&gt; в меню ноутбука. Всего у магазина 10 уровней.</Russian>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Улучшение магазина техники.&lt;/font&gt;&lt;br/&gt;На старте магазин техники нулевого уровня, который необходимо улучшать, если вы хотите купить технику уровня выше.&lt;br/&gt;Улучшение проиходит за счёт &lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'>очков разведданных&lt;/execute&gt; в меню ноутбука. Всего у магазина 10 уровней.</Russian>
                 <English></English>
             </Key>
 	    </Container>
@@ -142,11 +173,10 @@
             </Key>
             <Key ID="STR_DOCUMENTATION_ENEMY_DESC">
                 <Original></Original>
-		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Силы противника, СВУ.&lt;/font&gt;&lt;br/&gt;Противник будет поджидать вас повсюду. Он будет в строениях, на дорогах и на пересечённой местности, может патрулировать или ожидать ваш неспешный конвой в засаде.&lt;br/&gt;Но сначала вам нужно до него доехать, чему помешают самодельные взрывные устройства, которые могут быть разбросаны на дорогах и тропинках. Доехали до населённого пункта и решили зайти в дом? Смотрите под ноги, СВУ могут поджидать вас и там.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Секторы.&lt;/font&gt;&lt;br/&gt;Вы можете выселить противника, дав понять, что это ваш сектор. Когда вы это сделаете, сектор будет отмечен на карте и вы получите награду. Больших скоплений противника вы там больше не увидите. Но не стоит расслаблятся. В любое время противник может начать контрнаступление.</Russian>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Силы противника, СВУ.&lt;/font&gt;&lt;br/&gt;Противник будет поджидать вас повсюду. Он будет в строениях, на дорогах и на пересечённой местности, может патрулировать или ожидать ваш неспешный конвой в засаде.&lt;br/&gt;Но сначала вам нужно до него доехать, чему помешают самодельные взрывные устройства, которые могут быть разбросаны на дорогах и тропинках. Доехали до населённого пункта и решили зайти в дом? Смотрите под ноги, СВУ могут поджидать вас и там.&lt;br/&gt;Помните, что гражданские могут быть недовольны вашими действиями.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Секторы.&lt;/font&gt;&lt;br/&gt;Вы можете выселить противника, дав понять, что это ваш сектор. Когда вы это сделаете, сектор будет отмечен на карте и вы получите награду. Больших скоплений противника вы там больше не увидите. Но не стоит расслаблятся. В любое время противник может начать контрнаступление.</Russian>
                 <English></English>
             </Key>
 	    </Container>
-
     </Package>
 
     <Package name="PRJ_GUI_AND_MESSAGES">
@@ -156,6 +186,17 @@
                 <Original>Select a task in the task list.</Original>
 		        <Russian>Выберите задание в списке задач.</Russian>
                 <English>Select a task in the task list.</English>
+            </Key>
+
+            <Key ID="STR_PRJ_MHQ_IN_NOT_EXIST">
+                <Original>MHQ is not exist.</Original>
+		        <Russian>MHQ не найден.</Russian>
+                <English>MHQ is not exist.</English>
+            </Key>
+            <Key ID="STR_PRJ_MHQ_IS_NOT_DEPLOYED">
+                <Original>MHQ is not deployed.</Original>
+		        <Russian>MHQ не развёрнут.</Russian>
+                <English>MHQ is not deployed.</English>
             </Key>
 	    </Container>
 
@@ -179,6 +220,31 @@
                 <Original>Civilians</Original>
 		        <Russian>Гражданские</Russian>
                 <English>Civilians</English>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_INTELSCORE">
+                <Original>Intel Score</Original>
+		        <Russian>Разведданные</Russian>
+                <English>Intel Score</English>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_ARSENAL">
+                <Original>Arsenal</Original>
+		        <Russian>Арсенал</Russian>
+                <English>Arsenal</English>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_AIRSHOP">
+                <Original>Aircraft shop</Original>
+		        <Russian>Магазин ВТС</Russian>
+                <English>Aircraft shop</English>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_GROUNDSHOP">
+                <Original>Vehicle shop</Original>
+		        <Russian>Магазин НТС</Russian>
+                <English>Vehicle shop</English>
+            </Key>
+            <Key ID="STR_PRJ_STATISTICS_LVL">
+                <Original>lvl</Original>
+		        <Russian>ур.</Russian>
+                <English>lvl</English>
             </Key>
 	    </Container>
 
@@ -213,7 +279,7 @@
         <Container name="PRJ_UPGRADE_MENU">
             <Key ID="STR_PRJ_DONT_HAVE_IS">
                 <Original>Your team lacks an Intel Score.</Original>
-		        <Russian>У Вашей команды не хватает Intel Score.</Russian>
+		        <Russian>У Вашей команды не хватает очков разведданных.</Russian>
                 <English>Your team lacks an Intel Score.</English>
             </Key>
             <Key ID="STR_PRJ_UPGRADED">
@@ -225,6 +291,11 @@
                 <Original>to level %1.</Original>
 		        <Russian>до %1 уровня.</Russian>
                 <English>to level %1.</English>
+            </Key>
+            <Key ID="STR_PRJ_MAX_LEVEL">
+                <Original>to max level.</Original>
+		        <Russian>до максимального уровня.</Russian>
+                <English>to max level.</English>
             </Key>
             <Key ID="STR_PRJ_ARSENAL">
                 <Original>your arsenal</Original>
@@ -337,6 +408,24 @@
 		        <Russian>О чём вы? Я не понимаю.</Russian>
                 <English>What are you speaking about? I do not understand.</English>
 				<German>Worüber reden Sie? Ich verstehe nicht.</German>
+            </Key>
+            <Key ID="STR_PRJ_CIVIL_BAD_KARMA_1">
+                <Original>You bring only troubles. I will not tell you anything.</Original>
+		        <Russian>Вы приносите одни беды. Я не буду Вам ничего говорить.</Russian>
+                <English>You bring only troubles. I will not tell you anything.</English>
+				<German>Sie bringen nur Probleme. Ich werde dir nichts sagen.</German>
+            </Key>
+            <Key ID="STR_PRJ_CIVIL_BAD_KARMA_2">
+                <Original>First you kill civilians, and then ask for help. I do not know anything.</Original>
+		        <Russian>Сначала убиваете гражданских, а потом просите помощи. Ничего не знаю.</Russian>
+                <English>First you kill civilians, and then ask for help. I do not know anything.</English>
+				<German>Zuerst tötest du Zivilisten und bittest dann um Hilfe. Ich weiß gar nichts.</German>
+            </Key>
+            <Key ID="STR_PRJ_CIVIL_BAD_KARMA_3">
+                <Original>Perhaps I would have told someone else, but not you.</Original>
+		        <Russian>Возможно, я бы сказал кому-нибудь другому, но не вам.</Russian>
+                <English>Perhaps I would have told someone else, but not you.</English>
+				<German>Vielleicht hätte ich es jemand anderem erzählt, aber nicht dir.</German>
             </Key>
 	    </Container>
 

@@ -24,7 +24,7 @@ waitUntil {sleep 5; !alive _tower || !alive _generator || _taskID call BIS_fnc_t
 
 if (!alive _tower || !alive _generator) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-	[player,["money",(player getVariable "money") + _reward]] remoteExec ["setVariable",0];
+	["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
 	sleep 2;
 };
 

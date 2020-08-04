@@ -39,7 +39,7 @@ if ({!alive _x} forEach _boxes) then {
 
 if (triggerActivated _trg) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-    [player,["money",(player getVariable "money") + _reward]] remoteExec ["setVariable",0];
+    ["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
     uiSleep 2;
 };
 

@@ -31,7 +31,7 @@ prj_fnc_vehicle_shop_window = {
 		["C_Truck_02_transport_F",60,0],
 		["RHS_Ural_Open_Civ_01",60,0],
 		["RHS_Ural_Civ_01",60,0],
-		["B_LSV_01_unarmed_F",70,0],
+		["B_CTRG_LSV_01_light_F",70,0],
 		["O_LSV_02_unarmed_F",70,0],
 		["rhsusf_m998_d_2dr",100,0],
 		["rhsusf_m998_w_2dr",100,0],
@@ -76,13 +76,16 @@ prj_fnc_vehicle_shop_window = {
 		["rhsusf_M977A4_AMMO_usarmy_wd",120,0],
 		["rhsusf_M977A4_REPAIR_usarmy_wd",120,0],
 		["rhsusf_M978A4_usarmy_wd",120,0],
+		["B_G_Offroad_01_repair_F",180,0],
+		["B_G_Van_01_fuel_F",200,0],
 		["rhs_pts_vmf",200,0],
-		["rhsusf_m1025_d",120,1],
-		["rhsusf_m1025_w",120,1],
+		["rhsusf_m1025_d",220,1],
+		["rhsusf_m1025_w",220,1],
 		["rhsusf_m1025_d_m2",250,1],
 		["rhsusf_m1025_w_m2",250,1],
 		["rhsusf_m1025_d_Mk19",250,1],
 		["rhsusf_m1025_w_Mk19",250,1],
+		["O_T_Truck_02_fuel_F",280,1],
 		["rhsusf_M1078A1P2_B_WD_fmtv_usarmy",280,1],
 		["rhsusf_M1078A1P2_B_M2_WD_fmtv_usarmy",280,1],
 		["rhsusf_M1078A1P2_B_M2_WD_flatbed_fmtv_usarmy",280,1],
@@ -128,6 +131,7 @@ prj_fnc_vehicle_shop_window = {
 		["rhsusf_M977A4_BKIT_M2_usarmy_wd",500,1],
 		["rhsusf_M977A4_AMMO_BKIT_M2_usarmy_wd",500,1],
 		["rhsusf_M977A4_REPAIR_BKIT_M2_usarmy_wd",500,1],
+		["LOP_NK_T34",550,1],
 		["rhsusf_m113_usarmy_unarmed",550,1],
 		["rhsusf_m113d_usarmy_unarmed",550,1],
 		["rhsusf_CGRCAT1A2_M2_usmc_wd",580,1],
@@ -184,12 +188,13 @@ prj_fnc_vehicle_shop_window = {
 		["rhsusf_m1245_mk19crows_socom_deploy",800,2],
 		["rhsgref_BRDM2_ATGM_vdv",800,2],
 		["rhs_btr80_vdv",800,2],
-		["rhsusf_stryker_m1126_m2_d",800,3],
 		["rhsusf_stryker_m1126_m2_wd",800,3],
-		["rhs_prp3_tv",800,3],
+		["rhsusf_stryker_m1127_m2_wd",800,3],	
+		["rhs_prp3_tv",810,3],
 		["rhs_brm1k_tv",810,3],
 		["rhs_bmp1_tv",830,3],
 		["rhs_bmp1k_tv",830,3],
+		["rhsusf_stryker_m1126_mk19_wd",850,3],
 		["rhs_btr80a_vdv",850,3],
 		["rhsusf_m1045_w",870,3],
 		["rhs_bmp1d_tv",880,3],
@@ -198,10 +203,13 @@ prj_fnc_vehicle_shop_window = {
 		["rhs_bmp2e_tv",1000,4],
 		["rhs_bmp2_tv",1000,4],
 		["rhs_bmp2k_tv",1000,4],
+		["rhsusf_stryker_m1132_m2_wd",1000,4],
+		["rhsusf_stryker_m1134_wd",1150,4],
 		["rhs_bmp2d_tv",1150,4],
 		["rhs_bmd4_vdv",1200,4],
 		["rhs_bmd4m_vdv",1200,4],
 		["rhs_bmd4ma_vdv",1280,4],
+		["LOP_NK_T55",1300,4],
 		["RHS_M2A2_wd",1350,5],
 		["RHS_M2A2",1350,5],
 		["RHS_M2A3_wd",1350,5],
@@ -276,6 +284,7 @@ prj_fnc_vehicle_shop_window = {
 		["RHS_UH60M_MEV2",580,4],
 		["RHS_C130J",600,4],
 		["RHS_UH60M",630,4],
+		["RHS_C130J_Cargo",650,4],
 		["RHS_UH60M_ESSS2",650,4],
 		["RHS_UH60M_ESSS",650,4],
 		["rhs_ka60_grey",650,4],
@@ -434,8 +443,9 @@ prj_fnc_hq_menu = {
 	private _enemy = ((missionNamespace getVariable (getPlayerUID player)) select 1) select 1;
 	private _friend = ((missionNamespace getVariable (getPlayerUID player)) select 2) select 1;
 	private _civ = ((missionNamespace getVariable (getPlayerUID player)) select 3) select 1;
+	private _intel_score = missionNamespace getVariable "intel_score";
 
-	private _stats_text = localize "STR_PRJ_STATISTICS_KILLED" + ":<br/>" + localize "STR_PRJ_STATISTICS_ENEMIES" + ": " + str _enemy + "<br/>" + localize "STR_PRJ_STATISTICS_FRIENDLY" + ": " + str _friend + "<br/>" + localize "STR_PRJ_STATISTICS_CIVILIANS" + ": " + str _civ + "<br/>";
+	private _stats_text = localize "STR_PRJ_STATISTICS_KILLED" + ":<br/>" + localize "STR_PRJ_STATISTICS_ENEMIES" + ": " + str _enemy + "<br/>" + localize "STR_PRJ_STATISTICS_FRIENDLY" + ": " + str _friend + "<br/>" + localize "STR_PRJ_STATISTICS_CIVILIANS" + ": " + str _civ + "<br/>" + localize "STR_PRJ_STATISTICS_INTELSCORE" + ": " + str _intel_score + "<br/>";
 
 	private _stat_p = (_enemy * 10) - (_friend * 50) - (_civ * 25);
 
@@ -479,7 +489,7 @@ prj_fnc_hq_menu = {
 };
 
 prj_fnc_tpmhq = {
-	if (isNil "mhqterminal") exitWith {hint "MHQ is not exist"};
+	if (isNil "mhqterminal") exitWith {hint localize "STR_PRJ_MHQ_IN_NOT_EXIST"};
 
 	if ((mhqterminal animationPhase "lid_rot_1") != 0) then {
 		player setposATL ((getpos mhqterminal) findEmptyPosition [ 0 , 15 , "B_soldier_F" ]);
@@ -487,7 +497,7 @@ prj_fnc_tpmhq = {
 	}
 	else
 	{
-		hint "MHQ is not deployed";
+		hint localize "STR_PRJ_MHQ_IS_NOT_DEPLOYED";
 	};
 };
 
@@ -563,93 +573,7 @@ prj_fnc_player_info = {
 	ctrlEnable [1005, true];
 };
 
-// intel menu ///////////////////////////////////////////////////////////////////////////////////////////
-prj_fnc_intel_menu = {
-	private _intel_objects = [
-		["acex_intelitems_photo",5],
-		["acex_intelitems_document",3],
-		["ACE_Cellphone",2],
-		["acex_intelitems_notepad",1]
-	];
-
-	createDialog "dialogIntelMenu";
-
-	ctrlEnable [1019, false];
-
-	private _office_table_items = [((getItemCargo office_table) select 0) + ((getMagazineCargo office_table) select 0),((getItemCargo office_table) select 1) + ((getMagazineCargo office_table) select 1)];
-
-	private _intel_score = 0;
-	private _lb_index = 0;
-
-	for [{private _i = 0 }, { _i < (count _intel_objects) }, { _i = _i + 1 }] do {
-		private _intel_index = (_office_table_items select 0) find ((_intel_objects select _i) select 0);
-		if (_intel_index >= 0) then {
-			private _intel_displayName = getText(configFile >> "CfgMagazines" >> (_office_table_items select 0) select _intel_index >> "displayName");
-			if (_intel_displayName isEqualTo "") then {
-				_intel_displayName = getText(configFile >> "CfgWeapons" >> (_office_table_items select 0) select _intel_index >> "displayName");
-			};
-			private _intel_number = (_office_table_items select 1) select _intel_index;
-			_intel_score = _intel_score + (((_intel_objects select _i) select 1) * _intel_number * 10);
-			_intel_text = "x" + str _intel_number + " " + _intel_displayName;
-			lbAdd [1018, _intel_text];
-			lbSetTooltip [1018, _lb_index, _intel_text];
-			lbSetData [1018, _lb_index, str [(_office_table_items select 0) select _intel_index,_intel_number]];
-			lbSetValue [1018, _lb_index, ((_intel_objects select _i) select 1)];
-			_lb_index = _lb_index + 1;
-		};
-	};
-
-	private _ctrl = (findDisplay 3004) displayCtrl 1020;
-	private _text = "INTEL SCORE:<t size='1.2' color='#25E03F'> " + str (missionNamespace getVariable "intel_score") + "</t>";
-	_ctrl ctrlSetStructuredText parseText _text;
-};
-
-prj_fnc_show_intel_trade = {
-	ctrlEnable [1019, true];
-	private _ctrlloadb = (findDisplay 3004) displayCtrl 1019;
-	_ctrlloadb ctrlSetTextColor [0.8, 0.8, 0, 1];
-
-	private _index = lbCurSel 1018;
-	private _intels = lbData [1018, _index];
-	private _intels = call (compile _intels);
-	private _intel_score = lbValue [1018, _index];
-
-	ctrlSetText [1019, "EXCHANGE / " + str ((_intel_score * (_intels select 1)) * 10)];
-};
-
-prj_fnc_intel_trade_btn = {
-	ctrlEnable [1019, false];
-	private _ctrlloadb = (findDisplay 3004) displayCtrl 1019;
-	ctrlSetText [1019, "SELECT INTEL"];
-	_ctrlloadb ctrlSetTextColor [0, 0, 0, 1];
-
-	private _index = lbCurSel 1018;
-	private _intels = lbData [1018, _index];
-	private _intels = call (compile _intels);
-	private _intel_score = lbValue [1018, _index];
-
-	[missionNamespace,["intel_score",(missionNamespace getVariable "intel_score") + ((_intel_score * (_intels select 1)) * 10),true]] remoteExec ["setVariable",2];
-
-	lbDelete [1018, _index];
-
-	private _office_table_items = [((getItemCargo office_table) select 0) + ((getMagazineCargo office_table) select 0),((getItemCargo office_table) select 1) + ((getMagazineCargo office_table) select 1)];
-
-	clearItemCargoGlobal office_table;
-	clearMagazineCargoGlobal office_table;
-	clearWeaponCargoGlobal office_table;
-	clearBackpackCargoGlobal office_table;
-
-	for [{private _i = 0 }, { _i < (count (_office_table_items select 0)) }, { _i = _i + 1 }] do {
-		if !(((_office_table_items select 0) select _i) isEqualTo (_intels select 0)) then {
-			office_table addItemCargoGlobal [((_office_table_items select 0) select _i), ((_office_table_items select 1) select _i)];
-		};
-	};
-
-	private _ctrl_is = (findDisplay 3004) displayCtrl 1020;
-	private _text_is = "INTEL SCORE:<t size='1.2' color='#25E03F'> " + str ((missionNamespace getVariable "intel_score") + ((_intel_score * (_intels select 1)) * 10)) + "</t>";
-	_ctrl_is ctrlSetStructuredText parseText _text_is;
-};
-
+// upgrades menu ///////////////////////////////////////////////////////////////////////////////////////////
 prj_fnc_upgrades_menu = {
 	createDialog "dialogUpgradesMenu";
 
@@ -659,21 +583,25 @@ prj_fnc_upgrades_menu = {
 		{ctrlEnable [_x, false]} forEach [1027,1028];
 	};
 
-	private _ctrl_intel = (findDisplay 3006) displayCtrl 1025;
-	private _text_intel = "INTEL SCORE: <t size='1.2' color='#25E03F'>" + str (missionNamespace getVariable "intel_score") + "</t>";
-	_ctrl_intel ctrlSetStructuredText parseText _text_intel;
+	ctrlSetText [1026,localize "STR_PRJ_STATISTICS_ARSENAL" + " (WIP)"];
+	ctrlSetText [1027,localize "STR_PRJ_STATISTICS_AIRSHOP"];
+	ctrlSetText [1028,localize "STR_PRJ_STATISTICS_GROUNDSHOP"];
 
-	private _ctrl_arsenal = (findDisplay 3006) displayCtrl 1022;
-	private _text_arsenal = "ARSENAL: <t size='1.2' color='#25E03F'>" + str (missionNamespace getVariable "arsenal_level") + " LVL</t>";
-	_ctrl_arsenal ctrlSetStructuredText parseText _text_arsenal;
+	private _ctrl = (findDisplay 3006) displayCtrl 1025;
+	private _text = localize "STR_PRJ_STATISTICS_INTELSCORE" + ": <t size='1.2' color='#25E03F'>" + str (missionNamespace getVariable "intel_score") + "</t>";
+	_ctrl ctrlSetStructuredText parseText _text;
 
-	private _ctrl_a_grg = (findDisplay 3006) displayCtrl 1023;
-	private _text_a_grg = "AIR GARAGE: <t size='1.2' color='#25E03F'>" + str (missionNamespace getVariable "a_garage_level") + " LVL</t>";
-	_ctrl_a_grg ctrlSetStructuredText parseText _text_a_grg;
+	private _ctrl = (findDisplay 3006) displayCtrl 1022;
+	private _text = localize "STR_PRJ_STATISTICS_ARSENAL" + ": <t size='1.2' color='#25E03F'>" + str (missionNamespace getVariable "arsenal_level") + " " + localize "STR_PRJ_STATISTICS_LVL" +  "</t>";
+	_ctrl ctrlSetStructuredText parseText _text;
 
-	private _ctrl_g_grg = (findDisplay 3006) displayCtrl 1024;
-	private _text_g_grg = "LAND GARAGE: <t size='1.2' color='#25E03F'>" + str (missionNamespace getVariable "g_garage_level") + " LVL</t>";
-	_ctrl_g_grg ctrlSetStructuredText parseText _text_g_grg;
+	private _ctrl = (findDisplay 3006) displayCtrl 1023;
+	private _text = localize "STR_PRJ_STATISTICS_AIRSHOP" + ": <t size='1.2' color='#25E03F'>" + str (missionNamespace getVariable "a_garage_level") + " " + localize "STR_PRJ_STATISTICS_LVL" +  "</t>";
+	_ctrl ctrlSetStructuredText parseText _text;
+
+	private _ctrl = (findDisplay 3006) displayCtrl 1024;
+	private _text = localize "STR_PRJ_STATISTICS_GROUNDSHOP" + ": <t size='1.2' color='#25E03F'>" + str (missionNamespace getVariable "g_garage_level") + " " + localize "STR_PRJ_STATISTICS_LVL" +  "</t>";
+	_ctrl ctrlSetStructuredText parseText _text;
 };
 
 prj_fnc_upgrade = {
@@ -681,31 +609,33 @@ prj_fnc_upgrade = {
 		"_type"
 	];
 
-	private ["_variable","_upgrade_name","_next_level","_upgrade_name","_display_ctrl","_text"];
+	private ["_variable","_upgrade_name","_display_ctrl","_text","_next_level"];
 
 	switch (_type) do {
 		case 1: {
 			_variable = "arsenal_level";
-			_next_level = (missionNamespace getVariable _variable) + 1;
 			_upgrade_name = localize "STR_PRJ_ARSENAL";
 			_display_ctrl = 1022;
-			_text = "ARSENAL: <t size='1.2' color='#25E03F'>" + str _next_level + " LVL</t>";		
+			_next_level = (missionNamespace getVariable _variable) + 1;
+			_text = localize "STR_PRJ_STATISTICS_ARSENAL" + ": <t size='1.2' color='#25E03F'>" + str _next_level + "</t> " + localize "STR_PRJ_STATISTICS_LVL";
 		};
 		case 2: {
 			_variable = "a_garage_level";
-			_next_level = (missionNamespace getVariable _variable) + 1;
 			_upgrade_name = localize "STR_PRJ_A_GARAGE";
 			_display_ctrl = 1023;
-			_text = "AIR GARAGE: <t size='1.2' color='#25E03F'>" + str _next_level + " LVL</t>";
+			_next_level = (missionNamespace getVariable _variable) + 1;
+			_text = localize "STR_PRJ_STATISTICS_AIRSHOP" + ": <t size='1.2' color='#25E03F'>" + str _next_level + "</t> " + localize "STR_PRJ_STATISTICS_LVL";
 		};
 		case 3: {
 			_variable = "g_garage_level";
-			_next_level = (missionNamespace getVariable _variable) + 1;
 			_upgrade_name = localize "STR_PRJ_G_GARAGE";
 			_display_ctrl = 1024;
-			_text = "LAND GARAGE: <t size='1.2' color='#25E03F'>" + str _next_level + " LVL</t>";
+			_next_level = (missionNamespace getVariable _variable) + 1;
+			_text = localize "STR_PRJ_STATISTICS_GROUNDSHOP" + ": <t size='1.2' color='#25E03F'>" + str _next_level + "</t> " + localize "STR_PRJ_STATISTICS_LVL";
 		};
 	};
+
+	if ((missionNamespace getVariable _variable) >= 10) exitWith {hint (localize "STR_PRJ_UPGRADED" + " " + _upgrade_name + " " + localize "STR_PRJ_MAX_LEVEL")};
 
 	private _intel_score = missionNamespace getVariable "intel_score";
 
@@ -720,7 +650,7 @@ prj_fnc_upgrade = {
 		hint format [localize "STR_PRJ_UPGRADED" + " " + _upgrade_name + " " + localize "STR_PRJ_TO_LEVEL",_next_level];
 
 		private _ctrl_intel = (findDisplay 3006) displayCtrl 1025;
-		private _text_intel = "INTEL SCORE: <t size='1.2' color='#25E03F'>" + str (_intel_score - (_next_level * 100)) + "</t>";
+		private _text_intel = localize "STR_PRJ_STATISTICS_INTELSCORE" + ": <t size='1.2' color='#25E03F'>" + str (_intel_score - (_next_level * 100)) + "</t>";
 		_ctrl_intel ctrlSetStructuredText parseText _text_intel;
 
 		private _ctrl = (findDisplay 3006) displayCtrl _display_ctrl;
@@ -1029,7 +959,6 @@ prj_fnc_vehicle_repair = {
 		
 		if (_count > 0) then {
 			for "_i" from 0 to (_count - 1) do {
-				scopeName "xx_reload2_xx";
 				_config = (configFile >> "CfgVehicles" >> _type >> "Turrets") select _i;
 				_magazines = getArray(_config >> "magazines");
 				_removed = [];
@@ -1063,10 +992,8 @@ prj_fnc_vehicle_repair = {
 				};
 			};
 		};
-		_object setVehicleAmmo 1;
-			
-		_object setDamage 0;	
-			
+		_object setVehicleAmmo 1;	
+		_object setDamage 0;		
 		_object setFuel 1;	
 	};
 	_object vehicleChat format ["Vehicle is ready.", _type];

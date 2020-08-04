@@ -55,19 +55,40 @@ switch (worldName) do {
 	default {
 		//enemy
 		cities_enemy = [[3,1],[3,1],[2,0.4],[1,0.4],[1,1]];
-		villages_enemy = [[3,1],[2,1],[2,0.4],[1,0.4],[1,1]];
+		villages_enemy = [[2,1],[2,1],[2,0.4],[1,0.4],[1,1]];
 		local_enemy = [[1,1],[1,1],[1,0.4],[1,0.4],[1,1]];
-		rock_enemy = [[0],[1,1],[0],[1,0.2],[1,1]];
+		rock_enemy = [[0],[1,1],[0],[0],[1,1]];
 		hills_enemy = [[0],[1,1],[0],[0],[1,1]];
 		vegetation_enemy = [[0],[1,1],[1,0.5],[1,0.5],[1,1]];
-		other_enemy = [[0],[1,1],[1,0.4],[1,0.4],[1,1]];
+		other_enemy = [[0],[1,1],[1,0.3],[1,0.3],[1,1]];
 		//civilian
 		cities_civilian = [[3,1],[5,0],[2,0.5]];
-		villages_civilian = [[2,1],[5,0],[2,0.4]];
-		local_civilian = [[0],[2,0],[1,0.4]];
+		villages_civilian = [[2,1],[5,0],[1,0.5]];
+		local_civilian = [[0],[0],[1,0.3]];
 		rock_civilian = [[0],[0],[0]];
 		hills_civilian = [[0],[0],[0]];
 		vegetation_civilian = [[0],[0],[0]];
-		other_civilian = [[0],[2,0],[0]];
+		other_civilian = [[0],[2,0],[1,0.3]];
 	};
 };
+
+// switch (worldName) do {
+// 	default {
+// 		//enemy
+// 		cities_enemy = [[3,1],[3,1],[0],[0],[0]];
+// 		villages_enemy = [[3,1],[3,1],[0],[0],[0]];
+// 		local_enemy = [[3,1],[3,1],[0],[0],[0]];
+// 		rock_enemy = [[3,1],[3,1],[0],[0],[0]];
+// 		hills_enemy = [[3,1],[3,1],[0],[0],[0]];
+// 		vegetation_enemy = [[3,1],[3,1],[0],[0],[0]];
+// 		other_enemy =[[3,1],[3,1],[0],[0],[0]];
+// 		//civilian
+// 		cities_civilian = [[3,1],[5,0],[0]];
+// 		villages_civilian = [[3,1],[5,0],[0]];
+// 		local_civilian = [[3,1],[5,0],[0]];
+// 		rock_civilian = [[3,1],[5,0],[0]];
+// 		hills_civilian = [[3,1],[5,0],[0]];
+// 		vegetation_civilian = [[3,1],[5,0],[0]];
+// 		other_civilian = [[3,1],[5,0],[0]];
+// 	};
+// };

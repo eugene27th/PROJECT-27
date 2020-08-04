@@ -27,7 +27,7 @@ prj_fnc_set_variables = {
 
 		if (_overwritting) then {
 			(call (compile ((_data select _i) select 0))) setVariable ((_data select _i) select 1);
-			systemChat "таблица записана";
+			if (prj_debug) then {systemChat "таблица перезаписана"};
 		}
 		else
 		{
@@ -178,8 +178,15 @@ prj_fnc_civ_orders = {
 prj_fnc_civ_info = {
 	params ["_position","_civilian"];
 
+	private _kill_enemy = missionNamespace getVariable "total_kill_enemy";
+	private _civ_enemy = missionNamespace getVariable "total_kill_civ";
+
 	if !(player getVariable ["interpreter",false]) exitWith {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_1","STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_2","STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_3"])] spawn BIS_fnc_showSubtitle;
+	};
+
+	if (_kill_enemy - (_civ_enemy * 5)) exitWith {
+		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_BAD_KARMA_1","STR_PRJ_CIVIL_BAD_KARMA_2","STR_PRJ_CIVIL_BAD_KARMA_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
 	if (_civilian getVariable ["interviewed",false]) exitWith {
@@ -187,7 +194,7 @@ prj_fnc_civ_info = {
 	};
 
 	private _array = _position nearEntities [enemy_infantry, 1500];
-	if (!(_array isEqualTo []) && (random 1 < 0.5)) then {
+	if (!(_array isEqualTo []) && (random 1 < 0.7)) then {
 		private _man = _array select 0;
 		private _distance = (_position distance _man) + (round (random 150)) - (round (random 150));
 		private _dir = _position getDir _man;

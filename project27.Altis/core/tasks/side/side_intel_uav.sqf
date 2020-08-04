@@ -75,7 +75,7 @@ while {!(_taskID call BIS_fnc_taskCompleted)} do {
 					["HQ", "Data downloaded successfully."] remoteExec ["BIS_fnc_showSubtitle",0];
 					["finishdnlddronedate"] remoteExec ["playSound", 0];
 					[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-					[player,["money",(player getVariable "money") + _reward]] remoteExec ["setVariable",0];
+					["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
 					uiSleep 2;
 				};
 			};
