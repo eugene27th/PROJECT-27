@@ -205,7 +205,7 @@ prj_fnc_capt_zone = {
 		uiSleep 1;
 		[_trigger_str_name + "_captured"] call BIS_fnc_deleteTask;
 
-		private _time_remaining = 60;// * ([30,60] call BIS_fnc_randomInt);
+		private _time_remaining = 60 * ([40,70] call BIS_fnc_randomInt);
 		uiSleep _time_remaining;
 		_parent_trigger setVariable ["captured", false];
 		_trigger_str_name setMarkerColor "ColorOPFOR";
