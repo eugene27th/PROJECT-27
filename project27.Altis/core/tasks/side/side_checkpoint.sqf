@@ -48,7 +48,7 @@ waitUntil {sleep 5;triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
 
 if (triggerActivated _trg) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-    ["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
+    ["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
     uiSleep 2;
 };
 

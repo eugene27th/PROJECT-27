@@ -3,7 +3,6 @@
 	server only
 */
 
-private _safe_radius = 2000;
 private _distance = 600;
 
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
@@ -23,7 +22,7 @@ private _types_locations = [
 	["BorderCrossing",100,[other_enemy,other_civilian]]
 ];
 
-private _delete_locations = nearestLocations [position spawn_zone_blue, _all_locations, _safe_radius];
+private _delete_locations = nearestLocations [position spawn_zone, _all_locations, 2000];
 
 private _house_ieds = "ied_in_houses" call BIS_fnc_getParamValue;
 private _house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
@@ -41,7 +40,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setTriggerArea [(_distance + _spawn_area),(_distance + _spawn_area),0,false]; 
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
-		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 150 && (speed _x < 180)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 150 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
 		_trigger setVariable ["captured",false];
 
@@ -78,9 +77,9 @@ if (("ied_on_roads" call BIS_fnc_getParamValue) == 0) exitWith {};
 
 private _junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
 private _number_of_ied = "number_of_ied" call BIS_fnc_getParamValue;
-private _safe_radius = "ied_safe_radius" call BIS_fnc_getParamValue;
+private _ied_safe_radius = "ied_safe_radius" call BIS_fnc_getParamValue;
 
-private _roads = ([worldSize / 2, worldsize / 2, 0] nearRoads (worldSize * 1.5)) - (position spawn_zone_blue nearRoads _safe_radius);
+private _roads = ([worldSize / 2, worldsize / 2, 0] nearRoads (worldSize * 1.5)) - (position spawn_zone nearRoads _ied_safe_radius);
 
 for "_i" from 1 to _number_of_ied do {
 	private _ied = createMine [selectRandom ied, (position (selectRandom _roads)),[],3];

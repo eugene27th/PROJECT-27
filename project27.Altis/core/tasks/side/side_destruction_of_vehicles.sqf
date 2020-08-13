@@ -33,7 +33,7 @@ waitUntil {sleep 5;{!alive _x} forEach _vehicles || _taskID call BIS_fnc_taskCom
 
 if ({!alive _x} forEach _vehicles) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-    ["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
+    ["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
     uiSleep 2;
 };
 

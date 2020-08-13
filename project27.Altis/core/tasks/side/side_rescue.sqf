@@ -29,7 +29,7 @@ removeAllWeapons _pilotheli;
 _pilot setBehaviour "CARELESS";
 _pilot setUnitPos "DOWN";
 
-[_taskID + "_blue_base",position spawn_zone_blue,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
 [_taskID + "_center",_center_pos,"ColorWEST",0.7,[[900,900],"ELLIPSE"]] call prj_fnc_create_marker;
 
 private _trg = createTrigger ["EmptyDetector", position _pilot, true];
@@ -50,16 +50,16 @@ for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }
 
 {_x lookAt _heli} forEach _enemies;
 
-waitUntil {sleep 5; !alive _pilot || _pilot distance position spawn_zone_blue < 50 || _taskID call BIS_fnc_taskCompleted};
+waitUntil {sleep 5; !alive _pilot || _pilot distance position spawn_zone < 50 || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _pilot) then {
     [_taskID,"FAILED"] call BIS_fnc_taskSetState;
 	sleep 2;
 };
 
-if (_pilot distance position spawn_zone_blue < 50) then {
+if (_pilot distance position spawn_zone < 50) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-	["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
+	["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
 	sleep 2;
 };
 

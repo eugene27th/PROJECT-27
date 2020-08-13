@@ -23,32 +23,33 @@ execVM "core\tasks\patrols.sqf";
 	]
 ] call prj_fnc_set_variables;
 
-// create triggers
-private _trg_g_garage = [position g_garage_depot_blue, [10, 10, 3], "ANYPLAYER", "PRESENT", true, "[thisTrigger,'g_garage'] execVM 'core\fnc\action_functions.sqf'", true] call prj_fnc_create_trg;
-private _trg_a_garage = [position a_garage_depot_blue, [10, 10, 3], "ANYPLAYER", "PRESENT", true, "[thisTrigger,'a_garage'] execVM 'core\fnc\action_functions.sqf'", true] call prj_fnc_create_trg;
-
 // create markers
 [
 	[
 		["hq",position laptop_hq,"mil_dot","ColorWEST","command center"],
-		["arsenal",position arsenal_blue,"mil_dot","ColorWEST","arsenal"],
-		["respawn_west",position spawn_zone_blue,"b_hq","ColorWEST","main base"],
-		["ground_vehicle_shop",position g_garage_depot_blue,"mil_dot","ColorWEST","land vehicle"],
-		["air_vehicle_shop",position a_garage_depot_blue,"mil_dot","ColorWEST","air vehicle"],
-		["ground_vehicle_service",position tr_g_service_blue,"mil_dot","ColorWEST","ground service"],
-		["air_vehicle_service",position tr_a_service_blue,"mil_dot","ColorWEST","air service"],
-		["treatment_building",position tr_treatment_blue,"mil_dot","ColorWEST","treatment"]
+		["arsenal",position arsenal,"mil_dot","ColorWEST","arsenal"],
+		["respawn_west",position spawn_zone,"b_hq","ColorWEST","main base"],
+		["ground_vehicle_shop",position tr_a_shop,"mil_dot","ColorWEST","ground vehicles"],
+		["air_vehicle_shop",position tr_g_shop,"mil_dot","ColorWEST","air vehicles"],
+		["ground_vehicle_service",position tr_g_service,"mil_dot","ColorWEST","ground service"],
+		["air_vehicle_service",position tr_a_service,"mil_dot","ColorWEST","air service"],
+		["treatment_building",position tr_treatment,"mil_dot","ColorWEST","treatment"]
 	]
 ] call prj_fnc_create_markers;
 
 // create arsenal
-[arsenal_blue, [[], 1]] call ace_arsenal_fnc_attributeInit;
+[arsenal, [[], 1]] call ace_arsenal_fnc_attributeInit;
+
+// create any objects
+private _a_garage_depot = "VR_Area_01_circle_4_grey_F" createVehicle position tr_a_shop;
+private _g_garage_depot = "VR_Area_01_circle_4_yellow_F" createVehicle position tr_g_shop;
+{(_x # 0) setDir ((triggerArea (_x # 1)) # 2)} forEach [[_a_garage_depot,tr_a_shop],[_g_garage_depot,tr_g_shop]];
 
 //create EHs and other system
 // statistics manager
 null = [] spawn {
 	while {true} do {
-		uiSleep 10;
+		uiSleep 5;
 		{
 			if (isNil {_x getVariable "oldSide"} || {(_x getVariable "oldSide") != side _x}) then {
 				_x setVariable ["oldSide",side _x,true]
@@ -57,7 +58,7 @@ null = [] spawn {
 	};
 };
 
-addMissionEventHandler  ["Entitykilled", {
+addMissionEventHandler ["Entitykilled", {
 	params [
 		"_victim","_killer"
 	];
@@ -65,18 +66,18 @@ addMissionEventHandler  ["Entitykilled", {
 		if (side _killer == west && isPlayer _killer) then {
 			switch (_victim getVariable "oldSide") do {
 				case west: {
-					["missionNamespace", getPlayerUID _killer, "money", 0, -50] call prj_fnc_changePlayerVariable;
-					["missionNamespace", getPlayerUID _killer, "friend_killings", 2, 1] call prj_fnc_changePlayerVariable;
-					["missionNamespace", "total_kill_friend", 1] call prj_fnc_changeVariable;		
+					["missionNamespace", "money", 0, -50, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
+					["missionNamespace", "friend_killings", 2, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
+					["missionNamespace", "total_kill_friend", 1] call prj_fnc_changeVariable;	
 				};
 				case civilian: {
-					["missionNamespace", getPlayerUID _killer, "money", 0, -5] call prj_fnc_changePlayerVariable;
-					["missionNamespace", getPlayerUID _killer, "civ_killings", 3, 1] call prj_fnc_changePlayerVariable;
+					["missionNamespace", "money", 0, -5, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
+					["missionNamespace", "civ_killings", 3, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "total_kill_civ", 1] call prj_fnc_changeVariable;
 				};
 				case independent: {
-					["missionNamespace", getPlayerUID _killer, "money", 0, 10] call prj_fnc_changePlayerVariable;
-					["missionNamespace", getPlayerUID _killer, "enemy_killings", 1, 1] call prj_fnc_changePlayerVariable;
+					["missionNamespace", "money", 0, 10, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
+					["missionNamespace", "enemy_killings", 1, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "total_kill_enemy", 1] call prj_fnc_changeVariable;
 
 					if (random 1 < 0.5) then {

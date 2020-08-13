@@ -14,9 +14,22 @@ prj_fnc_changeVariable = {
 	};
 };
 
+prj_fnc_changePlayerVariableGlobal = {
+	params ["_space","_name","_number", "_value"];
+
+	{
+		private _UID = getPlayerUID _x;
+		private _variable = ((missionNamespace getVariable _UID) # _number) # 1;
+		private _player_table = missionNamespace getVariable _UID;
+		_player_table set [_number,[_name,_variable + _value]];
+		(call (compile _space)) setVariable [_UID, _player_table, true];
+		if (prj_debug) then {[format ["%1 changed to: %2",_UID,_player_table]] remoteExec ["systemChat"]};
+	} forEach allPlayers;
+};
+
 prj_fnc_select_position = {
 	
-	params ["_type_location",["_position_around", true]];
+	params ["_type_location",["_position_around", true],["_capture_check",false]];
 
 	private "_selected_pos";
 
@@ -27,18 +40,34 @@ prj_fnc_select_position = {
 		case 4: {["NameCityCapital","NameCity","NameVillage","NameLocal","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]};
 	};
 
-	private _safe_radius = "spawnunitsradiusaroundthebase" call BIS_fnc_getParamValue;
+	private _locations = nearestLocations [[worldSize / 2, worldsize / 2, 0], _types_location, worldSize * 1.5] - (nearestLocations [position spawn_zone, ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"], 2000]);
 
-	private _locations = nearestLocations [[worldSize / 2, worldsize / 2, 0], _types_location, worldSize * 1.5] - (nearestLocations [position spawn_zone_blue, ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"], _safe_radius]);
+	private _selecting = true;
 
-	switch (_position_around) do {
-		case true: {
-			_selected_pos = [locationPosition (selectRandom _locations), 100, 1000, 5, 0] call BIS_fnc_findSafePos;
+	while {_selecting} do {
+		switch (_position_around) do {
+			case true: {
+				_selected_pos = [locationPosition (selectRandom _locations), 100, 1000, 5, 0] call BIS_fnc_findSafePos;
+			};
+			case false: {
+				_selected_pos = locationPosition (selectRandom _locations);
+			};
 		};
-		case false: {
-			_selected_pos = locationPosition (selectRandom _locations);
+
+		if ((_selected_pos distance (position spawn_zone)) >= 2000) then {
+			if (_capture_check) then {
+				private _trgs = _selected_pos nearObjects ["EmptyDetector", 50];
+				if ((count _trgs) == 1) then {
+					if !((_trgs # 0) getVariable "captured") then {_selecting = false}
+				}
+			}
+			else
+			{
+				_selecting = false
+			};
 		};
 	};
+
 	_selected_pos set [2, 0];
 	_selected_pos
 };
@@ -201,22 +230,28 @@ prj_fnc_capt_zone = {
 	[_parent_trigger,_trigger_grid_pos,_trigger_str_name] spawn {
 		params ["_parent_trigger","_trigger_grid_pos","_trigger_str_name"];
 
-		[west, [_trigger_str_name + "_captured"], ["", format [localize "STR_SECTOR_CAPTURED_TITLE",_trigger_grid_pos], ""], objNull, "CREATED", 0, true, "map"] call BIS_fnc_taskCreate;
-		uiSleep 1;
-		[_trigger_str_name + "_captured"] call BIS_fnc_deleteTask;
+		["sector_capture",[_trigger_grid_pos]] remoteExec ["BIS_fnc_showNotification"];
 
 		private _time_remaining = 60 * ([40,70] call BIS_fnc_randomInt);
-		uiSleep _time_remaining;
+
+		while {_time_remaining > 0} do {
+			["missionNamespace", "money", 0, 50] call prj_fnc_changePlayerVariableGlobal;
+			if (prj_debug) then {
+				[format ["игрокам выдано %1 очков за удержание сектора %2",50,_trigger_grid_pos]] remoteExec ["systemChat",0];
+			};
+			uiSleep 300;
+			_time_remaining = _time_remaining - 300;
+		};
+
 		_parent_trigger setVariable ["captured", false];
 		_trigger_str_name setMarkerColor "ColorOPFOR";
 		_trigger_str_name setMarkerAlpha 0.8;
 		[_trigger_str_name, 2, 10] spawn BIS_fnc_blinkMarker;
 
-		[west, [_trigger_str_name + "_lost"], ["", format [localize "STR_SECTOR_LOST_TITLE",_trigger_grid_pos], ""], position _parent_trigger, "CREATED", 0, true, "danger"] call BIS_fnc_taskCreate;
+		["sector_lost",[_trigger_grid_pos]] remoteExec ["BIS_fnc_showNotification"];
 
 		uiSleep 20;
 		deleteMarker (_trigger_str_name);
-		[_trigger_str_name + "_lost"] call BIS_fnc_deleteTask;
 	};
 };
 
@@ -224,15 +259,11 @@ prj_fnc_civ = {
 	private _civ = _this;
 
 	_civ addEventHandler ["FiredNear", {
-		params [
-			"_unit"
-		];
+		params ["_unit"];
 
 		if ((animationState _unit) == "amovpercmstpssurwnondnon") exitWith {};
-		if ((random 1) > 0.5) exitWith {};
+		if ((random 1) > 0.3) exitWith {};
 
-		unAssignVehicle _unit;
-		_unit action ["eject",vehicle _unit];
 		_unit allowfleeing 0;
 		[_unit] join (createGroup civilian);
 

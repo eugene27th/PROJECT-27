@@ -17,7 +17,7 @@ private _pos = [_pos, 100, 500, 5, 0] call BIS_fnc_findSafePos;
 private _boxes = [];
 
 for "_i" from 1 to (round ((count (allPlayers - (entities "HeadlessClient_F"))) / 2)) do {
-	private _box = "C_IDAP_supplyCrate_F" createVehicle ((position spawn_zone_blue) findEmptyPosition [0,50,"C_IDAP_supplyCrate_F"]);
+	private _box = "C_IDAP_supplyCrate_F" createVehicle ((position spawn_zone) findEmptyPosition [0,50,"C_IDAP_supplyCrate_F"]);
 	_box setVariable ["ace_cookoff_enable", false, true];
 	[_box, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
 	[west, [(_taskID + "_" + str _i),_taskID], ["", "STR_SIDE_HUMANITARIAN_AID_CARGO", ""], _box, "CREATED", 0, false, "box"] call BIS_fnc_taskCreate;
@@ -39,7 +39,7 @@ if ({!alive _x} forEach _boxes) then {
 
 if (triggerActivated _trg) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-    ["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
+    ["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
     uiSleep 2;
 };
 

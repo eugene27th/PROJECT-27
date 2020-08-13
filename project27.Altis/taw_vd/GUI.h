@@ -571,7 +571,7 @@ class TAW_VDMenu {
 		class Title : RscTitle {
 			colorBackround[] = { 0, 0, 0, 0 };
 			idc = -1;
-			text = "View Settings (SCRIPT)";
+			text = "View Settings";
 			x = .3;
 			y = .2;
 			w = .8;

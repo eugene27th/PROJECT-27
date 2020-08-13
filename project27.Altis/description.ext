@@ -91,8 +91,46 @@ class CfgFunctions
 	};
 };
 
+class CfgMusic
+{
+	class start_music_1
+	{
+		name = "start_music_1";
+		sound[] = {"sound\start_music_1.ogg", db+0, 1};
+		titles[] = {0, ""};
+	};
+};
+
+class CfgNotifications
+{
+	class sector_capture
+	{
+		title = $STR_SECTOR_CAPTURED_TITLE;
+		iconPicture = "\A3\ui_f\data\GUI\Cfg\Notifications\tridentEnemy_ca.paa";
+		description = $STR_SECTOR_CAPTURED_DESC;
+		color[] = {1,1,1,1};
+		duration = 7;
+		priority = 0;
+		sound = "taskAssigned";
+		difficulty[] = {};
+	};
+
+	class sector_lost
+	{
+		title = $STR_SECTOR_LOST_TITLE;
+		iconPicture = "\A3\ui_f\data\GUI\Cfg\Notifications\tridentEnemy_ca.paa";
+		description = $STR_SECTOR_LOST_DESC;
+		color[] = {1,1,1,1};
+		duration = 7;
+		priority = 0;
+		sound = "taskAssigned";
+		difficulty[] = {};
+	};
+};
+
 class CfgSounds
 {
+
     class allah
 	{
 		name = "allah";

@@ -4,7 +4,7 @@
 */
 
 // local fnc
-pgn_fnc_set_textures = {
+prj_fnc_set_textures = {
 	params [
 		"_textures_array"
 	];
@@ -42,29 +42,31 @@ player createDiaryRecord ["Diary", [localize "STR_A3_FM_Welcome4","<br/><br/><fo
 
 private _doc_start = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_START_TITLE", localize "STR_DOCUMENTATION_START_DESC"], taskNull, "", false];
 
-// start screen
+//start screen
+playMusic "start_music_1";
 private _start_screen = [
-	position spawn_zone_blue, 
+	position spawn_zone, 
 	"WELCOME TO PROJECT 27", 
 	50, 
 	80, 
 	0, 
 	0, 
 	[
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heal_ca.paa",[0,0.35,1,1],tr_treatment_blue,1,1,0,"treatment"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],tr_g_service_blue,1,1,0,"repair/rearm"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],tr_a_service_blue,1,1,0,"repair/rearm"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\rifle_ca.paa",[0,0.35,1,1],arsenal_blue,1,1,0,"arsenal"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heal_ca.paa",[0,0.35,1,1],tr_treatment,1,1,0,"treatment"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],tr_g_service,1,1,0,"repair/rearm"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\repair_ca.paa",[0,0.35,1,1],tr_a_service,1,1,0,"repair/rearm"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\rifle_ca.paa",[0,0.35,1,1],arsenal,1,1,0,"arsenal"],
 		["\A3\ui_f\data\igui\cfg\simpleTasks\types\whiteboard_ca.paa",[0,0.35,1,1],laptop_hq,1,1,0,"HQ"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\car_ca.paa",[0,0.35,1,1],g_garage_depot_blue,1,1,0,"ground garage"],
-		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heli_ca.paa",[0,0.35,1,1],a_garage_depot_blue,1,1,0,"air garage"]
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\car_ca.paa",[0,0.35,1,1],tr_g_shop,1,1,0,"ground garage"],
+		["\A3\ui_f\data\igui\cfg\simpleTasks\types\heli_ca.paa",[0,0.35,1,1],tr_a_shop,1,1,0,"air garage"]
 	], 
 	0, 
 	true, 
-	20
+	45
 ] spawn BIS_fnc_establishingShot;
 
 waitUntil {scriptDone _start_screen};
+playMusic "";
 
 //briefing
 player removeDiaryRecord ["Diary", _doc_start];
@@ -128,7 +130,7 @@ player setPos getMarkerPos "respawn_west";
 	[
 		["vservice.paa",[service_board_blue]]
 	]
-] call pgn_fnc_set_textures;
+] call prj_fnc_set_textures;
 
 // actions
 laptop_hq addAction ["HQ menu", { call prj_fnc_hq_menu }];
@@ -264,7 +266,19 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 } forEach civilian_units;
 
 // ARSENAL
-[arsenal_blue, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
+[arsenal, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
+
+//check language
+private _languages = ["Russian"];
+if !(language in _languages) then {
+	hintC format ["Hello. Machine translation applied for %1. If you want to help with translation, write to: discord - eugene27#2931 or email - evgen.monreal@gmail.com",language];
+	hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
+		0 = _this spawn {
+			_this select 0 displayRemoveEventHandler ["unload", hintC_EH];
+			hintSilent "";
+		};
+	}];
+};
 
 //sitrep, texttiles
 uiSleep 10;

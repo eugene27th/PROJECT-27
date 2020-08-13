@@ -25,7 +25,7 @@ waitUntil {sleep 5; !alive _leader || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _leader) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-	["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
+	["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
 	sleep 2;
 };
 

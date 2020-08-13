@@ -10,10 +10,10 @@ private _taskID = "SIDE_" + str _taskID;
 private _center_pos = [3] call prj_fnc_select_position;
 private _pos = [_center_pos, 200, 500, 5, 0] call BIS_fnc_findSafePos;
 
-private _uav = friendly_UAV_array createVehicle _pos;
+private _uav = "B_UAV_02_dynamicLoadout_F" createVehicle _pos;
 _uav setDamage 0.8;
 _uav allowDamage false;
-_uav_pylons = "true" configClasses (configFile >> "CfgVehicles" >> friendly_UAV_array >> "Components" >> "TransportPylonsComponent" >> "pylons") apply {configName _x};
+_uav_pylons = "true" configClasses (configFile >> "CfgVehicles" >> "B_UAV_02_dynamicLoadout_F" >> "Components" >> "TransportPylonsComponent" >> "pylons") apply {configName _x};
 {_uav setPylonLoadout [_x, ""]} forEach _uav_pylons;
 
 private _uav_smoke = createVehicle ["test_EmptyObjectForSmoke", position _uav, [], 0, "CAN_COLLIDE"];
@@ -42,9 +42,9 @@ if (triggerActivated _trg) then {
 		private _unit = _grpname createUnit [selectRandom enemy_infantry, _position, [], 0, "NONE"];
 		_enemy pushBack _unit;
 	};
-};
 
-{_x doMove position _uav} forEach _enemy;
+	{_x doMove position _uav} forEach _enemy;
+};
 
 while {!(_taskID call BIS_fnc_taskCompleted)} do {
 
@@ -75,7 +75,7 @@ while {!(_taskID call BIS_fnc_taskCompleted)} do {
 					["HQ", "Data downloaded successfully."] remoteExec ["BIS_fnc_showSubtitle",0];
 					["finishdnlddronedate"] remoteExec ["playSound", 0];
 					[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-					["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
+					["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
 					uiSleep 2;
 				};
 			};

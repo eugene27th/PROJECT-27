@@ -16,7 +16,7 @@ private _enemy = (createGroup independent) createUnit [selectRandom enemy_infant
 _hostage setCaptive true;
 {_x setBehaviour "CARELESS"} forEach [_hostage,_enemy];
 
-[_taskID + "_blue_base",position spawn_zone_blue,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
 [_taskID + "_center",_center_pos,"ColorWEST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_create_marker;
 
 private _picture = getText(configfile >> "CfgVehicles" >> typeOf _hostage >> "editorPreview");
@@ -32,16 +32,16 @@ _trg setTriggerActivation ["WEST", "PRESENT", false];
 _trg setTriggerStatements ["this", "_unit = thisTrigger getVariable 'unit'; [_unit] join (thisList select 0); _unit setUnitPos 'UP'", ""];
 _trg attachTo [_hostage, [0, 0, 0]];
 
-waitUntil {sleep 5; !alive _hostage || _hostage distance position spawn_zone_blue < 50 || _taskID call BIS_fnc_taskCompleted};
+waitUntil {sleep 5; !alive _hostage || _hostage distance position spawn_zone < 50 || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _hostage) then {
     [_taskID,"FAILED"] call BIS_fnc_taskSetState;
 	sleep 2;
 };
 
-if (_hostage distance position spawn_zone_blue < 50) then {
+if (_hostage distance position spawn_zone < 50) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-	["missionNamespace", getPlayerUID player, "money", 0, _reward] remoteExec ["prj_fnc_changePlayerVariable"];
+	["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
 	sleep 2;
 };
 

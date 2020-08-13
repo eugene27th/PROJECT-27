@@ -30,7 +30,7 @@ prj_fnc_number_of_units = {
 prj_fnc_spawn_house_groups = {
 	params ["_side","_class_units","_config"];
 
-	if (((_config # 0) # 0) == 0) exitWith {[]};
+	if (((_config # 0) # 0) == 0) exitWith {};
 
 	private "_house_pos";
 	private _house_units = [];
@@ -49,7 +49,7 @@ prj_fnc_spawn_house_groups = {
 				doStop _unit;
 				_house_units pushBack _unit;
 			};
-			if (prj_debug) then {systemChat "юнит создан в доме"};
+			if (prj_debug) then {"юнит создан в доме" remoteExec ["systemChat"]};
 			uiSleep 0.5;
 		};
 	};
@@ -59,7 +59,7 @@ prj_fnc_spawn_house_groups = {
 prj_fnc_spawn_patrols_groups = {
 	params ["_side","_class_units","_config"];
 
-	if (((_config # 1) # 0) == 0) exitWith {[]};
+	if (((_config # 1) # 0) == 0) exitWith {};
 
 	private _patrols_units = [];
 
@@ -70,7 +70,7 @@ prj_fnc_spawn_patrols_groups = {
 			for [{private _i = 0 }, { _i < [((_config # 1) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
 				private _unit = _group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				_patrols_units pushBack _unit;
-				if (prj_debug) then {systemChat "юнит патруля создан"};
+				if (prj_debug) then {"юнит патруля создан" remoteExec ["systemChat"]};
 				uiSleep 0.5;
 			};
 			_group setBehaviour "SAFE";
@@ -85,7 +85,7 @@ prj_fnc_spawn_patrols_groups = {
 				_wp setWaypointType "MOVE";
 				_wp setWaypointCompletionRadius 50;
 				_wp setWaypointTimeout [0,2,6];
-				if (prj_debug) then {systemChat "WP для группы создан"};
+				if (prj_debug) then {"WP для группы создан" remoteExec ["systemChat"]};
 			};
 
 			private _pos_wp = [_trigger_pos, 10, _trigger_radius, 1, 0] call BIS_fnc_findSafePos;
@@ -102,7 +102,7 @@ prj_fnc_spawn_patrols_groups = {
 prj_fnc_spawn_vehicles = {
 	params ["_side","_class_units","_class_vehicles","_config",["_index_config",2],["_behaviour","SAFE"]];
 
-	if (((_config # _index_config) # 0) == 0) exitWith {[]};
+	if (((_config # _index_config) # 0) == 0) exitWith {};
 
 	private _vehicles = [];
 	private _vehicle_crew_units = [];
@@ -129,7 +129,7 @@ prj_fnc_spawn_vehicles = {
 				_direction = 0;
 			};
 
-			if (prj_debug) then {systemChat "позиция спавна транспорта выбрана"};
+			if (prj_debug) then {"позиция спавна транспорта выбрана" remoteExec ["systemChat"]};
 
 			if (isNil "_pos") exitWith {};
 
@@ -137,7 +137,7 @@ prj_fnc_spawn_vehicles = {
 			_vehicle setDir _direction;
 			_vehicles pushBack _vehicle;
 
-			if (prj_debug) then {systemChat "транспорт создан"};
+			if (prj_debug) then {"транспорт создан" remoteExec ["systemChat"]};
 
 			uiSleep 0.5;
 
@@ -148,21 +148,21 @@ prj_fnc_spawn_vehicles = {
 				private _unit = _vehicle_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				_unit moveInCommander _vehicle;
 				_vehicle_crew_units pushBack _unit;
-				if (prj_debug) then {systemChat "командир создан"};
+				if (prj_debug) then {"командир создан" remoteExec ["systemChat"]};
 			};
 
 			if ((_vehicle emptyPositions "gunner") != 0) then {
 				private _unit = _vehicle_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				_unit moveInGunner _vehicle;
 				_vehicle_crew_units pushBack _unit;
-				if (prj_debug) then {systemChat "стрелок создан"};
+				if (prj_debug) then {"стрелок создан" remoteExec ["systemChat"]};
 			};
 
 			if ((_vehicle emptyPositions "driver") != 0) then {
 				private _unit = _vehicle_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				_unit moveInDriver _vehicle;
 				_vehicle_crew_units pushBack _unit;
-				if (prj_debug) then {systemChat "водитель создан"};
+				if (prj_debug) then {"водитель создан" remoteExec ["systemChat"]};
 			};
 			
 			uiSleep 0.5;
@@ -174,7 +174,7 @@ prj_fnc_spawn_vehicles = {
 				private _unit = _vehicle_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				_unit moveInCargo _vehicle;
 				_vehicle_crew_units pushBack _unit;
-				if (prj_debug) then {systemChat "пассажир создан"};
+				if (prj_debug) then {"пассажир создан" remoteExec ["systemChat"]};
 				uiSleep 0.3;
 			};
 
@@ -196,7 +196,7 @@ prj_fnc_spawn_vehicles = {
 				_wp = _vehicle_crew_group addWaypoint [_pos, 0];
 				_wp setWaypointType "MOVE";
 				_wp setWaypointCompletionRadius 50;
-				if (prj_debug) then {systemChat "WP для транспорта создан"};
+				if (prj_debug) then {"WP для транспорта создан" remoteExec ["systemChat"]};
 				uiSleep 0.3;
 			};
 
@@ -220,7 +220,7 @@ prj_fnc_spawn_vehicles = {
 prj_fnc_spawn_static = {
 	params ["_side","_class_units","_class_static","_config"];
 
-	if (((_config # 4) # 0) == 0) exitWith {[]};
+	if (((_config # 4) # 0) == 0) exitWith {};
 
 	private _statics = [];
 	private _static_crew_units = [];
@@ -231,14 +231,14 @@ prj_fnc_spawn_static = {
 
 			private _pos = [_trigger_pos, 0, _trigger_radius, 5, 0] call BIS_fnc_findSafePos;
 
-			if (prj_debug) then {systemChat "позиция статика создан"};
+			if (prj_debug) then {"позиция статика создан" remoteExec ["systemChat"]};
 
 			if (isNil "_pos") exitWith {};
 
 			private _static = (selectRandom _class_static) createVehicle _pos;
 			_statics pushBack _static;
 
-			if (prj_debug) then {systemChat "статик создан"};
+			if (prj_debug) then {"статик создан" remoteExec ["systemChat"]};
 
 			//create crew
 			private _static_crew_group = createGroup _side;
@@ -247,14 +247,14 @@ prj_fnc_spawn_static = {
 				private _unit = _static_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				_unit moveInCommander _static;
 				_static_crew_units pushBack _unit;
-				if (prj_debug) then {systemChat "командир статика создан"};
+				if (prj_debug) then {"командир статика создан" remoteExec ["systemChat"]};
 			};
 
 			if ((_static emptyPositions "gunner") != 0) then {
 				private _unit = _static_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				_unit moveInGunner _static;
 				_static_crew_units pushBack _unit;
-				if (prj_debug) then {systemChat "стрелок статика создан"};
+				if (prj_debug) then {"стрелок статика создан" remoteExec ["systemChat"]};
 			};
 		};
 		uiSleep 0.5;
@@ -288,17 +288,6 @@ private _civilian_patrols_units = [civilian,civilian_units,(_trigger getVariable
 
 private _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,(_trigger getVariable "config") # 1,2,"CARELESS"] call prj_fnc_spawn_vehicles;
 
-if (!isNil "_civilian_house_units" || !isNil "_civilian_patrols_units") then {
-	{
-		if (side _x == civilian) then {
-			[_x] spawn {
-				params ["_civ"];
-				_civ call prj_fnc_civ
-			};
-		}
-	} forEach _civilian_house_units + _civilian_patrols_units;
-};
-
 waitUntil {sleep 3;!triggerActivated _trigger};
 
 /////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\
@@ -307,29 +296,39 @@ if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
 private _global_vehicles = [];
 private _global_infantry = [];
 
-if (!isNil "_enemy_house_units") then {_global_infantry = _global_infantry + _enemy_house_units};
-if (!isNil "_enemy_patrols_units") then {_global_infantry = _global_infantry + _enemy_patrols_units};
-if (!isNil "_civilian_house_units") then {_global_infantry = _global_infantry + _civilian_house_units};
-if (!isNil "_civilian_patrols_units") then {_global_infantry = _global_infantry + _civilian_patrols_units};
+if (!isNil "_civilian_house_units") then {_global_infantry append _civilian_house_units};
+if (!isNil "_civilian_patrols_units") then {_global_infantry append _civilian_patrols_units};
+if (!isNil "_civilian_light_vehicles") then {
+	_global_vehicles append (_civilian_light_vehicles # 0);
+	_global_infantry append (_civilian_light_vehicles # 1)
+};
+
+if (!isNil "_global_infantry") then {
+	{
+		[_x] spawn {
+			params ["_civ"];
+			_civ call prj_fnc_civ
+		};
+	} forEach _global_infantry;
+};
+
+if (!isNil "_enemy_house_units") then {_global_infantry append _enemy_house_units};
+if (!isNil "_enemy_patrols_units") then {_global_infantry append _enemy_patrols_units};
 
 if (!isNil "_enemy_light_vehicles") then {
-	_global_vehicles = _global_vehicles + (_enemy_light_vehicles # 0);
-	_global_infantry = _global_infantry + (_enemy_light_vehicles # 1)
+	_global_vehicles append (_enemy_light_vehicles # 0);
+	_global_infantry append (_enemy_light_vehicles # 1)
 };
 if (!isNil "_enemy_heavy_vehicles") then {
-	_global_vehicles = _global_vehicles + (_enemy_heavy_vehicles # 0);
-	_global_infantry = _global_infantry + (_enemy_heavy_vehicles # 1)
+	_global_vehicles append (_enemy_heavy_vehicles # 0);
+	_global_infantry append (_enemy_heavy_vehicles # 1)
 };
 if (!isNil "_enemy_statics") then {
-	_global_vehicles = _global_vehicles + (_enemy_statics # 0);
-	_global_infantry = _global_infantry + (_enemy_statics # 1)
-};
-if (!isNil "_civilian_light_vehicles") then {
-	_global_vehicles = _global_vehicles + (_civilian_light_vehicles # 0);
-	_global_infantry = _global_infantry + (_civilian_light_vehicles # 1)
+	_global_vehicles append (_enemy_statics # 0);
+	_global_infantry append (_enemy_statics # 1)
 };
 
-if (!(_global_vehicles isEqualTo [])) then {
+if !(_global_vehicles isEqualTo []) then {
 	private _vehicles_players = [];
 	{_vehicles_players pushBack (vehicle _x)} forEach allPlayers;
 	_global_vehicles = _global_vehicles - _vehicles_players;
@@ -337,12 +336,11 @@ if (!(_global_vehicles isEqualTo [])) then {
 
 private _deleteArray = [_global_vehicles,_global_infantry];
 for [{private _i = 0 }, { _i < (count _deleteArray) }, { _i = _i + 1 }] do {
-	if (!((_deleteArray # _i) isEqualTo [])) then {
+	if !((_deleteArray # _i) isEqualTo []) then {
 		{deleteVehicle _x} forEach (_deleteArray # _i)
 	};
 };
 
 if (prj_debug) then {
-	private _units_deleted = _global_vehicles + _global_infantry;
-	[format ["%1 deactivated\n%2 entities deleted",_trigger,count _units_deleted]] remoteExec ["hint",0];
+	[format ["%1 deactivated\ndeleted:\n%2 - vehicles\n%3 - people",_trigger,count _global_vehicles,count _global_infantry]] remoteExec ["hint",0];
 };

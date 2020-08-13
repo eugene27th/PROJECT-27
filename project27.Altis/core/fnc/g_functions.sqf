@@ -3,17 +3,15 @@
 	global functions
 */
 
-prj_fnc_changePlayerVariable = {
-	params ["_space","_UID","_name","_number", "_value"];
+prj_fnc_changePlayerVariableLocal = {
+	params ["_space","_name","_number", "_value",["_UID",(getPlayerUID player)]];
 
 	private _variable = ((missionNamespace getVariable _UID) select _number) select 1;
 	private _player_table = missionNamespace getVariable _UID;
 	_player_table set [_number,[_name,_variable + _value]];
 	(call (compile _space)) setVariable [_UID, _player_table, true];
 
-	if (prj_debug) then {
-		[format ["%1 изменена на:\n%2",_UID,_player_table]] remoteExec ["hint"]
-	};
+	if (prj_debug) then {[format ["%1 changed to: %2",_UID,_player_table]] remoteExec ["systemChat"]};
 };
 
 prj_fnc_set_variables = {
@@ -21,21 +19,21 @@ prj_fnc_set_variables = {
 
 	for [{private _i = 0 }, { _i < (count _data) }, { _i = _i + 1 }] do {
 
-		private _overwritting = ((_data select _i) select 2);
+		private _overwritting = ((_data # _i) # 2);
 		
-		private _variable = (call (compile ((_data select _i) select 0))) getVariable (((_data select _i) select 1) select 0);
+		private _variable = (call (compile ((_data # _i) # 0))) getVariable (((_data # _i) # 1) # 0);
 
 		if (_overwritting) then {
-			(call (compile ((_data select _i) select 0))) setVariable ((_data select _i) select 1);
+			(call (compile ((_data # _i) # 0))) setVariable ((_data # _i) # 1);
 			if (prj_debug) then {systemChat "таблица перезаписана"};
 		}
 		else
 		{
 			if (isNil "_variable") then {
-				(call (compile ((_data select _i) select 0))) setVariable ((_data select _i) select 1);
+				(call (compile ((_data # _i) # 0))) setVariable ((_data # _i) # 1);
 				if (prj_debug) then {
 					systemChat "таблица была пуста. записана новая таблица";
-					systemChat format ["%1",((_data select _i) select 1)];
+					systemChat format ["%1",((_data # _i) # 1)];
 				};
 			}
 			else
@@ -45,7 +43,6 @@ prj_fnc_set_variables = {
 				};
 			};
 		};
-
 	};
 };
 
@@ -81,32 +78,34 @@ prj_fnc_add_mhq_action = {
 
 prj_fnc_create_task = {
 	private _taskID = missionNamespace getVariable ["taskID",0];
+	private _oldTaskName = missionNamespace getVariable ["oldTaskName","side_null"];
 
 	private _tasks = [
-		["side_alarm_button",200],
+		["side_alarm_button",100],
 		["side_ammo_cache",200],
 		["side_capture_leader",200],
-		["side_capture_zone",200],
-		["side_checkpoint",200],
-		["side_convoy",200],
+		["side_capture_zone",180],
+		["side_checkpoint",130],
 		["side_destroy_tower",200],
 		["side_destruction_of_vehicles",200],
 		["side_hostage",200],
-		["side_humanitarian_aid",200],
+		["side_humanitarian_aid",100],
 		["side_intel_uav",200],
-		["side_liquidation_leader",200],
-		["side_mines",200],
+		["side_liquidation_leader",100],
 		["side_rescue",200]
 	];
 
 	private _selected_task = selectRandom _tasks;
 
-	[_taskID,(_selected_task select 1)] execVM "core\tasks\side\" + (_selected_task select 0) + ".sqf";
+	while {(_selected_task # 0) != _oldTaskName} do {_selected_task = selectRandom _tasks};
+
+	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
 
 	private _taskID = missionNamespace setVariable ["taskID",_taskID + 1,true];
+	private _oldTaskName = missionNamespace setVariable ["oldTaskName",_selected_task # 0,true];
 
 	if (prj_debug) then {
-		systemChat format ["id: %1 | task: %2 | reward: %3",_taskID, _selected_task select 0, str (_selected_task select 1)];
+		systemChat format ["id: %1 | task: %2 | reward: %3",_taskID, _selected_task # 0, _selected_task # 1];
 	};
 };
 
@@ -195,7 +194,7 @@ prj_fnc_civ_info = {
 
 	private _array = _position nearEntities [enemy_infantry, 1500];
 	if (!(_array isEqualTo []) && (random 1 < 0.7)) then {
-		private _man = _array select 0;
+		private _man = _array # 0;
 		private _distance = (_position distance _man) + (round (random 150)) - (round (random 150));
 		private _dir = _position getDir _man;
 

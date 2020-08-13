@@ -6,175 +6,157 @@
 
         <Container name="PRJ_SECTOR_CAPTURED_AND_LOST">
             <Key ID="STR_SECTOR_CAPTURED_TITLE">
-                <Original>Sector %1 is captured.</Original>
-		        <Russian>Сектор %1 захвачен.</Russian>
-                <English>Sector %1 is captured.</English>
+                <Original>Sector is captured.</Original>
+		        <Russian>Сектор захвачен.</Russian>
             </Key>
             <Key ID="STR_SECTOR_LOST_TITLE">
-                <Original>Sector %1 is lost.</Original>
-		        <Russian>Сектор %1 потерян.</Russian>
-                <English>Sector %1 is lost.</English>
+                <Original>Sector is lost.</Original>
+		        <Russian>Сектор потерян.</Russian>
+            </Key>
+
+            <Key ID="STR_SECTOR_CAPTURED_DESC">
+                <Original>Sector %1 is under your control.</Original>
+		        <Russian>Сектор %1 под вашим контролем.</Russian>
+            </Key>
+            <Key ID="STR_SECTOR_LOST_DESC">
+                <Original>Control over sector %1 has been lost.</Original>
+		        <Russian>Контроль над сектором %1 утерян.</Russian>
             </Key>
 	    </Container>
 
     </Package>
 
-
     <Package name="PRJ_DOCUMENTATION_BRIEFING">
 
         <Container name="PRJ_DOCUMENTATION_START">
             <Key ID="STR_DOCUMENTATION_START_TITLE">
-                <Original></Original>
-		        <Russian>Добро пожаловать.</Russian>
-                <English></English>
+                <Original>Welcome</Original>
+		        <Russian>Добро пожаловать</Russian>
             </Key>
             <Key ID="STR_DOCUMENTATION_START_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'>Welcome!&lt;/font&gt;&lt;br/&gt;PROJECT27 - it is a military tactical sandbox with economics, statistics and interaction.&lt;br/&gt;You can learn more about this mission in the instructions that will be available after your download.&lt;br/&gt;Good luck on the battlefields! And don't offend civilians :)&lt;br/&gt;*Machine translation has been used for your language.</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'>Добро пожаловать!&lt;/font&gt;&lt;br/&gt;PROJECT27 - это военная тактическая песочница с экономикой, статистикой и взаимодействием.&lt;br/&gt;Более подробно о данной миссии вы сможете узнать в инструктаже, который будет доступен после вашей загрузки.&lt;br/&gt;Удачи на полях сражений! И не обижайте гражданских :)</Russian>
-                <English></English>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_BASICS">
             <Key ID="STR_DOCUMENTATION_BASICS_TITLE">
-                <Original></Original>
+                <Original>Basics</Original>
 		        <Russian>Основы</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_BASICS_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Equipment.&lt;/font&gt;&lt;br/&gt;You can equip everything you need at the &lt;marker name='arsenal'&gt;crates in the main base&lt;/marker&gt;. The opening of the virtual arsenal takes place through the ACE (Win) interaction menu.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Wounds.&lt;/font&gt;&lt;br/&gt;Using the ACE interaction menu, you can heal your own and others' wounds.&lt;br/&gt;Remember that all actions are always available to you, even those that you do not need, therefore it is recommended to make a diagnosis before starting treatment.&lt;br/&gt;You can also heal yourself and your teammate by entering &lt;marker name='treatment_building'&gt;medical facility&lt;/marker&gt; at the main base.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Hearing loss.&lt;/font&gt;&lt;br/&gt;Use earplugs or active noise canceling headphones to prevent hearing loss.&lt;br/&gt;You can use earplugs through the ACE interaction menu with yourself.&lt;br/&gt;</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Снаряжение.&lt;/font&gt;&lt;br/&gt;Вы можете снарядиться всем необходимым у &lt;marker name='arsenal'&gt;ящиков на главной базе&lt;/marker&gt;. Открытие виртуального арсенала происходит через меню взаимодействия ACE (Win).&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Ранения.&lt;/font&gt;&lt;br/&gt;Используя меню взаимодействия ACE, Вы можете лечить свои и чужие ранения.&lt;br/&gt;Помните, что Вам всегда доступны все действия, даже те, в которых Вы не нуждаетесь, поэтому рекомендуется перед началом лечения поставить диагноз.&lt;br/&gt;Так же Вы можете вылечить себя и своего сокомандника, войдя в &lt;marker name='treatment_building'&gt;медицинское сооружение&lt;/marker&gt; на главной базе.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Потеря слуха.&lt;/font&gt;&lt;br/&gt;Используйте беруши или наушники с активным шумоподавлением для защиты от потери слуха.&lt;br/&gt;Беруши Вы можете использовать через меню взаимодействия ACE с собой.&lt;br/&gt;</Russian>
-                <English></English>
             </Key>
 	    </Container>
         
         <Container name="PRJ_DOCUMENTATION_VEHICLES">
             <Key ID="STR_DOCUMENTATION_VEHICLES_TITLE">
-                <Original></Original>
+                <Original>Vehicles. Service</Original>
 		        <Russian>Техника. Сервис</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_VEHICLES_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Vehicle store.&lt;/font&gt;&lt;br/&gt;Shops of &lt;marker name='ground_vehicle_shop'&gt;ground&lt;/marker&gt; and &lt;marker name='air_vehicle_shop'&gt;air&lt;/marker&gt; vehicles are available to you.&lt;br/&gt;To buy vehicles, you must have a sufficient number of points on your personal balance.&lt;br/&gt;&lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;Where are my glasses kept.&lt;/execute&gt;&lt;br/&gt;Initially, not all equipment is available in the store. Upgrade your garage to unlock new types of vehicles.&lt;br/&gt;How to improve a garage and what is needed for this.&lt;br/&gt;The offer to open the shop menu appears when the player enters the shop area.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Service.&lt;/font&gt;&lt;br/&gt;The service provides the ability to quickly load various things, clean inventory, repair and refuel, as well as remove your vehicle.&lt;br/&gt;There are two service zones on the map for ease of use. As a rule, for &lt;marker name='ground_vehicle_service'&gt;ground&lt;/marker&gt; and &lt;marker name='air_vehicle_service'&gt;air&lt;/marker&gt; vehicles.&lt;br/&gt;The offer to open the service menu appears when a car with a player enters the service area.</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Магазин техники.&lt;/font&gt;&lt;br/&gt;Вам доступны магазины &lt;marker name='ground_vehicle_shop'&gt;наземной&lt;/marker&gt; и &lt;marker name='air_vehicle_shop'&gt;воздушной&lt;/marker&gt; техники.&lt;br/&gt;Для покупки техники у Вас на личном балансе должно быть достаточное количество очков.&lt;br/&gt;&lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;Где хранятся мои очки.&lt;/execute&gt;&lt;br/&gt;Изначально в магазине доступна не вся техника. Улучшайте уровень своего гаража для открытия новых видов техники.&lt;br/&gt;Как улучшать гараж и что для этого нужно.&lt;br/&gt;Предложение открытия меню магазина появляется при вхождении игрока в зону магазина.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Сервис.&lt;/font&gt;&lt;br/&gt;Сервис предоставляет возможности быстрой загрузки различных вещей, очистки инвентаря, починки и заправки, а также удаления Вашего транспорта.&lt;br/&gt;На карте присутствуют две сервисных зоны для удобства их использования. Как правило, для &lt;marker name='ground_vehicle_service'&gt;наземной&lt;/marker&gt; и &lt;marker name='air_vehicle_service'&gt;воздушной&lt;/marker&gt; техники.&lt;br/&gt;Предложение открытия меню сервиса появляется при заезде машины с игроком в зону сервиса.</Russian>
-                <English></English>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_LAPTOP">
             <Key ID="STR_DOCUMENTATION_LAPTOP_TITLE">
-                <Original></Original>
+                <Original>Laptop, menu</Original>
 		        <Russian>Ноутбук, меню</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_LAPTOP_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Laptop.&lt;/font&gt;&lt;br/&gt;&lt;marker name='hq'&gt;A laptop at the main base in the command center&lt;/marker&gt; provides access to a menu with various options. To open the menu, look at the laptop and take the desired action.&lt;br/&gt;&lt;br/&gt;The menu opened, great. Let's move on to the content.&lt;br/&gt;Items are clickable. Feel free to click.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_stat call prj_fnc_ProcessDiaryLink'&gt;Player statistics.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;The first thing we will see. Calculated based on kills and player behavior.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_mhq call prj_fnc_ProcessDiaryLink'&gt;MHQ.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Allows the team to quickly redeploy infantry.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;Bank.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;The player's earned points are displayed here, as well as the menu for transferring them to another player.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'&gt;Intelligence.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;The number of intelligence points is displayed.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;Improvement of the vehicles store.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Upgrade your store with intelligence points to unlock new equipment purchases.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;Other options.&lt;/font&gt;&lt;br/&gt;Not available to everyone. Disabling rain, fog and the ability to find out about transport on the map.</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Ноутбук.&lt;/font&gt;&lt;br/&gt;&lt;marker name='hq'&gt;Ноутбук, стоящий на главной базе в командном центре&lt;/marker&gt;, предоставляет доступ к меню с различными опциями. Чтобы открыть меню, посмотрите на ноутбук и выполните нужное действие.&lt;br/&gt;&lt;br/&gt;Меню открылось, отлично. Перейдём к содержимому.&lt;br/&gt;Пункты кликабельны. Не стесняйтесь нажимать.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_stat call prj_fnc_ProcessDiaryLink'&gt;Cтатистика игрока.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Первое что мы увидим. Рассчитывается исходя из убийств и поведения игрока.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_mhq call prj_fnc_ProcessDiaryLink'&gt;MHQ.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Позволяет команде быстро перебросить пехоту.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;Банк.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Здесь отображаются заработанные очки игрока, а также меню перевода их другому игроку.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'&gt;Разведданные.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Отображается количество очков разведданных.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;&lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;Улучшение магазина техники.&lt;/execute&gt;&lt;/font&gt;&lt;br/&gt;Улучшайте магазин с помощью очков разведданных для открытия доступа к покупке новой техники.&lt;br/&gt;&lt;br/&gt;&lt;font color='#41DAEC' size='14'&gt;Другие опции.&lt;/font&gt;&lt;br/&gt;Доступны не всем. Отключение дождя, тумана и возможность узнать о транспорте на карте.</Russian>
-                <English></English>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_STAT">
             <Key ID="STR_DOCUMENTATION_STAT_TITLE">
-                <Original></Original>
+                <Original>Player stats</Original>
 		        <Russian>Статистика игрока</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_STAT_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Player stats.&lt;/font&gt;&lt;br/&gt;Statistics are personal and each player earns it for himself. It is calculated based on your kills (enemy, civilians and allies) and your behavior. Behaved well and only shot at the enemy? A green emoticon should smile at you. Is everything very bad and you constantly only hit your allies? In front of you will be a black and red smiley. Something like color gradation. But we're not here for emojis. For a good game, you get points that are sent to the &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;bank&lt;/execute&gt;.</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Статистика игрока.&lt;/font&gt;&lt;br/&gt;Статистика персональна и каждый игрок сам зарабатывает её для себя. Она рассчитывается исходя из ваших убийств (противника, гражданских и союзников) и вашего поведения. Хорошо себя вели и стреляли только в противника? Вам должен улыбнуться зелёный смайлик. Всё очень плохо и вы постоянно попадали только в союзников? Перед вами будет чёрно-красный смайлик. Что-то вроде цветной градации. Но не ради смайликов мы здесь. За хорошую игру вы получаете очки, которые отправляются в &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;банк&lt;/execute&gt;.</Russian>
-                <English></English>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_MHQ">
             <Key ID="STR_DOCUMENTATION_MHQ_TITLE">
-                <Original></Original>
+                <Original>MHQ</Original>
 		        <Russian>MHQ</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_MHQ_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;MHQ.&lt;/font&gt;&lt;br/&gt;Using the MHQ terminal, your team can quickly transfer units to the desired location.&lt;br/&gt;The terminal can be borrowed from any hardware store, it is free and will always be waiting for you there. One important "but" - &lt;font color='#41DAEC'&gt;the terminal can only be in a single copy, i.e. when you take a new terminal, the old one will disappear&lt;/font&gt;. The terminal is lightweight, it can be moved and loaded onto the vehicle using the ACE (win) interaction menu.&lt;br/&gt;Moved and unloaded the terminal? Well done.&lt;br/&gt;Now you need to activate it using the same ACE menu. Once activated, players can move to MHQ. This can be done by opening the &lt;execute expression='doc_laptop call prj_fnc_ProcessDiaryLink'>laptop menu&lt;/execute&gt; on the main base and selecting the appropriate section.&lt;br/&gt;Before the next loading of the terminal into the transport, deactivate it in the same way and off to adventure!</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;MHQ.&lt;/font&gt;&lt;br/&gt;С помощью терминала MHQ ваша команда может быстро перебросить юнитов в нужное место.&lt;br/&gt;Терминал можно взять в любом магазине техники, он бесплатный и всегда будет ждать вас там. Одно важное "но" - &lt;font color='#41DAEC'&gt;терминал может быть только в единственном экземпляре, т.е. при взятии нового терминала старый пропадёт&lt;/font&gt;. Терминал немного весит, его можно перемещать и загружать в транспорт с помощью меню взаимодействия ACE (win).&lt;br/&gt;Перевезли и выгрузили терминал? Молодцы.&lt;br/&gt;Теперь его нужно активировать с помощью всё того же меню ACE. После активации игроки могут перемещаться на MHQ. Сделать это можно, открыв &lt;execute expression='doc_laptop call prj_fnc_ProcessDiaryLink'>меню ноутбука&lt;/execute&gt; на основной базе и выбрав соответствующий раздел.&lt;br/&gt;Перед следующей загрузкой терминала в транспорт деактивируйте его тем же способом и вперёд к приключениям!</Russian>
-                <English></English>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_BANK">
             <Key ID="STR_DOCUMENTATION_BANK_TITLE">
-                <Original></Original>
+                <Original>Bank</Original>
 		        <Russian>Банк</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_BANK_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Bank.&lt;/font&gt;&lt;br/&gt;All your points are stored here. You get them for a good game or a translation from others. You can spend points in a &lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;vehicle store&lt;/execute&gt;, buying a good car or a fast helicopter.&lt;br/&gt;You can see how many points you have and send them to another player in the &lt;execute expression='doc_laptop call prj_fnc_ProcessDiaryLink'>laptop menu&lt;/execute&gt; in the corresponding section. To transfer, you need to select the player's nickname, enter the amount of points below and send them to the recipient.</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Банк.&lt;/font&gt;&lt;br/&gt;Здесь хранятся все ваши очки. Вы получаете их за хорошую игру или же переводом от других. Потратить очки можно в &lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;магазине транспорта&lt;/execute&gt;, прикупив хорошую машину или быстрый вертолёт.&lt;br/&gt;Посмотреть сколько у вас очков и отправить их другому игроку можно в &lt;execute expression='doc_laptop call prj_fnc_ProcessDiaryLink'>меню ноутбука&lt;/execute&gt; в соответствующем разделе. Для перевода, вам нужно выбрать никнейм игрока, ввести сумму очков снизу и отправить их получателю.</Russian>
-                <English></English>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_INTEL">
             <Key ID="STR_DOCUMENTATION_INTEL_TITLE">
-                <Original></Original>
+                <Original>Intelligence</Original>
 		        <Russian>Разведданные</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_INTEL_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Intelligence.&lt;/font&gt;&lt;br/&gt;Nothing complicated. Intelligence can be found from the enemy: pieces of paper, photographs, notebooks, documents. They need to be brought to the base and placed in the inventory of the &lt;marker name='hq'&gt;table&lt;/marker&gt; on which the laptop stands. After that, your team gets intelligence points, which you can spend on &lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;improving the vehicle store&lt;/execute&gt;.</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Разведданные.&lt;/font&gt;&lt;br/&gt;Ничего сложного. Разведданные можно найти у противника: бумажки, фотографии, блокноты, документы. Их нужно привезти на базу и поместить в инвентарь &lt;marker name='hq'&gt;стола&lt;/marker&gt;, того, на котором стоит ноутбук. После чего, у вашей команды появляются очки разведданных, которые вы можете потратить на &lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;улучшение магазина техники&lt;/execute&gt;.</Russian>
-                <English></English>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_VEHSHOP">
             <Key ID="STR_DOCUMENTATION_VEHSHOP_TITLE">
-                <Original></Original>
+                <Original>Improving the vehicle store</Original>
 		        <Russian>Улучшение магазина техники</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_VEHSHOP_DESC">
-                <Original></Original>
-		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Улучшение магазина техники.&lt;/font&gt;&lt;br/&gt;На старте магазин техники нулевого уровня, который необходимо улучшать, если вы хотите купить технику уровня выше.&lt;br/&gt;Улучшение проиходит за счёт &lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'>очков разведданных&lt;/execute&gt; в меню ноутбука. Всего у магазина 10 уровней.</Russian>
-                <English></English>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Improving the vehicle store.&lt;/font&gt;&lt;br/&gt;At the start, there is a level 0 vehicle store, which must be improved if you want to buy a higher level vehicle.&lt;br/&gt;Upgrading is done at the expense of &lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'>intelligence points&lt;/execute&gt; in the &lt;execute expression='doc_laptop call prj_fnc_ProcessDiaryLink'>laptop menu&lt;/execute&gt;. The store has 10 levels in total.</Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Улучшение магазина техники.&lt;/font&gt;&lt;br/&gt;На старте магазин техники нулевого уровня, который необходимо улучшать, если вы хотите купить технику уровня выше.&lt;br/&gt;Улучшение проиходит за счёт &lt;execute expression='doc_intel call prj_fnc_ProcessDiaryLink'>очков разведданных&lt;/execute&gt; в &lt;execute expression='doc_laptop call prj_fnc_ProcessDiaryLink'>меню ноутбука&lt;/execute&gt;. Всего у магазина 10 уровней.</Russian>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_TASKS">
             <Key ID="STR_DOCUMENTATION_TASKS_TITLE">
-                <Original></Original>
+                <Original>Side tasks and patrols</Original>
 		        <Russian>Задания и патрули</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_TASKS_DESC">
-                <Original></Original>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Side tasks.&lt;/font&gt;&lt;br/&gt;Tasks can be requested and canceled by the commander or the HQ player.&lt;br/&gt;You can request or cancel an available task from the ACE interaction menu. When canceling a task, it must be assigned, i.e. make it active in the task list in the upper left corner when the map is open (M). You do not need to cover the map to manage tasks.&lt;br/&gt;For completing tasks, each player is given a &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;reward&lt;/execute&gt; corresponding to the type of task completed.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Patrolling.&lt;/font&gt;&lt;br/&gt;Everything is simple here. You can turn off / on patrols in the parameters of the mission at its start.&lt;br/&gt;Patrol sectors will be assigned automatically. To complete the task, you must patrol the designated sector for 10 minutes. At least one of you will have to get out of the car.&lt;br/&gt;At the end of the patrol, you will also receive a &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;reward&lt;/execute&gt;.</Original>
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Задания.&lt;/font&gt;&lt;br/&gt;Задания может запрашивать и отменять командир или HQ игрок.&lt;br/&gt;Запросить доступное задание или отменить его можно в меню взаимодействия ACE. При отмене задания, его нужно назначить, т.е. сделать активным в списке задач, находящемся в верхнем левом углу при открытой карте (M). Для управления заданиями карту закрывать необязательно.&lt;br/&gt;За выполнение заданий каждому игроку дают &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;награду&lt;/execute&gt;, соответствующую типу выполненного задания.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Патрулирование.&lt;/font&gt;&lt;br/&gt;Здесь всё просто. Вы можете выключить/включить патрули в параметрах миссии при её старте.&lt;br/&gt;Сектора для патрулирования будут назначаться автоматически. Для выполнения задания, необходимо патрулировать обозначенный сектор на протяжении 10-ти минут. Из машины придётся выйти, хотя бы одному из вас.&lt;br/&gt;По окончании патрулирования вы так же получите &lt;execute expression='doc_bank call prj_fnc_ProcessDiaryLink'&gt;награду&lt;/execute&gt;.</Russian>
-                <English></English>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_TALKANDORDER">
             <Key ID="STR_DOCUMENTATION_TALKANDORDER_TITLE">
-                <Original></Original>
+                <Original>Communication/orders</Original>
 		        <Russian>Общение/приказы</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_TALKANDORDER_DESC">
-                <Original></Original>
-		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Общение с гражданскими/приказы.&lt;/font&gt;&lt;br/&gt;Гражданским можно отдавать приказы, которые будут понятны всем: стоять, лежать, поднять руки и другие.&lt;br/&gt;Вы можете общаться с гражданскими для получения информации о противнике, о подозрительных действиях или просто о погоде. Но не всё так просто в этом мире. Многие гражданские попросту не говорят на вашем языке. Поэтому в вашей команде есть такие ребята как переводчики. О них далее.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Переводчик.&lt;/font&gt;&lt;br/&gt;Понимает гражданских и даже может с ними разговаривать. Спросить о действиях и местоположении противника, поговорить о ситуации вокруг или спросить где туалет - уже на усмотрение переводчика. Стоит помнить, что некоторые могут оказаться не такими мирными и с ними придётся разбираться. Будьте начеку.</Russian>
-                <English></English>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Communication with civilians/orders.&lt;/font&gt;&lt;br/&gt;Orders can be given to civilians (ACE interaction menu) that will be understandable to everyone: stand, lie down, raise their hands, and others.&lt;br/&gt;You can communicate with civilians to get information about the enemy, about suspicious activities, or just about the weather. But not everything is so simple in this world. Many civilians simply do not speak your language. Therefore, your team has such guys as translators. More about them.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Interpreter.&lt;/font&gt;&lt;br/&gt;Understands civilians and can even talk to them. It is at the discretion of the translator to ask about the actions and location of the enemy, talk about the situation around or ask where the toilet is. It is worth remembering that some may not be so peaceful and will have to be dealt with. Be on the lookout.</Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Общение с гражданскими/приказы.&lt;/font&gt;&lt;br/&gt;Гражданским можно отдавать приказы (меню взаимодействия ACE), которые будут понятны всем: стоять, лежать, поднять руки и другие.&lt;br/&gt;Вы можете общаться с гражданскими для получения информации о противнике, о подозрительных действиях или просто о погоде. Но не всё так просто в этом мире. Многие гражданские попросту не говорят на вашем языке. Поэтому в вашей команде есть такие ребята как переводчики. О них далее.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Переводчик.&lt;/font&gt;&lt;br/&gt;Понимает гражданских и даже может с ними разговаривать. Спросить о действиях и местоположении противника, поговорить о ситуации вокруг или спросить где туалет - уже на усмотрение переводчика. Стоит помнить, что некоторые могут оказаться не такими мирными и с ними придётся разбираться. Будьте начеку.</Russian>
             </Key>
 	    </Container>
 
         <Container name="PRJ_DOCUMENTATION_ENEMY">
             <Key ID="STR_DOCUMENTATION_ENEMY_TITLE">
-                <Original></Original>
+                <Original>Enemy</Original>
 		        <Russian>Противник</Russian>
-                <English></English>
             </Key>
             <Key ID="STR_DOCUMENTATION_ENEMY_DESC">
-                <Original></Original>
-		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Силы противника, СВУ.&lt;/font&gt;&lt;br/&gt;Противник будет поджидать вас повсюду. Он будет в строениях, на дорогах и на пересечённой местности, может патрулировать или ожидать ваш неспешный конвой в засаде.&lt;br/&gt;Но сначала вам нужно до него доехать, чему помешают самодельные взрывные устройства, которые могут быть разбросаны на дорогах и тропинках. Доехали до населённого пункта и решили зайти в дом? Смотрите под ноги, СВУ могут поджидать вас и там.&lt;br/&gt;Помните, что гражданские могут быть недовольны вашими действиями.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Секторы.&lt;/font&gt;&lt;br/&gt;Вы можете выселить противника, дав понять, что это ваш сектор. Когда вы это сделаете, сектор будет отмечен на карте и вы получите награду. Больших скоплений противника вы там больше не увидите. Но не стоит расслаблятся. В любое время противник может начать контрнаступление.</Russian>
-                <English></English>
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Enemy forces, IED.&lt;/font&gt;&lt;br/&gt;The enemy will be waiting for you everywhere. He will be in buildings, on roads and on rough terrain, he can patrol or wait for your unhurried convoy in ambush.&lt;br/&gt;But first you need to get to it, which will prevent improvised explosive devices that can be scattered on roads and paths. Have you reached the village and decided to go into the house? Watch your step, IEDs can be waiting for you there too.&lt;br/&gt;Remember that civilians may be unhappy with your actions.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Sectors.&lt;/font&gt;&lt;br/&gt;You can evict the enemy, making it clear that this is your sector. When you do this, the sector will be marked on the map and you will receive a reward. You will no longer see large concentrations of the enemy there. But do not relax. The enemy can launch a counteroffensive at any time.</Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Силы противника, СВУ.&lt;/font&gt;&lt;br/&gt;Противник будет поджидать вас повсюду. Он будет в строениях, на дорогах и на пересечённой местности, может патрулировать или ожидать ваш неспешный конвой в засаде.&lt;br/&gt;Но сначала вам нужно до него доехать, чему помешают самодельные взрывные устройства, которые могут быть разбросаны на дорогах и тропинках. Доехали до населённого пункта и решили зайти в дом? Смотрите под ноги, СВУ могут поджидать вас и там.&lt;br/&gt;Помните, что гражданские могут быть недовольны вашими действиями.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Секторы.&lt;/font&gt;&lt;br/&gt;Вы можете выселить противника, дав понять, что это ваш сектор. Когда вы это сделаете, сектор отметится на карте и вы будете получать награду. Больших скоплений противника вы там больше не увидите. Но не стоит расслаблятся. В любое время противник может начать контрнаступление.</Russian>
             </Key>
 	    </Container>
     </Package>
@@ -185,18 +167,15 @@
             <Key ID="STR_PRJ_SELECT_TASK_ON_MAP">
                 <Original>Select a task in the task list.</Original>
 		        <Russian>Выберите задание в списке задач.</Russian>
-                <English>Select a task in the task list.</English>
             </Key>
 
             <Key ID="STR_PRJ_MHQ_IN_NOT_EXIST">
                 <Original>MHQ is not exist.</Original>
 		        <Russian>MHQ не найден.</Russian>
-                <English>MHQ is not exist.</English>
             </Key>
             <Key ID="STR_PRJ_MHQ_IS_NOT_DEPLOYED">
                 <Original>MHQ is not deployed.</Original>
 		        <Russian>MHQ не развёрнут.</Russian>
-                <English>MHQ is not deployed.</English>
             </Key>
 	    </Container>
 
@@ -204,47 +183,38 @@
             <Key ID="STR_PRJ_STATISTICS_KILLED">
                 <Original>Kill statistics</Original>
 		        <Russian>Статистика убийств</Russian>
-                <English>Kill statistics</English>
             </Key>
             <Key ID="STR_PRJ_STATISTICS_ENEMIES">
                 <Original>Enemies</Original>
 		        <Russian>Противник</Russian>
-                <English>Enemies</English>
             </Key>
             <Key ID="STR_PRJ_STATISTICS_FRIENDLY">
                 <Original>Friendly</Original>
 		        <Russian>Союзники</Russian>
-                <English>Friendly</English>
             </Key>
             <Key ID="STR_PRJ_STATISTICS_CIVILIANS">
                 <Original>Civilians</Original>
 		        <Russian>Гражданские</Russian>
-                <English>Civilians</English>
             </Key>
             <Key ID="STR_PRJ_STATISTICS_INTELSCORE">
                 <Original>Intel Score</Original>
 		        <Russian>Разведданные</Russian>
-                <English>Intel Score</English>
             </Key>
             <Key ID="STR_PRJ_STATISTICS_ARSENAL">
                 <Original>Arsenal</Original>
 		        <Russian>Арсенал</Russian>
-                <English>Arsenal</English>
             </Key>
             <Key ID="STR_PRJ_STATISTICS_AIRSHOP">
                 <Original>Aircraft shop</Original>
 		        <Russian>Магазин ВТС</Russian>
-                <English>Aircraft shop</English>
             </Key>
             <Key ID="STR_PRJ_STATISTICS_GROUNDSHOP">
                 <Original>Vehicle shop</Original>
 		        <Russian>Магазин НТС</Russian>
-                <English>Vehicle shop</English>
             </Key>
             <Key ID="STR_PRJ_STATISTICS_LVL">
                 <Original>lvl</Original>
 		        <Russian>ур.</Russian>
-                <English>lvl</English>
             </Key>
 	    </Container>
 
@@ -252,27 +222,22 @@
             <Key ID="STR_PRJ_NUMBER_OF_POINTS">
                 <Original>Indicate the number of points.</Original>
 		        <Russian>Укажите количество пойнтов.</Russian>
-                <English>Indicate the number of points.</English>
             </Key>
             <Key ID="STR_PRJ_DONT_HAVE_POINTS">
                 <Original>You do not have enough points.</Original>
 		        <Russian>У Вас не хватает пойнтов.</Russian>
-                <English>You do not have enough points.</English>
             </Key>
             <Key ID="STR_PRJ_INVALID_VALUE">
                 <Original>Invalid value.</Original>
 		        <Russian>Некорректное значение.</Russian>
-                <English>Invalid value.</English>
             </Key>
             <Key ID="STR_PRJ_SENT_POINTS">
                 <Original>You have sent %1 points.</Original>
 		        <Russian>Вы отправили %1 пойнтов.</Russian>
-                <English>You have sent %1 points.</English>
             </Key>
             <Key ID="STR_PRJ_GET_POINTS">
                 <Original>You got %1 points.</Original>
 		        <Russian>Вы получили %1 пойнтов.</Russian>
-                <English>You got %1 points.</English>
             </Key>
 	    </Container>
 
@@ -280,37 +245,30 @@
             <Key ID="STR_PRJ_DONT_HAVE_IS">
                 <Original>Your team lacks an Intel Score.</Original>
 		        <Russian>У Вашей команды не хватает очков разведданных.</Russian>
-                <English>Your team lacks an Intel Score.</English>
             </Key>
             <Key ID="STR_PRJ_UPGRADED">
                 <Original>You have upgraded</Original>
 		        <Russian>Вы модернизировали</Russian>
-                <English>You have upgraded</English>
             </Key>
             <Key ID="STR_PRJ_TO_LEVEL">
                 <Original>to level %1.</Original>
 		        <Russian>до %1 уровня.</Russian>
-                <English>to level %1.</English>
             </Key>
             <Key ID="STR_PRJ_MAX_LEVEL">
                 <Original>to max level.</Original>
 		        <Russian>до максимального уровня.</Russian>
-                <English>to max level.</English>
             </Key>
             <Key ID="STR_PRJ_ARSENAL">
                 <Original>your arsenal</Original>
 		        <Russian>арсенал</Russian>
-                <English>your arsenal</English>
             </Key>
             <Key ID="STR_PRJ_G_GARAGE">
                 <Original>the ground vehicle garage</Original>
 		        <Russian>гараж наземной техники</Russian>
-                <English>the ground vehicle garage</English>
             </Key>
             <Key ID="STR_PRJ_A_GARAGE">
                 <Original>the aircraft garage</Original>
 		        <Russian>гараж воздушной техники</Russian>
-                <English>the aircraft garage</English>
             </Key>
 	    </Container>
 
@@ -322,7 +280,6 @@
             <Key ID="STR_PRJ_CIVIL">
                 <Original>Civilian</Original>
 		        <Russian>Гражданский</Russian>
-                <English>Civilian</English>
 		        <German>Zivilist</German>
             </Key>
 	    </Container>
@@ -331,7 +288,6 @@
             <Key ID="STR_PRJ_INTERPRETER">
                 <Original>Interpreter</Original>
 		        <Russian>Переводчик</Russian>
-                <English>Interpreter</English>
 		        <German>Dolmetscher</German>
             </Key>
 	    </Container>
@@ -340,91 +296,75 @@
             <Key ID="STR_PRJ_CIVIL_INFO_1_INF">
                 <Original>I saw someone with a weapon somewhere in the %1, maybe %2 meters...</Original>
 		        <Russian>Видел кого-то с оружием где-то на %1, может метров %2...</Russian>
-                <English>I saw someone with a weapon somewhere in the %1, maybe %2 meters...</English>
 				<German>Ich habe eine bewaffnete Person Richtung %1 in etwa %2 Meter gesehen.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_2_INF">
                 <Original>There was definitely someone in the %1. %2 meters, no more.</Original>
 		        <Russian>На %1 точно кто-то был. Метров %2, не больше.</Russian>
-                <English>There was definitely someone in the %1. %2 meters, no more.</English>
 				<German>Es war definitiv jemand Richtung %1. Nicht weiter als %2 Meter.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_3_INF">
                 <Original>Recently I saw people with weapons. From here, about %2 meters to the %1.</Original>
 		        <Russian>Недавно видел людей с оружием. Отсюда метров %2 на %1.</Russian>
-                <English>Recently I saw people with weapons. From here, about %2 meters to the %1.</English>
 				<German>Habe vor Kurzem bewaffnete Männer in etwa %2 Meter Richtung %1 gesehen.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_NEGATIVE_1">
                 <Original>I do not know. I have not seen anyone.</Original>
 		        <Russian>Не знаю. Никого не видел.</Russian>
-                <English>I do not know. I have not seen anyone.</English>
 				<German>Ich weiß nichts. Habe niemanden gesehen.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_NEGATIVE_2">
                 <Original>Get away from me.</Original>
 		        <Russian>Отойдите от меня.</Russian>
-                <English>Get away from me.</English>
 				<German>Geh weg von mir.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_NEGATIVE_3">
                 <Original>I know nothing. Go away.</Original>
 		        <Russian>Я ничего не знаю. Уходите.</Russian>
-                <English>I know nothing. Go away.</English>
 				<German>Ich weiß nichts. Gehen Sie weg.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_INTERVIEWED_1">
                 <Original>You already asked me.</Original>
 		        <Russian>Вы меня уже спрашивали.</Russian>
-                <English>You already asked me.</English>
 				<German>Sie haben mich schon befragt.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_INTERVIEWED_2">
                 <Original>What more do you need? Go away.</Original>
 		        <Russian>Что вам ещё нужно? Уходите.</Russian>
-                <English>What more do you need? Go away.</English>
 				<German>Was brauchen sie noch? Gehen Sie endlich.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_INTERVIEWED_3">
                 <Original>I don’t want to talk to you anymore.</Original>
 		        <Russian>Я больше не хочу с вами разговаривать.</Russian>
-                <English>I don’t want to talk to you anymore.</English>
 				<German>Ich möchte nicht mehr mit Ihnen reden.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_1">
                 <Original>I do not understand.</Original>
 		        <Russian>Я вас не понимаю.</Russian>
-                <English>I do not understand.</English>
 				<German>Ich verstehe Sie nicht.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_2">
                 <Original>What are you saying?</Original>
 		        <Russian>Что вы говорите?</Russian>
-                <English>What are you saying?</English>
 				<German>Was sagen Sie?</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_3">
                 <Original>What are you speaking about? I do not understand.</Original>
-		        <Russian>О чём вы? Я не понимаю.</Russian>
-                <English>What are you speaking about? I do not understand.</English>
 				<German>Worüber reden Sie? Ich verstehe nicht.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_BAD_KARMA_1">
                 <Original>You bring only troubles. I will not tell you anything.</Original>
 		        <Russian>Вы приносите одни беды. Я не буду Вам ничего говорить.</Russian>
-                <English>You bring only troubles. I will not tell you anything.</English>
 				<German>Sie bringen nur Probleme. Ich werde dir nichts sagen.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_BAD_KARMA_2">
                 <Original>First you kill civilians, and then ask for help. I do not know anything.</Original>
 		        <Russian>Сначала убиваете гражданских, а потом просите помощи. Ничего не знаю.</Russian>
-                <English>First you kill civilians, and then ask for help. I do not know anything.</English>
 				<German>Zuerst tötest du Zivilisten und bittest dann um Hilfe. Ich weiß gar nichts.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_BAD_KARMA_3">
                 <Original>Perhaps I would have told someone else, but not you.</Original>
 		        <Russian>Возможно, я бы сказал кому-нибудь другому, но не вам.</Russian>
-                <English>Perhaps I would have told someone else, but not you.</English>
 				<German>Vielleicht hätte ich es jemand anderem erzählt, aber nicht dir.</German>
             </Key>
 	    </Container>
@@ -433,49 +373,41 @@
             <Key ID="STR_PRJ_SIDE_WORLD_N">
                 <Original>N</Original>
 		        <Russian>С</Russian>
-                <English>N</English>
 		        <German>N</German>
             </Key>
              <Key ID="STR_PRJ_SIDE_WORLD_NE">
                 <Original>NE</Original>
 		        <Russian>СВ</Russian>
-                <English>NE</English>
 		        <German>NO</German>
             </Key>
              <Key ID="STR_PRJ_SIDE_WORLD_E">
                 <Original>E</Original>
 		        <Russian>В</Russian>
-                <English>E</English>
 		        <German>O</German>
             </Key>
              <Key ID="STR_PRJ_SIDE_WORLD_SE">
                 <Original>SE</Original>
 		        <Russian>ЮВ</Russian>
-                <English>SE</English>
 		        <German>SO</German>
             </Key>
              <Key ID="STR_PRJ_SIDE_WORLD_S">
                 <Original>S</Original>
 		        <Russian>Ю</Russian>
-                <English>S</English>
 		        <German>S</German>
             </Key>
              <Key ID="STR_PRJ_SIDE_WORLD_SW">
                 <Original>SW</Original>
 		        <Russian>ЮЗ</Russian>
-                <English>SW</English>
 		        <German>SW</German>
             </Key>
              <Key ID="STR_PRJ_SIDE_WORLD_W">
                 <Original>W</Original>
 		        <Russian>З</Russian>
-                <English>W</English>
 		        <German>W</German>
             </Key>
              <Key ID="STR_PRJ_SIDE_WORLD_NW">
                 <Original>NW</Original>
 		        <Russian>СЗ</Russian>
-                <English>NW</English>
 		        <German>NW</German>
             </Key>
 	    </Container>
@@ -488,28 +420,33 @@
             <Key ID="STR_SIDE_CAPTURE_ZONE_TITLE">
                 <Original>Capture the sector</Original>
 		        <Russian>Захват сектора</Russian>
-                <English>Capture the sector</English>
 		        <German>Sektor einnehmen</German>
             </Key>
             <Key ID="STR_SIDE_CAPTURE_ZONE_DESCRIPTION">
                 <Original>The enemy has captured important sector. Civilians may be present in the area of action.&lt;br/&gt;Your task will be to seize the sector.</Original>
                 <Russian>Противник захватил нужный нам сектор. В зоне действий могут присутствовать гражданские.&lt;br/&gt;Ваша задача: захват и зачистка сектора.</Russian>
-		        <English>The enemy has captured important sector. Civilians may be present in the area of action.&lt;br/&gt;Your task will be to seize the sector.</English>
                 <German>Der Feind hat enien wichtigen Sektor erobert. Zivilisten können im Aktionsbereich anwesend sein.&lt;br/&gt;Ihre Aufgabe wird es sein den Sektor zu erobern und vom Feind zu säubern.</German>
-            </Key>	
+            </Key>
+             <Key ID="STR_SIDE_DEFENCE_ZONE_TITLE">
+                <Original></Original>
+		        <Russian>Оборона сектора</Russian>
+		        <German></German>
+            </Key>
+            <Key ID="STR_SIDE_DEFENCE_ZONE_DESCRIPTION">
+                <Original></Original>
+		        <Russian>Внимание!&lt;br/&gt;В сторону вашего сектора выдвинулись силы противника. На данный момент их мотивы неясны. Постарайтесь спрятать гражданских, укрепитесь и будьте готовы к обороне сектора.</Russian>
+            </Key>
 	    </Container>
 		
 		<Container name="SIDE_LIQUIDATION_LEADER">	
             <Key ID="STR_SIDE_LIQUIDATION_LEADER_TITLE">
                 <Original>HVT elimination</Original>
 		        <Russian>Ликвидация цели</Russian>
-                <English>HVT elimination</English>
                 <German>HVT Beseitigung</German>
             </Key>
             <Key ID="STR_SIDE_LIQUIDATION_LEADER_DESCRIPTION">
                 <Original>The commander of one of the detachments of illegal armed groups is trying to flee. Our intelligence has got its approximate position. Urgent target elimination needed. Don't let him escape!&lt;br/&gt;Your task is to neutralize the target as soon as possible.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
                 <Russian>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ. Необходима срочная ликвидация цели. Не упустите его!&lt;br/&gt;Задача: нейтрализуйте цель в кратчайшие сроки.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Russian>
-		        <English>The commander of one of the detachments of illegal armed groups is trying to flee. Our intelligence has got its approximate position. Urgent target elimination needed. Don't let him escape!&lt;br/&gt;Your task is to neutralize the target as soon as possible.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</English>
                 <German>Der Kommandeur einer der Abteilungen von ungesetzliche Kämpfer versucht zu fliehen. Unser Nachrichtendienst hat seine ungefähre Koordinaten bekommen und fordert Eliminierung des Ziels dringend an. Lassen Sie ihn nicht enkommen!&lt;br/&gt;Aufgabe: das Zies so schnell wie möglich zu neutralisieren.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</German>
             </Key>
 	    </Container>
@@ -518,13 +455,11 @@
             <Key ID="STR_SIDE_RESCUE_TITLE">
                 <Original>Rescue operation</Original>
 		        <Russian>Поисковая операция</Russian>
-                <English>Rescue operation</English>
                 <German>Rettungseinsatz</German>
             </Key>
             <Key ID="STR_SIDE_RESCUE_DESCRIPTION">
                 <Original>Our helicopter has crashed. All we know is approximate position of crash site. Hurry up before it's too late!&lt;br/&gt;Задача: найти пилота и доставить на одну из баз (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
 		        <Russian>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта. Поторопитесь, пока не стало слишком поздно!&lt;br/&gt;Задача: найти пилота и доставить на одну из баз (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
-                <English>Our helicopter has crashed. All we know is approximate position of crash site. Hurry up before it's too late!&lt;br/&gt;Задача: найти пилота и доставить на одну из баз (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</English>
                 <German>Unser Hubschrauber ist abgestürzt. Wir kennen nur die ungefähre Position des Hubschrauberabsturzes. Beeilen Sie sich, bevor es zu spät ist.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</German>
             </Key>
 	    </Container>
@@ -533,19 +468,16 @@
             <Key ID="STR_SIDE_HUMANITARIAN_AID_TITLE">
                 <Original>Humanitarian aid</Original>
 		        <Russian>Гуманитарная помощь</Russian>
-                <English>Humanitarian aid</English>
                 <German>Humanitäre Hilfe</German>
             </Key>	
             <Key ID="STR_SIDE_HUMANITARIAN_AID_DESCRIPTION">
                 <Original>Humanitarian Aid is delivered to Airfield.&lt;br/&gt;Our Task: deliver cargo to the meeting point.</Original>
 		        <Russian>На аэродром доставили гуманитарную помощь.&lt;br/&gt;Задача: доставить груз в обозначенный сектор.</Russian>
-                <English>Humanitarian Aid is delivered to Airfield.&lt;br/&gt;Our Task: deliver cargo to the meeting point.</English>
                 <German>Humanitäre Hilfe wurde an den Flughafen geliefert.&lt;br/&gt;Ihre Aufgabe: die Fracht zur bezeichneten Position.</German>
             </Key>
             <Key ID="STR_SIDE_HUMANITARIAN_AID_CARGO">
                 <Original>Cargo</Original>
 		        <Russian>Груз</Russian>
-                <English>Cargo</English>
                 <German>Ladung</German>
             </Key>
 	    </Container>
@@ -554,13 +486,11 @@
             <Key ID="STR_SIDE_DESTROY_TOWER_TITLE">
                 <Original>Interferences</Original>
 		        <Russian>Помехи</Russian>
-                <English>Interferences</English>
                 <German>Störungen</German>
             </Key>		
             <Key ID="STR_SIDE_DESTROY_TOWER_DESCRIPTION">
                 <Original>We've fixed interference in the designated sector and it could cause us some problems.&lt;br/&gt;Task: find and destroy the source of interference.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
 		        <Russian>В обозначенном секторе зафиксированы помехи, доставляющие нам некоторые проблемы.&lt;br/&gt;Задача: найти и уничтожить источник помех.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
-                <English>We've fixed interference in the designated sector and it could cause us some problems.&lt;br/&gt;Task: find and destroy the source of interference.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</English>
                 <German>Wir beobachten elektronische Störungen in bezeichnetem Gebiet, die uns Probleme bereiten können.&lt;br/&gt;Aufgabe ist: die Quelle der Störung zu finden und zu zerstören.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</German>
             </Key>
 	    </Container>
@@ -569,13 +499,11 @@
             <Key ID="STR_SIDE_ALARM_BUTTON_TITLE">
                 <Original>Alarm button</Original>
 		        <Russian>Тревожная кнопка</Russian>
-                <English>Alarm button</English>
                 <German>Alarmknopf</German>
             </Key>
             <Key ID="STR_SIDE_ALARM_BUTTON_DESCRIPTION">
                 <Original>IDAP employee has activated his alarm button. His location is marked on the map.&lt;br/&gt;Task: find out what happened. Play it by ear.</Original>
 		        <Russian>Активирована тревожная кнопка сотрудника IDAP. Его местоположение отмечено на карте.&lt;br/&gt;Задача: узнать, что произошло. Действуйте по обстановке.</Russian>
-                <English>IDAP employee has activated his alarm button. His location is marked on the map.&lt;br/&gt;Task: find out what happened. Play it by ear.</English>
                 <German>IDAP Mitarbeiter hat den Alarmknopf aktiviert. Seine Position ist auf der Karte markiert.&lt;br/&gt;Aufgabe: herausfinden was passiert ist. Improvisieren sie.</German>
             </Key>
 	    </Container>
@@ -584,13 +512,11 @@
             <Key ID="STR_SIDE_MINES_TITLE">
                 <Original>Road inspection</Original>
                 <Russian>Осмотр дороги</Russian>
-                <English>Road inspection</English>
                 <German>Straßeninspektion</German>
             </Key>
             <Key ID="STR_SIDE_MINES_DESCRIPTION">
                 <Original>We have received reports of unknowns who have mined the street.&lt;br/&gt;Task: Inspect the street(s) in the marked sector. Remove any obstacles on the road.</Original>
                 <Russian>В штаб сообщили о неизвестных, которые минировали дорогу.&lt;br/&gt;Задача: осмотреть дорогу (дороги) в заданном секторе; устранить препятствия на дороге.</Russian>
-                <English>We have received reports of unknowns who have mined the street.&lt;br/&gt;Task: Inspect the street(s) in the marked sector. Remove any obstacles on the road.</English>
                 <German>Wir haben Berichte über die Unbekannten, die die Straße vermint hatten erhalten.&lt;br/&gt;Aufgabe: Inspektion der Straße(n) in dem markierten Sektor. Beseitigen Sie jegliche Hindernisse auf der Straße.</German>
             </Key>
 	    </Container>
@@ -599,13 +525,11 @@
             <Key ID="STR_SIDE_AMMO_CACHE_TITLE">
                 <Original>Ammunition</Original>
                 <Russian>Боеприпасы</Russian>
-		        <English>Ammunition</English>
                 <German>Munition</German>
             </Key>
             <Key ID="STR_SIDE_AMMO_CACHE_DESCRIPTION">
                 <Original>The enemy convoy carrying ammunition was forced to stop not far from the designated sector. According to intelligence, the enemy left a cargo somewhere in this radius.&lt;br/&gt;Objective: find and destroy ammunition boxes.</Original>
                 <Russian>Конвой противника, перевозивший боеприпасы, был остановлен недалеко от обозначенного сектора. По данным разведки, противник оставил груз где-то в данном радиусе.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.</Russian>
-		        <English>The enemy convoy carrying ammunition was forced to stop not far from the designated sector. According to intelligence, the enemy left a cargo somewhere in this radius.&lt;br/&gt;Objective: find and destroy ammunition boxes.</English>
                 <German>Der munitionstragende feindliche Konvoi musste unweit des ausgewiesenen Sektors anhalten. Nach Angaben des Geheimdienstes hat der Feind irgendwo in diesem Radius die Ladung zurückgelassen.&lt;br/&gt;Aufgabe: feindliche Munitionskisten finden und zerstören.</German>
             </Key>
 	    </Container>
@@ -614,13 +538,11 @@
             <Key ID="STR_SIDE_HOSTAGE_TITLE">
                 <Original>Hostage</Original>
                 <Russian>Заложник</Russian>
-                <English>Hostage</English>
 		        <German>Die Geisel</German>
             </Key>
             <Key ID="STR_SIDE_HOSTAGE_DESCRIPTION">
                 <Original>Several Al-Qatala fighters took a civilian hostage and demand a ransom for him.&lt;br/&gt;Task: free civilian and deliver him to one of the bases (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
                 <Russian>Несколько бойцов Аль-Каталы взяли в заложники гражданского и требуют за него выкуп.&lt;br/&gt;Задача: найдите и доставьте гражданского на одну из баз (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
-		        <English>Several Al-Qatala fighters took a civilian hostage and demand a ransom for him.&lt;br/&gt;Task: free civilian and deliver him to one of the bases (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</English>
 		        <German>Einige Al-Qatala-Kämpfer nahmen eine zivile Geisel und fordern ein Lösegeld für ihn.&lt;br/&gt;Aufgabe: den Zivilisten befreien und zu einer der Basen bringen (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</German>
             </Key>
 	    </Container>
@@ -629,13 +551,11 @@
             <Key ID="STR_SIDE_CAPTURE_LEADER_TITLE">
                 <Original>Leader capture</Original>
                 <Russian>Захват лидера</Russian>
-                <English>Leader capture</English>
 		        <German>Leader gefangennehmen</German>
             </Key>
             <Key ID="STR_SIDE_CAPTURE_LEADER_DESCRIPTION">
                 <Original>The leader of one of the bases of Al-Qatala was located today by our intelligence service. They ask us to capture and delivery him to one of the bases (BLUE OR RED BASE).&lt;br/&gt;Task: capture the leader and deliver him to one of our bases.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
                 <Russian>Обнаружен лидер одной из баз Аль-Каталы. Необходим захват цели и доставка на базу.&lt;br/&gt;Задача: захватите лидера и доставьте его на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Russian>
-		        <English>The leader of one of the bases of Al-Qatala was located today by our intelligence service. They ask us to capture and delivery him to one of the bases (BLUE OR RED BASE).&lt;br/&gt;Task: capture the leader and deliver him to one of our bases.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</English>
 		        <German>Der Anführer einer der Stützpunkte von Al-Qatala wurde heute von unserem Geheimdienst ausfindig gemacht. Sie bitten uns, ihn zu fangen und zu einer der Basen (BLAUE ODER ROTE BASE) zu bringen.&lt;br/&gt;Aufgabe: Sie sollen den Anführer gefangennehmen und ihn zu einer unserer Basen bringen.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</German>
             </Key>
 	    </Container>
@@ -644,13 +564,11 @@
             <Key ID="STR_SIDE_CHECKPOINT_TITLE">
                 <Original>Roadblock</Original>
                 <Russian>Блокпост</Russian>
-                <English>Roadblock</English>
 		        <German>Straßensperre</German>
             </Key>
             <Key ID="STR_SIDE_CHECKPOINT_DESCRIPTION">
                 <Original>An enemy checkpoint has been spotted.&lt;br/&gt;Task: neutralize the roadblock.</Original>
 		        <Russian>Замечен блокпост противника.&lt;br/&gt;Задача: нейтрализуйте блокпост.</Russian>
-		        <English>An enemy checkpoint has been spotted.&lt;br/&gt;Task: neutralize the roadblock.</English>
 		        <German>Ein feindlicher Kontrollpunkt wurde entdeckt.&lt;br/&gt;Aufgabe: Straßensperre eliminieren.</German>
             </Key>
 	    </Container>
@@ -659,13 +577,11 @@
             <Key ID="STR_SIDE_INTEL_UAV_TITLE">
                 <Original>UAV</Original>
                 <Russian>БПЛА</Russian>
-                <English>UAV</English>
 		        <German>UAV</German>
             </Key>
             <Key ID="STR_SIDE_INTEL_UAV_DESCRIPTION">
                 <Original>One our UAV has crashed somewhere in this area. Find UAV and download the data from it.</Original>
 		        <Russian>Наш беспилотный летательный аппарат потерпел крушение в данном радиусе. Задача: найдите БПЛА и загрузите данные.</Russian>
-		        <English>One our UAV has crashed somewhere in this area. Find UAV and download the data from it.</English>
 		        <German>Eine unserer Drohne wurde in diesem Gebiet abgeschossen. Finden Sie sie und laden Sie alle Daten runter.</German>
             </Key>
 	    </Container>
@@ -674,12 +590,10 @@
             <Key ID="STR_SIDE_DESTRUCTION_OF_VEHICLES_TITLE">
                 <Original>The enemy’s vehicles</Original>
                 <Russian>Техника противника</Russian>
-                <English>The enemy’s vehicles</English>
             </Key>
             <Key ID="STR_SIDE_DESTRUCTION_OF_VEHICLES_DESCRIPTION">
                 <Original>The enemy’s vehicles were transferred to a sector marked on your map. The mission is to destroy those vehicles.</Original>
 		        <Russian>Техника противника была переброшена в сектор, отмеченный у вас на карте. Задача: уничтожить технику противника.</Russian>
-		        <English>The enemy’s vehicles were transferred to a sector marked on your map. The mission is to destroy those vehicles.</English>
             </Key>
 	    </Container>
 
@@ -687,19 +601,16 @@
             <Key ID="STR_SIDE_CONVOY_TITLE">
                 <Original>Convoy</Original>
                 <Russian>Конвой</Russian>
-                <English>Convoy</English>
 		        <German>Der Konvoi</German>
             </Key>
             <Key ID="STR_SIDE_CONVOY_DESCRIPTION">
                 <Original>The opponent transfers his vehicles to the new location. Friendly AWACS will give you the coordinates. Your task is to destroy enemy vehicles.</Original>
 		        <Russian>Противник перегоняет свою технику. Союзный самолёт ДРЛОиУ в воздухе и сможет передавать вам координаты. Задача: уничтожить технику противника.</Russian>
-		        <English>The opponent transfers his vehicles to the new location. Friendly AWACS will give you the coordinates. Your task is to destroy enemy vehicles.</English>
 		        <German>Der Gegner überführt seine Fahrzeuge zum neuen Standort. Freundliche AWACS wird Ihnen die Koordinaten durchgeben. Ihre Aufgabe ist gegnerische Fahrzeuge zu vernichten.</German>
             </Key>
             <Key ID="STR_SIDE_CONVOY_VEHICLE">
                 <Original>Vehicles</Original>
                 <Russian>Техника</Russian>
-                <English>Vehicles</English>
 		        <German>Fahrzeuge</German>
             </Key>
 	    </Container>
@@ -710,13 +621,11 @@
             <Key ID="STR_PATROL_TITLE">
                 <Original>Patrol</Original>
 		        <Russian>Патрулирование</Russian>
-                <English>Patrol</English>
                 <German>Patrouille</German>
             </Key>
             <Key ID="STR_PATROL_DESCRIPTION">
                 <Original>Task: patrol the designated sector for &lt;font color='#33FF9C'&gt;10&lt;/font&gt; minutes.</Original>
 		        <Russian>Задача: осмотр/патруль обозначенного сектора на протяжении &lt;font color='#33FF9C'&gt;10-ти&lt;/font&gt; минут.</Russian>
-                <English>Task: patrol the designated sector for &lt;font color='#33FF9C'&gt;10&lt;/font&gt; minutes.</English>
                 <German>Aufgabe: patrouillieren Sie &lt;font color='#33FF9C'&gt;10&lt;/font&gt; Minuten lang den zugewiesenen Sektor.</German>
             </Key>    
 	    </Container>  
