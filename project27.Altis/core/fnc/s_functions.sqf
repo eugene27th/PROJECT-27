@@ -222,6 +222,7 @@ prj_fnc_capt_zone = {
 	private _trigger_grid_pos = mapGridPosition _capt_trigger;
 	private _trigger_radius = (triggerArea _capt_trigger) # 0;
 	private _trigger_str_name = str _parent_trigger;
+	private _reward = _parent_trigger getVariable "reward";
 
 	[_trigger_str_name,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
 
@@ -232,13 +233,11 @@ prj_fnc_capt_zone = {
 
 		["sector_capture",[_trigger_grid_pos]] remoteExec ["BIS_fnc_showNotification"];
 
-		private _time_remaining = 60 * ([40,70] call BIS_fnc_randomInt);
+		private _time_remaining = 60 * ([100,180] call BIS_fnc_randomInt);
 
 		while {_time_remaining > 0} do {
-			["missionNamespace", "money", 0, 50] call prj_fnc_changePlayerVariableGlobal;
-			if (prj_debug) then {
-				[format ["игрокам выдано %1 очков за удержание сектора %2",50,_trigger_grid_pos]] remoteExec ["systemChat",0];
-			};
+			["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
+			[format ["Игрокам выдано %1 очков за удержание сектора %2.",_reward,_trigger_grid_pos]] remoteExec ["systemChat",0];
 			uiSleep 300;
 			_time_remaining = _time_remaining - 300;
 		};

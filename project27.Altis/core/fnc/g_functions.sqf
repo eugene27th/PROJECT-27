@@ -97,7 +97,7 @@ prj_fnc_create_task = {
 
 	private _selected_task = selectRandom _tasks;
 
-	while {(_selected_task # 0) != _oldTaskName} do {_selected_task = selectRandom _tasks};
+	while {(_selected_task # 0) == _oldTaskName} do {_selected_task = selectRandom _tasks};
 
 	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
 
@@ -177,43 +177,73 @@ prj_fnc_civ_orders = {
 prj_fnc_civ_info = {
 	params ["_position","_civilian"];
 
-	private _kill_enemy = missionNamespace getVariable "total_kill_enemy";
-	private _civ_enemy = missionNamespace getVariable "total_kill_civ";
+	private _kill_enemy = missionNamespace getVariable ["total_kill_enemy",0];
+	private _civ_enemy = missionNamespace getVariable ["total_kill_civ",0];
 
 	if !(player getVariable ["interpreter",false]) exitWith {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_1","STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_2","STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_3"])] spawn BIS_fnc_showSubtitle;
-	};
-
-	if (_kill_enemy - (_civ_enemy * 5)) exitWith {
-		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_BAD_KARMA_1","STR_PRJ_CIVIL_BAD_KARMA_2","STR_PRJ_CIVIL_BAD_KARMA_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
 	if (_civilian getVariable ["interviewed",false]) exitWith {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_INTERVIEWED_1","STR_PRJ_CIVIL_INFO_INTERVIEWED_2","STR_PRJ_CIVIL_INFO_INTERVIEWED_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
-	private _array = _position nearEntities [enemy_infantry, 1500];
-	if (!(_array isEqualTo []) && (random 1 < 0.7)) then {
-		private _man = _array # 0;
-		private _distance = (_position distance _man) + (round (random 150)) - (round (random 150));
-		private _dir = _position getDir _man;
+	if ((_kill_enemy - (_civ_enemy * 5)) < 0) exitWith {
+		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_BAD_KARMA_1","STR_PRJ_CIVIL_BAD_KARMA_2","STR_PRJ_CIVIL_BAD_KARMA_3"])] spawn BIS_fnc_showSubtitle;
+	};
 
+	private _camps_coords = missionNamespace getVariable "camps_coords";
+	private _near_camps = [];
+
+	{
+		if ((_x distance _position) < 3000) then {_near_camps pushBack _x};
+	} forEach _camps_coords;
+
+	if ((count _near_camps) > 0) then { // && (random 1) < 0.7
+		private _camp_pos = selectRandom _near_camps;
+		private _distance = (_position distance _camp_pos) + (round (random 500)) - (round (random 500));
+		private _dir = _position getDir _camp_pos;
+
+		private "_card";
 		switch (true) do {
-			case (_dir > 345 || _dir <= 15) : {card = localize "STR_PRJ_SIDE_WORLD_N"};
-			case (_dir > 15 && _dir <= 75) : {card = localize "STR_PRJ_SIDE_WORLD_NE"};
-			case (_dir > 75 && _dir <= 105) : {card = localize "STR_PRJ_SIDE_WORLD_E"};
-			case (_dir > 105 && _dir <= 165) : {card = localize "STR_PRJ_SIDE_WORLD_SE"};
-			case (_dir > 165 && _dir <= 195) : {card = localize "STR_PRJ_SIDE_WORLD_S"};
-			case (_dir > 195 && _dir <= 255) : {card = localize "STR_PRJ_SIDE_WORLD_SW"};
-			case (_dir > 255 && _dir <= 285) : {card = localize "STR_PRJ_SIDE_WORLD_W"};
-			case (_dir > 285 && _dir <= 345) : {card = localize "STR_PRJ_SIDE_WORLD_NW"};
+			case (_dir > 345 || _dir <= 15) : {_card = localize "STR_PRJ_SIDE_WORLD_N"};
+			case (_dir > 15 && _dir <= 75) : {_card = localize "STR_PRJ_SIDE_WORLD_NE"};
+			case (_dir > 75 && _dir <= 105) : {_card = localize "STR_PRJ_SIDE_WORLD_E"};
+			case (_dir > 105 && _dir <= 165) : {_card = localize "STR_PRJ_SIDE_WORLD_SE"};
+			case (_dir > 165 && _dir <= 195) : {_card = localize "STR_PRJ_SIDE_WORLD_S"};
+			case (_dir > 195 && _dir <= 255) : {_card = localize "STR_PRJ_SIDE_WORLD_SW"};
+			case (_dir > 255 && _dir <= 285) : {_card = localize "STR_PRJ_SIDE_WORLD_W"};
+			case (_dir > 285 && _dir <= 345) : {_card = localize "STR_PRJ_SIDE_WORLD_NW"};
 		};
-
-		[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_INF","STR_PRJ_CIVIL_INFO_2_INF","STR_PRJ_CIVIL_INFO_3_INF"]), card, round _distance]] spawn BIS_fnc_showSubtitle;
+		
+		[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_CAMP_1_INF","STR_PRJ_CIVIL_INFO_CAMP_2_INF","STR_PRJ_CIVIL_INFO_CAMP_3_INF"]), _card, round _distance]] spawn BIS_fnc_showSubtitle;
 	}
 	else
 	{
-		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
+		private _entities_array = _position nearEntities [enemy_infantry, 1500];
+		if (!(_entities_array isEqualTo []) && (random 1 < 0.7)) then {
+			private _man = _entities_array # 0;
+			private _distance = (_position distance _man) + (round (random 150)) - (round (random 150));
+			private _dir = _position getDir _man;
+
+			private "_card";
+			switch (true) do {
+				case (_dir > 345 || _dir <= 15) : {_card = localize "STR_PRJ_SIDE_WORLD_N"};
+				case (_dir > 15 && _dir <= 75) : {_card = localize "STR_PRJ_SIDE_WORLD_NE"};
+				case (_dir > 75 && _dir <= 105) : {_card = localize "STR_PRJ_SIDE_WORLD_E"};
+				case (_dir > 105 && _dir <= 165) : {_card = localize "STR_PRJ_SIDE_WORLD_SE"};
+				case (_dir > 165 && _dir <= 195) : {_card = localize "STR_PRJ_SIDE_WORLD_S"};
+				case (_dir > 195 && _dir <= 255) : {_card = localize "STR_PRJ_SIDE_WORLD_SW"};
+				case (_dir > 255 && _dir <= 285) : {_card = localize "STR_PRJ_SIDE_WORLD_W"};
+				case (_dir > 285 && _dir <= 345) : {_card = localize "STR_PRJ_SIDE_WORLD_NW"};
+			};
+
+			[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_INF","STR_PRJ_CIVIL_INFO_2_INF","STR_PRJ_CIVIL_INFO_3_INF"]), _card, round _distance]] spawn BIS_fnc_showSubtitle;
+		}
+		else
+		{
+			[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
+		};
 	};
 
 	_civilian setVariable ["interviewed",true,true];

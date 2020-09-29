@@ -8,11 +8,11 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=2071;
+		nextID=2084;
 	};
 	class MarkerIDProvider
 	{
-		nextID=19;
+		nextID=24;
 	};
 	class LayerIndexProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15177.523,42.129696,17192.508};
-		dir[]={-0.22301897,-0.45388111,0.86286247};
-		up[]={-0.11359914,0.89107835,0.43951246};
-		aside[]={0.96826571,1.1414522e-006,0.25027066};
+		pos[]={15159.18,32.333603,17357.717};
+		dir[]={0.65610158,-0.35594368,-0.66566426};
+		up[]={0.2499238,0.93453151,-0.25356328};
+		aside[]={-0.71225715,2.1732412e-006,-0.70203614};
 	};
 };
 binarizationWanted=0;
@@ -1020,7 +1020,7 @@ class Mission
 		{
 			dataType="Trigger";
 			position[]={15141.266,17.91,17203.109};
-			angle=3.8992217;
+			angle=3.89922;
 			class Attributes
 			{
 				name="tr_a_service";
@@ -4316,7 +4316,7 @@ class Mission
 		{
 			dataType="Trigger";
 			position[]={15134.398,17.91,16984.662};
-			angle=3.9010022;
+			angle=3.9009998;
 			class Attributes
 			{
 				name="tr_a_shop";

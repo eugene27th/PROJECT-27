@@ -308,6 +308,23 @@
 		        <Russian>Недавно видел людей с оружием. Отсюда метров %2 на %1.</Russian>
 				<German>Habe vor Kurzem bewaffnete Männer in etwa %2 Meter Richtung %1 gesehen.</German>
             </Key>
+
+            <Key ID="STR_PRJ_CIVIL_INFO_CAMP_1_INF">
+                <Original></Original>
+		        <Russian>Я видел что-то похожее на лагерь к %1, метров %2 отсюда.</Russian>
+				<German></German>
+            </Key>
+            <Key ID="STR_PRJ_CIVIL_INFO_CAMP_2_INF">
+                <Original></Original>
+		        <Russian>К %1 было какое-то собрание. Может метров %2, не знаю.</Russian>
+				<German></German>
+            </Key>
+            <Key ID="STR_PRJ_CIVIL_INFO_CAMP_3_INF">
+                <Original></Original>
+		        <Russian>Недавно видел много машин. Наверное, на %1. Где-то метров %2.</Russian>
+				<German></German>
+            </Key>
+
             <Key ID="STR_PRJ_CIVIL_INFO_NEGATIVE_1">
                 <Original>I do not know. I have not seen anyone.</Original>
 		        <Russian>Не знаю. Никого не видел.</Russian>
@@ -349,8 +366,9 @@
 				<German>Was sagen Sie?</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_3">
-                <Original>What are you speaking about? I do not understand.</Original>
-				<German>Worüber reden Sie? Ich verstehe nicht.</German>
+                <Original>What are you speaking about?</Original>
+                <Russian>О чём вы говорите?</Russian>
+				<German>Worüber reden Sie?</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_BAD_KARMA_1">
                 <Original>You bring only troubles. I will not tell you anything.</Original>
@@ -358,9 +376,9 @@
 				<German>Sie bringen nur Probleme. Ich werde dir nichts sagen.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_BAD_KARMA_2">
-                <Original>First you kill civilians, and then ask for help. I do not know anything.</Original>
-		        <Russian>Сначала убиваете гражданских, а потом просите помощи. Ничего не знаю.</Russian>
-				<German>Zuerst tötest du Zivilisten und bittest dann um Hilfe. Ich weiß gar nichts.</German>
+                <Original>First you destroy our country, and then ask for help. I do not know anything.</Original>
+		        <Russian>Сначала разрушаете нашу страну, а потом просите помощи. Ничего не знаю.</Russian>
+				<German>Zuerst zerstörst du unser Land und bittest dann um Hilfe. Ich weiß gar nichts.</German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_BAD_KARMA_3">
                 <Original>Perhaps I would have told someone else, but not you.</Original>

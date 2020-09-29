@@ -1,6 +1,6 @@
 /*
 	written by eugene27.
-	global functions
+	gui global functions
 */
 
 // vehicle shop ///////////////////////////////////////////////////////////////////////////////////////////
@@ -407,14 +407,14 @@ prj_fnc_spawn_vehicle = {
 	private _data = lbData [1012, _index];
 	_data = call (compile _data);
 
-	private _checkplace = nearestObjects [position objectspawn,["landVehicle","Air","Ship"],12] select 0;
+	private _checkplace = nearestObjects [position objectspawn,["landVehicle","Air","Ship"],12] # 0;
 	if (!isNil "_checkplace") then {deleteVehicle _checkplace};
 
-	private _vehicle = (_data select 0) createVehicle position objectspawn;
+	private _vehicle = (_data # 0) createVehicle position objectspawn;
 	//_vehicle setDir (getDir objectspawn);
 	_vehicle setDir ((triggerArea objectspawn) # 2);
 
-	if ((_data select 0) == "Land_DataTerminal_01_F") then {
+	if ((_data # 0) == "Land_DataTerminal_01_F") then {
 		if (!isNil "mhqterminal") then {
 			deleteVehicle mhqterminal
 		};
@@ -434,7 +434,9 @@ prj_fnc_spawn_vehicle = {
 	clearItemCargoGlobal _vehicle;
 	clearBackpackCargoGlobal _vehicle;
 
-	["missionNamespace", "money", 0, -(_data select 1)] call prj_fnc_changePlayerVariableLocal;
+	if ((_data # 1) != 0) then {
+		["missionNamespace", "money", 0, -(_data # 1)] call prj_fnc_changePlayerVariableLocal;
+	};
 };
 
 // hq menu ///////////////////////////////////////////////////////////////////////////////////////////

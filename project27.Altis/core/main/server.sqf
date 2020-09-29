@@ -29,8 +29,8 @@ execVM "core\tasks\patrols.sqf";
 		["hq",position laptop_hq,"mil_dot","ColorWEST","command center"],
 		["arsenal",position arsenal,"mil_dot","ColorWEST","arsenal"],
 		["respawn_west",position spawn_zone,"b_hq","ColorWEST","main base"],
-		["ground_vehicle_shop",position tr_a_shop,"mil_dot","ColorWEST","ground vehicles"],
-		["air_vehicle_shop",position tr_g_shop,"mil_dot","ColorWEST","air vehicles"],
+		["ground_vehicle_shop",position tr_g_shop,"mil_dot","ColorWEST","ground vehicles"],
+		["air_vehicle_shop",position tr_a_shop,"mil_dot","ColorWEST","air vehicles"],
 		["ground_vehicle_service",position tr_g_service,"mil_dot","ColorWEST","ground service"],
 		["air_vehicle_service",position tr_a_service,"mil_dot","ColorWEST","air service"],
 		["treatment_building",position tr_treatment,"mil_dot","ColorWEST","treatment"]
