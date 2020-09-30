@@ -64,7 +64,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 				};
 
 				if (prj_debug) then {
-					systemChat format ["%1 - %2 - %3", text _x, count _useful, round ((count _useful) * 0.2)];
+					systemChat format ["%1 - %2 - %3 - rew: %4", text _x, count _useful, round ((count _useful) * 0.2),(_types_locations # _i) # 3];
 				};
 			};
 		};
@@ -95,8 +95,13 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 
 	if (!isNil "_position") then {
 		if (((position spawn_zone) distance _position) < 2000) then {
-			while {((position spawn_zone) distance _position) < 2000} do {
+			private _try = 10;
+			while {((position spawn_zone) distance _position) < 2000 && _try > 0} do {
 				_position = [_worldCenter, _min_distance, _max_distance, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;
+				_try = _try - 1;
+			};
+			if (((position spawn_zone) distance _position) < 2000) then {
+				_position = nil;
 			};
 		};
 	};

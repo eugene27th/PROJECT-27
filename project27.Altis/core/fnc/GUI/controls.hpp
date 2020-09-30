@@ -60,7 +60,7 @@ class dialogHQmenu
 			x = 0.4125 * safezoneW + safezoneX;
 			y = 0.385 * safezoneH + safezoneY;
 			w = 0.15 * safezoneW;
-			h = 0.15 * safezoneH;
+			h = 0.1 * safezoneH;
 
 			size = 0.026;
 		};
