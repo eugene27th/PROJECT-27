@@ -1,6 +1,6 @@
 /*
 	written by eugene27.
-	gui global functions
+	global functions
 */
 
 // vehicle shop ///////////////////////////////////////////////////////////////////////////////////////////
@@ -922,10 +922,10 @@ prj_fnc_load_item_to_cargo = {
 			}
 		};
 		case "Magazine": {
-			_car addMagazinecargoGlobal [_item,1];
+			_car addMagazineCargoGlobal [_item,1];
 		};
 		case "Mine": {
-			_car addMagazinecargoGlobal [_item,1];
+			_car addMagazineCargoGlobal [_item,1];
 		};
 	};
 };

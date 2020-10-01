@@ -10,7 +10,7 @@ private _taskID = "SIDE_" + str _taskID;
 private _center_pos = [1,false] call prj_fnc_select_position;
 private _pos = [_center_pos, 200] call prj_fnc_select_house_position;
 
-private _hostage = (createGroup civilian) createUnit [selectRandom civilian_units, _pos, [], 0, "NONE"];
+private _hostage = (createGroup civilian) createUnit [selectRandom hostage_units, _pos, [], 0, "NONE"];
 private _enemy = (createGroup independent) createUnit [selectRandom enemy_infantry, position _hostage, [], 0, "NONE"];
 [_hostage, true] call ACE_captives_fnc_setHandcuffed;
 _hostage setCaptive true;

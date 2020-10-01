@@ -476,8 +476,8 @@
                 <German>Rettungseinsatz</German>
             </Key>
             <Key ID="STR_SIDE_RESCUE_DESCRIPTION">
-                <Original>Our helicopter has crashed. All we know is approximate position of crash site. Hurry up before it's too late!&lt;br/&gt;Задача: найти пилота и доставить на одну из баз (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
-		        <Russian>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта. Поторопитесь, пока не стало слишком поздно!&lt;br/&gt;Задача: найти пилота и доставить на одну из баз (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
+                <Original>Our helicopter has crashed. All we know is approximate position of crash site. Hurry up before it's too late!&lt;br/&gt;Our Task: find a pilot and deliver to the base.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+		        <Russian>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта. Поторопитесь, пока не стало слишком поздно!&lt;br/&gt;Задача: найти пилота и доставить на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
                 <German>Unser Hubschrauber ist abgestürzt. Wir kennen nur die ungefähre Position des Hubschrauberabsturzes. Beeilen Sie sich, bevor es zu spät ist.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</German>
             </Key>
 	    </Container>
@@ -559,9 +559,8 @@
 		        <German>Die Geisel</German>
             </Key>
             <Key ID="STR_SIDE_HOSTAGE_DESCRIPTION">
-                <Original>Several Al-Qatala fighters took a civilian hostage and demand a ransom for him.&lt;br/&gt;Task: free civilian and deliver him to one of the bases (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
-                <Russian>Несколько бойцов Аль-Каталы взяли в заложники гражданского и требуют за него выкуп.&lt;br/&gt;Задача: найдите и доставьте гражданского на одну из баз (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
-		        <German>Einige Al-Qatala-Kämpfer nahmen eine zivile Geisel und fordern ein Lösegeld für ihn.&lt;br/&gt;Aufgabe: den Zivilisten befreien und zu einer der Basen bringen (BLUE OR RED BASE).&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</German>
+                <Original>Several Al-Qatala fighters took a civilian hostage and demand a ransom for him.&lt;br/&gt;Task: free civilian and deliver him to the base.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+                <Russian>Несколько бойцов Аль-Каталы взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найдите и доставьте человека на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
             </Key>
 	    </Container>
 
@@ -572,12 +571,11 @@
 		        <German>Leader gefangennehmen</German>
             </Key>
             <Key ID="STR_SIDE_CAPTURE_LEADER_DESCRIPTION">
-                <Original>The leader of one of the bases of Al-Qatala was located today by our intelligence service. They ask us to capture and delivery him to one of the bases (BLUE OR RED BASE).&lt;br/&gt;Task: capture the leader and deliver him to one of our bases.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
+                <Original>The leader of one of the bases of Al-Qatala was located today by our intelligence service. They ask us to capture and delivery him to the base.&lt;br/&gt;Task: capture the leader and deliver him to one of our bases.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
                 <Russian>Обнаружен лидер одной из баз Аль-Каталы. Необходим захват цели и доставка на базу.&lt;br/&gt;Задача: захватите лидера и доставьте его на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Russian>
-		        <German>Der Anführer einer der Stützpunkte von Al-Qatala wurde heute von unserem Geheimdienst ausfindig gemacht. Sie bitten uns, ihn zu fangen und zu einer der Basen (BLAUE ODER ROTE BASE) zu bringen.&lt;br/&gt;Aufgabe: Sie sollen den Anführer gefangennehmen und ihn zu einer unserer Basen bringen.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</German>
             </Key>
 	    </Container>
-
+ 
         <Container name="SIDE_CHECKPOINT">
             <Key ID="STR_SIDE_CHECKPOINT_TITLE">
                 <Original>Roadblock</Original>
@@ -615,21 +613,14 @@
             </Key>
 	    </Container>
 
-        <Container name="SIDE_CONVOY">
-            <Key ID="STR_SIDE_CONVOY_TITLE">
-                <Original>Convoy</Original>
-                <Russian>Конвой</Russian>
-		        <German>Der Konvoi</German>
+        <Container name="SIDE_INTEL_VEHICLE">
+            <Key ID="STR_SIDE_INTEL_VEHICLE_TITLE">
+                <Original>Interception</Original>
+                <Russian>Перехват</Russian>
             </Key>
-            <Key ID="STR_SIDE_CONVOY_DESCRIPTION">
-                <Original>The opponent transfers his vehicles to the new location. Friendly AWACS will give you the coordinates. Your task is to destroy enemy vehicles.</Original>
-		        <Russian>Противник перегоняет свою технику. Союзный самолёт ДРЛОиУ в воздухе и сможет передавать вам координаты. Задача: уничтожить технику противника.</Russian>
-		        <German>Der Gegner überführt seine Fahrzeuge zum neuen Standort. Freundliche AWACS wird Ihnen die Koordinaten durchgeben. Ihre Aufgabe ist gegnerische Fahrzeuge zu vernichten.</German>
-            </Key>
-            <Key ID="STR_SIDE_CONVOY_VEHICLE">
-                <Original>Vehicles</Original>
-                <Russian>Техника</Russian>
-		        <German>Fahrzeuge</German>
+            <Key ID="STR_SIDE_INTEL_VEHICLE_DESCRIPTION">
+                <Original>Our informant reported that the enemy was transporting documents and intelligence. We have detected the vehicle and will continue to monitor it, however, we will not be able to constantly transmit coordinates, so there may be delays. Watch the movement of vehicles in your navigation devices.&lt;br/&gt;Our task: to intercept and stop vehicle, to seize intelligence.</Original>
+		        <Russian>Наш информатор сообщил о перевозке противником документов и разведданных. Мы засекли технику и будем продолжать за ней следить, однако, постоянно передавать координаты мы не сможем, поэтому могут быть задержки. Смотрите за передвижением технике в своих навигационных устройствах.&lt;br/&gt;Задача: перехватить и остановить технику, изъять разведданные.</Russian>
             </Key>
 	    </Container>
     </Package>

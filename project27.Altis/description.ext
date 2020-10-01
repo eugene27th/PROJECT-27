@@ -39,8 +39,8 @@ class Params
 	class number_of_ied
 	{
 		title = "The number of mines on the road";
-		values[] = { 100, 150, 200, 250, 300, 400 };
-		texts[] = { "100", "150", "200", "250", "300", "400" };
+		values[] = { 10, 25, 50, 100, 150, 200, 250, 300, 400 };
+		texts[] = { "10", "25", "50", "100", "150", "200", "250", "300", "400" };
 		default = 100;
 	};
 

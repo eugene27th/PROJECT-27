@@ -199,6 +199,7 @@ for "_i" from 1 to _number_of_ied do {
 		_junk = selectRandom _junk_class createVehicle position _ied;
 		_junk enableSimulationGlobal false;
 	};
+	
 	private _junk = selectRandom _junk_class createVehicle (position (selectRandom _roads));
 	_junk enableSimulationGlobal false;
 

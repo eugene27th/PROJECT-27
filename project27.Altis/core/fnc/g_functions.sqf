@@ -81,6 +81,7 @@ prj_fnc_create_task = {
 	private _oldTaskName = missionNamespace getVariable ["oldTaskName","side_null"];
 
 	private _tasks = [
+		["side_intel_in_vehicle",300],
 		["side_alarm_button",100],
 		["side_ammo_cache",200],
 		["side_capture_leader",200],
@@ -101,11 +102,11 @@ prj_fnc_create_task = {
 
 	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
 
-	private _taskID = missionNamespace setVariable ["taskID",_taskID + 1,true];
+	missionNamespace setVariable ["taskID",_taskID + 1,true];
 	private _oldTaskName = missionNamespace setVariable ["oldTaskName",_selected_task # 0,true];
 
 	if (prj_debug) then {
-		systemChat format ["id: %1 | task: %2 | reward: %3",_taskID, _selected_task # 0, _selected_task # 1];
+		systemChat format ["id: %1 | task: %2 | reward: %3",_taskID,_selected_task # 0,_selected_task # 1];
 	};
 };
 
