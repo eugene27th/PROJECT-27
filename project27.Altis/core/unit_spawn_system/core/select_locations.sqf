@@ -47,6 +47,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
 		_trigger setVariable ["reward",(_types_locations # _i) # 3];
 		_trigger setVariable ["captured",false];
+		_trigger setVariable ["active",false];
 
 		if (_house_ieds == 1) then {
 			private _buildings = nearestObjects [_pos, ["Building"], _spawn_area];
@@ -64,7 +65,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 				};
 
 				if (prj_debug) then {
-					systemChat format ["%1 - %2 - %3 - rew: %4", text _x, count _useful, round ((count _useful) * 0.2),(_types_locations # _i) # 3];
+					systemChat format ["loc: %1 - build: %2 - rew: %3", text _x, count _useful,(_types_locations # _i) # 3];
 				};
 			};
 		};

@@ -5,13 +5,19 @@
 
 params ["_trigger"];
 
-if (prj_debug) then {
-	[format ["%1 activated\nenemy - %2\nciv - %3",_trigger,(_trigger getVariable "config") # 0,(_trigger getVariable "config") # 1]] remoteExec ["hint",0];
-};
+if (_trigger getVariable "active") exitWith {systemChat "не торопись"};
+
+_trigger setVariable ["active",true];
 
 private _distance = 600;
 private _trigger_pos = position _trigger;
 private _trigger_radius = ((triggerArea _trigger) # 0) - _distance;
+private _enemy_config = (_trigger getVariable "config") # 0;
+private _civil_config = (_trigger getVariable "config") # 1;
+
+if (prj_debug) then {
+	[format ["%1 activated\nenemy - %2\nciv - %3",_trigger,_enemy_config,_civil_config]] remoteExec ["hint",0];
+};
 
 //functions
 prj_fnc_number_of_units = {
@@ -267,49 +273,54 @@ private ["_enemy_house_units","_enemy_patrols_units","_enemy_light_vehicles","_e
 
 if (!(_trigger getVariable "captured")) then {
 	
-	_enemy_house_units = [independent,enemy_infantry,(_trigger getVariable "config") # 0] call prj_fnc_spawn_house_groups;
+	_enemy_house_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_spawn_house_groups;
 
-	_enemy_patrols_units = [independent,enemy_infantry,(_trigger getVariable "config") # 0] call prj_fnc_spawn_patrols_groups;
+	_enemy_patrols_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_spawn_patrols_groups;
 
-	_enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,(_trigger getVariable "config") # 0] call prj_fnc_spawn_vehicles;
+	_enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,_enemy_config] call prj_fnc_spawn_vehicles;
 
-	_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,(_trigger getVariable "config") # 0,3] call prj_fnc_spawn_vehicles;
+	_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,_enemy_config,3] call prj_fnc_spawn_vehicles;
 
-	_enemy_statics = [independent,enemy_infantry,enemy_turrets,(_trigger getVariable "config") # 0] call prj_fnc_spawn_static;
+	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_spawn_static;
 
 	_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone", false] call prj_fnc_create_trg;
 	_capt_trg setVariable ["parent_trigger",_trigger];
 };
 
-/////////////////////SPAWN CIVILIAN\\\\\\\\\\\\\\\\\\\\\\\\
-private _civilian_house_units = [civilian,civilian_units,(_trigger getVariable "config") # 1] call prj_fnc_spawn_house_groups;
+//////////////////////SPAWN CIVILIAN\\\\\\\\\\\\\\\\\\\\\\\
+private _civilian_house_units = [civilian,civilian_units,_civil_config] call prj_fnc_spawn_house_groups;
 
-private _civilian_patrols_units = [civilian,civilian_units,(_trigger getVariable "config") # 1] call prj_fnc_spawn_patrols_groups;
+private _civilian_patrols_units = [civilian,civilian_units,_civil_config] call prj_fnc_spawn_patrols_groups;
 
-private _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,(_trigger getVariable "config") # 1,2,"CARELESS"] call prj_fnc_spawn_vehicles;
+private _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,_civil_config,2,"CARELESS"] call prj_fnc_spawn_vehicles;
 
-waitUntil {sleep 3;!triggerActivated _trigger};
+private _civilian_global_infantry = [];
 
-/////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\
+if (!isNil "_civilian_house_units") then {_civilian_global_infantry append _civilian_house_units};
+if (!isNil "_civilian_patrols_units") then {_civilian_global_infantry append _civilian_patrols_units};
+
+if !(_civilian_global_infantry isEqualTo []) then {
+	[_civilian_global_infantry] spawn {
+		params ["_civs"];
+		{_x call prj_fnc_civ} forEach _civs;
+	};
+};
+
+/////////////////////////WAITING\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+_trigger setVariable ["active",false];
+waitUntil {sleep 3; !triggerActivated _trigger};
+
+////////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\\\
 if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
 
 private _global_vehicles = [];
 private _global_infantry = [];
 
-if (!isNil "_civilian_house_units") then {_global_infantry append _civilian_house_units};
-if (!isNil "_civilian_patrols_units") then {_global_infantry append _civilian_patrols_units};
+if !(_civilian_global_infantry isEqualTo []) then {_global_infantry append _civilian_global_infantry};
+
 if (!isNil "_civilian_light_vehicles") then {
 	_global_vehicles append (_civilian_light_vehicles # 0);
 	_global_infantry append (_civilian_light_vehicles # 1)
-};
-
-if (!isNil "_global_infantry") then {
-	{
-		[_x] spawn {
-			params ["_civ"];
-			_civ call prj_fnc_civ
-		};
-	} forEach _global_infantry;
 };
 
 if (!isNil "_enemy_house_units") then {_global_infantry append _enemy_house_units};
