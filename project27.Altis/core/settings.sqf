@@ -71,4 +71,4 @@ switch (_map_preset) do {
 };
 
 // debug mode
-prj_debug = false;
+prj_debug = true;

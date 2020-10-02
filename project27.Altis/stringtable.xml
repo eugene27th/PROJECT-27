@@ -608,8 +608,8 @@
                 <Russian>Техника противника</Russian>
             </Key>
             <Key ID="STR_SIDE_DESTRUCTION_OF_VEHICLES_DESCRIPTION">
-                <Original>The enemy’s vehicles were transferred to a sector marked on your map. The mission is to destroy those vehicles.</Original>
-		        <Russian>Техника противника была переброшена в сектор, отмеченный у вас на карте. Задача: уничтожить технику противника.</Russian>
+                <Original>The enemy’s vehicles were transferred to a sector marked on your map. The mission is to find and destroy those vehicles.</Original>
+		        <Russian>Техника противника была переброшена в сектор, отмеченный у вас на карте. Задача: найти уничтожить технику противника.</Russian>
             </Key>
 	    </Container>
 
@@ -619,8 +619,7 @@
                 <Russian>Перехват</Russian>
             </Key>
             <Key ID="STR_SIDE_INTEL_VEHICLE_DESCRIPTION">
-                <Original>Our informant reported that the enemy was transporting documents and intelligence. We have detected the vehicle and will continue to monitor it, however, we will not be able to constantly transmit coordinates, so there may be delays. Watch the movement of vehicles in your navigation devices.&lt;br/&gt;Our task: to intercept and stop vehicle, to seize intelligence.</Original>
-		        <Russian>Наш информатор сообщил о перевозке противником документов и разведданных. Мы засекли технику и будем продолжать за ней следить, однако, постоянно передавать координаты мы не сможем, поэтому могут быть задержки. Смотрите за передвижением технике в своих навигационных устройствах.&lt;br/&gt;Задача: перехватить и остановить технику, изъять разведданные.</Russian>
+                <Original>Наш информатор сообщил о перевозке противником документов и разведданных. Мы засекли технику и будем продолжать за ней следить, однако, постоянно передавать координаты мы не сможем, поэтому могут быть задержки. Смотрите за передвижением техники в своих навигационных устройствах.&lt;br/&gt;Задача: перехватить и остановить технику, изъять разведданные, уничтожить технику по усмотрению.</Original>
             </Key>
 	    </Container>
     </Package>

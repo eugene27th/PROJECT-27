@@ -25,7 +25,7 @@ sleep 3;
 
 private _pilot = (createGroup civilian) createUnit [getText(configfile >> "CfgVehicles" >> typeOf _heli >> "crew"), position _heli findEmptyPosition [10,200,"B_Survivor_F"], [], 0, "NONE"];
 _pilot setCaptive true;
-removeAllWeapons _pilotheli;
+removeAllWeapons _pilot;
 _pilot setBehaviour "CARELESS";
 _pilot setUnitPos "DOWN";
 
