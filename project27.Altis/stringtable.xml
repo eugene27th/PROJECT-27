@@ -170,7 +170,7 @@
             </Key>
 
             <Key ID="STR_PRJ_MHQ_IN_NOT_EXIST">
-                <Original>MHQ is not exist.</Original>
+                <Original>MHQ does not exist</Original>
 		        <Russian>MHQ не найден.</Russian>
             </Key>
             <Key ID="STR_PRJ_MHQ_IS_NOT_DEPLOYED">

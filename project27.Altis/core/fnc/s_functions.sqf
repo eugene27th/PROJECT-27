@@ -47,7 +47,7 @@ prj_fnc_select_position = {
 	while {_selecting} do {
 		switch (_position_around) do {
 			case true: {
-				_selected_pos = [locationPosition (selectRandom _locations), 100, 1000, 5, 0] call BIS_fnc_findSafePos;
+				_selected_pos = [locationPosition (selectRandom _locations), 0, 700, 5, 0] call BIS_fnc_findSafePos;
 			};
 			case false: {
 				_selected_pos = locationPosition (selectRandom _locations);

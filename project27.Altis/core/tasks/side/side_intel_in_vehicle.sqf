@@ -16,7 +16,7 @@ private _finish_pos = [_position, _distance_route, round (random 359)] call BIS_
 _finish_pos = getPos ([_finish_pos, _distance_route] call BIS_fnc_nearestRoad); 
 _finish_pos set [2, 0];
 
-private _vehicle = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy) createVehicle _position;
+private _vehicle = (selectRandom enemy_vehicles_light) createVehicle _position;
 _vehicle setDir _direction;
 
 private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;

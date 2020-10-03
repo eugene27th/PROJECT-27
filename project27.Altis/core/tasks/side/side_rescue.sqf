@@ -7,8 +7,8 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _center_pos = [1] call prj_fnc_select_position;
-private _pos = [_center_pos, 300, 900, 5, 0] call BIS_fnc_findSafePos;
+private _center_pos = [1,false] call prj_fnc_select_position;
+private _pos = [_center_pos, 200, 700, 5, 0] call BIS_fnc_findSafePos;
 
 private _heli = (selectRandom friendly_helicopters) createVehicle _pos;
 _heli setVariable ["ace_cookoff_enableAmmoCookoff", false, true];

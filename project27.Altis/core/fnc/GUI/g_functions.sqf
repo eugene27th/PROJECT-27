@@ -492,7 +492,15 @@ prj_fnc_hq_menu = {
 };
 
 prj_fnc_tpmhq = {
-	if (isNil "mhqterminal") exitWith {hint localize "STR_PRJ_MHQ_IN_NOT_EXIST"};
+	if (isNil "mhqterminal") exitWith {
+		hintC (localize "STR_PRJ_MHQ_IN_NOT_EXIST");
+		hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
+			0 = _this spawn {
+				_this select 0 displayRemoveEventHandler ["unload", hintC_EH];
+				hintSilent "";
+			};
+		}];
+	};
 
 	if ((mhqterminal animationPhase "lid_rot_1") != 0) then {
 		player setposATL ((getpos mhqterminal) findEmptyPosition [ 0 , 15 , "B_soldier_F" ]);

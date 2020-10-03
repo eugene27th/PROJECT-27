@@ -5,7 +5,7 @@
 
 params ["_trigger"];
 
-if (_trigger getVariable "active") exitWith {systemChat "не торопись"};
+if (_trigger getVariable "active") exitWith {};
 
 _trigger setVariable ["active",true];
 
