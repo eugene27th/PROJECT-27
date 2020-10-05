@@ -59,6 +59,22 @@ class Params
 		texts[] = { "10%", "20%", "30%", "40%", "50%", "60%", "70%" };
 		default = 2;
 	};
+
+	class preset_units
+	{
+		title = "Preset units";
+		values[] = { 0, 1 };
+		texts[] = { "Middle east", "European aggressor" };
+		default = 0;
+	};
+
+	class capture_of_sectors
+	{
+		title = "Capture of sectors";
+		values[] = { 1, 0 };
+		texts[] = { "On", "Off" };
+		default = 1;
+	};
 	
 };
 
@@ -84,8 +100,8 @@ class CfgFunctions
 
 		class AdvancedSlingLoading
 		{
-			file="core\fnc";
-			class advancedSlingLoadingInit{postInit=1;};
+			file = "core\fnc";
+			class advancedSlingLoadingInit{postInit=1};
 		};
 
 	};
@@ -131,10 +147,31 @@ class CfgNotifications
 class CfgSounds
 {
 
-    class allah
+    class scream_allah
 	{
-		name = "allah";
-		sound[] = {"sound\allah.ogg", db+20, 1};
+		name = "scream_allah";
+		sound[] = {"sound\scream_allah.ogg", db+10, 1};
+		titles[] = {0, ""};
+	};
+
+	class scream_1
+	{
+		name = "scream_1";
+		sound[] = {"sound\scream_1.ogg", db+60, 1};
+		titles[] = {0, ""};
+	};
+
+	class scream_2
+	{
+		name = "scream_2";
+		sound[] = {"sound\scream_2.ogg", db+60, 1};
+		titles[] = {0, ""};
+	};
+
+	class scream_3
+	{
+		name = "scream_3";
+		sound[] = {"sound\scream_3.ogg", db+120, 1};
 		titles[] = {0, ""};
 	};
 

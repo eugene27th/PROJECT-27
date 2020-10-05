@@ -232,14 +232,14 @@ prj_fnc_capt_zone = {
 
 		["sector_capture",[_trigger_grid_pos]] remoteExec ["BIS_fnc_showNotification"];
 
-		private _time_remaining = 60 * ([100,180] call BIS_fnc_randomInt);
+		private _time_remaining = 60 * ([60,120] call BIS_fnc_randomInt);
 		private _reward = _parent_trigger getVariable "reward";
 
 		while {_time_remaining > 0} do {
 			["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
 			[format ["Игрокам выдано %1 очков за удержание сектора %2.",_reward,_trigger_grid_pos]] remoteExec ["systemChat",0];
-			uiSleep 300;
-			_time_remaining = _time_remaining - 300;
+			uiSleep 600;
+			_time_remaining = _time_remaining - 600;
 		};
 
 		_parent_trigger setVariable ["captured", false];
@@ -290,31 +290,38 @@ prj_fnc_civ = {
 		private _nearestunits = nearestObjects [getPos _civ,["Man"],30];
 		{
 			if (side _x == west) then {
-				if (((random 1) < 0.3) && alive _civ && [_civ] call ace_common_fnc_isAwake) then {
-					[_civ] join (createGroup independent);
-					{_civ addItemToUniform _x} forEach ["ACE_DeadManSwitch","ACE_Cellphone"];       
-					if (random 1 < 0.5) then {
-						_civ addMagazine [selectRandom ["acex_intelitems_photo","acex_intelitems_document","acex_intelitems_notepad"], 1];
-					};
-					_civ removeAllEventHandlers "FiredNear";
-					if ((animationState _civ) == "amovpercmstpssurwnondnon") then {
-						[_civ, "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"] remoteExec ["switchMove", 0];
-					};
-					_civ setUnitPos "UP";
-					unAssignVehicle _civ;
-					_civ action ["eject",vehicle _civ];
-					_civ allowfleeing 0;
-					_civ forceSpeed 15;				  
-					(group _civ) setBehaviour "CARELESS";
-					(group _civ) setSpeedMode "FULL";
 
-					while {(_civ distance _x) > 10} do {
-						_civ domove position _x;
-						uiSleep 2;
+				if ((random 1) > 0.5 || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true;};
+
+				[_civ] join (createGroup independent);
+
+				_civ removeAllEventHandlers "FiredNear";
+				if ((animationState _civ) == "amovpercmstpssurwnondnon") then {
+					[_civ, "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"] remoteExec ["switchMove", 0];
+				};
+
+				if (random 1 < 0.5) then {
+					_civ addMagazine [selectRandom ["acex_intelitems_photo","acex_intelitems_document","acex_intelitems_notepad"], 1];
+				};
+
+				_civ setUnitPos "UP";
+				unAssignVehicle _civ;
+				_civ action ["eject",vehicle _civ];
+				_civ allowfleeing 0;
+				_civ forceSpeed 15;				  
+				(group _civ) setBehaviour "CARELESS";
+				(group _civ) setSpeedMode "FULL";
+
+				if ((random 1) < 0.5) then {
+					{_civ addItemToUniform _x} forEach ["ACE_DeadManSwitch","ACE_Cellphone"];       
+
+					while {alive _civ && [_civ] call ace_common_fnc_isAwake && (_civ distance _x) > 10} do {
+						_civ doMove position _x;
+						uiSleep 3;
 					};
 
 					if (alive _civ && [_civ] call ace_common_fnc_isAwake) then {
-						[_civ, ["allah",50,1]] remoteExec ["say3D"];
+						[_civ, [selectRandom screams,50,1]] remoteExec ["say3D"];
 						uiSleep 3;
 						if (alive _civ && [_civ] call ace_common_fnc_isAwake && !(_civ getVariable ["ace_captives_isHandcuffed", false])) then {
 							private _blast = ["Bo_Mk82","Rocket_03_HE_F","M_Mo_82mm_AT_LG","Bo_GBU12_LGB","Bo_GBU12_LGB_MI10","HelicopterExploSmall"];
@@ -324,33 +331,18 @@ prj_fnc_civ = {
 						};
 					};
 				}
-				else
-				{	
-					if ((random 1) < 0.3 && alive _civ && [_civ] call ace_common_fnc_isAwake) then {
-						[_civ] join (createGroup independent);
-						if (random 1 < 0.5) then {
-							_civ addMagazine [selectRandom ["acex_intelitems_photo","acex_intelitems_document","acex_intelitems_notepad"], 1];
-						};
-						if (random 1 < 0.5) then {
-							_civ addItemToUniform "ACE_Cellphone";
-						};			
-						_civ removeAllEventHandlers "FiredNear";
-						if ((animationState _civ) == "amovpercmstpssurwnondnon") then {
-							[_civ, "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"] remoteExec ["switchMove", 0];
-						};
-						unAssignVehicle _civ;
-						_civ setUnitPos "UP";							
-						_civ action ["eject",vehicle _civ];
-						_civ allowfleeing 0;
+				else 
+				{			
+					if (random 1 < 0.5) then {
+						_civ addItemToUniform "ACE_Cellphone";
+					};			
+			
+					while {alive _civ && [_civ] call ace_common_fnc_isAwake && (_civ distance _x) > 40} do {
+						_civ doMove position _x;
+						sleep 3;
+					};
 
-						while {(_civ distance _x) > 40} do {
-							_civ domove position _x;
-							sleep 5;
-						};
-
-						(group _civ) setBehaviour "CARELESS";
-						(group _civ) setSpeedMode "FULL";
-
+					if (alive _civ && [_civ] call ace_common_fnc_isAwake) then {
 						_weaponchoice = selectRandom [
 							["rhsusf_weap_m9","rhsusf_mag_15Rnd_9x19_JHP"],
 							["rhs_weap_tt33","rhs_mag_762x25_8"],
@@ -363,7 +355,7 @@ prj_fnc_civ = {
 
 						_civ addWeapon (_weaponchoice # 0);
 						_civ addHandgunItem (_weaponchoice # 1);
-						for "_i" from 1 to 4 do {_civ addMagazine (_weaponchoice # 1)};					
+						for "_i" from 1 to 3 do {_civ addMagazine (_weaponchoice # 1)};					
 						_civ dotarget _x;
 						_civ dofire _x;
 					};

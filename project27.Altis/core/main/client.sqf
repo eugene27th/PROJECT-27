@@ -132,6 +132,52 @@ player setPos getMarkerPos "respawn_west";
 	]
 ] call prj_fnc_set_textures;
 
+//transformation intels to inter score
+office_table addEventHandler ["ContainerClosed", {
+	params ["_container", "_unit"];
+	
+	private _intel_objects = [
+		["acex_intelitems_photo",5],
+		["acex_intelitems_document",5],
+		["ACE_Cellphone",2],
+		["acex_intelitems_notepad",1]
+	];
+
+	private _office_table_items = [((getItemCargo office_table) # 0) + ((getMagazineCargo office_table) # 0),((getItemCargo office_table) # 1) + ((getMagazineCargo office_table) # 1)];
+
+	clearItemCargoGlobal office_table;
+	clearMagazineCargoGlobal office_table;
+	clearWeaponCargoGlobal office_table;
+	clearBackpackCargoGlobal office_table;
+
+	{	
+		private _finded = false;
+		for [{private _i = 0 }, { _i < (count _intel_objects) }, { _i = _i + 1 }] do {
+
+			private _intel_object = ((_intel_objects # _i) # 0);
+			private _intel_object_coast = ((_intel_objects # _i) # 1);
+			
+			if (_x isEqualTo _intel_object) then {
+				private _intel_coast = ((_office_table_items # 1) # _forEachIndex) * _intel_object_coast;
+				private _value = (missionNamespace getVariable "intel_score") + _intel_coast;
+				missionNamespace setVariable ["intel_score",_value,true];
+				if (prj_debug) then {
+					systemChat format ["найдено совпадение %1 и %2. начислено %3 очков",_x,_intel_object,_intel_coast]
+				};
+				_finded = true;
+			};
+		};
+
+		if (!_finded) then {
+			office_table addItemCargoGlobal [_x, ((_office_table_items # 1) # _forEachIndex)];
+			if (prj_debug) then {
+				systemChat format ["для %1 не найдено совпадений. вернуто в кол-ве %3",_x,((_office_table_items # 1) # _forEachIndex)]
+			};
+		};
+
+	} forEach (_office_table_items # 0);
+}];
+
 // actions
 laptop_hq addAction ["HQ menu", { call prj_fnc_hq_menu }];
 
@@ -268,10 +314,22 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 // ARSENAL
 [arsenal, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
 
-//check language
+//check machine translate language
 private _languages = ["Russian"];
-if !(language in _languages) then {
+private _MTlanguages = ["English"];
+
+if (language in _MTlanguages) then {
 	hintC format ["Hello. Machine translation applied for %1. If you want to help with translation, write to: discord - eugene27#2931 or email - evgen.monreal@gmail.com",language];
+	hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
+		0 = _this spawn {
+			_this select 0 displayRemoveEventHandler ["unload", hintC_EH];
+			hintSilent "";
+		};
+	}];
+};
+
+if !(language in (_MTlanguages + _languages)) then {
+	hintC format ["Hello. Your language is not supported. The default is English"];
 	hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
 		0 = _this spawn {
 			_this select 0 displayRemoveEventHandler ["unload", hintC_EH];

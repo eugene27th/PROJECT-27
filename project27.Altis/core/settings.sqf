@@ -3,8 +3,11 @@
 	global
 */
 
-// map preset / предустановка карты // presets: "middle_east", "european_aggressor"
-private _map_preset = "middle_east";
+private _preset_units_array = ["middle_east","european_aggressor"];
+private _number = "preset_units" call BIS_fnc_getParamValue;
+private _preset_units = _preset_units_array # _number;
+
+systemChat format ["preset units: %1",_preset_units];
 
 // arsenal black list / чёрный лист арсенала. предметы, которых не будет в арсенале.
 arsenal_black_list = ["launch_B_Titan_short_tna_F","launch_B_Titan_short_F","launch_I_Titan_short_F","launch_O_Titan_short_ghex_F","launch_O_Titan_short_F","launch_B_Titan_tna_F","launch_B_Titan_F","launch_B_Titan_olive_F","launch_O_Titan_F","launch_O_Titan_ghex_F","launch_I_Titan_eaf_F","launch_I_Titan_F","NVGogglesB_blk_F","NVGogglesB_grn_F","NVGogglesB_gry_F","H_HelmetO_ViperSP_ghex_F","H_HelmetO_ViperSP_hex_F","Laserdesignator_02_ghex_F","Laserdesignator_02","optic_Nightstalker","FirstAidKit","optic_DMS","optic_DMS_ghex_F","optic_Hamr","optic_Hamr_khk_F","optic_LRPS","optic_LRPS_tna_F","optic_LRPS_ghex_F","optic_NVS","ACE_optic_Hamr_2D","ACE_optic_Hamr_PIP","optic_tws","optic_tws_mg","ace_csw_staticGMGCarry","ace_csw_staticHMGCarry","ace_csw_staticATCarry","ace_csw_staticAACarry","H_HelmetIA","H_HelmetLeaderO_ocamo","H_HelmetO_ocamo","H_HelmetSpecO_ocamo","H_HelmetLeaderO_oucamo","H_HelmetO_oucamo","H_HelmetSpecO_blk","H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","H_HelmetSpecO_ghex_F","H_HelmetLeaderO_ghex_F","H_HelmetO_ghex_F","H_HelmetHBK_headset_F","H_HelmetHBK_chops_F","H_HelmetHBK_ear_F","H_HelmetHBK_F","H_HelmetB_TI_tna_F","H_HelmetAggressor_F","H_HelmetAggressor_cover_F","H_HelmetAggressor_cover_taiga_F","H_HelmetCrew_I","H_HelmetCrew_O","H_HelmetCrew_B","G_Goggles_VR","U_I_Protagonist_VR","U_O_Protagonist_VR","Laserdesignator_01_khk_F","Laserdesignator_02_ghex_F","Laserdesignator_02","U_C_Protagonist_VR","U_O_V_Soldier_Viper_F","U_B_T_Sniper_F","V_PlateCarrierSpec_mtp","V_PlateCarrierSpec_rgr","U_O_T_Sniper_F","U_B_Protagonist_VR","U_I_GhillieSuit","U_O_GhillieSuit","U_B_GhillieSuit","U_O_V_Soldier_Viper_hex_F","V_PlateCarrierSpec_wdl","O_NVGoggles_hex_F","O_NVGoggles_urb_F","O_NVGoggles_ghex_F","O_NVGoggles_grn_F"];
@@ -13,7 +16,7 @@ arsenal_black_list = ["launch_B_Titan_short_tna_F","launch_B_Titan_short_F","lau
 hqUID = ["76561198141746661","76561198138702011","76561198343937417","76561198061237087"];
 
 // units configuration. don’t know? don’t change.
-switch (_map_preset) do {
+switch (_preset_units) do {
 	case "european_aggressor": {
 
 		// units and vehicles
@@ -40,6 +43,9 @@ switch (_map_preset) do {
 		towers = [["Land_TTowerSmall_1_F","Land_Portable_generator_F"],["Land_TTowerSmall_2_F","Land_PowerGenerator_F"]];
 
 		ied = ["APERSBoundingMine","ATMine","APERSMine","ACE_IEDLandBig_Range","ACE_IEDUrbanBig_Range","ACE_IEDLandSmall_Range","ACE_IEDUrbanSmall_Range"];
+
+		// sounds
+		screams = ["scream_1","scream_2","scream_3"];
 	};
 	case "middle_east": {
 
@@ -67,6 +73,9 @@ switch (_map_preset) do {
 		towers = [["Land_TTowerSmall_1_F","Land_Portable_generator_F"],["Land_TTowerSmall_2_F","Land_PowerGenerator_F"]];
 		
 		ied = ["APERSBoundingMine","ATMine","APERSMine","ACE_IEDLandBig_Range","ACE_IEDUrbanBig_Range","ACE_IEDLandSmall_Range","ACE_IEDUrbanSmall_Range"];
+
+		// sounds
+		screams = ["scream_allah","scream_1"];
 	};
 };
 

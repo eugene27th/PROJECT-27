@@ -90,7 +90,6 @@ prj_fnc_create_task = {
 		["side_destroy_tower",200],
 		["side_destruction_of_vehicles",200],
 		["side_hostage",200],
-		["side_humanitarian_aid",100],
 		["side_intel_uav",200],
 		["side_liquidation_leader",100],
 		["side_rescue",200]
@@ -175,6 +174,22 @@ prj_fnc_civ_orders = {
 	} forEach _units;
 };
 
+prj_fnc_dir_localize = {
+	params ["_dir"];
+	private "_localize";
+	switch (true) do {
+		case (_dir > 345 && _dir <= 15) : {_localize = localize "STR_PRJ_SIDE_WORLD_N"};
+		case (_dir > 15 && _dir <= 75) : {_localize = localize "STR_PRJ_SIDE_WORLD_NE"};
+		case (_dir > 75 && _dir <= 105) : {_localize = localize "STR_PRJ_SIDE_WORLD_E"};
+		case (_dir > 105 && _dir <= 165) : {_localize = localize "STR_PRJ_SIDE_WORLD_SE"};
+		case (_dir > 165 && _dir <= 195) : {_localize = localize "STR_PRJ_SIDE_WORLD_S"};
+		case (_dir > 195 && _dir <= 255) : {_localize = localize "STR_PRJ_SIDE_WORLD_SW"};
+		case (_dir > 255 && _dir <= 285) : {_localize = localize "STR_PRJ_SIDE_WORLD_W"};
+		case (_dir > 285 && _dir <= 345) : {_localize = localize "STR_PRJ_SIDE_WORLD_NW"};
+	};
+	_localize
+};
+
 prj_fnc_civ_info = {
 	params ["_position","_civilian"];
 
@@ -200,22 +215,12 @@ prj_fnc_civ_info = {
 		if ((_x distance _position) < 3000) then {_near_camps pushBack _x};
 	} forEach _camps_coords;
 
-	if ((count _near_camps) > 0) then { // && (random 1) < 0.7
+	if (((count _near_camps) > 0) && (random 1) < 0.5) then {
 		private _camp_pos = selectRandom _near_camps;
 		private _distance = (_position distance _camp_pos) + (round (random 500)) - (round (random 500));
 		private _dir = _position getDir _camp_pos;
 
-		private "_card";
-		switch (true) do {
-			case (_dir > 345 || _dir <= 15) : {_card = localize "STR_PRJ_SIDE_WORLD_N"};
-			case (_dir > 15 && _dir <= 75) : {_card = localize "STR_PRJ_SIDE_WORLD_NE"};
-			case (_dir > 75 && _dir <= 105) : {_card = localize "STR_PRJ_SIDE_WORLD_E"};
-			case (_dir > 105 && _dir <= 165) : {_card = localize "STR_PRJ_SIDE_WORLD_SE"};
-			case (_dir > 165 && _dir <= 195) : {_card = localize "STR_PRJ_SIDE_WORLD_S"};
-			case (_dir > 195 && _dir <= 255) : {_card = localize "STR_PRJ_SIDE_WORLD_SW"};
-			case (_dir > 255 && _dir <= 285) : {_card = localize "STR_PRJ_SIDE_WORLD_W"};
-			case (_dir > 285 && _dir <= 345) : {_card = localize "STR_PRJ_SIDE_WORLD_NW"};
-		};
+		[_dir] call prj_fnc_dir_localize;
 		
 		[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_CAMP_1_INF","STR_PRJ_CIVIL_INFO_CAMP_2_INF","STR_PRJ_CIVIL_INFO_CAMP_3_INF"]), _card, round _distance]] spawn BIS_fnc_showSubtitle;
 	}
@@ -227,17 +232,7 @@ prj_fnc_civ_info = {
 			private _distance = (_position distance _man) + (round (random 150)) - (round (random 150));
 			private _dir = _position getDir _man;
 
-			private "_card";
-			switch (true) do {
-				case (_dir > 345 || _dir <= 15) : {_card = localize "STR_PRJ_SIDE_WORLD_N"};
-				case (_dir > 15 && _dir <= 75) : {_card = localize "STR_PRJ_SIDE_WORLD_NE"};
-				case (_dir > 75 && _dir <= 105) : {_card = localize "STR_PRJ_SIDE_WORLD_E"};
-				case (_dir > 105 && _dir <= 165) : {_card = localize "STR_PRJ_SIDE_WORLD_SE"};
-				case (_dir > 165 && _dir <= 195) : {_card = localize "STR_PRJ_SIDE_WORLD_S"};
-				case (_dir > 195 && _dir <= 255) : {_card = localize "STR_PRJ_SIDE_WORLD_SW"};
-				case (_dir > 255 && _dir <= 285) : {_card = localize "STR_PRJ_SIDE_WORLD_W"};
-				case (_dir > 285 && _dir <= 345) : {_card = localize "STR_PRJ_SIDE_WORLD_NW"};
-			};
+			[_dir] call prj_fnc_dir_localize;
 
 			[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_INF","STR_PRJ_CIVIL_INFO_2_INF","STR_PRJ_CIVIL_INFO_3_INF"]), _card, round _distance]] spawn BIS_fnc_showSubtitle;
 		}

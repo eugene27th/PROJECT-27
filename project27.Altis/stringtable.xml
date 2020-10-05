@@ -310,19 +310,16 @@
             </Key>
 
             <Key ID="STR_PRJ_CIVIL_INFO_CAMP_1_INF">
-                <Original></Original>
+                <Original>I saw what looked like a camp to the %1, about %2 meters from here.</Original>
 		        <Russian>Я видел что-то похожее на лагерь к %1, метров %2 отсюда.</Russian>
-				<German></German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_CAMP_2_INF">
-                <Original></Original>
+                <Original>There was a meeting to the %1. Maybe %2 meters, I don't know.</Original>
 		        <Russian>К %1 было какое-то собрание. Может метров %2, не знаю.</Russian>
-				<German></German>
             </Key>
             <Key ID="STR_PRJ_CIVIL_INFO_CAMP_3_INF">
-                <Original></Original>
+                <Original>I saw a lot of cars recently. Probably %1. Somewhere %2 meters.</Original>
 		        <Russian>Недавно видел много машин. Наверное, на %1. Где-то метров %2.</Russian>
-				<German></German>
             </Key>
 
             <Key ID="STR_PRJ_CIVIL_INFO_NEGATIVE_1">
@@ -489,8 +486,8 @@
                 <German>Humanitäre Hilfe</German>
             </Key>	
             <Key ID="STR_SIDE_HUMANITARIAN_AID_DESCRIPTION">
-                <Original>Humanitarian Aid is delivered to Airfield.&lt;br/&gt;Our Task: deliver cargo to the meeting point.</Original>
-		        <Russian>На аэродром доставили гуманитарную помощь.&lt;br/&gt;Задача: доставить груз в обозначенный сектор.</Russian>
+                <Original>Humanitarian Aid is delivered to base.&lt;br/&gt;Our Task: deliver cargo to the meeting point.</Original>
+		        <Russian>На базу доставили гуманитарную помощь.&lt;br/&gt;Задача: доставить груз в обозначенный сектор.</Russian>
                 <German>Humanitäre Hilfe wurde an den Flughafen geliefert.&lt;br/&gt;Ihre Aufgabe: die Fracht zur bezeichneten Position.</German>
             </Key>
             <Key ID="STR_SIDE_HUMANITARIAN_AID_CARGO">

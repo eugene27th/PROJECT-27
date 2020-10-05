@@ -9,18 +9,18 @@ private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal"
 
 private _types_locations = [
 	// [location type,radius,array of units,reward],
-	["NameCityCapital",350,[cities_enemy,cities_civilian],200],
-	["NameCity",300,[cities_enemy,cities_civilian],150],
-	["NameVillage",250,[villages_enemy,villages_civilian],100],
-	["NameLocal",150,[local_enemy,local_civilian],70],
-	["Hill",50,[hills_enemy,hills_civilian],100],
-	["RockArea",125,[rock_enemy,rock_civilian],50],
-	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],50],
-	["VegetationFir",175,[vegetation_enemy,vegetation_civilian],50],
-	["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],50],
-	["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],50],
-	["ViewPoint",150,[other_enemy,other_civilian],70],
-	["BorderCrossing",100,[other_enemy,other_civilian],70]
+	["NameCityCapital",350,[cities_enemy,cities_civilian],150],
+	["NameCity",300,[cities_enemy,cities_civilian],100],
+	["NameVillage",250,[villages_enemy,villages_civilian],70],
+	["NameLocal",150,[local_enemy,local_civilian],50],
+	["Hill",50,[hills_enemy,hills_civilian],50],
+	["RockArea",125,[rock_enemy,rock_civilian],10],
+	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],10],
+	["VegetationFir",175,[vegetation_enemy,vegetation_civilian],10],
+	["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],10],
+	["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],10],
+	["ViewPoint",150,[other_enemy,other_civilian],10],
+	["BorderCrossing",100,[other_enemy,other_civilian],10]
 ];
 
 private _worldSize = worldSize;
@@ -43,7 +43,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setTriggerArea [(_distance + _spawn_area),(_distance + _spawn_area),0,false]; 
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
-		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 150 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
 		_trigger setVariable ["reward",(_types_locations # _i) # 3];
 		_trigger setVariable ["captured",false];
@@ -173,17 +173,16 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 
 missionNamespace setVariable ["camps_coords",_camps_coords,true];
 
-// [_camps_ammo_boxes] spawn {
-// 	params ["_camps_ammo_boxes"];
-// 	while {(count _camps_ammo_boxes) > 0} do {
-// 		{if (!alive _x) then {
-// 			systemChat format ["%1 помер",_x];
-// 			_camps_ammo_boxes - [_x];
-// 		}} forEach _camps_ammo_boxes;
-// 		if (prj_debug) then {systemChat format ["CAMPS ALIVE: %1",count (_camps_ammo_boxes)]};
-// 		uiSleep 15;
-// 	};
-// };
+{
+	[_x] spawn {
+		params ["_box"];
+		waitUntil {sleep 10; !alive _box};
+		private _value = 500;
+		private _oldValue = missionNamespace getVariable ["intel_score",0];
+		missionNamespace setVariable ["intel_score",_oldValue + _value,true];
+		[format ["Тайник с боеприпасами уничтожен. Начислено %1 очков разведданных.",_value]] remoteExec ["systemChat"]
+	};
+} forEach _camps_ammo_boxes;
 
 //create ied on the roads
 if (("ied_on_roads" call BIS_fnc_getParamValue) == 0) exitWith {};

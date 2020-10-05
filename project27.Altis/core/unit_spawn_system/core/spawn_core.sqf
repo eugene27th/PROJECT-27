@@ -283,8 +283,11 @@ if (!(_trigger getVariable "captured")) then {
 
 	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_spawn_static;
 
-	_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone", false] call prj_fnc_create_trg;
-	_capt_trg setVariable ["parent_trigger",_trigger];
+	private _capture_sectores = "capture_of_sectors" call BIS_fnc_getParamValue;
+	if ((worldSize > 7000) && (_capture_sectores == 1)) then {
+		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone", false] call prj_fnc_create_trg;
+		_capt_trg setVariable ["parent_trigger",_trigger];
+	};
 };
 
 //////////////////////SPAWN CIVILIAN\\\\\\\\\\\\\\\\\\\\\\\
@@ -300,10 +303,12 @@ if (!isNil "_civilian_house_units") then {_civilian_global_infantry append _civi
 if (!isNil "_civilian_patrols_units") then {_civilian_global_infantry append _civilian_patrols_units};
 
 if !(_civilian_global_infantry isEqualTo []) then {
-	[_civilian_global_infantry] spawn {
-		params ["_civs"];
-		{_x call prj_fnc_civ} forEach _civs;
-	};
+	{
+		[_x] spawn {
+			params ["_civ"];
+			_civ call prj_fnc_civ;
+		};
+	} forEach _civilian_global_infantry;
 };
 
 /////////////////////////WAITING\\\\\\\\\\\\\\\\\\\\\\\\\\\\

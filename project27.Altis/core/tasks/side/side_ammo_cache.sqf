@@ -18,10 +18,9 @@ clearWeaponCargoGlobal _ammo_cache;
 clearBackpackCargoGlobal _ammo_cache;
 _ammo_cache setVariable ["ace_cookoff_enable", false, true];
 
-private _marker = createMarker ["cache_" + _taskID, position _ammo_cache];
-_marker setMarkerType "mil_dot";
-_marker setMarkerAlpha 1;
-_marker setMarkerColor "ColorBLACK";
+if (prj_debug) then {
+	["side_cache_" + _taskID,position _ammo_cache,"ColorBLACK",1,[],"mil_dot","cache"] call prj_fnc_create_marker;
+};
 
 [west, [_taskID], ["STR_SIDE_AMMO_CACHE_DESCRIPTION", "STR_SIDE_AMMO_CACHE_TITLE", ""], _pos, "CREATED", 0, true, "destroy"] call BIS_fnc_taskCreate;
 
