@@ -219,25 +219,26 @@ prj_fnc_capt_zone = {
 
 	private _parent_trigger = _capt_trigger getVariable "parent_trigger";
 	private _trigger_pos = position _capt_trigger;
+	private _trigger_loc_name = _parent_trigger getVariable "loc_name";
 	private _trigger_grid_pos = mapGridPosition _capt_trigger;
 	private _trigger_radius = (triggerArea _capt_trigger) # 0;
 	private _trigger_str_name = str _parent_trigger;
 
-	[_trigger_str_name,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
-
 	_parent_trigger setVariable ["captured", true];
 
-	[_parent_trigger,_trigger_grid_pos,_trigger_str_name] spawn {
-		params ["_parent_trigger","_trigger_grid_pos","_trigger_str_name"];
+	[_trigger_str_name,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
 
-		["sector_capture",[_trigger_grid_pos]] remoteExec ["BIS_fnc_showNotification"];
+	[_parent_trigger,_trigger_grid_pos,_trigger_loc_name,_trigger_str_name] spawn {
+		params ["_parent_trigger","_trigger_grid_pos","_trigger_loc_name","_trigger_str_name"];
+
+		["sector_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
 
 		private _time_remaining = 60 * ([60,120] call BIS_fnc_randomInt);
 		private _reward = _parent_trigger getVariable "reward";
 
 		while {_time_remaining > 0} do {
 			["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
-			[format ["Игрокам выдано %1 очков за удержание сектора %2.",_reward,_trigger_grid_pos]] remoteExec ["systemChat",0];
+			[format ["Игрокам выдано %1 очков за удержание сектора %2 (%3).",_reward,_trigger_grid_pos,_trigger_loc_name]] remoteExec ["systemChat",0];
 			uiSleep 600;
 			_time_remaining = _time_remaining - 600;
 		};
@@ -247,7 +248,7 @@ prj_fnc_capt_zone = {
 		_trigger_str_name setMarkerAlpha 0.8;
 		[_trigger_str_name, 2, 10] spawn BIS_fnc_blinkMarker;
 
-		["sector_lost",[_trigger_grid_pos]] remoteExec ["BIS_fnc_showNotification"];
+		["sector_lost",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
 
 		uiSleep 20;
 		deleteMarker (_trigger_str_name);

@@ -46,6 +46,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
 		_trigger setVariable ["reward",(_types_locations # _i) # 3];
+		_trigger setVariable ["loc_name",_pos call BIS_fnc_locationDescription];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];
 
@@ -156,6 +157,16 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		private _ammo_box = "Box_FIA_Ammo_F" createVehicle ([_position, 5, 25, 1, 0, 0.5, 0] call BIS_fnc_findSafePos);
 		_camps_ammo_boxes pushBack _ammo_box;
 
+		private _trigger = createTrigger ["EmptyDetector",_position,false];
+		_trigger setTriggerArea [700,700,0,false]; 
+		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
+		_trigger setTriggerTimeout [3, 3, 3, true];
+		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setVariable ["config",[[[0],[2,2],[1,0.3],[1,0.3],[1,1]],[[0],[0],[0]]]];
+		_trigger setVariable ["capt_av",false];
+		_trigger setVariable ["captured",false];
+		_trigger setVariable ["active",false];
+
 		if (prj_debug) then {
 			["camp_" + str _position,_position,"ColorYellow",1,[],"mil_objective",str _i] call prj_fnc_create_marker;
 		};
@@ -180,7 +191,7 @@ missionNamespace setVariable ["camps_coords",_camps_coords,true];
 		private _value = 500;
 		private _oldValue = missionNamespace getVariable ["intel_score",0];
 		missionNamespace setVariable ["intel_score",_oldValue + _value,true];
-		[format ["Тайник с боеприпасами уничтожен. Начислено %1 очков разведданных.",_value]] remoteExec ["systemChat"]
+		[format [localize "STR_SECTOR_CAMP_DESTROYED",_value]] remoteExec ["systemChat"]
 	};
 } forEach _camps_ammo_boxes;
 

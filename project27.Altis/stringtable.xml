@@ -15,12 +15,16 @@
             </Key>
 
             <Key ID="STR_SECTOR_CAPTURED_DESC">
-                <Original>Sector %1 is under your control.</Original>
-		        <Russian>Сектор %1 под вашим контролем.</Russian>
+                <Original>Sector %1 (%2) is under your control.</Original>
+		        <Russian>Сектор %1 (%2) под вашим контролем.</Russian>
             </Key>
             <Key ID="STR_SECTOR_LOST_DESC">
-                <Original>Control over sector %1 has been lost.</Original>
-		        <Russian>Контроль над сектором %1 утерян.</Russian>
+                <Original>Control over sector %1 (%2) has been lost.</Original>
+		        <Russian>Контроль над сектором %1 (%2) утерян.</Russian>
+            </Key>
+            <Key ID="STR_SECTOR_CAMP_DESTROYED">
+                <Original>The ammo cache has been destroyed. Earned %1 intelligence points.</Original>
+		        <Russian>Тайник с боеприпасами уничтожен. Начислено %1 очков разведданных.</Russian>
             </Key>
 	    </Container>
 

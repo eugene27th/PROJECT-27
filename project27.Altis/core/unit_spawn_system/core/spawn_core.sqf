@@ -284,7 +284,9 @@ if (!(_trigger getVariable "captured")) then {
 	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_spawn_static;
 
 	private _capture_sectores = "capture_of_sectors" call BIS_fnc_getParamValue;
-	if ((worldSize > 7000) && (_capture_sectores == 1)) then {
+	private _trigger_capt_av = _trigger getVariable ["capt_av",true];
+
+	if ((worldSize > 7000) && (_capture_sectores == 1) && _trigger_capt_av) then {
 		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone", false] call prj_fnc_create_trg;
 		_capt_trg setVariable ["parent_trigger",_trigger];
 	};

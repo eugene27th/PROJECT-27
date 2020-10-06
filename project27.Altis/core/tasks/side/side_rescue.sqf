@@ -11,8 +11,9 @@ private _center_pos = [1,false] call prj_fnc_select_position;
 private _pos = [_center_pos, 200, 700, 5, 0] call BIS_fnc_findSafePos;
 
 private _heli = (selectRandom friendly_helicopters) createVehicle _pos;
-_heli setVariable ["ace_cookoff_enableAmmoCookoff", false, true];
-_heli setDamage 1;
+_heli allowDamage false;
+_heli lock true;
+_heli setDamage 0.7;
 
 private _heli_smoke = createVehicle ["test_EmptyObjectForSmoke", position _heli, [], 0, "CAN_COLLIDE"];
 _heli_smoke attachTo [_heli, [0, 0, 0]];
