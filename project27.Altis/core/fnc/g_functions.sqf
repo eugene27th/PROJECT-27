@@ -188,7 +188,8 @@ prj_fnc_near_pos_array = {
 };
 
 prj_fnc_localize_info = {
-	params ["_pos","_pos_array","_random"];
+	params ["_pos","_pos_array",["_random",300]];
+
 	private _selected_pos = selectRandom _pos_array;
 	private _distance = (_pos distance _selected_pos) + (round (random _random)) - (round (random _random));
 	private _dir = _pos getDir _selected_pos;
@@ -225,9 +226,9 @@ prj_fnc_civ_info = {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_BAD_KARMA_1","STR_PRJ_CIVIL_BAD_KARMA_2","STR_PRJ_CIVIL_BAD_KARMA_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
-	if ((random 1) < 0.5) then {
+	if (true) then { //(random 1) < 0.5
 		private _camps_coords = missionNamespace getVariable ["camps_coords",[]];
-		private _near_camps = [_position, _camps_coords, 3000] call prj_fnc_near_pos_array;
+		private _near_camps = [_position, _camps_coords, 2500] call prj_fnc_near_pos_array;
 
 		if ((count _near_camps) > 0 && (random 1) < 0.5) then {
 			private _localize_info = [_position,_near_camps,500] call prj_fnc_localize_info;
@@ -237,16 +238,16 @@ prj_fnc_civ_info = {
 		else
 		{
 			private _ied_coords = missionNamespace getVariable ["ied_array",[]];
-			private	_near_ied = [_position, _ied_coords, 3000] call prj_fnc_near_pos_array;
+			private	_near_ied = [_position, _ied_coords, 2000] call prj_fnc_near_pos_array;
 
-			if (_ied_state == 1 && (count _near_ied) > 0 && (random 1) < 0.5) then {
+			if ((count _near_ied) > 0 && (random 1) < 0.5) then { 
 				private _localize_info = [_position,_near_ied,500] call prj_fnc_localize_info;
 				
 				[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_IED","STR_PRJ_CIVIL_INFO_2_IED","STR_PRJ_CIVIL_INFO_3_IED"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
 			}
 			else
 			{
-				private _entities_array = _position nearEntities [enemy_infantry, 1500];
+				private _entities_array = _position nearEntities [enemy_infantry, 2500];
 				if ((count _entities_array) > 0) then {
 					private _localize_info = [_position,_entities_array,150] call prj_fnc_localize_info;
 
@@ -264,5 +265,5 @@ prj_fnc_civ_info = {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
-	_civilian setVariable ["interviewed",true,true];
+	// _civilian setVariable ["interviewed",true,true];
 };
