@@ -36,7 +36,7 @@ switch (_preset_units) do {
 		enemy_helicopters = ["I_Heli_light_03_unarmed_F"];
 
 		// mission objects
-		box_ammo_cache = "Box_FIA_Ammo_F";
+		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];
 
 		towers = [["Land_TTowerSmall_1_F","Land_Portable_generator_F"],["Land_TTowerSmall_2_F","Land_PowerGenerator_F"]];
 
@@ -66,7 +66,7 @@ switch (_preset_units) do {
 		enemy_helicopters = [];
 		
 		// mission objects
-		box_ammo_cache = "Box_FIA_Ammo_F";
+		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];
 		
 		towers = [["Land_TTowerSmall_1_F","Land_Portable_generator_F"],["Land_TTowerSmall_2_F","Land_PowerGenerator_F"]];
 		
@@ -78,4 +78,4 @@ switch (_preset_units) do {
 };
 
 // debug mode
-prj_debug = false;
+prj_debug = true;

@@ -204,8 +204,14 @@ private _ied_safe_radius = "ied_safe_radius" call BIS_fnc_getParamValue;
 
 private _roads = (_worldCenter nearRoads (_worldSize * 1.5)) - (position spawn_zone nearRoads _ied_safe_radius);
 
+private _ied_array = [];
+
 for "_i" from 1 to _number_of_ied do {
-	private _ied = createMine [selectRandom ied, (position (selectRandom _roads)),[],3];
+
+	private _position = position (selectRandom _roads);
+	_ied_array pushBack _position;
+
+	private _ied = createMine [selectRandom ied, _position,[],3];
 	if ((random 1) < 0.7) then {
 		_junk = selectRandom _junk_class createVehicle position _ied;
 		_junk enableSimulationGlobal false;
@@ -221,3 +227,5 @@ for "_i" from 1 to _number_of_ied do {
 };
 
 {independent revealMine _x} forEach allMines;
+
+missionNamespace setVariable ["ied_array",_ied_array,true];

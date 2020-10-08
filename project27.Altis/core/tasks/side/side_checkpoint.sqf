@@ -22,13 +22,11 @@ private _vehicles = [];
 
 private _vehicle = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy) createVehicle _pos;
 _vehicle setDir _direction + 90;
-_vehicle lock true;
 private _crew_units = [_vehicle,enemy_infantry] call prj_fnc_create_crew;
 _vehicles pushBack _vehicle;
 
 for "_i" from 1 to 2 do {
 	private _static = (selectRandom enemy_turrets) createVehicle (_pos findEmptyPosition [(10 * _i), 150, "B_HMG_01_high_F"]);
-	_static lock true;
 	_vehicles pushBack _static;
 	private _crew = [_static,enemy_infantry] call prj_fnc_create_crew;
 	_crew_units = _crew_units + _crew;
@@ -41,6 +39,15 @@ _composition = [
 	["Land_WoodenWindBreak_01_F",[0.0314941,4.18152,-0.00102663],0,1,0,[],"","",true,false]
 ];
 [_pos, _direction, _composition, 0] call BIS_fnc_objectsMapper;
+
+private _enemies = [];
+for [{private _i = 0 }, { _i < [7,10] call BIS_fnc_randomInt}, { _i = _i + 1 }] do {
+    private _grpname = createGroup independent;
+    private _pos = [_pos, 10, 100, 1, 0] call BIS_fnc_findSafePos;
+    private _unit = _grpname createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
+	_unit setDir (round (random 360));
+    _enemies pushBack _unit;
+};
 
 [west, [_taskID], ["STR_SIDE_CHECKPOINT_DESCRIPTION", "STR_SIDE_CHECKPOINT_TITLE", ""], _pos, "CREATED", 0, true, "target"] call BIS_fnc_taskCreate;
 
@@ -55,6 +62,14 @@ if (triggerActivated _trg) then {
 [_taskID] call BIS_fnc_deleteTask;
 deleteMarker _taskID;
 
-uiSleep 30;
+if !(triggerActivated _trg) then {
+	uiSleep 120;
+	{deleteVehicle _x} forEach _vehicles;
+};
 
-{deleteVehicle _x} forEach _vehicles + _crew_units;
+_enemies = _enemies + _crew_units;
+[_enemies] spawn {
+	params ["_enemies"];
+	uiSleep 120;
+	{deleteVehicle _x} forEach _enemies;
+};

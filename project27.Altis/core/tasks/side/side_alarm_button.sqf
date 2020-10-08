@@ -63,12 +63,13 @@ if (triggerActivated _trg) then {
 	(_idap_units select 1) assignAsCargo _idap_vehicle;
 	[(_idap_units select 1)] orderGetIn true; 
     [(_idap_units select 1)] allowGetIn true;
-	sleep 2;
+	uiSleep 2;
+    (crew _idap_vehicle) doMove [0,0,0];
 };
 
 [_taskID] call BIS_fnc_deleteTask;
 deleteMarker _taskID;
 
-uiSleep 30;
+uiSleep 120;
 
 {deleteVehicle _x} forEach [_idap_vehicle,_enemy_vehicle,_trg] + _enemy_vehicle_crew + _idap_units + _enemies;

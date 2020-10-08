@@ -82,5 +82,10 @@ if ((_taskID call BIS_fnc_taskState) in ["CANCELED","FAILED"]) then {
 };
 
 [_taskID] call BIS_fnc_deleteTask;
-{deleteVehicle _x} forEach _crew_units;
 deleteMarker _marker_name;
+
+[_crew_units] spawn {
+	params ["_crew_units"];
+	uiSleep 120;
+	{deleteVehicle _x} forEach _crew_units;
+};

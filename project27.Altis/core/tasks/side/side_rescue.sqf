@@ -24,7 +24,8 @@ private _picture = getText(configfile >> "CfgVehicles" >> typeOf _heli >> "edito
 
 sleep 3;
 
-private _pilot = (createGroup civilian) createUnit [getText(configfile >> "CfgVehicles" >> typeOf _heli >> "crew"), position _heli findEmptyPosition [10,200,"B_Survivor_F"], [], 0, "NONE"];
+private _pilot_position = (position _heli) findEmptyPosition [10,200,"B_Survivor_F"];
+private _pilot = (createGroup civilian) createUnit [getText(configfile >> "CfgVehicles" >> typeOf _heli >> "crew"),_pilot_position, [], 0, "NONE"];
 _pilot setCaptive true;
 removeAllWeapons _pilot;
 _pilot setBehaviour "CARELESS";
@@ -33,7 +34,7 @@ _pilot setUnitPos "DOWN";
 [_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
 [_taskID + "_center",_center_pos,"ColorWEST",0.7,[[900,900],"ELLIPSE"]] call prj_fnc_create_marker;
 
-private _trg = createTrigger ["EmptyDetector", position _pilot, true];
+private _trg = createTrigger ["EmptyDetector", _pilot_position, true];
 _trg setVariable ["unit", _pilot];
 _trg setTriggerArea [5, 5, 0, false];
 _trg setTriggerActivation ["WEST", "PRESENT", false];
@@ -44,7 +45,7 @@ private _enemies = [];
 
 for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
     private _grpname = createGroup independent;
-    private _pos = [position _pilot, 50, 150, 1, 0] call BIS_fnc_findSafePos;
+    private _pos = [_pilot_position, 50, 150, 1, 0] call BIS_fnc_findSafePos;
     private _unit = _grpname createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
     _enemies pushBack _unit;
 };
@@ -67,5 +68,11 @@ if (_pilot distance position spawn_zone < 50) then {
 [_pilot, false] call ACE_captives_fnc_setHandcuffed;
 _pilot action ["GetOut",vehicle _pilot];
 [_taskID] call BIS_fnc_deleteTask;
-{deleteVehicle _x} forEach [_pilot,_trg,_heli_smoke] + _enemies;
+{deleteVehicle _x} forEach [_pilot,_trg,_heli_smoke];
 {deleteMarker _x} forEach [(_taskID + "_red_base"),(_taskID + "_blue_base"),(_taskID + "_center")];
+
+[_enemies] spawn {
+    params ["_enemies"];
+	uiSleep 120;
+	{deleteVehicle _x} forEach _enemies;
+};

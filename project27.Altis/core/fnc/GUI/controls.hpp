@@ -693,7 +693,6 @@ class dialogVehicleShop
 	
 	class controls
 	{
-
 		class VehShop_Header: prjRscText 
 		{
 			colorBackground[] = { 0, 0.7, 0, 0.7 };
@@ -786,6 +785,25 @@ class dialogVehicleShop
 			y = 0.26 * safezoneH + safezoneY;
 			w = 0.4000 * safezoneW;
 			h = 0.4 * safezoneH;
+		};
+
+		class RscText_1041: RscText
+		{
+			idc = 1041;
+
+			x = 0.1675 * safezoneW + safezoneX;
+			y = 0.713125 * safezoneH + safezoneY;
+			w = 0.66 * safezoneW;
+			h = 0.0525 * safezoneH;
+		};
+		class RscText_1040: prjRscText
+		{
+			idc = 1040;
+			text = "";
+			x = 0.17625 * safezoneW + safezoneX;
+			y = 0.72625 * safezoneH + safezoneY;
+			w = 0.63875 * safezoneW;
+			h = 0.02625 * safezoneH;
 		};
 	};
 };

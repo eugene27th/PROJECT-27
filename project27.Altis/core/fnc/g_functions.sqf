@@ -81,18 +81,18 @@ prj_fnc_create_task = {
 	private _oldTaskName = missionNamespace getVariable ["oldTaskName","side_null"];
 
 	private _tasks = [
-		["side_intel_in_vehicle",300],
-		["side_alarm_button",100],
-		["side_ammo_cache",200],
-		["side_capture_leader",200],
-		["side_capture_zone",180],
-		["side_checkpoint",130],
-		["side_destroy_tower",200],
-		["side_destruction_of_vehicles",200],
-		["side_hostage",200],
-		["side_intel_uav",200],
-		["side_liquidation_leader",100],
-		["side_rescue",200]
+		["side_intel_in_vehicle",400],
+		["side_alarm_button",300],
+		["side_ammo_cache",300],
+		["side_capture_leader",350],
+		["side_capture_zone",280],
+		["side_checkpoint",200],
+		["side_destroy_tower",300],
+		["side_destruction_of_vehicles",300],
+		["side_hostage",350],
+		["side_intel_uav",400],
+		["side_liquidation_leader",200],
+		["side_rescue",400]
 	];
 
 	private _selected_task = selectRandom _tasks;
@@ -174,27 +174,41 @@ prj_fnc_civ_orders = {
 	} forEach _units;
 };
 
-prj_fnc_dir_localize = {
-	params ["_dir"];
-	private "_localize";
+prj_fnc_near_pos_array = {
+	params ["_pos","_pos_array","_distance"];
+
+	if (_pos_array isEqualTo []) exitWith {[]};
+
+	private _near_pos_array = [];
+	{
+		if ((_x distance _pos) < _distance) then {_near_pos_array pushBack _x};
+	} forEach _pos_array;
+
+	_near_pos_array
+};
+
+prj_fnc_localize_info = {
+	params ["_pos","_pos_array","_random"];
+	private _selected_pos = selectRandom _pos_array;
+	private _distance = (_pos distance _selected_pos) + (round (random _random)) - (round (random _random));
+	private _dir = _pos getDir _selected_pos;
+	private "_localize_dir";
 	switch (true) do {
-		case (_dir > 345 && _dir <= 15) : {_localize = localize "STR_PRJ_SIDE_WORLD_N"};
-		case (_dir > 15 && _dir <= 75) : {_localize = localize "STR_PRJ_SIDE_WORLD_NE"};
-		case (_dir > 75 && _dir <= 105) : {_localize = localize "STR_PRJ_SIDE_WORLD_E"};
-		case (_dir > 105 && _dir <= 165) : {_localize = localize "STR_PRJ_SIDE_WORLD_SE"};
-		case (_dir > 165 && _dir <= 195) : {_localize = localize "STR_PRJ_SIDE_WORLD_S"};
-		case (_dir > 195 && _dir <= 255) : {_localize = localize "STR_PRJ_SIDE_WORLD_SW"};
-		case (_dir > 255 && _dir <= 285) : {_localize = localize "STR_PRJ_SIDE_WORLD_W"};
-		case (_dir > 285 && _dir <= 345) : {_localize = localize "STR_PRJ_SIDE_WORLD_NW"};
+		case (_dir > 345 && _dir <= 15) : {_localize_dir = localize "STR_PRJ_SIDE_WORLD_N"};
+		case (_dir > 15 && _dir <= 75) : {_localize_dir = localize "STR_PRJ_SIDE_WORLD_NE"};
+		case (_dir > 75 && _dir <= 105) : {_localize_dir = localize "STR_PRJ_SIDE_WORLD_E"};
+		case (_dir > 105 && _dir <= 165) : {_localize_dir = localize "STR_PRJ_SIDE_WORLD_SE"};
+		case (_dir > 165 && _dir <= 195) : {_localize_dir = localize "STR_PRJ_SIDE_WORLD_S"};
+		case (_dir > 195 && _dir <= 255) : {_localize_dir = localize "STR_PRJ_SIDE_WORLD_SW"};
+		case (_dir > 255 && _dir <= 285) : {_localize_dir = localize "STR_PRJ_SIDE_WORLD_W"};
+		case (_dir > 285 && _dir <= 345) : {_localize_dir = localize "STR_PRJ_SIDE_WORLD_NW"};
 	};
-	_localize
+
+	[_localize_dir,round _distance];
 };
 
 prj_fnc_civ_info = {
 	params ["_position","_civilian"];
-
-	private _kill_enemy = missionNamespace getVariable ["total_kill_enemy",0];
-	private _civ_enemy = missionNamespace getVariable ["total_kill_civ",0];
 
 	if !(player getVariable ["interpreter",false]) exitWith {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_1","STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_2","STR_PRJ_CIVIL_DOES_NOT_UNDERSTAND_3"])] spawn BIS_fnc_showSubtitle;
@@ -204,42 +218,50 @@ prj_fnc_civ_info = {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_INTERVIEWED_1","STR_PRJ_CIVIL_INFO_INTERVIEWED_2","STR_PRJ_CIVIL_INFO_INTERVIEWED_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
+	private _kill_enemy = missionNamespace getVariable ["total_kill_enemy",0];
+	private _civ_enemy = missionNamespace getVariable ["total_kill_civ",0];
+
 	if ((_kill_enemy - (_civ_enemy * 5)) < 0) exitWith {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_BAD_KARMA_1","STR_PRJ_CIVIL_BAD_KARMA_2","STR_PRJ_CIVIL_BAD_KARMA_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
-	private _camps_coords = missionNamespace getVariable "camps_coords";
-	private _near_camps = [];
+	if ((random 1) < 0.5) then {
+		private _camps_coords = missionNamespace getVariable ["camps_coords",[]];
+		private _near_camps = [_position, _camps_coords, 3000] call prj_fnc_near_pos_array;
 
-	{
-		if ((_x distance _position) < 3000) then {_near_camps pushBack _x};
-	} forEach _camps_coords;
+		if ((count _near_camps) > 0 && (random 1) < 0.5) then {
+			private _localize_info = [_position,_near_camps,500] call prj_fnc_localize_info;
 
-	if (((count _near_camps) > 0) && (random 1) < 0.5) then {
-		private _camp_pos = selectRandom _near_camps;
-		private _distance = (_position distance _camp_pos) + (round (random 500)) - (round (random 500));
-		private _dir = _position getDir _camp_pos;
-
-		[_dir] call prj_fnc_dir_localize;
-		
-		[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_CAMP_1_INF","STR_PRJ_CIVIL_INFO_CAMP_2_INF","STR_PRJ_CIVIL_INFO_CAMP_3_INF"]), _card, round _distance]] spawn BIS_fnc_showSubtitle;
-	}
-	else
-	{
-		private _entities_array = _position nearEntities [enemy_infantry, 1500];
-		if (!(_entities_array isEqualTo []) && (random 1 < 0.7)) then {
-			private _man = _entities_array # 0;
-			private _distance = (_position distance _man) + (round (random 150)) - (round (random 150));
-			private _dir = _position getDir _man;
-
-			[_dir] call prj_fnc_dir_localize;
-
-			[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_INF","STR_PRJ_CIVIL_INFO_2_INF","STR_PRJ_CIVIL_INFO_3_INF"]), _card, round _distance]] spawn BIS_fnc_showSubtitle;
+			[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_CAMP_1_INF","STR_PRJ_CIVIL_INFO_CAMP_2_INF","STR_PRJ_CIVIL_INFO_CAMP_3_INF"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
 		}
 		else
 		{
-			[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
+			private _ied_coords = missionNamespace getVariable ["ied_array",[]];
+			private	_near_ied = [_position, _ied_coords, 3000] call prj_fnc_near_pos_array;
+
+			if (_ied_state == 1 && (count _near_ied) > 0 && (random 1) < 0.5) then {
+				private _localize_info = [_position,_near_ied,500] call prj_fnc_localize_info;
+				
+				[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_IED","STR_PRJ_CIVIL_INFO_2_IED","STR_PRJ_CIVIL_INFO_3_IED"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
+			}
+			else
+			{
+				private _entities_array = _position nearEntities [enemy_infantry, 1500];
+				if ((count _entities_array) > 0) then {
+					private _localize_info = [_position,_entities_array,150] call prj_fnc_localize_info;
+
+					[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_INF","STR_PRJ_CIVIL_INFO_2_INF","STR_PRJ_CIVIL_INFO_3_INF"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
+				}
+				else
+				{
+					[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
+				};
+			};
 		};
+	}
+	else
+	{
+		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
 	_civilian setVariable ["interviewed",true,true];

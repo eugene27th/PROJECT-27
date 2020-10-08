@@ -263,8 +263,9 @@ prj_fnc_vehicle_shop_window = {
 		["rhs_t14_tv",16000,10]
 	];
 	private _air_vehicles = [
-		["C_Plane_Civil_01_F",1000,1],
-		["C_Heli_Light_01_civil_F",2000,1],
+		["RHS_AN2_B",300,0],
+		["C_Plane_Civil_01_F",1000,0],
+		["C_Heli_Light_01_civil_F",1500,0],
 		["rhs_uh1h_hidf_unarmed",2500,1],
 		["RHS_Mi8t_civilian",2700,1],
 		["RHS_Mi8amt_civilian",2700,1],
@@ -330,6 +331,16 @@ prj_fnc_vehicle_shop_window = {
 	private _text_money = "YOU HAVE: " + str _money;
 	_ctrl_money ctrlSetText _text_money;
 	_ctrl_money ctrlSetTextColor [0.2,0.7,0,1];
+
+	private _checkplace = nearestObjects [position objectspawn,["landVehicle","Air","Ship"],12] # 0;
+	if (!isNil "_checkplace") then {
+		private _vehicle_name = getText(configFile >> "CfgVehicles" >> typeOf _checkplace >> "displayName");
+		private _ctrl_alert = (findDisplay 3002) displayCtrl 1040;
+		private _text_alert = str _vehicle_name + " " + localize "STR_PRJ_VEH_SHOP_MENU_ALERT";
+		_ctrl_alert ctrlSetText _text_alert;
+		private _ctrl_bg = (findDisplay 3002) displayCtrl 1041;
+		_ctrl_bg ctrlSetBackgroundColor [0,0,0,0.7];
+	};
 
 	private _ctrl_lb = (findDisplay 3002) displayCtrl 1012;
 

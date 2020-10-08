@@ -98,4 +98,12 @@ deleteMarker _taskID;
 
 uiSleep 30;
 
-{deleteVehicle _x} forEach [_trg,_uav,_uav_smoke] + (if (!isNil "_enemy") then {_enemy});
+{deleteVehicle _x} forEach [_trg,_uav,_uav_smoke];
+
+if (!isNil "_enemy") then {
+	[_enemy] spawn {
+		params ["_enemy"];
+		uiSleep 120;
+		{deleteVehicle _x} forEach _enemies;
+	};
+};

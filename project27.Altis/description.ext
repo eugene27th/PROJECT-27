@@ -70,7 +70,7 @@ class Params
 
 	class capture_of_sectors
 	{
-		title = "Capture of sectors";
+		title = "Sectors capturing";
 		values[] = { 1, 0 };
 		texts[] = { "On", "Off" };
 		default = 1;
