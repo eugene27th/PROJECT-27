@@ -106,6 +106,9 @@ player addEventHandler ["Killed", {
 player setPos getMarkerPos "respawn_west";
 
 // set variables
+private _player_points = "player_point_value_on_start" call BIS_fnc_getParamValue;
+if (isNil "_player_points") then {_player_points = 1000};
+
 [
 	[
 		[
@@ -113,7 +116,7 @@ player setPos getMarkerPos "respawn_west";
 			[
 				getPlayerUID player,
 				[
-					["money",1000],
+					["money",_player_points],
 					["enemy_killings",0],
 					["friend_killings",0],
 					["civ_killings",0]

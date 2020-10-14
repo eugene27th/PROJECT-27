@@ -11,12 +11,17 @@ execVM "core\unit_spawn_system\core\select_locations.sqf";
 execVM "core\tasks\patrols.sqf";
 
 // set variables
+private _air_level = "a_garage_level_on_start" call BIS_fnc_getParamValue;
+private _ground_level = "g_garage_level_on_start" call BIS_fnc_getParamValue;
+if (isNil "_air_level") then {_air_level = 0};
+if (isNil "_ground_level") then {_ground_level = 0};
+
 [
 	[
 		["missionNamespace",["intel_score",0,true],false],
 		["missionNamespace",["arsenal_level",0,true],false],
-		["missionNamespace",["g_garage_level",0,true],false],
-		["missionNamespace",["a_garage_level",0,true],false],
+		["missionNamespace",["g_garage_level",_ground_level,true],false],
+		["missionNamespace",["a_garage_level",_air_level,true],false],
 		["missionNamespace",["total_kill_enemy",0,true],false],
 		["missionNamespace",["total_kill_friend",0,true],false],
 		["missionNamespace",["total_kill_civ",0,true],false]	

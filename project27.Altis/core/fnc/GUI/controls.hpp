@@ -924,12 +924,24 @@ class dialogVehicleService
 			x = 0.3075 * safezoneW + safezoneX;
 			y = 0.329375 * safezoneH + safezoneY;
 			w = 0.20125 * safezoneW;
-			h = 0.3 * safezoneH;
+			h = 0.275625 * safezoneH;
 
 			font = "RobotoCondensed";
 			size = 0.023;
 
 			onLBSelChanged = call prj_fnc_btn_load_enable;
+		};
+		class RscButton_1050: prjRscButton
+		{
+			font = "PuristaMedium";
+			idc = 1050;
+			text = "";
+			x = 0.3075 * safezoneW + safezoneX;
+			y = 0.618125 * safezoneH + safezoneY;
+			w = 0.20125 * safezoneW;
+			h = 0.039375 * safezoneH;
+
+			action = "call prj_fnc_sell_vehicle";
 		};
 	};
 };

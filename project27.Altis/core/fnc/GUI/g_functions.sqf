@@ -689,10 +689,55 @@ prj_fnc_option_menu = {
 	};
 };
 
-// vehicle service menu ///////////////////////////////////////////////////////////////////////////////////////////
+// vehicle service menu ///////////////////////////////////////////////////////////////////////////////////
+prj_fnc_price_calculate = {
+	params ["_vehicle"];
+
+	if !(typeOf _vehicle in (enemy_vehicles_light + enemy_vehicles_heavy + enemy_helicopters)) exitWith {};
+
+	private _vehicle_armor = getNumber(configfile >> "CfgVehicles" >> typeOf _vehicle >> "armor");
+	private _vehicle_price = 3 * _vehicle_armor;
+
+	switch (true) do {
+		case (_vehicle in enemy_vehicles_light): {
+			_vehicle_price = _vehicle_price + 100;
+		};
+		case (_vehicle in enemy_vehicles_heavy): {
+			_vehicle_price = _vehicle_price + 500;
+		};
+		case (_vehicle in enemy_helicopters): {
+			_vehicle_price = _vehicle_price + 1000;
+		};
+		default {};
+	};
+
+	if ((damage _vehicle) < 0.1) then {
+		_vehicle_price = _vehicle_price + 200;
+	};
+
+	_vehicle_price
+};
+
 prj_fnc_vehicle_menu_window = {
 	createDialog "dialogVehicleService";
 	ctrlEnable [1015, false];
+
+	private _vehicle = vehicle player;
+
+	if (typeOf _vehicle in (enemy_vehicles_light + enemy_vehicles_heavy + enemy_helicopters)) then {
+		private _vehicle_price = [_vehicle] call prj_fnc_price_calculate;
+		private _ctrl = (findDisplay 3003) displayCtrl 1050;
+		private _text = "sell a vehicle - " + str _vehicle_price + " points";
+		_ctrl ctrlSetText _text;
+		_ctrl ctrlSetTextColor [0.2,0.7,0,1];
+	}
+	else
+	{
+		ctrlEnable [1050, false];
+		private _ctrl = (findDisplay 3003) displayCtrl 1050;
+		private _text = "the vehicle is not for sale";
+		_ctrl ctrlSetText _text;
+	};
 
 	showitems = {
 		params ["_items"];
@@ -885,6 +930,15 @@ prj_fnc_vehicle_menu_window = {
 			]
 		]
 	] call showitems;
+};
+
+prj_fnc_sell_vehicle = {
+	private _vehicle = vehicle player;
+	private _vehicle_price = [_vehicle] call prj_fnc_price_calculate;
+	["missionNamespace", "money", 0, _vehicle_price] call prj_fnc_changePlayerVariableLocal;
+	player action ['GetOut',_vehicle];
+	deleteVehicle (_vehicle);
+	closeDialog 2;
 };
 
 prj_fnc_btn_load_enable = {
