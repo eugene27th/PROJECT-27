@@ -9,11 +9,11 @@ private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal"
 
 private _types_locations = [
 	// [location type,radius,array of units,reward],
-	["NameCityCapital",350,[cities_enemy,cities_civilian],150],
-	["NameCity",300,[cities_enemy,cities_civilian],100],
-	["NameVillage",250,[villages_enemy,villages_civilian],70],
-	["NameLocal",150,[local_enemy,local_civilian],50],
-	["Hill",50,[hills_enemy,hills_civilian],50],
+	["NameCityCapital",350,[cities_enemy,cities_civilian],100],
+	["NameCity",300,[cities_enemy,cities_civilian],50],
+	["NameVillage",250,[villages_enemy,villages_civilian],30],
+	["NameLocal",150,[local_enemy,local_civilian],20],
+	["Hill",50,[hills_enemy,hills_civilian],10],
 	["RockArea",125,[rock_enemy,rock_civilian],10],
 	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],10],
 	["VegetationFir",175,[vegetation_enemy,vegetation_civilian],10],

@@ -185,7 +185,7 @@
 
         <Container name="PRJ_VEH_SHOP_MENU">
             <Key ID="STR_PRJ_VEH_SHOP_MENU_ALERT">
-                <Original>will disappear if the vehicle is not removed from the site!</Original>
+                <Original>will be despawned if not removed from the trigger!</Original>
 		        <Russian>пропадёт, если ТС не уберут с площадки!</Russian>
             </Key>
 	    </Container>

@@ -10,8 +10,8 @@ prj_fnc_set_textures = {
 	];
 	for [{private _i = 0 }, { _i < (count _textures_array) }, { _i = _i + 1 }] do {
 		{
-			_x setObjectTexture [0, "img\" + ((_textures_array select _i) select 0)]
-		} forEach ((_textures_array select _i) select 1);
+			_x setObjectTexture [(_textures_array # _i) # 2, "img\" + ((_textures_array # _i) # 0)]
+		} forEach ((_textures_array # _i) # 1);
 	};
 };
 
@@ -113,7 +113,7 @@ player setPos getMarkerPos "respawn_west";
 			[
 				getPlayerUID player,
 				[
-					["money",0],
+					["money",1000],
 					["enemy_killings",0],
 					["friend_killings",0],
 					["civ_killings",0]
@@ -128,7 +128,8 @@ player setPos getMarkerPos "respawn_west";
 // set textures
 [
 	[
-		["vservice.paa",[service_board_blue]]
+		["vservice.paa",[service_board_blue],0],
+		["laptopHQ.paa",[laptop_hq],1]
 	]
 ] call prj_fnc_set_textures;
 
@@ -137,10 +138,10 @@ office_table addEventHandler ["ContainerClosed", {
 	params ["_container", "_unit"];
 	
 	private _intel_objects = [
-		["acex_intelitems_photo",5],
-		["acex_intelitems_document",5],
-		["ACE_Cellphone",2],
-		["acex_intelitems_notepad",1]
+		["acex_intelitems_photo",30],
+		["acex_intelitems_document",25],
+		["ACE_Cellphone",10],
+		["acex_intelitems_notepad",10]
 	];
 
 	private _office_table_items = [((getItemCargo office_table) # 0) + ((getMagazineCargo office_table) # 0),((getItemCargo office_table) # 1) + ((getMagazineCargo office_table) # 1)];
@@ -314,6 +315,14 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 // ARSENAL
 [arsenal, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
 
+//video
+private _video = "img\mainDisplay.ogv";
+while {true} do {
+	waitUntil {sleep 5; (mainmonitor distance (position player)) < 50};
+	mainmonitor setObjectTexture [0, _video];
+	[_video, [10, 10]] call BIS_fnc_playVideo;
+};
+
 //check machine translate language
 private _languages = ["Russian"];
 private _MTlanguages = ["English"];
@@ -337,6 +346,20 @@ if !(language in (_MTlanguages + _languages)) then {
 		};
 	}];
 };
+
+//EH icon3D
+// private _icons3d = [
+// 	[position tr_g_service, 50, "ground vehicle service"],
+// 	[position tr_g_shop, 50, "ground vehicle shop"],
+// 	[position arsenal, 50, "arsenal"],
+// 	[position laptop_hq, 50, "laptop"],
+// 	[position tr_a_shop, 50, "air vehicle shop"],
+// 	[position tr_a_service, 50, "air vehicle service"],
+// 	[position tr_treatment, 50, "treatment"]
+// ];
+// addMissionEventHandler ["Draw3D", {
+// 	drawIcon3D ["\a3\ui_f\data\IGUI\Cfg\Cursors\mission_ca.paa", [1,1,1,0.5], position tr_g_service, 1.6, 1.6, 0, "vehicle service", 0];
+// }];
 
 //sitrep, texttiles
 uiSleep 10;

@@ -24,31 +24,10 @@ private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
 private _intel_objects = ["acex_intelitems_photo","acex_intelitems_document"];
 
 for "_i" from 0 to ((count _intel_objects) - 1) do {
-	_vehicle addMagazineCargoGlobal [(_intel_objects # _i), [10,30] call BIS_fnc_randomInt];
+	_vehicle addMagazineCargoGlobal [(_intel_objects # _i), [10,20] call BIS_fnc_randomInt];
 };
 
 _vehicle setVariable ["taskData",[_intel_objects,_taskID]];
-
-_vehicle addEventHandler ["ContainerClosed", {
-	params ["_container", "_unit"];
-
-	private _intel_objects = (_container getVariable "taskData") # 0;
-	private _taskID = (_container getVariable "taskData") # 1;
-	private _vehicle_items = ((getItemCargo _container) # 0) + ((getMagazineCargo _container) # 0);
-	private _items = false;
-
-	{
-		if (_x in _intel_objects) then {
-			_items = true;
-		};
-	} forEach _vehicle_items;
-
-	if (!_items) then {
-		[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-	};
-
-	hint str _vehicle_items;
-}];
 
 (crew _vehicle) doMove _finish_pos;
 
@@ -65,6 +44,20 @@ while {alive _vehicle && !(_taskID call BIS_fnc_taskCompleted)} do {
 		uiSleep 10;
 		_marker_name setMarkerText "vehicle";
 	};
+
+	private _vehicle_items = ((getItemCargo _vehicle) # 0) + ((getMagazineCargo _vehicle) # 0);
+	private _items = false;
+
+	{
+		if (_x in _intel_objects) then {
+			_items = true;
+		};
+	} forEach _vehicle_items;
+
+	if (!_items) then {
+		[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
+	};
+
 	if ((_vehicle distance _finish_pos) < 500) then {
 		[_taskID,"FAILED"] call BIS_fnc_taskSetState;
 	};

@@ -226,7 +226,7 @@ prj_fnc_civ_info = {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_BAD_KARMA_1","STR_PRJ_CIVIL_BAD_KARMA_2","STR_PRJ_CIVIL_BAD_KARMA_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
-	if (true) then { //(random 1) < 0.5
+	if ((random 1) < 0.5) then {
 		private _camps_coords = missionNamespace getVariable ["camps_coords",[]];
 		private _near_camps = [_position, _camps_coords, 2500] call prj_fnc_near_pos_array;
 
@@ -265,5 +265,5 @@ prj_fnc_civ_info = {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
-	// _civilian setVariable ["interviewed",true,true];
+	_civilian setVariable ["interviewed",true,true];
 };

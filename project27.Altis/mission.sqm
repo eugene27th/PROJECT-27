@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=2115;
+		nextID=2118;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15206.606,52.984104,17323.949};
-		dir[]={-0.61867273,-0.65074688,0.44050169};
-		up[]={-0.53013402,0.75934696,0.37745908};
-		aside[]={0.58004129,-1.4668331e-008,0.81466591};
+		pos[]={15171.336,24.964952,17351.148};
+		dir[]={0.84497184,-0.51637113,0.14016023};
+		up[]={0.50946355,0.85640913,0.084509596};
+		aside[]={0.16365662,8.5349893e-007,-0.98657376};
 	};
 };
 binarizationWanted=0;
@@ -702,33 +702,81 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15182.422,19.537569,17365.77};
+				position[]={15182.422,19.537134,17365.77};
 				angles[]={0,5.5279465,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
 				name="laptop_hq";
 			};
 			id=522;
 			type="Land_Laptop_03_black_F";
+			atlOffset=0.8443718;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom1";
+					expression="_this setObjectTextureGlobal [1,_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="";
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item11
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15186.507,19.568514,17365.645};
-				angles[]={0,3.9159224,0};
+				position[]={15186.507,19.568684,17365.645};
+				angles[]={0,3.9159253,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
+				name="mainmonitor";
 			};
 			id=524;
 			type="Land_TripodScreen_01_large_black_F";
+			atlOffset=0.00016975403;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="";
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item12
 		{
@@ -1041,7 +1089,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15171.8,19.651882,17296.285};
+				position[]={15171.8,19.65147,17296.285};
 				angles[]={0,3.9522109,0};
 			};
 			side="Empty";
@@ -1052,7 +1100,7 @@ class Mission
 			};
 			id=1491;
 			type="Land_Billboard_F";
-			atlOffset=0.00041007996;
+			atlOffset=-1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0

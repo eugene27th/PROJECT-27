@@ -642,8 +642,8 @@ class dialogUpgradesMenu
 
 			sizeEx = 0.032;
 
-			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'a_garage_level') + 1);if (_next < 10) then {_control ctrlSetText str _next + ' / ' + str (_next * 100)} else {_control ctrlSetText 'MAX'}";
-			onMouseExit = "params ['_control'];_control ctrlSetText localize 'STR_PRJ_STATISTICS_AIRSHOP'";
+			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'a_garage_level') + 1);if (_next < 10) then {_control ctrlSetFont 'RobotoCondensedLight';_control ctrlSetText str _next + ' lvl > ' + str (_next * 100) + ' IntelScore';} else {_control ctrlSetText 'MAX'}";
+			onMouseExit = "params ['_control'];_control ctrlSetFont 'EtelkaMonospacePro';_control ctrlSetText localize 'STR_PRJ_STATISTICS_AIRSHOP'";
 
 			action = "[2] call prj_fnc_upgrade";
 		};
@@ -679,8 +679,8 @@ class dialogUpgradesMenu
 
 			sizeEx = 0.032;
 
-			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'g_garage_level') + 1);if (_next < 10) then {_control ctrlSetText str _next + ' / ' + str (_next * 100)} else {_control ctrlSetText 'MAX'}";
-			onMouseExit = "params ['_control'];_control ctrlSetText localize 'STR_PRJ_STATISTICS_GROUNDSHOP'";
+			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'g_garage_level') + 1);if (_next < 10) then {_control ctrlSetFont 'RobotoCondensedLight';_control ctrlSetText str _next + ' lvl > ' + str (_next * 100) + ' IntelScore';} else {_control ctrlSetText 'MAX'}";
+			onMouseExit = "params ['_control'];_control ctrlSetFont 'EtelkaMonospacePro';_control ctrlSetText localize 'STR_PRJ_STATISTICS_GROUNDSHOP'";
 
 			action = "[3] call prj_fnc_upgrade";
 		};

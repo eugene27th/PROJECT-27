@@ -103,7 +103,7 @@ uiSleep 30;
 if (!isNil "_enemy") then {
 	[_enemy] spawn {
 		params ["_enemy"];
-		uiSleep 120;
-		{deleteVehicle _x} forEach _enemies;
+		uiSleep 30;
+		{deleteVehicle _x} forEach _enemy;
 	};
 };

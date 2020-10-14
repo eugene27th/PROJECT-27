@@ -314,7 +314,6 @@ if !(_civilian_global_infantry isEqualTo []) then {
 };
 
 /////////////////////////WAITING\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-_trigger setVariable ["active",false];
 waitUntil {sleep 3; !triggerActivated _trigger};
 
 ////////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -358,6 +357,8 @@ for [{private _i = 0 }, { _i < (count _deleteArray) }, { _i = _i + 1 }] do {
 		{deleteVehicle _x} forEach (_deleteArray # _i)
 	};
 };
+
+_trigger setVariable ["active",false];
 
 if (prj_debug) then {
 	[format ["%1 deactivated\ndeleted:\n%2 - vehicles\n%3 - people",_trigger,count _global_vehicles,count _global_infantry]] remoteExec ["hint",0];

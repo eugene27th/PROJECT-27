@@ -238,7 +238,7 @@ prj_fnc_capt_zone = {
 
 		while {_time_remaining > 0} do {
 			["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
-			[format ["Игрокам выдано %1 очков за удержание сектора %2 (%3).",_reward,_trigger_grid_pos,_trigger_loc_name]] remoteExec ["systemChat",0];
+			// [format ["Игрокам выдано %1 очков за удержание сектора %2 (%3).",_reward,_trigger_grid_pos,_trigger_loc_name]] remoteExec ["systemChat",0];
 			uiSleep 600;
 			_time_remaining = _time_remaining - 600;
 		};
