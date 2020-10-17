@@ -3,18 +3,6 @@
 	only client
 */
 
-// local fnc
-prj_fnc_set_textures = {
-	params [
-		"_textures_array"
-	];
-	for [{private _i = 0 }, { _i < (count _textures_array) }, { _i = _i + 1 }] do {
-		{
-			_x setObjectTexture [(_textures_array # _i) # 2, "img\" + ((_textures_array # _i) # 0)]
-		} forEach ((_textures_array # _i) # 1);
-	};
-};
-
 // Initializes the player/client side Dynamic Groups framework
 ["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
 
@@ -38,7 +26,7 @@ prj_fnc_set_textures = {
 	true;
 };
 
-player createDiaryRecord ["Diary", [localize "STR_A3_FM_Welcome4","<br/><br/><font color='#33FF9C' size='16'>PROJECT27 1.3.0.5</font><br/><font color='#33FFF9'>https://github.com/eugene27r/PROJECT-27</font<br/><br/><br/>If you want to help with translation, write to:<br/><font color='#51C1E5'>discord - eugene27#2931</font><br/><font color='#51C1E5'>email - evgen.monreal@gmail.com</font><br/><br/>Report a problem:<br/><font color='#51C1E5'>https://github.com/eugene27r/PROJECT-27/issues</font>"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_A3_FM_Welcome4","<br/><br/><font color='#33FF9C' size='16'>PROJECT27 1.3.0.5</font><br/><font color='#33FFF9'>https://github.com/eugene27r/PROJECT-27</font<br/><br/><br/>If you want to help with translation, write to:<br/><font color='#51C1E5'>discord - eugene27#3110</font><br/><font color='#51C1E5'>email - evgen.monreal@gmail.com</font><br/><br/>Report a problem:<br/><font color='#51C1E5'>https://github.com/eugene27r/PROJECT-27/issues</font>"], taskNull, "", false];
 
 private _doc_start = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_START_TITLE", localize "STR_DOCUMENTATION_START_DESC"], taskNull, "", false];
 
@@ -324,7 +312,7 @@ private _languages = ["Russian"];
 private _MTlanguages = ["English"];
 
 if (language in _MTlanguages) then {
-	hintC format ["Hello. Machine translation applied for %1. If you want to help with translation, write to: discord - eugene27#2931 or email - evgen.monreal@gmail.com",language];
+	hintC format ["Hello. Machine translation applied for %1. If you want to help with translation, write to: discord - eugene27#3110 or email - evgen.monreal@gmail.com",language];
 	hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
 		0 = _this spawn {
 			_this select 0 displayRemoveEventHandler ["unload", hintC_EH];

@@ -472,7 +472,7 @@ prj_fnc_spawn_vehicle = {
 			deleteVehicle mhqterminal
 		};
 		
-		_vehicle setVehicleVarName "mhqterminal";
+		[_vehicle, "mhqterminal"] remoteExec ["setVehicleVarName"];
 		missionNamespace setVariable ["mhqterminal", _vehicle, true];
 
 		[_vehicle, 3] call ace_cargo_fnc_setSize; 

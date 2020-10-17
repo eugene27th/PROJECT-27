@@ -3,6 +3,17 @@
 	global functions
 */
 
+prj_fnc_set_textures = {
+	params [
+		"_textures_array"
+	];
+	for [{private _i = 0 }, { _i < (count _textures_array) }, { _i = _i + 1 }] do {
+		{
+			_x setObjectTexture [(_textures_array # _i) # 2, "img\" + ((_textures_array # _i) # 0)]
+		} forEach ((_textures_array # _i) # 1);
+	};
+};
+
 prj_fnc_changePlayerVariableLocal = {
 	params ["_space","_name","_number", "_value",["_UID",(getPlayerUID player)]];
 

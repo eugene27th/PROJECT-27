@@ -12,6 +12,7 @@ _trigger setVariable ["active",true];
 private _distance = 600;
 private _trigger_pos = position _trigger;
 private _trigger_radius = ((triggerArea _trigger) # 0) - _distance;
+private _sector_radius = ((triggerArea _trigger) # 0);
 private _enemy_config = (_trigger getVariable "config") # 0;
 private _civil_config = (_trigger getVariable "config") # 1;
 
@@ -314,7 +315,10 @@ if !(_civilian_global_infantry isEqualTo []) then {
 };
 
 /////////////////////////WAITING\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-waitUntil {sleep 3; !triggerActivated _trigger};
+while {true} do {
+	uiSleep 5;
+	if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {};
+};
 
 ////////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\\\
 if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
