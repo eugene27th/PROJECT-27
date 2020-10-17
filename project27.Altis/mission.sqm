@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15164.771,27.2234,17360.68};
-		dir[]={0.63660163,-0.36968374,-0.67700434};
-		up[]={0.25329587,0.92922509,-0.2693643};
-		aside[]={-0.728544,1.5278347e-006,-0.68506819};
+		pos[]={15175.063,20.687859,17350.242};
+		dir[]={0.55375648,-0.28856331,0.78124744};
+		up[]={0.16690774,0.95753002,0.23548424};
+		aside[]={0.81588,1.685461e-006,-0.57830215};
 	};
 };
 binarizationWanted=0;
@@ -749,7 +749,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				name="mainmonitor";
+				name="infoDisplay";
 			};
 			id=524;
 			type="Land_TripodScreen_01_large_black_F";
