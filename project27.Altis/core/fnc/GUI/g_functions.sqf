@@ -561,7 +561,13 @@ prj_fnc_tpmhq = {
 	}
 	else
 	{
-		hint localize "STR_PRJ_MHQ_IS_NOT_DEPLOYED";
+		hintC (localize "STR_PRJ_MHQ_IS_NOT_DEPLOYED");
+		hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
+			0 = _this spawn {
+				_this select 0 displayRemoveEventHandler ["unload", hintC_EH];
+				hintSilent "";
+			};
+		}];
 	};
 };
 

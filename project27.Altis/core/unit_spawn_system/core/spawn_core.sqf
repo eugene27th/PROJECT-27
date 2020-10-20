@@ -315,9 +315,17 @@ if !(_civilian_global_infantry isEqualTo []) then {
 };
 
 /////////////////////////WAITING\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-while {true} do {
+private _deleting = false;
+
+while {!_deleting} do {
 	uiSleep 5;
-	if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {};
+	if (isNil "mhqterminal") then {
+		if (!triggerActivated _trigger) exitWith {_deleting = true};
+	}
+	else
+	{
+		if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
+	};
 };
 
 ////////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\\\
