@@ -46,8 +46,8 @@ if (isNil "_ground_level") then {_ground_level = 0};
 [arsenal, [[], 1]] call ace_arsenal_fnc_attributeInit;
 
 // create any objects
-private _a_garage_depot = "VR_Area_01_circle_4_grey_F" createVehicle position tr_a_shop;
-private _g_garage_depot = "VR_Area_01_circle_4_yellow_F" createVehicle position tr_g_shop;
+private _a_garage_depot = createVehicle ["VR_Area_01_circle_4_grey_F", position tr_a_shop, [], 0, "CAN_COLLIDE"];
+private _g_garage_depot = createVehicle ["VR_Area_01_circle_4_yellow_F", position tr_g_shop, [], 0, "CAN_COLLIDE"];
 {(_x # 0) setDir ((triggerArea (_x # 1)) # 2)} forEach [[_a_garage_depot,tr_a_shop],[_g_garage_depot,tr_g_shop]];
 
 //create EHs and other system
