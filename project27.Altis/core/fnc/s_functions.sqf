@@ -313,7 +313,9 @@ prj_fnc_civ = {
 				(group _civ) setBehaviour "CARELESS";
 				(group _civ) setSpeedMode "FULL";
 
-				if ((random 1) < 0.5) then {
+				private _bombers = "suicide_bombers" call BIS_fnc_getParamValue;
+
+				if ((random 1) < 0.5 && _bombers == 1) then {
 					{_civ addItemToUniform _x} forEach ["ACE_DeadManSwitch","ACE_Cellphone"];       
 
 					while {alive _civ && [_civ] call ace_common_fnc_isAwake && (_civ distance _x) > 10} do {
