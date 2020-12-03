@@ -19,6 +19,16 @@ _finish_pos set [2, 0];
 private _vehicle = (selectRandom enemy_vehicles_light) createVehicle _position;
 _vehicle setDir _direction;
 
+_vehicle addEventHandler ["FiredNear", {
+	params ["_unit"];
+	_unit removeEventHandler ["FiredNear", _thisEventHandler];
+
+	private _number = [1,3] call BIS_fnc_randomInt;
+	private _vehicles = [position _unit,[1500,2500],_number] call prj_fnc_reinforcement;
+
+	[_vehicles,600,60] spawn prj_fnc_check_and_delete;
+}];
+
 private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
 
 private _intel_objects = ["acex_intelitems_photo","acex_intelitems_document"];

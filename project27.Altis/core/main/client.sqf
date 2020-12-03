@@ -11,7 +11,7 @@
 	disableSerialization;
 	waitUntil{ !isNull (findDisplay 46) };
 	private _ctrlText = (findDisplay 46) ctrlCreate ["RscStructuredText",-1];
-	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.4.0 TEST | PROJECT 27</t>";
+	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.4.0.1 | PROJECT 27</t>";
 	_ctrlText ctrlSetStructuredText parseText _text;
 	_ctrlText ctrlSetTextColor [1,1,1,0.7];
 	_ctrlText ctrlSetBackgroundColor [0,0,0,0];
@@ -121,7 +121,7 @@ if (isNil "_player_points") then {_player_points = 1000};
 	[
 		["vservice.paa",[service_board_blue],0],
 		["laptopHQ.paa",[laptop_hq],1],
-		["infoDisplay.paa",[infoDisplay],0]
+		["previewDisplay.paa",[infoDisplay],0]
 	]
 ] call prj_fnc_set_textures;
 

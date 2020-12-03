@@ -35,7 +35,7 @@ prj_fnc_number_of_units = {
 };
 
 prj_fnc_spawn_house_groups = {
-	params ["_side","_class_units","_config"];
+	params ["_side","_class_units","_config",["_voice",true]];
 
 	if (((_config # 0) # 0) == 0) exitWith {};
 
@@ -54,6 +54,9 @@ prj_fnc_spawn_house_groups = {
 			if (!isNil "_house_pos") then {
 				private _unit = _group createUnit [selectRandom _class_units, _house_pos, [], 0, "NONE"];
 				doStop _unit;
+				if (_voice) then {
+					[_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit];
+				};
 				_house_units pushBack _unit;
 			};
 			if (prj_debug) then {"юнит создан в доме" remoteExec ["systemChat"]};
@@ -64,7 +67,7 @@ prj_fnc_spawn_house_groups = {
 };
 
 prj_fnc_spawn_patrols_groups = {
-	params ["_side","_class_units","_config"];
+	params ["_side","_class_units","_config",["_voice",true]];
 
 	if (((_config # 1) # 0) == 0) exitWith {};
 
@@ -76,6 +79,9 @@ prj_fnc_spawn_patrols_groups = {
 		if (!isNil "_pos") then {
 			for [{private _i = 0 }, { _i < [((_config # 1) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
 				private _unit = _group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
+				if (_voice) then {
+					[_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit];
+				};
 				_patrols_units pushBack _unit;
 				if (prj_debug) then {"юнит патруля создан" remoteExec ["systemChat"]};
 				uiSleep 0.5;
@@ -288,15 +294,17 @@ if (!(_trigger getVariable "captured")) then {
 	private _trigger_capt_av = _trigger getVariable ["capt_av",true];
 
 	if ((worldSize > 7000) && (_capture_sectores == 1) && _trigger_capt_av) then {
-		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone", false] call prj_fnc_create_trg;
+		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone; private _number = [1,3] call BIS_fnc_randomInt;
+		private _vehicles = [position _unit,[1500,2500],_number] call prj_fnc_reinforcement;
+		[_vehicles,600,60] spawn prj_fnc_check_and_delete;", false] call prj_fnc_create_trg;
 		_capt_trg setVariable ["parent_trigger",_trigger];
 	};
 };
 
 //////////////////////SPAWN CIVILIAN\\\\\\\\\\\\\\\\\\\\\\\
-private _civilian_house_units = [civilian,civilian_units,_civil_config] call prj_fnc_spawn_house_groups;
+private _civilian_house_units = [civilian,civilian_units,_civil_config,false] call prj_fnc_spawn_house_groups;
 
-private _civilian_patrols_units = [civilian,civilian_units,_civil_config] call prj_fnc_spawn_patrols_groups;
+private _civilian_patrols_units = [civilian,civilian_units,_civil_config,false] call prj_fnc_spawn_patrols_groups;
 
 private _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,_civil_config,2,"CARELESS"] call prj_fnc_spawn_vehicles;
 

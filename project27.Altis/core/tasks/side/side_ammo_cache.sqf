@@ -9,10 +9,15 @@ private _taskID = "SIDE_" + str _taskID;
 
 private _pos = [4] call prj_fnc_select_position;
 
-[_taskID,_pos,"ColorOrange",0.7,[[300,300],"ELLIPSE"]] call prj_fnc_create_marker;
+private _plcount = count allPlayers;
+private _radius = _plcount * 30;
+if (_radius > 500) then {_radius = 500};
+private _min_radius = _radius * 0.3;
+
+[_taskID,_pos,"ColorOrange",0.7,[[_radius,_radius],"ELLIPSE"]] call prj_fnc_create_marker;
 
 private _ammo_cache_class = selectRandom box_ammo_cache;
-private _ammo_cache_pos = [_pos, 150, 300, 3, 0] call BIS_fnc_findSafePos;
+private _ammo_cache_pos = [_pos, _min_radius, _radius, 3, 0] call BIS_fnc_findSafePos;
 private _ammo_cache = _ammo_cache_class createVehicle _ammo_cache_pos;
 _ammo_cache setVariable ["ace_cookoff_enable", false, true];
 

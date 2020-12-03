@@ -50,6 +50,10 @@ while {!(_taskID call BIS_fnc_taskCompleted)} do {
 
 	if (triggerActivated _trg) then {
 
+		private _number = [1,3] call BIS_fnc_randomInt;
+		private _vehicles = [position _unit,[1500,2500],_number] call prj_fnc_reinforcement;
+		[_vehicles,600,60] spawn prj_fnc_check_and_delete;
+
 		for [{private _i = 120 }, { _i > -1  }, { _i = _i - 10 }] do {
 
 			if (!triggerActivated _trg) exitWith {

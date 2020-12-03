@@ -100,6 +100,89 @@ prj_fnc_select_road_position = {
 	_returndata
 };
 
+prj_fnc_select_road_position_around = {
+
+	params ["_pos",["_radius",[1000,3000]]];
+
+	private "_returndata";
+
+	private _all_roads = _pos nearRoads (_radius # 1);
+	private _del_roads = _pos nearRoads (_radius # 0);
+
+	private _roads = _all_roads - _del_roads;
+	private _roads = _roads select {isOnRoad _x};
+
+	if ((count _roads) >= 2) then {
+		private _road = selectRandom _roads;
+		private _pos = getPos _road;
+		_pos set [2, 0];
+		private _roadConnectedTo = roadsConnectedTo _road;
+		private _connectedRoad = _roadConnectedTo select 0;
+		private _direction = _road getDir _connectedRoad;
+		_returndata = [_pos,_direction];
+	}
+	else
+	{
+		private _pos = [_pos, _radius # 0, _radius # 1, 3, 0] call BIS_fnc_findSafePos;
+		private _direction = round (random 360);
+		_returndata = [_pos,_direction];
+	};
+	_returndata
+};
+
+prj_fnc_reinforcement = {
+	params ["_pos",["_radius",[1000,2000]],["_number",1]];
+
+	private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
+	private _position = _position_data # 0;
+	private _direction = _position_data # 1;
+
+	private _vehicles = [];
+	for "_i" from 1 to _number do {
+		private _vehicle = (selectRandom (enemy_vehicles_light + enemy_vehicles_heavy)) createVehicle _position;
+		_vehicle setDir _direction;
+		private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
+		(crew _vehicle) doMove _pos;
+
+		_vehicles pushBack [_vehicle, _crew_units];
+
+		if (prj_debug) then {
+			["m_" + str (random 1000),position _vehicle,"ColorBLACK",1,[],"mil_dot","car"] call prj_fnc_create_marker;
+		};	
+	};
+
+	_vehicles
+};
+
+prj_fnc_check_and_delete = {
+	params ["_vehicles","_start_time","_interval_time"];
+	uiSleep _start_time;
+	while {(count _vehicles) > 0} do {
+		for [{private _i = 0 }, { _i < (count _vehicles) }, { _i = _i + 1 }] do {
+			private _vehicle = (_vehicles # _i) # 0;
+
+			if (!alive _vehicle) then {
+				((_vehicles # _i) # 1) pushBack _vehicle;
+				{deleteVehicle _x} forEach ((_vehicles # _i) # 1);
+				_vehicles deleteAt _i;
+			}
+			else
+			{
+				private _finded = false;
+				private _nearestunits = nearestObjects [position _vehicle,["Man"],2000];
+				{if (side _x == west) exitWith {_finded = true}} forEach _nearestunits;
+				if (!_finded) then {
+					((_vehicles # _i) # 1) pushBack _vehicle;
+					{deleteVehicle _x} forEach ((_vehicles # _i) # 1);
+					_vehicles deleteAt _i;
+				};
+			};
+			
+		};
+		uiSleep _interval_time;
+	};
+};
+
 prj_fnc_select_house_position = {
 
 	params [["_pos", [0,0,0]],["_radius", 200]];
@@ -207,7 +290,6 @@ prj_fnc_create_crew = {
 			private _unit = _vehicle_group createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
 			_unit moveInCargo _vehicle;
 			_vehicle_cargo pushBack _unit;
-			uiSleep 0.3;
 		};
 	};
 

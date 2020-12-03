@@ -8,7 +8,13 @@ params ["_taskID","_reward"];
 private _taskID = "SIDE_" + str _taskID;
 
 private _center_pos = [1,false] call prj_fnc_select_position;
-private _pos = [_center_pos, 200, 500, 3, 0] call BIS_fnc_findSafePos;
+
+private _plcount = count allPlayers;
+private _radius = _plcount * 30;
+if (_radius > 500) then {_radius = 500};
+private _min_radius = _radius * 0.3;
+
+private _pos = [_center_pos, _min_radius, _radius, 3, 0] call BIS_fnc_findSafePos;
 
 private _tower_class = selectRandom towers;
 private _tower = (_tower_class select 0) createVehicle _pos;
@@ -27,7 +33,7 @@ private _picture = getText(configfile >> "CfgVehicles" >> _tower_class select 0 
 
 [west, [_taskID], [format [localize "STR_SIDE_DESTROY_TOWER_DESCRIPTION", _picture], "STR_SIDE_DESTROY_TOWER_TITLE", ""], _center_pos, "CREATED", 0, true, "destroy"] call BIS_fnc_taskCreate;
 
-[_taskID,_center_pos,"ColorOrange",0.7,[[500,500],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_center_pos,"ColorOrange",0.7,[[_radius,_radius],"ELLIPSE"]] call prj_fnc_create_marker;
 
 waitUntil {sleep 5; !alive _tower || !alive _generator || _taskID call BIS_fnc_taskCompleted};
 
