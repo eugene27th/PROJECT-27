@@ -14,6 +14,7 @@ prj_fnc_vehicle_shop_window = {
 		["ACE_Wheel",0,0],
 		["ACE_Track",0,0],
 		["B_supplyCrate_F",0,0],
+		["C_IDAP_supplyCrate_F",300,0],
 		["rhsusf_mrzr4_d",0,0],
 		["C_Quadbike_01_F",0,0],
 		["C_Hatchback_01_F",0,0],
@@ -402,6 +403,9 @@ prj_fnc_vehicle_shop_window = {
 	{
 		if ((_x select 2) <= missionNamespace getVariable (if (_vehiclearray) then {"g_garage_level"} else {"a_garage_level"})) then {
 			private _left_text = (getText(configFile >> "CfgVehicles" >> _x select 0 >> "displayName"));
+			switch (_x # 0) do {
+				case "C_IDAP_supplyCrate_F": {_left_text = "Supply Box"};
+			};
 			private _right_text = (if ((_x select 1) != 0) then {str (_x select 1)} else {"FREE"});
 			lbAdd [1012, _left_text];
 			_ctrl_lb lbSetTextRight [_forEachIndex + 1, _right_text];
@@ -472,7 +476,6 @@ prj_fnc_spawn_vehicle = {
 	if (!isNil "_checkplace") then {deleteVehicle _checkplace};
 
 	private _vehicle = (_data # 0) createVehicle position objectspawn;
-	//_vehicle setDir (getDir objectspawn);
 	_vehicle setDir ((triggerArea objectspawn) # 2);
 
 	if ((_data # 0) == "Land_DataTerminal_01_F") then {
@@ -483,11 +486,21 @@ prj_fnc_spawn_vehicle = {
 		[_vehicle, "mhqterminal"] remoteExec ["setVehicleVarName"];
 		missionNamespace setVariable ["mhqterminal", _vehicle, true];
 
-		[_vehicle, 3] call ace_cargo_fnc_setSize; 
+		[_vehicle, 3] call ace_cargo_fnc_setSize;
 		[_vehicle, "blue", "orange", "green"] call BIS_fnc_DataTerminalColor;
 		[_vehicle, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
 
 		remoteExecCall ["prj_fnc_add_mhq_action"];
+	};
+
+	if ((_data # 0) == "C_IDAP_supplyCrate_F") then {
+		if (!isNil "supplybox") then {
+			deleteVehicle supplybox
+		};
+		
+		[_vehicle, "supplybox"] remoteExec ["setVehicleVarName"];
+		missionNamespace setVariable ["supplybox", _vehicle, true];
+		[_vehicle, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
 	};
 
 	clearWeaponCargoGlobal _vehicle;

@@ -24,7 +24,7 @@ if (isNil "_ground_level") then {_ground_level = 0};
 		["missionNamespace",["a_garage_level",_air_level,true],false],
 		["missionNamespace",["total_kill_enemy",0,true],false],
 		["missionNamespace",["total_kill_friend",0,true],false],
-		["missionNamespace",["total_kill_civ",0,true],false]	
+		["missionNamespace",["total_kill_civ",0,true],false]
 	]
 ] call prj_fnc_set_variables;
 

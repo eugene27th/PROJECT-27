@@ -63,27 +63,29 @@ prj_fnc_ProcessDiaryLink = {
     processDiaryLink createDiaryLink ["Diary", _this, ""];
 };
 
-doc_enemy = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_ENEMY_TITLE", localize "STR_DOCUMENTATION_ENEMY_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_SUPPLY_TITLE", localize "STR_DOCUMENTATION_SUPPLY_DESC"], taskNull, "", false];
 
-doc_talkorder = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_TALKANDORDER_TITLE", localize "STR_DOCUMENTATION_TALKANDORDER_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_ENEMY_TITLE", localize "STR_DOCUMENTATION_ENEMY_DESC"], taskNull, "", false];
 
-doc_tasks = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_TASKS_TITLE", localize "STR_DOCUMENTATION_TASKS_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_TALKANDORDER_TITLE", localize "STR_DOCUMENTATION_TALKANDORDER_DESC"], taskNull, "", false];
 
-doc_vehshop = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_VEHSHOP_TITLE", localize "STR_DOCUMENTATION_VEHSHOP_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_TASKS_TITLE", localize "STR_DOCUMENTATION_TASKS_DESC"], taskNull, "", false];
 
-doc_intel = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_INTEL_TITLE", localize "STR_DOCUMENTATION_INTEL_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_VEHSHOP_TITLE", localize "STR_DOCUMENTATION_VEHSHOP_DESC"], taskNull, "", false];
 
-doc_bank = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_BANK_TITLE", localize "STR_DOCUMENTATION_BANK_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_INTEL_TITLE", localize "STR_DOCUMENTATION_INTEL_DESC"], taskNull, "", false];
 
-doc_mhq = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_MHQ_TITLE", localize "STR_DOCUMENTATION_MHQ_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_BANK_TITLE", localize "STR_DOCUMENTATION_BANK_DESC"], taskNull, "", false];
 
-doc_stat = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_STAT_TITLE", localize "STR_DOCUMENTATION_STAT_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_MHQ_TITLE", localize "STR_DOCUMENTATION_MHQ_DESC"], taskNull, "", false];
 
-doc_laptop = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_LAPTOP_TITLE", localize "STR_DOCUMENTATION_LAPTOP_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_STAT_TITLE", localize "STR_DOCUMENTATION_STAT_DESC"], taskNull, "", false];
 
-doc_vehicle = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_VEHICLES_TITLE", localize "STR_DOCUMENTATION_VEHICLES_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_LAPTOP_TITLE", localize "STR_DOCUMENTATION_LAPTOP_DESC"], taskNull, "", false];
 
-doc_basics = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_BASICS_TITLE", localize "STR_DOCUMENTATION_BASICS_DESC"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_VEHICLES_TITLE", localize "STR_DOCUMENTATION_VEHICLES_DESC"], taskNull, "", false];
+
+player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_BASICS_TITLE", localize "STR_DOCUMENTATION_BASICS_DESC"], taskNull, "", false];
 
 // EH with death screen
 player addEventHandler ["Killed", {
@@ -207,9 +209,82 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 	] call ace_interact_menu_fnc_createAction;
 
 	[player, 1, ["ACE_SelfActions", "hq_menu"], _action] call ace_interact_menu_fnc_addActionToObject;
+
+	_action = [
+		"supply_drop_request",
+		"Supply request",
+		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
+		{},
+		{}
+	] call ace_interact_menu_fnc_createAction;
+
+	[player, 1, ["ACE_SelfActions", "hq_menu"], _action] call ace_interact_menu_fnc_addActionToObject;
+
+	_action = [
+		"supply_drop_request_my_pos",
+		"On my position",
+		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
+		{
+			[position player] remoteExecCall ['prj_fnc_request_supply_drop',2]
+		},
+		{true}
+	] call ace_interact_menu_fnc_createAction;
+
+	[player, 1, ["ACE_SelfActions", "hq_menu", "supply_drop_request"], _action] call ace_interact_menu_fnc_addActionToObject;
+
+	_action = [
+		"supply_drop_request_selected_pos",
+		"Select position on map",
+		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
+		{
+			openMap true;
+			["",localize "STR_PRJ_SELECT_PLACE_ON_MAP"] spawn BIS_fnc_showSubtitle
+			onMapSingleClick "[_pos] remoteExecCall ['prj_fnc_request_supply_drop',2]; onMapSingleClick ''; openMap false; true";
+		},
+		{true}
+	] call ace_interact_menu_fnc_createAction;
+
+	[player, 1, ["ACE_SelfActions", "hq_menu", "supply_drop_request"], _action] call ace_interact_menu_fnc_addActionToObject;
+
+	_action = [
+		"supply_drop_request_smoke_pos",
+		"On my smoke position",
+		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
+		{
+			systemChat localize "STR_PRJ_THROW_SMOKE";
+			private _smokeEH = player addEventHandler ["Fired", {
+				params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+				_unit removeEventHandler ["Fired", _thisEventHandler];
+				if (_ammo isEqualTo "SmokeShellOrange") then {
+					[_projectile] spawn {
+						params ["_projectile"];
+						["HQ",localize "STR_PRJ_WAITING_SMOKE"] spawn BIS_fnc_showSubtitle;
+						uiSleep 10;
+						[position _projectile] remoteExecCall ['prj_fnc_request_supply_drop',2];
+					};	
+				};
+			}];
+
+			[_smokeEH,player] spawn {
+				params ["_id","_unit"];
+				uiSleep 30;
+				_unit removeEventHandler ["Fired", _id];
+			};
+		},
+		{true}
+	] call ace_interact_menu_fnc_createAction;
+
+	[player, 1, ["ACE_SelfActions", "hq_menu", "supply_drop_request"], _action] call ace_interact_menu_fnc_addActionToObject;	
+
 };
 
-_action = ["Civil_Orders", "Civil Orders", "\A3\ui_f\data\igui\cfg\simpleTasks\types\meet_ca.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
+_action = [
+	"Civil_Orders",
+	"Civil Orders",
+	"\A3\ui_f\data\igui\cfg\simpleTasks\types\meet_ca.paa",
+	{},
+	{true}
+] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], _action] call ace_interact_menu_fnc_addActionToObject;
 
 _action = ["Civil_Stop", "STOP", "\A3\ui_f\data\igui\cfg\simpleTasks\types\talk4_ca.paa", {

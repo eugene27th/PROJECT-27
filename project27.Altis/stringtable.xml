@@ -163,9 +163,47 @@
 		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Силы противника, СВУ.&lt;/font&gt;&lt;br/&gt;Противник будет поджидать вас повсюду. Он будет в строениях, на дорогах и на пересечённой местности, может патрулировать или ожидать ваш неспешный конвой в засаде.&lt;br/&gt;Но сначала вам нужно до него доехать, чему помешают самодельные взрывные устройства, которые могут быть разбросаны на дорогах и тропинках. Доехали до населённого пункта и решили зайти в дом? Смотрите под ноги, СВУ могут поджидать вас и там.&lt;br/&gt;Помните, что гражданские могут быть недовольны вашими действиями.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Секторы.&lt;/font&gt;&lt;br/&gt;Вы можете выселить противника, дав понять, что это ваш сектор. Когда вы это сделаете, сектор отметится на карте и вы будете получать награду. Больших скоплений противника вы там больше не увидите. Но не стоит расслаблятся. В любое время противник может начать контрнаступление.</Russian>
             </Key>
 	    </Container>
+
+        <Container name="PRJ_DOCUMENTATION_SUPPLY">
+            <Key ID="STR_DOCUMENTATION_SUPPLY_TITLE">
+                <Original>Supply Drop</Original>
+		        <Russian>Доставка снабжения</Russian>
+            </Key>
+            <Key ID="STR_DOCUMENTATION_SUPPLY_DESC">
+                <Original>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Crate.&lt;/font&gt;&lt;br/&gt;The box with name "Supply Box" can be bought at any of the &lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;vehicle stores&lt;/execute&gt;.&lt;br/&gt;He, like MHQ, can only be one. When buying the next one, the previous crate will be deleted.&lt;br/&gt;You can fill it with anything you can fit into it. Before dispatch, it must be within 10 meters of the &lt;marker name='arsenal'&gt;arsenal box&lt;/marker&gt;.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Sending cargo.&lt;/font&gt;&lt;br/&gt;The supply box can be sent by the commander (the first slot in the lobby) or the player whose UID in the HQ list. Sending is carried out using the ACE menu along the path "HQ > Supply request". Several shipping methods are available: to your position, choosing a location on the map and to the position of a smoke grenade. The first two methods are understandable, but the third requires a vanilla (BIS) smoke grenade with orange smoke.</Original>
+		        <Russian>&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Ящик.&lt;/font&gt;&lt;br/&gt;Ящик с названием "Supply Box" можно купить в любом из &lt;execute expression='doc_vehshop call prj_fnc_ProcessDiaryLink'&gt;магазинов техники&lt;/execute&gt;.&lt;br/&gt;Он, как и MHQ, может быть только один. При покупке следующего, предыдущий ящик будет удаляться.&lt;br/&gt;Вы можете наполнить его любыми предметами, которые сможете в него впихнуть. Перед отправкой он должен находиться в радиусе 10 метров от &lt;marker name='arsenal'&gt;ящика арсенала&lt;/marker&gt;.&lt;br/&gt;&lt;br/&gt;&lt;font color='#33FF9C' size='18'&gt;Отправка груза.&lt;/font&gt;&lt;br/&gt;Ящик со снабжением может отправить командир (первый слот в лобби) или игрок, чей UID есть в списке HQ. Отправка осуществляется с помощью меню ACE по пути "HQ > Supply request". Доступно несколько способов доставки: на свою позицию, выбор места на карте и на позицию дымовой гранаты. Первые два способа понятны, а вот для третьего нужна ванильная (BIS) дымовая граната с оранжевым дымом.</Russian>
+            </Key>
+	    </Container>
     </Package>
 
     <Package name="PRJ_GUI_AND_MESSAGES">
+
+        <Container name="PRJ_SUPPLY_MESSAGES">
+            <Key ID="STR_PRJ_BOX_NOT_FOUND">
+                <Original>The box was not found.</Original>
+		        <Russian>Ящик не найден.</Russian>
+            </Key>
+            <Key ID="STR_PRJ_BOX_SENDED">
+                <Original>The supply has been sent and will be in %1 in %2 seconds.</Original>
+		        <Russian>Груз отправлен, будет на %1 через %2 секунд.</Russian>
+            </Key>
+            <Key ID="STR_PRJ_BOX_DROPPED">
+                <Original>The supply has been dropped on %1.</Original>
+		        <Russian>Груз сброшен на %1.</Russian>
+            </Key>
+            <Key ID="STR_PRJ_WAITING_SMOKE">
+                <Original>We expect smoke.</Original>
+		        <Russian>Ожидаем дым.</Russian>
+            </Key>
+            <Key ID="STR_PRJ_THROW_SMOKE">
+                <Original>Throw smoke. Thinking time: 30 seconds.</Original>
+		        <Russian>Бросайте дым. Время на обдумывание: 30 секунд.</Russian>
+            </Key>
+            <Key ID="STR_PRJ_SELECT_PLACE_ON_MAP">
+                <Original>Select a location by clicking LMB on the map.</Original>
+		        <Russian>Выберите место, нажав ЛКМ на карте.</Russian>
+            </Key>
+	    </Container>
 
         <Container name="PRJ_MISC_MESSAGES">
             <Key ID="STR_PRJ_SELECT_TASK_ON_MAP">

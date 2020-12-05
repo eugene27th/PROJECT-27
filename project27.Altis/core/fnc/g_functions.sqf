@@ -145,6 +145,58 @@ prj_fnc_cancel_task = {
 	};
 };
 
+prj_fnc_request_supply_drop = {
+	params ["_position"];
+
+	private _check_zone = (position arsenal) nearObjects ["Thing", 10];
+
+	private ["_box","_arrow"];
+
+	{
+		if (typeOf _x == "C_IDAP_supplyCrate_F") exitWith {
+			_x allowDamage false;
+			_box = _x;
+			private _pos = position _x;
+			_pos set [2, (_pos # 2) + 1.5];
+			_arrow = createVehicle ["Sign_Arrow_Yellow_F", _pos, [], 0, "CAN_COLLIDE"];
+			_x enableSimulationGlobal false;
+			_x lock true;
+		};
+	} forEach _check_zone;
+
+	if (isNil "_box") exitWith {localize "STR_PRJ_BOX_NOT_FOUND" remoteExec ["systemChat",0]};
+
+	[_box,_position,_arrow] spawn {
+		params ["_box","_position","_arrow"];
+
+		private _wait_time = [10,20] call BIS_fnc_randomInt;
+		["HQ",format [localize "STR_PRJ_BOX_SENDED",mapGridPosition _position,_wait_time]] remoteExec ["BIS_fnc_showSubtitle",0];
+
+		uiSleep _wait_time;
+
+		deleteVehicle _arrow;
+		_box enableSimulationGlobal true;
+		_position set [2, 500];
+
+		private _parachute = "B_parachute_02_F" createVehicle _position;
+		_parachute setPos _position;
+		_box attachTo [_parachute, [0, 0, 0]];
+
+		["HQ",format [localize "STR_PRJ_BOX_DROPPED",mapGridPosition _position,_wait_time]] remoteExec ["BIS_fnc_showSubtitle",0];
+
+		waituntil {(position _box # 2) < 3};
+
+		private _smoke = "SmokeShellOrange" createVehicle (position _box);
+		_smoke attachTo [_box, [0, 0, 0]];
+
+		detach _box;
+		_box lock false;
+		_box allowDamage true;
+		uiSleep 30;
+		{deleteVehicle _x} forEach [_smoke,_parachute];
+	};
+};
+
 prj_fnc_civ_orders = {
 	params ["_order","_position"];
 
