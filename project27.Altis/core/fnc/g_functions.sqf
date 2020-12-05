@@ -169,7 +169,7 @@ prj_fnc_request_supply_drop = {
 	[_box,_position,_arrow] spawn {
 		params ["_box","_position","_arrow"];
 
-		private _wait_time = [10,20] call BIS_fnc_randomInt;
+		private _wait_time = [300,600] call BIS_fnc_randomInt;
 		["HQ",format [localize "STR_PRJ_BOX_SENDED",mapGridPosition _position,_wait_time]] remoteExec ["BIS_fnc_showSubtitle",0];
 
 		uiSleep _wait_time;
