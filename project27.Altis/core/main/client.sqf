@@ -185,6 +185,8 @@ office_table addEventHandler ["ContainerClosed", {
 
 // actions
 laptop_hq addAction ["HQ menu", { call prj_fnc_hq_menu }];
+[trashBox, false] call ace_dragging_fnc_setDraggable;
+[trashBox, false] call ace_dragging_fnc_setCarryable;
 
 if (!isNil "mhqterminal") then {call prj_fnc_add_mhq_action};
 
@@ -404,30 +406,6 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 
 // ARSENAL
 [arsenal, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
-
-//check machine translate language
-private _languages = ["Russian"];
-private _MTlanguages = ["English"];
-
-if (language in _MTlanguages) then {
-	hintC format ["Hello. Machine translation applied for %1. If you want to help with translation, write to: discord - eugene27#3110 or email - evgen.monreal@gmail.com",language];
-	hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
-		0 = _this spawn {
-			_this select 0 displayRemoveEventHandler ["unload", hintC_EH];
-			hintSilent "";
-		};
-	}];
-};
-
-if !(language in (_MTlanguages + _languages)) then {
-	hintC format ["Hello. Your language is not supported. The default is English"];
-	hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
-		0 = _this spawn {
-			_this select 0 displayRemoveEventHandler ["unload", hintC_EH];
-			hintSilent "";
-		};
-	}];
-};
 
 //sitrep, texttiles
 uiSleep 10;
