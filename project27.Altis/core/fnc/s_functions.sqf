@@ -27,9 +27,9 @@ prj_fnc_changePlayerVariableGlobal = {
 	} forEach allPlayers;
 };
 
-prj_fnc_select_position = {
+prj_fnc_selectPosition = {
 	
-	params ["_type_location",["_position_around", true],["_capture_check",false]];
+	params ["_type_location",["_position_around", true],["_nearest",[]]];
 
 	private "_selected_pos";
 
@@ -40,32 +40,59 @@ prj_fnc_select_position = {
 		case 4: {["NameCityCapital","NameCity","NameVillage","NameLocal","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]};
 	};
 
-	private _locations = nearestLocations [[worldSize / 2, worldsize / 2, 0], _types_location, worldSize * 1.5] - (nearestLocations [position spawn_zone, ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"], 2000]);
+	private _all_types = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 
-	private _selecting = true;
+	private _global_locations = nearestLocations [[worldSize / 2, worldsize / 2, 0], _types_location, worldSize * 1.5];
+	private _safe_locations = nearestLocations [position spawn_zone, _all_types, 2000];
+	private _locations = _global_locations - _safe_locations;
 
-	while {_selecting} do {
-		switch (_position_around) do {
-			case true: {
-				_selected_pos = [locationPosition (selectRandom _locations), 0, 700, 5, 0] call BIS_fnc_findSafePos;
-			};
-			case false: {
-				_selected_pos = locationPosition (selectRandom _locations);
-			};
+	if !(_nearest isEqualTo []) then {
+		_filtered_locations = [_locations, [], { (position spawn_zone) distance (locationPosition _x) }, "ASCEND"] call BIS_fnc_sortBy;
+		_selected_pos = locationPosition (_filtered_locations # (_nearest call BIS_fnc_randomInt));
+	}
+	else
+	{
+		_selected_pos = locationPosition (selectRandom _locations);
+	};
+
+	private _selected_pos = locationPosition (selectRandom _locations);
+
+	if (_position_around) then {
+		_selected_pos = [_selected_pos, 0, 700, 5, 0] call BIS_fnc_findSafePos;
+	};
+
+	_selected_pos set [2, 0];
+	_selected_pos
+};
+
+prj_fnc_selectCaptPosition = {
+
+	params [["_position_around",false],["_captured",false],["_nearest",[]]];
+
+	private _locations = missionNamespace getVariable "location_triggers";
+
+	private _filtered_locations = switch (_captured) do {
+		case true: {
+			_locations select {(_x getVariable "captured")}
 		};
-
-		if ((_selected_pos distance (position spawn_zone)) >= 2000) then {
-			if (_capture_check) then {
-				private _trgs = _selected_pos nearObjects ["EmptyDetector", 50];
-				if ((count _trgs) == 1) then {
-					if !((_trgs # 0) getVariable "captured") then {_selecting = false}
-				}
-			}
-			else
-			{
-				_selecting = false
-			};
+		case false: {
+			_locations select {!(_x getVariable "captured")}
 		};
+	};
+
+	private "_selected_pos";
+
+	if !(_nearest isEqualTo []) then {
+		_filtered_locations = [_filtered_locations, [], { (position spawn_zone) distance (position _x) }, "ASCEND"] call BIS_fnc_sortBy;
+		_selected_pos = position (_filtered_locations # (_nearest call BIS_fnc_randomInt));
+	}
+	else
+	{
+		_selected_pos = position (selectRandom _filtered_locations);
+	};
+
+	if (_position_around) then {
+		_selected_pos = [_selected_pos, 0, 700, 5, 0] call BIS_fnc_findSafePos;
 	};
 
 	_selected_pos set [2, 0];
@@ -78,7 +105,7 @@ prj_fnc_select_road_position = {
 
 	private "_returndata";
 
-	private _pos = [_typelocation] call prj_fnc_select_position;
+	private _pos = [_typelocation] call prj_fnc_selectPosition;
 	private _roads = _pos nearRoads _radius;
 	private _roads = _roads select {isOnRoad _x};
 
@@ -254,8 +281,6 @@ prj_fnc_create_crew = {
 
 	params ["_vehicle","_units",["_passengers",false],["_side",independent]];
 
-	// hintC format ["%1 | %2 | %3 | %4",_vehicle,_units,_side,_passengers];
-
 	//create crew
 	private _vehicle_crew = [];
 
@@ -374,7 +399,7 @@ prj_fnc_civ = {
 		{
 			if (side _x == west) then {
 
-				if ((random 1) > 0.5 || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true;};
+				if ((random 1) > 0.5 || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true};
 
 				[_civ] join (createGroup independent);
 
@@ -422,25 +447,33 @@ prj_fnc_civ = {
 						_civ addItemToUniform "ACE_Cellphone";
 					};			
 			
-					while {alive _civ && [_civ] call ace_common_fnc_isAwake && (_civ distance _x) > 40} do {
+					while {alive _civ && [_civ] call ace_common_fnc_isAwake && (_civ distance _x) > 50} do {
 						_civ doMove position _x;
 						sleep 3;
 					};
 
 					if (alive _civ && [_civ] call ace_common_fnc_isAwake) then {
-						_weaponchoice = selectRandom [
-							["rhsusf_weap_m9","rhsusf_mag_15Rnd_9x19_JHP"],
-							["rhs_weap_tt33","rhs_mag_762x25_8"],
-							["rhsusf_weap_m1911a1","rhsusf_mag_7x45acp_MHP"],
-							["rhs_weap_makarov_pm","rhs_mag_9x18_8_57N181S"],
-							["rhs_weap_makarov_pm","rhs_mag_9x18_8_57N181S"],
-							["rhs_weap_savz61_folded","rhsgref_20rnd_765x17_vz61"],
-							["rhs_weap_type94_new","rhs_mag_6x8mm_mhp"]
-						];
+						if (random 1 < 0.5) then {
+							private _weaponchoice = selectRandom [
+								["rhsusf_weap_m9","rhsusf_mag_15Rnd_9x19_JHP"],
+								["rhs_weap_tt33","rhs_mag_762x25_8"],
+								["rhsusf_weap_m1911a1","rhsusf_mag_7x45acp_MHP"],
+								["rhs_weap_makarov_pm","rhs_mag_9x18_8_57N181S"],
+								["rhs_weap_makarov_pm","rhs_mag_9x18_8_57N181S"],
+								["rhs_weap_savz61_folded","rhsgref_20rnd_765x17_vz61"],
+								["rhs_weap_type94_new","rhs_mag_6x8mm_mhp"]
+							];
 
-						_civ addWeapon (_weaponchoice # 0);
-						_civ addHandgunItem (_weaponchoice # 1);
-						for "_i" from 1 to 3 do {_civ addMagazine (_weaponchoice # 1)};					
+							_civ addWeapon (_weaponchoice # 0);
+							_civ addHandgunItem (_weaponchoice # 1);
+							for "_i" from 1 to 3 do {_civ addMagazine (_weaponchoice # 1)};			
+						}
+						else
+						{
+							private _grenades = ["rhs_mag_rgd5","rhs_mag_f1"];
+							private _grenade = selectRandom _grenades;
+							for "_i" from 1 to 3 do {_civ addItemToUniform _grenade};
+						};
 						_civ dotarget _x;
 						_civ dofire _x;
 					};

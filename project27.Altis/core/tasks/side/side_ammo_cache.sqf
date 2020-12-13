@@ -7,7 +7,7 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _pos = [4] call prj_fnc_select_position;
+private _pos = [4] call prj_fnc_selectPosition;
 
 private _plcount = count allPlayers;
 private _radius = _plcount * 30;

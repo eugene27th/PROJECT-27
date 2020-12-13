@@ -54,7 +54,7 @@ private _g_garage_depot = createVehicle ["VR_Area_01_circle_4_yellow_F", positio
 // statistics manager
 null = [] spawn {
 	while {true} do {
-		uiSleep 5;
+		uiSleep 1;
 		{
 			if (isNil {_x getVariable "oldSide"} || {(_x getVariable "oldSide") != side _x}) then {
 				_x setVariable ["oldSide",side _x,true]
@@ -97,6 +97,16 @@ addMissionEventHandler ["Entitykilled", {
 	};
 }];
 
+addMissionEventHandler ["PlayerConnected",
+{
+	params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
+	private _uids = missionNamespace getVariable ["prj27UIDs",[]];
+	if ((_uids findIf {_x == _uid}) == -1) then {
+		_uids pushBack _uid;
+		missionNamespace setVariable ["prj27UIDs",_uids];
+	};
+}];
+
 // time acceleration
 [] spawn {
 	while {true} do {
@@ -107,3 +117,7 @@ addMissionEventHandler ["Entitykilled", {
 		uiSleep 30;
 	};
 };
+
+// auto load
+private _autoLoad = "autoSaveLoad" call BIS_fnc_getParamValue;
+if (_autoLoad == 1) then {call prj_fnc_load_game};

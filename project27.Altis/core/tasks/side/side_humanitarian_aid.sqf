@@ -7,7 +7,7 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _pos = [1] call prj_fnc_select_position;
+private _pos = [1] call prj_fnc_selectPosition;
 private _pos = [_pos, 100, 500, 5, 0] call BIS_fnc_findSafePos;
 
 [_taskID,_pos,"ColorWEST",0.7,[[35,35],"ELLIPSE"]] call prj_fnc_create_marker;

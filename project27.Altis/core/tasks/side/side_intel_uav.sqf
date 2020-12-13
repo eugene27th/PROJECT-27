@@ -7,7 +7,7 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _center_pos = [3] call prj_fnc_select_position;
+private _center_pos = [3] call prj_fnc_selectPosition;
 private _pos = [_center_pos, 200, 500, 5, 0] call BIS_fnc_findSafePos;
 
 private _uav = "B_UAV_02_dynamicLoadout_F" createVehicle _pos;

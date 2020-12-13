@@ -31,6 +31,8 @@ private _house_ieds = "ied_in_houses" call BIS_fnc_getParamValue;
 private _house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
 private _house_ieds_percentage = ("percentage_of_ied_in_houses" call BIS_fnc_getParamValue) * 0.1;
 
+private _triggersArray = [];
+
 for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 
 	private _locations = (nearestLocations [_worldCenter, [(_types_locations # _i) # 0], _worldSize * 1.5]) - _delete_locations;
@@ -49,6 +51,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setVariable ["loc_name",_pos call BIS_fnc_locationDescription];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];
+		_triggersArray pushBack _trigger;
 
 		if (_house_ieds == 1) then {
 			private _buildings = nearestObjects [_pos, ["Building"], _spawn_area];
@@ -77,6 +80,8 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		};
 	} forEach _locations;
 };
+
+missionNamespace setVariable ["location_triggers",_triggersArray];
 
 //create camps
 private _number_of_camps = round (round (_worldSize / 2000));

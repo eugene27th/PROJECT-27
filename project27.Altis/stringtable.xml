@@ -200,8 +200,12 @@
 		        <Russian>Бросайте дым. Время на обдумывание: 30 секунд.</Russian>
             </Key>
             <Key ID="STR_PRJ_SELECT_PLACE_ON_MAP">
-                <Original>Select a location by clicking LMB on the map.</Original>
-		        <Russian>Выберите место, нажав ЛКМ на карте.</Russian>
+                <Original>Select a location by clicking LMB on the map. 15 seconds to think.</Original>
+		        <Russian>Выберите место, нажав ЛКМ на карте. 15 секунд на обдумывание.</Russian>
+            </Key>
+            <Key ID="STR_PRJ_SUPPLY_REQUEST_DENIED">
+                <Original>Supply delivery request denied. Wait for the previous crate to be sent.</Original>
+		        <Russian>Запрос на доставку снабжения отклонён. Дождитесь отправки предыдущего ящика.</Russian>
             </Key>
 	    </Container>
 

@@ -10,30 +10,30 @@ prj_fnc_vehicle_shop_window = {
 	];
 
 	private _land_vehicles = [
-		["Land_CanisterFuel_F",0,0],
-		["ACE_Wheel",0,0],
-		["ACE_Track",0,0],
-		["B_supplyCrate_F",0,0],
+		["Land_CanisterFuel_F",10,0],
+		["ACE_Wheel",20,0],
+		["ACE_Track",20,0],
+		["B_supplyCrate_F",100,0],
 		["C_IDAP_supplyCrate_F",300,0],
-		["rhsusf_mrzr4_d",0,0],
 		["C_Quadbike_01_F",0,0],
 		["C_Hatchback_01_F",0,0],
-		["C_Hatchback_01_sport_F",0,0],
-		["C_Offroad_01_covered_F",0,0],
-		["C_Offroad_01_F",0,0],
 		["C_Offroad_02_unarmed_F",0,0],
 		["C_SUV_01_F",0,0],
-		["C_Van_01_transport_F",0,0],
 		["rhs_uaz_vdv",0,0],
 		["rhs_uaz_open_vdv",0,0],
-		["C_Van_01_box_F",0,0],
-		["C_Van_02_transport_F",0,0],
-		["C_Van_02_vehicle_F",0,0],
+		["rhsusf_mrzr4_d",100,0],
+		["C_Hatchback_01_sport_F",100,0],
+		["C_Offroad_01_covered_F",100,0],
+		["C_Offroad_01_F",100,0],
+		["C_Van_01_transport_F",100,0],
+		["C_Van_01_box_F",100,0],
+		["C_Van_02_transport_F",100,0],
+		["C_Van_02_vehicle_F",100,0],
 		["C_Truck_02_transport_F",100,0],
 		["RHS_Ural_Open_Civ_01",100,0],
 		["RHS_Ural_Civ_01",100,0],
-		["B_CTRG_LSV_01_light_F",100,0],
-		["O_LSV_02_unarmed_F",100,0],
+		["B_CTRG_LSV_01_light_F",150,0],
+		["O_LSV_02_unarmed_F",150,0],
 		["rhs_pts_vmf",150,0],
 		["rhsusf_m998_d_2dr",200,0],
 		["rhsusf_m998_w_2dr",200,0],
@@ -244,7 +244,7 @@ prj_fnc_vehicle_shop_window = {
 		["rhs_bmp1p_tv",6000,3],
 		["rhsusf_stryker_m1132_m2_wd",6500,4],
 		["rhsusf_stryker_m1134_wd",6500,4],
-		["rhs_zsu234_aa",6500,3],
+		["rhs_zsu234_aa",6500,4],
 		["rhs_bmp2e_tv",7000,4],
 		["rhs_bmp2_tv",7000,4],
 		["rhs_bmp2k_tv",7000,4],
@@ -480,7 +480,8 @@ prj_fnc_spawn_vehicle = {
 
 	if ((_data # 0) == "Land_DataTerminal_01_F") then {
 		if (!isNil "mhqterminal") then {
-			deleteVehicle mhqterminal
+			deleteVehicle mhqterminal;
+			"Взят новый терминал MHQ" remoteExec ["systemChat",0];
 		};
 		
 		[_vehicle, "mhqterminal"] remoteExec ["setVehicleVarName"];
@@ -495,12 +496,11 @@ prj_fnc_spawn_vehicle = {
 
 	if ((_data # 0) == "C_IDAP_supplyCrate_F") then {
 		if (!isNil "supplybox") then {
-			deleteVehicle supplybox
+			deleteVehicle supplybox;
+			"Куплен новый Supply Box" remoteExec ["systemChat",0];
 		};
-		
 		[_vehicle, "supplybox"] remoteExec ["setVehicleVarName"];
 		missionNamespace setVariable ["supplybox", _vehicle, true];
-		[_vehicle, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
 	};
 
 	clearWeaponCargoGlobal _vehicle;
@@ -754,7 +754,13 @@ prj_fnc_option_menu = {
 	createDialog "dialogOptionMenu";
 
 	if !((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then {
-		ctrlEnable [1021, false];
+		{
+			ctrlEnable [_x, false];
+		} forEach [1021,1031,1032];		
+	};
+
+	if !((getPlayerUID player) in hqUID) then {
+		ctrlEnable [1033, false];
 	};
 };
 

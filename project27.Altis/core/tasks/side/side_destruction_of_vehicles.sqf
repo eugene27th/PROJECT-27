@@ -7,7 +7,7 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _center_pos = [1,false] call prj_fnc_select_position;
+private _center_pos = [1,false] call prj_fnc_selectPosition;
 
 private _enemies = [];
 private _vehicles = [];

@@ -7,7 +7,7 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _pos = [1,false,true] call prj_fnc_select_position;
+private _pos = [false,false,[0,20]] call prj_fnc_selectCaptPosition;
 
 [_taskID,_pos,"ColorEAST",0.7,[[250,250],"ELLIPSE"]] call prj_fnc_create_marker;
 

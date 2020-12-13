@@ -11,7 +11,7 @@
 	disableSerialization;
 	waitUntil{ !isNull (findDisplay 46) };
 	private _ctrlText = (findDisplay 46) ctrlCreate ["RscStructuredText",-1];
-	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.4.0.2 | PROJECT 27</t>";
+	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.4.0.3 | PROJECT 27</t>";
 	_ctrlText ctrlSetStructuredText parseText _text;
 	_ctrlText ctrlSetTextColor [1,1,1,0.7];
 	_ctrlText ctrlSetBackgroundColor [0,0,0,0];
@@ -127,6 +127,16 @@ if (isNil "_player_points") then {_player_points = 1000};
 	]
 ] call prj_fnc_set_textures;
 
+// trashBox EH
+trashBox addEventHandler ["ContainerClosed", {
+	params ["_container", "_unit"];
+
+	clearItemCargoGlobal _container;
+	clearMagazineCargoGlobal _container;
+	clearWeaponCargoGlobal _container;
+	clearBackpackCargoGlobal _container;
+}];
+
 //transformation intels to inter score
 office_table addEventHandler ["ContainerClosed", {
 	params ["_container", "_unit"];
@@ -225,6 +235,9 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 		"On my position",
 		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
 		{
+			if (missionNamespace getVariable ["supply_waiting",false]) exitWith {
+				["HQ",localize "STR_PRJ_SUPPLY_REQUEST_DENIED"] remoteExec ["BIS_fnc_showSubtitle",0];
+			};
 			[position player] remoteExecCall ['prj_fnc_request_supply_drop',2]
 		},
 		{true}
@@ -237,9 +250,16 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 		"Select position on map",
 		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
 		{
+			if (missionNamespace getVariable ["supply_waiting",false]) exitWith {
+				["HQ",localize "STR_PRJ_SUPPLY_REQUEST_DENIED"] remoteExec ["BIS_fnc_showSubtitle",0];
+			};
 			openMap true;
 			["",localize "STR_PRJ_SELECT_PLACE_ON_MAP"] spawn BIS_fnc_showSubtitle
 			onMapSingleClick "[_pos] remoteExecCall ['prj_fnc_request_supply_drop',2]; onMapSingleClick ''; openMap false; true";
+			[] spawn {
+				uiSleep 15;
+				onMapSingleClick '';
+			};
 		},
 		{true}
 	] call ace_interact_menu_fnc_createAction;
@@ -251,6 +271,9 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 		"On my smoke position",
 		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
 		{
+			if (missionNamespace getVariable ["supply_waiting",false]) exitWith {
+				["HQ",localize "STR_PRJ_SUPPLY_REQUEST_DENIED"] remoteExec ["BIS_fnc_showSubtitle",0];
+			};
 			systemChat localize "STR_PRJ_THROW_SMOKE";
 			private _smokeEH = player addEventHandler ["Fired", {
 				params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];

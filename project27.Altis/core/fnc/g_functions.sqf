@@ -109,7 +109,6 @@ prj_fnc_create_task = {
 	private _selected_task = selectRandom _tasks;
 
 	while {(_selected_task # 0) == _oldTaskName} do {_selected_task = selectRandom _tasks};
-
 	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
 
 	missionNamespace setVariable ["taskID",_taskID + 1,true];
@@ -148,6 +147,10 @@ prj_fnc_cancel_task = {
 prj_fnc_request_supply_drop = {
 	params ["_position"];
 
+	if (missionNamespace getVariable ["supply_waiting",false]) exitWith {
+		["HQ",localize "STR_PRJ_SUPPLY_REQUEST_DENIED"] remoteExec ["BIS_fnc_showSubtitle",0];
+	};
+
 	private _check_zone = (position arsenal) nearObjects ["Thing", 10];
 
 	private ["_box","_arrow"];
@@ -157,8 +160,8 @@ prj_fnc_request_supply_drop = {
 			_x allowDamage false;
 			_box = _x;
 			private _pos = position _x;
-			_pos set [2, (_pos # 2) + 1.5];
 			_arrow = createVehicle ["Sign_Arrow_Yellow_F", _pos, [], 0, "CAN_COLLIDE"];
+			_arrow attachTo [_box, [0, 0, + 1]];
 			_x enableSimulationGlobal false;
 			_x lock true;
 		};
@@ -169,13 +172,18 @@ prj_fnc_request_supply_drop = {
 	[_box,_position,_arrow] spawn {
 		params ["_box","_position","_arrow"];
 
-		private _wait_time = [300,600] call BIS_fnc_randomInt;
+		missionNamespace setVariable ["supply_waiting",true,true];
+
+		private _wait_time = [300,500] call BIS_fnc_randomInt;
 		["HQ",format [localize "STR_PRJ_BOX_SENDED",mapGridPosition _position,_wait_time]] remoteExec ["BIS_fnc_showSubtitle",0];
 
 		uiSleep _wait_time;
-
 		deleteVehicle _arrow;
+
+		if (isNull _box) exitWith {missionNamespace setVariable ["supply_waiting",false,true]};
+
 		_box enableSimulationGlobal true;
+		uiSleep 1;
 		_position set [2, 500];
 
 		private _parachute = "B_parachute_02_F" createVehicle _position;
@@ -184,7 +192,10 @@ prj_fnc_request_supply_drop = {
 
 		["HQ",format [localize "STR_PRJ_BOX_DROPPED",mapGridPosition _position,_wait_time]] remoteExec ["BIS_fnc_showSubtitle",0];
 
-		waituntil {(position _box # 2) < 3};
+		waitUntil {!alive _box || (position _box # 2) < 3};
+
+		missionNamespace setVariable ["supply_waiting",false,true];
+		if (isNull _box) exitWith {deleteVehicle _parachute};
 
 		private _smoke = "SmokeShellOrange" createVehicle (position _box);
 		_smoke attachTo [_box, [0, 0, 0]];
@@ -329,4 +340,94 @@ prj_fnc_civ_info = {
 	};
 
 	_civilian setVariable ["interviewed",true,true];
+};
+
+prj_fnc_save_game = {
+	params [["_clear",false],["_cars",true]];
+
+	private _mVars = ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
+
+	private _aVars = ["prj27_saveVehs"];
+
+	private _pVars = missionNamespace getVariable ["prj27UIDs",[]];
+	private _gVars = _mVars + _pVars;
+
+	if (_clear) exitWith {
+		{profileNamespace setVariable [_x,0]} forEach _mVars;
+		{profileNamespace setVariable [_x,[]]} forEach _aVars;
+		{profileNamespace setVariable 
+			[_x,
+				[
+					["money",0],
+					["enemy_killings",0],
+					["friend_killings",0],
+					["civ_killings",0]
+				]
+			]
+		} forEach _pVars;
+	};
+	
+	{
+		private _var = missionNamespace getVariable [_x,0];
+		profileNamespace setVariable [_x,_var];
+		if (prj_debug) then {
+			systemChat format ["%1 set %2",_x,_var];
+		};
+	} forEach _gVars;
+
+	profileNamespace setVariable ["prj27UIDs",_pVars];
+
+	if (_cars) then {
+		private _vehsArray = [];
+		private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 200];
+		{
+			_vehsArray pushBack [typeOf _x,position _x,getDir _x];
+			profileNamespace setVariable ["prj27_saveVehs",_vehsArray];
+		} forEach _vehs;
+		systemChat str _vehsArray;
+	};
+
+	"Игровой процесс сохранён." remoteExec ["systemChat",0];
+};
+
+prj_fnc_load_game = {
+	params [["_cars",true]];
+
+	private _mVars = ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
+
+	private _pVars = profileNamespace getVariable ["prj27UIDs",[]];
+	private _gVars = _mVars + _pVars;
+
+	{
+		private _var = profileNamespace getVariable [_x,0];
+		if (prj_debug) then {
+			systemChat format ["%1 / %2",_x,_var];
+		};
+		missionNamespace setVariable [_x,_var,true];
+	} forEach _gVars;
+
+	if (_cars) then {
+		private _vehsArray = profileNamespace getVariable "prj27_saveVehs";
+		if (isNil "_vehsArray") exitWith {if (prj_debug) then {systemChat "машин нет"}};
+
+		private _vehsDel = nearestObjects [position arsenal,["Air","LandVehicle"], 200];
+		{
+			deleteVehicle _x;
+			if (prj_debug) then {
+				systemChat format ["delete %1",_x];
+			};
+		} forEach _vehsDel;
+
+		{
+			private _veh = (_x # 0) createVehicle (_x # 1);
+			_veh setDir (_x # 2);
+			clearWeaponCargoGlobal _veh;
+			clearMagazineCargoGlobal _veh;
+			clearItemCargoGlobal _veh;
+			clearBackpackCargoGlobal _veh;
+			if (prj_debug) then {
+				systemChat format ["spawn %1",_x # 0];
+			};
+		} forEach _vehsArray;
+	};
 };

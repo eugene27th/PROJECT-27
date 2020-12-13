@@ -7,7 +7,7 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _center_pos = [1,false] call prj_fnc_select_position;
+private _center_pos = [1,false] call prj_fnc_selectPosition;
 private _pos = [_center_pos, 200, 700, 5, 0] call BIS_fnc_findSafePos;
 
 private _heli = (selectRandom friendly_helicopters) createVehicle _pos;

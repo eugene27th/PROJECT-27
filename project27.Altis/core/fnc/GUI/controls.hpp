@@ -486,6 +486,93 @@ class dialogOptionMenu
 			action = "hint format ['ENEMY - %1\nCIVILIAN - %2\nFRIEND - %3',missionNamespace getVariable 'total_kill_enemy',missionNamespace getVariable 'total_kill_civ',missionNamespace getVariable 'total_kill_friend']";
 		};
 
+		class Options_SaveGame_Back: prjRscText {
+			colorBackground[] = { 0, 0, 0, 0.5 };
+			idc = -1;
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.506 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_SaveGame_Pct: prjRscPicture
+		{
+			idc = -1;
+			text = "img\icons\icon_save.paa";
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.506 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_SaveGame_Btn: prjRscButtonHQ
+		{
+			idc = 1031;
+			text = "SAVE GAME";
+			x = 0.444 * safezoneW + safezoneX;
+			y = 0.506 * safezoneH + safezoneY;
+			w = 0.142 * safezoneW;
+			h = 0.039375 * safezoneH;
+
+			action = "remoteExecCall ['prj_fnc_save_game',2]";
+		};
+
+		class Options_LoadGame_Back: prjRscText {
+			colorBackground[] = { 0, 0, 0, 0.5 };
+			idc = -1;
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.550 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_LoadGame_Pct: prjRscPicture
+		{
+			idc = -1;
+			text = "img\icons\icon_save.paa";
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.550 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_LoadGame_Btn: prjRscButtonHQ
+		{
+			idc = 1032;
+			text = "LOAD GAME";
+			x = 0.444 * safezoneW + safezoneX;
+			y = 0.550 * safezoneH + safezoneY;
+			w = 0.142 * safezoneW;
+			h = 0.039375 * safezoneH;
+
+			action = "remoteExecCall ['prj_fnc_load_game',2]";
+		};
+
+		class Options_ClearGameSave_Back: prjRscText {
+			colorBackground[] = { 0, 0, 0, 0.5 };
+			idc = -1;
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.594 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_ClearGameSave_Pct: prjRscPicture
+		{
+			idc = -1;
+			text = "img\icons\icon_save.paa";
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.594 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_ClearGameSave_Btn: prjRscButtonHQ
+		{
+			idc = 1033;
+			text = "CLEAR SAVE";
+			x = 0.444 * safezoneW + safezoneX;
+			y = 0.594 * safezoneH + safezoneY;
+			w = 0.142 * safezoneW;
+			h = 0.039375 * safezoneH;
+
+			action = "[true] remoteExecCall ['prj_fnc_save_game',2]";
+		};
+
 	};
 };
 
@@ -942,6 +1029,52 @@ class dialogVehicleService
 			h = 0.039375 * safezoneH;
 
 			action = "call prj_fnc_sell_vehicle";
+		};
+	};
+};
+
+class dialogWeaponShopMenu
+{
+	idd = 3010;
+	class controls
+	{
+		class weaponS_Header: prjRscText
+		{
+			colorBackground[] = { 0, 0.7, 0, 0.7 };
+			idc = -1;
+			x = 0.28125 * safezoneW + safezoneX;
+			y = 0.28 * safezoneH + safezoneY;
+			w = 0.4375 * safezoneW;
+			h = 0.018 * safezoneH;
+		};
+		class weaponS_Header_Text: prjRscText 
+		{
+			text = "esc to back"
+			idc = -1;
+			x = 0.28125 * safezoneW + safezoneX;
+			y = 0.28 * safezoneH + safezoneY;
+			w = 0.4375 * safezoneW;
+			h = 0.018 * safezoneH;
+			
+			sizeEx = 0.025;
+		};
+		class weaponS_MainBackground: prjRscText
+		{
+			colorBackground[] = { 0, 0, 0, 0.7 };
+			idc = -1;
+			x = 0.28125 * safezoneW + safezoneX;
+			y = 0.30 * safezoneH + safezoneY;
+			w = 0.4375 * safezoneW;
+			h = 0.40 * safezoneH;
+		};
+
+		class weaponS_listBoxTree: prjRscTree
+		{
+			idc = -1;
+			x = 0.29 * safezoneW + safezoneX;
+			y = 0.31625 * safezoneH + safezoneY;
+			w = 0.21 * safezoneW;
+			h = 0.3675 * safezoneH;
 		};
 	};
 };

@@ -12,6 +12,14 @@ enableDebugConsole[] = { "76561198141746661", "76561198138702011", "765611980612
 
 class Params
 {
+	class autoSaveLoad
+	{
+		title = "load save";
+		values[] = { 1, 0 };
+		texts[] = { "Yes", "No" };
+		default = 1;
+	};
+
 	class patrols
 	{
 		title = "Patrols tasks";
@@ -57,7 +65,7 @@ class Params
 		title = "Percentage of IED in houses";
 		values[] = { 1, 2, 3, 4, 5, 6, 7 };
 		texts[] = { "10%", "20%", "30%", "40%", "50%", "60%", "70%" };
-		default = 2;
+		default = 1;
 	};
 
 	class preset_units
@@ -65,7 +73,7 @@ class Params
 		title = "Preset units";
 		values[] = { 0, 1, 2 };
 		texts[] = { "Middle east", "European aggressor", "Syndikat" };
-		default = 0;
+		default = 1;
 	};
 
 	class capture_of_sectors
@@ -97,7 +105,7 @@ class Params
 		title = "Players' points when they first enter the game";
 		values[] = { 100, 500, 1000, 2000, 3000, 5000, 7000, 10000, 15000, 20000, 100000 };
 		texts[] = { "100" ,"500", "1000", "2000", "3000", "5000", "7000", "10000", "15000", "20000", "100000" };
-		default = 1000;
+		default = 100;
 	};
 
 	class suicide_bombers
@@ -105,7 +113,7 @@ class Params
 		title = "Suicide bombers";
 		values[] = { 1, 0 };
 		texts[] = { "On", "Off" };
-		default = 1;
+		default = 0;
 	};
 	
 };
