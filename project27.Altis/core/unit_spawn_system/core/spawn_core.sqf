@@ -291,12 +291,10 @@ if (!(_trigger getVariable "captured")) then {
 	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_spawn_static;
 
 	private _capture_sectores = "capture_of_sectors" call BIS_fnc_getParamValue;
-	private _trigger_capt_av = _trigger getVariable ["capt_av",true];
-
-	if ((worldSize > 7000) && (_capture_sectores == 1) && _trigger_capt_av) then {
+	if (_capture_sectores == 1) then {
 		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone; private _number = [1,3] call BIS_fnc_randomInt;
 		private _vehicles = [position _unit,[1500,2500],_number] call prj_fnc_reinforcement;
-		[_vehicles,600,60] spawn prj_fnc_check_and_delete;", false] call prj_fnc_create_trg;
+		[_vehicles,600,60,2500] spawn prj_fnc_check_and_delete;", false] call prj_fnc_create_trg;
 		_capt_trg setVariable ["parent_trigger",_trigger];
 	};
 };

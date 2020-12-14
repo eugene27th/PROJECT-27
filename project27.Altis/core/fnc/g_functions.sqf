@@ -371,7 +371,7 @@ prj_fnc_save_game = {
 		private _var = missionNamespace getVariable [_x,0];
 		profileNamespace setVariable [_x,_var];
 		if (prj_debug) then {
-			systemChat format ["%1 set %2",_x,_var];
+			systemChat format ["%1 set %2",_x,_var]
 		};
 	} forEach _gVars;
 
@@ -384,7 +384,9 @@ prj_fnc_save_game = {
 			_vehsArray pushBack [typeOf _x,position _x,getDir _x];
 			profileNamespace setVariable ["prj27_saveVehs",_vehsArray];
 		} forEach _vehs;
-		systemChat str _vehsArray;
+		if (prj_debug) then {
+			systemChat str _vehsArray
+		};
 	};
 
 	"Игровой процесс сохранён." remoteExec ["systemChat",0];

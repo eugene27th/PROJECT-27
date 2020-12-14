@@ -22,6 +22,15 @@
                 <Original>Control over sector %1 (%2) has been lost.</Original>
 		        <Russian>Контроль над сектором %1 (%2) утерян.</Russian>
             </Key>
+
+            <Key ID="STR_CAMP_CAPTURED_TITLE">
+                <Original>Camp captured.</Original>
+		        <Russian>Лагерь захвачен.</Russian>
+            </Key>
+            <Key ID="STR_CAMP_CAPTURED_DESC">
+                <Original>Enemy camp %1 (%2) eliminated.</Original>
+		        <Russian>Лагерь противника %1 (%2) ликвидирован.</Russian>
+            </Key>
             <Key ID="STR_SECTOR_CAMP_DESTROYED">
                 <Original>The ammo cache has been destroyed. Earned %1 intelligence points.</Original>
 		        <Russian>Тайник с боеприпасами уничтожен. Начислено %1 очков разведданных.</Russian>

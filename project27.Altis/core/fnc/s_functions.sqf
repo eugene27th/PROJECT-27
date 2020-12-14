@@ -182,7 +182,7 @@ prj_fnc_reinforcement = {
 };
 
 prj_fnc_check_and_delete = {
-	params ["_vehicles","_start_time","_interval_time"];
+	params ["_vehicles","_start_time","_interval_time",["_distance",2000]];
 	uiSleep _start_time;
 	while {(count _vehicles) > 0} do {
 		for [{private _i = 0 }, { _i < (count _vehicles) }, { _i = _i + 1 }] do {
@@ -326,12 +326,20 @@ prj_fnc_capt_zone = {
 
 	private _parent_trigger = _capt_trigger getVariable "parent_trigger";
 	private _trigger_pos = position _capt_trigger;
-	private _trigger_loc_name = _parent_trigger getVariable "loc_name";
+	private _trigger_loc_name = _trigger_pos call BIS_fnc_locationDescription;
 	private _trigger_grid_pos = mapGridPosition _capt_trigger;
 	private _trigger_radius = (triggerArea _capt_trigger) # 0;
 	private _trigger_str_name = str _parent_trigger;
+	private _trigger_camp = _parent_trigger getVariable ["camp",false];
 
 	_parent_trigger setVariable ["captured", true];
+
+	if (_trigger_camp) exitWith {
+		["missionNamespace", "money", 0, 300] call prj_fnc_changePlayerVariableGlobal;
+		["camp_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
+		deleteVehicle _capt_trigger;
+		[_parent_trigger] spawn {params ["_parent_trigger"]; uiSleep 120; deleteVehicle _parent_trigger};
+	};
 
 	[_trigger_str_name,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
 
@@ -345,7 +353,6 @@ prj_fnc_capt_zone = {
 
 		while {_time_remaining > 0} do {
 			["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
-			// [format ["Игрокам выдано %1 очков за удержание сектора %2 (%3).",_reward,_trigger_grid_pos,_trigger_loc_name]] remoteExec ["systemChat",0];
 			uiSleep 600;
 			_time_remaining = _time_remaining - 600;
 		};

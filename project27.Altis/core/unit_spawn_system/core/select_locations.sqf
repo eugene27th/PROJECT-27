@@ -48,7 +48,6 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 200)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
 		_trigger setVariable ["reward",(_types_locations # _i) # 3];
-		_trigger setVariable ["loc_name",_pos call BIS_fnc_locationDescription];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];
 		_triggersArray pushBack _trigger;
@@ -168,7 +167,7 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		_trigger setTriggerTimeout [3, 3, 3, true];
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",[[[0],[2,2],[1,0.3],[1,0.3],[1,1]],[[0],[0],[0]]]];
-		_trigger setVariable ["capt_av",false];
+		_trigger setVariable ["camp",true];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];
 
