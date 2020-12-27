@@ -73,7 +73,7 @@ while {alive _vehicle && !(_taskID call BIS_fnc_taskCompleted)} do {
 	};
 };
 
-waitUntil {sleep 5; !alive _vehicle || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5; !alive _vehicle || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _vehicle) then {
     [_taskID,"FAILED"] call BIS_fnc_taskSetState;

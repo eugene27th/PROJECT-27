@@ -22,7 +22,7 @@ private _picture = getText(configfile >> "CfgVehicles" >> typeOf _heli >> "edito
 
 [west, [_taskID], [format [localize "STR_SIDE_RESCUE_DESCRIPTION",_picture], "STR_SIDE_RESCUE_TITLE", ""], _center_pos, "CREATED", 0, true, "search"] call BIS_fnc_taskCreate;
 
-sleep 3;
+uiSleep 3;
 
 private _pilot_position = (position _heli) findEmptyPosition [10,200,"B_Survivor_F"];
 private _pilot = (createGroup civilian) createUnit [getText(configfile >> "CfgVehicles" >> typeOf _heli >> "crew"),_pilot_position, [], 0, "NONE"];
@@ -52,17 +52,17 @@ for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }
 
 {_x lookAt _heli} forEach _enemies;
 
-waitUntil {sleep 5; !alive _pilot || _pilot distance position spawn_zone < 50 || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5; !alive _pilot || _pilot distance position spawn_zone < 50 || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _pilot) then {
     [_taskID,"FAILED"] call BIS_fnc_taskSetState;
-	sleep 2;
+	uiSleep 2;
 };
 
 if (_pilot distance position spawn_zone < 50) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
 	["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
-	sleep 2;
+	uiSleep 2;
 };
 
 [_pilot, false] call ACE_captives_fnc_setHandcuffed;

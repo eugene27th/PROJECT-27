@@ -30,7 +30,7 @@ _trg setTriggerArea [35, 35, 0, false, 10];
 _trg setTriggerActivation ["NONE", "PRESENT", false];
 _trg setTriggerStatements ["{_x in thisList && ((getPosATL _x) select 2) < 0.2 && (speed _x == 0)} forEach (thisTrigger getVariable 'boxes')", "",""];
 
-waitUntil {sleep 5; {!alive _x} forEach _boxes || triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5; {!alive _x} forEach _boxes || triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
 
 if ({!alive _x} forEach _boxes) then {
     [_taskID,"FAILED"] call BIS_fnc_taskSetState;

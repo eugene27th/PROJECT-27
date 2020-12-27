@@ -1078,3 +1078,74 @@ class dialogWeaponShopMenu
 		};
 	};
 };
+
+class dialogSlideMonitorMenu
+{
+	idd = 3020;
+	
+	class controls
+	{
+		class HQ_Header: prjRscText {
+			colorBackground[] = { 0, 0.7, 0, 0.7 };
+			idc = -1;
+			x = 0.395 * safezoneW + safezoneX;
+			y = 0.28 * safezoneH + safezoneY;
+			w = 0.21 * safezoneW;
+			h = 0.018 * safezoneH;
+		};
+		class HQ_Header_Text: prjRscText 
+		{
+			text = "esc to back"
+			idc = -1;
+			x = 0.395 * safezoneW + safezoneX;
+			y = 0.28 * safezoneH + safezoneY;
+			w = 0.21 * safezoneW;
+			h = 0.018 * safezoneH;
+			
+			sizeEx = 0.025;
+		};
+		class HQ_MainBackground: prjRscText {
+			colorBackground[] = { 0, 0, 0, 0.7 };
+			idc = -1;
+			x = 0.395 * safezoneW + safezoneX;
+			y = 0.30 * safezoneH + safezoneY;
+			w = 0.21 * safezoneW;
+			h = 0.40 * safezoneH;
+		};
+
+		class slideMonitorMenuSlideName: prjRscText 
+		{
+			text = "slide name"
+			idc = 1055;
+			x = 0.40375 * safezoneW + safezoneX;
+			y = 0.31625 * safezoneH + safezoneY;
+			w = 0.1925 * safezoneW;
+			h = 0.0525 * safezoneH;
+		};
+
+		class slideMonitorMenuNext: prjRscButtonHQ
+		{
+			idc = -1;
+			text = ">>";
+			x = 0.50875 * safezoneW + safezoneX;
+			y = 0.618125 * safezoneH + safezoneY;
+			w = 0.0875 * safezoneW;
+			h = 0.065625 * safezoneH;
+
+			action = "['next'] remoteExecCall ['prj_fnc_monitorChangeSlide',2]";
+		};
+
+		class slideMonitorMenuPrevious: prjRscButtonHQ
+		{
+			idc = -1;
+			text = "<<";
+			x = 0.40375 * safezoneW + safezoneX;
+			y = 0.618125 * safezoneH + safezoneY;
+			w = 0.0875 * safezoneW;
+			h = 0.065625 * safezoneH;
+
+			action = "['previous'] remoteExecCall ['prj_fnc_monitorChangeSlide',2]";
+		};
+	};
+};
+

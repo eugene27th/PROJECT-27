@@ -27,7 +27,7 @@ while {true} do {
 		_trg setTriggerStatements ["this", "",""];
 		_trg setTriggerTimeout [600, 600, 600, true];
 
-		waitUntil {sleep 10; _taskID call BIS_fnc_taskCompleted || triggerActivated _trg};
+		waitUntil {uiSleep 10; _taskID call BIS_fnc_taskCompleted || triggerActivated _trg};
 
 		if (triggerActivated _trg) then {
 			[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;

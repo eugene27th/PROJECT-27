@@ -20,6 +20,22 @@ class Params
 		default = 0;
 	};
 
+	class enemycoef
+	{
+		title = "enemy numbers";
+		values[] = { 1, 2, 3, 4 };
+		texts[] = { "x1 (recommended)", "x2", "x3", "x4" };
+		default = 1;
+	};
+
+	class winterAmbience
+	{
+		title = "winter ambience";
+		values[] = { 1, 0 };
+		texts[] = { "on", "off" };
+		default = 1;
+	};
+
 	class patrols
 	{
 		title = "Patrols tasks";
@@ -84,6 +100,14 @@ class Params
 		default = 1;
 	};
 
+	class sectorCaptureMode
+	{
+		title = "Sector capture mode";
+		values[] = { 0, 1 };
+		texts[] = { "temporary sector capture", "permanent sector capture" };
+		default = 0;
+	};
+
 	class a_garage_level_on_start
 	{
 		title = "Aircraft store level (on start)";
@@ -105,6 +129,14 @@ class Params
 		title = "Players' points when they first enter the game";
 		values[] = { 100, 500, 1000, 2000, 3000, 5000, 7000, 10000, 15000, 20000, 100000 };
 		texts[] = { "100" ,"500", "1000", "2000", "3000", "5000", "7000", "10000", "15000", "20000", "100000" };
+		default = 100;
+	};
+
+	class rewardForDestroyingCache
+	{
+		title = "reward for destroying the enemy cache";
+		values[] = { 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
+		texts[] = { "100" ,"200", "300", "400", "500", "600", "700", "800", "900", "1000" };
 		default = 100;
 	};
 
@@ -230,42 +262,67 @@ class CfgSounds
 	class startdnlddronedate
 	{
 		name = "uav_start";
-		sound[] = {"sound\dronemission\start.ogg", db+20, 1};
+		sound[] = {"sound\dronemission\start.ogg", db+10, 1};
 		titles[] = {0, ""};
 	};
 
 	class stopdnlddronedate
 	{
 		name = "uav_stop";
-		sound[] = {"sound\dronemission\stop.ogg", db+20, 1};
+		sound[] = {"sound\dronemission\stop.ogg", db+10, 1};
 		titles[] = {0, ""};
 	};
 
 	class finishdnlddronedate
 	{
 		name = "uav_finish";
-		sound[] = {"sound\dronemission\finish.ogg", db+20, 1};
+		sound[] = {"sound\dronemission\finish.ogg", db+10, 1};
 		titles[] = {0, ""};
 	};
 
 	class 90dnlddronedate
 	{
 		name = "uav_90s";
-		sound[] = {"sound\dronemission\90.ogg", db+20, 1};
+		sound[] = {"sound\dronemission\90.ogg", db+10, 1};
 		titles[] = {0, ""};
 	};
 
 	class 60dnlddronedate
 	{
 		name = "uav_60s";
-		sound[] = {"sound\dronemission\60.ogg", db+20, 1};
+		sound[] = {"sound\dronemission\60.ogg", db+10, 1};
 		titles[] = {0, ""};
 	};
 
 	class 30dnlddronedate
 	{
 		name = "uav_30s";
-		sound[] = {"sound\dronemission\30.ogg", db+20, 1};
+		sound[] = {"sound\dronemission\30.ogg", db+10, 1};
 		titles[] = {0, ""};
+	};
+	
+	class IMW_SB
+	{
+		name = "Breath (Internal)";
+		sound[] = { "sound\winter\singleBreath.ogg", 0.75, 1, 100 };
+		titles[] = { 0, "" };
+	};
+	class IMW_C
+	{
+		name = "Cough";
+		sound[] = { "sound\winter\cough.ogg", 1, 1, 100 };
+		titles[] = { 0, "" };
+	};
+	class IMW_SW_L
+	{
+		name = "Snowy Wind (Low Volume)";
+		sound[] = { "sound\winter\snowWind.ogg", 1.9, 1, 100 };
+		titles[] = { 0, "" };
+	};
+	class IMW_SW_H
+	{
+		name = "Snowy Wind (High Volume)";
+		sound[] = { "sound\winter\snowWind.ogg", 2.75, 1, 100 };
+		titles[] = { 0, "" };
 	};
 };

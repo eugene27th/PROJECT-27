@@ -43,12 +43,12 @@ private _picture = getText(configfile >> "CfgVehicles" >> _ammo_cache_class >> "
 
 [west, [_taskID], [format [localize "STR_SIDE_AMMO_CACHE_DESCRIPTION", _picture], "STR_SIDE_AMMO_CACHE_TITLE", ""], _pos, "CREATED", 0, true, "destroy"] call BIS_fnc_taskCreate;
 
-waitUntil {sleep 5;!alive _ammo_cache || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5;!alive _ammo_cache || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _ammo_cache) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
 	["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
-	sleep 2;
+	uiSleep 2;
 };
 
 [_enemies] spawn {

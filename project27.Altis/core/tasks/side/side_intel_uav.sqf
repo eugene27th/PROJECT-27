@@ -29,7 +29,7 @@ _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _trg setTriggerStatements ["this", "",""];
 _trg attachTo [_uav, [0, 0, 0]];
 
-waitUntil {sleep 5; triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5; triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
 
 private "_enemy";
 
@@ -95,7 +95,7 @@ while {!(_taskID call BIS_fnc_taskCompleted)} do {
 	uiSleep 5;
 };
 
-waitUntil {sleep 5;_taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5;_taskID call BIS_fnc_taskCompleted};
 
 [_taskID] call BIS_fnc_deleteTask;
 deleteMarker _taskID;

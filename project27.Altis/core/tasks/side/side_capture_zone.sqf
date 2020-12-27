@@ -15,7 +15,7 @@ private _pos = [false,false,[0,20]] call prj_fnc_selectCaptPosition;
 
 private _trgC = [_pos, [250, 250, 20], "WEST SEIZED", "PRESENT", true, "", false] call prj_fnc_create_trg;
 
-waitUntil {sleep 5;triggerActivated _trgC || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5;triggerActivated _trgC || _taskID call BIS_fnc_taskCompleted};
 
 if (triggerActivated _trgC) then {
     [_taskID, "SUCCEEDED"] call BIS_fnc_taskSetState;

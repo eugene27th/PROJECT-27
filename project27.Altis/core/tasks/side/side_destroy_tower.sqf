@@ -35,12 +35,12 @@ private _picture = getText(configfile >> "CfgVehicles" >> _tower_class select 0 
 
 [_taskID,_center_pos,"ColorOrange",0.7,[[_radius,_radius],"ELLIPSE"]] call prj_fnc_create_marker;
 
-waitUntil {sleep 5; !alive _tower || !alive _generator || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5; !alive _tower || !alive _generator || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _tower || !alive _generator) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
 	["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
-	sleep 2;
+	uiSleep 2;
 };
 
 [_taskID] call BIS_fnc_deleteTask;

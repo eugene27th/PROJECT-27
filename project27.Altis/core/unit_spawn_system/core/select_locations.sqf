@@ -9,18 +9,18 @@ private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal"
 
 private _types_locations = [
 	// [location type,radius,array of units,reward],
-	["NameCityCapital",350,[cities_enemy,cities_civilian],100],
-	["NameCity",300,[cities_enemy,cities_civilian],50],
-	["NameVillage",250,[villages_enemy,villages_civilian],30],
-	["NameLocal",150,[local_enemy,local_civilian],20],
-	["Hill",50,[hills_enemy,hills_civilian],10],
-	["RockArea",125,[rock_enemy,rock_civilian],10],
-	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],10],
-	["VegetationFir",175,[vegetation_enemy,vegetation_civilian],10],
-	["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],10],
-	["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],10],
-	["ViewPoint",150,[other_enemy,other_civilian],10],
-	["BorderCrossing",100,[other_enemy,other_civilian],10]
+	["NameCityCapital",350,[cities_enemy,cities_civilian],500],
+	["NameCity",300,[cities_enemy,cities_civilian],300],
+	["NameVillage",250,[villages_enemy,villages_civilian],200],
+	["NameLocal",150,[local_enemy,local_civilian],150],
+	["Hill",50,[hills_enemy,hills_civilian],100],
+	["RockArea",125,[rock_enemy,rock_civilian],100],
+	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],100],
+	["VegetationFir",175,[vegetation_enemy,vegetation_civilian],100],
+	["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],100],
+	["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],100],
+	["ViewPoint",150,[other_enemy,other_civilian],100],
+	["BorderCrossing",100,[other_enemy,other_civilian],100]
 ];
 
 private _worldSize = worldSize;
@@ -188,14 +188,16 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 
 missionNamespace setVariable ["camps_coords",_camps_coords,true];
 
+private _cacheReward = "rewardForDestroyingCache" call BIS_fnc_getParamValue;
+if (isNil "_cacheReward") then {_cacheReward = 100};
+
 {
-	[_x] spawn {
-		params ["_box"];
-		waitUntil {sleep 10; !alive _box};
-		private _value = 500;
+	[_x,_cacheReward] spawn {
+		params ["_box","_cacheReward"];
+		waitUntil {uiSleep 10; !alive _box};
 		private _oldValue = missionNamespace getVariable ["intel_score",0];
-		missionNamespace setVariable ["intel_score",_oldValue + _value,true];
-		[format [localize "STR_SECTOR_CAMP_DESTROYED",_value]] remoteExec ["systemChat"]
+		missionNamespace setVariable ["intel_score",_oldValue + _cacheReward,true];
+		[format [localize "STR_SECTOR_CAMP_DESTROYED",_cacheReward]] remoteExec ["systemChat"]
 	};
 } forEach _camps_ammo_boxes;
 

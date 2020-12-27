@@ -52,12 +52,19 @@ private _g_garage_depot = createVehicle ["VR_Area_01_circle_4_yellow_F", positio
 
 //create EHs and other system
 // statistics manager
-null = [] spawn {
+[] spawn {
 	while {true} do {
 		uiSleep 1;
 		{
-			if (isNil {_x getVariable "oldSide"} || {(_x getVariable "oldSide") != side _x}) then {
-				_x setVariable ["oldSide",side _x,true]
+			private _oldSide = _x getVariable ["oldSide","empty"];
+			if (_oldSide isEqualTo "empty") then {
+				_x setVariable ["oldSide",side _x,true];
+			}
+			else
+			{
+				if (side group _x != _oldSide) then {
+					_x setVariable ["oldSide",side _x,true];
+				};
 			};
 		} forEach allUnits;
 	};
@@ -76,7 +83,7 @@ addMissionEventHandler ["Entitykilled", {
 					["missionNamespace", "total_kill_friend", 1] call prj_fnc_changeVariable;	
 				};
 				case civilian: {
-					["missionNamespace", "money", 0, -5, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
+					["missionNamespace", "money", 0, -20, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "civ_killings", 3, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "total_kill_civ", 1] call prj_fnc_changeVariable;
 				};
@@ -103,9 +110,56 @@ addMissionEventHandler ["PlayerConnected",
 	private _uids = missionNamespace getVariable ["prj27UIDs",[]];
 	if ((_uids findIf {_x == _uid}) == -1) then {
 		_uids pushBack _uid;
-		missionNamespace setVariable ["prj27UIDs",_uids];
+		missionNamespace setVariable ["prj27UIDs",_uids,true];
+
+		private _player_points = "player_point_value_on_start" call BIS_fnc_getParamValue;
+		if (isNil "_player_points") then {_player_points = 100};
+
+		[
+			[
+				[
+					"missionNamespace",
+					[
+						_uid,
+						[
+							["money",_player_points],
+							["enemy_killings",0],
+							["friend_killings",0],
+							["civ_killings",0]
+						],
+						true
+					],
+					false
+				]
+			]
+		] call prj_fnc_set_variables;
 	};
 }];
+
+if (!isDedicated) then {
+
+	private _player_points = "player_point_value_on_start" call BIS_fnc_getParamValue;
+	if (isNil "_player_points") then {_player_points = 100};
+
+	[
+		[
+			[
+				"missionNamespace",
+				[
+					getPlayerUID player,
+					[
+						["money",_player_points],
+						["enemy_killings",0],
+						["friend_killings",0],
+						["civ_killings",0]
+					],
+					true
+				],
+				false
+			]
+		]
+	] call prj_fnc_set_variables;
+};
 
 // time acceleration
 [] spawn {
@@ -121,3 +175,7 @@ addMissionEventHandler ["PlayerConnected",
 // auto load
 private _autoLoad = "autoSaveLoad" call BIS_fnc_getParamValue;
 if (_autoLoad == 1) then {call prj_fnc_load_game};
+
+// winter ambience
+private _winterAmb = "winterAmbience" call BIS_fnc_getParamValue;
+if (_winterAmb == 1) then {call prj_fnc_winterAmbienceServer};

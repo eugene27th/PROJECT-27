@@ -31,12 +31,12 @@ private _picture = getText(configfile >> "CfgVehicles" >> typeOf _leader >> "edi
 
 [west, [_taskID], [format [localize "STR_SIDE_LIQUIDATION_LEADER_DESCRIPTION",_picture], "STR_SIDE_LIQUIDATION_LEADER_TITLE", ""], _center_pos, "CREATED", 0, true, "kill"] call BIS_fnc_taskCreate;
 
-waitUntil {sleep 5; !alive _leader || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5; !alive _leader || _taskID call BIS_fnc_taskCompleted};
 
 if (!alive _leader) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
 	["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
-	sleep 2;
+	uiSleep 2;
 };
 
 [_taskID] call BIS_fnc_deleteTask;

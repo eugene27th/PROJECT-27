@@ -11,7 +11,7 @@
 	disableSerialization;
 	waitUntil{ !isNull (findDisplay 46) };
 	private _ctrlText = (findDisplay 46) ctrlCreate ["RscStructuredText",-1];
-	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.4.0.3 | PROJECT 27</t>";
+	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.4.0.4 | PROJECT 27</t>";
 	_ctrlText ctrlSetStructuredText parseText _text;
 	_ctrlText ctrlSetTextColor [1,1,1,0.7];
 	_ctrlText ctrlSetBackgroundColor [0,0,0,0];
@@ -91,46 +91,25 @@ player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_BASICS_TITLE", l
 player addEventHandler ["Killed", {
 	params ["_unit", "_killer", "_instigator", "_useEffects"];
 	hideBody player;
-	private _position = position player;
-	[_position,_killer] spawn {
-		params ["_position","_killer"];
-		uiSleep 10;
-		private _veh = createVehicle ["Land_Tombstone_10_F", _position, [], 0, "CAN_COLLIDE"];
-		[_veh,["who is the killer?",{
-			private _display = getText(configFile >> "CfgVehicles" >> typeOf (_this select 3) >> "displayName");
-			hint format ["killer: %1",_display]
-		},_killer]] remoteExec ["addAction",0];
-		uiSleep 120;
-		deleteVehicle _veh
+	if ((vehicle player) == player) then {
+		private _position = position player;
+		[_position,_killer] spawn {
+			params ["_position","_killer"];
+			uiSleep 10;
+			private _veh = createVehicle ["Land_Tombstone_10_F", _position, [], 0, "CAN_COLLIDE"];
+			[_veh,["who is the killer?",{
+				private _display = getText(configFile >> "CfgVehicles" >> typeOf (_this select 3) >> "displayName");
+				hint format ["killer: %1",_display]
+			},_killer]] remoteExec ["addAction",0];
+			uiSleep 120;
+			deleteVehicle _veh
+		};
 	};
 	private _quotations = ["A_hub_quotation","A_in_quotation","A_in2_quotation","A_m01_quotation","A_m02_quotation","A_m03_quotation","A_m04_quotation","A_m05_quotation","A_out_quotation","B_Hub01_quotation","B_in_quotation","B_m01_quotation","B_m02_1_quotation","B_m03_quotation","B_m05_quotation","B_m06_quotation","B_out2_quotation","C_EA_quotation","C_EB_quotation","C_in2_quotation","C_m01_quotation","C_m02_quotation","C_out1_quotation"];
 	["A3\missions_f_epa\video\" + selectRandom _quotations + ".ogv"] spawn BIS_fnc_playVideo;	
 }];
 
 player setPos getMarkerPos "respawn_west";
-
-// set variables
-private _player_points = "player_point_value_on_start" call BIS_fnc_getParamValue;
-if (isNil "_player_points") then {_player_points = 1000};
-
-[
-	[
-		[
-			"missionNamespace",
-			[
-				getPlayerUID player,
-				[
-					["money",_player_points],
-					["enemy_killings",0],
-					["friend_killings",0],
-					["civ_killings",0]
-				],
-				true
-			],
-			false
-		]
-	]
-] call prj_fnc_set_variables;
 
 // set textures
 [
@@ -199,6 +178,7 @@ office_table addEventHandler ["ContainerClosed", {
 
 // actions
 laptop_hq addAction ["HQ menu", { call prj_fnc_hq_menu }];
+infoDisplay addAction ["Create Monitor", {[position arsenal] remoteExecCall ["prj_fnc_slideMonitorCreate",2]}];
 [trashBox, false] call ace_dragging_fnc_setDraggable;
 [trashBox, false] call ace_dragging_fnc_setCarryable;
 

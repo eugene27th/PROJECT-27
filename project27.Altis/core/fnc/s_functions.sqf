@@ -166,7 +166,9 @@ prj_fnc_reinforcement = {
 
 	private _vehicles = [];
 	for "_i" from 1 to _number do {
-		private _vehicle = (selectRandom (enemy_vehicles_light + enemy_vehicles_heavy)) createVehicle _position;
+		private _vehClass = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy);
+		private _safePos = _position findEmptyPosition [0,300,_vehClass];
+		private _vehicle = _vehClass createVehicle _safePos;
 		_vehicle setDir _direction;
 		private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
 		(crew _vehicle) doMove _pos;
@@ -175,7 +177,7 @@ prj_fnc_reinforcement = {
 
 		if (prj_debug) then {
 			["m_" + str (random 1000),position _vehicle,"ColorBLACK",1,[],"mil_dot","car"] call prj_fnc_create_marker;
-		};	
+		};
 	};
 
 	_vehicles
@@ -184,24 +186,40 @@ prj_fnc_reinforcement = {
 prj_fnc_check_and_delete = {
 	params ["_vehicles","_start_time","_interval_time",["_distance",2000]];
 	uiSleep _start_time;
-	while {(count _vehicles) > 0} do {
-		for [{private _i = 0 }, { _i < (count _vehicles) }, { _i = _i + 1 }] do {
-			private _vehicle = (_vehicles # _i) # 0;
+	private _vehsArray = _vehicles;
+	while {(count _vehsArray) > 0} do {
+		private _count_vehicles = count _vehsArray;
+		for [{private _i = 0 }, { _i < _count_vehicles }, { _i = _i + 1 }] do {
+			private _vehicle = (_vehsArray # _i) # 0;
+			private _crew = (_vehsArray # _i) # 1;
 
 			if (!alive _vehicle) then {
-				((_vehicles # _i) # 1) pushBack _vehicle;
-				{deleteVehicle _x} forEach ((_vehicles # _i) # 1);
-				_vehicles deleteAt _i;
+				_crew pushBack _vehicle;
+				{deleteVehicle _x} forEach _crew;
+				_vehsArray deleteAt _i;
 			}
 			else
 			{
-				private _finded = false;
-				private _nearestunits = nearestObjects [position _vehicle,["Man"],2000];
-				{if (side _x == west) exitWith {_finded = true}} forEach _nearestunits;
-				if (!_finded) then {
-					((_vehicles # _i) # 1) pushBack _vehicle;
-					{deleteVehicle _x} forEach ((_vehicles # _i) # 1);
-					_vehicles deleteAt _i;
+				private _playerInVeh = false;
+				{
+					if (_vehicle == vehicle _x) exitWith {_playerInVeh = true}
+				} forEach allPlayers;
+
+				if (_playerInVeh) then {
+					{deleteVehicle _x} forEach _crew;
+					_vehsArray deleteAt _i;
+					systemChat "в машине подкрепления есть человек, она не пропадёт";
+				}
+				else
+				{
+					private _finded = false;
+					private _nearestunits = nearestObjects [position _vehicle,["Man"],2000];
+					{if (side _x == west) exitWith {_finded = true}} forEach _nearestunits;
+					if (!_finded) then {
+						_crew pushBack _vehicle;
+						{deleteVehicle _x} forEach _crew;
+						_vehsArray deleteAt _i;
+					};
 				};
 			};
 			
@@ -330,42 +348,49 @@ prj_fnc_capt_zone = {
 	private _trigger_grid_pos = mapGridPosition _capt_trigger;
 	private _trigger_radius = (triggerArea _capt_trigger) # 0;
 	private _trigger_str_name = str _parent_trigger;
+	private _markerName = _trigger_str_name + str serverTime;
 	private _trigger_camp = _parent_trigger getVariable ["camp",false];
 
 	_parent_trigger setVariable ["captured", true];
 
+	private _number = [1,3] call BIS_fnc_randomInt;
+	private _vehicles = [_trigger_pos,[1500,2500],_number] call prj_fnc_reinforcement;
+	[_vehicles,600,60,2500] spawn prj_fnc_check_and_delete;
+
 	if (_trigger_camp) exitWith {
-		["missionNamespace", "money", 0, 300] call prj_fnc_changePlayerVariableGlobal;
+		["missionNamespace", "money", 0, 500] call prj_fnc_changePlayerVariableGlobal;
 		["camp_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
 		deleteVehicle _capt_trigger;
 		[_parent_trigger] spawn {params ["_parent_trigger"]; uiSleep 120; deleteVehicle _parent_trigger};
 	};
 
-	[_trigger_str_name,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
+	[_markerName,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
 
-	[_parent_trigger,_trigger_grid_pos,_trigger_loc_name,_trigger_str_name] spawn {
-		params ["_parent_trigger","_trigger_grid_pos","_trigger_loc_name","_trigger_str_name"];
+	[_parent_trigger,_trigger_grid_pos,_trigger_loc_name,_markerName] spawn {
+		params ["_parent_trigger","_trigger_grid_pos","_trigger_loc_name","_markerName"];
 
 		["sector_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
 
-		private _time_remaining = 60 * ([60,120] call BIS_fnc_randomInt);
-		private _reward = _parent_trigger getVariable "reward";
+		private _captureMode = "sectorCaptureMode" call BIS_fnc_getParamValue;
 
-		while {_time_remaining > 0} do {
-			["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
-			uiSleep 600;
-			_time_remaining = _time_remaining - 600;
+		private _reward = _parent_trigger getVariable ["reward",100];
+		["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
+
+		if (_captureMode == 0) then {
+			private _time_remaining = 60 * ([240,360] call BIS_fnc_randomInt);
+
+			uiSleep _time_remaining;
+
+			_parent_trigger setVariable ["captured", false];
+			_markerName setMarkerColor "ColorOPFOR";
+			_markerName setMarkerAlpha 0.8;
+			[_markerName, 2, 10] spawn BIS_fnc_blinkMarker;
+
+			["sector_lost",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
+
+			uiSleep 20;
+			deleteMarker _markerName;
 		};
-
-		_parent_trigger setVariable ["captured", false];
-		_trigger_str_name setMarkerColor "ColorOPFOR";
-		_trigger_str_name setMarkerAlpha 0.8;
-		[_trigger_str_name, 2, 10] spawn BIS_fnc_blinkMarker;
-
-		["sector_lost",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
-
-		uiSleep 20;
-		deleteMarker (_trigger_str_name);
 	};
 };
 
@@ -374,6 +399,12 @@ prj_fnc_civ = {
 
 	_civ addEventHandler ["FiredNear", {
 		params ["_unit"];
+
+		private _oldSide = _unit getVariable ["oldSide",civilian];
+
+		if (_oldSide != civilian) exitWith {
+			_unit removeEventHandler ["FiredNear",_thisEventHandler];
+		};
 
 		if ((animationState _unit) == "amovpercmstpssurwnondnon") exitWith {};
 		if ((random 1) > 0.3) exitWith {};
@@ -406,9 +437,11 @@ prj_fnc_civ = {
 		{
 			if (side _x == west) then {
 
-				if ((random 1) > 0.5 || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true};
+				if ((random 1) < 0.3 || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true};
 
 				[_civ] join (createGroup independent);
+
+				uiSleep 3;
 
 				_civ removeAllEventHandlers "FiredNear";
 				if ((animationState _civ) == "amovpercmstpssurwnondnon") then {
@@ -456,7 +489,7 @@ prj_fnc_civ = {
 			
 					while {alive _civ && [_civ] call ace_common_fnc_isAwake && (_civ distance _x) > 50} do {
 						_civ doMove position _x;
-						sleep 3;
+						uiSleep 3;
 					};
 
 					if (alive _civ && [_civ] call ace_common_fnc_isAwake) then {
@@ -490,4 +523,14 @@ prj_fnc_civ = {
 		} forEach _nearestunits;
 		uiSleep 15;
 	};
+};
+
+prj_fnc_winterAmbienceServer = {
+	[] spawn {
+		private _winterSounds = ["IMW_SW_L","IMW_SW_H"];
+		while {true} do {
+			[selectRandom _winterSounds] remoteExec ["playSound",0];
+			uiSleep 60;
+		}
+	}
 };

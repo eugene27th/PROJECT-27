@@ -30,7 +30,7 @@ for [{private _i = 0 }, { _i < [3,7] call BIS_fnc_randomInt }, { _i = _i + 1 }] 
     uiSleep 0.8;
 };
 
-waitUntil {sleep 5;{!alive _x} forEach _vehicles || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5;{!alive _x} forEach _vehicles || _taskID call BIS_fnc_taskCompleted};
 
 if ({!alive _x} forEach _vehicles) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;

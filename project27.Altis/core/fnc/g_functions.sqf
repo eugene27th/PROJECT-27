@@ -354,7 +354,6 @@ prj_fnc_save_game = {
 
 	if (_clear) exitWith {
 		{profileNamespace setVariable [_x,0]} forEach _mVars;
-		{profileNamespace setVariable [_x,[]]} forEach _aVars;
 		{profileNamespace setVariable 
 			[_x,
 				[
@@ -365,6 +364,7 @@ prj_fnc_save_game = {
 				]
 			]
 		} forEach _pVars;
+		{profileNamespace setVariable [_x,[]]} forEach _aVars;
 	};
 	
 	{
@@ -409,8 +409,8 @@ prj_fnc_load_game = {
 	} forEach _gVars;
 
 	if (_cars) then {
-		private _vehsArray = profileNamespace getVariable "prj27_saveVehs";
-		if (isNil "_vehsArray") exitWith {if (prj_debug) then {systemChat "машин нет"}};
+		private _vehsArray = profileNamespace getVariable ["prj27_saveVehs",[]];
+		if (isNil "_vehsArray" || (count _vehsArray) < 1) exitWith {if (prj_debug) then {systemChat "машин нет"}};
 
 		private _vehsDel = nearestObjects [position arsenal,["Air","LandVehicle"], 200];
 		{
@@ -421,7 +421,9 @@ prj_fnc_load_game = {
 		} forEach _vehsDel;
 
 		{
-			private _veh = (_x # 0) createVehicle (_x # 1);
+			private _vehClass = (_x # 0);
+			private _safePos = (_x # 1) findEmptyPosition [0,100,_vehClass];
+			private _veh = _vehClass createVehicle _safePos;
 			_veh setDir (_x # 2);
 			clearWeaponCargoGlobal _veh;
 			clearMagazineCargoGlobal _veh;
@@ -432,4 +434,83 @@ prj_fnc_load_game = {
 			};
 		} forEach _vehsArray;
 	};
+};
+
+prj_fnc_clear_profile = {
+	private _vars = ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ","prj27_saveVehs"];
+	private _pVars = profileNamespace getVariable ["prj27UIDs",[]];
+
+	{
+		profileNamespace setVariable [_x,nil];
+		systemChat str _x;
+	} forEach (_vars + _pVars);
+
+	profileNamespace setVariable ["prj27UIDs",nil];
+};
+
+prj_fnc_slideMonitorCreate = {
+	params ["_position"];
+
+	private _textureNames = ["1","15","22"];
+
+	private _monitorObject = missionNamespace getVariable ["slidesMonitor",nil];
+	if (!isNil "_monitorObject") then {
+		deleteVehicle _monitorObject;
+		"Создан новый монитор." remoteExec ["systemChat",0];
+	};
+
+	_safePosition = _position findEmptyPosition [0,50,"Land_TripodScreen_01_large_black_F"];
+	_monitorObject = "Land_TripodScreen_01_large_black_F" createVehicle _safePosition;
+	_monitorObject allowDamage false;
+	_monitorObject setObjectTextureGlobal [0, "img\slides\1.jpg"];
+
+	_monitorObject setVariable ["slidesArray",_textureNames,true];
+	missionNamespace setVariable ["slidesMonitor",_monitorObject,true];
+
+	[_monitorObject,["slideshow menu", { call prj_fnc_slideMonitorMenu }]] remoteExec ["addAction",0];
+	[_monitorObject, true, [0, 2, 0]] remoteExecCall ["ace_dragging_fnc_setCarryable",0];
+};
+
+prj_fnc_monitorChangeSlide = {
+	params ["_mode"];
+	private _monitorObject = missionNamespace getVariable ["slidesMonitor",nil];
+	if (isNil "_monitorObject") exitWith {};
+
+	private _textures = _monitorObject getVariable "slidesArray";
+	private _slideNumber = _monitorObject getVariable ["slideNumber",0];
+	private _maxNumber = (count _textures) - 1;
+
+	switch (_mode) do {
+		case "next": {_slideNumber = _slideNumber + 1};
+		case "previous": {_slideNumber = _slideNumber - 1};
+		default {};
+	};
+
+	switch (true) do {
+		case (_slideNumber > _maxNumber): {_slideNumber = 0};
+		case (_slideNumber < 0): {_slideNumber = _maxNumber};
+		default {};
+	};
+
+	private _currentSlide = _textures # _slideNumber;
+
+	_monitorObject setObjectTextureGlobal [0, "img\slides\" + _currentSlide + ".jpg"];
+
+	ctrlSetText [1055, "слайд:" + str _currentSlide];
+
+	_monitorObject setVariable ["slideNumber",_slideNumber,true];
+};
+
+prj_fnc_sitOnChair = {
+	params ["_unit","_chair"];
+	private _position = position _chair;
+	private _animsArray = ["HubSittingChairUA_idle2","HubSittingChairUC_idle2","HubSittingChairA_idle2"];
+	[_unit,(selectRandom _animsArray)] remoteExec ["switchMove",0];
+	_unit setPos _position;
+	_unit setDir ((getDir _chair) - 180);
+	private _sitAction = _unit addAction ["stand up",{
+		params ["_target", "_caller", "_actionId", "_arguments"];
+		[_caller,""] remoteExec ["switchMove",0];
+		_caller removeAction _actionId;
+	}];
 };

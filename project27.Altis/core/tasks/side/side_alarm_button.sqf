@@ -46,11 +46,11 @@ _trg setTriggerArea [50, 50, 0, false, 20];
 _trg setTriggerActivation ["WEST SEIZED", "PRESENT", false];
 _trg setTriggerStatements ["this", "",""];
 
-waitUntil {sleep 5;{!alive _x} forEach _idap_units || triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5;{!alive _x} forEach _idap_units || triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
 
 if ({!alive _x} forEach _idap_units) then {
     [_taskID,"FAILED"] call BIS_fnc_taskSetState;
-	sleep 2;
+	uiSleep 2;
 };
 
 if (triggerActivated _trg) then {

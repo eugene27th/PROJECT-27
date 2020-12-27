@@ -61,7 +61,7 @@ for [{private _i = 0 }, { _i < [7,10] call BIS_fnc_randomInt}, { _i = _i + 1 }] 
 
 [west, [_taskID], ["STR_SIDE_CHECKPOINT_DESCRIPTION", "STR_SIDE_CHECKPOINT_TITLE", ""], _pos, "CREATED", 0, true, "target"] call BIS_fnc_taskCreate;
 
-waitUntil {sleep 5;triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5;triggerActivated _trg || _taskID call BIS_fnc_taskCompleted};
 
 if (triggerActivated _trg) then {
     [_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
