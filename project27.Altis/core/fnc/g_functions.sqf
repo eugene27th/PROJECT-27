@@ -350,6 +350,14 @@ prj_fnc_save_game = {
 	private _aVars = ["prj27_saveVehs"];
 
 	private _pVars = missionNamespace getVariable ["prj27UIDs",[]];
+	private _oldpv = profileNamespace getVariable ["prj27UIDs",[]];
+	private _res = _oldpv + (_pVars - _oldpv);
+	profileNamespace setVariable ["prj27UIDs",_res];
+	
+	if (prj_debug) then {
+		systemChat format ["_pVars: %1 / _oldpv: %2 / _res: %3",_pVars,_oldpv,_res];
+	};
+
 	private _gVars = _mVars + _pVars;
 
 	if (_clear) exitWith {
@@ -363,7 +371,7 @@ prj_fnc_save_game = {
 					["civ_killings",0]
 				]
 			]
-		} forEach _pVars;
+		} forEach _res;
 		{profileNamespace setVariable [_x,[]]} forEach _aVars;
 	};
 	
@@ -374,8 +382,6 @@ prj_fnc_save_game = {
 			systemChat format ["%1 set %2",_x,_var]
 		};
 	} forEach _gVars;
-
-	profileNamespace setVariable ["prj27UIDs",_pVars];
 
 	if (_cars) then {
 		private _vehsArray = [];
@@ -398,6 +404,7 @@ prj_fnc_load_game = {
 	private _mVars = ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
 
 	private _pVars = profileNamespace getVariable ["prj27UIDs",[]];
+	if (prj_debug) then {systemChat format ["_pVars: %1",_pVars]};
 	private _gVars = _mVars + _pVars;
 
 	{
@@ -499,18 +506,4 @@ prj_fnc_monitorChangeSlide = {
 	ctrlSetText [1055, "слайд:" + str _currentSlide];
 
 	_monitorObject setVariable ["slideNumber",_slideNumber,true];
-};
-
-prj_fnc_sitOnChair = {
-	params ["_unit","_chair"];
-	private _position = position _chair;
-	private _animsArray = ["HubSittingChairUA_idle2","HubSittingChairUC_idle2","HubSittingChairA_idle2"];
-	[_unit,(selectRandom _animsArray)] remoteExec ["switchMove",0];
-	_unit setPos _position;
-	_unit setDir ((getDir _chair) - 180);
-	private _sitAction = _unit addAction ["stand up",{
-		params ["_target", "_caller", "_actionId", "_arguments"];
-		[_caller,""] remoteExec ["switchMove",0];
-		_caller removeAction _actionId;
-	}];
 };

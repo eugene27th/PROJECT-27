@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15192.494,30.530916,17315.242};
-		dir[]={-0.50576723,-0.45904499,0.73048514};
-		up[]={-0.26135275,0.88838297,0.37747467};
-		aside[]={0.82221866,8.9523382e-008,0.56928045};
+		pos[]={15027.505,34.164253,17075.133};
+		dir[]={-0.49126974,-0.31304923,-0.81282794};
+		up[]={-0.16193287,0.94973612,-0.26792547};
+		aside[]={-0.85584426,2.2328459e-007,0.5172689};
 	};
 };
 binarizationWanted=0;
@@ -4398,19 +4398,16 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15151.718,18.357702,17335.025};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15151.718,18.3577,17335.025};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair] call prj_fnc_sitOnChair}];}";
-				name="prj27chair";
 			};
 			id=2320;
 			type="Land_CampingChair_V2_F";
-			atlOffset=1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4479,19 +4476,16 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15152.687,18.359035,17335.961};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15152.688,18.359035,17335.961};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_1] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_1";
 			};
 			id=2351;
 			type="Land_CampingChair_V2_F";
-			atlOffset=1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4521,18 +4515,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15153.906,18.360758,17337.109};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15153.906,18.360756,17337.109};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_2] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_2";
 			};
 			id=2352;
 			type="Land_CampingChair_V2_F";
+			atlOffset=-1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4562,18 +4555,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15154.896,18.362108,17338.076};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15154.896,18.362106,17338.076};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_3] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_3";
 			};
 			id=2353;
 			type="Land_CampingChair_V2_F";
+			atlOffset=-1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4603,19 +4595,16 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15152.883,18.362488,17333.766};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15152.883,18.362486,17333.766};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_8] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_8";
 			};
 			id=2358;
 			type="Land_CampingChair_V2_F";
-			atlOffset=1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4645,19 +4634,16 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15153.853,18.363829,17334.699};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15153.853,18.363827,17334.699};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_9] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_9";
 			};
 			id=2359;
 			type="Land_CampingChair_V2_F";
-			atlOffset=1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4687,18 +4673,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15155.075,18.365557,17335.848};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15155.075,18.365555,17335.848};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_10] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_10";
 			};
 			id=2360;
 			type="Land_CampingChair_V2_F";
+			atlOffset=-1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4729,14 +4714,12 @@ class Mission
 			class PositionInfo
 			{
 				position[]={15156.063,18.366901,17336.814};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_11] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_11";
 			};
 			id=2361;
 			type="Land_CampingChair_V2_F";
@@ -4770,15 +4753,13 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15154.078,18.367365,17332.488};
-				angles[]={0,5.52492,0.0026520467};
+				position[]={15154.079,18.367367,17332.488};
+				angles[]={0,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_16] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_16";
 			};
 			id=2366;
 			type="Land_CampingChair_V2_F";
@@ -4811,19 +4792,16 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15155.046,18.36871,17333.426};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15155.046,18.368708,17333.426};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_17] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_17";
 			};
 			id=2367;
 			type="Land_CampingChair_V2_F";
-			atlOffset=1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4853,18 +4831,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15156.269,18.37044,17334.574};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15156.269,18.370438,17334.574};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_18] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_18";
 			};
 			id=2368;
 			type="Land_CampingChair_V2_F";
+			atlOffset=-1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4894,18 +4871,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15157.259,18.37179,17335.541};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15157.259,18.37179,17335.539};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_19] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_19";
 			};
 			id=2369;
 			type="Land_CampingChair_V2_F";
+			atlOffset=-1.9073486e-006;
 		};
 		class Item52
 		{
@@ -4913,14 +4889,12 @@ class Mission
 			class PositionInfo
 			{
 				position[]={15155.212,18.37039,17331.289};
-				angles[]={0,5.52492,0.0026520467};
+				angles[]={0,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_21] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_21";
 			};
 			id=2371;
 			type="Land_CampingChair_V2_F";
@@ -4954,14 +4928,12 @@ class Mission
 			class PositionInfo
 			{
 				position[]={15156.128,18.372831,17332.156};
-				angles[]={0,5.52492,0.0026520467};
+				angles[]={0,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_22] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_22";
 			};
 			id=2372;
 			type="Land_CampingChair_V2_F";
@@ -4994,18 +4966,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15157.379,18.375027,17333.354};
-				angles[]={0.0013372133,5.52492,0.0026520467};
+				position[]={15157.379,18.375025,17333.354};
+				angles[]={0.0013439035,5.5249267,0.0026529003};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_23] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_23";
 			};
 			id=2373;
 			type="Land_CampingChair_V2_F";
+			atlOffset=-1.9073486e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -5035,8 +5006,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15160.511,18.952602,17324.092};
-				angles[]={0,3.3016055,0};
+				position[]={15150.604,18.930485,17336.205};
+				angles[]={0,5.352035,0};
 			};
 			side="Empty";
 			flags=5;
@@ -5051,8 +5022,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15159.769,18.948793,17336.264};
-				angles[]={0,6.2527814,0};
+				position[]={15156.65,18.944307,17337.93};
+				angles[]={0,5.7881393,0};
 			};
 			side="Empty";
 			flags=5;
@@ -5091,14 +5062,12 @@ class Mission
 			class PositionInfo
 			{
 				position[]={15158.398,18.374054,17334.322};
-				angles[]={0.0012918708,5.5249267,0};
+				angles[]={0.0012915437,5.5249267,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""sit down"",{[player,prj27chair_13] call prj_fnc_sitOnChair}];}";
-				name="prj27chair_13";
 			};
 			id=2379;
 			type="Land_CampingChair_V2_F";

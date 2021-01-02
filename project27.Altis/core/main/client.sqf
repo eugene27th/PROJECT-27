@@ -135,8 +135,8 @@ office_table addEventHandler ["ContainerClosed", {
 	params ["_container", "_unit"];
 	
 	private _intel_objects = [
-		["acex_intelitems_photo",30],
-		["acex_intelitems_document",25],
+		["acex_intelitems_photo",20],
+		["acex_intelitems_document",15],
 		["ACE_Cellphone",10],
 		["acex_intelitems_notepad",10]
 	];

@@ -182,7 +182,7 @@ prj_fnc_vehicle_shop_window = {
 		["rhsusf_M1239_MK19_deploy_socom_d",30100,1],
 		["rhsusf_M1230_M2_usarmy_d",45000,1],
 		["rhsusf_M1230_M2_usarmy_wd",40300,1],
-		["rhsusf_M1230_MK19_usarmy_d",4900,1],
+		["rhsusf_M1230_MK19_usarmy_d",44500,1],
 		["rhsusf_M1230_MK19_usarmy_wd",44800,1],
 		["rhsusf_M1232_M2_usarmy_d",37800,1],
 		["rhsusf_M1232_M2_usarmy_wd",37800,1],

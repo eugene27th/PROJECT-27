@@ -195,7 +195,11 @@ prj_fnc_check_and_delete = {
 
 			if (!alive _vehicle) then {
 				_crew pushBack _vehicle;
-				{deleteVehicle _x} forEach _crew;
+				[_crew] spawn {
+					params ["_crew"];
+					uiSleep 300;
+					{deleteVehicle _x} forEach _crew;
+				};	
 				_vehsArray deleteAt _i;
 			}
 			else
@@ -431,13 +435,17 @@ prj_fnc_civ = {
 		_wp setWaypointStatements ["true", "[unit_civ_runner, 'Acts_CivilHiding_2'] remoteExec ['switchMove', 0]"];
 	}];
 
+	private _chanceCivTransform = "chanceCivTransform" call BIS_fnc_getParamValue;
+	if (isNil "_chanceCivTransform") then {_chanceCivTransform = 2};
+	_chanceCivTransform = _chanceCivTransform * 0.1;
+
 	private _scan_end = false;
 	while {alive _civ && !_scan_end} do {
 		private _nearestunits = nearestObjects [getPos _civ,["Man"],30];
 		{
 			if (side _x == west) then {
 
-				if ((random 1) < 0.3 || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true};
+				if ((random 1) > _chanceCivTransform || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true};
 
 				[_civ] join (createGroup independent);
 

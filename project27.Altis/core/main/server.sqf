@@ -138,6 +138,12 @@ addMissionEventHandler ["PlayerConnected",
 
 if (!isDedicated) then {
 
+	private _uid = getPlayerUID player;
+	private _uids = missionNamespace getVariable ["prj27UIDs",[]];
+	
+	if ((_uids findIf {_x == _uid}) == -1) then {_uids pushBack _uid};
+	missionNamespace setVariable ["prj27UIDs",_uids,true];
+
 	private _player_points = "player_point_value_on_start" call BIS_fnc_getParamValue;
 	if (isNil "_player_points") then {_player_points = 100};
 
@@ -146,7 +152,7 @@ if (!isDedicated) then {
 			[
 				"missionNamespace",
 				[
-					getPlayerUID player,
+					_uid,
 					[
 						["money",_player_points],
 						["enemy_killings",0],

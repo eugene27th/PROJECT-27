@@ -94,6 +94,7 @@ if (prj_debug) then {
 
 private _min_distance = 0;
 private _max_distance = (_worldSize / ((_number_of_camps * 2) + 1));
+private _intel_objects = ["acex_intelitems_photo","acex_intelitems_document"];
 
 for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 
@@ -161,6 +162,15 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		private _ammo_box = "Box_FIA_Ammo_F" createVehicle ([_position, 5, 25, 1, 0, 0.5, 0] call BIS_fnc_findSafePos);
 		_camps_ammo_boxes pushBack _ammo_box;
 
+		clearWeaponCargoGlobal _ammo_box;
+		clearMagazineCargoGlobal _ammo_box;
+		clearItemCargoGlobal _ammo_box;
+		clearBackpackCargoGlobal _ammo_box;
+
+		for "_i" from 0 to ((count _intel_objects) - 1) do {
+			_ammo_box addMagazineCargoGlobal [(_intel_objects # _i), [10,15] call BIS_fnc_randomInt];
+		};
+
 		private _trigger = createTrigger ["EmptyDetector",_position,false];
 		_trigger setTriggerArea [700,700,0,false]; 
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
@@ -187,19 +197,6 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 };
 
 missionNamespace setVariable ["camps_coords",_camps_coords,true];
-
-private _cacheReward = "rewardForDestroyingCache" call BIS_fnc_getParamValue;
-if (isNil "_cacheReward") then {_cacheReward = 100};
-
-{
-	[_x,_cacheReward] spawn {
-		params ["_box","_cacheReward"];
-		waitUntil {uiSleep 10; !alive _box};
-		private _oldValue = missionNamespace getVariable ["intel_score",0];
-		missionNamespace setVariable ["intel_score",_oldValue + _cacheReward,true];
-		[format [localize "STR_SECTOR_CAMP_DESTROYED",_cacheReward]] remoteExec ["systemChat"]
-	};
-} forEach _camps_ammo_boxes;
 
 //create ied on the roads
 if (("ied_on_roads" call BIS_fnc_getParamValue) == 0) exitWith {};
