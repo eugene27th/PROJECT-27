@@ -14,7 +14,7 @@ class dialogHQmenu
 		};
 		class HQ_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.395 * safezoneW + safezoneX;
 			y = 0.28 * safezoneH + safezoneY;
@@ -202,7 +202,7 @@ class dialogBankMenu
 		};
 		class Bank_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.395 * safezoneW + safezoneX;
 			y = 0.28 * safezoneH + safezoneY;
@@ -302,7 +302,7 @@ class dialogIntelMenu
 		};
 		class Intel_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.395 * safezoneW + safezoneX;
 			y = 0.28 * safezoneH + safezoneY;
@@ -350,7 +350,7 @@ class dialogOptionMenu
 		};
 		class Options_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.395 * safezoneW + safezoneX;
 			y = 0.28 * safezoneH + safezoneY;
@@ -593,7 +593,7 @@ class dialogUpgradesMenu
 		};
 		class Upgrades_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.395 * safezoneW + safezoneX;
 			y = 0.28 * safezoneH + safezoneY;
@@ -693,7 +693,7 @@ class dialogUpgradesMenu
 
 			sizeEx = 0.032;
 
-			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'arsenal_level') + 1);if (_next < 10) then {_control ctrlSetText str _next + ' / ' + str (_next * 100)} else {_control ctrlSetText 'MAX'}";
+			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'arsenal_level') + 1);if (_next < 10) then {_control ctrlSetText str _next + ' / ' + str (_next * 200)} else {_control ctrlSetText 'MAX'}";
 			onMouseExit = "params ['_control'];_control ctrlSetText localize 'STR_PRJ_STATISTICS_ARSENAL'";
 
 			action = "[1] call prj_fnc_upgrade";
@@ -729,7 +729,7 @@ class dialogUpgradesMenu
 
 			sizeEx = 0.032;
 
-			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'a_garage_level') + 1);if (_next <= 10) then {_control ctrlSetFont 'RobotoCondensedLight';_control ctrlSetText str _next + ' lvl > ' + str (_next * 100) + ' IntelScore';} else {_control ctrlSetText 'MAX'}";
+			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'a_garage_level') + 1);if (_next <= 10) then {_control ctrlSetFont 'RobotoCondensedLight';_control ctrlSetText str _next + ' lvl > ' + str (_next * 200) + ' IntelScore';} else {_control ctrlSetText 'MAX'}";
 			onMouseExit = "params ['_control'];_control ctrlSetFont 'EtelkaMonospacePro';_control ctrlSetText localize 'STR_PRJ_STATISTICS_AIRSHOP'";
 
 			action = "[2] call prj_fnc_upgrade";
@@ -766,7 +766,7 @@ class dialogUpgradesMenu
 
 			sizeEx = 0.032;
 
-			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'g_garage_level') + 1);if (_next <= 10) then {_control ctrlSetFont 'RobotoCondensedLight';_control ctrlSetText str _next + ' lvl > ' + str (_next * 100) + ' IntelScore';} else {_control ctrlSetText 'MAX'}";
+			onMouseEnter = "params ['_control'];_next = ((missionNamespace getVariable 'g_garage_level') + 1);if (_next <= 10) then {_control ctrlSetFont 'RobotoCondensedLight';_control ctrlSetText str _next + ' lvl > ' + str (_next * 200) + ' IntelScore';} else {_control ctrlSetText 'MAX'}";
 			onMouseExit = "params ['_control'];_control ctrlSetFont 'EtelkaMonospacePro';_control ctrlSetText localize 'STR_PRJ_STATISTICS_GROUNDSHOP'";
 
 			action = "[3] call prj_fnc_upgrade";
@@ -791,7 +791,7 @@ class dialogVehicleShop
 		};
 		class VehShop_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.1675 * safezoneW + safezoneX;
 			y = 0.225 * safezoneH + safezoneY;
@@ -912,7 +912,7 @@ class dialogVehicleService
 		};
 		class VehService_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.29875 * safezoneW + safezoneX;
 			y = 0.29625 * safezoneH + safezoneY;
@@ -947,7 +947,7 @@ class dialogVehicleService
 			idc = -1;
 			text = "repair/rearm";
 			x = 0.5175 * safezoneW + safezoneX;
-			y = 0.618125 * safezoneH + safezoneY;
+			y = 0.62 * safezoneH + safezoneY;
 			w = 0.07875 * safezoneW;
 			h = 0.039375 * safezoneH;
 
@@ -963,7 +963,7 @@ class dialogVehicleService
 			idc = -1;
 			text = "delete vehicle";
 			x = 0.605 * safezoneW + safezoneX;
-			y = 0.618125 * safezoneH + safezoneY;
+			y = 0.62 * safezoneH + safezoneY;
 			w = 0.07875 * safezoneW;
 			h = 0.039375 * safezoneH;
 
@@ -977,16 +977,16 @@ class dialogVehicleService
 		class RscButton_1608: prjRscButton
 		{
 			idc = 1015;
-			text = "load";
+			text = "load (x1)";
 			x = 0.5175 * safezoneW + safezoneX;
 			y = 0.565625 * safezoneH + safezoneY;
 			w = 0.07875 * safezoneW;
-			h = 0.039375 * safezoneH;
+			h = 0.02625 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 
-			action = "call prj_fnc_load_item_to_cargo";
+			action = "[1] call prj_fnc_load_item_to_cargo";
 		};
 		class RscButton_1609: prjRscButton
 		{
@@ -995,7 +995,7 @@ class dialogVehicleService
 			x = 0.605 * safezoneW + safezoneX;
 			y = 0.565625 * safezoneH + safezoneY;
 			w = 0.07875 * safezoneW;
-			h = 0.039375 * safezoneH;
+			h = 0.0525 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
@@ -1030,6 +1030,49 @@ class dialogVehicleService
 
 			action = "call prj_fnc_sell_vehicle";
 		};
+
+		class RscButton_1610: prjRscButton
+		{
+			idc = 1045;
+			font = "PuristaMedium";
+			action = "[2] call prj_fnc_load_item_to_cargo";
+
+			text = "x2";
+			x = 0.5175 * safezoneW + safezoneX;
+			y = 0.591875 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.02625 * safezoneH;
+
+			colorBackground[] = { 100, 0, 0, 0.2 };
+		};
+		class RscButton_1611: prjRscButton
+		{
+			idc = 1046;
+			font = "PuristaMedium";
+			action = "[5] call prj_fnc_load_item_to_cargo";
+
+			text = "x5";
+			x = 0.54375 * safezoneW + safezoneX;
+			y = 0.591875 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.02625 * safezoneH;
+
+			colorBackground[] = { 200, 100, 0, 0.2 };
+		};
+		class RscButton_1612: prjRscButton
+		{
+			idc = 1047;
+			font = "PuristaMedium";
+			action = "[10] call prj_fnc_load_item_to_cargo";
+
+			text = "x10";
+			x = 0.57 * safezoneW + safezoneX;
+			y = 0.591875 * safezoneH + safezoneY;
+			w = 0.0255 * safezoneW;
+			h = 0.02625 * safezoneH;
+
+			colorBackground[] = { 0, 0, 100, 0.2 };
+		};
 	};
 };
 
@@ -1049,7 +1092,7 @@ class dialogWeaponShopMenu
 		};
 		class weaponS_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.28125 * safezoneW + safezoneX;
 			y = 0.28 * safezoneH + safezoneY;
@@ -1095,7 +1138,7 @@ class dialogSlideMonitorMenu
 		};
 		class HQ_Header_Text: prjRscText 
 		{
-			text = "esc to back"
+			text = "esc to back";
 			idc = -1;
 			x = 0.395 * safezoneW + safezoneX;
 			y = 0.28 * safezoneH + safezoneY;
@@ -1115,7 +1158,7 @@ class dialogSlideMonitorMenu
 
 		class slideMonitorMenuSlideName: prjRscText 
 		{
-			text = "slide name"
+			text = "slide name";
 			idc = 1055;
 			x = 0.40375 * safezoneW + safezoneX;
 			y = 0.31625 * safezoneH + safezoneY;

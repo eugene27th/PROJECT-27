@@ -181,7 +181,3 @@ if (!isDedicated) then {
 // auto load
 private _autoLoad = "autoSaveLoad" call BIS_fnc_getParamValue;
 if (_autoLoad == 1) then {call prj_fnc_load_game};
-
-// winter ambience
-private _winterAmb = "winterAmbience" call BIS_fnc_getParamValue;
-if (_winterAmb == 1) then {call prj_fnc_winterAmbienceServer};

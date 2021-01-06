@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=2380;
+		nextID=2506;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15027.505,34.164253,17075.133};
-		dir[]={-0.49126974,-0.31304923,-0.81282794};
-		up[]={-0.16193287,0.94973612,-0.26792547};
-		aside[]={-0.85584426,2.2328459e-007,0.5172689};
+		pos[]={15141.649,76.168938,17375.668};
+		dir[]={0.4059743,-0.7960009,-0.44923508};
+		up[]={0.53369266,0.60534471,-0.59056592};
+		aside[]={-0.74200654,1.3690442e-007,-0.67055196};
 	};
 };
 binarizationWanted=0;
@@ -4486,6 +4486,7 @@ class Mission
 			};
 			id=2351;
 			type="Land_CampingChair_V2_F";
+			atlOffset=-3.8146973e-006;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -5016,6 +5017,7 @@ class Mission
 			};
 			id=2374;
 			type="Land_PortableLight_single_F";
+			atlOffset=1.9073486e-006;
 		};
 		class Item56
 		{

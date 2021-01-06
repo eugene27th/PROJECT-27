@@ -13,6 +13,7 @@ prj_fnc_vehicle_shop_window = {
 		["Land_CanisterFuel_F",10,0],
 		["ACE_Wheel",20,0],
 		["ACE_Track",50,0],
+		["Land_WoodenCrate_01_F",500,0],
 		["B_supplyCrate_F",100,0],
 		["C_IDAP_supplyCrate_F",300,0],
 		["C_Quadbike_01_F",0,0],
@@ -37,16 +38,24 @@ prj_fnc_vehicle_shop_window = {
 		["rhs_pts_vmf",15000,0],
 		["rhsusf_m998_d_2dr",4300,0],
 		["rhsusf_m998_w_2dr",4300,0],
+		["rhsgref_hidf_M998_2dr",4300,0],
 		["rhsusf_m998_d_2dr_halftop",4500,0],
 		["rhsusf_m998_w_2dr_halftop",4500,0],
+		["rhsgref_hidf_M998_2dr_halftop",4500,0],
+		["rhssaf_army_o_m998_olive_2dr_halftop",4500,0],
 		["rhsusf_m998_d_2dr_fulltop",4800,0],
 		["rhsusf_m998_w_2dr_fulltop",4800,0],
+		["rhsgref_hidf_M998_2dr_fulltop",4800,0],
+		["rhssaf_army_o_m998_olive_2dr_fulltop",4800,0],
 		["rhsusf_m998_d_4dr",4900,0],
 		["rhsusf_m998_w_4dr",4900,0],
+		["rhsgref_hidf_m998_4dr",4900,0],
 		["rhsusf_m998_d_4dr_halftop",5000,0],
 		["rhsusf_m998_w_4dr_halftop",5000,0],
+		["rhsgref_hidf_M998_4dr_halftop",5000,0],
 		["rhsusf_m998_d_4dr_fulltop",5200,0],
 		["rhsusf_m998_w_4dr_fulltop",5200,0],
+		["rhsgref_hidf_M998_4dr_fulltop",5200,0],
 		["rhs_gaz66_vdv",2700,0],
 		["rhs_gaz66_flat_vdv",1700,0],
 		["rhs_gaz66o_vdv",2600,0],
@@ -85,10 +94,15 @@ prj_fnc_vehicle_shop_window = {
 		["B_G_Van_01_fuel_F",10000,0],
 		["rhsusf_m1025_d",8200,1],
 		["rhsusf_m1025_w",8200,1],
+		["rhsgref_hidf_m1025",8200,1],
+		["rhssaf_army_o_m1025_olive",8200,1],
 		["rhsusf_m1025_d_m2",17500,1],
 		["rhsusf_m1025_w_m2",17600,1],
+		["rhsgref_hidf_m1025_m2",17600,1],
+		["rhssaf_army_o_m1025_olive_m2",17600,1],
 		["rhsusf_m1025_d_Mk19",23700,1],
 		["rhsusf_m1025_w_Mk19",23700,1],
+		["rhsgref_hidf_m1025_mk19",23700,1],
 		["O_T_Truck_02_fuel_F",14800,1],
 		["rhsusf_M1078A1P2_B_WD_fmtv_usarmy",5900,1],
 		["rhsusf_M1078A1P2_B_M2_WD_fmtv_usarmy",12200,1],
@@ -110,8 +124,10 @@ prj_fnc_vehicle_shop_window = {
 		["rhsusf_m1043_w",11400,1],
 		["rhsusf_m1151_usarmy_wd",13800,1],
 		["rhsusf_m1151_usarmy_d",13800,1],
+		["rhssaf_army_o_m1151_olive",13800,1],
 		["rhsusf_m1152_usarmy_wd",10500,1],
 		["rhsusf_m1152_usarmy_d",10500,1],
+		["rhssaf_army_o_m1152_olive",10500,1],
 		["rhsusf_m1165_usarmy_wd",11500,1],
 		["rhsusf_m1165_usarmy_d",11500,1],
 		["rhsusf_m1152_rsv_usarmy_wd",14700,1],
@@ -141,6 +157,7 @@ prj_fnc_vehicle_shop_window = {
 		["rhsusf_m1043_w_m2",15900,1],
 		["rhsusf_m1043_d_mk19",21200,1],
 		["rhsusf_m1043_w_mk19",21200,1],
+		["rhssaf_army_o_m1151_olive_pkm",19500,1],
 		["rhsusf_m1151_m240_v1_usarmy_wd",19500,1],
 		["rhsusf_m1151_m240_v1_usarmy_d",19500,1],
 		["rhsusf_m1151_m2_v1_usarmy_wd",20700,1],
@@ -230,120 +247,129 @@ prj_fnc_vehicle_shop_window = {
 		["rhsusf_m1245_m2crows_socom_deploy",44500,2],
 		["rhsusf_m1245_mk19crows_socom_deploy",48500,2],
 		["rhs_btr80_vdv",52000,2],
-		["rhsusf_stryker_m1126_m2_wd",64000,3],
-		["rhsusf_stryker_m1127_m2_wd",68000,3],	
-		["rhs_prp3_tv",71000,3],
+		["rhsgref_BRDM2_ATGM_vdv",40000,2],
+		["rhsusf_m1045_w",49700,3],
+		["rhsusf_stryker_m1126_m2_wd",60000,3],
+		["rhsusf_stryker_m1127_m2_wd",63000,3],	
+		["rhsusf_stryker_m1132_m2_wd",65000,3],
+		["rhsusf_stryker_m1134_wd",65000,3],
 		["rhs_brm1k_tv",66100,3],
+		["rhsusf_stryker_m1126_mk19_wd",67000,3],
 		["rhs_bmp1_tv",68000,3],
 		["rhs_bmp1k_tv",68000,3],
-		["rhsgref_BRDM2_ATGM_vdv",40000,2],
-		["rhsusf_stryker_m1126_mk19_wd",67000,3],
+		["rhs_bmp1p_tv",69000,3],
+		["rhs_bmp1d_tv",70000,3],
+		["rhs_prp3_tv",71000,3],
 		["rhs_btr80a_vdv",78000,3],
-		["rhsusf_m1045_w",49700,3],
-		["rhs_bmp1d_tv",69000,3],
-		["rhs_bmp1p_tv",67000,3],
-		["rhsusf_stryker_m1132_m2_wd",72500,4],
-		["rhsusf_stryker_m1134_wd",65500,4],
-		["rhs_zsu234_aa",56300,4],
+		["rhs_bmd1r",45000,4],
+		["rhs_bmd1k",45500,4],
+		["rhs_bmd1pk",47000,4],
+		["rhs_bmd1",49000,4],
+		["rhs_bmd1p",50000,4],
+		["rhs_bmd2k",54000,4],
+		["rhs_bmd2",55000,4],
+		["rhs_bmd2m",60000,4],
+		["rhs_zsu234_aa",60300,4],
+		["rhs_bmd4_vdv",63000,4],
+		["rhs_bmd4m_vdv",63000,4],
+		["rhs_bmd4ma_vdv",65000,4],
 		["rhs_bmp2e_tv",71000,4],
-		["rhs_bmp2_tv",70000,4],
+		["rhs_bmp2_tv",71400,4],
 		["rhs_bmp2k_tv",71800,4],
 		["rhs_bmp2d_tv",73000,4],
 		["LOP_NK_T55",87700,4],
-		["rhs_bmd4_vdv",49000,4],
-		["rhs_bmd4m_vdv",51000,4],
-		["rhs_bmd4ma_vdv",54000,4],
-		["RHS_M2A2_wd",79900,5],
-		["RHS_M2A2",79900,5],
-		["RHS_M2A3_wd",85000,5],
-		["RHS_M2A3",85000,5],
-		["RHS_M6_wd",83000,5],
-		["RHS_M6",83000,5],
-		["rhs_sprut_vdv",92000,5],
-		["RHS_BM21_MSV_01",105000,6],
-		["rhs_2s1_tv",123000,6],
-		["rhs_2s3_tv",123000,6],
-		["rhsusf_m109_usarmy",155000,6],
-		["rhsusf_m109d_usarmy",155000,6],
-		["rhsusf_M142_usmc_WD",138000,6],
-		["rhsusf_M142_usarmy_WD",138000,6],
-		["rhsusf_M142_usarmy_D",138000,6],
-		["rhs_t72ba_tv",110000,6],
-		["rhs_t80",127000,6],
-		["rhs_t72bb_tv",134000,6],
-		["rhs_t72bc_tv",134000,6],
-		["rhs_t90_tv",165000,6],
+		["RHS_M2A2_wd",67000,5],
+		["RHS_M2A2",67000,5],
+		["RHS_M2A3_wd",68000,5],
+		["RHS_M2A3",68000,5],
+		["RHS_M6_wd",69000,5],
+		["RHS_M6",69000,5],
+		["rhs_sprut_vdv",85000,5],
+		["RHS_BM21_MSV_01",100000,6],
 		["RHS_M2A2_BUSKI_WD",105000,6],
 		["RHS_M2A2_BUSKI",105000,6],
 		["RHS_M2A3_BUSKI_wd",110000,6],
 		["RHS_M2A3_BUSKI",110000,6],
+		["RHS_M2A3_BUSKIII_wd",115000,6],
+		["RHS_M2A3_BUSKIII",115000,6],
+		["rhs_t72ba_tv",120000,6],
+		["rhs_2s1_tv",123000,6],
+		["rhs_2s3_tv",123000,6],
+		["rhs_t80",127000,6],
 		["rhs_t80b",130000,6],
 		["rhs_t80bk",130000,6],
-		["RHS_M2A3_BUSKIII_wd",108000,6],
-		["RHS_M2A3_BUSKIII",108000,6],
 		["rhs_t80a",133000,6],
 		["rhs_t80bv",134000,6],
+		["rhs_t72bb_tv",134000,6],
+		["rhs_t72bc_tv",134000,6],
 		["rhs_t80bvk",136000,6],	
-		["rhs_t80u",142000,6],
-		["rhs_t80u45m",145000,6],
+		["rhsusf_M142_usmc_WD",138000,6],
+		["rhsusf_M142_usarmy_WD",138000,6],
+		["rhsusf_M142_usarmy_D",138000,6],
+		["rhsusf_m109_usarmy",145000,6],
+		["rhsusf_m109d_usarmy",145000,6],
+		["rhs_t80u",145000,6],
+		["rhs_t80u45m",149000,6],
+		["rhs_t90_tv",165000,6],
 		// появилась агава
-		["rhs_t80um",148000,7],
-		["rhs_t80uk",149000,7],
+		["rhs_t80um",150000,7],
+		["rhs_t80uk",150000,7],
 		//
-		["rhs_t80ue1",143000,7],
-		["rhs_t90a_tv",168000,7],
+		["rhssaf_army_o_t72s",155000,7],
+		["rhs_t80ue1",160000,7],
+		["rhs_t72bd_tv",162000,7],
+		["rhs_t72be_tv",170000,8],
+		["rhs_t90a_tv",175000,7],
 		["rhsusf_m1a1hc_wd",180000,7],
-		["rhs_t72bd_tv",150500,7],
-		["rhsusf_m1a1fep_wd",145000,7],
-		["rhsusf_m1a1fep_od",145000,7],
-		["rhs_t72be_tv",148000,8],
+		["rhsusf_m1a1fep_wd",183000,7],
+		["rhsusf_m1a1fep_od",183000,7],
+		["rhs_t90saa_tv",180000,8],
+		["rhs_t90sab_tv",182000,9],
 		["rhsusf_m1a1aimwd_usarmy",185000,8],
 		["rhsusf_m1a1aimd_usarmy",185000,8],
-		["rhs_t90saa_tv",173000,8],
-		["rhsusf_m1a2sep1d_usarmy",192000,8],
-		["rhsusf_m1a2sep1wd_usarmy",192000,8],
-		["rhs_t90sab_tv",178000,9],
-		["rhsusf_m1a1aim_tuski_d",201500,9],
-		["rhsusf_m1a1aim_tuski_wd",201500,9],
-		["rhs_t90am_tv",185500,9],
-		["rhsusf_m1a2sep1tuskid_usarmy",210000,10],
-		["rhsusf_m1a2sep1tuskiwd_usarmy",210000,10],
-		["rhs_t90sm_tv",190300,10],
-		["rhsusf_m1a2sep1tuskiiwd_usarmy",215000,10],
-		["rhsusf_m1a2sep1tuskiid_usarmy",215000,10],
-		["rhs_t14_tv",193000,10]
+		["rhsusf_m1a2sep1d_usarmy",190000,8],
+		["rhsusf_m1a2sep1wd_usarmy",190000,8],
+		["rhsusf_m1a1aim_tuski_d",195500,9],
+		["rhsusf_m1a1aim_tuski_wd",197500,9],
+		["rhs_t90am_tv",197500,9],
+		["rhs_t90sm_tv",198000,10],
+		["rhsusf_m1a2sep1tuskid_usarmy",200000,10],
+		["rhsusf_m1a2sep1tuskiwd_usarmy",200000,10],	
+		["rhsusf_m1a2sep1tuskiiwd_usarmy",210000,10],
+		["rhsusf_m1a2sep1tuskiid_usarmy",210000,10],
+		["rhs_t14_tv",210000,10]
 	];
 	private _air_vehicles = [
-		["RHS_AN2_B",25300,0],
-		["C_Plane_Civil_01_F",19000,0],
-		["C_Heli_Light_01_civil_F",17300,0],
-		["rhs_uh1h_hidf_unarmed",27900,1],
+		["RHS_AN2_B",18000,0],
+		["C_Plane_Civil_01_F",14000,0],
+		["C_Heli_Light_01_civil_F",17000,0],
+		["rhs_uh1h_hidf_unarmed",22000,1],
 		["RHS_Mi8t_civilian",31700,1],
-		["RHS_Mi8amt_civilian",34200,1],
-		["RHS_MELB_MH6M",43000,2],
-		["RHS_MELB_H6M",38000,2],
-		["RHS_Mi8mt_vvs",35000,2],
-		["RHS_Mi8mt_vvsc",36000,2],
-		["RHS_Mi8mt_Cargo_vvs",39000,2],
-		["RHS_Mi8mt_Cargo_vvsc",39000,2],
+		["RHS_Mi8amt_civilian",34200,1],		
+		["RHS_Mi8mt_vvs",33000,2],
+		["RHS_Mi8mt_vvsc",34000,2],	
+		["RHS_Mi8mt_Cargo_vvs",36000,2],
+		["RHS_Mi8mt_Cargo_vvsc",37000,2],
+		["RHS_MELB_H6M",37000,2],
+		["RHS_MELB_MH6M",40000,2],
 		["RHS_Mi8AMT_vvs",37400,3],
 		["RHS_Mi8AMT_vvsc",38100,3],
+		["RHS_UH1Y_UNARMED_d",40500,4],
 		["RHS_CH_47F_10",45000,4],
 		["RHS_CH_47F_light",45000,4],
 		["rhsusf_CH53E_USMC_d",65500,4],
-		["RHS_UH1Y_UNARMED_d",50500,4],
 		["RHS_C130J",96000,4],
 		["RHS_C130J_Cargo",99000,4],
 		["rhs_ka60_grey",30000,5],
 		["rhs_ka60_c",30000,5],
 		["RHS_UH60M2",35000,5],
-		["RHS_UH60M_MEV2",47000,5],
-		["RHS_UH60M",40000,5],
-		["RHS_UH60M_ESSS2",45700,5],
-		["RHS_UH60M_ESSS",49000,5],
-		["RHS_MELB_AH6M",39900,5],
-		["RHS_UH1Y_FFAR_d",58000,5],
-		["RHS_UH1Y_d",62000,5],
+		["RHS_UH60M_MEV2",37000,5],
+		["RHS_UH60M",38000,5],
+		["RHS_UH60M_ESSS2",42700,5],
+		["RHS_UH60M_ESSS",45000,5],
+		["RHS_MELB_AH6M",37900,5],
+		["RHS_UH1Y_FFAR_d",52000,5],
+		["RHS_UH1Y_d",55000,5],
 		["RHS_Mi8MTV3_vvs",68500,6],
 		["RHS_Mi8MTV3_vvsc",68500,6],
 		["RHS_Mi8AMTSh_vvs",79500,6],
@@ -357,6 +383,7 @@ prj_fnc_vehicle_shop_window = {
 		["RHS_Su25SM_vvsc",161000,8],
 		["rhs_mi28n_vvs",184000,8],
 		["rhs_mi28n_vvsc",185000,8],
+		["rhs_l159_cdf_b_CDF",190000,8],
 		["RHS_AH1Z",190000,9],
 		["RHS_Ka52_vvsc",190000,9],
 		["RHS_Ka52_vvs",190000,9],
@@ -730,18 +757,18 @@ prj_fnc_upgrade = {
 
 	private _intel_score = missionNamespace getVariable "intel_score";
 
-	if (_intel_score < (_next_level * 100)) then {
+	if (_intel_score < (_next_level * 200)) then {
 		hint localize "STR_PRJ_DONT_HAVE_IS"
 	}
 	else
 	{
-		[missionNamespace,["intel_score",(_intel_score - (_next_level * 100)),true]] remoteExec ["setVariable",2];
+		[missionNamespace,["intel_score",(_intel_score - (_next_level * 200)),true]] remoteExec ["setVariable",2];
 		[missionNamespace,[_variable,_next_level,true]] remoteExec ["setVariable",2];
 
 		hint format [localize "STR_PRJ_UPGRADED" + " " + _upgrade_name + " " + localize "STR_PRJ_TO_LEVEL",_next_level];
 
 		private _ctrl_intel = (findDisplay 3006) displayCtrl 1025;
-		private _text_intel = localize "STR_PRJ_STATISTICS_INTELSCORE" + ": <t size='1.2' color='#25E03F'>" + str (_intel_score - (_next_level * 100)) + "</t>";
+		private _text_intel = localize "STR_PRJ_STATISTICS_INTELSCORE" + ": <t size='1.2' color='#25E03F'>" + str (_intel_score - (_next_level * 200)) + "</t>";
 		_ctrl_intel ctrlSetStructuredText parseText _text_intel;
 
 		private _ctrl = (findDisplay 3006) displayCtrl _display_ctrl;
@@ -756,11 +783,13 @@ prj_fnc_option_menu = {
 	if !((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then {
 		{
 			ctrlEnable [_x, false];
-		} forEach [1021,1031,1032];		
+		} forEach [1021,1031];		
 	};
 
 	if !((getPlayerUID player) in hqUID) then {
-		ctrlEnable [1033, false];
+		{
+			ctrlEnable [_x, false];
+		} forEach [1032,1033];
 	};
 };
 
@@ -771,31 +800,34 @@ prj_fnc_price_calculate = {
 	if !(typeOf _vehicle in (enemy_vehicles_light + enemy_vehicles_heavy + enemy_helicopters)) exitWith {};
 
 	private _vehicle_armor = getNumber(configfile >> "CfgVehicles" >> typeOf _vehicle >> "armor");
-	private _vehicle_price = 3 * _vehicle_armor;
+
+	private _vehicle_price = _vehicle_armor;
 
 	switch (true) do {
-		case (_vehicle in enemy_vehicles_light): {
-			_vehicle_price = _vehicle_price + 100;
-		};
-		case (_vehicle in enemy_vehicles_heavy): {
-			_vehicle_price = _vehicle_price + 500;
-		};
-		case (_vehicle in enemy_helicopters): {
-			_vehicle_price = _vehicle_price + 1000;
-		};
+		case (_vehicle_armor < 60) : {_vehicle_price = 2 * _vehicle_armor};
+		case (_vehicle_armor < 90) : {_vehicle_price = 3 * _vehicle_armor};
+		case (_vehicle_armor <= 200) : {_vehicle_price = 4 * _vehicle_armor};
+		case (_vehicle_armor > 200) : {_vehicle_price = 5 * _vehicle_armor};
 		default {};
 	};
 
-	if ((damage _vehicle) < 0.1) then {
-		_vehicle_price = _vehicle_price + 200;
+	switch (true) do {
+		case (typeOf _vehicle in enemy_vehicles_light): {_vehicle_price = _vehicle_price * 3};
+		case (typeOf _vehicle in enemy_vehicles_heavy): {_vehicle_price = _vehicle_price * 4};
+		default {};
 	};
 
+	// if ((damage _vehicle) < 0.2) then {
+	// 	_vehicle_price = _vehicle_price + 200;
+	// };
+
+	_vehicle_price = _vehicle_price * 10;
 	_vehicle_price
 };
 
 prj_fnc_vehicle_menu_window = {
 	createDialog "dialogVehicleService";
-	ctrlEnable [1015, false];
+	{ctrlEnable [_x, false]} forEach [1015,1045,1046,1047];
 
 	private _vehicle = vehicle player;
 
@@ -1017,7 +1049,7 @@ prj_fnc_sell_vehicle = {
 };
 
 prj_fnc_btn_load_enable = {
-	ctrlEnable [1015, true];
+	{ctrlEnable [_x, true]} forEach [1015,1045,1046,1047];
 	private _ctrlloadb = (findDisplay 3003) displayCtrl 1015;
 	_ctrlloadb ctrlSetTextColor [0.8, 0.8, 0, 1];
 };
@@ -1048,6 +1080,8 @@ prj_fnc_show_load_items = {
 };
 
 prj_fnc_load_item_to_cargo = {
+	params [["_coef",1]];
+
 	private _index = lbCurSel 1017;
 	private _item = lbData [1017, _index];
 	private _car = vehicle player;
@@ -1055,25 +1089,25 @@ prj_fnc_load_item_to_cargo = {
 
 	switch (_typeofitem # 0) do {
 		case "Item": {
-			_car addItemCargoGlobal [_item,1];
+			_car addItemCargoGlobal [_item,_coef];
 		};
 		case "Weapon": {
-			_car addWeaponCargoGlobal [_item,1];
+			_car addWeaponCargoGlobal [_item,_coef];
 		};
 		case "Equipment": {
 			if ((_typeofitem  # 1) == "Backpack") then {
-				_car addBackpackCargoGlobal [_item,1];
+				_car addBackpackCargoGlobal [_item,_coef];
 			}
 			else
 			{
-				_car addItemCargoGlobal [_item,1];
+				_car addItemCargoGlobal [_item,_coef];
 			}
 		};
 		case "Magazine": {
-			_car addMagazineCargoGlobal [_item,1];
+			_car addMagazineCargoGlobal [_item,_coef];
 		};
 		case "Mine": {
-			_car addMagazineCargoGlobal [_item,1];
+			_car addMagazineCargoGlobal [_item,_coef];
 		};
 	};
 };

@@ -92,18 +92,18 @@ prj_fnc_create_task = {
 	private _oldTaskName = missionNamespace getVariable ["oldTaskName","side_null"];
 
 	private _tasks = [
-		["side_intel_in_vehicle",400],
-		["side_alarm_button",300],
-		["side_ammo_cache",300],
-		["side_capture_leader",350],
-		["side_capture_zone",280],
-		["side_checkpoint",200],
-		["side_destroy_tower",300],
-		["side_destruction_of_vehicles",300],
-		["side_hostage",350],
-		["side_intel_uav",400],
-		["side_liquidation_leader",200],
-		["side_rescue",400]
+		["side_intel_in_vehicle",4000],
+		["side_alarm_button",3000],
+		["side_ammo_cache",3000],
+		["side_capture_leader",3500],
+		["side_capture_zone",2800],
+		["side_checkpoint",2000],
+		["side_destroy_tower",3000],
+		["side_destruction_of_vehicles",3000],
+		["side_hostage",3500],
+		["side_intel_uav",4000],
+		["side_liquidation_leader",2000],
+		["side_rescue",4000]
 	];
 
 	private _selected_task = selectRandom _tasks;
@@ -429,8 +429,9 @@ prj_fnc_load_game = {
 
 		{
 			private _vehClass = (_x # 0);
-			private _safePos = (_x # 1) findEmptyPosition [0,100,_vehClass];
-			private _veh = _vehClass createVehicle _safePos;
+			// private _safePos = (_x # 1) findEmptyPosition [0,100,_vehClass];
+			// private _veh = _vehClass createVehicle _safePos;
+			private _veh = createVehicle [_vehClass, (_x # 1), [], 0, "CAN_COLLIDE"];
 			_veh setDir (_x # 2);
 			clearWeaponCargoGlobal _veh;
 			clearMagazineCargoGlobal _veh;

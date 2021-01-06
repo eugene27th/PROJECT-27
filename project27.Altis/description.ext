@@ -36,14 +36,6 @@ class Params
 		default = 3;
 	};
 
-	class winterAmbience
-	{
-		title = "winter ambience";
-		values[] = { 1, 0 };
-		texts[] = { "on", "off" };
-		default = 0;
-	};
-
 	class patrols
 	{
 		title = "Patrols tasks";
@@ -51,6 +43,15 @@ class Params
 		texts[] = { "On", "Off" };
 		default = 1;
 	};
+
+	class patrolTime
+	{
+		title = "Patrol time";
+		values[] = { 300, 600, 900 };
+		texts[] = { "5 minutes", "10 minutes", "15 minutes" };
+		default = 300;
+	};
+
 
 	class ied_on_roads
 	{
@@ -73,7 +74,7 @@ class Params
 		title = "The number of mines on the road";
 		values[] = { 10, 25, 50, 100, 150, 200, 250, 300, 400 };
 		texts[] = { "10", "25", "50", "100", "150", "200", "250", "300", "400" };
-		default = 100;
+		default = 25;
 	};
 
 	class ied_in_houses
@@ -137,7 +138,7 @@ class Params
 		title = "Players' points when they first enter the game";
 		values[] = { 100, 500, 1000, 2000, 3000, 5000, 7000, 10000, 15000, 20000, 100000 };
 		texts[] = { "100" ,"500", "1000", "2000", "3000", "5000", "7000", "10000", "15000", "20000", "100000" };
-		default = 100;
+		default = 2000;
 	};
 
 	class suicide_bombers
@@ -299,30 +300,5 @@ class CfgSounds
 		name = "uav_30s";
 		sound[] = {"sound\dronemission\30.ogg", db+10, 1};
 		titles[] = {0, ""};
-	};
-	
-	class IMW_SB
-	{
-		name = "Breath (Internal)";
-		sound[] = { "sound\winter\singleBreath.ogg", 0.75, 1, 100 };
-		titles[] = { 0, "" };
-	};
-	class IMW_C
-	{
-		name = "Cough";
-		sound[] = { "sound\winter\cough.ogg", 1, 1, 100 };
-		titles[] = { 0, "" };
-	};
-	class IMW_SW_L
-	{
-		name = "Snowy Wind (Low Volume)";
-		sound[] = { "sound\winter\snowWind.ogg", 1.9, 1, 100 };
-		titles[] = { 0, "" };
-	};
-	class IMW_SW_H
-	{
-		name = "Snowy Wind (High Volume)";
-		sound[] = { "sound\winter\snowWind.ogg", 2.75, 1, 100 };
-		titles[] = { 0, "" };
 	};
 };

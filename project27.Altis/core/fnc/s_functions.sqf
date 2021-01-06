@@ -158,7 +158,7 @@ prj_fnc_select_road_position_around = {
 };
 
 prj_fnc_reinforcement = {
-	params ["_pos",["_radius",[1000,2000]],["_number",1]];
+	params ["_pos",["_radius",[1000,2000]],["_number",2]];
 
 	private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
 	private _position = _position_data # 0;
@@ -166,7 +166,7 @@ prj_fnc_reinforcement = {
 
 	private _vehicles = [];
 	for "_i" from 1 to _number do {
-		private _vehClass = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy);
+		private _vehClass = selectRandom enemy_vehicles_light;
 		private _safePos = _position findEmptyPosition [0,300,_vehClass];
 		private _vehicle = _vehClass createVehicle _safePos;
 		_vehicle setDir _direction;
@@ -357,7 +357,7 @@ prj_fnc_capt_zone = {
 
 	_parent_trigger setVariable ["captured", true];
 
-	private _number = [1,3] call BIS_fnc_randomInt;
+	private _number = [2,3] call BIS_fnc_randomInt;
 	private _vehicles = [_trigger_pos,[1500,2500],_number] call prj_fnc_reinforcement;
 	[_vehicles,600,60,2500] spawn prj_fnc_check_and_delete;
 

@@ -707,9 +707,9 @@
                 <German>Patrouille</German>
             </Key>
             <Key ID="STR_PATROL_DESCRIPTION">
-                <Original>Task: patrol the designated sector for &lt;font color='#33FF9C'&gt;10&lt;/font&gt; minutes.</Original>
-		        <Russian>Задача: осмотр/патруль обозначенного сектора на протяжении &lt;font color='#33FF9C'&gt;10-ти&lt;/font&gt; минут.</Russian>
-                <German>Aufgabe: patrouillieren Sie &lt;font color='#33FF9C'&gt;10&lt;/font&gt; Minuten lang den zugewiesenen Sektor.</German>
+                <Original>Task: patrol the designated sector for &lt;font color='#33FF9C'&gt;%1&lt;/font&gt; minutes.</Original>
+		        <Russian>Задача: осмотр/патруль обозначенного сектора на протяжении &lt;font color='#33FF9C'&gt;%1-ти&lt;/font&gt; минут.</Russian>
+                <German>Aufgabe: patrouillieren Sie &lt;font color='#33FF9C'&gt;%1&lt;/font&gt; Minuten lang den zugewiesenen Sektor.</German>
             </Key>    
 	    </Container>  
     </Package>
