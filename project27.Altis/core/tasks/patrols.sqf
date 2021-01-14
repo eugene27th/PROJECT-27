@@ -53,8 +53,6 @@ while {true} do {
 							[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
 							["missionNamespace", "money", 0, 2000] call prj_fnc_changePlayerVariableGlobal;
 							uiSleep 2;
-							deleteVehicle _trg;
-							deleteMarker _taskID;
 						};
 					};
 
@@ -65,6 +63,8 @@ while {true} do {
 			uiSleep 5;
 		};
 
+		deleteVehicle _trg;
+		deleteMarker _taskID;
 		[_taskID] call BIS_fnc_deleteTask;
 	};
 };

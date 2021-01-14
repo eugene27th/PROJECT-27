@@ -9,18 +9,18 @@ private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal"
 
 private _types_locations = [
 	// [location type,radius,array of units,reward],
-	["NameCityCapital",350,[cities_enemy,cities_civilian],500],
-	["NameCity",300,[cities_enemy,cities_civilian],300],
-	["NameVillage",250,[villages_enemy,villages_civilian],200],
-	["NameLocal",150,[local_enemy,local_civilian],150],
-	["Hill",50,[hills_enemy,hills_civilian],100],
-	["RockArea",125,[rock_enemy,rock_civilian],100],
-	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],100],
-	["VegetationFir",175,[vegetation_enemy,vegetation_civilian],100],
-	["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],100],
-	["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],100],
-	["ViewPoint",150,[other_enemy,other_civilian],100],
-	["BorderCrossing",100,[other_enemy,other_civilian],100]
+	["NameCityCapital",350,[cities_enemy,cities_civilian],3500],
+	["NameCity",300,[cities_enemy,cities_civilian],2500],
+	["NameVillage",250,[villages_enemy,villages_civilian],2000],
+	["NameLocal",150,[local_enemy,local_civilian],1500],
+	["Hill",50,[hills_enemy,hills_civilian],1000],
+	["RockArea",125,[rock_enemy,rock_civilian],500],
+	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],500],
+	["VegetationFir",175,[vegetation_enemy,vegetation_civilian],500],
+	["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],500],
+	["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],500],
+	["ViewPoint",150,[other_enemy,other_civilian],1000],
+	["BorderCrossing",100,[other_enemy,other_civilian],500]
 ];
 
 private _worldSize = worldSize;

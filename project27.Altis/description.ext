@@ -155,11 +155,6 @@ class Params
 #include "core\fnc\GUI\defines.hpp"
 #include "core\fnc\GUI\controls.hpp"
 
-disableRandomization[] =
-{
-	"AllVehicles"
-};
-
 class CfgFunctions
 {
 	#include "taw_vd\CfgFunctions.hpp"

@@ -340,6 +340,7 @@ prj_fnc_vehicle_shop_window = {
 		["rhs_t14_tv",210000,10]
 	];
 	private _air_vehicles = [
+		["C_Quadbike_01_F",0,0],
 		["RHS_AN2_B",18000,0],
 		["C_Plane_Civil_01_F",14000,0],
 		["C_Heli_Light_01_civil_F",17000,0],
@@ -518,7 +519,7 @@ prj_fnc_spawn_vehicle = {
 		[_vehicle, "blue", "orange", "green"] call BIS_fnc_DataTerminalColor;
 		[_vehicle, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
 
-		remoteExecCall ["prj_fnc_add_mhq_action"];
+		remoteExecCall ["prj_fnc_add_mhq_action",0,true];
 	};
 
 	if ((_data # 0) == "C_IDAP_supplyCrate_F") then {

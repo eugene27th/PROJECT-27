@@ -92,7 +92,6 @@ prj_fnc_create_task = {
 	private _oldTaskName = missionNamespace getVariable ["oldTaskName","side_null"];
 
 	private _tasks = [
-		["side_intel_in_vehicle",4000],
 		["side_alarm_button",3000],
 		["side_ammo_cache",3000],
 		["side_capture_leader",3500],
@@ -385,7 +384,7 @@ prj_fnc_save_game = {
 
 	if (_cars) then {
 		private _vehsArray = [];
-		private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 200];
+		private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000];
 		{
 			_vehsArray pushBack [typeOf _x,position _x,getDir _x];
 			profileNamespace setVariable ["prj27_saveVehs",_vehsArray];
@@ -475,7 +474,7 @@ prj_fnc_slideMonitorCreate = {
 	_monitorObject setVariable ["slidesArray",_textureNames,true];
 	missionNamespace setVariable ["slidesMonitor",_monitorObject,true];
 
-	[_monitorObject,["slideshow menu", { call prj_fnc_slideMonitorMenu }]] remoteExec ["addAction",0];
+	[_monitorObject,["slideshow menu", { call prj_fnc_slideMonitorMenu }]] remoteExec ["addAction",0,true];
 	[_monitorObject, true, [0, 2, 0]] remoteExecCall ["ace_dragging_fnc_setCarryable",0];
 };
 

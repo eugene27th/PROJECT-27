@@ -145,8 +145,8 @@ force ace_repair_engineerSetting_wheel = 0;
 force ace_repair_fullRepairLocation = 3;
 force ace_repair_fullRepairRequiredItems = ["ToolKit"];
 force ace_repair_miscRepairRequiredItems = ["ToolKit"];
-force ace_repair_repairDamageThreshold = 0.6;
-force ace_repair_repairDamageThreshold_engineer = 0.4;
+force ace_repair_repairDamageThreshold = 1;
+force ace_repair_repairDamageThreshold_engineer = 1;
 force ace_repair_wheelRepairRequiredItems = ["ToolKit"];
 
 // ACE Magazine Repack
@@ -450,8 +450,8 @@ force ace_medical_spontaneousWakeUpEpinephrineBoost = 3.4;
 force ace_medical_statemachine_AIUnconsciousness = false;
 force ace_medical_statemachine_cardiacArrestBleedoutEnabled = true;
 force ace_medical_statemachine_cardiacArrestTime = 300;
-force ace_medical_statemachine_fatalInjuriesAI = 2;
-force ace_medical_statemachine_fatalInjuriesPlayer = 0;
+force ace_medical_statemachine_fatalInjuriesAI = 0;
+force ace_medical_statemachine_fatalInjuriesPlayer = 2;
 force ace_medical_treatment_advancedBandages = 2;
 force ace_medical_treatment_advancedDiagnose = true;
 force ace_medical_treatment_advancedMedication = true;
