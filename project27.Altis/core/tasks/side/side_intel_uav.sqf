@@ -37,7 +37,7 @@ if (triggerActivated _trg) then {
 	_enemy = [];
 
 	for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
-		private _grpname = createGroup independent;
+		private _grpname = createGroup [independent, true];
 		private _position = [position _uav, [200,300] call BIS_fnc_randomInt, [0,359] call BIS_fnc_randomInt] call BIS_fnc_relPos;
 		private _unit = _grpname createUnit [selectRandom enemy_infantry, _position, [], 0, "NONE"];
 		_enemy pushBack _unit;

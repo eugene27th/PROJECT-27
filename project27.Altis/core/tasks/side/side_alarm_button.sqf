@@ -28,7 +28,7 @@ private _idap_units = [];
 private _enemies = [];
 
 for "_i" from 1 to 2 do {
-	private _unit = (createGroup civilian) createUnit [selectRandom idap_units, _unit_pos, [], 0, "NONE"];
+	private _unit = (createGroup [civilian, true]) createUnit [selectRandom idap_units, _unit_pos, [], 0, "NONE"];
     _unit setBehaviour "CARELESS";
     [_unit, "Acts_CivilHiding_2"] remoteExec ["switchMove", 0];
     _idap_units pushBack _unit;
@@ -36,7 +36,7 @@ for "_i" from 1 to 2 do {
 
 for [{private _i = 0 }, { _i < ([10,15] call BIS_fnc_randomInt) }, { _i = _i + 1 }] do {
 	private _position = [_pos, [4,15] call BIS_fnc_randomInt, [0,359] call BIS_fnc_randomInt] call BIS_fnc_relPos;
-	private _unit = (createGroup independent) createUnit [selectRandom enemy_infantry, _position, [], 0, "NONE"];
+	private _unit = (createGroup [independent, true]) createUnit [selectRandom enemy_infantry, _position, [], 0, "NONE"];
     _unit lookAt _idap_vehicle;
     _enemies pushBack _unit;
 };

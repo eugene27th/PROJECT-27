@@ -52,7 +52,7 @@ _composition = [
 
 private _enemies = [];
 for [{private _i = 0 }, { _i < [7,10] call BIS_fnc_randomInt}, { _i = _i + 1 }] do {
-    private _grpname = createGroup independent;
+    private _grpname = createGroup [independent, true];
     private _pos = [_pos, 10, 100, 1, 0] call BIS_fnc_findSafePos;
     private _unit = _grpname createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
 	_unit setDir (round (random 360));

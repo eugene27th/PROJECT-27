@@ -96,8 +96,8 @@ class Params
 	class preset_units
 	{
 		title = "Preset units";
-		values[] = { 0, 1, 2 };
-		texts[] = { "Middle east", "European aggressor", "Syndikat" };
+		values[] = { 0, 1, 2, 3 };
+		texts[] = { "Middle east", "European aggressor", "Syndikat", "Middle east (+CUP)" };
 		default = 1;
 	};
 

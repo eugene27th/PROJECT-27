@@ -32,7 +32,7 @@ if (prj_debug) then {
 
 private _enemies = [];
 for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
-    private _grpname = createGroup independent;
+    private _grpname = createGroup [independent, true];
     private _pos = [_ammo_cache_pos, 50, 200, 1, 0] call BIS_fnc_findSafePos;
     private _unit = _grpname createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
 	_unit setDir (round (random 360));

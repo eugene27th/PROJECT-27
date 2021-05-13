@@ -64,27 +64,16 @@ prj_fnc_ProcessDiaryLink = {
 };
 
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_SUPPLY_TITLE", localize "STR_DOCUMENTATION_SUPPLY_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_ENEMY_TITLE", localize "STR_DOCUMENTATION_ENEMY_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_TALKANDORDER_TITLE", localize "STR_DOCUMENTATION_TALKANDORDER_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_TASKS_TITLE", localize "STR_DOCUMENTATION_TASKS_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_VEHSHOP_TITLE", localize "STR_DOCUMENTATION_VEHSHOP_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_INTEL_TITLE", localize "STR_DOCUMENTATION_INTEL_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_BANK_TITLE", localize "STR_DOCUMENTATION_BANK_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_MHQ_TITLE", localize "STR_DOCUMENTATION_MHQ_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_STAT_TITLE", localize "STR_DOCUMENTATION_STAT_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_LAPTOP_TITLE", localize "STR_DOCUMENTATION_LAPTOP_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_VEHICLES_TITLE", localize "STR_DOCUMENTATION_VEHICLES_DESC"], taskNull, "", false];
-
 player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_BASICS_TITLE", localize "STR_DOCUMENTATION_BASICS_DESC"], taskNull, "", false];
 
 // EH with death screen
@@ -115,8 +104,7 @@ player setPos getMarkerPos "respawn_west";
 [
 	[
 		["vservice.paa",[service_board_blue],0],
-		["laptopHQ.paa",[laptop_hq],1],
-		["previewDisplay.paa",[infoDisplay],0]
+		["laptopHQ.paa",[laptop_hq],1]
 	]
 ] call prj_fnc_set_textures;
 
@@ -178,7 +166,6 @@ office_table addEventHandler ["ContainerClosed", {
 
 // actions
 laptop_hq addAction ["HQ menu", { call prj_fnc_hq_menu }];
-infoDisplay addAction ["Create Monitor", {[position arsenal] remoteExecCall ["prj_fnc_slideMonitorCreate",2]}];
 [trashBox, false] call ace_dragging_fnc_setDraggable;
 [trashBox, false] call ace_dragging_fnc_setCarryable;
 

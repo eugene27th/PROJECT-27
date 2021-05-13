@@ -306,7 +306,7 @@ prj_fnc_create_crew = {
 	//create crew
 	private _vehicle_crew = [];
 
-	private _vehicle_group = createGroup _side;
+	private _vehicle_group = createGroup [_side, true];
 
 	if ((_vehicle emptyPositions "commander") != 0) then {
 		private _unit = _vehicle_group createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
@@ -414,7 +414,7 @@ prj_fnc_civ = {
 		if ((random 1) > 0.3) exitWith {};
 
 		_unit allowfleeing 0;
-		[_unit] join (createGroup civilian);
+		[_unit] join (createGroup [civilian, true]);
 
 		(group _unit) setBehaviour "CARELESS";
 		(group _unit) setSpeedMode "FULL";
@@ -447,7 +447,7 @@ prj_fnc_civ = {
 
 				if ((random 1) > _chanceCivTransform || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true};
 
-				[_civ] join (createGroup independent);
+				[_civ] join (createGroup [independent, true]);
 
 				uiSleep 3;
 
@@ -531,14 +531,4 @@ prj_fnc_civ = {
 		} forEach _nearestunits;
 		uiSleep 15;
 	};
-};
-
-prj_fnc_winterAmbienceServer = {
-	[] spawn {
-		private _winterSounds = ["IMW_SW_L","IMW_SW_H"];
-		while {true} do {
-			[selectRandom _winterSounds] remoteExec ["playSound",0];
-			uiSleep 60;
-		}
-	}
 };

@@ -45,7 +45,7 @@ prj_fnc_spawn_house_groups = {
 	private _useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
 
 	for [{private _i = 0 }, { _i < ((_config # 0) # 0) }, { _i = _i + 1 }] do {
-		private _group = createGroup _side;
+		private _group = createGroup [_side, true];
 		for [{private _i = 0 }, { _i < [((_config # 0) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
 			if ((count _useful) > 5) then {
 				_allpositions = (selectRandom _useful) buildingPos -1;
@@ -74,7 +74,7 @@ prj_fnc_spawn_patrols_groups = {
 	private _patrols_units = [];
 
 	for [{private _i = 0 }, { _i < ((_config # 1) # 0) }, { _i = _i + 1 }] do {
-		private _group = createGroup _side;
+		private _group = createGroup [_side, true];
 		private _pos = [_trigger_pos, 10, _trigger_radius, 1, 0] call BIS_fnc_findSafePos;
 		if (!isNil "_pos") then {
 			for [{private _i = 0 }, { _i < [((_config # 1) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
@@ -155,7 +155,7 @@ prj_fnc_spawn_vehicles = {
 			uiSleep 0.5;
 
 			//create crew
-			private _vehicle_crew_group = createGroup _side;
+			private _vehicle_crew_group = createGroup [_side, true];
 
 			if ((_vehicle emptyPositions "commander") != 0) then {
 				private _unit = _vehicle_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
@@ -254,7 +254,7 @@ prj_fnc_spawn_static = {
 			if (prj_debug) then {"статик создан" remoteExec ["systemChat"]};
 
 			//create crew
-			private _static_crew_group = createGroup _side;
+			private _static_crew_group = createGroup [_side, true];
 
 			if ((_static emptyPositions "commander") != 0) then {
 				private _unit = _static_crew_group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];

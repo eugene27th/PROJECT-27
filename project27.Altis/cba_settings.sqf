@@ -34,7 +34,7 @@ ace_arsenal_fontHeight = 4.5;
 
 // ACE Artillery
 force ace_artillerytables_advancedCorrections = true;
-force ace_artillerytables_disableArtilleryComputer = true;
+force ace_artillerytables_disableArtilleryComputer = false;
 force ace_mk6mortar_airResistanceEnabled = true;
 force ace_mk6mortar_allowCompass = true;
 force ace_mk6mortar_allowComputerRangefinder = false;
@@ -145,8 +145,8 @@ force ace_repair_engineerSetting_wheel = 0;
 force ace_repair_fullRepairLocation = 3;
 force ace_repair_fullRepairRequiredItems = ["ToolKit"];
 force ace_repair_miscRepairRequiredItems = ["ToolKit"];
-force ace_repair_repairDamageThreshold = 1;
-force ace_repair_repairDamageThreshold_engineer = 1;
+force ace_repair_repairDamageThreshold = 0.6;
+force ace_repair_repairDamageThreshold_engineer = 0.4;
 force ace_repair_wheelRepairRequiredItems = ["ToolKit"];
 
 // ACE Magazine Repack

@@ -11,8 +11,8 @@ private _center_pos = [1,false] call prj_fnc_selectPosition;
 
 private _pos = [_center_pos, 200] call prj_fnc_select_house_position;
 
-private _leader = (createGroup independent) createUnit [selectRandom enemy_leaders, _pos, [], 0, "NONE"];
-private _enemy = (createGroup independent) createUnit [selectRandom enemy_infantry, position _leader, [], 0, "NONE"];
+private _leader = (createGroup [independent, true]) createUnit [selectRandom enemy_leaders, _pos, [], 0, "NONE"];
+private _enemy = (createGroup [independent, true]) createUnit [selectRandom enemy_infantry, position _leader, [], 0, "NONE"];
 {_x setBehaviour "CARELESS"} forEach [_leader,_enemy];
 
 _leader addEventHandler ["FiredNear", {

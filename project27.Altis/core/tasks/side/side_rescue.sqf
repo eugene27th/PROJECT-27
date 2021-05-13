@@ -25,7 +25,7 @@ private _picture = getText(configfile >> "CfgVehicles" >> typeOf _heli >> "edito
 uiSleep 3;
 
 private _pilot_position = (position _heli) findEmptyPosition [10,200,"B_Survivor_F"];
-private _pilot = (createGroup civilian) createUnit [getText(configfile >> "CfgVehicles" >> typeOf _heli >> "crew"),_pilot_position, [], 0, "NONE"];
+private _pilot = (createGroup [civilian, true]) createUnit [getText(configfile >> "CfgVehicles" >> typeOf _heli >> "crew"),_pilot_position, [], 0, "NONE"];
 _pilot setCaptive true;
 removeAllWeapons _pilot;
 _pilot setBehaviour "CARELESS";
@@ -44,7 +44,7 @@ _trg attachTo [_pilot, [0, 0, 0]];
 private _enemies = [];
 
 for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
-    private _grpname = createGroup independent;
+    private _grpname = createGroup [independent, true];
     private _pos = [_pilot_position, 50, 150, 1, 0] call BIS_fnc_findSafePos;
     private _unit = _grpname createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
     _enemies pushBack _unit;
