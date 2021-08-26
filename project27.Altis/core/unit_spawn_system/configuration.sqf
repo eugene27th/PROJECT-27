@@ -69,6 +69,8 @@ switch (worldName) do {
 		hills_civilian = [[0],[0],[0]];
 		vegetation_civilian = [[0],[0],[0]];
 		other_civilian = [[0],[0],[0]];
+		//camps
+		camps_enemy = [[0],[4,2],[2,0.4],[2,0.3],[2,1]];
 	};
 };
 

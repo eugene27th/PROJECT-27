@@ -9,423 +9,6 @@ prj_fnc_vehicle_shop_window = {
 		"_vehiclearray","_spawnobject"
 	];
 
-	private _land_vehicles = [
-		["Land_CanisterFuel_F",10,0],
-		["ACE_Wheel",20,0],
-		["ACE_Track",50,0],
-		["Land_WoodenCrate_01_F",500,0],
-		["B_supplyCrate_F",100,0],
-		["C_IDAP_supplyCrate_F",300,0],
-		["C_Quadbike_01_F",0,0],
-		["C_Hatchback_01_F",1000,0],
-		["I_C_Offroad_02_unarmed_F",2000,0],
-		["C_SUV_01_F",2500,0],
-		["C_Offroad_02_unarmed_F",3000,0],
-		["rhs_uaz_vdv",700,0],
-		["rhs_uaz_open_vdv",700,0],
-		["rhsusf_mrzr4_d",2500,0],
-		["C_Hatchback_01_sport_F",1200,0],
-		["C_Offroad_01_covered_F",3500,0],
-		["C_Offroad_01_F",3000,0],
-		["C_Van_01_transport_F",4000,0],
-		["C_Van_01_box_F",3500,0],
-		["C_Van_02_transport_F",4000,0],
-		["C_Van_02_vehicle_F",4000,0],
-		["C_Truck_02_transport_F",3200,0],
-		["RHS_Ural_Open_Civ_01",2900,0],
-		["RHS_Ural_Civ_01",2900,0],
-		["B_CTRG_LSV_01_light_F",5000,0],
-		["O_LSV_02_unarmed_F",5000,0],
-		["rhs_pts_vmf",15000,0],
-		["rhsusf_m998_d_2dr",4300,0],
-		["rhsusf_m998_w_2dr",4300,0],
-		["rhsgref_hidf_M998_2dr",4300,0],
-		["rhsusf_m998_d_2dr_halftop",4500,0],
-		["rhsusf_m998_w_2dr_halftop",4500,0],
-		["rhsgref_hidf_M998_2dr_halftop",4500,0],
-		["rhssaf_army_o_m998_olive_2dr_halftop",4500,0],
-		["rhsusf_m998_d_2dr_fulltop",4800,0],
-		["rhsusf_m998_w_2dr_fulltop",4800,0],
-		["rhsgref_hidf_M998_2dr_fulltop",4800,0],
-		["rhssaf_army_o_m998_olive_2dr_fulltop",4800,0],
-		["rhsusf_m998_d_4dr",4900,0],
-		["rhsusf_m998_w_4dr",4900,0],
-		["rhsgref_hidf_m998_4dr",4900,0],
-		["rhsusf_m998_d_4dr_halftop",5000,0],
-		["rhsusf_m998_w_4dr_halftop",5000,0],
-		["rhsgref_hidf_M998_4dr_halftop",5000,0],
-		["rhsusf_m998_d_4dr_fulltop",5200,0],
-		["rhsusf_m998_w_4dr_fulltop",5200,0],
-		["rhsgref_hidf_M998_4dr_fulltop",5200,0],
-		["rhs_D30_at_msv",2000,0],
-		["rhs_D30_msv",5500,0],
-		["rhs_gaz66_vdv",2700,0],
-		["rhs_gaz66_flat_vdv",1700,0],
-		["rhs_gaz66o_vdv",2600,0],
-		["rhs_gaz66o_flat_vdv",1600,0],
-		["rhs_gaz66_r142_vdv",10000,0],
-		["rhs_gaz66_repair_vdv",12000,0],
-		["rhs_gaz66_ap2_vdv",14000,0],
-		["rhs_gaz66_ammo_vdv",20000,0],
-		["rhs_zil131_vdv",3100,0],
-		["rhs_zil131_open_vdv",3000,0],
-		["rhs_zil131_flatbed_vdv",2000,0],
-		["rhs_kamaz5350_vdv",3400,0],
-		["rhs_kamaz5350_flatbed_cover_vdv",2400,0],
-		["rhs_kamaz5350_open_vdv",3200,0],
-		["rhs_kamaz5350_flatbed_vdv",2400,0],
-		["RHS_Ural_VDV_01",3400,0],
-		["RHS_Ural_Flat_VDV_01",2400,0],
-		["RHS_Ural_Open_VDV_01",3200,0],
-		["RHS_Ural_Open_Flat_VDV_01",2200,0],
-		["RHS_Ural_Fuel_VDV_01",24000,0],
-		["rhs_kraz255b1_bmkt_vv",2400,0],
-		["rhs_kraz255b1_flatbed_vv",3400,0],
-		["rhs_kraz255b1_pmp_vv",2400,0],
-		["rhsusf_M1084A1R_SOV_M2_d_fmtv_socom",6400,0],
-		["rhsusf_M1078A1R_SOV_M2_d_fmtv_socom",6400,0],
-		["rhsusf_M1078A1P2_WD_fmtv_usarmy",6800,0],
-		["rhsusf_M1078A1P2_WD_flatbed_fmtv_usarmy",6800,0],
-		["rhsusf_M1083A1P2_WD_fmtv_usarmy",5900,0],
-		["rhsusf_M1083A1P2_WD_flatbed_fmtv_usarmy",4900,0],
-		["rhsusf_M1084A1P2_WD_fmtv_usarmy",4400,0],
-		["rhsusf_M977A4_usarmy_wd",6500,0],
-		["rhsusf_M977A4_AMMO_usarmy_wd",26500,0],
-		["rhsusf_M977A4_REPAIR_usarmy_wd",21000,0],
-		["rhsusf_M978A4_usarmy_wd",27000,0],
-		["B_G_Offroad_01_repair_F",15000,0],
-		["B_G_Van_01_fuel_F",10000,0],	
-		["I_C_Offroad_02_LMG_F",8200,1],
-		["I_C_Offroad_02_AT_F",9500,1],
-		["rhsusf_m1025_d",8200,1],
-		["rhsusf_m1025_w",8200,1],
-		["rhsgref_hidf_m1025",8200,1],
-		["rhssaf_army_o_m1025_olive",8200,1],
-		["rhsusf_m1025_d_m2",17500,1],
-		["rhsusf_m1025_w_m2",17600,1],
-		["rhsgref_hidf_m1025_m2",17600,1],
-		["rhssaf_army_o_m1025_olive_m2",17600,1],
-		["rhsusf_m1025_d_Mk19",23700,1],
-		["rhsusf_m1025_w_Mk19",23700,1],
-		["rhsgref_hidf_m1025_mk19",23700,1],
-		["O_T_Truck_02_fuel_F",14800,1],
-		["rhsusf_M1078A1P2_B_WD_fmtv_usarmy",5900,1],
-		["rhsusf_M1078A1P2_B_M2_WD_fmtv_usarmy",12200,1],
-		["rhsusf_M1078A1P2_B_M2_WD_flatbed_fmtv_usarmy",7400,1],
-		["rhsusf_M1078A1P2_B_WD_flatbed_fmtv_usarmy",3000,1],
-		["rhsusf_M1078A1P2_B_WD_CP_fmtv_usarmy",23900,1],
-		["rhsusf_M1083A1P2_B_WD_fmtv_usarmy",5600,1],
-		["rhsusf_M1083A1P2_B_M2_WD_fmtv_usarmy",16100,1],
-		["rhsusf_M1083A1P2_B_WD_flatbed_fmtv_usarmy",4700,1],
-		["rhsusf_M1083A1P2_B_M2_WD_flatbed_fmtv_usarmy",15000,1],
-		["rhsusf_M1084A1P2_B_WD_fmtv_usarmy",4000,1],
-		["rhsusf_M1084A1P2_B_M2_WD_fmtv_usarmy",12000,1],
-		["rhsusf_M1085A1P2_B_WD_Medical_fmtv_usarmy",21000,1],
-		["rhsusf_M977A4_BKIT_usarmy_wd",3300,1],
-		["rhsusf_M977A4_REPAIR_BKIT_usarmy_wd",21300,1],
-		["rhsusf_M978A4_BKIT_usarmy_wd",25300,1],
-		["rhsusf_M977A4_AMMO_BKIT_usarmy_wd",28100,1],
-		["rhsusf_m1043_d",11400,1],
-		["rhsusf_m1043_w",11400,1],
-		["rhsusf_m1151_usarmy_wd",13800,1],
-		["rhsusf_m1151_usarmy_d",13800,1],
-		["rhssaf_army_o_m1151_olive",13800,1],
-		["rhsusf_m1152_usarmy_wd",10500,1],
-		["rhsusf_m1152_usarmy_d",10500,1],
-		["rhssaf_army_o_m1152_olive",10500,1],
-		["rhsusf_m1165_usarmy_wd",11500,1],
-		["rhsusf_m1165_usarmy_d",11500,1],
-		["rhsusf_m1152_rsv_usarmy_wd",14700,1],
-		["rhsusf_m1152_rsv_usarmy_d",14700,1],
-		["rhsusf_m1152_sicps_usarmy_wd",18300,1],
-		["rhsusf_m1152_sicps_usarmy_d",18300,1],
-		["rhs_tigr_vdv",9500,1],
-		["rhs_tigr_3camo_vdv",10700,1],
-		["O_MRAP_02_F",12500,1],
-		["O_T_MRAP_02_ghex_F",12500,1],
-		["rhs_typhoon_vdv",17200,1],
-		["rhs_tigr_m_vdv",10700,1],
-		["rhs_tigr_m_3camo_vdv",10900,1],
-		["I_MRAP_03_F",12500,1],
-		["rhsusf_CGRCAT1A2_usmc_wd",16400,1],
-		["rhsusf_M1238A1_socom_d",18600,1],
-		["rhsusf_M1239_socom_d",21000,1],
-		["rhsusf_M1239_M2_deploy_socom_d",21000,1],
-		["rhsusf_M1220_usarmy_d",26000,1],
-		["rhsusf_M1220_usarmy_wd",26000,1],
-		["rhsusf_M1220_MK19_usarmy_d",28300,1],
-		["rhsusf_M1220_MK19_usarmy_wd",28300,1],
-		["rhsusf_M1230a1_usarmy_d",32000,1],
-		["rhsusf_M1230a1_usarmy_wd",32000,1],
-		["rhsusf_M1232_usarmy_d",31000,1],
-		["rhsusf_M1232_usarmy_wd",31000,1],
-		["rhsusf_m1240a1_usarmy_d",26700,1],
-		["LOP_NK_T34",82000,1],
-		["rhsusf_m1043_d_m2",15900,1],
-		["rhsusf_m1043_w_m2",15900,1],
-		["rhsusf_m1043_d_mk19",21200,1],
-		["rhsusf_m1043_w_mk19",21200,1],
-		["rhssaf_army_o_m1151_olive_pkm",19500,1],
-		["rhsusf_m1151_m240_v1_usarmy_wd",19500,1],
-		["rhsusf_m1151_m240_v1_usarmy_d",19500,1],
-		["rhsusf_m1151_m2_v1_usarmy_wd",20700,1],
-		["rhsusf_m1151_m2_v1_usarmy_d",20700,1],
-		["rhsusf_m1151_m2_lras3_v1_usarmy_wd",27800,1],
-		["rhsusf_m1151_m2_lras3_v1_usarmy_d",27800,1],
-		["rhsusf_m1151_mk19_v1_usarmy_wd",25200,1],
-		["rhsusf_m1151_mk19_v1_usarmy_d",25200,1],
-		["rhs_tigr_sts_vdv",30100,1],
-		["rhs_tigr_sts_3camo_vdv",31400,1],	
-		["rhsusf_M977A4_BKIT_M2_usarmy_wd",16800,1],
-		["rhsusf_M977A4_AMMO_BKIT_M2_usarmy_wd",38000,1],
-		["rhsusf_M977A4_REPAIR_BKIT_M2_usarmy_wd",32000,1],
-		["rhsusf_m1151_m240_v2_usarmy_wd",25100,1],
-		["rhsusf_m1151_m240_v2_usarmy_d",25100,1],
-		["rhsusf_m1165_asv_m240_usaf_d",26300,1],
-		["rhsusf_m1151_m2_v2_usarmy_wd",28900,1],
-		["rhsusf_m1151_m2_v2_usarmy_d",27900,1],
-		["rhsusf_m1151_mk19_v2_usarmy_wd",31000,1],
-		["rhsusf_m1151_mk19_v2_usarmy_d",31000,1],
-		["rhsusf_m1165a1_gmv_m2_m240_socom_d",34000,1],
-		["rhsusf_m1165a1_gmv_mk19_m240_socom_d",36000,1],
-		["rhsusf_m113_usarmy_unarmed",43000,1],
-		["rhsusf_m113d_usarmy_unarmed",43000,1],
-		["rhsusf_m1151_m2crows_usarmy_wd",35000,1],
-		["rhsusf_m1151_m2crows_usarmy_d",35000,1],
-		["rhsusf_m1151_mk19crows_usarmy_wd",37100,1],
-		["rhsusf_m1151_mk19crows_usarmy_d",37100,1],
-		["rhsusf_m1165a1_gmv_m134d_m240_socom_d",40000,1],
-		["rhsusf_CGRCAT1A2_M2_usmc_wd",21200,1],
-		["rhsusf_CGRCAT1A2_Mk19_usmc_wd",25000,1],
-		["rhsusf_M1238A1_M2_socom_d",26300,1],
-		["rhsusf_M1238A1_Mk19_socom_d",29800,1],
-		["rhsusf_M1239_M2_socom_d",25000,1],
-		["rhsusf_M1239_MK19_socom_d",28000,1],
-		["rhsusf_M1220_M153_M2_usarmy_d",36600,1],
-		["rhsusf_M1220_M153_M2_usarmy_wd",36600,1],
-		["rhsusf_M1220_M2_usarmy_d",31200,1],
-		["rhsusf_M1220_M2_usarmy_wd",31200,1],
-		["rhsusf_M1220_M153_MK19_usarmy_d",38900,1],
-		["rhsusf_M1220_M153_MK19_usarmy_wd",38900,1],
-		["rhsusf_M1239_MK19_deploy_socom_d",30100,1],
-		["rhsusf_M1230_M2_usarmy_d",45000,1],
-		["rhsusf_M1230_M2_usarmy_wd",40300,1],
-		["rhsusf_M1230_MK19_usarmy_d",44500,1],
-		["rhsusf_M1230_MK19_usarmy_wd",44800,1],
-		["rhsusf_M1232_M2_usarmy_d",37800,1],
-		["rhsusf_M1232_M2_usarmy_wd",37800,1],
-		["rhsusf_M1232_MK19_usarmy_d",41300,1],
-		["rhsusf_M1232_MK19_usarmy_wd",41300,1],
-		["rhsusf_M1237_M2_usarmy_d",37200,1],
-		["rhsusf_M1237_M2_usarmy_wd",37200,1],
-		["rhsusf_M1237_MK19_usarmy_d",42500,1],
-		["rhsusf_M1237_MK19_usarmy_wd",42500,1],
-		["rhsusf_m113_usarmy_supply",58900,1],
-		["rhsusf_m113d_usarmy_supply",58900,1],
-		["rhsusf_m1240a1_m240_usarmy_d",31400,1],
-		["rhsusf_m1240a1_m240_usarmy_wd",30800,1],
-		["rhsusf_m1240a1_m2_usarmy_d",34500,1],
-		["rhsusf_m1240a1_m2_usarmy_wd",34500,1],
-		["rhsusf_m1240a1_mk19_usarmy_d",39600,1],
-		["rhsusf_m1240a1_mk19_usarmy_wd",39600,1],
-		["rhsusf_m113_usarmy_M240",45600,2],
-		["rhsusf_m113_usarmy_MK19",49400,2],
-		["rhsusf_m113d_usarmy_M240",45600,2],
-		["rhsusf_m113d_usarmy_MK19",49400,2],
-		["rhsusf_m1240a1_m240_uik_usarmy_wd",32200,2],
-		["rhsusf_m1240a1_m240_uik_usarmy_d",33100,2],
-		["rhsusf_m1240a1_m2_uik_usarmy_wd",36300,2],
-		["rhsusf_m1240a1_m2_uik_usarmy_d",36300,2],
-		["rhsusf_m1240a1_mk19_uik_usarmy_wd",39000,2],
-		["rhsusf_m1240a1_mk19_uik_usarmy_d",39000,2],
-		["rhsusf_M1117_d",56000,2],
-		["rhsusf_M1117_O",56000,2],
-		["rhsusf_M1117_W",56000,2],
-		["rhsusf_m1240a1_m2crows_usarmy_d",38400,2],
-		["rhsusf_m1240a1_m2crows_usarmy_wd",38400,2],
-		["rhsusf_m1240a1_mk19crows_usarmy_d",43000,2],
-		["rhsusf_m1240a1_mk19crows_usarmy_wd",43000,2],
-		["rhsusf_m113_usarmy",52000,2],
-		["rhsusf_m113d_usarmy",52000,2],
-		["rhsgref_BRDM2_vdv",35000,2],
-		["rhs_btr60_vdv",45000,2],
-		["rhsusf_m1240a1_m2crows_usarmy_wd",39800,2],
-		["rhsusf_m1240a1_m2crows_usarmy_d",39800,2],
-		["rhsusf_m1240a1_mk19crows_usarmy_wd",41600,2],
-		["rhsusf_m1240a1_mk19crows_usarmy_d",41600,2],
-		["rhs_btr70_vdv",48200,2],
-		["rhsusf_m966_w",45000,2],
-		["rhsusf_m1245_m2crows_socom_deploy",44500,2],
-		["rhsusf_m1245_mk19crows_socom_deploy",48500,2],
-		["rhs_btr80_vdv",52000,2],
-		["rhsgref_BRDM2_ATGM_vdv",40000,2],
-		["rhsusf_m1045_w",49700,3],
-		["rhsusf_stryker_m1126_m2_wd",60000,3],
-		["rhsusf_stryker_m1127_m2_wd",63000,3],	
-		["rhsusf_stryker_m1132_m2_wd",65000,3],
-		["rhsusf_stryker_m1134_wd",65000,3],
-		["I_LT_01_cannon_F",65000,3],
-		["I_LT_01_AT_F",66000,3],
-		["I_LT_01_AA_F",67000,3],
-		["rhs_brm1k_tv",66100,3],
-		["rhsusf_stryker_m1126_mk19_wd",67000,3],
-		["rhs_bmp1_tv",65000,3],
-		["rhs_bmp1k_tv",66000,3],
-		["rhs_bmp1p_tv",67000,3],
-		["rhs_bmp1d_tv",70000,3],
-		["rhs_prp3_tv",71000,3],
-		["rhs_btr80a_vdv",78000,3],
-		["rhs_bmd1r",50000,4],
-		["rhs_bmd1k",55500,4],
-		["rhs_bmd1pk",57000,4],
-		["rhs_bmd1",59000,4],
-		["rhs_bmd1p",60000,4],
-		["rhs_bmd2k",74000,4],
-		["rhs_bmd2",74000,4],
-		["rhs_bmd2m",77000,4],
-		["rhs_zsu234_aa",60300,4],
-		["rhs_bmd4_vdv",80000,4],
-		["rhs_bmd4m_vdv",83000,4],
-		["rhs_bmd4ma_vdv",85000,4],
-		["rhs_bmp2e_tv",80000,4],
-		["rhs_bmp2_tv",80400,4],
-		["rhs_bmp2k_tv",81800,4],
-		["rhs_bmp2d_tv",85000,4],
-		["LOP_NK_T55",87700,4],
-		["RHS_M2A2_wd",89000,5],
-		["RHS_M2A2",89000,5],
-		["RHS_M2A3_wd",91000,5],
-		["RHS_M2A3",91000,5],
-		["RHS_M6_wd",91000,5],
-		["RHS_M6",91000,5],
-		["rhs_sprut_vdv",96000,5],
-		["B_APC_Wheeled_01_cannon_F",100000,5],
-		["B_T_APC_Wheeled_01_cannon_F",100000,5],
-		["RHS_BM21_MSV_01",100000,6],
-		["RHS_M2A2_BUSKI_WD",105000,6],
-		["RHS_M2A2_BUSKI",105000,6],
-		["RHS_M2A3_BUSKI_wd",110000,6],
-		["RHS_M2A3_BUSKI",110000,6],
-		["RHS_M2A3_BUSKIII_wd",115000,6],
-		["RHS_M2A3_BUSKIII",115000,6],
-		["rhs_t72ba_tv",120000,6],
-		["rhs_2s1_at_tv",100000,6],
-		["rhs_2s1_tv",123000,6],
-		["rhs_2s3_at_tv",100000,6],
-		["rhs_2s3_tv",123000,6],
-		["rhs_t80",127000,6],
-		["rhs_t80b",130000,6],
-		["rhs_t80bk",130000,6],
-		["rhs_t80a",133000,6],
-		["rhs_t80bv",134000,6],
-		["rhs_t72bb_tv",134000,6],
-		["rhs_t72bc_tv",134000,6],
-		["rhs_t80bvk",136000,6],	
-		["rhsusf_M142_usmc_WD",138000,6],
-		["rhsusf_M142_usarmy_WD",138000,6],
-		["rhsusf_M142_usarmy_D",138000,6],
-		["rhsusf_m109_usarmy",145000,6],
-		["rhsusf_m109d_usarmy",145000,6],
-		["rhs_t80u",145000,6],
-		["rhs_t80u45m",149000,6],
-		["rhs_t90_tv",165000,6],
-		// появилась агава
-		["rhs_t80um",150000,7],
-		["rhs_t80uk",150000,7],
-		//
-		["rhssaf_army_o_t72s",155000,7],
-		["rhs_t80ue1",160000,7],
-		["rhs_t72bd_tv",162000,7],
-		["rhs_t72be_tv",170000,8],
-		["rhs_t90a_tv",175000,7],
-		["rhsusf_m1a1hc_wd",180000,7],
-		["rhsusf_m1a1fep_wd",183000,7],
-		["rhsusf_m1a1fep_od",183000,7],
-		["rhs_t90saa_tv",180000,8],
-		["rhs_t90sab_tv",182000,8],
-		["rhsusf_m1a1aimwd_usarmy",185000,8],
-		["rhsusf_m1a1aimd_usarmy",185000,8],
-		["rhsusf_m1a2sep1d_usarmy",190000,8],
-		["rhsusf_m1a2sep1wd_usarmy",190000,8],
-		["rhsusf_m1a1aim_tuski_d",195500,9],
-		["rhsusf_m1a1aim_tuski_wd",197500,9],
-		["rhs_t90am_tv",197500,9],
-		["rhs_t90sm_tv",198000,10],
-		["rhs_t15_tv",115000,10],
-		["rhsusf_m1a2sep1tuskid_usarmy",200000,10],
-		["rhsusf_m1a2sep1tuskiwd_usarmy",200000,10],	
-		["rhsusf_m1a2sep1tuskiiwd_usarmy",210000,10],
-		["rhsusf_m1a2sep1tuskiid_usarmy",210000,10],
-		["rhs_t14_tv",210000,10]
-	];
-	private _air_vehicles = [
-		["C_Quadbike_01_F",0,0],
-		["RHS_AN2_B",18000,0],
-		["C_Plane_Civil_01_F",14000,0],
-		["C_Heli_Light_01_civil_F",17000,0],
-		["rhs_uh1h_hidf_unarmed",22000,1],
-		["RHS_Mi8t_civilian",31700,1],
-		["RHS_Mi8amt_civilian",34200,1],		
-		["RHS_Mi8mt_vvs",33000,2],
-		["RHS_Mi8mt_vvsc",34000,2],	
-		["I_Heli_light_03_unarmed_F",35000,2],
-		["RHS_Mi8mt_Cargo_vvs",36000,2],
-		["RHS_Mi8mt_Cargo_vvsc",37000,2],
-		["O_Heli_Transport_04_bench_F",37000,2],
-		["RHS_MELB_H6M",37000,2],
-		["RHS_MELB_MH6M",40000,2],
-		["O_Heli_Transport_04_medevac_F",36000,3],
-		["RHS_Mi8AMT_vvs",37400,3],
-		["RHS_Mi8AMT_vvsc",38100,3],
-		["RHS_UH1Y_UNARMED_d",40500,4],
-		["O_Heli_Transport_04_covered_F",41000,4],
-		["RHS_CH_47F_10",45000,4],
-		["RHS_CH_47F_light",45000,4],
-		["rhsusf_CH53E_USMC_d",65500,4],
-		["O_Heli_Transport_04_fuel_F",66000,4],
-		["O_Heli_Transport_04_repair_F",68000,4],
-		["O_Heli_Transport_04_ammo_F",70000,4],
-		["RHS_C130J",96000,4],
-		["RHS_C130J_Cargo",99000,4],
-		["rhs_ka60_grey",30000,5],
-		["rhs_ka60_c",30000,5],
-		["I_Heli_Transport_02_F",32000,5],
-		["RHS_UH60M2",35000,5],
-		["RHS_UH60M_MEV2",37000,5],
-		["RHS_UH60M",38000,5],
-		["RHS_UH60M_ESSS2",42700,5],
-		["RHS_UH60M_ESSS",45000,5],
-		["RHS_MELB_AH6M",37900,5],
-		["RHS_UH1Y_FFAR_d",52000,5],
-		["RHS_UH1Y_d",55000,5],
-		["RHS_Mi8MTV3_vvs",68500,6],
-		["RHS_Mi8MTV3_vvsc",68500,6],
-		["RHS_Mi8AMTSh_vvs",79500,6],
-		["RHS_Mi8AMTSh_vvsc",79500,6],
-		["RHS_Mi24P_vvs",110000,7],
-		["RHS_Mi24P_vvsc",110000,7],
-		["RHS_Mi24V_vvs",120000,7],
-		["RHS_Mi24V_vvsc",122000,7],
-		["RHSGREF_A29B_HIDF",80000,8],
-		["RHS_Su25SM_vvs",160000,8],
-		["RHS_Su25SM_vvsc",161000,8],
-		["rhs_mi28n_vvs",184000,8],
-		["rhs_mi28n_vvsc",185000,8],
-		["rhs_l159_cdf_b_CDF",190000,8],
-		["RHS_AH1Z",190000,9],
-		["RHS_Ka52_vvsc",190000,9],
-		["RHS_Ka52_vvs",190000,9],
-		["RHS_AH64D",205000,9],
-		["RHS_AH64DGrey",207000,9],
-		["RHS_A10",220000,9],
-		["rhs_mig29s_vmf",210000,10],
-		["rhs_mig29s_vvsc",210000,10],
-		["rhs_mig29sm_vmf",260000,10],
-		["rhs_mig29sm_vvsc",260000,10],
-		["rhsusf_f22",230000,10],
-		["RHS_T50_vvs_generic_ext",227000,10]
-	];
-
 	objectspawn = _spawnobject;
 
 	createDialog "dialogVehicleShop";
@@ -469,18 +52,14 @@ prj_fnc_vehicle_shop_window = {
 			if ((_x select 1) != 0) then {
 				if (_money < (_x select 1)) then {
 					lbSetColorRight [1012, _forEachIndex + 1, [0.92, 0.13, 0.13, 1]];
-				}
-				else
-				{
+				} else {
 					lbSetColorRight [1012, _forEachIndex + 1, [0.04, 0.67, 0, 1]];
 				};
-			}
-			else
-			{
+			} else {
 				lbSetColorRight [1012, _forEachIndex + 1, [0.82, 0.78, 0.04, 1]];
 			};
 		};
-	} forEach (if (_vehiclearray) then {_land_vehicles} else {_air_vehicles});
+	} forEach (if (_vehiclearray) then {shop_land_vehicles} else {shop_air_vehicles});
 };
 
 prj_fnc_show_vehicle_picture = {
@@ -502,17 +81,13 @@ prj_fnc_show_vehicle_picture = {
 			_ctrlprice ctrlSetTextColor [1, 0, 0, 1];
 			ctrlEnable [1008, false];
 			ctrlSetText [1008, "UNDERFUNDED"];
-		}
-		else
-		{
+		} else {
 			ctrlSetText [1009, "PRICE: " + str (_data select 1)];
 			_ctrlprice ctrlSetTextColor [0, 1, 0, 1];
 			ctrlEnable [1008, true];
 			ctrlSetText [1008, "BUY"];
 		};
-	}
-	else
-	{
+	} else {
 		ctrlSetText [1009, "FREE"];
 		_ctrlprice ctrlSetTextColor [0, 1, 0, 1];
 		ctrlEnable [1008, true];
@@ -546,7 +121,7 @@ prj_fnc_spawn_vehicle = {
 		[_vehicle, "blue", "orange", "green"] call BIS_fnc_DataTerminalColor;
 		[_vehicle, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
 
-		remoteExecCall ["prj_fnc_add_mhq_action",0,true];
+		remoteExecCall ["prj_fnc_add_mhq_action",0,_vehicle];
 	};
 
 	if ((_data # 0) == "C_IDAP_supplyCrate_F") then {
@@ -634,9 +209,7 @@ prj_fnc_tpmhq = {
 	if ((mhqterminal animationPhase "lid_rot_1") != 0) then {
 		player setposATL ((getpos mhqterminal) findEmptyPosition [ 0 , 15 , "B_soldier_F" ]);
 		closeDialog 2;
-	}
-	else
-	{
+	} else {
 		hintC (localize "STR_PRJ_MHQ_IS_NOT_DEPLOYED");
 		hintC_EH = findDisplay 57 displayAddEventHandler ["unload", {
 			0 = _this spawn {
@@ -659,9 +232,7 @@ prj_fnc_bank_menu = {
 
 	if (_money >= 0) then {
 		_ctrl ctrlSetTextColor [0.2, 0.7, 0.18, 1];
-	}
-	else
-	{
+	} else {
 		_ctrl ctrlSetTextColor [0.82, 0.17, 0.17, 1];
 	};
 
@@ -708,9 +279,7 @@ prj_fnc_btn_transfer_points = {
 
 	if (_money >= 0) then {
 		_ctrl ctrlSetTextColor [0.2, 0.7, 0.18, 1];
-	}
-	else
-	{
+	} else {
 		_ctrl ctrlSetTextColor [0.82, 0.17, 0.17, 1];
 	};
 };
@@ -787,9 +356,7 @@ prj_fnc_upgrade = {
 
 	if (_intel_score < (_next_level * 200)) then {
 		hint localize "STR_PRJ_DONT_HAVE_IS"
-	}
-	else
-	{
+	} else {
 		[missionNamespace,["intel_score",(_intel_score - (_next_level * 200)),true]] remoteExec ["setVariable",2];
 		[missionNamespace,[_variable,_next_level,true]] remoteExec ["setVariable",2];
 
@@ -865,9 +432,7 @@ prj_fnc_vehicle_menu_window = {
 		private _text = "sell a vehicle - " + str _vehicle_price + " points";
 		_ctrl ctrlSetText _text;
 		_ctrl ctrlSetTextColor [0.2,0.7,0,1];
-	}
-	else
-	{
+	} else {
 		ctrlEnable [1050, false];
 		private _ctrl = (findDisplay 3003) displayCtrl 1050;
 		private _text = "the vehicle is not for sale";
@@ -1125,9 +690,7 @@ prj_fnc_load_item_to_cargo = {
 		case "Equipment": {
 			if ((_typeofitem  # 1) == "Backpack") then {
 				_car addBackpackCargoGlobal [_item,_coef];
-			}
-			else
-			{
+			} else {
 				_car addItemCargoGlobal [_item,_coef];
 			}
 		};
@@ -1225,9 +788,7 @@ prj_fnc_slideMonitorMenu = {
 	private "_text";
 	if (isNil "_currentSlide") then {
 		_text = "титульный слайд"
-	}
-	else
-	{
+	} else {
 		_text = str (_textures # _currentSlide)
 	};
 

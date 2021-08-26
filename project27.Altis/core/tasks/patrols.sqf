@@ -48,6 +48,13 @@ while {true} do {
 						case _waitingTime: {
 							["", "Patrol started. Time: " + str (_waitingTime/60) + " minutes."] remoteExec ["BIS_fnc_showSubtitle",0];
 						};
+
+						case 3: {
+							private _number = [2,3] call BIS_fnc_randomInt;
+							private _vehicles = [_pos,[1500,2500],_number] call prj_fnc_reinforcement;
+							[_vehicles,600,60,2500] spawn prj_fnc_check_and_delete;
+						};
+
 						case 0: {
 							["", "Patrol completed successfully. Waiting for next zone..."] remoteExec ["BIS_fnc_showSubtitle",0];
 							[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;

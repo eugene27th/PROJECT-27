@@ -8,7 +8,7 @@ loadScreen = "img\preview.paa";
 overviewText    = "Fictional armed conflict. Tactical military sandbox.";
 overviewPicture = "img\preview.paa";
 
-enableDebugConsole[] = { "76561198141746661", "76561198138702011", "76561198061237087" };
+enableDebugConsole[] = { "76561198141746661", "76561198138702011", "76561198060515006" };
 
 class Params
 {
@@ -17,7 +17,7 @@ class Params
 		title = "load save automatically (recommended for dedicated)";
 		values[] = { 1, 0 };
 		texts[] = { "Yes", "No" };
-		default = 0;
+		default = 1;
 	};
 
 	class enemycoef
@@ -49,7 +49,7 @@ class Params
 		title = "Patrol time";
 		values[] = { 300, 600, 900 };
 		texts[] = { "5 minutes", "10 minutes", "15 minutes" };
-		default = 300;
+		default = 600;
 	};
 
 
@@ -96,9 +96,9 @@ class Params
 	class preset_units
 	{
 		title = "Preset units";
-		values[] = { 0, 1, 2, 3 };
-		texts[] = { "Middle east", "European aggressor", "Syndikat", "Middle east (+CUP)" };
-		default = 1;
+		values[] = { 0, 1, 2, 3, 4, 5 };
+		texts[] = { "Middle east", "European aggressor", "Syndikat", "Middle east (+CUP)", "European aggressor (+CUP)", "Regular Salyanka Army (+CUP)" };
+		default = 0;
 	};
 
 	class capture_of_sectors

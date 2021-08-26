@@ -43,12 +43,8 @@ _trg attachTo [_pilot, [0, 0, 0]];
 
 private _enemies = [];
 
-for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
-    private _grpname = createGroup [independent, true];
-    private _pos = [_pilot_position, 50, 150, 1, 0] call BIS_fnc_findSafePos;
-    private _unit = _grpname createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
-    _enemies pushBack _unit;
-};
+_enemies = _enemies + ([_pos] call prj_fnc_enemy_crowd);
+_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_enemy_patrols);
 
 {_x lookAt _heli} forEach _enemies;
 

@@ -49,9 +49,7 @@ prj_fnc_selectPosition = {
 	if !(_nearest isEqualTo []) then {
 		_filtered_locations = [_locations, [], { (position spawn_zone) distance (locationPosition _x) }, "ASCEND"] call BIS_fnc_sortBy;
 		_selected_pos = locationPosition (_filtered_locations # (_nearest call BIS_fnc_randomInt));
-	}
-	else
-	{
+	} else {
 		_selected_pos = locationPosition (selectRandom _locations);
 	};
 
@@ -85,9 +83,7 @@ prj_fnc_selectCaptPosition = {
 	if !(_nearest isEqualTo []) then {
 		_filtered_locations = [_filtered_locations, [], { (position spawn_zone) distance (position _x) }, "ASCEND"] call BIS_fnc_sortBy;
 		_selected_pos = position (_filtered_locations # (_nearest call BIS_fnc_randomInt));
-	}
-	else
-	{
+	} else {
 		_selected_pos = position (selectRandom _filtered_locations);
 	};
 
@@ -117,9 +113,7 @@ prj_fnc_select_road_position = {
 		private _connectedRoad = _roadConnectedTo select 0;
 		private _direction = _road getDir _connectedRoad;
 		_returndata = [_pos,_direction];
-	}
-	else
-	{
+	} else {
 		private _pos = [_pos, round ((_radius / 100) * 10), _radius, 3, 0] call BIS_fnc_findSafePos;
 		private _direction = round (random 360);
 		_returndata = [_pos,_direction];
@@ -147,14 +141,91 @@ prj_fnc_select_road_position_around = {
 		private _connectedRoad = _roadConnectedTo select 0;
 		private _direction = _road getDir _connectedRoad;
 		_returndata = [_pos,_direction];
-	}
-	else
-	{
+	} else {
 		private _pos = [_pos, _radius # 0, _radius # 1, 3, 0] call BIS_fnc_findSafePos;
 		private _direction = round (random 360);
 		_returndata = [_pos,_direction];
 	};
 	_returndata
+};
+
+prj_fnc_enemy_crowd = {
+    params ["_pos",["_radius",[4,15]],["_number_of",[10,15]]];
+  
+    private _units = [];
+
+	private _ground_enemies_grp = createGroup [independent, true];
+
+    for [{private _i = 0 }, { _i < (_number_of call BIS_fnc_randomInt) }, { _i = _i + 1 }] do {
+        private _position = [_pos, _radius call BIS_fnc_randomInt, [0,359] call BIS_fnc_randomInt] call BIS_fnc_relPos;
+        private _unit = _ground_enemies_grp createUnit [selectRandom enemy_infantry, _position, [], 0, "NONE"];
+        doStop _unit;
+        _unit setDir (round (random 360));
+
+        _units pushBack _unit;
+    };
+
+    _units
+};
+
+prj_fnc_enemy_patrols = {
+	params ["_cpos","_radius","_inf",["_voice",false]];
+
+	prj_fnc_number_of_units = {
+		params ["_number"];
+
+		private _number_result = switch (_number) do {
+			case 0: {1};
+			case 1: {[2,4] call BIS_fnc_randomInt};
+			case 2: {[4,8] call BIS_fnc_randomInt};
+			case 3: {[8,12] call BIS_fnc_randomInt};
+			default {1};
+		};
+		_number_result
+	};
+
+	private _units = [];
+
+	if ((_inf # 0) != 0) then {
+		for [{private _i = 0 }, { _i < (_inf # 0) }, { _i = _i + 1 }] do {
+			private _group = createGroup [independent, true];
+			private _pos = [_cpos, 10, _radius, 1, 0] call BIS_fnc_findSafePos;
+			if (!isNil "_pos") then {
+				for [{private _i = 0 }, { _i < [(_inf # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
+					private _unit = _group createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
+					if (!_voice) then {
+						[_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit];
+					};
+					_units pushBack _unit;
+					if (prj_debug) then {"юнит патруля создан" remoteExec ["systemChat"]};
+					uiSleep 0.5;
+				};
+				_group setBehaviour "SAFE";
+				_group setSpeedMode "LIMITED";
+				_group setCombatMode "YELLOW";
+				_group setFormation (["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "DIAMOND"] call BIS_fnc_selectRandom);
+
+				//create waypoints
+				for "_i" from 1 to 5 do {
+					private _pos = [_cpos, 10, _radius, 1, 0] call BIS_fnc_findSafePos;
+					private _wp = _group addWaypoint [_pos, 0];
+					_wp setWaypointType "MOVE";
+					_wp setWaypointCompletionRadius 50;
+					_wp setWaypointTimeout [0,2,6];
+					if (prj_debug) then {"WP для группы создан" remoteExec ["systemChat"]};
+				};
+
+				private _pos_wp = [_cpos, 10, _radius, 1, 0] call BIS_fnc_findSafePos;
+
+				private _wp_cycle = _group addWaypoint [_pos_wp, 0];
+				_wp_cycle setWaypointType "CYCLE";
+				_wp_cycle setWaypointCompletionRadius 50;
+			};
+			uiSleep 0.5;
+		};
+	};
+	
+	_units
 };
 
 prj_fnc_reinforcement = {
@@ -163,21 +234,22 @@ prj_fnc_reinforcement = {
 	private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
 	private _position = _position_data # 0;
 	private _direction = _position_data # 1;
-
 	private _vehicles = [];
+
 	for "_i" from 1 to _number do {
 		private _vehClass = selectRandom enemy_vehicles_light;
-		private _safePos = _position findEmptyPosition [0,300,_vehClass];
+		private _safePos = [_position, 0, 300] call BIS_fnc_findSafePos;
 		private _vehicle = _vehClass createVehicle _safePos;
 		_vehicle setDir _direction;
 		private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
-		(crew _vehicle) doMove _pos;
+
+		private _wp = (group _crew_units) addWaypoint [_pos, 0];  
+		_wp setWaypointSpeed "FULL";  
+		_wp setWaypointType "SAD";
+
+		(group _crew_units) setCombatMode "RED";
 
 		_vehicles pushBack [_vehicle, _crew_units];
-
-		if (prj_debug) then {
-			["m_" + str (random 1000),position _vehicle,"ColorBLACK",1,[],"mil_dot","car"] call prj_fnc_create_marker;
-		};
 	};
 
 	_vehicles
@@ -201,9 +273,7 @@ prj_fnc_check_and_delete = {
 					{deleteVehicle _x} forEach _crew;
 				};	
 				_vehsArray deleteAt _i;
-			}
-			else
-			{
+			} else {
 				private _playerInVeh = false;
 				{
 					if (_vehicle == vehicle _x) exitWith {_playerInVeh = true}
@@ -213,9 +283,7 @@ prj_fnc_check_and_delete = {
 					{deleteVehicle _x} forEach _crew;
 					_vehsArray deleteAt _i;
 					systemChat "в машине подкрепления есть человек, она не пропадёт";
-				}
-				else
-				{
+				} else {
 					private _finded = false;
 					private _nearestunits = nearestObjects [position _vehicle,["Man"],2000];
 					{if (side _x == west) exitWith {_finded = true}} forEach _nearestunits;
@@ -331,7 +399,7 @@ prj_fnc_create_crew = {
 
 	if (_passengers) then {
 		
-		private _empty_seats = round (random (_vehicle emptyPositions "cargo"));
+		private _empty_seats = _vehicle emptyPositions "cargo";
 
 		for "_i" from 1 to _empty_seats do {
 			private _unit = _vehicle_group createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
@@ -488,9 +556,7 @@ prj_fnc_civ = {
 							deleteVehicle _civ;
 						};
 					};
-				}
-				else 
-				{			
+				} else {		
 					if (random 1 < 0.5) then {
 						_civ addItemToUniform "ACE_Cellphone";
 					};			
@@ -515,9 +581,7 @@ prj_fnc_civ = {
 							_civ addWeapon (_weaponchoice # 0);
 							_civ addHandgunItem (_weaponchoice # 1);
 							for "_i" from 1 to 3 do {_civ addMagazine (_weaponchoice # 1)};			
-						}
-						else
-						{
+						} else {
 							private _grenades = ["rhs_mag_rgd5","rhs_mag_f1"];
 							private _grenade = selectRandom _grenades;
 							for "_i" from 1 to 3 do {_civ addItemToUniform _grenade};

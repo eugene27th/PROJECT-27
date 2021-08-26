@@ -30,7 +30,7 @@ params ["_trg","_type","_thisList"];
 				true,
 				false
 			] call BIS_fnc_holdActionAdd;
-			waitUntil {uiSleep 1; (_x distance (getPos _trg)) > 10};
+			waitUntil {uiSleep 1; (_x distance (getPos _trg)) > 15};
 			[_x, _action] call BIS_fnc_holdActionRemove;
 		};
 		case "g_garage": {
@@ -74,7 +74,7 @@ params ["_trg","_type","_thisList"];
 				true,
 				false
 			] call BIS_fnc_holdActionAdd;
-			waitUntil {uiSleep 1; (_x distance (getPos _trg)) > 10};
+			waitUntil {uiSleep 1; (_x distance (getPos _trg)) > 15};
 			[_x, _action] call BIS_fnc_holdActionRemove;
 		};
 

@@ -67,7 +67,7 @@ prj_fnc_spawn_house_groups = {
 };
 
 prj_fnc_spawn_patrols_groups = {
-	params ["_side","_class_units","_config",["_voice",true]];
+	params ["_side","_class_units","_config",["_voice",false]];
 
 	if (((_config # 1) # 0) == 0) exitWith {};
 
@@ -79,7 +79,7 @@ prj_fnc_spawn_patrols_groups = {
 		if (!isNil "_pos") then {
 			for [{private _i = 0 }, { _i < [((_config # 1) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
 				private _unit = _group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
-				if (_voice) then {
+				if (!_voice) then {
 					[_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit];
 				};
 				_patrols_units pushBack _unit;
@@ -135,9 +135,7 @@ prj_fnc_spawn_vehicles = {
 				_roadConnectedTo = roadsConnectedTo _road;
 				_connectedRoad = _roadConnectedTo # 0;
 				_direction = _road getDir _connectedRoad;
-			}
-			else
-			{
+			} else {
 				_pos = [_trigger_pos, 0, _trigger_radius, 5, 0] call BIS_fnc_findSafePos;
 				_direction = 0;
 			};
@@ -201,9 +199,7 @@ prj_fnc_spawn_vehicles = {
 					private _road = selectRandom _roads;
 					_pos = getPos _road;
 					_pos set [2, 0];
-				}
-				else
-				{
+				} else {
 					_pos = [_trigger_pos, 0, _trigger_radius, 5, 0] call BIS_fnc_findSafePos;
 				};
 				_wp = _vehicle_crew_group addWaypoint [_pos, 0];
@@ -217,9 +213,7 @@ prj_fnc_spawn_vehicles = {
 				private _road = selectRandom _roads;
 				_pos_wp = getPos _road;
 				_pos_wp set [2, 0];
-			}
-			else
-			{
+			} else {
 				_pos_wp = [_trigger_pos, 0, _trigger_radius, 5, 0] call BIS_fnc_findSafePos;
 			};
 			private _wp_cycle = _vehicle_crew_group addWaypoint [_pos_wp, 0];
@@ -281,13 +275,9 @@ private ["_enemy_house_units","_enemy_patrols_units","_enemy_light_vehicles","_e
 if (!(_trigger getVariable "captured")) then {
 	
 	_enemy_house_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_spawn_house_groups;
-
 	_enemy_patrols_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_spawn_patrols_groups;
-
 	_enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,_enemy_config] call prj_fnc_spawn_vehicles;
-
 	_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,_enemy_config,3] call prj_fnc_spawn_vehicles;
-
 	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_spawn_static;
 
 	private _capture_sectores = "capture_of_sectors" call BIS_fnc_getParamValue;
@@ -299,9 +289,7 @@ if (!(_trigger getVariable "captured")) then {
 
 //////////////////////SPAWN CIVILIAN\\\\\\\\\\\\\\\\\\\\\\\
 private _civilian_house_units = [civilian,civilian_units,_civil_config,false] call prj_fnc_spawn_house_groups;
-
 private _civilian_patrols_units = [civilian,civilian_units,_civil_config,false] call prj_fnc_spawn_patrols_groups;
-
 private _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,_civil_config,2,"CARELESS"] call prj_fnc_spawn_vehicles;
 
 private _civilian_global_infantry = [];
@@ -325,9 +313,7 @@ while {!_deleting} do {
 	uiSleep 5;
 	if (isNil "mhqterminal") then {
 		if (!triggerActivated _trigger) exitWith {_deleting = true};
-	}
-	else
-	{
+	} else {
 		if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
 	};
 };

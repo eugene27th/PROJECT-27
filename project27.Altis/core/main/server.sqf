@@ -59,9 +59,7 @@ private _g_garage_depot = createVehicle ["VR_Area_01_circle_4_yellow_F", positio
 			private _oldSide = _x getVariable ["oldSide","empty"];
 			if (_oldSide isEqualTo "empty") then {
 				_x setVariable ["oldSide",side _x,true];
-			}
-			else
-			{
+			} else {
 				if (side group _x != _oldSide) then {
 					_x setVariable ["oldSide",side _x,true];
 				};
@@ -86,6 +84,9 @@ addMissionEventHandler ["Entitykilled", {
 					["missionNamespace", "money", 0, -20, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "civ_killings", 3, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "total_kill_civ", 1] call prj_fnc_changeVariable;
+
+					private _itemsArray = ["ACE_Can_Franta","ACE_Can_Spirit","ACE_WaterBottle","ACE_Can_RedGull","ACE_Humanitarian_Ration"];
+					_victim addItemToUniform (selectRandom _itemsArray);
 				};
 				case independent: {
 					["missionNamespace", "money", 0, 10, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
@@ -95,17 +96,20 @@ addMissionEventHandler ["Entitykilled", {
 					if (random 1 < 0.5) then {
 						_victim addMagazine [selectRandom ["acex_intelitems_photo","acex_intelitems_document","acex_intelitems_notepad"], 1];
 					};
+
 					if (random 1 < 0.5) then {
 						_victim addItemToUniform "ACE_Cellphone";
 					};
+
+					private _itemsArray = ["ACE_Can_Franta","ACE_Can_Spirit","ACE_WaterBottle","ACE_Can_RedGull","ACE_Humanitarian_Ration","ACE_MRE_SteakVegetables","ACE_MRE_ChickenTikkaMasala","ACE_EarPlugs"];
+					_victim addItemToUniform (selectRandom _itemsArray);
 				};
-			};	
+			};
 		};
 	};
 }];
 
-addMissionEventHandler ["PlayerConnected",
-{
+addMissionEventHandler ["PlayerConnected", {
 	params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 	private _uids = missionNamespace getVariable ["prj27UIDs",[]];
 	if ((_uids findIf {_x == _uid}) == -1) then {
@@ -171,9 +175,7 @@ if (!isDedicated) then {
 [] spawn {
 	while {true} do {
 		if (daytime >= 21 || daytime < 4) then
-		{setTimeMultiplier 7}
-		else
-		{setTimeMultiplier 5};
+		{setTimeMultiplier 7} else {setTimeMultiplier 5};
 		uiSleep 30;
 	};
 };

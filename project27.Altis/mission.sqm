@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15164.768,22.106075,17354.941};
-		dir[]={0.55930072,-0.29891598,-0.77320242};
-		up[]={0.175194,0.95427912,-0.24219593};
-		aside[]={-0.81024748,4.5518391e-008,-0.5860973};
+		pos[]={15194.393,21.960348,17319.678};
+		dir[]={-0.68012899,-0.28093606,-0.67720532};
+		up[]={-0.19910392,0.95971841,-0.19824676};
+		aside[]={-0.70561534,7.0501119e-007,0.70866323};
 	};
 };
 binarizationWanted=0;
@@ -1001,21 +1001,40 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15171.8,19.65147,17296.285};
+				position[]={15171.42,20.176746,17296.018};
 				angles[]={0,3.9522109,0};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
 				name="service_board_blue";
 			};
 			id=1491;
 			type="Land_Billboard_F";
-			atlOffset=-1.9073486e-006;
+			atlOffset=0.52499962;
 			class CustomAttributes
 			{
 				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="img\vservice.paa";
+						};
+					};
+				};
+				class Attribute1
 				{
 					property="allowDamage";
 					expression="_this allowdamage _value;";
@@ -1034,7 +1053,7 @@ class Mission
 						};
 					};
 				};
-				nAttributes=1;
+				nAttributes=2;
 			};
 		};
 		class Item19

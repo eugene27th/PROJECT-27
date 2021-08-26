@@ -26,6 +26,7 @@ for [{private _i = 0 }, { _i < [3,7] call BIS_fnc_randomInt }, { _i = _i + 1 }] 
     _vehicles pushBack _vehicle;
     uisleep 0.2;
     _unit = _enemy_grp createUnit [selectRandom enemy_infantry, (position _vehicle) findEmptyPosition [0,30,"C_IDAP_Man_AidWorker_01_F"], [], 0, "NONE"];
+    doStop _unit;
     _enemies pushBack _unit;
     uiSleep 0.8;
 };

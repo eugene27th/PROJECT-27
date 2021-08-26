@@ -25,7 +25,11 @@ private _types_locations = [
 
 private _worldSize = worldSize;
 private _worldCenter = [_worldSize / 2, _worldSize / 2, 0];
-private _delete_locations = nearestLocations [position spawn_zone, _all_locations, 2000];
+private _g_delete_locations = nearestLocations [position spawn_zone, _all_locations, 2000];
+
+private _a_delete_locations = [];
+{_a_delete_locations = _a_delete_locations + nearestLocations [_x, _all_locations, 100]} forEach delete_locations;
+_g_delete_locations = _g_delete_locations + _a_delete_locations;
 
 private _house_ieds = "ied_in_houses" call BIS_fnc_getParamValue;
 private _house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
@@ -35,7 +39,7 @@ private _triggersArray = [];
 
 for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 
-	private _locations = (nearestLocations [_worldCenter, [(_types_locations # _i) # 0], _worldSize * 1.5]) - _delete_locations;
+	private _locations = (nearestLocations [_worldCenter, [(_types_locations # _i) # 0], _worldSize * 1.5]) - _g_delete_locations;
 
 	private _spawn_area = (_types_locations # _i) # 1;
 
@@ -176,7 +180,7 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
-		_trigger setVariable ["config",[[[0],[2,2],[1,0.3],[1,0.3],[1,1]],[[0],[0],[0]]]];
+		_trigger setVariable ["config",[camps_enemy,[[0],[0],[0]]];
 		_trigger setVariable ["camp",true];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];

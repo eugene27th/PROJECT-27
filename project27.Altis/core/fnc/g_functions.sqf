@@ -37,18 +37,14 @@ prj_fnc_set_variables = {
 		if (_overwritting) then {
 			(call (compile ((_data # _i) # 0))) setVariable ((_data # _i) # 1);
 			if (prj_debug) then {systemChat "таблица перезаписана"};
-		}
-		else
-		{
+		} else {
 			if (isNil "_variable") then {
 				(call (compile ((_data # _i) # 0))) setVariable ((_data # _i) # 1);
 				if (prj_debug) then {
 					systemChat "таблица была пуста. записана новая таблица";
 					systemChat format ["%1",((_data # _i) # 1)];
 				};
-			}
-			else
-			{
+			} else {
 				if (prj_debug) then {
 					systemChat "таблица уже существует. новая таблица не записана";
 				};
@@ -150,12 +146,12 @@ prj_fnc_request_supply_drop = {
 		["HQ",localize "STR_PRJ_SUPPLY_REQUEST_DENIED"] remoteExec ["BIS_fnc_showSubtitle",0];
 	};
 
-	private _check_zone = (position arsenal) nearObjects ["Thing", 10];
+	private _check_zone = (position arsenal) nearObjects ["Thing", 100];
 
 	private ["_box","_arrow"];
 
 	{
-		if (typeOf _x == "C_IDAP_supplyCrate_F") exitWith {
+		if (typeOf _x == supply_box) exitWith {
 			_x allowDamage false;
 			_box = _x;
 			private _pos = position _x;
@@ -173,7 +169,7 @@ prj_fnc_request_supply_drop = {
 
 		missionNamespace setVariable ["supply_waiting",true,true];
 
-		private _wait_time = [300,500] call BIS_fnc_randomInt;
+		private _wait_time = [140,300] call BIS_fnc_randomInt;
 		["HQ",format [localize "STR_PRJ_BOX_SENDED",mapGridPosition _position,_wait_time]] remoteExec ["BIS_fnc_showSubtitle",0];
 
 		uiSleep _wait_time;
@@ -307,9 +303,7 @@ prj_fnc_civ_info = {
 			private _localize_info = [_position,_near_camps,500] call prj_fnc_localize_info;
 
 			[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_CAMP_1_INF","STR_PRJ_CIVIL_INFO_CAMP_2_INF","STR_PRJ_CIVIL_INFO_CAMP_3_INF"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
-		}
-		else
-		{
+		} else {
 			private _ied_coords = missionNamespace getVariable ["ied_array",[]];
 			private	_near_ied = [_position, _ied_coords, 2000] call prj_fnc_near_pos_array;
 
@@ -317,24 +311,18 @@ prj_fnc_civ_info = {
 				private _localize_info = [_position,_near_ied,500] call prj_fnc_localize_info;
 				
 				[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_IED","STR_PRJ_CIVIL_INFO_2_IED","STR_PRJ_CIVIL_INFO_3_IED"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
-			}
-			else
-			{
+			} else {
 				private _entities_array = _position nearEntities [enemy_infantry, 2500];
 				if ((count _entities_array) > 0) then {
 					private _localize_info = [_position,_entities_array,150] call prj_fnc_localize_info;
 
 					[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_INF","STR_PRJ_CIVIL_INFO_2_INF","STR_PRJ_CIVIL_INFO_3_INF"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
-				}
-				else
-				{
+				} else {
 					[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
 				};
 			};
 		};
-	}
-	else
-	{
+	} else {
 		[localize "STR_PRJ_CIVIL", localize (selectRandom ["STR_PRJ_CIVIL_INFO_NEGATIVE_1","STR_PRJ_CIVIL_INFO_NEGATIVE_2","STR_PRJ_CIVIL_INFO_NEGATIVE_3"])] spawn BIS_fnc_showSubtitle;
 	};
 
