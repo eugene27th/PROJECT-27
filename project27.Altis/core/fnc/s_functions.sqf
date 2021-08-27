@@ -229,7 +229,7 @@ prj_fnc_enemy_patrols = {
 };
 
 prj_fnc_reinforcement = {
-	params ["_pos",["_radius",[1000,2000]],["_number",2]];
+	params ["_pos",["_radius",[1000,4000]],["_number",2]];
 
 	private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
 	private _position = _position_data # 0;
@@ -243,11 +243,13 @@ prj_fnc_reinforcement = {
 		_vehicle setDir _direction;
 		private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
 
-		private _wp = (group _crew_units) addWaypoint [_pos, 0];  
+		private _vehicle_group = group _vehicle;
+
+		private _wp = _vehicle_group addWaypoint [_pos, 0];  
 		_wp setWaypointSpeed "FULL";  
 		_wp setWaypointType "SAD";
 
-		(group _crew_units) setCombatMode "RED";
+		_vehicle_group setCombatMode "RED";
 
 		_vehicles pushBack [_vehicle, _crew_units];
 	};
@@ -426,7 +428,7 @@ prj_fnc_capt_zone = {
 	_parent_trigger setVariable ["captured", true];
 
 	private _number = [2,3] call BIS_fnc_randomInt;
-	private _vehicles = [_trigger_pos,[1500,2500],_number] call prj_fnc_reinforcement;
+	private _vehicles = [_trigger_pos,[1500,4000],_number] call prj_fnc_reinforcement;
 	[_vehicles,600,60,2500] spawn prj_fnc_check_and_delete;
 
 	if (_trigger_camp) exitWith {

@@ -76,12 +76,12 @@ addMissionEventHandler ["Entitykilled", {
 		if (side _killer == west && isPlayer _killer) then {
 			switch (_victim getVariable "oldSide") do {
 				case west: {
-					["missionNamespace", "money", 0, -50, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
+					["missionNamespace", "money", 0, -5000, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "friend_killings", 2, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "total_kill_friend", 1] call prj_fnc_changeVariable;	
 				};
 				case civilian: {
-					["missionNamespace", "money", 0, -20, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
+					["missionNamespace", "money", 0, -2000, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "civ_killings", 3, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "total_kill_civ", 1] call prj_fnc_changeVariable;
 
@@ -89,7 +89,7 @@ addMissionEventHandler ["Entitykilled", {
 					_victim addItemToUniform (selectRandom _itemsArray);
 				};
 				case independent: {
-					["missionNamespace", "money", 0, 10, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
+					["missionNamespace", "money", 0, 25, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "enemy_killings", 1, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "total_kill_enemy", 1] call prj_fnc_changeVariable;
 

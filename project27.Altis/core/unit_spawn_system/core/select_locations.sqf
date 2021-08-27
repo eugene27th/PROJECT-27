@@ -180,7 +180,7 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
-		_trigger setVariable ["config",[camps_enemy,[[0],[0],[0]]];
+		_trigger setVariable ["config",[camps_enemy,[[0],[0],[0]]]];
 		_trigger setVariable ["camp",true];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];

@@ -82,20 +82,16 @@ player addEventHandler ["Killed", {
 	hideBody player;
 	if ((vehicle player) == player) then {
 		private _position = position player;
-		[_position,_killer] spawn {
-			params ["_position","_killer"];
+		[_position] spawn {
+			params ["_position"];
 			uiSleep 10;
-			private _veh = createVehicle ["Land_Tombstone_10_F", _position, [], 0, "CAN_COLLIDE"];
-			[_veh,["who is the killer?",{
-				private _display = getText(configFile >> "CfgVehicles" >> typeOf (_this select 3) >> "displayName");
-				hint format ["killer: %1",_display]
-			},_killer]] remoteExec ["addAction",0];
+			private _veh = createVehicle ["Land_Bodybag_01_blue_F", _position, [], 0, "CAN_COLLIDE"];
 			uiSleep 120;
 			deleteVehicle _veh
 		};
 	};
 	private _quotations = ["A_hub_quotation","A_in_quotation","A_in2_quotation","A_m01_quotation","A_m02_quotation","A_m03_quotation","A_m04_quotation","A_m05_quotation","A_out_quotation","B_Hub01_quotation","B_in_quotation","B_m01_quotation","B_m02_1_quotation","B_m03_quotation","B_m05_quotation","B_m06_quotation","B_out2_quotation","C_EA_quotation","C_EB_quotation","C_in2_quotation","C_m01_quotation","C_m02_quotation","C_out1_quotation"];
-	["A3\missions_f_epa\video\" + selectRandom _quotations + ".ogv"] spawn BIS_fnc_playVideo;	
+	["A3\missions_f_epa\video\" + selectRandom _quotations + ".ogv"] spawn BIS_fnc_playVideo;
 }];
 
 player setPos getPos spawn_zone;

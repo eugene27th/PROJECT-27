@@ -234,11 +234,13 @@ class ScenarioData
 		maxPlayers=33;
 	};
 	wreckManagerMode=1;
-	wreckLimit=10;
-	wreckRemovalMaxTime=600;
+	wreckLimit=20;
+	wreckRemovalMinTime=1800;
+	wreckRemovalMaxTime=1800;
 	corpseManagerMode=1;
-	corpseLimit=20;
-	corpseRemovalMaxTime=600;
+	corpseLimit=100;
+	corpseRemovalMinTime=1800;
+	corpseRemovalMaxTime=1800;
 };
 class CustomAttributes
 {

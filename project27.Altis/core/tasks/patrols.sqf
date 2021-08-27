@@ -51,7 +51,7 @@ while {true} do {
 
 						case 3: {
 							private _number = [2,3] call BIS_fnc_randomInt;
-							private _vehicles = [_pos,[1500,2500],_number] call prj_fnc_reinforcement;
+							private _vehicles = [_pos,[1500,4000],_number] call prj_fnc_reinforcement;
 							[_vehicles,600,60,2500] spawn prj_fnc_check_and_delete;
 						};
 
