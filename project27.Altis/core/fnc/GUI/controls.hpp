@@ -57,10 +57,10 @@ class dialogHQmenu
 		{
 			idc = 1002;
 			text = "";
-			x = 0.4125 * safezoneW + safezoneX;
-			y = 0.385 * safezoneH + safezoneY;
-			w = 0.15 * safezoneW;
-			h = 0.1 * safezoneH;
+			x = 0.412468 * safezoneW + safezoneX;
+			y = 0.37934 * safezoneH + safezoneY;
+			w = 0.150001 * safezoneW;
+			h = 0.111198 * safezoneH;
 
 			size = 0.026;
 		};
@@ -1076,52 +1076,6 @@ class dialogVehicleService
 	};
 };
 
-class dialogWeaponShopMenu
-{
-	idd = 3010;
-	class controls
-	{
-		class weaponS_Header: prjRscText
-		{
-			colorBackground[] = { 0, 0.7, 0, 0.7 };
-			idc = -1;
-			x = 0.28125 * safezoneW + safezoneX;
-			y = 0.28 * safezoneH + safezoneY;
-			w = 0.4375 * safezoneW;
-			h = 0.018 * safezoneH;
-		};
-		class weaponS_Header_Text: prjRscText 
-		{
-			text = "esc to back";
-			idc = -1;
-			x = 0.28125 * safezoneW + safezoneX;
-			y = 0.28 * safezoneH + safezoneY;
-			w = 0.4375 * safezoneW;
-			h = 0.018 * safezoneH;
-			
-			sizeEx = 0.025;
-		};
-		class weaponS_MainBackground: prjRscText
-		{
-			colorBackground[] = { 0, 0, 0, 0.7 };
-			idc = -1;
-			x = 0.28125 * safezoneW + safezoneX;
-			y = 0.30 * safezoneH + safezoneY;
-			w = 0.4375 * safezoneW;
-			h = 0.40 * safezoneH;
-		};
-
-		class weaponS_listBoxTree: prjRscTree
-		{
-			idc = -1;
-			x = 0.29 * safezoneW + safezoneX;
-			y = 0.31625 * safezoneH + safezoneY;
-			w = 0.21 * safezoneW;
-			h = 0.3675 * safezoneH;
-		};
-	};
-};
-
 class dialogSlideMonitorMenu
 {
 	idd = 3020;
@@ -1192,3 +1146,137 @@ class dialogSlideMonitorMenu
 	};
 };
 
+class dialogArsenalShop
+{
+	idd = 3007;
+	
+	class controls
+	{
+		class Arsenal_Header: prjRscText 
+		{
+			colorBackground[] = { 0, 0.7, 0, 0.7 };
+			idc = -1;
+			x = 0.237534 * safezoneW + safezoneX;
+			y = 0.150058 * safezoneH + safezoneY;
+			w = 0.524932 * safezoneW;
+			h = 0.0279953 * safezoneH;
+		};
+		class Arsenal_Header_Text: prjRscText 
+		{
+			text = "esc to back";
+			idc = -1;
+			x = 0.240159 * safezoneW + safezoneX;
+			y = 0.155657 * safezoneH + safezoneY;
+			w = 0.519682 * safezoneW;
+			h = 0.0167972 * safezoneH;
+
+			sizeEx = 0.025;
+		};
+
+		class Arsenal_Background : prjRscText {
+			colorBackground[] = { 0, 0, 0, 0.7 };
+			idc = -1;
+			x = 0.237534 * safezoneW + safezoneX;
+			y = 0.181972 * safezoneH + safezoneY;
+			w = 0.524932 * safezoneW;
+			h = 0.669087 * safezoneH;
+
+			size = 0.02;
+		};
+
+		class Arsenal_LB_Header_Cat_Text: prjRscText 
+		{
+			text = "categories";
+			idc = -1;
+			x = 0.24672 * safezoneW + safezoneX;
+			y = 0.192049 * safezoneH + safezoneY;
+			w = 0.119416 * safezoneW;
+			h = 0.0223961 * safezoneH;
+
+			sizeEx = 0.035;
+		};
+
+		class Arsenal_LB_Header_Items_Text: prjRscText 
+		{
+			text = "items";
+			idc = -1;
+			x = 0.377948 * safezoneW + safezoneX;
+			y = 0.192052 * safezoneH + safezoneY;
+			w = 0.158776 * safezoneW;
+			h = 0.0223961 * safezoneH;
+
+			sizeEx = 0.035;
+		};
+
+		class Arsenal_LB_Cat: prjRscListbox
+		{
+			idc = 1018;
+			x = 0.244096 * safezoneW + safezoneX;
+			y = 0.22285 * safezoneH + safezoneY;
+			w = 0.124671 * safezoneW;
+			h = 0.613095 * safezoneH;
+
+			onLBSelChanged = call prj_fnc_show_arsenal_items;
+		};
+
+		class Arsenal_LB_Items: prjRscListbox
+		{
+			idc = 1019;
+			x = 0.375329 * safezoneW + safezoneX;
+			y = 0.22285 * safezoneH + safezoneY;
+			w = 0.164041 * safezoneW;
+			h = 0.613095 * safezoneH;
+
+			onLBSelChanged = call prj_fnc_show_arsenal_item_info;
+		};
+
+		class Arsenal_Item_Picture: prjRscPicture
+		{
+			idc = 1081;
+			text = "";
+			x = 0.545932 * safezoneW + safezoneX;
+			y = 0.22285 * safezoneH + safezoneY;
+			w = 0.209973 * safezoneW;
+			h = 0.209964 * safezoneH;
+		};
+
+		class Arsenal_Item_Picture_Text: prjRscText 
+		{
+			idc = 1083;
+			text = "";
+			x = 0.552493 * safezoneW + safezoneX;
+			y = 0.234045 * safezoneH + safezoneY;
+			w = 0.0524932 * safezoneW;
+			h = 0.0279953 * safezoneH;
+		};
+
+		class Arsenal_ST_Item_Info: prjRscStructuredText
+		{
+			idc = 1080;
+			x = 0.545932 * safezoneW + safezoneX;
+			y = 0.44681 * safezoneH + safezoneY;
+			w = 0.209973 * safezoneW;
+			h = 0.333173 * safezoneH;
+			font = "EtelkaMonospacePro";
+			size = 0.024;
+		};
+
+		class Arsenal_Btn_Buy: prjRscButton
+		{
+			idc = 1082;
+			text = "buy";
+			x = 0.54462 * safezoneW + safezoneX;
+			y = 0.79395 * safezoneH + safezoneY;
+			w = 0.211268 * safezoneW;
+			h = 0.0419929 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+
+			colorText[] = {0.2, 0.5, 0.2, 1};
+
+			action = "call prj_fnc_vehicle_repair";
+		};
+		
+	};
+};

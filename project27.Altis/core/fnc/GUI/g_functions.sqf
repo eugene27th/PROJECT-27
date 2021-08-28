@@ -439,197 +439,12 @@ prj_fnc_vehicle_menu_window = {
 		_ctrl ctrlSetText _text;
 	};
 
-	showitems = {
-		params ["_items"];
-
-		for [{private _i = 0 }, { _i < (count _items) }, { _i = _i + 1 }] do {
-			private _displayname = (_items # _i) # 0;
-			lbAdd [1014, _displayname];
-			lbSetTooltip [1014, _i, _displayname];
-			lbSetData [1014, _i, str (_items # _i)];
-		};
+	for [{private _i = 0 }, { _i < (count vehicle_loadout_items) }, { _i = _i + 1 }] do {
+		private _displayname = (vehicle_loadout_items # _i) # 0;
+		lbAdd [1014, _displayname];
+		lbSetTooltip [1014, _i, _displayname];
+		lbSetData [1014, _i, str (vehicle_loadout_items # _i)];
 	};
-
-	[
-		[
-			[
-				"Medicine",
-				[
-					"ACE_adenosine",
-					"ACE_epinephrine",
-					"ACE_personalAidKit",
-					"ACE_tourniquet",
-					"ACE_bloodIV",
-					"ACE_bloodIV_250",
-					"ACE_bloodIV_500",
-					"ACE_bodyBag",
-					"ACE_morphine",
-					"ACE_quikclot",
-					"ACE_plasmaIV",
-					"ACE_plasmaIV_250",
-					"ACE_plasmaIV_500",
-					"ACE_elasticBandage",
-					"ACE_fieldDressing",
-					"ACE_packingBandage",
-					"ACE_salineIV",
-					"ACE_salineIV_250",
-					"ACE_salineIV_500",
-					"ACE_surgicalKit",
-					"ACE_splint"
-				]
-			],
-			[
-				"Explosives",
-				[
-					"DemoCharge_Remote_Mag",
-					"SatchelCharge_Remote_Mag",
-					"ATMine_Range_Mag",
-					"APERSBoundingMine_Range_Mag",
-					"APERSMine_Range_Mag",
-					"ClaymoreDirectionalMine_Remote_Mag",
-					"APERSMineDispenser_Mag",
-					"MineDetector",
-					"ACE_DefusalKit",
-					"ACE_M26_Clacker"
-				]
-			],
-			[
-				"Food",
-				[
-					"ACE_Can_Franta",
-					"ACE_Can_Spirit",
-					"ACE_Can_RedGull",
-					"ACE_WaterBottle",
-					"ACE_Humanitarian_Ration",
-					"ACE_MRE_CreamChickenSoup",
-					"ACE_MRE_ChickenTikkaMasala",
-					"ACE_MRE_ChickenHerbDumplings",
-					"ACE_MRE_MeatballsPasta",
-					"ACE_MRE_SteakVegetables",
-					"ACE_MRE_CreamTomatoSoup",
-					"ACE_MRE_BeefStew",
-					"ACE_MRE_LambCurry",
-					"ACE_Canteen"
-				]
-			],
-			[
-				"Misc",
-				[
-					"ACE_UAVBattery",
-					"ACE_EarPlugs",	
-					"ACE_IR_Strobe_Item",
-					"ACE_CableTie",
-					"ACE_wirecutter",
-					"ACE_Sandbag_empty",
-					"ToolKit",
-					"ACE_EntrenchingTool",
-					"ACE_Flashlight_XL50",
-					"ACE_Flashlight_MX991",
-					"B_AssaultPack_cbr"
-				]
-			],
-			[
-				"Tubes",
-				[
-					"rhs_weap_M136_hp",
-					"rhs_weap_M136_hedp",
-					"rhs_weap_M136",
-					"rhs_weap_m72a7",
-					"rhs_weap_rpg75",
-					"rhs_weap_rpg26",
-					"rhs_weap_rshg2",
-					"rhs_weap_m80"
-				]
-			],
-			[
-				"Ammo",
-				[
-					"rhs_30Rnd_545x39_7N10_AK",
-					"rhs_30Rnd_545x39_7N22_AK",
-					"rhs_30Rnd_762x39mm_polymer",
-					"rhs_30Rnd_762x39mm_polymer_89",
-					"rhs_mag_30Rnd_556x45_M855A1_PMAG",
-					"rhs_mag_30Rnd_556x45_Mk262_PMAG_Tan",
-					"rhs_mag_30Rnd_556x45_Mk318_PMAG",
-					"rhs_20rnd_9x39mm_SP5",
-					"rhs_20rnd_9x39mm_SP6",
-					"rhs_10Rnd_762x54mmR_7N1",
-					"rhs_10Rnd_762x54mmR_7N14",
-					"rhsusf_mag_10Rnd_STD_50BMG_M33",
-					"rhsusf_mag_10Rnd_STD_50BMG_mk211",
-					"rhssaf_10Rnd_792x57_m76_tracer",
-					"rhsgref_10Rnd_792x57_m76",
-					"rhsusf_10Rnd_762x51_m118_special_Mag",
-					"rhsusf_10Rnd_762x51_m62_Mag",
-					"rhsusf_10Rnd_762x51_m993_Mag",
-					"rhsusf_20Rnd_762x51_m118_special_Mag",
-					"rhsusf_20Rnd_762x51_m62_Mag",
-					"rhsusf_20Rnd_762x51_m80_Mag",
-					"rhsusf_20Rnd_762x51_m993_Mag",
-					"rhs_mag_20Rnd_762x51_m61_fnfal",
-					"rhs_mag_20Rnd_762x51_m62_fnfal",
-					"rhs_mag_20Rnd_762x51_m80_fnfal",
-					"rhs_mag_20Rnd_762x51_m80a1_fnfal",
-					"rhs_mag_20Rnd_SCAR_762x51_m118_special_bk",
-					"rhs_mag_20Rnd_SCAR_762x51_m61_ap_bk",
-					"rhs_mag_20Rnd_SCAR_762x51_m62_tracer_bk",
-					"rhs_mag_20Rnd_SCAR_762x51_m80_ball_bk",
-					"rhs_mag_20Rnd_SCAR_762x51_m80a1_epr_bk",
-					"rhs_mag_20Rnd_SCAR_762x51_mk316_special_bk",
-					"rhs_45Rnd_545X39_7N22_AK",
-					"rhs_45Rnd_545X39_7N10_AK",
-					"rhs_100Rnd_762x54mmR",
-					"rhs_100Rnd_762x54mmR_7BZ3",
-					"rhs_100Rnd_762x54mmR_7N13",
-					"rhs_100Rnd_762x54mmR_7N26",
-					"rhs_100Rnd_762x54mmR_green",
-					"rhsusf_200rnd_556x45_M855_box",
-					"rhsusf_200Rnd_556x45_box",
-					"rhsusf_20Rnd_762x51_SR25_m118_special_Mag",
-					"rhsusf_20Rnd_762x51_SR25_m62_Mag",
-					"rhsusf_20Rnd_762x51_SR25_m993_Mag",
-					"rhsusf_20Rnd_762x51_SR25_mk316_special_Mag",
-					"rhs_mag_30Rnd_556x45_Mk318_SCAR",
-					"rhsusf_5Rnd_762x51_AICS_m118_special_Mag",
-					"rhsusf_5Rnd_762x51_AICS_m62_Mag",
-					"rhsusf_5Rnd_762x51_AICS_m993_Mag",
-					"rhs_VOG25",
-					"rhs_VG40TB",
-					"rhs_VG40SZ",
-					"rhs_VG40OP_white",
-					"rhs_VG40OP_green",
-					"rhs_VG40OP_red",
-					"rhs_VOG25P",
-					"rhsusf_mag_6Rnd_M397_HET",
-					"rhsusf_mag_6Rnd_M433_HEDP",
-					"rhsusf_mag_6Rnd_M716_yellow",
-					"rhsusf_mag_6Rnd_M715_green",
-					"rhsusf_mag_6Rnd_M714_white",
-					"rhsusf_mag_6Rnd_m662_red",
-					"rhsusf_mag_6Rnd_M713_red",
-					"rhsusf_mag_6Rnd_m661_green",
-					"rhsusf_mag_6Rnd_M585_white",
-					"rhsusf_mag_6Rnd_m4009",
-					"rhsusf_mag_6Rnd_M576_Buckshot",
-					"rhs_mag_M397_HET",
-					"rhs_mag_M433_HEDP",
-					"ACE_HuntIR_M203",
-					"ACE_40mm_Flare_white",
-					"rhs_mag_m576",
-					"rhs_mag_M585_white",
-					"ACE_40mm_Flare_green",
-					"rhs_mag_m661_green",
-					"ACE_40mm_Flare_red",
-					"rhs_mag_m662_red",
-					"rhs_mag_m713_Red",
-					"rhs_mag_m714_White",
-					"rhs_mag_m715_Green",
-					"rhs_mag_m716_yellow",
-					"ACE_40mm_Flare_ir"
-				]
-			]
-		]
-	] call showitems;
 };
 
 prj_fnc_sell_vehicle = {
@@ -793,4 +608,231 @@ prj_fnc_slideMonitorMenu = {
 	};
 
 	ctrlSetText [1055, "слайд:" + _text];
+};
+
+prj_fnc_arsenal_shop_window = {
+	createDialog "dialogArsenalShop";
+	{ctrlEnable [_x, false]} forEach [1082];
+
+	for [{private _i = 0 }, { _i < (count arsenal_shop_items) }, { _i = _i + 1 }] do {
+		private _displayname = (arsenal_shop_items # _i) # 0;
+		lbAdd [1018, _displayname];
+		lbSetTooltip [1018, _i, _displayname];
+		lbSetData [1018, _i, str (arsenal_shop_items # _i)];
+	};
+};
+
+prj_fnc_show_arsenal_items = {
+	lbClear 1019;
+
+	private _index = lbCurSel 1018;
+	private _items = lbData [1018, _index];
+	private _items = call (compile _items);
+
+	private _ctrl_lb = (findDisplay 3007) displayCtrl 1019;
+
+	private _money = ((missionNamespace getVariable (getPlayerUID player)) # 0) # 1;
+
+	{
+		private _item = (_x # 0);
+		private _price = (_x # 1);
+
+		private "_configPath";
+		private _configs = ["CfgVehicles","CfgWeapons","CfgMagazines","CfgGlasses"];
+
+		for "_i" from 0 to ((count _configs) - 1) do {
+			if (isClass (configfile >> (_configs # _i) >> _item)) then {
+				_configPath = configfile >> (_configs # _i) >> _item;
+			};
+		};
+
+		private _left_text = getText(_configPath >> "displayName");
+
+		lbAdd [1019, _left_text];
+		lbSetData [1019, _forEachIndex, str _x];
+
+		_ctrl_lb lbSetTextRight [_forEachIndex, str _price];
+
+		if (_price != 0) then {
+			if (_money < _price) then {
+				lbSetColorRight [1019, _forEachIndex, [0.92, 0.13, 0.13, 1]];
+			} else {
+				lbSetColorRight [1019, _forEachIndex, [0.04, 0.67, 0, 1]];
+			};
+		} else {
+			lbSetColorRight [1019, _forEachIndex, [0.82, 0.78, 0.04, 1]];
+		};
+
+ 	} forEach (_items # 1);
+};
+
+prj_fnc_show_arsenal_item_info = {
+
+	{ctrlSetText [_x, ""]} forEach [1082,1081,1080];
+
+	private _index = lbCurSel 1019;
+	private _data = lbData [1019, _index];
+	_data = call (compile _data);
+
+	private _item = _data # 0;
+	private _price = _data # 1;
+
+	// item config
+
+	private ["_configPath","_configName"];
+
+	{
+		if (isClass (configfile >> _x >> _item)) then {
+			_configPath = configfile >> _x >> _item;
+			_configName = _x;
+		};
+	} forEach ["CfgVehicles","CfgWeapons","CfgMagazines","CfgGlasses"];
+
+	// item picture
+
+	private _picture = getText(_configPath >> "picture");
+	if !(_picture isEqualTo "") then {ctrlSetText [1081, _picture]} else {ctrlSetText [1083, "no image"]};
+		
+	// item description
+
+	private _desc = getText(_configPath >> "descriptionShort");
+	if (_desc isEqualTo "") then {_desc = "They did not come up with a description"};
+
+	// item mass
+
+	private _mass = getNumber(_configPath >> "mass");
+
+	if (_mass isEqualTo 0 && {isClass (_configPath >> "itemInfo")}) then {
+		_mass = getNumber(_configPath >> "itemInfo" >> "mass");
+	};
+
+	if (_mass isEqualTo 0 && {isClass (_configPath >> "WeaponSlotsInfo")}) then {
+		_mass = getNumber(_configPath >> "WeaponSlotsInfo" >> "mass");
+	};
+
+	_mass = format ["%1kg (%2lb)",((_mass * 0.1 * (1/2.2046) * 100) / 100) ToFixed 2, ((_mass * 0.1 * 100) / 100) ToFixed 2];
+
+	// item set final text
+
+	private _itemInfo = "The information ran away somewhere";
+
+	switch (_configName) do {
+		case "CfgVehicles": {
+			_itemInfo = _desc + "<br/><br/>" +
+						"Weight: <t color='#ffffff'>" + _mass + "</t><br/>";
+		};
+
+		case "CfgWeapons": {
+			_itemInfo = _desc + "<br/><br/>" +
+						"Weight: <t color='#ffffff'>" + _mass + "</t><br/>";
+
+			// weapon info
+			if (_item isKindOf ["Rifle", configFile >> "CfgWeapons"] || _item isKindOf ["Pistol", configFile >> "CfgWeapons"]) then {
+				// rate of fire
+				private _fireModes = getArray (_configPath >> "modes");
+				private _rateOfFire = [];
+
+				{_rateOfFire pushBackUnique (getNumber (_configPath >> _x >> "reloadTime"))} foreach _fireModes;
+
+				_rateOfFire sort true;
+				_rateOfFire = _rateOfFire param [0, 0];
+
+				_rateOfFire = format ["%1 rpm", round (60 / _rateOfFire)];
+				if (_rateOfFire isEqualTo 0) then {_rateOfFire = "PEW PEW PEW"};
+
+				// accuracy
+				private _dispersion = [];
+
+				{
+					if (getNumber (_configPath >> _x >> "showToPlayer") != 0) then {
+						_dispersion pushBackUnique (getNumber (_configPath >> _x >> "dispersion"));
+					};
+				} foreach _fireModes;
+
+				_dispersion sort true;
+				_dispersion = _dispersion param [0, 0];
+
+				private _accuracy = format ["%1 MIL (%2 MOA)", (_dispersion * 1000) toFixed 2, (_dispersion / pi * 10800) ToFixed 1];
+
+				// barrel length
+				private _barrelLength = str (getNumber(_configPath >> "ACE_barrelLength"));
+				if (_barrelLength isEqualTo "") then {_barrelLength = ""};
+
+				// barrel twist
+				private _barrelTwist = str (getNumber(_configPath >> "ACE_barrelTwist"));
+				if (_barrelTwist isEqualTo "") then {_barrelTwist = ""};
+
+				// info text
+				_itemInfo = _itemInfo + "<br/>" + 
+							"Rate of fire: <t color='#ffffff'>" + _rateOfFire + "</t><br/>" + 
+							"Accuracy: <t color='#ffffff'>" + _accuracy + "</t><br/>" +
+							"Barrel length: <t color='#ffffff'>" + _barrelLength + " mm</t><br/>" +
+							"Barrel twist: <t color='#ffffff'>" + _barrelTwist + " mm</t>";
+			};
+		};
+
+		case "CfgMagazines": {
+			_itemInfo = _desc + "<br/><br/>" +
+						"Weight: <t color='#ffffff'>" + _mass + "</t><br/>";
+
+			if ((getNumber(_configPath >> "type")) == 256) then {
+				// ammo in magazines
+				private _ammo = getText(_configPath >> "ammo");
+				if (_ammo isEqualTo "") then {_ammo = ""};
+
+				// initial velocity
+				private _initialVelocity = str (getNumber(_configPath >> "initSpeed"));
+				if (_initialVelocity isEqualTo "") then {_initialVelocity = ""};
+
+				// bullet info
+				private _bulletConfigPath = configfile >> "CfgAmmo" >> _ammo;
+
+				// ballistic сoefficient			
+				private _ballisticCoefficient = str ((getArray(_bulletConfigPath >> "ACE_ballisticCoefficients")) # 0);
+				if (_ballisticCoefficient isEqualTo "") then {_ballisticCoefficient = ""};
+
+				// bullet mass
+				private _bulletMass = str (getNumber(_bulletConfigPath >> "ACE_bulletMass"));
+				if (_bulletMass isEqualTo "") then {_bulletMass = ""};
+
+				_itemInfo = _desc + "<br/><br/>" +
+							"Weight: <t color='#ffffff'>" + _mass + "</t><br/><br/>" +
+							"Ammunition: <t color='#ffffff'>" + _ammo + "</t><br/>" +
+							"Initial velocity: <t color='#ffffff'>" + _initialVelocity + " m/s</t><br/>" +
+							"Ballistic сoefficient: <t color='#ffffff'>" + _ballisticCoefficient + " G7 (ASM)</t><br/>" +
+							"Bullet mass: <t color='#ffffff'>" + _bulletMass + " g</t><br/>";
+			};
+		};
+
+		case "CfgGlasses": {
+			_itemInfo = _desc + "<br/><br/>" +
+						"Weight: <t color='#ffffff'>" + _mass + "</t><br/>";
+		};
+
+		default {
+			_itemInfo = "lol. hello...<br/>It wasn't supposed to happen...";
+		};
+	};
+
+	private _ctrlInfo = (findDisplay 3007) displayCtrl 1080;
+	_ctrlInfo ctrlSetStructuredText parseText _itemInfo;
+	_ctrlInfo ctrlSetTextColor [0.8, 0.8, 0, 1];
+
+	// button
+
+	private _money = ((missionNamespace getVariable (getPlayerUID player)) # 0) # 1;
+
+	if (_price != 0) then {
+		if (_money < _price) then {
+			ctrlSetText [1082, "LACKING AMOUNT: " + str (_price - _money)];
+			ctrlEnable [1082, false];
+		} else {
+			ctrlSetText [1082, "BUY"];
+			ctrlEnable [1082, true];
+		};
+	} else {
+		ctrlSetText [1082, "RECEIVE"];
+		ctrlEnable [1082, true];
+	};
+
 };

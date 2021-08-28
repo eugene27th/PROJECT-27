@@ -380,8 +380,17 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 
 } forEach civilian_units;
 
-// ARSENAL
-[arsenal, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
+// arsenal
+private _arsenal_type = "virtualArsenal" call BIS_fnc_getParamValue;
+
+if (_arsenal_type == 1) then {
+	_action = ["Arsenal_Shop", "Arsenal", ("\A3\ui_f\data\igui\cfg\simpleTasks\types\meet_ca.paa"), {
+		call prj_fnc_arsenal_shop_window;
+	}, {true}] call ace_interact_menu_fnc_createAction;
+	[arsenal, 0, ["ACE_MainActions"], _action] call ace_interact_menu_fnc_addActionToObject;
+} else {
+	[arsenal, arsenal_black_list] call ace_arsenal_fnc_removeVirtualItems;
+};
 
 //sitrep, texttiles
 uiSleep 10;

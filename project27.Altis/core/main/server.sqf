@@ -43,7 +43,11 @@ if (isNil "_ground_level") then {_ground_level = 0};
 ] call prj_fnc_create_markers;
 
 // create arsenal
-[arsenal, [[], 1]] call ace_arsenal_fnc_attributeInit;
+private _arsenal_type = "virtualArsenal" call BIS_fnc_getParamValue;
+
+if (_arsenal_type == 0) then {
+	[arsenal, [[], 1]] call ace_arsenal_fnc_attributeInit;
+};
 
 // create any objects
 private _a_garage_depot = createVehicle ["VR_Area_01_circle_4_grey_F", position tr_a_shop, [], 0, "CAN_COLLIDE"];
@@ -78,7 +82,7 @@ addMissionEventHandler ["Entitykilled", {
 				case west: {
 					["missionNamespace", "money", 0, -5000, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "friend_killings", 2, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
-					["missionNamespace", "total_kill_friend", 1] call prj_fnc_changeVariable;	
+					["missionNamespace", "total_kill_friend", 1] call prj_fnc_changeVariable;
 				};
 				case civilian: {
 					["missionNamespace", "money", 0, -2000, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
@@ -174,8 +178,7 @@ if (!isDedicated) then {
 // time acceleration
 [] spawn {
 	while {true} do {
-		if (daytime >= 21 || daytime < 4) then
-		{setTimeMultiplier 7} else {setTimeMultiplier 5};
+		if (daytime >= 21 || daytime < 4) then {setTimeMultiplier 7} else {setTimeMultiplier 5};
 		uiSleep 30;
 	};
 };

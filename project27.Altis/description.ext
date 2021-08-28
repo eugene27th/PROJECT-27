@@ -12,33 +12,73 @@ enableDebugConsole[] = { "76561198141746661", "76561198138702011", "765611980605
 
 class Params
 {
+	class divider_general
+	{
+		title = "• GENERAL";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
 	class autoSaveLoad
 	{
-		title = "load save automatically (recommended for dedicated)";
+		title = "Load save automatically (recommended for dedicated)";
 		values[] = { 1, 0 };
 		texts[] = { "Yes", "No" };
 		default = 1;
 	};
 
-	class enemycoef
+	class divider_arsenal
 	{
-		title = "enemy numbers";
-		values[] = { 1, 2, 3, 4 };
-		texts[] = { "x1 (recommended)", "x2", "x3", "x4" };
+		title = "• ARSENAL";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class virtualArsenal
+	{
+		title = "Arsenal";
+		values[] = { 0, 1 };
+		texts[] = { "Virtual arsenal", "Arsenal shop" };
 		default = 1;
 	};
 
-	class chanceCivTransform
+	class divider_sectors
 	{
-		title = "chance of civilian transformation";
-		values[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-		texts[] = { "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%" };
-		default = 3;
+		title = "• SECTORS";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class capture_of_sectors
+	{
+		title = "Sectors capturing";
+		values[] = { 1, 0 };
+		texts[] = { "On", "Off" };
+		default = 1;
+	};
+
+	class sectorCaptureMode
+	{
+		title = "Sector capture mode";
+		values[] = { 0, 1 };
+		texts[] = { "temporary sector capture", "permanent sector capture" };
+		default = 0;
+	};
+
+	class divider_tasks
+	{
+		title = "• PATROL TASKS";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
 	};
 
 	class patrols
 	{
-		title = "Patrols tasks";
+		title = "Patrol tasks";
 		values[] = { 1, 2 };
 		texts[] = { "On", "Off" };
 		default = 1;
@@ -52,6 +92,53 @@ class Params
 		default = 600;
 	};
 
+	class divider_enemy
+	{
+		title = "• ENEMY";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class preset_units
+	{
+		title = "Preset units";
+		values[] = { 0, 1, 2, 3, 4, 5 };
+		texts[] = { "Middle east", "European aggressor", "Syndikat", "Middle east (+CUP)", "European aggressor (+CUP)", "Regular Salyanka Army (+CUP)" };
+		default = 0;
+	};
+
+	class enemycoef
+	{
+		title = "Enemy numbers";
+		values[] = { 1, 2, 3, 4 };
+		texts[] = { "x1 (recommended)", "x2", "x3", "x4" };
+		default = 1;
+	};
+
+	class chanceCivTransform
+	{
+		title = "chance of civilian transformation";
+		values[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		texts[] = { "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%" };
+		default = 3;
+	};
+
+	class suicide_bombers
+	{
+		title = "Suicide bombers";
+		values[] = { 1, 0 };
+		texts[] = { "On", "Off" };
+		default = 0;
+	};
+
+	class divider_ied_roads
+	{
+		title = "• IED ON THE ROADS";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
 
 	class ied_on_roads
 	{
@@ -77,6 +164,14 @@ class Params
 		default = 25;
 	};
 
+	class divider_ied_house
+	{
+		title = "• IED IN THE HOUSES";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
 	class ied_in_houses
 	{
 		title = "IED in houses";
@@ -93,27 +188,27 @@ class Params
 		default = 1;
 	};
 
-	class preset_units
+	class divider_points
 	{
-		title = "Preset units";
-		values[] = { 0, 1, 2, 3, 4, 5 };
-		texts[] = { "Middle east", "European aggressor", "Syndikat", "Middle east (+CUP)", "European aggressor (+CUP)", "Regular Salyanka Army (+CUP)" };
+		title = "• POINTS";
+		values[] = { "" };
+		texts[] = { "" };
 		default = 0;
 	};
 
-	class capture_of_sectors
+	class player_point_value_on_start
 	{
-		title = "Sectors capturing";
-		values[] = { 1, 0 };
-		texts[] = { "On", "Off" };
-		default = 1;
+		title = "Players' points when they first enter the game";
+		values[] = { 100, 500, 1000, 2000, 3000, 5000, 7000, 10000, 15000, 20000, 100000 };
+		texts[] = { "100" ,"500", "1000", "2000", "3000", "5000", "7000", "10000", "15000", "20000", "100000" };
+		default = 2000;
 	};
 
-	class sectorCaptureMode
+	class divider_vehshops
 	{
-		title = "Sector capture mode";
-		values[] = { 0, 1 };
-		texts[] = { "temporary sector capture", "permanent sector capture" };
+		title = "• VEHICLE SHOPS";
+		values[] = { "" };
+		texts[] = { "" };
 		default = 0;
 	};
 
@@ -130,22 +225,6 @@ class Params
 		title = "Ground vehicle store level (on start)";
 		values[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 		texts[] = { "0" ,"1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-		default = 0;
-	};
-
-	class player_point_value_on_start
-	{
-		title = "Players' points when they first enter the game";
-		values[] = { 100, 500, 1000, 2000, 3000, 5000, 7000, 10000, 15000, 20000, 100000 };
-		texts[] = { "100" ,"500", "1000", "2000", "3000", "5000", "7000", "10000", "15000", "20000", "100000" };
-		default = 2000;
-	};
-
-	class suicide_bombers
-	{
-		title = "Suicide bombers";
-		values[] = { 1, 0 };
-		texts[] = { "On", "Off" };
 		default = 0;
 	};
 	
