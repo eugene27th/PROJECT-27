@@ -86,24 +86,9 @@ prj_fnc_add_mhq_action = {
 prj_fnc_create_task = {
 	private _taskID = missionNamespace getVariable ["taskID",0];
 	private _oldTaskName = missionNamespace getVariable ["oldTaskName","side_null"];
+	private _selected_task = selectRandom tasksConfig;
 
-	private _tasks = [
-		["side_alarm_button",3000],
-		["side_ammo_cache",3000],
-		["side_capture_leader",3500],
-		["side_capture_zone",2800],
-		["side_checkpoint",2000],
-		["side_destroy_tower",3000],
-		["side_destruction_of_vehicles",3000],
-		["side_hostage",3500],
-		["side_intel_uav",4000],
-		["side_liquidation_leader",2000],
-		["side_rescue",4000]
-	];
-
-	private _selected_task = selectRandom _tasks;
-
-	while {(_selected_task # 0) == _oldTaskName} do {_selected_task = selectRandom _tasks};
+	while {(_selected_task # 0) == _oldTaskName} do {_selected_task = selectRandom tasksConfig};
 	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
 
 	missionNamespace setVariable ["taskID",_taskID + 1,true];
@@ -330,168 +315,203 @@ prj_fnc_civ_info = {
 };
 
 prj_fnc_save_game = {
-	params [["_clear",false],["_cars",true]];
+	params [["_vehs",true]];
 
-	private _mVars = ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
+	// save general
 
-	private _aVars = ["prj27_saveVehs"];
+	private _generalDataArray = [];
+	{_generalDataArray pushBack (missionNamespace getVariable [_x,0])} forEach ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
 
-	private _pVars = missionNamespace getVariable ["prj27UIDs",[]];
-	private _oldpv = profileNamespace getVariable ["prj27UIDs",[]];
-	private _res = _oldpv + (_pVars - _oldpv);
-	profileNamespace setVariable ["prj27UIDs",_res];
-	
-	if (prj_debug) then {
-		systemChat format ["_pVars: %1 / _oldpv: %2 / _res: %3",_pVars,_oldpv,_res];
+	"ArmaRequests" callExtension format ['0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveGeneral&d=%1|null',_generalDataArray];
+
+	waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+
+	private _response = "ArmaRequests" callExtension "1";
+	private _parsedResponse = parseSimpleArray _response;
+	private _responseCode = _parsedResponse # 0;
+
+	if (_responseCode != 9) then {
+		"General data are saved" remoteExec ["systemChat"];
+	} else {
+		"Response error" remoteExec ["systemChat"];
 	};
 
-	private _gVars = _mVars + _pVars;
+	// save players
 
-	if (_clear) exitWith {
-		{profileNamespace setVariable [_x,0]} forEach _mVars;
-		{profileNamespace setVariable 
-			[_x,
-				[
-					["money",0],
-					["enemy_killings",0],
-					["friend_killings",0],
-					["civ_killings",0]
-				]
-			]
-		} forEach _res;
-		{profileNamespace setVariable [_x,[]]} forEach _aVars;
-	};
-	
+	private _allUIDs = missionNamespace getVariable ["prj27UIDs",[]];
+
 	{
-		private _var = missionNamespace getVariable [_x,0];
-		profileNamespace setVariable [_x,_var];
-		if (prj_debug) then {
-			systemChat format ["%1 set %2",_x,_var]
-		};
-	} forEach _gVars;
+		private _playerData = missionNamespace getVariable [_x,0];
 
-	if (_cars) then {
-		private _vehsArray = [];
+		private _u = _x;
+		private _m = (_playerData # 0) # 1;
+		private _e = (_playerData # 1) # 1;
+		private _f = (_playerData # 2) # 1;
+		private _c = (_playerData # 3) # 1;
+
+		"ArmaRequests" callExtension format ['0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayers&u=%1&m=%2&e=%3&f=%4&c=%5|null',_u,_m,_e,_f,_c];
+
+		waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+
+		private _response = "ArmaRequests" callExtension "1";
+		private _parsedResponse = parseSimpleArray _response;
+		private _responseCode = _parsedResponse # 0;
+
+		if (_responseCode == 9) then {"Response error" remoteExec ["systemChat"]};
+
+	} forEach _allUIDs;
+
+	"Player data saved" remoteExec ["systemChat"];
+
+	// save vehicles
+
+	if (_vehs) then {
 		private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000];
+
+		private _vehsArray = [];
 		{
-			_vehsArray pushBack [typeOf _x,position _x,getDir _x];
-			profileNamespace setVariable ["prj27_saveVehs",_vehsArray];
+			_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x]
 		} forEach _vehs;
-		if (prj_debug) then {
-			systemChat str _vehsArray
+		
+		"ArmaRequests" callExtension format ['0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveVehicles&d=%1|null',_vehsArray];
+
+		waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+
+		private _response = "ArmaRequests" callExtension "1";
+		private _parsedResponse = parseSimpleArray _response;
+		private _responseCode = _parsedResponse # 0;
+
+		if (_responseCode != 9) then {
+			"Vehicles are saved" remoteExec ["systemChat"];
+		} else {
+			"Response error" remoteExec ["systemChat"];
 		};
 	};
 
-	"Игровой процесс сохранён." remoteExec ["systemChat",0];
+	"Data saved" remoteExec ["systemChat"];
 };
 
 prj_fnc_load_game = {
-	params [["_cars",true]];
+	params [["_vehs",true]];
 
-	private _mVars = ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
+	// load general
 
-	private _pVars = profileNamespace getVariable ["prj27UIDs",[]];
-	if (prj_debug) then {systemChat format ["_pVars: %1",_pVars]};
-	private _gVars = _mVars + _pVars;
+	"ArmaRequests" callExtension '0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadGeneral|null';
 
-	{
-		private _var = profileNamespace getVariable [_x,0];
-		if (prj_debug) then {
-			systemChat format ["%1 / %2",_x,_var];
+	waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+
+	private _response = "ArmaRequests" callExtension "1";
+	private _parsedResponse = parseSimpleArray _response;
+	private _responseCode = _parsedResponse # 0;
+	private _stringArray = (_parsedResponse # 1) splitString ",";
+
+	if (_responseCode != 9) then {
+		if !(_response isEqualTo "null"} then {
+
+			{
+				missionNamespace setVariable [_x,_stringArray # _forEachIndex,true];
+			} forEach ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
+
+			"General data are loaded" remoteExec ["systemChat"];
+
+		} else {
+			"No general data in the table" remoteExec ["systemChat"];
 		};
-		missionNamespace setVariable [_x,_var,true];
-	} forEach _gVars;
 
-	if (_cars) then {
-		private _vehsArray = profileNamespace getVariable ["prj27_saveVehs",[]];
-		if (isNil "_vehsArray" || (count _vehsArray) < 1) exitWith {if (prj_debug) then {systemChat "машин нет"}};
+	} else {
+		"Response error" remoteExec ["systemChat"];
+	};
 
-		private _vehsDel = nearestObjects [position arsenal,["Air","LandVehicle"], 200];
-		{
-			deleteVehicle _x;
-			if (prj_debug) then {
-				systemChat format ["delete %1",_x];
+	// load players
+
+	"ArmaRequests" callExtension '0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadPlayers|null';
+
+	waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+
+	private _response = "ArmaRequests" callExtension "1";
+	private _parsedResponse = parseSimpleArray _response;
+	private _responseCode = _parsedResponse # 0;
+	private _stringArray = (_parsedResponse # 1) splitString "-";
+
+	if (_responseCode != 9) then {
+		
+		if !(_response isEqualTo "null"} then {
+
+			{
+				private _playerData = _x splitString ":";
+
+				private _uid = (_playerData # 0);
+				private _money = (_playerData # 1);
+				private _enemy = (_playerData # 2);
+				private _friend = (_playerData # 3);
+				private _civs = (_playerData # 4);
+			
+				missionNamespace setVariable [
+					_uid,
+					[
+						["money",_money],
+						["enemy_killings",_enemy],
+						["friend_killings",_friend],
+						["civ_killings",_civs]
+					],
+					true
+				];
+
+			} forEach _stringArray;
+
+			"All players data are loaded" remoteExec ["systemChat"];
+
+		} else {
+			"No players in the table" remoteExec ["systemChat"];
+		};
+
+	} else {
+		"Response error" remoteExec ["systemChat"];
+	};
+
+	// load vehicles
+
+	if (_vehs) then {
+
+		"ArmaRequests" callExtension '0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadVehicles|null';
+
+		waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+
+		private _response = "ArmaRequests" callExtension "1";
+		private _parsedResponse = parseSimpleArray _response;
+		private _responseCode = _parsedResponse # 0;
+		private _stringArray = (_parsedResponse # 1) splitString "-";
+
+		if (_responseCode != 9) then {
+
+			if !(_response isEqualTo "null"} then {
+
+				{deleteVehicle _x} forEach (nearestObjects [position arsenal,["Air","LandVehicle"], 200]);
+
+				{
+					private _vehInfo = _x splitString ":";
+
+					private _vehClass = (_vehInfo # 0);
+					private _vehPosStr = (_vehInfo # 1) splitString "[,]";
+					private _vehPosArr = [parseNumber (_vehPosStr # 0),parseNumber (_vehPosStr # 1),parseNumber (_vehPosStr # 2)];
+					private _vehDir = parseNumber (_vehInfo # 2);
+				
+					private _veh = createVehicle [_vehClass, _vehPosArr, [], 0, "CAN_COLLIDE"];
+					_veh setDir _vehDir;
+
+				} forEach _stringArray;
+
+				"All vehicles are loaded" remoteExec ["systemChat"];
+
+			} else {
+				"No vehicles in the table" remoteExec ["systemChat"];
 			};
-		} forEach _vehsDel;
 
-		{
-			private _vehClass = (_x # 0);
-			// private _safePos = (_x # 1) findEmptyPosition [0,100,_vehClass];
-			// private _veh = _vehClass createVehicle _safePos;
-			private _veh = createVehicle [_vehClass, (_x # 1), [], 0, "CAN_COLLIDE"];
-			_veh setDir (_x # 2);
-			clearWeaponCargoGlobal _veh;
-			clearMagazineCargoGlobal _veh;
-			clearItemCargoGlobal _veh;
-			clearBackpackCargoGlobal _veh;
-			if (prj_debug) then {
-				systemChat format ["spawn %1",_x # 0];
-			};
-		} forEach _vehsArray;
-	};
-};
-
-prj_fnc_clear_profile = {
-	private _vars = ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ","prj27_saveVehs"];
-	private _pVars = profileNamespace getVariable ["prj27UIDs",[]];
-
-	{
-		profileNamespace setVariable [_x,nil];
-		systemChat str _x;
-	} forEach (_vars + _pVars);
-
-	profileNamespace setVariable ["prj27UIDs",nil];
-};
-
-prj_fnc_slideMonitorCreate = {
-	params ["_position"];
-
-	private _textureNames = ["1","15","22"];
-
-	private _monitorObject = missionNamespace getVariable ["slidesMonitor",nil];
-	if (!isNil "_monitorObject") then {
-		deleteVehicle _monitorObject;
-		"Создан новый монитор." remoteExec ["systemChat",0];
+		} else {
+			"Response error" remoteExec ["systemChat"];
+		};
 	};
 
-	_safePosition = _position findEmptyPosition [0,50,"Land_TripodScreen_01_large_black_F"];
-	_monitorObject = "Land_TripodScreen_01_large_black_F" createVehicle _safePosition;
-	_monitorObject allowDamage false;
-	_monitorObject setObjectTextureGlobal [0, "img\slides\1.jpg"];
-
-	_monitorObject setVariable ["slidesArray",_textureNames,true];
-	missionNamespace setVariable ["slidesMonitor",_monitorObject,true];
-
-	[_monitorObject,["slideshow menu", { call prj_fnc_slideMonitorMenu }]] remoteExec ["addAction",0,true];
-	[_monitorObject, true, [0, 2, 0]] remoteExecCall ["ace_dragging_fnc_setCarryable",0];
-};
-
-prj_fnc_monitorChangeSlide = {
-	params ["_mode"];
-	private _monitorObject = missionNamespace getVariable ["slidesMonitor",nil];
-	if (isNil "_monitorObject") exitWith {};
-
-	private _textures = _monitorObject getVariable "slidesArray";
-	private _slideNumber = _monitorObject getVariable ["slideNumber",0];
-	private _maxNumber = (count _textures) - 1;
-
-	switch (_mode) do {
-		case "next": {_slideNumber = _slideNumber + 1};
-		case "previous": {_slideNumber = _slideNumber - 1};
-		default {};
-	};
-
-	switch (true) do {
-		case (_slideNumber > _maxNumber): {_slideNumber = 0};
-		case (_slideNumber < 0): {_slideNumber = _maxNumber};
-		default {};
-	};
-
-	private _currentSlide = _textures # _slideNumber;
-
-	_monitorObject setObjectTextureGlobal [0, "img\slides\" + _currentSlide + ".jpg"];
-
-	ctrlSetText [1055, "слайд:" + str _currentSlide];
-
-	_monitorObject setVariable ["slideNumber",_slideNumber,true];
+	// final message
+	"The data is loaded" remoteExec ["systemChat"];
 };

@@ -514,65 +514,6 @@ class dialogOptionMenu
 
 			action = "remoteExecCall ['prj_fnc_save_game',2]";
 		};
-
-		class Options_LoadGame_Back: prjRscText {
-			colorBackground[] = { 0, 0, 0, 0.5 };
-			idc = -1;
-			x = 0.415 * safezoneW + safezoneX;
-			y = 0.550 * safezoneH + safezoneY;
-			w = 0.02625 * safezoneW;
-			h = 0.039375 * safezoneH;
-		};
-		class Options_LoadGame_Pct: prjRscPicture
-		{
-			idc = -1;
-			text = "img\icons\icon_save.paa";
-			x = 0.415 * safezoneW + safezoneX;
-			y = 0.550 * safezoneH + safezoneY;
-			w = 0.02625 * safezoneW;
-			h = 0.039375 * safezoneH;
-		};
-		class Options_LoadGame_Btn: prjRscButtonHQ
-		{
-			idc = 1032;
-			text = "LOAD GAME";
-			x = 0.444 * safezoneW + safezoneX;
-			y = 0.550 * safezoneH + safezoneY;
-			w = 0.142 * safezoneW;
-			h = 0.039375 * safezoneH;
-
-			action = "remoteExecCall ['prj_fnc_load_game',2]";
-		};
-
-		class Options_ClearGameSave_Back: prjRscText {
-			colorBackground[] = { 0, 0, 0, 0.5 };
-			idc = -1;
-			x = 0.415 * safezoneW + safezoneX;
-			y = 0.594 * safezoneH + safezoneY;
-			w = 0.02625 * safezoneW;
-			h = 0.039375 * safezoneH;
-		};
-		class Options_ClearGameSave_Pct: prjRscPicture
-		{
-			idc = -1;
-			text = "img\icons\icon_save.paa";
-			x = 0.415 * safezoneW + safezoneX;
-			y = 0.594 * safezoneH + safezoneY;
-			w = 0.02625 * safezoneW;
-			h = 0.039375 * safezoneH;
-		};
-		class Options_ClearGameSave_Btn: prjRscButtonHQ
-		{
-			idc = 1033;
-			text = "CLEAR SAVE";
-			x = 0.444 * safezoneW + safezoneX;
-			y = 0.594 * safezoneH + safezoneY;
-			w = 0.142 * safezoneW;
-			h = 0.039375 * safezoneH;
-
-			action = "[true] remoteExecCall ['prj_fnc_save_game',2]";
-		};
-
 	};
 };
 

@@ -967,5 +967,20 @@ vehicle_loadout_items = [
 	]
 ];
 
+// tasks / [name,reward]
+tasksConfig = [
+	["side_alarm_button",3000],
+	["side_ammo_cache",3000],
+	["side_capture_leader",3500],
+	["side_capture_zone",2800],
+	["side_checkpoint",2000],
+	["side_destroy_tower",3000],
+	["side_destruction_of_vehicles",3000],
+	["side_hostage",3500],
+	["side_intel_uav",4000],
+	["side_liquidation_leader",2000],
+	["side_rescue",4000]
+];
+
 // debug mode
 prj_debug = false;
