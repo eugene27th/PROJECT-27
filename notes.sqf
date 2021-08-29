@@ -3,3 +3,5 @@
         hideObjectGlobal _x; 
     };  
 } forEach nearestObjects [[worldSize / 2,worldSize / 2,0], [], worldSize * 2];
+
+1
