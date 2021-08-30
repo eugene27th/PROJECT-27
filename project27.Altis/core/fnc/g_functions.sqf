@@ -315,16 +315,15 @@ prj_fnc_civ_info = {
 };
 
 prj_fnc_save_game = {
-	params [["_vehs",true]];
 
 	// save general
 
 	private _generalDataArray = [];
 	{_generalDataArray pushBack (missionNamespace getVariable [_x,0])} forEach ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
 
-	"ArmaRequests" callExtension format ['0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveGeneral&d=%1|null',_generalDataArray];
+	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveGeneral&d=%1|null",_generalDataArray]);
 
-	waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
 	private _response = "ArmaRequests" callExtension "1";
 	private _parsedResponse = parseSimpleArray _response;
@@ -349,9 +348,9 @@ prj_fnc_save_game = {
 		private _f = (_playerData # 2) # 1;
 		private _c = (_playerData # 3) # 1;
 
-		"ArmaRequests" callExtension format ['0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayers&u=%1&m=%2&e=%3&f=%4&c=%5|null',_u,_m,_e,_f,_c];
+		"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayers&u=%1&m=%2&e=%3&f=%4&c=%5|null",_u,_m,_e,_f,_c]);
 
-		waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+		waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
 		private _response = "ArmaRequests" callExtension "1";
 		private _parsedResponse = parseSimpleArray _response;
@@ -365,27 +364,25 @@ prj_fnc_save_game = {
 
 	// save vehicles
 
-	if (_vehs) then {
-		private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000];
+	private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000];
 
-		private _vehsArray = [];
-		{
-			_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x]
-		} forEach _vehs;
-		
-		"ArmaRequests" callExtension format ['0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveVehicles&d=%1|null',_vehsArray];
+	private _vehsArray = [];
+	{
+		_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x];
+	} forEach _vehs;
+	
+	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveVehicles&d=%1|null",_vehsArray]);
 
-		waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
-		private _response = "ArmaRequests" callExtension "1";
-		private _parsedResponse = parseSimpleArray _response;
-		private _responseCode = _parsedResponse # 0;
+	private _response = "ArmaRequests" callExtension "1";
+	private _parsedResponse = parseSimpleArray _response;
+	private _responseCode = _parsedResponse # 0;
 
-		if (_responseCode != 9) then {
-			"Vehicles are saved" remoteExec ["systemChat"];
-		} else {
-			"Response error" remoteExec ["systemChat"];
-		};
+	if (_responseCode != 9) then {
+		"Vehicles are saved" remoteExec ["systemChat"];
+	} else {
+		"Response error" remoteExec ["systemChat"];
 	};
 
 	"Data saved" remoteExec ["systemChat"];
@@ -396,37 +393,31 @@ prj_fnc_load_game = {
 
 	// load general
 
-	"ArmaRequests" callExtension '0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadGeneral|null';
+	"ArmaRequests" callExtension "0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadGeneral|null";
 
-	waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
 	private _response = "ArmaRequests" callExtension "1";
 	private _parsedResponse = parseSimpleArray _response;
 	private _responseCode = _parsedResponse # 0;
-	private _stringArray = (_parsedResponse # 1) splitString ",";
+	private _dataArray = (_parsedResponse # 1) splitString ",";
 
 	if (_responseCode != 9) then {
-		if !(_response isEqualTo "null"} then {
 
-			{
-				missionNamespace setVariable [_x,_stringArray # _forEachIndex,true];
-			} forEach ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
+		{
+			missionNamespace setVariable [_x,parseNumber (_dataArray # _forEachIndex),true];
+		} forEach ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
 
-			"General data are loaded" remoteExec ["systemChat"];
-
-		} else {
-			"No general data in the table" remoteExec ["systemChat"];
-		};
-
+		"General data are loaded" remoteExec ["systemChat"];
 	} else {
 		"Response error" remoteExec ["systemChat"];
 	};
 
 	// load players
 
-	"ArmaRequests" callExtension '0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadPlayers|null';
+	"ArmaRequests" callExtension "0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadPlayers|null";
 
-	waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
 	private _response = "ArmaRequests" callExtension "1";
 	private _parsedResponse = parseSimpleArray _response;
@@ -435,35 +426,29 @@ prj_fnc_load_game = {
 
 	if (_responseCode != 9) then {
 		
-		if !(_response isEqualTo "null"} then {
+		{
+			private _playerData = _x splitString ":";
 
-			{
-				private _playerData = _x splitString ":";
+			private _uid = (_playerData # 0);
+			private _money = parseNumber (_playerData # 1);
+			private _enemy = parseNumber (_playerData # 2);
+			private _friend = parseNumber (_playerData # 3);
+			private _civs = parseNumber (_playerData # 4);
+		
+			missionNamespace setVariable [
+				_uid,
+				[
+					["money",_money],
+					["enemy_killings",_enemy],
+					["friend_killings",_friend],
+					["civ_killings",_civs]
+				],
+				true
+			];
 
-				private _uid = (_playerData # 0);
-				private _money = (_playerData # 1);
-				private _enemy = (_playerData # 2);
-				private _friend = (_playerData # 3);
-				private _civs = (_playerData # 4);
-			
-				missionNamespace setVariable [
-					_uid,
-					[
-						["money",_money],
-						["enemy_killings",_enemy],
-						["friend_killings",_friend],
-						["civ_killings",_civs]
-					],
-					true
-				];
+		} forEach _stringArray;
 
-			} forEach _stringArray;
-
-			"All players data are loaded" remoteExec ["systemChat"];
-
-		} else {
-			"No players in the table" remoteExec ["systemChat"];
-		};
+		"All players data are loaded" remoteExec ["systemChat"];
 
 	} else {
 		"Response error" remoteExec ["systemChat"];
@@ -473,39 +458,33 @@ prj_fnc_load_game = {
 
 	if (_vehs) then {
 
-		"ArmaRequests" callExtension '0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadVehicles|null';
+		"ArmaRequests" callExtension "0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadVehicles|null";
 
-		waitUntil {sleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+		waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
 		private _response = "ArmaRequests" callExtension "1";
 		private _parsedResponse = parseSimpleArray _response;
 		private _responseCode = _parsedResponse # 0;
-		private _stringArray = (_parsedResponse # 1) splitString "-";
+		private _stringArray = (_parsedResponse # 1) splitString "+";
 
 		if (_responseCode != 9) then {
 
-			if !(_response isEqualTo "null"} then {
+			{deleteVehicle _x} forEach (nearestObjects [position arsenal,["Air","LandVehicle"], 200]);
 
-				{deleteVehicle _x} forEach (nearestObjects [position arsenal,["Air","LandVehicle"], 200]);
+			{
+				private _vehInfo = _x splitString ":";
 
-				{
-					private _vehInfo = _x splitString ":";
+				private _vehClass = call (compile (_vehInfo # 0));
+				private _vehPosStr = (_vehInfo # 1) splitString "[,]";
+				private _vehPosArr = [parseNumber (_vehPosStr # 0),parseNumber (_vehPosStr # 1),parseNumber (_vehPosStr # 2)];
+				private _vehDir = parseNumber (_vehInfo # 2);
+			
+				private _veh = createVehicle [_vehClass, _vehPosArr, [], 0, "CAN_COLLIDE"];
+				_veh setDir _vehDir;
 
-					private _vehClass = (_vehInfo # 0);
-					private _vehPosStr = (_vehInfo # 1) splitString "[,]";
-					private _vehPosArr = [parseNumber (_vehPosStr # 0),parseNumber (_vehPosStr # 1),parseNumber (_vehPosStr # 2)];
-					private _vehDir = parseNumber (_vehInfo # 2);
-				
-					private _veh = createVehicle [_vehClass, _vehPosArr, [], 0, "CAN_COLLIDE"];
-					_veh setDir _vehDir;
+			} forEach _stringArray;
 
-				} forEach _stringArray;
-
-				"All vehicles are loaded" remoteExec ["systemChat"];
-
-			} else {
-				"No vehicles in the table" remoteExec ["systemChat"];
-			};
+			"All vehicles are loaded" remoteExec ["systemChat"];
 
 		} else {
 			"Response error" remoteExec ["systemChat"];
@@ -513,5 +492,5 @@ prj_fnc_load_game = {
 	};
 
 	// final message
-	"The data is loaded" remoteExec ["systemChat"];
+	"Data loaded" remoteExec ["systemChat"];
 };

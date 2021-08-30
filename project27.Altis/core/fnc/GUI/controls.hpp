@@ -512,7 +512,7 @@ class dialogOptionMenu
 			w = 0.142 * safezoneW;
 			h = 0.039375 * safezoneH;
 
-			action = "remoteExecCall ['prj_fnc_save_game',2]";
+			action = "remoteExec ['prj_fnc_save_game',2]";
 		};
 	};
 };
@@ -1070,7 +1070,7 @@ class dialogSlideMonitorMenu
 			w = 0.0875 * safezoneW;
 			h = 0.065625 * safezoneH;
 
-			action = "['next'] remoteExecCall ['prj_fnc_monitorChangeSlide',2]";
+			action = "['next'] remoteExec ['prj_fnc_monitorChangeSlide',2]";
 		};
 
 		class slideMonitorMenuPrevious: prjRscButtonHQ
@@ -1082,7 +1082,7 @@ class dialogSlideMonitorMenu
 			w = 0.0875 * safezoneW;
 			h = 0.065625 * safezoneH;
 
-			action = "['previous'] remoteExecCall ['prj_fnc_monitorChangeSlide',2]";
+			action = "['previous'] remoteExec ['prj_fnc_monitorChangeSlide',2]";
 		};
 	};
 };

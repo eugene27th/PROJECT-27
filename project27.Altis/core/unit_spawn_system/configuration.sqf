@@ -54,16 +54,16 @@
 switch (worldName) do {
 	default {
 		//enemy
-		cities_enemy = [[2,1],[2,2],[2,0.4],[1,0.3],[1,0.8]];
-		villages_enemy = [[1,1],[2,1],[1,0.4],[1,0.2],[1,0.6]];
-		local_enemy = [[1,1],[1,1],[0],[0],[1,0.6]];
+		cities_enemy = [[5,2],[4,2],[2,0.4],[1,0.5],[1,0.4]];
+		villages_enemy = [[4,2],[3,2],[2,0.4],[1,0.4],[1,0.3]];
+		local_enemy = [[0],[3,2],[1,0.6],[1,0.4],[1,0.4]];
 		rock_enemy = [[0],[1,1],[0],[0],[0]];
 		hills_enemy = [[0],[1,1],[0],[0],[1,1]];
-		vegetation_enemy = [[0],[1,1],[0],[0],[1,0.5]];
-		other_enemy = [[0],[1,1],[1,0.3],[1,0.1],[1,0.7]];
+		vegetation_enemy = [[0],[1,1],[0],[0],[0]];
+		other_enemy = [[0],[1,1],[1,0.5],[1,0.2],[1,0.5]];
 		//civilian
-		cities_civilian = [[2,1],[5,0],[1,0.7]];
-		villages_civilian = [[1,1],[5,0],[1,0.5]];
+		cities_civilian = [[0],[3,0],[1,0.4]];
+		villages_civilian = [[0],[3,0],[1,0.2]];
 		local_civilian = [[0],[0],[0]];
 		rock_civilian = [[0],[0],[0]];
 		hills_civilian = [[0],[0],[0]];

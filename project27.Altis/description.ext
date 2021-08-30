@@ -41,7 +41,7 @@ class Params
 		title = "Arsenal";
 		values[] = { 0, 1 };
 		texts[] = { "Virtual arsenal", "Arsenal shop" };
-		default = 1;
+		default = 0;
 	};
 
 	class divider_sectors
