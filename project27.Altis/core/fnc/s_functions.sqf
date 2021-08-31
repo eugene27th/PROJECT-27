@@ -28,7 +28,6 @@ prj_fnc_changePlayerVariableGlobal = {
 };
 
 prj_fnc_selectPosition = {
-	
 	params ["_type_location",["_position_around", true],["_nearest",[]]];
 
 	private "_selected_pos";
@@ -64,7 +63,6 @@ prj_fnc_selectPosition = {
 };
 
 prj_fnc_selectCaptPosition = {
-
 	params [["_position_around",false],["_captured",false],["_nearest",[]]];
 
 	private _locations = missionNamespace getVariable "location_triggers";
@@ -96,7 +94,6 @@ prj_fnc_selectCaptPosition = {
 };
 
 prj_fnc_select_road_position = {
-
 	params [["_typelocation",4],["_radius",3000]];
 
 	private "_returndata";
@@ -122,7 +119,6 @@ prj_fnc_select_road_position = {
 };
 
 prj_fnc_select_road_position_around = {
-
 	params ["_pos",["_radius",[1000,3000]]];
 
 	private "_returndata";
@@ -229,29 +225,128 @@ prj_fnc_enemy_patrols = {
 };
 
 prj_fnc_reinforcement = {
-	params ["_pos",["_radius",[1000,4000]],["_number",2]];
+	params ["_pos",["_radius",[1500,4000]],["_number",2],["_type","ground"]];
 
-	private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
-	private _position = _position_data # 0;
-	private _direction = _position_data # 1;
-	private _vehicles = [];
+	if (_type == "random") then {
+		if ((random 1) < 0.35) then {
+			_type = "air";
+		} else {
+			_type = "ground";
+		};
+	};
 
-	for "_i" from 1 to _number do {
-		private _vehClass = selectRandom enemy_vehicles_light;
-		private _safePos = [_position, 0, 300] call BIS_fnc_findSafePos;
-		private _vehicle = _vehClass createVehicle _safePos;
-		_vehicle setDir _direction;
-		private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
+	switch (_type) do {
+		case "ground": {
+			private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
 
-		private _vehicle_group = group _vehicle;
+			private _vehicles = [];
 
-		private _wp = _vehicle_group addWaypoint [_pos, 0];  
-		_wp setWaypointSpeed "FULL";  
-		_wp setWaypointType "SAD";
+			for "_i" from 1 to _number do {
+				private _safePos = [(_position_data # 0), 0, 300] call BIS_fnc_findSafePos;
 
-		_vehicle_group setCombatMode "RED";
+				private _vehicle = (selectRandom enemy_vehicles_light) createVehicle _safePos;
+				_vehicle setDir (_position_data # 1);
 
-		_vehicles pushBack [_vehicle, _crew_units];
+				private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
+
+				private _vehicle_group = group _vehicle;
+				_vehicle_group setCombatMode "RED";
+
+				private _wp = _vehicle_group addWaypoint [_pos, 0];  
+				_wp setWaypointSpeed "FULL";  
+				_wp setWaypointType "SAD";
+
+				_vehicles pushBack [_vehicle, _crew_units];
+			};
+		};
+
+		case "air": {
+			
+			private _finishPos = [_pos, 600, 1800, 5, 0, 0.5, 0, [], [_nullPos, []]] call BIS_fnc_findSafePos;
+			private _helipad = "Land_HelipadEmpty_F" createVehicle _finishPos;
+
+			for "_i" from 1 to _number do {
+
+				private _spawnPos = [4] call prj_fnc_selectPosition;
+	
+				private _vehicle = createVehicle [(selectRandom enemy_heliLight), _spawnPos, [], 0, "FLY"];
+				private _vehUnits = [_vehicle,enemy_infantry,true,false] call prj_fnc_create_crew;
+
+				private _crewUnits = (_vehUnits # 0) # 0;
+				private _cargoUnits = (_vehUnits # 1) # 0;
+
+				private _crewGroup = (_vehUnits # 0) # 1;
+				private _cargoGroup = (_vehUnits # 1) # 1;
+
+				_cargoGroup setCombatMode "RED";
+
+				private _wpCrew = _crewGroup addWaypoint [_finishPos, 0];  
+				_wpCrew setWaypointSpeed "FULL";
+				_wpCrew setWaypointType "TR UNLOAD";
+
+				private _wpCargo = _cargoGroup addWaypoint [_finishPos, 0];  
+				_wpCargo setWaypointSpeed "FULL";
+				_wpCargo setWaypointType "GETOUT";
+
+				_wpCrew synchronizeWaypoint [_wpCargo];
+
+				private _wpCrew = _crewGroup addWaypoint [_spawnPos, 0];  
+				_wpCrew setWaypointSpeed "FULL";
+				_wpCrew setWaypointType "MOVE";
+
+				private _wpCargo = _cargoGroup addWaypoint [_pos, 0];  
+				_wpCargo setWaypointSpeed "FULL";
+				_wpCargo setWaypointType "SAD";
+
+				//check and vehicle delete
+
+				[_vehicle,_crewUnits,_spawnPos,_helipad] spawn {
+					sleep 120;
+
+					params ["_vehicle","_crewUnits","_spawnPos","_helipad"];
+
+					waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 250};
+
+					if (!alive _vehicle) then {
+						sleep 120;
+					};
+
+					_crewUnits pushBack _vehicle;
+					_crewUnits pushBack _helipad;
+					
+					{deleteVehicle _x} forEach _crewUnits;
+				};
+
+				//check and cargos delete
+
+				[_cargoUnits] spawn {
+					sleep 300;
+
+					params ["_cargoUnits"];
+					
+					while {(count _cargoUnits) > 0} do {
+						private _unitsCount = (count _cargoUnits) - 1;
+
+						for "_i" from 0 to _unitsCount do {
+							private _finded = false;
+							
+							private _nearUnits = nearestObjects [position (_cargoUnits # _i),["Man"],1500];
+							{
+								if (side _x == west) exitWith {
+									_finded = true;
+								};
+							} forEach _nearUnits;
+
+							if (!_finded) then {
+								deleteVehicle (_cargoUnits # _i);
+							};
+						};
+
+						sleep 60;
+					};
+				};
+			};
+		};
 	};
 
 	_vehicles
@@ -303,7 +398,6 @@ prj_fnc_check_and_delete = {
 };
 
 prj_fnc_select_house_position = {
-
 	params [["_pos", [0,0,0]],["_radius", 200]];
 
 	private "_pos";
@@ -321,9 +415,7 @@ prj_fnc_select_house_position = {
 };
 
 prj_fnc_create_trg = {
-	params [
-		"_position", "_area", "_by", "_type", ["_global",true], ["_activation",""], ["_repeating",false], ["_rectangle",false], ["_angle",0]
-	];
+	params ["_position", "_area", "_by", "_type", ["_global",true], ["_activation",""], ["_repeating",false], ["_rectangle",false], ["_angle",0]];
 
 	_area params ["_a", "_b", "_c"];
 
@@ -336,9 +428,7 @@ prj_fnc_create_trg = {
 };
 
 prj_fnc_create_marker = {
-	params [
-		"_markername","_position","_color","_alpha",["_size_form",[]],["_type",""],["_text",""]
-	];
+	params ["_markername","_position","_color","_alpha",["_size_form",[]],["_type",""],["_text",""]];
 
 	_marker = createMarker [_markername,_position];
 	_marker setMarkerColor _color;
@@ -358,9 +448,7 @@ prj_fnc_create_marker = {
 };
 
 prj_fnc_create_markers = {
-	params [
-		"_markers_array"
-	];
+	params ["_markers_array"];
 	for [{private _i = 0 }, { _i < (count _markers_array) }, { _i = _i + 1 }] do {
 		_marker = createMarker [((_markers_array select _i) select 0),((_markers_array select _i) select 1)];
 		_marker setMarkerType ((_markers_array select _i) select 2);
@@ -370,31 +458,28 @@ prj_fnc_create_markers = {
 };
 
 prj_fnc_create_crew = {
+	params ["_vehicle","_units",["_passengers",false],["_oneGroup",true],["_side",independent]];
 
-	params ["_vehicle","_units",["_passengers",false],["_side",independent]];
+	//create group
+	private _vehCrewGroup = createGroup [_side, true];
+	private "_vehCargoGroup";
+
+	if (_oneGroup) then {
+		_vehCargoGroup = _vehCrewGroup;
+	} else {
+		_vehCargoGroup = createGroup [_side, true];
+	};
 
 	//create crew
 	private _vehicle_crew = [];
 
-	private _vehicle_group = createGroup [_side, true];
-
-	if ((_vehicle emptyPositions "commander") != 0) then {
-		private _unit = _vehicle_group createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
-		_unit moveInCommander _vehicle;
-		_vehicle_crew pushBack _unit;
-	};
-
-	if ((_vehicle emptyPositions "gunner") != 0) then {
-		private _unit = _vehicle_group createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
-		_unit moveInGunner _vehicle;
-		_vehicle_crew pushBack _unit;
-	};
-
-	if ((_vehicle emptyPositions "driver") != 0) then {
-		private _unit = _vehicle_group createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
-		_unit moveInDriver _vehicle;
-		_vehicle_crew pushBack _unit;
-	};
+	{
+		if ((_vehicle emptyPositions _x) != 0) then {
+			private _unit = _vehCrewGroup createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
+			_unit moveInDriver _vehicle;
+			_vehicle_crew pushBack _unit;
+		};
+	} forEach ["commander","gunner","driver"];
 
 	//create passengers
 	private _vehicle_cargo = [];
@@ -404,13 +489,20 @@ prj_fnc_create_crew = {
 		private _empty_seats = _vehicle emptyPositions "cargo";
 
 		for "_i" from 1 to _empty_seats do {
-			private _unit = _vehicle_group createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
+			private _unit = _vehCargoGroup createUnit [selectRandom _units, position _vehicle, [], 0, "NONE"];
 			_unit moveInCargo _vehicle;
 			_vehicle_cargo pushBack _unit;
 		};
 	};
 
-	_vehicle_crew + _vehicle_cargo
+	//return
+
+	if (_oneGroup) then {
+		_vehicle_crew + _vehicle_cargo
+	} else {
+		[[_vehicle_crew,_vehCrewGroup],[_vehicle_cargo,_vehCargoGroup]]
+	};
+	
 };
 
 prj_fnc_capt_zone = {

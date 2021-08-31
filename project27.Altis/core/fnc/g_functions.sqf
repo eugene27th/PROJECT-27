@@ -329,11 +329,7 @@ prj_fnc_save_game = {
 	private _parsedResponse = parseSimpleArray _response;
 	private _responseCode = _parsedResponse # 0;
 
-	if (_responseCode != 9) then {
-		"General data are saved" remoteExec ["systemChat"];
-	} else {
-		"Response error" remoteExec ["systemChat"];
-	};
+	if (_responseCode != 9) then {"General data are saved" remoteExec ["systemChat"]} else {"Response error" remoteExec ["systemChat"]};
 
 	// save players
 
@@ -348,7 +344,7 @@ prj_fnc_save_game = {
 		private _f = (_playerData # 2) # 1;
 		private _c = (_playerData # 3) # 1;
 
-		"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayers&u=%1&m=%2&e=%3&f=%4&c=%5|null",_u,_m,_e,_f,_c]);
+		"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayer&u=%1&m=%2&e=%3&f=%4&c=%5|null",_u,_m,_e,_f,_c]);
 
 		waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
@@ -364,12 +360,10 @@ prj_fnc_save_game = {
 
 	// save vehicles
 
-	private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000];
+	private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000] + nearestObjects [position tr_a_shop,["Air","LandVehicle"], 1000];
 
 	private _vehsArray = [];
-	{
-		_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x];
-	} forEach _vehs;
+	{_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x]} forEach _vehs;
 	
 	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveVehicles&d=%1|null",_vehsArray]);
 
@@ -379,11 +373,7 @@ prj_fnc_save_game = {
 	private _parsedResponse = parseSimpleArray _response;
 	private _responseCode = _parsedResponse # 0;
 
-	if (_responseCode != 9) then {
-		"Vehicles are saved" remoteExec ["systemChat"];
-	} else {
-		"Response error" remoteExec ["systemChat"];
-	};
+	if (_responseCode != 9) then {"Vehicles are saved" remoteExec ["systemChat"]} else {"Response error" remoteExec ["systemChat"]};
 
 	"Data saved" remoteExec ["systemChat"];
 };
