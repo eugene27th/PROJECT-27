@@ -346,7 +346,7 @@ prj_fnc_save_game = {
 
 		"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayer&u=%1&m=%2&e=%3&f=%4&c=%5|null",_u,_m,_e,_f,_c]);
 
-		waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
+		waitUntil {uiSleep 0.2; "ArmaRequests" callExtension "2" == "OK"};
 
 		private _response = "ArmaRequests" callExtension "1";
 		private _parsedResponse = parseSimpleArray _response;

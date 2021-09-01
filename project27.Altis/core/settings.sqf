@@ -37,8 +37,8 @@ switch (_preset_units) do {
 		enemy_vehicles_heavy = ["rhsgref_nat_btr70","rhsgref_cdf_bmd2k","rhsgref_cdf_bmp2k","rhsgref_cdf_t72ba_tv","rhsgref_cdf_t72bb_tv","rhsgref_cdf_t80b_tv","rhsgref_cdf_bmp1d","rhsgref_cdf_bmp1p","rhsgref_cdf_bmd1k","rhsgref_cdf_bmp1","rhsgref_cdf_bmp2","rhsgref_BRDM2","rhsgref_cdf_btr80","rhsgref_ins_g_bmp1","rhsgref_ins_g_bmp2e"];
 		enemy_turrets = ["rhsgref_nat_DSHKM","rhsgref_nat_SPG9","rhsgref_nat_AGS30_TriPod","rhsgref_nat_DSHKM_Mini_TriPod","rhsgref_nat_NSV_TriPod","rhsgref_nat_ZU23","LOP_NAPA_Kord","LOP_NAPA_Kord_High","LOP_NAPA_AGS30_TriPod","LOP_NAPA_Static_M2","LOP_NAPA_Static_M2_MiniTripod","LOP_NAPA_Static_Mk19_TriPod","LOP_NAPA_NSV_TriPod"];
 
-		enemy_heliSentry = ["LOP_RACS_MH9"];
-		enemy_heliTransport = ["LOP_RACS_MH9","I_Heli_light_03_unarmed_F"];
+		enemy_heliSentry = ["LOP_RACS_MH9","LOP_PMC_MH9"];
+		enemy_heliTransport = ["LOP_RACS_MH9","LOP_RACS_UH60M","LOP_UA_Mi8MT_Cargo"];
 		enemy_heliHeavy = ["rhsgref_cdf_Mi24D","rhsgref_cdf_Mi35","LOP_RACS_MH9_armed"];
 
 		// mission objects
