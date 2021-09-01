@@ -37,8 +37,9 @@ switch (_preset_units) do {
 		enemy_vehicles_heavy = ["rhsgref_nat_btr70","rhsgref_cdf_bmd2k","rhsgref_cdf_bmp2k","rhsgref_cdf_t72ba_tv","rhsgref_cdf_t72bb_tv","rhsgref_cdf_t80b_tv","rhsgref_cdf_bmp1d","rhsgref_cdf_bmp1p","rhsgref_cdf_bmd1k","rhsgref_cdf_bmp1","rhsgref_cdf_bmp2","rhsgref_BRDM2","rhsgref_cdf_btr80","rhsgref_ins_g_bmp1","rhsgref_ins_g_bmp2e"];
 		enemy_turrets = ["rhsgref_nat_DSHKM","rhsgref_nat_SPG9","rhsgref_nat_AGS30_TriPod","rhsgref_nat_DSHKM_Mini_TriPod","rhsgref_nat_NSV_TriPod","rhsgref_nat_ZU23","LOP_NAPA_Kord","LOP_NAPA_Kord_High","LOP_NAPA_AGS30_TriPod","LOP_NAPA_Static_M2","LOP_NAPA_Static_M2_MiniTripod","LOP_NAPA_Static_Mk19_TriPod","LOP_NAPA_NSV_TriPod"];
 
-		enemy_heliLight = ["I_Heli_light_03_unarmed_F","LOP_UA_Mi8MT_Cargo"];
-		enemy_heliHeavy = ["LOP_UA_Mi8MTV3_FAB","LOP_UA_Mi8MTV3_UPK23"];
+		enemy_heliSentry = ["LOP_RACS_MH9"];
+		enemy_heliTransport = ["LOP_RACS_MH9","I_Heli_light_03_unarmed_F"];
+		enemy_heliHeavy = ["rhsgref_cdf_Mi24D","rhsgref_cdf_Mi35","LOP_RACS_MH9_armed"];
 
 		// mission objects
 		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];
@@ -66,7 +67,10 @@ switch (_preset_units) do {
 		enemy_vehicles_light = ["LOP_AFR_Landrover","LOP_AFR_Landrover_M2","LOP_AM_Nissan_PKM","LOP_AM_UAZ_SPG","LOP_ISTS_Landrover","LOP_ISTS_Landrover_M2","LOP_ISTS_Landrover_SPG9","LOP_ISTS_M1025_W_M2","LOP_ISTS_M1025_W_Mk19","LOP_ISTS_M1025_D"];
 		enemy_vehicles_heavy = ["LOP_AM_BTR60","LOP_ISTS_BTR60","LOP_ISTS_BMP1","LOP_ISTS_T55"];
 		enemy_turrets = ["LOP_AM_Static_DSHKM","LOP_AM_Kord_High","LOP_AM_Static_SPG9","LOP_AM_AGS30_TriPod","LOP_AM_Static_M2","LOP_AM_Static_M2_MiniTripod","LOP_AM_Static_Mk19_TriPod","LOP_AM_Static_ZU23"];
-		enemy_helicopters = [];
+		
+		enemy_heliSentry = ["LOP_RACS_MH9"];
+		enemy_heliTransport = ["LOP_RACS_MH9","I_Heli_light_03_unarmed_F"];
+		enemy_heliHeavy = ["rhsgref_cdf_Mi24D","rhsgref_cdf_Mi35","LOP_RACS_MH9_armed"];
 		
 		// mission objects
 		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];
@@ -94,7 +98,10 @@ switch (_preset_units) do {
 		enemy_vehicles_light = ["I_C_Offroad_02_AT_F","I_C_Offroad_02_LMG_F","I_C_Offroad_02_unarmed_F","I_C_Van_01_transport_F","I_C_Van_02_vehicle_F","I_C_Van_02_transport_F","I_G_Offroad_01_F","I_G_Offroad_01_AT_F","I_G_Offroad_01_repair_F","I_G_Offroad_01_armed_F","I_G_Van_01_transport_F","I_G_Van_01_fuel_F","I_G_Quadbike_01_F","I_G_Van_02_transport_F","I_G_Van_02_vehicle_F","LOP_PMC_Offroad_M2","rhsgref_tla_btr60"];
 		enemy_vehicles_heavy = ["rhsgref_tla_btr60","LOP_AFR_Landrover_M2","LOP_AFR_T55","LOP_AFR_T34"];
 		enemy_turrets = ["rhsgref_nat_DSHKM","rhsgref_nat_SPG9","rhsgref_nat_AGS30_TriPod","rhsgref_nat_DSHKM_Mini_TriPod","rhsgref_nat_NSV_TriPod","rhsgref_nat_ZU23","I_C_HMG_02_high_F"];
-		enemy_helicopters = ["I_C_Heli_Light_01_civil_F"];
+		
+		enemy_heliSentry = ["LOP_RACS_MH9"];
+		enemy_heliTransport = ["LOP_RACS_MH9","I_Heli_light_03_unarmed_F"];
+		enemy_heliHeavy = ["rhsgref_cdf_Mi24D","rhsgref_cdf_Mi35","LOP_RACS_MH9_armed"];
 
 		// mission objects
 		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];
@@ -123,7 +130,10 @@ switch (_preset_units) do {
 		enemy_vehicles_light = ["LOP_IA_M1025_D","LOP_IA_M1025_W_Mk19","LOP_IA_M1025_W_M2","LOP_IA_M998_D_4DR","LOP_AFR_Landrover","LOP_AFR_Landrover_M2","LOP_AM_Nissan_PKM","LOP_AM_UAZ_SPG","LOP_ISTS_Landrover","LOP_ISTS_Landrover_M2","LOP_ISTS_Landrover_SPG9","LOP_ISTS_M1025_W_M2","LOP_ISTS_M1025_W_Mk19","LOP_ISTS_M1025_D","CUP_I_Hilux_unarmed_TK","CUP_I_Datsun_4seat_TK","CUP_I_V3S_Open_TKG","CUP_I_V3S_Covered_TKG","CUP_I_Hilux_armored_unarmed_TK","CUP_I_Hilux_AGS30_TK","CUP_I_Hilux_DSHKM_TK","CUP_I_Hilux_podnos_TK","CUP_I_Hilux_zu23_TK","CUP_I_Hilux_UB32_TK","CUP_I_Hilux_btr60_TK","CUP_I_Hilux_BMP1_TK","CUP_I_MTLB_pk_SYNDIKAT"];
 		enemy_vehicles_heavy = ["LOP_AM_BTR60","LOP_ISTS_BTR60","LOP_ISTS_BMP1","LOP_ISTS_T55","CUP_I_BRDM2_TK_Gue","CUP_I_BMP1_TK_GUE"];
 		enemy_turrets = ["LOP_AM_Static_DSHKM","LOP_AM_Kord_High","LOP_AM_Static_SPG9","LOP_AM_AGS30_TriPod","LOP_AM_Static_M2","LOP_AM_Static_M2_MiniTripod","LOP_AM_Static_Mk19_TriPod","LOP_AM_Static_ZU23"];
-		enemy_helicopters = [];
+		
+		enemy_heliSentry = ["LOP_RACS_MH9"];
+		enemy_heliTransport = ["LOP_RACS_MH9","I_Heli_light_03_unarmed_F"];
+		enemy_heliHeavy = ["rhsgref_cdf_Mi24D","rhsgref_cdf_Mi35","LOP_RACS_MH9_armed"];
 		
 		// mission objects
 		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];
@@ -152,7 +162,10 @@ switch (_preset_units) do {
 		enemy_vehicles_light = ["rhssaf_m1025_olive_m2","rhssaf_m1025_olive","rhssaf_m998_olive_2dr_fulltop","rhssaf_m998_olive_2dr_halftop","LOP_NAPA_Truck","LOP_NAPA_Landrover","LOP_NAPA_Landrover_M2","LOP_NAPA_Offroad","LOP_NAPA_Offroad_M2","rhsgref_nat_uaz","rhsgref_nat_uaz_open","rhsgref_nat_uaz_ags","rhsgref_nat_uaz_dshkm","rhsgref_nat_uaz_spg9","rhsgref_nat_van","rhsgref_nat_ural","rhsgref_nat_ural_open","rhsgref_cdf_gaz66","rhsgref_cdf_zil131","CUP_I_Hilux_unarmed_TK","CUP_I_Datsun_4seat_TK","CUP_I_V3S_Open_TKG","CUP_I_V3S_Covered_TKG","CUP_I_Hilux_armored_unarmed_TK","CUP_I_Hilux_AGS30_TK","CUP_I_Hilux_DSHKM_TK","CUP_I_Hilux_podnos_TK"];
 		enemy_vehicles_heavy = ["rhsgref_nat_btr70","rhsgref_cdf_bmd2k","rhsgref_cdf_bmp2k","rhsgref_cdf_t72ba_tv","rhsgref_cdf_t72bb_tv","rhsgref_cdf_t80b_tv","rhsgref_cdf_bmp1d","rhsgref_cdf_bmp1p","rhsgref_cdf_bmd1k","rhsgref_cdf_bmp1","rhsgref_cdf_bmp2","rhsgref_BRDM2","rhsgref_cdf_btr80","rhsgref_ins_g_bmp1","rhsgref_ins_g_bmp2e"];
 		enemy_turrets = ["rhsgref_nat_DSHKM","rhsgref_nat_SPG9","rhsgref_nat_AGS30_TriPod","rhsgref_nat_DSHKM_Mini_TriPod","rhsgref_nat_NSV_TriPod","rhsgref_nat_ZU23","LOP_NAPA_Kord","LOP_NAPA_Kord_High","LOP_NAPA_AGS30_TriPod","LOP_NAPA_Static_M2","LOP_NAPA_Static_M2_MiniTripod","LOP_NAPA_Static_Mk19_TriPod","LOP_NAPA_NSV_TriPod"];
-		enemy_helicopters = ["I_Heli_light_03_unarmed_F"];
+		
+		enemy_heliSentry = ["LOP_RACS_MH9"];
+		enemy_heliTransport = ["LOP_RACS_MH9","I_Heli_light_03_unarmed_F"];
+		enemy_heliHeavy = ["rhsgref_cdf_Mi24D","rhsgref_cdf_Mi35","LOP_RACS_MH9_armed"];
 
 		// mission objects
 		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];
@@ -181,7 +194,10 @@ switch (_preset_units) do {
 		enemy_vehicles_light = ["LOP_RACS_Landrover_M2","LOP_AFR_Landrover_M2","LOP_AFR_Offroad","LOP_AFR_Offroad_M2","LOP_AM_Landrover_M2","LOP_AFR_Landrover","CUP_I_LR_MG_RACS","CUP_I_LR_Transport_RACS","CUP_I_Hilux_unarmed_TK","CUP_I_Hilux_DSHKM_TK","CUP_I_Hilux_M2_TK","CUP_I_Hilux_metis_TK","CUP_I_Hilux_MLRS_TK","CUP_I_Datsun_AA_TK_Random","CUP_I_RG31_Mk19_W_ION","CUP_I_RG31E_M2_W_ION","CUP_I_RG31_M2_W_ION","CUP_I_RG31_M2_W_GC_ION","CUP_I_MTVR_RACS","LOP_IRAN_BMP1","LOP_IRAN_BTR70","LOP_IRAN_BTR80","LOP_IRAN_M113_C","LOP_ISTS_BMP1","CUP_I_M113_RACS","CUP_I_M113_RACS_URB","CUP_I_LAV25_HQ_RACS"];
 		enemy_vehicles_heavy = ["LOP_RACS_T72BB","LOP_IRAN_BMP2","LOP_IRAN_T72BA","LOP_ISTS_BMP2","CUP_I_LAV25M240_RACS","CUP_I_LAV25_RACS","CUP_I_M60A3_TTS_RACS"];
 		enemy_turrets = ["LOP_AM_Static_DSHKM","LOP_AM_Kord_High","LOP_AM_Static_SPG9","LOP_AM_AGS30_TriPod","LOP_AM_Static_M2","LOP_AM_Static_M2_MiniTripod","LOP_AM_Static_Mk19_TriPod","LOP_AM_Static_ZU23"];
-		enemy_helicopters = [];
+		
+		enemy_heliSentry = ["LOP_RACS_MH9","LOP_PMC_MH9"];
+		enemy_heliTransport = ["LOP_RACS_MH9","LOP_RACS_UH60M","LOP_UA_Mi8MT_Cargo"];
+		enemy_heliHeavy = ["rhsgref_cdf_Mi24D","rhsgref_cdf_Mi35","LOP_RACS_MH9_armed"];
 		
 		// mission objects
 		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];

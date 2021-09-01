@@ -21,9 +21,9 @@ _hostage addEventHandler ["FiredNear", {
 	_unit removeEventHandler ["FiredNear", _thisEventHandler];
 
 	private _number = [2,3] call BIS_fnc_randomInt;
-	private _vehicles = [position _unit,[1500,4000],_number] call prj_fnc_reinforcement;
+	private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
 
-	[_vehicles,600,60] spawn prj_fnc_check_and_delete;
+	[_vehicles] spawn prj_fnc_check_and_delete;
 }];
 
 [_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
