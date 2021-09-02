@@ -31,8 +31,6 @@ _vehicle addEventHandler ["FiredNear", {
 
 	private _number = [2,3] call BIS_fnc_randomInt;
 	private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
-
-	[_vehicles] spawn prj_fnc_check_and_delete;
 }];
 
 for "_i" from 1 to 2 do {

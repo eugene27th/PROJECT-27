@@ -21,8 +21,6 @@ _leader addEventHandler ["FiredNear", {
 
 	private _number = [2,3] call BIS_fnc_randomInt;
 	private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
-
-	[_vehicles] spawn prj_fnc_check_and_delete;
 }];
 
 [_taskID,_center_pos,"ColorEAST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_create_marker;

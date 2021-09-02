@@ -52,7 +52,6 @@ while {true} do {
 						case 3: {
 							private _number = [2,3] call BIS_fnc_randomInt;
 							private _vehicles = [_pos,_number] call prj_fnc_reinforcement;
-							[_vehicles] spawn prj_fnc_check_and_delete;
 						};
 
 						case 0: {

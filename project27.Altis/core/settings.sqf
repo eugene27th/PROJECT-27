@@ -33,13 +33,19 @@ switch (_preset_units) do {
 		enemy_leaders = ["LOP_NAPA_Infantry_Prizrak","LOP_NAPA_Infantry_SL","rhsgref_nat_commander","rhsgref_nat_pmil_commander"];
 		enemy_infantry = ["rhsgref_nat_pmil_grenadier_rpg","rhsgref_nat_pmil_saboteur","rhsgref_nat_pmil_hunter","rhsgref_nat_pmil_machinegunner","rhsgref_nat_pmil_scout","rhsgref_nat_pmil_medic","rhsgref_nat_pmil_grenadier","rhsgref_nat_pmil_specialist_aa","rhsgref_nat_pmil_rifleman_akm","rhsgref_nat_pmil_rifleman_aksu","rhsgref_nat_pmil_rifleman","rhsgref_nat_grenadier_rpg","rhsgref_nat_saboteur","rhsgref_nat_medic","rhsgref_nat_militiaman_kar98k","rhsgref_nat_militiaman_kar98k","rhsgref_nat_hunter","rhsgref_nat_machinegunner","rhsgref_nat_machinegunner_mg42","rhsgref_nat_scout","rhsgref_nat_grenadier","rhsgref_nat_specialist_aa","rhsgref_nat_rifleman_akms","rhsgref_nat_rifleman_aks74","rhsgref_nat_rifleman_mp44","rhsgref_nat_rifleman","rhsgref_nat_rifleman_vz58","LOP_NAPA_Infantry_Engineer","LOP_NAPA_Infantry_GL_2","LOP_NAPA_Infantry_GL","LOP_NAPA_Infantry_Rifleman_3","LOP_NAPA_Infantry_Rifleman","LOP_NAPA_Infantry_AT","LOP_NAPA_Infantry_Rifleman_2","LOP_NAPA_Infantry_Marksman","LOP_NAPA_Infantry_MG","LOP_NAPA_Infantry_MG_Asst","LOP_NAPA_Infantry_Corpsman","rhsgref_nat_pmil_hunter"];
 
+		enemy_turrets = ["rhsgref_nat_DSHKM","rhsgref_nat_SPG9","rhsgref_nat_AGS30_TriPod","rhsgref_nat_DSHKM_Mini_TriPod","rhsgref_nat_NSV_TriPod","rhsgref_nat_ZU23","LOP_NAPA_Kord","LOP_NAPA_Kord_High","LOP_NAPA_AGS30_TriPod","LOP_NAPA_Static_M2","LOP_NAPA_Static_M2_MiniTripod","LOP_NAPA_Static_Mk19_TriPod","LOP_NAPA_NSV_TriPod"];
+
 		enemy_vehicles_light = ["rhssaf_m1025_olive_m2","rhssaf_m1025_olive","rhssaf_m998_olive_2dr_fulltop","rhssaf_m998_olive_2dr_halftop","LOP_NAPA_Truck","LOP_NAPA_Landrover","LOP_NAPA_Landrover_M2","LOP_NAPA_Offroad","LOP_NAPA_Offroad_M2","rhsgref_nat_uaz","rhsgref_nat_uaz_open","rhsgref_nat_uaz_ags","rhsgref_nat_uaz_dshkm","rhsgref_nat_uaz_spg9","rhsgref_nat_van","rhsgref_nat_ural","rhsgref_nat_ural_open","rhsgref_cdf_gaz66","rhsgref_cdf_zil131"];
 		enemy_vehicles_heavy = ["rhsgref_nat_btr70","rhsgref_cdf_bmd2k","rhsgref_cdf_bmp2k","rhsgref_cdf_t72ba_tv","rhsgref_cdf_t72bb_tv","rhsgref_cdf_t80b_tv","rhsgref_cdf_bmp1d","rhsgref_cdf_bmp1p","rhsgref_cdf_bmd1k","rhsgref_cdf_bmp1","rhsgref_cdf_bmp2","rhsgref_BRDM2","rhsgref_cdf_btr80","rhsgref_ins_g_bmp1","rhsgref_ins_g_bmp2e"];
-		enemy_turrets = ["rhsgref_nat_DSHKM","rhsgref_nat_SPG9","rhsgref_nat_AGS30_TriPod","rhsgref_nat_DSHKM_Mini_TriPod","rhsgref_nat_NSV_TriPod","rhsgref_nat_ZU23","LOP_NAPA_Kord","LOP_NAPA_Kord_High","LOP_NAPA_AGS30_TriPod","LOP_NAPA_Static_M2","LOP_NAPA_Static_M2_MiniTripod","LOP_NAPA_Static_Mk19_TriPod","LOP_NAPA_NSV_TriPod"];
+
+		enemy_vehicles_aa = ["LOP_IRAN_ZSU234"];
+		enemy_vehicles_at = ["rhsgref_cdf_t80b_tv","rhsgref_cdf_t72bb_tv","rhsgref_cdf_t72ba_tv"];
 
 		enemy_heliSentry = ["LOP_RACS_MH9","LOP_PMC_MH9"];
 		enemy_heliTransport = ["LOP_RACS_MH9","LOP_RACS_UH60M","LOP_UA_Mi8MT_Cargo"];
 		enemy_heliHeavy = ["rhsgref_cdf_Mi24D","rhsgref_cdf_Mi35","LOP_RACS_MH9_armed"];
+
+		enemy_fighters = ["rhssaf_airforce_l_18_101"];
 
 		// mission objects
 		box_ammo_cache = ["Box_FIA_Ammo_F","Box_FIA_Support_F","O_supplyCrate_F","Box_FIA_Wps_F"];
