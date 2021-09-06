@@ -263,6 +263,8 @@ prj_fnc_sentry_patrol = {
 						private _enemyCategory = _enemyData # 0;
 						private _enemyType = _enemyData # 1;
 
+						systemChat str _enemyData;
+
 						switch (_enemyCategory) do {
 							case "Soldier": {
 								private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_reinforcement;
@@ -273,17 +275,16 @@ prj_fnc_sentry_patrol = {
 									private _vehicles = [position _nearEnemy,2,"antiAir"] call prj_fnc_reinforcement;
 									systemChat "у них воздух!";
 								} else {
-									if ((random 1) < 0.3) then {
-										private _vehicles = [position _nearEnemy,2,"antiTank"] call prj_fnc_reinforcement;
-									} else {
+									if (_enemyType isEqualTo "Car") then {
 										private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_reinforcement;
+										systemChat "а у них эта, машинка";
+									} else {
+										private _vehicles = [position _nearEnemy,2,"antiTank"] call prj_fnc_reinforcement;
+										systemChat "так, шото потяжелее?";
 									};
-									systemChat "ох, ёмаё. у них техника";
 								};
 							};
 						};
-
-						systemChat str _enemyData;
 					};
 				};
 			};
@@ -963,4 +964,75 @@ prj_fnc_civ = {
 		} forEach _nearestunits;
 		uiSleep 15;
 	};
+};
+
+prj_fnc_web_tracker = {
+	private _returnData = [];
+
+	// get players
+
+	{
+		private _playerPos = position _x;
+		private _playerGridPos = mapGridPosition _x;
+		private _playerName = name _x;
+		private _posX = _playerPos # 0;
+		private _posY = _playerPos # 1;
+		private _dir = getDir _x;
+
+		_returnData pushBack [_posX,_posY,_playerGridPos,0,_dir,1,_playerName];
+
+	} forEach allPlayers;
+
+	// get vehicles
+
+	{
+		if (((vehicle _x) isKindOf 'Car') || ((vehicle _x) isKindOf 'Tank') || ((vehicle _x) isKindOf 'Air')) then {
+			private _vehSide = side (group _x);
+
+			private _vehPos = position _x;
+			private _vehGridPos = mapGridPosition _x;
+			// private _vehName = getText (configFile >> 'CfgVehicles' >> (typeOf _x) >> 'displayName');
+			private _vehName = typeOf _x;
+			private _posX = _vehPos # 0;
+			private _posY = _vehPos # 1;
+			private _dir = getDir _x;
+
+			_vehSide = switch (_vehSide) do {
+				case WEST: {1};
+				case INDEPENDENT: {2};
+				default {0};
+			};
+
+			private _vehCrew = fullCrew _x;
+			private _vehCrewReturn = "";
+
+			for "_i" from 0 to ((count _vehCrew) - 1) do {
+				private _unitCrewName = name ((_vehCrew # _i) # 0);
+				private _unitCrewRole = ((_vehCrew # _i) # 1);
+
+				if !(_vehCrewReturn isEqualTo "") then {
+					_vehCrewReturn = _vehCrewReturn + "_";
+				};
+
+				_vehCrewReturn = _vehCrewReturn + _unitCrewRole + "=" + _unitCrewName;
+			};
+
+			private _data = _vehName + "-" + _vehCrewReturn;
+			
+			_returnData pushBack [_posX,_posY,_vehGridPos,1,_dir,_vehSide,_data];
+		};
+
+	} forEach vehicles;
+
+	// send request
+
+	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaMap/api?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions&d=%1|null",_returnData]);
+
+	waitUntil {uiSleep 0.2; "ArmaRequests" callExtension "2" == "OK"};
+
+	private _response = "ArmaRequests" callExtension "1";
+	private _parsedResponse = parseSimpleArray _response;
+	private _responseCode = _parsedResponse # 0;
+
+	if (_responseCode == 9) then {"Response error" remoteExec ["systemChat"]};
 };

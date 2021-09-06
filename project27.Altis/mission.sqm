@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=513;
+	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=2610;
+		nextID=2654;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15168.794,26.00248,17235.438};
-		dir[]={-0.60511231,-0.38978326,-0.69419628};
-		up[]={-0.25612,0.92090631,-0.29382583};
-		aside[]={-0.75381827,8.8475645e-009,0.65708309};
+		pos[]={15160.273,42.778072,17251.811};
+		dir[]={-0.62271142,-0.43999755,-0.64701885};
+		up[]={-0.3051134,0.89799893,-0.31702322};
+		aside[]={-0.72051126,-2.3283064e-010,0.69344342};
 	};
 };
 binarizationWanted=0;
@@ -47,13 +47,14 @@ addons[]=
 	"ace_gforces",
 	"ace_parachute",
 	"A3_Props_F_Enoch_Military_Supplies",
-	"A3_Modules_F_Curator_Curator"
+	"A3_Modules_F_Curator_Curator",
+	"po_factions_fic"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=16;
+		items=17;
 		class Item0
 		{
 			className="A3_Structures_F_Bootcamp";
@@ -166,6 +167,12 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item16
+		{
+			className="po_factions_fic";
+			name="po_factions_fic";
+			author="Leight, Keeway";
+		};
 	};
 };
 class DynamicSimulation
@@ -182,7 +189,8 @@ dlcs[]=
 {
 	"Heli",
 	"ORANGE",
-	"Enoch"
+	"Enoch",
+	"LOP_LeightsOPFOR"
 };
 randomSeed=7128371;
 class ScenarioData
@@ -304,7 +312,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=21;
+		items=23;
 		class Item0
 		{
 			dataType="Trigger";
@@ -3612,6 +3620,252 @@ class Mission
 				};
 				nAttributes=4;
 			};
+		};
+		class Item21
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15145.121,20.291758,17227.248};
+			};
+			side="West";
+			flags=6;
+			class Attributes
+			{
+			};
+			id=2645;
+			type="LOP_CDF_KAMAZ_Covered";
+		};
+		class Item22
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=8;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15143.67,18.150099,17230.406};
+					};
+					side="West";
+					flags=6;
+					class Attributes
+					{
+					};
+					id=2646;
+					type="LOP_CDF_Infantry_Rifleman";
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15144.491,18.126709,17222.834};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+					};
+					id=2647;
+					type="LOP_CDF_Infantry_AT_Asst";
+				};
+				class Item2
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15145.759,18.126709,17222.834};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+					};
+					id=2648;
+					type="LOP_CDF_Infantry_Engineer";
+				};
+				class Item3
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15146.567,18.147097,17230.252};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+					};
+					id=2649;
+					type="LOP_CDF_Infantry_GL";
+				};
+				class Item4
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15146.567,18.147097,17230.252};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+					};
+					id=2650;
+					type="LOP_CDF_Infantry_Engineer";
+				};
+				class Item5
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15144.491,18.126709,17222.834};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+					};
+					id=2651;
+					type="LOP_CDF_Infantry_GL";
+				};
+				class Item6
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15145.759,18.126709,17222.834};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+					};
+					id=2652;
+					type="LOP_CDF_Infantry_Corpsman";
+				};
+				class Item7
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15144.491,18.126709,17222.834};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+					};
+					id=2653;
+					type="LOP_CDF_Infantry_Engineer";
+				};
+			};
+			class Attributes
+			{
+			};
+			class CrewLinks
+			{
+				class LinkIDProvider
+				{
+					nextID=8;
+				};
+				class Links
+				{
+					items=8;
+					class Item0
+					{
+						linkID=0;
+						item0=2646;
+						item1=2645;
+						class CustomData
+						{
+							role=1;
+						};
+					};
+					class Item1
+					{
+						linkID=1;
+						item0=2647;
+						item1=2645;
+						class CustomData
+						{
+							role=2;
+							turretPath[]={0};
+						};
+					};
+					class Item2
+					{
+						linkID=2;
+						item0=2648;
+						item1=2645;
+						class CustomData
+						{
+							role=2;
+							turretPath[]={1};
+						};
+					};
+					class Item3
+					{
+						linkID=3;
+						item0=2649;
+						item1=2645;
+						class CustomData
+						{
+							role=3;
+							cargoIndex=0;
+						};
+					};
+					class Item4
+					{
+						linkID=4;
+						item0=2650;
+						item1=2645;
+						class CustomData
+						{
+							role=3;
+							cargoIndex=1;
+						};
+					};
+					class Item5
+					{
+						linkID=5;
+						item0=2651;
+						item1=2645;
+						class CustomData
+						{
+							role=3;
+							cargoIndex=2;
+						};
+					};
+					class Item6
+					{
+						linkID=6;
+						item0=2652;
+						item1=2645;
+						class CustomData
+						{
+							role=3;
+							cargoIndex=3;
+						};
+					};
+					class Item7
+					{
+						linkID=7;
+						item0=2653;
+						item1=2645;
+						class CustomData
+						{
+							role=3;
+							cargoIndex=4;
+						};
+					};
+				};
+			};
+			id=2644;
 		};
 	};
 	class Connections
