@@ -4,9 +4,8 @@
 */
 
 prj_fnc_set_textures = {
-	params [
-		"_textures_array"
-	];
+	params ["_textures_array"];
+	
 	for [{private _i = 0 }, { _i < (count _textures_array) }, { _i = _i + 1 }] do {
 		{
 			_x setObjectTexture [(_textures_array # _i) # 2, "img\" + ((_textures_array # _i) # 0)]
@@ -346,7 +345,7 @@ prj_fnc_save_game = {
 
 		"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayer&u=%1&m=%2&e=%3&f=%4&c=%5|null",_u,_m,_e,_f,_c]);
 
-		waitUntil {uiSleep 0.2; "ArmaRequests" callExtension "2" == "OK"};
+		waitUntil {uiSleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
 
 		private _response = "ArmaRequests" callExtension "1";
 		private _parsedResponse = parseSimpleArray _response;

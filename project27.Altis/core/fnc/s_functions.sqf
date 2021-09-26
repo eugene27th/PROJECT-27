@@ -966,40 +966,189 @@ prj_fnc_civ = {
 	};
 };
 
-prj_fnc_web_tracker = {
+prj_fnc_array_delimiter = {
+	params ["_maxCount","_array"];
+
+	private _coef = ceil ((count _array) / _maxCount);
+	private _returnArray = [];
+
+	for "_i" from 1 to _coef do {
+		private _div = (_i * _maxCount) - _maxCount;
+		private _newArray = +_array;
+
+		_newArray deleteRange [0,_div];
+		_newArray resize _maxCount;
+
+		private _newFilteredArray = _newArray select {!isNil {_x}};
+		_returnArray pushBack _newFilteredArray;
+	};
+
+	_returnArray
+};
+
+prj_fnc_http_request = {
+	params ["_getParams","_data"];
+
+	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaMap/api%1&d=%2|null",_getParams,_data]);
+
+	waitUntil {uiSleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
+
+	private _response = "ArmaRequests" callExtension "1";
+	private _parsedResponse = parseSimpleArray _response;
+	private _responseCode = _parsedResponse # 0;
+
+	if (_responseCode == 9) then {"Response error" remoteExec ["systemChat"]};
+};
+
+prj_fnc_http_multiple_request = {
+	params ["_getParams","_dataArray"];
+
+	private _firstResponse = true;
+
+	{
+		private _clear = 0;
+
+		if (_firstResponse) then {
+			_clear = 1;
+			_firstResponse = false;
+		};
+
+		[format["%1&c=%2",_getParams,_clear],_x] call prj_fnc_http_request;
+	} forEach _dataArray;
+};
+
+prj_fnc_webTracker_uploadMarkers = {
+
+	private _BISColors = [
+		['Color1_FD_F', 1],
+		['Color2_FD_F', 2],
+		['Color3_FD_F', 3],
+		['Color4_FD_F', 4],
+		['Color5_FD_F', 5],
+		['Color6_FD_F', 6],
+		['ColorBlack', 7],
+		['ColorBlue', 8],
+		['ColorBrown', 9],
+		['ColorCIV', 10],
+		['ColorEAST', 11],
+		['ColorGUER', 12],
+		['ColorGreen', 13],
+		['ColorGrey', 14],
+		['ColorKhaki', 15],
+		['ColorOrange', 16],
+		['ColorPink', 17],
+		['ColorRed', 18],
+		['ColorUNKNOWN', 19],
+		['ColorWEST', 20],
+		['ColorWhite', 21],
+		['ColorYellow', 22],
+		['Default', 23],
+		['colorBLUFOR', 24],
+		['colorCivilian', 25],
+		['colorIndependent', 26],
+		['colorOPFOR', 27]
+	];
+
+	private _BISMarkerTypes = [
+		['hd_ambush', 1],
+		['hd_arrow', 2],
+		['hd_destroy', 3],
+		['hd_dot', 4],
+		['hd_end', 5],
+		['hd_flag', 6],
+		['hd_join', 7],
+		['hd_objective', 8],
+		['hd_pickup', 9],
+		['hd_start', 10],
+		['hd_unknown', 11],
+		['hd_warning', 12]
+	];
+
+	// get player markers
+
+	private _markersArray = [];
+
+	for "_i" from 0 to ((count allMapMarkers) - 1) do {
+		private _a = toArray (allMapMarkers # _i);
+		_a resize 15;
+
+		if (toString _a == "_USER_DEFINED #" && markerType (allMapMarkers # _i) != "") then {
+			
+			private _aDb = toArray (allMapMarkers # _i);
+			_aDb deleteRange [0,15];
+
+			private _mData = (toString _aDb) splitString "/";
+
+			private "_mOwnerName";
+
+			{
+				if (getPlayerID _x isEqualTo _mData # 0) then {
+					_mOwnerName = name _x;
+				};
+			} forEach allPlayers;
+
+			private _mColor = ((_BISColors select {(_x # 0) == (markerColor (allMapMarkers # _i))}) # 0) # 1;
+			private _mType = ((_BISMarkerTypes select {(_x # 0) == (markerType (allMapMarkers # _i))}) # 0) # 1;
+		
+			_markersArray pushBack (format ["%1:%2;%3;%4;%5;%6;%7;%8",_mOwnerName,_mData # 2,((markerPos (allMapMarkers # _i)) # 0),((markerPos (allMapMarkers # _i)) # 1),markerDir (allMapMarkers # _i),_mType,_mColor,markerText (allMapMarkers # _i)]);
+		};
+	};
+
+	private _maxMarkersCount = 100;
+
+	if ((count _markersArray) <= _maxMarkersCount) exitWith {
+		["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=saveMarkers&c=1",_markersArray] call prj_fnc_http_request;
+	};
+
+	private _divMarkersArray = [_maxMarkersCount,_markersArray] call prj_fnc_array_delimiter;
+	["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=saveMarkers",_divMarkersArray] call prj_fnc_http_multiple_request;
+};
+
+prj_fnc_webTracker_uploadObjects = {
 	private _returnData = [];
 
 	// get players
 
 	{
-		private _playerPos = position _x;
-		private _playerGridPos = mapGridPosition _x;
-		private _playerName = name _x;
-		private _posX = _playerPos # 0;
-		private _posY = _playerPos # 1;
+		if ((vehicle player) != player) then {continue;};
+
+		private _pos = position _x;
+		private _gridPos = mapGridPosition _x;
+		private _name = name _x;
+		private _posX = _pos # 0;
+		private _posY = _pos # 1;
 		private _dir = getDir _x;
 
-		_returnData pushBack [_posX,_posY,_playerGridPos,0,_dir,1,_playerName];
-
+		_returnData pushBack [_posX,_posY,_gridPos,0,_dir,1,_name];
 	} forEach allPlayers;
 
 	// get vehicles
 
 	{
 		if (((vehicle _x) isKindOf 'Car') || ((vehicle _x) isKindOf 'Tank') || ((vehicle _x) isKindOf 'Air')) then {
-			private _vehSide = side (group _x);
+			private _side = side (group _x);
 
-			private _vehPos = position _x;
-			private _vehGridPos = mapGridPosition _x;
-			// private _vehName = getText (configFile >> 'CfgVehicles' >> (typeOf _x) >> 'displayName');
-			private _vehName = typeOf _x;
-			private _posX = _vehPos # 0;
-			private _posY = _vehPos # 1;
+			private _type = 1;
+
+			if ((vehicle _x) isKindOf 'Air') then {
+				_type = 2;
+			};
+
+			private _pos = position _x;
+			private _gridPos = mapGridPosition _x;
+			private _name = getText (configFile >> 'CfgVehicles' >> (typeOf _x) >> 'displayName');
+			private _posX = _pos # 0;
+			private _posY = _pos # 1;
+			private _posZ = str (_pos # 2);
+			private _posZs = str ((getPosASL _x) # 2);
 			private _dir = getDir _x;
+			private _speed = str (speed _x);
+			private _damage = str (damage _x);
 
-			_vehSide = switch (_vehSide) do {
+			_side = switch (_side) do {
 				case WEST: {1};
 				case INDEPENDENT: {2};
+				case CIVILIAN: {3};
 				default {0};
 			};
 
@@ -1017,22 +1166,23 @@ prj_fnc_web_tracker = {
 				_vehCrewReturn = _vehCrewReturn + _unitCrewRole + "=" + _unitCrewName;
 			};
 
-			private _data = _vehName + "-" + _vehCrewReturn;
+			private _data = _name + ":" + _vehCrewReturn + ":" + _posZ + "_" + _posZs + ":" + _speed + ":" + _damage;
+
+			if (_damage == "1") then {
+				_data = _name + ":0:0_0:0:1";
+			};
 			
-			_returnData pushBack [_posX,_posY,_vehGridPos,1,_dir,_vehSide,_data];
+			_returnData pushBack [_posX,_posY,_gridPos,_type,_dir,_side,_data];
 		};
 
 	} forEach vehicles;
 
-	// send request
+	private _maxObjectsCount = 3;
 
-	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaMap/api?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions&d=%1|null",_returnData]);
+	if ((count _returnData) <= _maxObjectsCount) exitWith {
+		["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions&c=1",_returnData] call prj_fnc_http_request;
+	};
 
-	waitUntil {uiSleep 0.2; "ArmaRequests" callExtension "2" == "OK"};
-
-	private _response = "ArmaRequests" callExtension "1";
-	private _parsedResponse = parseSimpleArray _response;
-	private _responseCode = _parsedResponse # 0;
-
-	if (_responseCode == 9) then {"Response error" remoteExec ["systemChat"]};
+	private _divObjectsArray = [_maxObjectsCount,_returnData] call prj_fnc_array_delimiter;
+	["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions",_divObjectsArray] call prj_fnc_http_multiple_request;	
 };

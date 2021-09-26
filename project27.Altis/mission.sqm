@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=2654;
+		nextID=2697;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15160.273,42.778072,17251.811};
-		dir[]={-0.62271142,-0.43999755,-0.64701885};
-		up[]={-0.3051134,0.89799893,-0.31702322};
-		aside[]={-0.72051126,-2.3283064e-010,0.69344342};
+		pos[]={15149.165,30.032368,17255.563};
+		dir[]={-0.65523469,-0.3007766,-0.69296539};
+		up[]={-0.2066482,0.95369464,-0.21854772};
+		aside[]={-0.72661144,-1.4901161e-008,0.68704879};
 	};
 };
 binarizationWanted=0;
@@ -47,14 +47,13 @@ addons[]=
 	"ace_gforces",
 	"ace_parachute",
 	"A3_Props_F_Enoch_Military_Supplies",
-	"A3_Modules_F_Curator_Curator",
-	"po_factions_fic"
+	"A3_Modules_F_Curator_Curator"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=17;
+		items=16;
 		class Item0
 		{
 			className="A3_Structures_F_Bootcamp";
@@ -167,12 +166,6 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item16
-		{
-			className="po_factions_fic";
-			name="po_factions_fic";
-			author="Leight, Keeway";
-		};
 	};
 };
 class DynamicSimulation
@@ -189,8 +182,7 @@ dlcs[]=
 {
 	"Heli",
 	"ORANGE",
-	"Enoch",
-	"LOP_LeightsOPFOR"
+	"Enoch"
 };
 randomSeed=7128371;
 class ScenarioData
@@ -312,7 +304,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=23;
+		items=21;
 		class Item0
 		{
 			dataType="Trigger";
@@ -393,8 +385,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15121.729,18.461523,17233.721};
-				angles[]={0,3.8871624,0};
+				position[]={15122.592,18.447056,17234.602};
+				angles[]={0.231527,0.72588921,6.0926528};
 			};
 			side="Empty";
 			flags=4;
@@ -403,6 +395,7 @@ class Mission
 			};
 			id=516;
 			type="Land_MapBoard_01_Wall_F";
+			atlOffset=-0.014467239;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -3620,252 +3613,6 @@ class Mission
 				};
 				nAttributes=4;
 			};
-		};
-		class Item21
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={15145.121,20.291758,17227.248};
-			};
-			side="West";
-			flags=6;
-			class Attributes
-			{
-			};
-			id=2645;
-			type="LOP_CDF_KAMAZ_Covered";
-		};
-		class Item22
-		{
-			dataType="Group";
-			side="West";
-			class Entities
-			{
-				items=8;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15143.67,18.150099,17230.406};
-					};
-					side="West";
-					flags=6;
-					class Attributes
-					{
-					};
-					id=2646;
-					type="LOP_CDF_Infantry_Rifleman";
-				};
-				class Item1
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15144.491,18.126709,17222.834};
-					};
-					side="West";
-					flags=5;
-					class Attributes
-					{
-					};
-					id=2647;
-					type="LOP_CDF_Infantry_AT_Asst";
-				};
-				class Item2
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15145.759,18.126709,17222.834};
-					};
-					side="West";
-					flags=5;
-					class Attributes
-					{
-					};
-					id=2648;
-					type="LOP_CDF_Infantry_Engineer";
-				};
-				class Item3
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15146.567,18.147097,17230.252};
-					};
-					side="West";
-					flags=5;
-					class Attributes
-					{
-					};
-					id=2649;
-					type="LOP_CDF_Infantry_GL";
-				};
-				class Item4
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15146.567,18.147097,17230.252};
-					};
-					side="West";
-					flags=5;
-					class Attributes
-					{
-					};
-					id=2650;
-					type="LOP_CDF_Infantry_Engineer";
-				};
-				class Item5
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15144.491,18.126709,17222.834};
-					};
-					side="West";
-					flags=5;
-					class Attributes
-					{
-					};
-					id=2651;
-					type="LOP_CDF_Infantry_GL";
-				};
-				class Item6
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15145.759,18.126709,17222.834};
-					};
-					side="West";
-					flags=5;
-					class Attributes
-					{
-					};
-					id=2652;
-					type="LOP_CDF_Infantry_Corpsman";
-				};
-				class Item7
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15144.491,18.126709,17222.834};
-					};
-					side="West";
-					flags=5;
-					class Attributes
-					{
-					};
-					id=2653;
-					type="LOP_CDF_Infantry_Engineer";
-				};
-			};
-			class Attributes
-			{
-			};
-			class CrewLinks
-			{
-				class LinkIDProvider
-				{
-					nextID=8;
-				};
-				class Links
-				{
-					items=8;
-					class Item0
-					{
-						linkID=0;
-						item0=2646;
-						item1=2645;
-						class CustomData
-						{
-							role=1;
-						};
-					};
-					class Item1
-					{
-						linkID=1;
-						item0=2647;
-						item1=2645;
-						class CustomData
-						{
-							role=2;
-							turretPath[]={0};
-						};
-					};
-					class Item2
-					{
-						linkID=2;
-						item0=2648;
-						item1=2645;
-						class CustomData
-						{
-							role=2;
-							turretPath[]={1};
-						};
-					};
-					class Item3
-					{
-						linkID=3;
-						item0=2649;
-						item1=2645;
-						class CustomData
-						{
-							role=3;
-							cargoIndex=0;
-						};
-					};
-					class Item4
-					{
-						linkID=4;
-						item0=2650;
-						item1=2645;
-						class CustomData
-						{
-							role=3;
-							cargoIndex=1;
-						};
-					};
-					class Item5
-					{
-						linkID=5;
-						item0=2651;
-						item1=2645;
-						class CustomData
-						{
-							role=3;
-							cargoIndex=2;
-						};
-					};
-					class Item6
-					{
-						linkID=6;
-						item0=2652;
-						item1=2645;
-						class CustomData
-						{
-							role=3;
-							cargoIndex=3;
-						};
-					};
-					class Item7
-					{
-						linkID=7;
-						item0=2653;
-						item1=2645;
-						class CustomData
-						{
-							role=3;
-							cargoIndex=4;
-						};
-					};
-				};
-			};
-			id=2644;
 		};
 	};
 	class Connections
