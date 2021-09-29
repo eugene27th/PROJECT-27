@@ -83,15 +83,28 @@ prj_fnc_add_mhq_action = {
 };
 
 prj_fnc_create_task = {
+
+	if !(missionNamespace getVariable ["task_available",true]) exitWith {
+		hint localize "STR_PRJ_TASK_NOT_AVAILABLE";
+	};
+
 	private _taskID = missionNamespace getVariable ["taskID",0];
 	private _oldTaskName = missionNamespace getVariable ["oldTaskName","side_null"];
 	private _selected_task = selectRandom tasksConfig;
 
 	while {(_selected_task # 0) == _oldTaskName} do {_selected_task = selectRandom tasksConfig};
-	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
+	// [_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
+	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\side_convoy.sqf";
 
 	missionNamespace setVariable ["taskID",_taskID + 1,true];
 	private _oldTaskName = missionNamespace setVariable ["oldTaskName",_selected_task # 0,true];
+
+	missionNamespace setVariable ["task_available",false,true];
+
+	[] spawn {
+		uiSleep 180;
+		missionNamespace setVariable ["task_available",true,true];
+	};
 
 	if (prj_debug) then {
 		systemChat format ["id: %1 | task: %2 | reward: %3",_taskID,_selected_task # 0,_selected_task # 1];

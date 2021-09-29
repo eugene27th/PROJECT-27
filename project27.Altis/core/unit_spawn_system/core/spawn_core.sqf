@@ -9,8 +9,54 @@ if (_trigger getVariable "active") exitWith {};
 
 _trigger setVariable ["active",true];
 
-private _distance = 600;
 private _trigger_pos = position _trigger;
+private _capture_sectores = "capture_of_sectors" call BIS_fnc_getParamValue;
+
+if (_trigger getVariable ["checkpoint",false]) exitWith {
+	private _dir = _trigger getVariable "cp_direction";
+
+	private _checkpointData = [_trigger_pos,_dir] call prj_fnc_create_checkpoint;
+	private _vehicles = _checkpointData # 0;
+	private _infantry = (_checkpointData # 1) + (_checkpointData # 2);
+
+	if (_capture_sectores == 1) then {
+		private _trigger_radius = triggerArea _trigger;
+		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone;", false] call prj_fnc_create_trg;
+		_capt_trg setVariable ["parent_trigger",_trigger];
+	};
+
+	private _deleting = false;
+
+	while {!_deleting} do {
+		uiSleep 5;
+		if (isNil "mhqterminal") then {
+			if (!triggerActivated _trigger) exitWith {_deleting = true};
+		} else {
+			if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
+		};
+	};
+
+	if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
+
+	[_vehicles,_infantry] spawn {
+		params ["_vehicles","_infantry"];
+		uiSleep 60;
+
+		{
+			deleteVehicle _x
+		} forEach _infantry;
+
+		{
+			if !(_x getVariable ["cannotDeleted",false]) then {
+				deleteVehicle _x
+			}
+		} forEach _vehicles;
+
+		_trigger setVariable ["active",false];
+	};
+};
+
+private _distance = 600;
 private _trigger_radius = ((triggerArea _trigger) # 0) - _distance;
 private _sector_radius = ((triggerArea _trigger) # 0);
 private _enemy_config = (_trigger getVariable "config") # 0;
@@ -280,7 +326,6 @@ if (!(_trigger getVariable "captured")) then {
 	_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,_enemy_config,3] call prj_fnc_spawn_vehicles;
 	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_spawn_static;
 
-	private _capture_sectores = "capture_of_sectors" call BIS_fnc_getParamValue;
 	if (_capture_sectores == 1) then {
 		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone;", false] call prj_fnc_create_trg;
 		_capt_trg setVariable ["parent_trigger",_trigger];
@@ -306,20 +351,7 @@ if !(_civilian_global_infantry isEqualTo []) then {
 	} forEach _civilian_global_infantry;
 };
 
-/////////////////////////WAITING\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-private _deleting = false;
-
-while {!_deleting} do {
-	uiSleep 5;
-	if (isNil "mhqterminal") then {
-		if (!triggerActivated _trigger) exitWith {_deleting = true};
-	} else {
-		if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
-	};
-};
-
-////////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\\\
-if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
+//////////////////////SET VARIABLES\\\\\\\\\\\\\\\\\\\\\\\
 
 private _global_vehicles = [];
 private _global_infantry = [];
@@ -347,9 +379,41 @@ if (!isNil "_enemy_statics") then {
 	_global_infantry append (_enemy_statics # 1)
 };
 
+{
+	_x addEventHandler ["GetIn", {
+		params ["_vehicle", "_role", "_unit", "_turret"];
+
+		if (isPlayer _unit) then {
+			_vehicle removeEventHandler ["GetIn",_thisEventHandler];
+			_vehicle setVariable ["cannotDeleted",true,true];
+		};
+	}];
+} forEach _global_vehicles;
+
+/////////////////////////WAITING\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+private _deleting = false;
+
+while {!_deleting} do {
+	uiSleep 5;
+	if (isNil "mhqterminal") then {
+		if (!triggerActivated _trigger) exitWith {_deleting = true};
+	} else {
+		if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
+	};
+};
+
+////////////////////////DELETE ALL\\\\\\\\\\\\\\\\\\\\\\\\\\
+if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
+
 if !(_global_vehicles isEqualTo []) then {
 	private _vehicles_players = [];
-	{_vehicles_players pushBack (vehicle _x)} forEach allPlayers;
+
+	{
+		if !(_x getVariable ["cannotDeleted",false]) then {
+			_vehicles_players pushBack _x;
+		};
+	} forEach _global_vehicles;
+
 	_global_vehicles = _global_vehicles - _vehicles_players;
 };
 

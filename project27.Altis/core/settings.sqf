@@ -35,11 +35,14 @@ switch (_preset_units) do {
 
 		enemy_turrets = ["rhsgref_nat_DSHKM","rhsgref_nat_SPG9","rhsgref_nat_AGS30_TriPod","rhsgref_nat_DSHKM_Mini_TriPod","rhsgref_nat_NSV_TriPod","rhsgref_nat_ZU23","LOP_NAPA_Kord","LOP_NAPA_Kord_High","LOP_NAPA_AGS30_TriPod","LOP_NAPA_Static_M2","LOP_NAPA_Static_M2_MiniTripod","LOP_NAPA_Static_Mk19_TriPod","LOP_NAPA_NSV_TriPod"];
 
-		enemy_vehicles_light = ["rhssaf_m1025_olive_m2","rhssaf_m1025_olive","rhssaf_m998_olive_2dr_fulltop","rhssaf_m998_olive_2dr_halftop","LOP_NAPA_Truck","LOP_NAPA_Landrover","LOP_NAPA_Landrover_M2","LOP_NAPA_Offroad","LOP_NAPA_Offroad_M2","rhsgref_nat_uaz","rhsgref_nat_uaz_open","rhsgref_nat_uaz_ags","rhsgref_nat_uaz_dshkm","rhsgref_nat_uaz_spg9","rhsgref_nat_van","rhsgref_nat_ural","rhsgref_nat_ural_open","rhsgref_cdf_gaz66","rhsgref_cdf_zil131"];
-		enemy_vehicles_heavy = ["rhsgref_nat_btr70","rhsgref_cdf_bmd2k","rhsgref_cdf_bmp2k","rhsgref_cdf_t72ba_tv","rhsgref_cdf_t72bb_tv","rhsgref_cdf_t80b_tv","rhsgref_cdf_bmp1d","rhsgref_cdf_bmp1p","rhsgref_cdf_bmd1k","rhsgref_cdf_bmp1","rhsgref_cdf_bmp2","rhsgref_BRDM2","rhsgref_cdf_btr80","rhsgref_ins_g_bmp1","rhsgref_ins_g_bmp2e"];
+		enemy_vehicles_light = ["rhssaf_m1025_olive_m2","rhssaf_m1025_olive","rhssaf_m998_olive_2dr_fulltop","rhssaf_m998_olive_2dr_halftop","LOP_NAPA_Truck","LOP_NAPA_Landrover","LOP_NAPA_Landrover_M2","LOP_NAPA_Offroad","LOP_NAPA_Offroad_M2","rhsgref_nat_van","rhsgref_nat_ural","rhsgref_nat_ural_open","rhsgref_cdf_gaz66","rhsgref_cdf_zil131"];
+		enemy_vehicles_heavy = ["rhsgref_nat_btr70","rhsgref_cdf_bmd2k","rhsgref_cdf_bmp2k","rhsgref_cdf_bmp1d","rhsgref_cdf_bmp1p","rhsgref_cdf_bmd1k","rhsgref_cdf_bmp1","rhsgref_cdf_bmp2","rhsgref_BRDM2","rhsgref_cdf_btr80","rhsgref_ins_g_bmp1","rhsgref_ins_g_bmp2e"];
 
 		enemy_vehicles_aa = ["LOP_IRAN_ZSU234"];
 		enemy_vehicles_at = ["rhsgref_cdf_t80b_tv","rhsgref_cdf_t72bb_tv","rhsgref_cdf_t72ba_tv"];
+
+		enemy_vehiclesConvoyHeavy = ["rhssaf_m1025_olive_m2","LOP_NAPA_Landrover_M2","LOP_NAPA_Offroad_M2"];
+		enemy_vehiclesConvoyLight = ["rhssaf_m1025_olive","rhssaf_m998_olive_2dr_fulltop","rhssaf_m998_olive_2dr_halftop","LOP_NAPA_Truck","LOP_NAPA_Landrover","LOP_NAPA_Offroad","rhsgref_nat_van"];
 
 		enemy_heliSentry = ["LOP_RACS_MH9","LOP_PMC_MH9"];
 		enemy_heliTransport = ["LOP_RACS_MH9","LOP_RACS_UH60M","LOP_UA_Mi8MT_Cargo"];
@@ -55,6 +58,7 @@ switch (_preset_units) do {
 		// sounds
 		screams = ["scream_1","scream_2","scream_3"];
 	};
+	
 	case "middle_east": {
 
 		// units and vehicles
@@ -86,6 +90,7 @@ switch (_preset_units) do {
 		// sounds
 		screams = ["scream_allah","scream_1"];
 	};
+
 	case "syndikat": {
 
 		// units and vehicles

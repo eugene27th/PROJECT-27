@@ -18,40 +18,9 @@ _trg setTriggerArea [30, 30, 0, false, 20];
 _trg setTriggerActivation ["WEST SEIZED", "PRESENT", false];
 _trg setTriggerStatements ["this", "", ""];
 
-private _vehicles = [];
-
-private _vehicle = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy) createVehicle _pos;
-_vehicle setDir _direction + 90;
-private _crew_units = [_vehicle,enemy_infantry] call prj_fnc_create_crew;
-_vehicles pushBack _vehicle;
-
-_vehicle addEventHandler ["FiredNear", {
-	params ["_unit"];
-	_unit removeEventHandler ["FiredNear", _thisEventHandler];
-
-	private _number = [2,3] call BIS_fnc_randomInt;
-	private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
-}];
-
-for "_i" from 1 to 2 do {
-	private _static = (selectRandom enemy_turrets) createVehicle (_pos findEmptyPosition [(10 * _i), 150, "B_HMG_01_high_F"]);
-	_vehicles pushBack _static;
-	private _crew = [_static,enemy_infantry] call prj_fnc_create_crew;
-	_crew_units = _crew_units + _crew;
-};
-
-_composition = [
-	["Land_BagFence_Long_F",[-0.0192871,-2.23193,-0.000999928],0,1,0,[],"","",true,false], 
-	["Land_BagFence_Long_F",[0.106201,2.72778,-0.000999928],0,1,0,[],"","",true,false], 
-	["Land_WoodenWindBreak_01_F",[0.0856934,-3.78625,-0.00102663],180,1,0,[],"","",true,false], 
-	["Land_WoodenWindBreak_01_F",[0.0314941,4.18152,-0.00102663],0,1,0,[],"","",true,false]
-];
-[_pos, _direction, _composition, 0] call BIS_fnc_objectsMapper;
-
-private _enemies = [];
-
-_enemies = _enemies + ([_pos] call prj_fnc_enemy_crowd);
-_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_enemy_patrols);
+private _checkpointData = [_pos,_direction] call prj_fnc_create_checkpoint;
+private _vehicles = _checkpointData # 0;
+private _infantry = (_checkpointData # 1) + (_checkpointData # 2);
 
 [west, [_taskID], ["STR_SIDE_CHECKPOINT_DESCRIPTION", "STR_SIDE_CHECKPOINT_TITLE", ""], _pos, "CREATED", 0, true, "target"] call BIS_fnc_taskCreate;
 
@@ -66,14 +35,22 @@ if (triggerActivated _trg) then {
 [_taskID] call BIS_fnc_deleteTask;
 deleteMarker _taskID;
 
-if !(triggerActivated _trg) then {
-	uiSleep 120;
-	{deleteVehicle _x} forEach _vehicles;
+private _delTime = 0;
+
+if (triggerActivated _trg) then {
+	_delTime = 180;
 };
 
-_enemies = _enemies + _crew_units;
-[_enemies] spawn {
-	params ["_enemies"];
-	uiSleep 120;
-	{deleteVehicle _x} forEach _enemies;
+[_vehicles,_infantry,_delTime] spawn {
+	params ["_vehicles","_infantry","_delTime"];
+	uiSleep _delTime;
+
+	{
+		if !(_x getVariable ["cannotDeleted",false]) then {
+			deleteVehicle _x;
+		}
+	} forEach _vehicles;
+
+	_infantry pushBack _trg;
+	{deleteVehicle _x} forEach _infantry;
 };

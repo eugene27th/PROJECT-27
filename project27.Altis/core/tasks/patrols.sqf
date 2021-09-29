@@ -17,7 +17,7 @@ while {true} do {
 		private _index = _index + 1;
 		private _taskID = "PATROL_" + str _index;
 
-		private _pos = [false,false,[0,15]] call prj_fnc_selectCaptPosition;
+		private _pos = [false,false,[0,15],["NameCityCapital","NameCity","NameVillage"]] call prj_fnc_selectCaptPosition;
 
 		[_taskID,_pos,"ColorEAST",0.7,[[150,150],"ELLIPSE"]] call prj_fnc_create_marker;
 
@@ -49,9 +49,13 @@ while {true} do {
 							["", "Patrol started. Time: " + str (_waitingTime/60) + " minutes."] remoteExec ["BIS_fnc_showSubtitle",0];
 						};
 
-						case 3: {
-							private _number = [2,3] call BIS_fnc_randomInt;
-							private _vehicles = [_pos,_number] call prj_fnc_reinforcement;
+						case (_waitingTime - 60): {
+							if (round (random 1) > 0.35) then {
+								private _number = [2,3] call BIS_fnc_randomInt;
+								private _vehicles = [_pos,_number] call prj_fnc_reinforcement;
+							} else {
+								[_pos] call prj_fnc_sentry_patrol;
+							};
 						};
 
 						case 0: {

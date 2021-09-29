@@ -35,6 +35,15 @@
                 <Original>The ammo cache has been destroyed. Earned %1 intelligence points.</Original>
 		        <Russian>Тайник с боеприпасами уничтожен. Начислено %1 очков разведданных.</Russian>
             </Key>
+
+            <Key ID="STR_CHECKPOINT_CAPTURED_TITLE">
+                <Original>Checkpoint eliminated.</Original>
+		        <Russian>Блокпост уничтожен.</Russian>
+            </Key>
+            <Key ID="STR_CHECKPOINT_CAPTURED_DESC">
+                <Original>Checkpoint %1 (%2) eliminated.</Original>
+		        <Russian>Блокпост противника %1 (%2) ликвидирован.</Russian>
+            </Key>
 	    </Container>
 
     </Package>
@@ -231,6 +240,11 @@
             <Key ID="STR_PRJ_MHQ_IS_NOT_DEPLOYED">
                 <Original>MHQ is not deployed.</Original>
 		        <Russian>MHQ не развёрнут.</Russian>
+            </Key>
+
+            <Key ID="STR_PRJ_TASK_NOT_AVAILABLE">
+                <Original>Задание можно взять один раз в 3 минуты.</Original>
+		        <Russian>Задание можно взять один раз в 3 минуты.</Russian>
             </Key>
 	    </Container>
 
@@ -564,9 +578,8 @@
                 <German>Humanitäre Hilfe</German>
             </Key>	
             <Key ID="STR_SIDE_HUMANITARIAN_AID_DESCRIPTION">
-                <Original>Humanitarian Aid is delivered to base.&lt;br/&gt;Our Task: deliver cargo to the meeting point.</Original>
-		        <Russian>На базу доставили гуманитарную помощь.&lt;br/&gt;Задача: доставить груз в обозначенный сектор.</Russian>
-                <German>Humanitäre Hilfe wurde an den Flughafen geliefert.&lt;br/&gt;Ihre Aufgabe: die Fracht zur bezeichneten Position.</German>
+                <Original>Humanitarian Aid is delivered to base.&lt;br/&gt;Our Task: deliver cargo to the meeting point and secure around it for two minutes.</Original>
+		        <Russian>На базу доставили гуманитарную помощь.&lt;br/&gt;Задача: доставить груз в обозначенный сектор и обеспечивать безопасность вокруг в течение двух минут.</Russian>
             </Key>
             <Key ID="STR_SIDE_HUMANITARIAN_AID_CARGO">
                 <Original>Cargo</Original>
@@ -688,13 +701,21 @@
             </Key>
 	    </Container>
 
-        <Container name="SIDE_INTEL_VEHICLE">
-            <Key ID="STR_SIDE_INTEL_VEHICLE_TITLE">
-                <Original>Interception</Original>
-                <Russian>Перехват</Russian>
+        <Container name="SIDE_CONVOY">
+            <Key ID="STR_SIDE_CONVOY_TITLE">
+                <Original>Convoy</Original>
+                <Russian>Конвой</Russian>
             </Key>
-            <Key ID="STR_SIDE_INTEL_VEHICLE_DESCRIPTION">
-                <Original>Наш информатор сообщил о перевозке противником документов и разведданных. Мы засекли технику и будем продолжать за ней следить, однако, постоянно передавать координаты мы не сможем, поэтому могут быть задержки. Смотрите за передвижением техники в своих навигационных устройствах.&lt;br/&gt;Задача: перехватить и остановить технику, изъять разведданные, уничтожить технику по усмотрению.</Original>
+            <Key ID="STR_SIDE_CONVOY_DESCRIPTION">
+                <Original>Наш информатор сообщил, что в течение 20 минут противник планирует перебросить часть своих сил. Нам известно примерное место, в котором они собираются. Место назначения будет сообщено позже.&lt;br/&gt;Задача: перехватить и остановить технику, уничтожить технику по усмотрению.</Original>
+            </Key>
+            <Key ID="STR_SIDE_CONVOY_START_TITLE">
+                <Original>The convoy has moved out</Original>
+		        <Russian>Конвой выдвинулся</Russian>
+            </Key>
+            <Key ID="STR_SIDE_CONVOY_START_DESCRIPTION">
+                <Original>The convoy left for sector %1.</Original>
+		        <Russian>Конвой выдвинулся в сектор %1.</Russian>
             </Key>
 	    </Container>
     </Package>

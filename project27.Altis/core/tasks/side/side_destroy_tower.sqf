@@ -20,6 +20,13 @@ private _tower_class = selectRandom towers;
 private _tower = (_tower_class select 0) createVehicle _pos;
 private _generator = (_tower_class select 1) createVehicle ((position _tower) findEmptyPosition [0,20,_tower_class select 1]);
 
+_tower addEventHandler ["FiredNear", {
+	params ["_unit"];
+	_unit removeEventHandler ["FiredNear", _thisEventHandler];
+	
+	[position _unit] call prj_fnc_sentry_patrol;
+}];
+
 private _enemies = [];
 
 _enemies = _enemies + ([_pos] call prj_fnc_enemy_crowd);

@@ -50,6 +50,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 200)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setVariable ["location",(_types_locations # _i) # 0];
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
 		_trigger setVariable ["reward",(_types_locations # _i) # 3];
 		_trigger setVariable ["captured",false];
@@ -176,7 +177,7 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		};
 
 		private _trigger = createTrigger ["EmptyDetector",_position,false];
-		_trigger setTriggerArea [700,700,0,false]; 
+		_trigger setTriggerArea [800,800,0,false];
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
@@ -202,37 +203,80 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 
 missionNamespace setVariable ["camps_coords",_camps_coords,true];
 
-//create ied on the roads
-if (("ied_on_roads" call BIS_fnc_getParamValue) == 0) exitWith {};
+private _roadsSafeRadius = "roads_safe_radius" call BIS_fnc_getParamValue;
+private _allRoads = (_worldCenter nearRoads (_worldSize * 1.5)) - (position spawn_zone nearRoads _roadsSafeRadius);
 
-private _junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
-private _number_of_ied = "number_of_ied" call BIS_fnc_getParamValue;
-private _ied_safe_radius = "ied_safe_radius" call BIS_fnc_getParamValue;
+// create checkpoints
+private _checkpointParam = "checkpoints_on_roads" call BIS_fnc_getParamValue;
 
-private _roads = (_worldCenter nearRoads (_worldSize * 1.5)) - (position spawn_zone nearRoads _ied_safe_radius);
+if (_checkpointParam != 0) then {
+	private _checkpointsArray = [];
 
-private _ied_array = [];
+	for "_i" from 1 to _checkpointParam do {
+		private _randomRoad = selectRandom _allRoads;
+		_allRoads deleteAt (_allRoads find _randomRoad);
 
-for "_i" from 1 to _number_of_ied do {
+		private _roadConnectedTo = roadsConnectedTo _randomRoad;
+		private _connectedRoad = _roadConnectedTo select 0;
+		private _direction = _randomRoad getDir _connectedRoad;
 
-	private _position = position (selectRandom _roads);
-	_ied_array pushBack _position;
+		if (isNil "_direction") then {
+			_direction = 0;
+		};
 
-	private _ied = createMine [selectRandom ied, _position,[],3];
-	if ((random 1) < 0.7) then {
-		_junk = selectRandom _junk_class createVehicle position _ied;
-		_junk enableSimulationGlobal false;
-	};
-	
-	private _junk = selectRandom _junk_class createVehicle (position (selectRandom _roads));
-	_junk enableSimulationGlobal false;
+		private _pos = position _randomRoad;
 
-	if (prj_debug) then {
-		["junk_" + str (position _junk),position _junk,"ColorWEST",1,[],"mil_dot"] call prj_fnc_create_marker;
-		["ied_" + str (position _ied),position _ied,"ColorOPFOR",1,[],"mil_dot"] call prj_fnc_create_marker;
+		private _trigger = createTrigger ["EmptyDetector",_pos,false];
+		_trigger setTriggerArea [700,700,0,false];
+		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
+		_trigger setTriggerTimeout [3, 3, 3, true];
+		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setVariable ["checkpoint",true];
+		_trigger setVariable ["cp_direction",_direction];
+		_trigger setVariable ["captured",false];
+		_trigger setVariable ["active",false];
+
+		_checkpointsArray pushBack _pos;
+
+		// if (prj_debug) then {
+			["checkpoint_" + str _pos,_pos,"ColorBlack",1,[],"mil_dot"] call prj_fnc_create_marker;
+		// };
 	};
 };
 
-{independent revealMine _x} forEach allMines;
+//create ied on the roads
+private _iedsParam = "ied_on_roads" call BIS_fnc_getParamValue;
 
-missionNamespace setVariable ["ied_array",_ied_array,true];
+if (_iedsParam != 0) then {
+	private _junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
+
+	private _ied_array = [];
+
+	for "_i" from 1 to _iedsParam do {
+
+		private _randomRoad = selectRandom _allRoads;
+		_allRoads deleteAt (_allRoads find _randomRoad);
+
+		private _pos = position _randomRoad;
+		private _ied = createMine [selectRandom ied, _pos,[],3];
+
+		if ((random 1) < 0.7) then {
+			_junk = selectRandom _junk_class createVehicle position _ied;
+			_junk enableSimulationGlobal false;
+		};
+
+		_ied_array pushBack _pos;
+		
+		private _junk = selectRandom _junk_class createVehicle (position (selectRandom _allRoads));
+		_junk enableSimulationGlobal false;
+
+		if (prj_debug) then {
+			["junk_" + str (position _junk),position _junk,"ColorWEST",1,[],"mil_dot"] call prj_fnc_create_marker;
+			["ied_" + str (position _ied),position _ied,"ColorOPFOR",1,[],"mil_dot"] call prj_fnc_create_marker;
+		};
+	};
+
+	{independent revealMine _x} forEach allMines;
+
+	missionNamespace setVariable ["ied_array",_ied_array,true];
+};

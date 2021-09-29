@@ -20,7 +20,7 @@ _leader addEventHandler ["FiredNear", {
 	_unit removeEventHandler ["FiredNear", _thisEventHandler];
 
 	private _number = [2,3] call BIS_fnc_randomInt;
-	private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
+	private _vehicles = [position _unit,_number,"groundToInf"] call prj_fnc_reinforcement;
 }];
 
 [_taskID,_center_pos,"ColorEAST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_create_marker;

@@ -59,16 +59,16 @@ prj_fnc_selectPosition = {
 };
 
 prj_fnc_selectCaptPosition = {
-	params [["_position_around",false],["_captured",false],["_nearest",[]]];
+	params [["_position_around",false],["_captured",false],["_nearest",[]],["_typeLocations",["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"]]];
 
 	private _locations = missionNamespace getVariable "location_triggers";
 
 	private _filtered_locations = switch (_captured) do {
 		case true: {
-			_locations select {(_x getVariable "captured")}
+			_locations select {(_x getVariable "captured") && (_x getVariable "location") in _typeLocations}
 		};
 		case false: {
-			_locations select {!(_x getVariable "captured")}
+			_locations select {!(_x getVariable "captured") && (_x getVariable "location") in _typeLocations}
 		};
 	};
 
@@ -90,11 +90,14 @@ prj_fnc_selectCaptPosition = {
 };
 
 prj_fnc_select_road_position = {
-	params [["_typelocation",4],["_radius",3000]];
+	params [["_pos",4],["_radius",3000]];
 
 	private "_returndata";
 
-	private _pos = [_typelocation] call prj_fnc_selectPosition;
+	if (typeName _pos != "ARRAY") then {
+		_pos = [_typelocation] call prj_fnc_selectPosition;
+	};
+
 	private _roads = _pos nearRoads _radius;
 	private _roads = _roads select {isOnRoad _x};
 
@@ -113,6 +116,7 @@ prj_fnc_select_road_position = {
 		private _direction = round (random 360);
 		_returndata = [_pos,_direction];
 	};
+	
 	_returndata
 };
 
@@ -222,8 +226,64 @@ prj_fnc_enemy_patrols = {
 	_units
 };
 
+prj_fnc_create_checkpoint = {
+	params ["_pos",["_direction",0],["_spawnComposition",false],["_radius",70]];
+
+	private _vehicles = [];
+
+	private _barricadingVehicle = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy) createVehicle _pos;
+	_barricadingVehicle setDir _direction + 90;
+	_vehicles pushBack _barricadingVehicle;
+	
+	private _crewUnits = [_barricadingVehicle,enemy_infantry] call prj_fnc_create_crew;
+	
+	_barricadingVehicle addEventHandler ["FiredNear", {
+		params ["_unit"];
+		_unit removeEventHandler ["FiredNear", _thisEventHandler];
+
+		[position _unit] call prj_fnc_sentry_patrol;
+	}];
+
+	for "_i" from 0 to 1 do {
+		private _static = (selectRandom enemy_turrets) createVehicle (_pos findEmptyPosition [(10 * _i), 150, "B_HMG_01_high_F"]);
+		_static setDir _direction + (_i * 180);
+		_vehicles pushBack _static;
+		private _staticCrew = [_static,enemy_infantry] call prj_fnc_create_crew;
+		_crewUnits = _crewUnits + _staticCrew;
+	};
+
+	if (_spawnComposition) then {
+		_composition = [
+			["Land_BagFence_Long_F",[-0.0192871,-2.23193,-0.000999928],0,1,0,[],"","",true,false], 
+			["Land_BagFence_Long_F",[0.106201,2.72778,-0.000999928],0,1,0,[],"","",true,false], 
+			["Land_WoodenWindBreak_01_F",[0.0856934,-3.78625,-0.00102663],180,1,0,[],"","",true,false], 
+			["Land_WoodenWindBreak_01_F",[0.0314941,4.18152,-0.00102663],0,1,0,[],"","",true,false]
+		];
+
+		[_pos, _direction, _composition, 0] call BIS_fnc_objectsMapper;
+	};
+
+	private _enemyInf = [];
+
+	_enemyInf = _enemyInf + ([_pos] call prj_fnc_enemy_crowd);
+	_enemyInf = _enemyInf + ([_pos,_radius,[1,2]] call prj_fnc_enemy_patrols);
+
+	{
+		_x addEventHandler ["GetIn", {
+			params ["_vehicle", "_role", "_unit", "_turret"];
+
+			if (isPlayer _unit) then {
+				_vehicle removeEventHandler ["GetIn",_thisEventHandler];
+				_vehicle setVariable ["cannotDeleted",true,true];
+			};
+		}];
+	} forEach _vehicles;
+
+	[_vehicles,_crewUnits,_enemyInf]
+};
+
 prj_fnc_sentry_patrol = {
-	params ["_sentryPos",["_type","air"],["_radius",650],["_numPoints",8]];
+	params ["_sentryPos",["_type","air"],["_radius",500],["_numPoints",8]];
 
 	switch (_type) do {
 		case "air": {
@@ -243,7 +303,7 @@ prj_fnc_sentry_patrol = {
 				private _wpPos = [_sentryPos, _radius, _deg] call BIS_fnc_relPos;
 
 				private _wpCrew = _vehGroup addWaypoint [_wpPos, 0];
-				_wpCrew setWaypointSpeed "NORMAL";
+				_wpCrew setWaypointSpeed "LIMITED";
 				_wpCrew setWaypointType "MOVE";
 
 				_deg = _deg + _degDif;
@@ -287,6 +347,13 @@ prj_fnc_sentry_patrol = {
 						};
 					};
 				};
+
+				if (!alive _vehicle) then {
+					private _heliCrashPos = position _vehicle;
+					_heliCrashPos set [2,0];
+					
+					private _vehicles = [_heliCrashPos,2,"antiInf"] call prj_fnc_reinforcement;
+				};
 			};
 
 			private _wpCrew = _vehGroup addWaypoint [_spawnPos, 0];  
@@ -315,19 +382,19 @@ prj_fnc_sentry_patrol = {
 };
 
 prj_fnc_reinforcement = {
-	params ["_pos",["_number",2],["_type","ground"],["_radius",[1500,4000]]];
+	params ["_pos",["_number",2],["_type","antiInf"],["_radius",[1500,4000]]];
 
-	// _type = switch (_type) do {
-	// 	case "antiInf": {
-	// 		if ((random 1) < 0.35) then {"airToInf"} else {"groundToInf"};
-	// 	};
-	// 	case "antiAir": {
-	// 		if ((random 1) < 0.4) then {"airToAir"} else {"groundToAir"};
-	// 	};
-	// 	case "antiTank": {
-	// 		if ((random 1) < 0.4) then {"airToGround"} else {"groundToGround"};
-	// 	};
-	// };
+	_type = switch (_type) do {
+		case "antiInf": {
+			if ((random 1) < 0.4) then {"airToInf"} else {"groundToInf"};
+		};
+		case "antiAir": {
+			if ((random 1) < 0.4) then {"airToAir"} else {"groundToAir"};
+		};
+		case "antiTank": {
+			if ((random 1) < 0.3) then {"airToGround"} else {"groundToGround"};
+		};
+	};
 
 	switch (_type) do {
 		case "groundToInf": {
@@ -607,8 +674,132 @@ prj_fnc_reinforcement = {
 	};
 };
 
+prj_fnc_convoy_create = {
+	params ["_startPos","_direction","_finishPos","_config","_taskID"];
+
+	private _allVehicles = [];
+	private _allUnits = [];
+
+	private _allGrpUnits = [];
+
+	private _maxConvoyDistance = 0;
+	private _distanceForOneVehicle = 17;
+
+	{
+		for "_i" from 1 to (_x # 1) do {
+			_maxConvoyDistance = _maxConvoyDistance + _distanceForOneVehicle;
+		};
+	} forEach _config;
+
+	private _line_pos = [_startPos, _maxConvoyDistance + 80, _direction] call BIS_fnc_relPos;
+
+	private _vehicleCount = 0;
+
+	{
+		for "_i" from 1 to (_x # 1) do {
+			private _vehicle = (selectRandom (_x # 0)) createVehicle _startPos;
+			_vehicle setDir _direction;
+
+			private _units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
+
+			_allUnits pushBack _units;
+			_allVehicles pushBack _vehicle;
+
+			_units pushBack _vehicle;
+			_allGrpUnits append _units;
+
+			(crew _vehicle) doMove _line_pos;
+		
+			private _distance = _maxConvoyDistance - (_distanceForOneVehicle * _vehicleCount);
+
+			systemChat format ["машина #%1 зареспавнена, ждём %2 метров",_vehicleCount,_distance];
+
+			waitUntil {sleep 0.5; (_startPos distance _vehicle) > _distance};
+			// uiSleep 3;
+
+			doStop _vehicle;
+
+			_vehicle addEventHandler ["GetIn", {
+				params ["_vehicle", "_role", "_unit", "_turret"];
+
+				if (isPlayer _unit) then {
+					_vehicle removeEventHandler ["GetIn",_thisEventHandler];
+					_vehicle setVariable ["cannotDeleted",true,true];
+					systemChat "машина игрока";
+				};
+			}];
+			
+			[_vehicle,_units,_finishPos,_taskID] spawn {
+				params ["_vehicle","_units","_finishPos","_taskID"];
+
+				waitUntil {uiSleep 5; !alive _vehicle || (_vehicle distance _finishPos) < 300 };
+
+				if ((_vehicle distance _finishPos) < 300 && !(_taskID call BIS_fnc_taskCompleted)) then {
+					[_taskID,"FAILED"] call BIS_fnc_taskSetState;
+				};
+
+				if (!alive _vehicle || !canMove _vehicle) then {
+
+					uiSleep 30;
+
+					private _playersNear = false;
+
+					{
+						if ((_x distance _vehicle) < 2000) exitWith {_playersNear = true}
+					} forEach allPlayers;
+
+					if (!_playersNear && !(_x getVariable ["cannotDeleted",false])) then {
+						_units pushBack _vehicle;
+						{deleteVehicle _x} forEach _units;
+					};
+				};
+			};
+
+			if (_vehicleCount == 0) then {
+				_vehicle addEventHandler ["FiredNear", {
+					params ["_unit"];
+					_unit removeEventHandler ["FiredNear", _thisEventHandler];
+
+					private _number = [2,3] call BIS_fnc_randomInt;
+					private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
+
+					systemChat "выстрелы у головной машины";
+				}];
+			};
+
+			{
+				_vehicle addMagazineCargoGlobal [_x, [5,15] call BIS_fnc_randomInt];
+			} forEach ["acex_intelitems_photo","acex_intelitems_document","acex_intelitems_notepad"];
+
+			_vehicleCount = _vehicleCount + 1;
+		};
+	} forEach _config;
+
+	private _convoyGroup = createGroup independent;
+	_allGrpUnits joinSilent _convoyGroup;
+	// _convoyGroup setCombatMode "RED";
+	
+	private _wpConwoy = _convoyGroup addWaypoint [_finishPos, 0];
+	_wpConwoy setWaypointSpeed "LIMITED";
+	_wpConwoy setWaypointType "MOVE";
+	_wpConwoy setWaypointFormation "COLUMN";
+
+	[_allVehicles,_allUnits]
+};
+
 prj_fnc_check_and_delete = {
 	params ["_vehicles",["_distance",2500],["_start_time",600],["_interval_time",60]];
+
+	{
+		_x addEventHandler ["GetIn", {
+			params ["_vehicle", "_role", "_unit", "_turret"];
+
+			if (isPlayer _unit) then {
+				_vehicle removeEventHandler ["GetIn",_thisEventHandler];
+				_vehicle setVariable ["cannotDeleted",true,true];
+			};
+		}];
+	} forEach _vehicles;
 
 	uiSleep _start_time;
 
@@ -632,15 +823,7 @@ prj_fnc_check_and_delete = {
 				};
 			};
 
-			private _playerInVeh = false;
-
-			{
-				if (_veh == vehicle _x) exitWith {
-					_playerInVeh = true
-				};
-			} forEach allPlayers;
-
-			if (_playerInVeh) then {
+			if (_x getVariable ["cannotDeleted",false]) then {
 				_deleteIndexs pushBack _i;
 
 				[_crew] spawn {
@@ -651,7 +834,11 @@ prj_fnc_check_and_delete = {
 			} else {
 				private _playersNear = false;
 
-				{if ((_x distance _veh) < _distance) exitWith {_playersNear = true}} forEach allPlayers;
+				{
+					if ((_x distance _veh) < _distance) exitWith {
+						_playersNear = true
+					}
+				} forEach allPlayers;
 
 				if (!_playersNear) then {
 					_deleteIndexs pushBack _i;
@@ -792,17 +979,35 @@ prj_fnc_capt_zone = {
 	private _trigger_str_name = str _parent_trigger;
 	private _markerName = _trigger_str_name + str serverTime;
 	private _trigger_camp = _parent_trigger getVariable ["camp",false];
+	private _trigger_checkpoint = _parent_trigger getVariable ["checkpoint",false];
 
 	_parent_trigger setVariable ["captured", true];
 
 	private _number = [2,3] call BIS_fnc_randomInt;
 	private _vehicles = [_trigger_pos,_number] call prj_fnc_reinforcement;
 
+	[_trigger_pos] call prj_fnc_sentry_patrol;
+
 	if (_trigger_camp) exitWith {
-		["missionNamespace", "money", 0, 500] call prj_fnc_changePlayerVariableGlobal;
+		["missionNamespace", "money", 0, 5000] call prj_fnc_changePlayerVariableGlobal;
 		["camp_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
 		deleteVehicle _capt_trigger;
-		[_parent_trigger] spawn {params ["_parent_trigger"]; uiSleep 120; deleteVehicle _parent_trigger};
+		[_parent_trigger] spawn {
+			params ["_parent_trigger"];
+			uiSleep 120;
+			deleteVehicle _parent_trigger
+		};
+	};
+
+	if (_trigger_checkpoint) exitWith {
+		["missionNamespace", "money", 0, 1000] call prj_fnc_changePlayerVariableGlobal;
+		["checkpoint_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
+		deleteVehicle _capt_trigger;
+		[_parent_trigger] spawn {
+			params ["_parent_trigger"];
+			uiSleep 120;
+			deleteVehicle _parent_trigger
+		};
 	};
 
 	[_markerName,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
@@ -1177,7 +1382,7 @@ prj_fnc_webTracker_uploadObjects = {
 
 	} forEach vehicles;
 
-	private _maxObjectsCount = 3;
+	private _maxObjectsCount = 30;
 
 	if ((count _returnData) <= _maxObjectsCount) exitWith {
 		["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions&c=1",_returnData] call prj_fnc_http_request;
