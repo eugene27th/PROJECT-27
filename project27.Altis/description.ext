@@ -36,6 +36,14 @@ class Params
 		default = 1500;
 	};
 
+	class time_acceleration
+	{
+		title = "Time acceleration";
+		values[] = { 0, 1 };
+		texts[] = { "Off", "On" };
+		default = 0;
+	};
+
 	class divider_arsenal
 	{
 		title = "• ARSENAL";
@@ -108,14 +116,6 @@ class Params
 		default = 0;
 	};
 
-	class preset_units
-	{
-		title = "Preset units";
-		values[] = { 0, 1, 2, 3, 4, 5 };
-		texts[] = { "Middle east", "European aggressor", "Syndikat", "Middle east (+CUP)", "European aggressor (+CUP)", "Regular Salyanka Army (+CUP)" };
-		default = 1;
-	};
-
 	class enemycoef
 	{
 		title = "Enemy numbers";
@@ -143,9 +143,9 @@ class Params
 	class checkpoints_on_roads
 	{
 		title = "Enemy checkpoints on the roads";
-		values[] = { 0, 10, 25, 50 };
-		texts[] = { "Off", "10", "25", "50" };
-		default = 25;
+		values[] = { 0, 10, 15, 20, 25, 50 };
+		texts[] = { "Off", "10", "15", "20", "25", "50" };
+		default = 15;
 	};
 
 	class divider_ied_roads

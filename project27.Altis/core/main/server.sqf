@@ -176,14 +176,14 @@ if (!isDedicated) then {
 };
 
 // time acceleration
-// if (("paramName" call BIS_fnc_getParamValue) == 1) then {
-// 	[] spawn {
-// 		while {true} do {
-// 			if (daytime >= 21 || daytime < 4) then {setTimeMultiplier 7} else {setTimeMultiplier 5};
-// 			uiSleep 30;
-// 		};
-// 	};
-// };
+if (("time_acceleration" call BIS_fnc_getParamValue) == 1) then {
+	[] spawn {
+		while {true} do {
+			if (daytime >= 21 || daytime < 4) then {setTimeMultiplier 7} else {setTimeMultiplier 5};
+			uiSleep 30;
+		};
+	};
+};
 
 // auto load
 if (("autoSaveLoad" call BIS_fnc_getParamValue) == 1) then {call prj_fnc_load_game};

@@ -46,10 +46,10 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 	{
 		private _pos = locationPosition _x;
 		private _trigger = createTrigger ["EmptyDetector",_pos,false];
-		_trigger setTriggerArea [(_distance + _spawn_area),(_distance + _spawn_area),0,false]; 
+		_trigger setTriggerArea [(_distance + _spawn_area),(_distance + _spawn_area),0,false,800]; 
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
-		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 200)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && (speed _x < 180)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["location",(_types_locations # _i) # 0];
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
 		_trigger setVariable ["reward",(_types_locations # _i) # 3];
@@ -177,12 +177,12 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		};
 
 		private _trigger = createTrigger ["EmptyDetector",_position,false];
-		_trigger setTriggerArea [800,800,0,false];
+		_trigger setTriggerArea [800,800,0,false,800];
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
-		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && (speed _x < 150)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["config",[camps_enemy,[[0],[0],[0]]]];
-		_trigger setVariable ["camp",true];
+		_trigger setVariable ["special","camp"];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];
 
@@ -227,11 +227,11 @@ if (_checkpointParam != 0) then {
 		private _pos = position _randomRoad;
 
 		private _trigger = createTrigger ["EmptyDetector",_pos,false];
-		_trigger setTriggerArea [700,700,0,false];
+		_trigger setTriggerArea [900,900,0,false,800];
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
-		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && ((getPosATL _x) # 2) < 800 && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
-		_trigger setVariable ["checkpoint",true];
+		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && (speed _x < 150)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setVariable ["special","checkpoint"];
 		_trigger setVariable ["cp_direction",_direction];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];

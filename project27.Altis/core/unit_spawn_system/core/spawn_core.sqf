@@ -12,47 +12,52 @@ _trigger setVariable ["active",true];
 private _trigger_pos = position _trigger;
 private _capture_sectores = "capture_of_sectors" call BIS_fnc_getParamValue;
 
-if (_trigger getVariable ["checkpoint",false]) exitWith {
-	private _dir = _trigger getVariable "cp_direction";
+private _trigger_special = _trigger getVariable ["special","none"];
 
-	private _checkpointData = [_trigger_pos,_dir] call prj_fnc_create_checkpoint;
-	private _vehicles = _checkpointData # 0;
-	private _infantry = (_checkpointData # 1) + (_checkpointData # 2);
+if (_trigger_special != "none") exitWith {
+	switch (_trigger_special) do {
+		case "checkpoint": {
+			private _dir = _trigger getVariable "cp_direction";
 
-	if (_capture_sectores == 1) then {
-		private _trigger_radius = triggerArea _trigger;
-		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone;", false] call prj_fnc_create_trg;
-		_capt_trg setVariable ["parent_trigger",_trigger];
-	};
+			private _checkpointData = [_trigger_pos,_dir] call prj_fnc_create_checkpoint;
+			private _vehicles = _checkpointData # 0;
+			private _infantry = (_checkpointData # 1) + (_checkpointData # 2);
 
-	private _deleting = false;
+			if (_capture_sectores == 1) then {
+				_capt_trg = [_trigger_pos, [100, 100, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone;", false] call prj_fnc_create_trg;
+				_capt_trg setVariable ["parent_trigger",_trigger];
+			};
 
-	while {!_deleting} do {
-		uiSleep 5;
-		if (isNil "mhqterminal") then {
-			if (!triggerActivated _trigger) exitWith {_deleting = true};
-		} else {
-			if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
+			private _deleting = false;
+
+			while {!_deleting} do {
+				uiSleep 5;
+				if (isNil "mhqterminal") then {
+					if (!triggerActivated _trigger) exitWith {_deleting = true};
+				} else {
+					if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
+				};
+			};
+
+			if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
+
+			[_vehicles,_infantry,_trigger] spawn {
+				params ["_vehicles","_infantry","_trigger"];
+				uiSleep 60;
+
+				{
+					deleteVehicle _x
+				} forEach _infantry;
+
+				{
+					if !(_x getVariable ["cannotDeleted",false]) then {
+						deleteVehicle _x
+					}
+				} forEach _vehicles;
+
+				_trigger setVariable ["active",false];
+			};
 		};
-	};
-
-	if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
-
-	[_vehicles,_infantry] spawn {
-		params ["_vehicles","_infantry"];
-		uiSleep 60;
-
-		{
-			deleteVehicle _x
-		} forEach _infantry;
-
-		{
-			if !(_x getVariable ["cannotDeleted",false]) then {
-				deleteVehicle _x
-			}
-		} forEach _vehicles;
-
-		_trigger setVariable ["active",false];
 	};
 };
 
@@ -409,7 +414,7 @@ if !(_global_vehicles isEqualTo []) then {
 	private _vehicles_players = [];
 
 	{
-		if !(_x getVariable ["cannotDeleted",false]) then {
+		if (_x getVariable ["cannotDeleted",false]) then {
 			_vehicles_players pushBack _x;
 		};
 	} forEach _global_vehicles;
