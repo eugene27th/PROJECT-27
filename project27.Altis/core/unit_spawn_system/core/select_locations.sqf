@@ -238,9 +238,9 @@ if (_checkpointParam != 0) then {
 
 		_checkpointsArray pushBack _pos;
 
-		// if (prj_debug) then {
+		if (prj_debug) then {
 			["checkpoint_" + str _pos,_pos,"ColorBlack",1,[],"mil_dot"] call prj_fnc_create_marker;
-		// };
+		};
 	};
 };
 
@@ -250,7 +250,8 @@ private _iedsParam = "ied_on_roads" call BIS_fnc_getParamValue;
 if (_iedsParam != 0) then {
 	private _junk_class = ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
 
-	private _ied_array = [];
+	private _iedArray = [];
+	private _iedPosArray = [];
 
 	for "_i" from 1 to _iedsParam do {
 
@@ -265,7 +266,8 @@ if (_iedsParam != 0) then {
 			_junk enableSimulationGlobal false;
 		};
 
-		_ied_array pushBack _pos;
+		_iedArray pushBack _ied;
+		_iedPosArray pushBack _pos;
 		
 		private _junk = selectRandom _junk_class createVehicle (position (selectRandom _allRoads));
 		_junk enableSimulationGlobal false;
@@ -276,7 +278,6 @@ if (_iedsParam != 0) then {
 		};
 	};
 
-	{independent revealMine _x} forEach allMines;
-
-	missionNamespace setVariable ["ied_array",_ied_array,true];
+	missionNamespace setVariable ["iedArray",_iedArray,true];
+	missionNamespace setVariable ["iedPosArray",_iedPosArray,true];
 };

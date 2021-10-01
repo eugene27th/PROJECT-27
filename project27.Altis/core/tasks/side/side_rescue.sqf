@@ -69,6 +69,6 @@ _pilot action ["GetOut",vehicle _pilot];
 
 [_enemies] spawn {
     params ["_enemies"];
-	uiSleep 120;
+	uiSleep 300;
 	{deleteVehicle _x} forEach _enemies;
 };

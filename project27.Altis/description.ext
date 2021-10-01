@@ -135,8 +135,8 @@ class Params
 	class suicide_bombers
 	{
 		title = "Suicide bombers";
-		values[] = { 1, 0 };
-		texts[] = { "On", "Off" };
+		values[] = { 0, 1 };
+		texts[] = { "Off", "On" };
 		default = 0;
 	};
 

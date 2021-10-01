@@ -35,15 +35,12 @@ if (triggerActivated _trg) then {
 [_taskID] call BIS_fnc_deleteTask;
 deleteMarker _taskID;
 
-private _delTime = 0;
-
-if (triggerActivated _trg) then {
-	_delTime = 180;
-};
-
-[_vehicles,_infantry,_delTime] spawn {
+[_vehicles,_infantry,_trg] spawn {
 	params ["_vehicles","_infantry","_delTime"];
-	uiSleep _delTime;
+
+	if (triggerActivated _trg) then {
+		uiSleep 300;
+	};
 
 	{
 		if !(_x getVariable ["cannotDeleted",false]) then {

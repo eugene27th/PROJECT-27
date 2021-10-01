@@ -32,7 +32,7 @@ if (prj_debug) then {
 
 private _enemies = [];
 
-_enemies = _enemies + ([_pos] call prj_fnc_enemy_crowd);
+_enemies = _enemies + ([_pos,true] call prj_fnc_enemy_crowd);
 _enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_enemy_patrols);
 
 private _picture = getText(configfile >> "CfgVehicles" >> _ammo_cache_class >> "editorPreview");
@@ -49,7 +49,7 @@ if (!alive _ammo_cache) then {
 
 [_enemies] spawn {
 	params ["_enemies"];
-	uiSleep 120;
+	uiSleep 300;
 	{deleteVehicle _x} forEach _enemies;
 };
 

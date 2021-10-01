@@ -148,9 +148,13 @@ prj_fnc_select_road_position_around = {
 };
 
 prj_fnc_enemy_crowd = {
-    params ["_pos",["_radius",[4,15]],["_number_of",[4,8]]];
+    params ["_pos",["_relPos",false],["_radius",[4,15]],["_number_of",[4,8]]];
   
     private _units = [];
+
+	if (_relPos) then {
+		_pos = [_pos, 80, 150, 3, 0] call BIS_fnc_findSafePos;
+	};
 
 	private _ground_enemies_grp = createGroup [independent, true];
 
@@ -323,24 +327,22 @@ prj_fnc_sentry_patrol = {
 						private _enemyCategory = _enemyData # 0;
 						private _enemyType = _enemyData # 1;
 
-						systemChat str _enemyData;
-
 						switch (_enemyCategory) do {
 							case "Soldier": {
 								private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_reinforcement;
-								systemChat "тю, сбегайте кекните пехоту";
+								// systemChat "пехота";
 							};
 							case "Vehicle": {
 								if (_enemyType isEqualTo "Helicopter" || _enemyType isEqualTo "Plane") then {
 									private _vehicles = [position _nearEnemy,2,"antiAir"] call prj_fnc_reinforcement;
-									systemChat "у них воздух!";
+									// systemChat "воздух";
 								} else {
 									if (_enemyType isEqualTo "Car") then {
 										private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_reinforcement;
-										systemChat "а у них эта, машинка";
+										// systemChat "машинка";
 									} else {
 										private _vehicles = [position _nearEnemy,2,"antiTank"] call prj_fnc_reinforcement;
-										systemChat "так, шото потяжелее?";
+										// systemChat "шото потяжелее";
 									};
 								};
 							};
@@ -386,7 +388,7 @@ prj_fnc_reinforcement = {
 
 	_type = switch (_type) do {
 		case "antiInf": {
-			if ((random 1) < 0.4) then {"airToInf"} else {"groundToInf"};
+			if ((random 1) < 0.3) then {"airToInf"} else {"groundToInf"};
 		};
 		case "antiAir": {
 			if ((random 1) < 0.4) then {"airToAir"} else {"groundToAir"};
@@ -565,7 +567,7 @@ prj_fnc_reinforcement = {
 			//check and cargos delete
 
 			[_cargoUnits] spawn {
-				sleep 300;
+				sleep 420;
 
 				params ["_cargoUnits"];
 				
@@ -575,12 +577,11 @@ prj_fnc_reinforcement = {
 					for "_i" from 0 to _unitsCount do {
 						private _finded = false;
 						
-						private _nearUnits = nearestObjects [position (_cargoUnits # _i),["Man"],1500];
 						{
-							if (side _x == west) exitWith {
+							if ((_x distance (_cargoUnits # _i)) < 2000) exitWith {
 								_finded = true;
 							};
-						} forEach _nearUnits;
+						} forEach allPlayers;
 
 						if (!_finded) then {
 							deleteVehicle (_cargoUnits # _i);
@@ -879,12 +880,12 @@ prj_fnc_capt_zone = {
 			case "camp": {
 				["missionNamespace", "money", 0, 5000] call prj_fnc_changePlayerVariableGlobal;
 				["camp_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
-				systemChat "camp";
+				// systemChat "camp";
 			};
 			case "checkpoint": {
 				["missionNamespace", "money", 0, 1000] call prj_fnc_changePlayerVariableGlobal;
 				["checkpoint_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
-				systemChat "checkpoint";
+				// systemChat "checkpoint";
 			};
 		};
 

@@ -93,8 +93,7 @@ prj_fnc_create_task = {
 	private _selected_task = selectRandom tasksConfig;
 
 	while {(_selected_task # 0) == _oldTaskName} do {_selected_task = selectRandom tasksConfig};
-	// [_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
-	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\side_convoy.sqf";
+	[_taskID,(_selected_task # 1)] execVM "core\tasks\side\" + (_selected_task # 0) + ".sqf";
 
 	missionNamespace setVariable ["taskID",_taskID + 1,true];
 	private _oldTaskName = missionNamespace setVariable ["oldTaskName",_selected_task # 0,true];
@@ -301,7 +300,7 @@ prj_fnc_civ_info = {
 
 			[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_CAMP_1_INF","STR_PRJ_CIVIL_INFO_CAMP_2_INF","STR_PRJ_CIVIL_INFO_CAMP_3_INF"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
 		} else {
-			private _ied_coords = missionNamespace getVariable ["ied_array",[]];
+			private _ied_coords = missionNamespace getVariable ["iedPosArray",[]];
 			private	_near_ied = [_position, _ied_coords, 2000] call prj_fnc_near_pos_array;
 
 			if ((count _near_ied) > 0 && (random 1) < 0.5) then { 

@@ -391,6 +391,7 @@ if (!isNil "_enemy_statics") then {
 		if (isPlayer _unit) then {
 			_vehicle removeEventHandler ["GetIn",_thisEventHandler];
 			_vehicle setVariable ["cannotDeleted",true,true];
+			systemChat "машина игрока";
 		};
 	}];
 } forEach _global_vehicles;
