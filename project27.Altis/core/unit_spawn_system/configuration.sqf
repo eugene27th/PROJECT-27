@@ -54,7 +54,7 @@
 switch (worldName) do {
 	default {
 		//enemy
-		cities_enemy = [[5,2],[4,2],[2,0.4],[1,0.5],[1,0.4]];
+		cities_enemy = [[4,2],[4,2],[2,0.4],[1,0.5],[1,0.4]];
 		villages_enemy = [[4,2],[3,2],[2,0.4],[1,0.4],[1,0.3]];
 		local_enemy = [[0],[3,2],[1,0.6],[1,0.4],[1,0.4]];
 		rock_enemy = [[0],[1,1],[0],[0],[0]];
@@ -69,8 +69,6 @@ switch (worldName) do {
 		hills_civilian = [[0],[0],[0]];
 		vegetation_civilian = [[0],[0],[0]];
 		other_civilian = [[0],[0],[0]];
-		//camps
-		camps_enemy = [[0],[4,2],[2,0.4],[2,0.3],[2,1]];
 	};
 };
 

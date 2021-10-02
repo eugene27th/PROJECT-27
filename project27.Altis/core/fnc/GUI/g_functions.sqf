@@ -426,7 +426,7 @@ prj_fnc_vehicle_menu_window = {
 
 	private _vehicle = vehicle player;
 
-	if (typeOf _vehicle in (enemy_vehicles_light + enemy_vehicles_heavy + enemy_helicopters)) then {
+	if (typeOf _vehicle in (enemy_vehicles_light + enemy_vehicles_heavy)) then {
 		private _vehicle_price = [_vehicle] call prj_fnc_price_calculate;
 		private _ctrl = (findDisplay 3003) displayCtrl 1050;
 		private _text = "sell a vehicle - " + str _vehicle_price + " points";

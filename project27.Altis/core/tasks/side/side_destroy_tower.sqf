@@ -22,7 +22,7 @@ private _generator = (_tower_class select 1) createVehicle ((position _tower) fi
 
 _tower addEventHandler ["FiredNear", {
 	params ["_unit"];
-	_unit removeEventHandler ["FiredNear", _thisEventHandler];
+	_unit removeAllEventHandlers "FiredNear";
 	
 	[position _unit] call prj_fnc_sentry_patrol;
 }];

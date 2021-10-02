@@ -17,8 +17,8 @@ private _enemy = (createGroup [independent, true]) createUnit [selectRandom enem
 
 _leader addEventHandler ["FiredNear", {
 	params ["_unit"];
-	_unit removeEventHandler ["FiredNear", _thisEventHandler];
-
+	_unit removeAllEventHandlers "FiredNear";
+	
 	private _number = [2,3] call BIS_fnc_randomInt;
 	private _vehicles = [position _unit,_number,"groundToInf"] call prj_fnc_reinforcement;
 }];

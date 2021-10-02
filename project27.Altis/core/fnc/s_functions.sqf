@@ -243,8 +243,8 @@ prj_fnc_create_checkpoint = {
 	
 	_barricadingVehicle addEventHandler ["FiredNear", {
 		params ["_unit"];
-		_unit removeEventHandler ["FiredNear", _thisEventHandler];
-
+		_unit removeAllEventHandlers "FiredNear";
+		
 		[position _unit] call prj_fnc_sentry_patrol;
 	}];
 
@@ -388,7 +388,7 @@ prj_fnc_reinforcement = {
 
 	_type = switch (_type) do {
 		case "antiInf": {
-			if ((random 1) < 0.3) then {"airToInf"} else {"groundToInf"};
+			if ((random 1) < 0.35) then {"airToInf"} else {"groundToInf"};
 		};
 		case "antiAir": {
 			if ((random 1) < 0.4) then {"airToAir"} else {"groundToAir"};
@@ -880,12 +880,10 @@ prj_fnc_capt_zone = {
 			case "camp": {
 				["missionNamespace", "money", 0, 5000] call prj_fnc_changePlayerVariableGlobal;
 				["camp_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
-				// systemChat "camp";
 			};
 			case "checkpoint": {
-				["missionNamespace", "money", 0, 1000] call prj_fnc_changePlayerVariableGlobal;
+				["missionNamespace", "money", 0, 3000] call prj_fnc_changePlayerVariableGlobal;
 				["checkpoint_capture",[_trigger_grid_pos,_trigger_loc_name]] remoteExec ["BIS_fnc_showNotification"];
-				// systemChat "checkpoint";
 			};
 		};
 
@@ -1197,7 +1195,7 @@ prj_fnc_webTracker_uploadObjects = {
 	// get players
 
 	{
-		if ((vehicle player) != player) then {continue;};
+		if ((vehicle _x) != _x) then {continue;};
 
 		private _pos = position _x;
 		private _gridPos = mapGridPosition _x;

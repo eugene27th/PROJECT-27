@@ -3,7 +3,8 @@
 	server only
 */
 
-private _distance = 600;
+private _distance = 600; // 600-1000
+private _safeZone = 1000; // 1500-2000
 
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 
@@ -13,19 +14,19 @@ private _types_locations = [
 	["NameCity",300,[cities_enemy,cities_civilian],2500],
 	["NameVillage",250,[villages_enemy,villages_civilian],2000],
 	["NameLocal",150,[local_enemy,local_civilian],1500],
-	["Hill",50,[hills_enemy,hills_civilian],1000],
-	["RockArea",125,[rock_enemy,rock_civilian],500],
-	["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],500],
-	["VegetationFir",175,[vegetation_enemy,vegetation_civilian],500],
-	["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],500],
-	["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],500],
-	["ViewPoint",150,[other_enemy,other_civilian],1000],
-	["BorderCrossing",100,[other_enemy,other_civilian],500]
+	["Hill",50,[hills_enemy,hills_civilian],1000]
+	// ["RockArea",125,[rock_enemy,rock_civilian],500],
+	// ["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],500],
+	// ["VegetationFir",175,[vegetation_enemy,vegetation_civilian],500],
+	// ["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],500],
+	// ["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],500],
+	// ["ViewPoint",150,[other_enemy,other_civilian],1000],
+	// ["BorderCrossing",100,[other_enemy,other_civilian],500]
 ];
 
 private _worldSize = worldSize;
 private _worldCenter = [_worldSize / 2, _worldSize / 2, 0];
-private _g_delete_locations = nearestLocations [position spawn_zone, _all_locations, 2000];
+private _g_delete_locations = nearestLocations [position spawn_zone, _all_locations, _safeZone];
 
 private _a_delete_locations = [];
 {_a_delete_locations = _a_delete_locations + nearestLocations [_x, _all_locations, 100]} forEach delete_locations;
@@ -106,13 +107,13 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 	private _position = [_worldCenter, _min_distance, _max_distance, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;
 
 	if (!isNil "_position") then {
-		if (((position spawn_zone) distance _position) < 2000) then {
+		if (((position spawn_zone) distance _position) < _safeZone) then {
 			private _try = 10;
-			while {((position spawn_zone) distance _position) < 2000 && _try > 0} do {
+			while {((position spawn_zone) distance _position) < _safeZone && _try > 0} do {
 				_position = [_worldCenter, _min_distance, _max_distance, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;
 				_try = _try - 1;
 			};
-			if (((position spawn_zone) distance _position) < 2000) then {
+			if (((position spawn_zone) distance _position) < _safeZone) then {
 				_position = nil;
 			};
 		};
@@ -181,7 +182,6 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
 		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && (speed _x < 150)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
-		_trigger setVariable ["config",[camps_enemy,[[0],[0],[0]]]];
 		_trigger setVariable ["special","camp"];
 		_trigger setVariable ["captured",false];
 		_trigger setVariable ["active",false];

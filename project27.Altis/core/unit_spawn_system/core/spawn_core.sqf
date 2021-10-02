@@ -11,59 +11,77 @@ _trigger setVariable ["active",true];
 
 private _trigger_pos = position _trigger;
 private _capture_sectores = "capture_of_sectors" call BIS_fnc_getParamValue;
+private _sector_radius = ((triggerArea _trigger) # 0);
 
 private _trigger_special = _trigger getVariable ["special","none"];
 
 if (_trigger_special != "none") exitWith {
+	private _vehicles = [];
+	private _infantry = [];
+	private _captRadius = 100;
+
 	switch (_trigger_special) do {
 		case "checkpoint": {
 			private _dir = _trigger getVariable "cp_direction";
 
 			private _checkpointData = [_trigger_pos,_dir] call prj_fnc_create_checkpoint;
-			private _vehicles = _checkpointData # 0;
-			private _infantry = (_checkpointData # 1) + (_checkpointData # 2);
+			_vehicles = _checkpointData # 0;
+			_infantry = (_checkpointData # 1) + (_checkpointData # 2);
+		};
 
-			if (_capture_sectores == 1) then {
-				_capt_trg = [_trigger_pos, [100, 100, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone;", false] call prj_fnc_create_trg;
-				_capt_trg setVariable ["parent_trigger",_trigger];
-			};
+		case "camp": {
+			_infantry = [_trigger_pos] call prj_fnc_enemy_crowd;
+			_infantry append ([_trigger_pos,150,[2,2]] call prj_fnc_enemy_patrols);
 
-			private _deleting = false;
+			for "_i" from 1 to 2 do {
+				private _static = (selectRandom enemy_turrets) createVehicle (_trigger_pos findEmptyPosition [(60 * _i), 200, "B_HMG_01_high_F"]);
+				_static setDir (round (random 360));
+				_vehicles pushBack _static;
 
-			while {!_deleting} do {
-				uiSleep 5;
-				if (isNil "mhqterminal") then {
-					if (!triggerActivated _trigger) exitWith {_deleting = true};
-				} else {
-					if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
-				};
-			};
-
-			if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
-
-			[_vehicles,_infantry,_trigger] spawn {
-				params ["_vehicles","_infantry","_trigger"];
-				uiSleep 60;
-
-				{
-					deleteVehicle _x
-				} forEach _infantry;
-
-				{
-					if !(_x getVariable ["cannotDeleted",false]) then {
-						deleteVehicle _x
-					}
-				} forEach _vehicles;
-
-				_trigger setVariable ["active",false];
+				private _staticCrew = [_static,enemy_infantry] call prj_fnc_create_crew;
+				_infantry append _staticCrew;
 			};
 		};
+	};
+
+	if (_capture_sectores == 1) then {
+		_capt_trg = [_trigger_pos, [_captRadius, _captRadius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone;", false] call prj_fnc_create_trg;
+		_capt_trg setVariable ["parent_trigger",_trigger];
+	};
+
+	private _deleting = false;
+
+	while {!_deleting} do {
+		uiSleep 5;
+		if (isNil "mhqterminal") then {
+			if (!triggerActivated _trigger) exitWith {_deleting = true};
+		} else {
+			if (!triggerActivated _trigger && (mhqterminal distance _trigger) > _sector_radius) exitWith {_deleting = true};
+		};
+	};
+
+	if (!isNil "_capt_trg") then {deleteVehicle _capt_trg};
+
+	[_vehicles,_infantry,_trigger] spawn {
+		params ["_vehicles","_infantry","_trigger"];
+		uiSleep 60;
+
+		{
+			deleteVehicle _x
+		} forEach _infantry;
+
+		{
+			if !(_x getVariable ["cannotDeleted",false]) then {
+				deleteVehicle _x
+			}
+		} forEach _vehicles;
+
+		_trigger setVariable ["active",false];
 	};
 };
 
 private _distance = 600;
 private _trigger_radius = ((triggerArea _trigger) # 0) - _distance;
-private _sector_radius = ((triggerArea _trigger) # 0);
 private _enemy_config = (_trigger getVariable "config") # 0;
 private _civil_config = (_trigger getVariable "config") # 1;
 

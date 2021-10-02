@@ -23,9 +23,7 @@ private _finishGridPos = mapGridPosition _finishPos;
 [west, [_taskID], ["STR_SIDE_CONVOY_DESCRIPTION", "STR_SIDE_CONVOY_TITLE", ""], _centerPos, "CREATED", 0, true, "intel"] call BIS_fnc_taskCreate;
 [_taskID,_centerPos,"ColorOPFOR",0.4,[[500,500],"ELLIPSE"]] call prj_fnc_create_marker;
 
-// uiSleep ([800,900] call BIS_fnc_randomInt);
-
-uiSleep ([15,25] call BIS_fnc_randomInt);
+uiSleep ([800,900] call BIS_fnc_randomInt);
 
 private _allVehicles = [];
 private _allUnits = [];
@@ -74,7 +72,7 @@ private _convoyConfig = [[enemy_vehiclesConvoyHeavy,1],[enemy_vehiclesConvoyLigh
 			_vehicle addEventHandler ["FiredNear", {
 				params ["_unit"];
 				_unit removeAllEventHandlers "FiredNear";
-
+				
 				private _number = [2,3] call BIS_fnc_randomInt;
 				private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
 			}];

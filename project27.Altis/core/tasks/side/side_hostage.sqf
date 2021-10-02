@@ -18,8 +18,8 @@ _hostage setCaptive true;
 
 _hostage addEventHandler ["FiredNear", {
 	params ["_unit"];
-	_unit removeEventHandler ["FiredNear", _thisEventHandler];
-
+	_unit removeAllEventHandlers "FiredNear";
+	
 	if (round (random 1) > 0.35) then {
 		private _number = [2,3] call BIS_fnc_randomInt;
 		private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
