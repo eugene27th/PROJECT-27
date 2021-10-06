@@ -593,6 +593,8 @@ shop_land_vehicles = [
 	["rhs_bmp2_tv",80400,4],
 	["rhs_bmp2k_tv",81800,4],
 	["rhs_bmp2d_tv",85000,4],
+	["CUP_B_M1128_MGS_Desert",87000,4],
+	["CUP_B_M1128_MGS_Woodland",87000,4],
 	["LOP_NK_T55",87700,4],
 	["RHS_M2A2_wd",89000,5],
 	["RHS_M2A2",89000,5],
@@ -671,11 +673,14 @@ shop_land_vehicles = [
 
 shop_air_vehicles = [
 	["RHS_AN2_B",18000,0],
+	["CUP_B_CESSNA_T41_UNARMED_AIRFORCE_USA",10000,0],
 	["C_Plane_Civil_01_F",14000,0],
 	["C_Heli_Light_01_civil_F",17000,0],
-	["rhs_uh1h_hidf_unarmed",22000,1],
-	["RHS_Mi8t_civilian",31700,1],
-	["RHS_Mi8amt_civilian",34200,1],		
+	["rhs_uh1h_hidf_unarmed",22000,0],
+	["CUP_C_412",25000,0],
+	["RHS_Mi8t_civilian",31700,0],
+	["RHS_Mi8amt_civilian",34200,0],
+	["CUP_I_412_Mil_Transport_PMC",35000,1],	
 	["RHS_Mi8mt_vvs",33000,2],
 	["RHS_Mi8mt_vvsc",34000,2],	
 	["I_Heli_light_03_unarmed_F",35000,2],
@@ -684,6 +689,7 @@ shop_air_vehicles = [
 	["O_Heli_Transport_04_bench_F",37000,2],
 	["RHS_MELB_H6M",37000,2],
 	["RHS_MELB_MH6M",40000,2],
+	["CUP_I_412_Military_Radar_PMC",45000,2],
 	["O_Heli_Transport_04_medevac_F",36000,3],
 	["RHS_Mi8AMT_vvs",37400,3],
 	["RHS_Mi8AMT_vvsc",38100,3],
@@ -716,6 +722,7 @@ shop_air_vehicles = [
 	["RHS_MELB_AH6M",37900,5],
 	["RHS_UH1Y_FFAR_d",52000,5],
 	["RHS_UH1Y_d",55000,5],
+	["CUP_I_412_dynamicLoadout_PMC",60000,5],
 	["RHS_Mi8MTV3_vvs",68500,6],
 	["RHS_Mi8MTV3_vvsc",68500,6],
 	["RHS_Mi8AMTSh_vvs",79500,6],
@@ -946,5 +953,51 @@ tasksConfig = [
 	["side_humanitarian_aid",3000]
 ];
 
+// tables
+BISColors = [
+	['Color1_FD_F', 1],
+	['Color2_FD_F', 2],
+	['Color3_FD_F', 3],
+	['Color4_FD_F', 4],
+	['Color5_FD_F', 5],
+	['Color6_FD_F', 6],
+	['ColorBlack', 7],
+	['ColorBlue', 8],
+	['ColorBrown', 9],
+	['ColorCIV', 10],
+	['ColorEAST', 11],
+	['ColorGUER', 12],
+	['ColorGreen', 13],
+	['ColorGrey', 14],
+	['ColorKhaki', 15],
+	['ColorOrange', 16],
+	['ColorPink', 17],
+	['ColorRed', 18],
+	['ColorUNKNOWN', 19],
+	['ColorWEST', 20],
+	['ColorWhite', 21],
+	['ColorYellow', 22],
+	['Default', 23],
+	['colorBLUFOR', 24],
+	['colorCivilian', 25],
+	['colorIndependent', 26],
+	['colorOPFOR', 27]
+];
+
+BISMarkerTypes = [
+	['hd_ambush', 1],
+	['hd_arrow', 2],
+	['hd_destroy', 3],
+	['hd_dot', 4],
+	['hd_end', 5],
+	['hd_flag', 6],
+	['hd_join', 7],
+	['hd_objective', 8],
+	['hd_pickup', 9],
+	['hd_start', 10],
+	['hd_unknown', 11],
+	['hd_warning', 12]
+];
+
 // debug mode
-prj_debug = true;
+prj_debug = false;

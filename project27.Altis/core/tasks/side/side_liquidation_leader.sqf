@@ -9,7 +9,7 @@ private _taskID = "SIDE_" + str _taskID;
 
 private _center_pos = [1,false] call prj_fnc_selectPosition;
 
-private _pos = [_center_pos, 200] call prj_fnc_select_house_position;
+private _pos = [_center_pos, 200] call prj_fnc_selectHousePosition;
 
 private _leader = (createGroup [independent, true]) createUnit [selectRandom enemy_leaders, _pos, [], 0, "NONE"];
 private _enemy = (createGroup [independent, true]) createUnit [selectRandom enemy_infantry, position _leader, [], 0, "NONE"];
@@ -20,10 +20,10 @@ _leader addEventHandler ["FiredNear", {
 	_unit removeAllEventHandlers "FiredNear";
 	
 	private _number = [2,3] call BIS_fnc_randomInt;
-	private _vehicles = [position _unit,_number,"groundToInf"] call prj_fnc_reinforcement;
+	private _vehicles = [position _unit,_number,"groundToInf"] call prj_fnc_createReinforcement;
 }];
 
-[_taskID,_center_pos,"ColorEAST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_center_pos,"ColorEAST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_createMarker;
 
 private _picture = getText(configfile >> "CfgVehicles" >> typeOf _leader >> "editorPreview");
 

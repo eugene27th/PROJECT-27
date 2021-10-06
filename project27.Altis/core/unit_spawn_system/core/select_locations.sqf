@@ -68,7 +68,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 						private _allpositions = (selectRandom _useful) buildingPos -1;
 						private _house_ied = createMine [selectRandom _house_ieds_class, selectRandom _allpositions,[],1];
 						if (prj_debug) then {
-							["house_ied_" + str (position _house_ied),position _house_ied,"ColorWEST",1,[],"mil_dot"] call prj_fnc_create_marker;
+							["house_ied_" + str (position _house_ied),position _house_ied,"ColorWEST",1,[],"mil_dot"] call prj_fnc_createMarker;
 						};
 					};
 				};
@@ -80,8 +80,8 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		};
 
 		if (prj_debug) then {
-			["_area_marker_" + str _pos,_pos,"ColorOPFOR",0.7,[[_spawn_area,_spawn_area],"ELLIPSE"]] call prj_fnc_create_marker;
-			["_area_trigger_marker_" + str _pos,_pos,"ColorBLUFOR",0.3,[[(_distance + _spawn_area),(_distance + _spawn_area)],"ELLIPSE"]] call prj_fnc_create_marker;
+			["_area_marker_" + str _pos,_pos,"ColorOPFOR",0.7,[[_spawn_area,_spawn_area],"ELLIPSE"]] call prj_fnc_createMarker;
+			["_area_trigger_marker_" + str _pos,_pos,"ColorBLUFOR",0.3,[[(_distance + _spawn_area),(_distance + _spawn_area)],"ELLIPSE"]] call prj_fnc_createMarker;
 		};
 	} forEach _locations;
 };
@@ -95,7 +95,7 @@ private _camps_ammo_boxes = [];
 
 if (prj_debug) then {
 	systemChat format ["CAMPS: %1",_number_of_camps];
-	["marker_center_world",_worldCenter,"ColorBlack",1,[],"mil_objective","CENTER"] call prj_fnc_create_marker;
+	["marker_center_world",_worldCenter,"ColorBlack",1,[],"mil_objective","CENTER"] call prj_fnc_createMarker;
 };
 
 private _min_distance = 0;
@@ -187,7 +187,7 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 		_trigger setVariable ["active",false];
 
 		if (prj_debug) then {
-			["camp_" + str _position,_position,"ColorYellow",1,[],"mil_objective",str _i] call prj_fnc_create_marker;
+			["camp_" + str _position,_position,"ColorYellow",1,[],"mil_objective",str _i] call prj_fnc_createMarker;
 		};
 	};
 
@@ -196,7 +196,7 @@ for [{private _i = 1 }, { _i < (_number_of_camps + 1) }, { _i = _i + 1 }] do {
 
 	if (prj_debug) then {
 		private _ellipse_radius = _min_distance;
-		["marker_min_" + str _i,_worldCenter,"ColorBlack",1,[[_ellipse_radius,_ellipse_radius],"ELLIPSE"]] call prj_fnc_create_marker;
+		["marker_min_" + str _i,_worldCenter,"ColorBlack",1,[[_ellipse_radius,_ellipse_radius],"ELLIPSE"]] call prj_fnc_createMarker;
 		("marker_min_" + str _i) setMarkerBrush "Border";
 	};
 };
@@ -239,7 +239,7 @@ if (_checkpointParam != 0) then {
 		_checkpointsArray pushBack _pos;
 
 		if (prj_debug) then {
-			["checkpoint_" + str _pos,_pos,"ColorBlack",1,[],"mil_dot"] call prj_fnc_create_marker;
+			["checkpoint_" + str _pos,_pos,"ColorBlack",1,[],"mil_dot"] call prj_fnc_createMarker;
 		};
 	};
 };
@@ -273,8 +273,8 @@ if (_iedsParam != 0) then {
 		_junk enableSimulationGlobal false;
 
 		if (prj_debug) then {
-			["junk_" + str (position _junk),position _junk,"ColorWEST",1,[],"mil_dot"] call prj_fnc_create_marker;
-			["ied_" + str (position _ied),position _ied,"ColorOPFOR",1,[],"mil_dot"] call prj_fnc_create_marker;
+			["junk_" + str (position _junk),position _junk,"ColorWEST",1,[],"mil_dot"] call prj_fnc_createMarker;
+			["ied_" + str (position _ied),position _ied,"ColorOPFOR",1,[],"mil_dot"] call prj_fnc_createMarker;
 		};
 	};
 

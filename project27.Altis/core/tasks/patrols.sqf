@@ -19,7 +19,7 @@ while {true} do {
 
 		private _pos = [false,false,[0,15],["NameCityCapital","NameCity","NameVillage"]] call prj_fnc_selectCaptPosition;
 
-		[_taskID,_pos,"ColorEAST",0.7,[[150,150],"ELLIPSE"]] call prj_fnc_create_marker;
+		[_taskID,_pos,"ColorEAST",0.7,[[150,150],"ELLIPSE"]] call prj_fnc_createMarker;
 
 		private _task = [west, [_taskID], [format [localize "STR_PATROL_DESCRIPTION",(_waitingTime/60)], "STR_PATROL_TITLE", ""], _pos, "CREATED", 0, false, "walk"] call BIS_fnc_taskCreate;
 
@@ -53,9 +53,9 @@ while {true} do {
 							systemChat "wtf";
 							if (round (random 1) > 0.35) then {
 								private _number = [2,3] call BIS_fnc_randomInt;
-								private _vehicles = [_pos,_number] call prj_fnc_reinforcement;
+								private _vehicles = [_pos,_number] call prj_fnc_createReinforcement;
 							} else {
-								[_pos] call prj_fnc_sentry_patrol;
+								[_pos] call prj_fnc_createSentryPatrol;
 							};
 						};
 

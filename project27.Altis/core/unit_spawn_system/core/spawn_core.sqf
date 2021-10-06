@@ -24,28 +24,28 @@ if (_trigger_special != "none") exitWith {
 		case "checkpoint": {
 			private _dir = _trigger getVariable "cp_direction";
 
-			private _checkpointData = [_trigger_pos,_dir] call prj_fnc_create_checkpoint;
+			private _checkpointData = [_trigger_pos,_dir] call prj_fnc_createCheckpoint;
 			_vehicles = _checkpointData # 0;
 			_infantry = (_checkpointData # 1) + (_checkpointData # 2);
 		};
 
 		case "camp": {
-			_infantry = [_trigger_pos] call prj_fnc_enemy_crowd;
-			_infantry append ([_trigger_pos,150,[2,2]] call prj_fnc_enemy_patrols);
+			_infantry = [_trigger_pos] call prj_fnc_createCrowd;
+			_infantry append ([_trigger_pos,150,[2,2]] call prj_fnc_createPatrol);
 
 			for "_i" from 1 to 2 do {
 				private _static = (selectRandom enemy_turrets) createVehicle (_trigger_pos findEmptyPosition [(60 * _i), 200, "B_HMG_01_high_F"]);
 				_static setDir (round (random 360));
 				_vehicles pushBack _static;
 
-				private _staticCrew = [_static,enemy_infantry] call prj_fnc_create_crew;
+				private _staticCrew = [_static,enemy_infantry] call prj_fnc_createCrew;
 				_infantry append _staticCrew;
 			};
 		};
 	};
 
 	if (_capture_sectores == 1) then {
-		_capt_trg = [_trigger_pos, [_captRadius, _captRadius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone;", false] call prj_fnc_create_trg;
+		_capt_trg = [_trigger_pos, [_captRadius, _captRadius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_zoneСapture;", false] call prj_fnc_createTrigger;
 		_capt_trg setVariable ["parent_trigger",_trigger];
 	};
 
@@ -90,7 +90,7 @@ if (prj_debug) then {
 };
 
 //functions
-prj_fnc_number_of_units = {
+prj_fnc_getNumberOfUnits = {
 	params ["_number"];
 
 	private _number_result = switch (_number) do {
@@ -103,7 +103,7 @@ prj_fnc_number_of_units = {
 	_number_result
 };
 
-prj_fnc_spawn_house_groups = {
+prj_fnc_createHouseGroups = {
 	params ["_side","_class_units","_config",["_voice",true]];
 
 	if (((_config # 0) # 0) == 0) exitWith {};
@@ -115,7 +115,7 @@ prj_fnc_spawn_house_groups = {
 
 	for [{private _i = 0 }, { _i < ((_config # 0) # 0) }, { _i = _i + 1 }] do {
 		private _group = createGroup [_side, true];
-		for [{private _i = 0 }, { _i < [((_config # 0) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
+		for [{private _i = 0 }, { _i < [((_config # 0) # 1)] call prj_fnc_getNumberOfUnits }, { _i = _i + 1 }] do {
 			if ((count _useful) > 5) then {
 				_allpositions = (selectRandom _useful) buildingPos -1;
 				_house_pos = selectRandom _allpositions;
@@ -135,7 +135,7 @@ prj_fnc_spawn_house_groups = {
 	_house_units
 };
 
-prj_fnc_spawn_patrols_groups = {
+prj_fnc_createPatrolGroups = {
 	params ["_side","_class_units","_config",["_voice",false]];
 
 	if (((_config # 1) # 0) == 0) exitWith {};
@@ -146,7 +146,7 @@ prj_fnc_spawn_patrols_groups = {
 		private _group = createGroup [_side, true];
 		private _pos = [_trigger_pos, 10, _trigger_radius, 1, 0] call BIS_fnc_findSafePos;
 		if (!isNil "_pos") then {
-			for [{private _i = 0 }, { _i < [((_config # 1) # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
+			for [{private _i = 0 }, { _i < [((_config # 1) # 1)] call prj_fnc_getNumberOfUnits }, { _i = _i + 1 }] do {
 				private _unit = _group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				if (!_voice) then {
 					[_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit];
@@ -181,7 +181,7 @@ prj_fnc_spawn_patrols_groups = {
 	_patrols_units
 };
 
-prj_fnc_spawn_vehicles = {
+prj_fnc_createVehicles = {
 	params ["_side","_class_units","_class_vehicles","_config",["_index_config",2],["_behaviour","SAFE"]];
 
 	if (((_config # _index_config) # 0) == 0) exitWith {};
@@ -293,7 +293,7 @@ prj_fnc_spawn_vehicles = {
 	[_vehicles,_vehicle_crew_units]
 };
 
-prj_fnc_spawn_static = {
+prj_fnc_createStatic = {
 	params ["_side","_class_units","_class_static","_config"];
 
 	if (((_config # 4) # 0) == 0) exitWith {};
@@ -343,22 +343,22 @@ private ["_enemy_house_units","_enemy_patrols_units","_enemy_light_vehicles","_e
 
 if (!(_trigger getVariable "captured")) then {
 	
-	_enemy_house_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_spawn_house_groups;
-	_enemy_patrols_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_spawn_patrols_groups;
-	_enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,_enemy_config] call prj_fnc_spawn_vehicles;
-	_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,_enemy_config,3] call prj_fnc_spawn_vehicles;
-	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_spawn_static;
+	_enemy_house_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_createHouseGroups;
+	_enemy_patrols_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_createPatrolGroups;
+	_enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,_enemy_config] call prj_fnc_createVehicles;
+	_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,_enemy_config,3] call prj_fnc_createVehicles;
+	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_createStatic;
 
 	if (_capture_sectores == 1) then {
-		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_capt_zone;", false] call prj_fnc_create_trg;
+		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_zoneСapture;", false] call prj_fnc_createTrigger;
 		_capt_trg setVariable ["parent_trigger",_trigger];
 	};
 };
 
 //////////////////////SPAWN CIVILIAN\\\\\\\\\\\\\\\\\\\\\\\
-private _civilian_house_units = [civilian,civilian_units,_civil_config,false] call prj_fnc_spawn_house_groups;
-private _civilian_patrols_units = [civilian,civilian_units,_civil_config,false] call prj_fnc_spawn_patrols_groups;
-private _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,_civil_config,2,"CARELESS"] call prj_fnc_spawn_vehicles;
+private _civilian_house_units = [civilian,civilian_units,_civil_config,false] call prj_fnc_createHouseGroups;
+private _civilian_patrols_units = [civilian,civilian_units,_civil_config,false] call prj_fnc_createPatrolGroups;
+private _civilian_light_vehicles = [civilian,civilian_units,civilian_vehicles,_civil_config,2,"CARELESS"] call prj_fnc_createVehicles;
 
 private _civilian_global_infantry = [];
 
@@ -369,7 +369,7 @@ if !(_civilian_global_infantry isEqualTo []) then {
 	{
 		[_x] spawn {
 			params ["_civ"];
-			_civ call prj_fnc_civ;
+			_civ call prj_fnc_civBehaviour;
 		};
 	} forEach _civilian_global_infantry;
 };

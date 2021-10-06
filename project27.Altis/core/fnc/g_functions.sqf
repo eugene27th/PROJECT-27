@@ -3,7 +3,7 @@
 	global functions
 */
 
-prj_fnc_set_textures = {
+prj_fnc_setTextures = {
 	params ["_textures_array"];
 	
 	for [{private _i = 0 }, { _i < (count _textures_array) }, { _i = _i + 1 }] do {
@@ -24,7 +24,7 @@ prj_fnc_changePlayerVariableLocal = {
 	if (prj_debug) then {[format ["%1 changed to: %2",_UID,_player_table]] remoteExec ["systemChat"]};
 };
 
-prj_fnc_set_variables = {
+prj_fnc_setTableVariables = {
 	params ["_data"];
 
 	for [{private _i = 0 }, { _i < (count _data) }, { _i = _i + 1 }] do {
@@ -52,7 +52,7 @@ prj_fnc_set_variables = {
 	};
 };
 
-prj_fnc_add_mhq_action = {
+prj_fnc_addActionToMHQ = {
 	private _actiondeploy = [
 		"a_hq_terminal_deploy",
 		"Deploy MHQ",
@@ -82,10 +82,10 @@ prj_fnc_add_mhq_action = {
 	[mhqterminal, 0, ["ACE_MainActions"], _actionundeploy] call ace_interact_menu_fnc_addActionToObject;
 };
 
-prj_fnc_create_task = {
+prj_fnc_createSideTask = {
 
 	if !(missionNamespace getVariable ["task_available",true]) exitWith {
-		hint localize "STR_PRJ_TASK_NOT_AVAILABLE";
+		[localize "STR_PRJ_TASK_NOT_AVAILABLE"] remoteExec ["systemChat"];
 	};
 
 	private _taskID = missionNamespace getVariable ["taskID",0];
@@ -106,16 +106,14 @@ prj_fnc_create_task = {
 	};
 
 	if (prj_debug) then {
-		systemChat format ["id: %1 | task: %2 | reward: %3",_taskID,_selected_task # 0,_selected_task # 1];
+		[format ["id: %1 | task: %2 | reward: %3",_taskID,_selected_task # 0,_selected_task # 1]] remoteExec ["systemChat"];
 	};
 };
 
-prj_fnc_cancel_task = {
+prj_fnc_cancelSideTask = {
 	params ["_task"];
 
 	if (_task isEqualTo "") exitWith {hint localize "STR_PRJ_SELECT_TASK_ON_MAP"};
-
-	private "_task";
 
 	private _subTasks = _task call BIS_fnc_taskChildren;
 	if (_subTasks isEqualTo []) then {
@@ -135,7 +133,7 @@ prj_fnc_cancel_task = {
 	};
 };
 
-prj_fnc_request_supply_drop = {
+prj_fnc_requestSupplyDrop = {
 	params ["_position"];
 
 	if (missionNamespace getVariable ["supply_waiting",false]) exitWith {
@@ -199,7 +197,7 @@ prj_fnc_request_supply_drop = {
 	};
 };
 
-prj_fnc_civ_orders = {
+prj_fnc_giveOrderToCiv = {
 	params ["_order","_position"];
 
 	private _list = _position nearEntities [["Man"], 60];
@@ -239,7 +237,7 @@ prj_fnc_civ_orders = {
 	} forEach _units;
 };
 
-prj_fnc_near_pos_array = {
+prj_fnc_nearPosArray = {
 	params ["_pos","_pos_array","_distance"];
 
 	if (_pos_array isEqualTo []) exitWith {[]};
@@ -252,7 +250,7 @@ prj_fnc_near_pos_array = {
 	_near_pos_array
 };
 
-prj_fnc_localize_info = {
+prj_fnc_localizePosInfo = {
 	params ["_pos","_pos_array",["_random",300]];
 
 	private _selected_pos = selectRandom _pos_array;
@@ -273,7 +271,7 @@ prj_fnc_localize_info = {
 	[_localize_dir,round _distance];
 };
 
-prj_fnc_civ_info = {
+prj_fnc_getCivInfo = {
 	params ["_position","_civilian"];
 
 	if !(player getVariable ["interpreter",false]) exitWith {
@@ -293,24 +291,24 @@ prj_fnc_civ_info = {
 
 	if ((random 1) < 0.5) then {
 		private _camps_coords = missionNamespace getVariable ["camps_coords",[]];
-		private _near_camps = [_position, _camps_coords, 2500] call prj_fnc_near_pos_array;
+		private _near_camps = [_position, _camps_coords, 2500] call prj_fnc_nearPosArray;
 
 		if ((count _near_camps) > 0 && (random 1) < 0.5) then {
-			private _localize_info = [_position,_near_camps,500] call prj_fnc_localize_info;
+			private _localize_info = [_position,_near_camps,500] call prj_fnc_localizePosInfo;
 
 			[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_CAMP_1_INF","STR_PRJ_CIVIL_INFO_CAMP_2_INF","STR_PRJ_CIVIL_INFO_CAMP_3_INF"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
 		} else {
 			private _ied_coords = missionNamespace getVariable ["iedPosArray",[]];
-			private	_near_ied = [_position, _ied_coords, 2000] call prj_fnc_near_pos_array;
+			private	_near_ied = [_position, _ied_coords, 2000] call prj_fnc_nearPosArray;
 
 			if ((count _near_ied) > 0 && (random 1) < 0.5) then { 
-				private _localize_info = [_position,_near_ied,500] call prj_fnc_localize_info;
+				private _localize_info = [_position,_near_ied,500] call prj_fnc_localizePosInfo;
 				
 				[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_IED","STR_PRJ_CIVIL_INFO_2_IED","STR_PRJ_CIVIL_INFO_3_IED"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
 			} else {
 				private _entities_array = _position nearEntities [enemy_infantry, 2500];
 				if ((count _entities_array) > 0) then {
-					private _localize_info = [_position,_entities_array,150] call prj_fnc_localize_info;
+					private _localize_info = [_position,_entities_array,150] call prj_fnc_localizePosInfo;
 
 					[localize "STR_PRJ_CIVIL", format [localize (selectRandom ["STR_PRJ_CIVIL_INFO_1_INF","STR_PRJ_CIVIL_INFO_2_INF","STR_PRJ_CIVIL_INFO_3_INF"]), _localize_info # 0, _localize_info # 1]] spawn BIS_fnc_showSubtitle;
 				} else {
@@ -325,7 +323,52 @@ prj_fnc_civ_info = {
 	_civilian setVariable ["interviewed",true,true];
 };
 
-prj_fnc_save_game = {
+prj_fnc_getAllMapMarkers = {
+
+	/*
+		the function and method exists because the BIS function "allMapMarkers" is broken on dedicated server
+		https://feedback.bistudio.com/T76287
+	*/
+	
+	private _localMarkers = [];
+
+	for "_i" from 0 to ((count allMapMarkers) - 1) do {
+		private _a = toArray (allMapMarkers # _i);
+		_a resize 15;
+
+		if (toString _a == "_USER_DEFINED #" && markerType (allMapMarkers # _i) != "") then {
+			
+			private _aDb = toArray (allMapMarkers # _i);
+			_aDb deleteRange [0,15];
+
+			private _mData = (toString _aDb) splitString "/";
+
+			private "_mOwnerName";
+
+			{
+				if (getPlayerID _x isEqualTo _mData # 0) then {
+					_mOwnerName = name _x;
+				};
+			} forEach allPlayers;
+
+			private _mColor = ((BISColors select {(_x # 0) == (markerColor (allMapMarkers # _i))}) # 0) # 1;
+			private _mType = ((BISMarkerTypes select {(_x # 0) == (markerType (allMapMarkers # _i))}) # 0) # 1;
+		
+			_localMarkers pushBack (format ["%1:%2;%3;%4;%5;%6;%7;%8",_mOwnerName,_mData # 2,((markerPos (allMapMarkers # _i)) # 0),((markerPos (allMapMarkers # _i)) # 1),markerDir (allMapMarkers # _i),_mType,_mColor,markerText (allMapMarkers # _i)]);
+		};
+	};
+
+	if ((count _localMarkers) < 1) exitWith {};
+
+	private _markersArray = missionNamespace getVariable ["allMapMarkersArray",[]];
+	
+	private _returnMarkersArray = _markersArray - _localMarkers;
+	_returnMarkersArray append _localMarkers;
+
+	missionNamespace setVariable ["allMapMarkersArray",_returnMarkersArray,true];
+};
+
+prj_fnc_saveGame = {
 
 	// save general
 
@@ -371,7 +414,7 @@ prj_fnc_save_game = {
 
 	// save vehicles
 
-	private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000] + nearestObjects [position tr_a_shop,["Air","LandVehicle"], 1000];
+	private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000];
 
 	private _vehsArray = [];
 	{_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x]} forEach _vehs;
@@ -389,7 +432,7 @@ prj_fnc_save_game = {
 	"Data saved" remoteExec ["systemChat"];
 };
 
-prj_fnc_load_game = {
+prj_fnc_loadGame = {
 	params [["_vehs",true]];
 
 	// load general

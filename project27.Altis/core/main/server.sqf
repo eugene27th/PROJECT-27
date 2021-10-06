@@ -26,7 +26,7 @@ if (isNil "_ground_level") then {_ground_level = 0};
 		["missionNamespace",["total_kill_friend",0,true],false],
 		["missionNamespace",["total_kill_civ",0,true],false]
 	]
-] call prj_fnc_set_variables;
+] call prj_fnc_setTableVariables;
 
 // create markers
 [
@@ -40,7 +40,7 @@ if (isNil "_ground_level") then {_ground_level = 0};
 		["air_vehicle_service",position tr_a_service,"mil_dot","ColorWEST","air service"],
 		["treatment_building",position tr_treatment,"mil_dot","ColorWEST","treatment"]
 	]
-] call prj_fnc_create_markers;
+] call prj_fnc_createMarkers;
 
 // create arsenal
 private _arsenal_type = "virtualArsenal" call BIS_fnc_getParamValue;
@@ -140,7 +140,7 @@ addMissionEventHandler ["PlayerConnected", {
 					false
 				]
 			]
-		] call prj_fnc_set_variables;
+		] call prj_fnc_setTableVariables;
 	};
 }];
 
@@ -172,7 +172,7 @@ if (!isDedicated) then {
 				false
 			]
 		]
-	] call prj_fnc_set_variables;
+	] call prj_fnc_setTableVariables;
 };
 
 // time acceleration
@@ -186,4 +186,4 @@ if (("time_acceleration" call BIS_fnc_getParamValue) == 1) then {
 };
 
 // auto load
-if (("autoSaveLoad" call BIS_fnc_getParamValue) == 1) then {call prj_fnc_load_game};
+if (("autoSaveLoad" call BIS_fnc_getParamValue) == 1) then {call prj_fnc_loadGame};

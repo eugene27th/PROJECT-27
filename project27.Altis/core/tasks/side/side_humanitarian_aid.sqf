@@ -9,7 +9,7 @@ private _taskID = "SIDE_" + str _taskID;
 
 private _pos = [false,false,[],["NameCityCapital","NameCity"]] call prj_fnc_selectCaptPosition;
 
-[_taskID,_pos,"ColorWEST",0.7,[[300,300],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_pos,"ColorWEST",0.7,[[300,300],"ELLIPSE"]] call prj_fnc_createMarker;
 
 [west, [_taskID], ["STR_SIDE_HUMANITARIAN_AID_DESCRIPTION", "STR_SIDE_HUMANITARIAN_AID_TITLE", ""], _pos, "CREATED", 0, true, "container"] call BIS_fnc_taskCreate;
 
@@ -26,7 +26,7 @@ if (!alive _box) then {
 };
 
 if (alive _box && (_box distance _pos < 300) && ((getPosATL _box) select 2) < 0.2 && (speed _box == 0)) then {
-	[position _box] call prj_fnc_sentry_patrol;
+	[position _box] call prj_fnc_createSentryPatrol;
 
 	uiSleep 120;
 

@@ -17,7 +17,7 @@ private _enemy_grp = createGroup [independent, true];
 
 [west, [_taskID], ["STR_SIDE_DESTRUCTION_OF_VEHICLES_DESCRIPTION", "STR_SIDE_DESTRUCTION_OF_VEHICLES_TITLE", ""], _center_pos, "CREATED", 0, true, "destroy"] call BIS_fnc_taskCreate;
 
-[_taskID,_center_pos,"ColorOrange",0.7,[[600,600],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_center_pos,"ColorOrange",0.7,[[600,600],"ELLIPSE"]] call prj_fnc_createMarker;
 
 for [{private _i = 0 }, { _i < [3,7] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
     private _vehicle = (selectRandom (enemy_vehicles_light + enemy_vehicles_heavy)) createVehicle _pos;

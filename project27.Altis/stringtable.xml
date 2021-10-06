@@ -707,7 +707,7 @@
                 <Russian>Конвой</Russian>
             </Key>
             <Key ID="STR_SIDE_CONVOY_DESCRIPTION">
-                <Original>Наш информатор сообщил, что в течение &lt;font color='#33FF9C'&gt;15 минут&lt;/font&gt; противник планирует перебросить часть своих сил. Нам известно примерное место, в котором они собираются. Место назначения будет сообщено &lt;font color='#33FF9C'&gt;позже&lt;/font&gt;.&lt;br/&gt;Задача: нейтрализовать конвой, уничтожить технику по усмотрению.</Original>
+                <Original>Наш информатор сообщил, что в течение &lt;font color='#33FF9C'&gt;30 минут&lt;/font&gt; противник планирует перебросить часть своих сил. Нам известно примерное место, в котором они собираются. Место назначения будет сообщено &lt;font color='#33FF9C'&gt;позже&lt;/font&gt;.&lt;br/&gt;Задача: нейтрализовать конвой, уничтожить технику по усмотрению.</Original>
             </Key>
             <Key ID="STR_SIDE_CONVOY_START_TITLE">
                 <Original>The convoy has moved out</Original>

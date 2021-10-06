@@ -8,7 +8,7 @@ params ["_taskID","_reward"];
 private _taskID = "SIDE_" + str _taskID;
 
 private _center_pos = [1,false] call prj_fnc_selectPosition;
-private _pos = [_center_pos, 200] call prj_fnc_select_house_position;
+private _pos = [_center_pos, 200] call prj_fnc_selectHousePosition;
 
 private _hostage = (createGroup [civilian, true]) createUnit [selectRandom hostage_units, _pos, [], 0, "NONE"];
 private _enemy = (createGroup [independent, true]) createUnit [selectRandom enemy_infantry, position _hostage, [], 0, "NONE"];
@@ -22,14 +22,14 @@ _hostage addEventHandler ["FiredNear", {
 	
 	if (round (random 1) > 0.35) then {
 		private _number = [2,3] call BIS_fnc_randomInt;
-		private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
+		private _vehicles = [position _unit,_number] call prj_fnc_createReinforcement;
 	} else {
-		[position _unit] call prj_fnc_sentry_patrol;
+		[position _unit] call prj_fnc_createSentryPatrol;
 	};
 }];
 
-[_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
-[_taskID + "_center",_center_pos,"ColorWEST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_createMarker;
+[_taskID + "_center",_center_pos,"ColorWEST",0.7,[[200,200],"ELLIPSE"]] call prj_fnc_createMarker;
 
 private _picture = getText(configfile >> "CfgVehicles" >> typeOf _hostage >> "editorPreview");
 

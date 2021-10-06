@@ -121,7 +121,7 @@ prj_fnc_spawn_vehicle = {
 		[_vehicle, "blue", "orange", "green"] call BIS_fnc_DataTerminalColor;
 		[_vehicle, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
 
-		remoteExecCall ["prj_fnc_add_mhq_action",0,_vehicle];
+		remoteExecCall ["prj_fnc_addActionToMHQ",0,_vehicle];
 	};
 
 	if ((_data # 0) == "C_IDAP_supplyCrate_F") then {

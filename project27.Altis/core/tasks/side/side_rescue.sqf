@@ -31,20 +31,20 @@ removeAllWeapons _pilot;
 _pilot setBehaviour "CARELESS";
 _pilot setUnitPos "DOWN";
 
-[_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
-[_taskID + "_center",_center_pos,"ColorWEST",0.7,[[900,900],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_createMarker;
+[_taskID + "_center",_center_pos,"ColorWEST",0.7,[[900,900],"ELLIPSE"]] call prj_fnc_createMarker;
 
 private _trg = createTrigger ["EmptyDetector", _pilot_position, true];
 _trg setVariable ["unit", _pilot];
 _trg setTriggerArea [5, 5, 0, false];
 _trg setTriggerActivation ["WEST", "PRESENT", false];
-_trg setTriggerStatements ["this", "_unit = thisTrigger getVariable 'unit'; [_unit] join (thisList select 0); _unit setUnitPos 'UP';[position _unit] call prj_fnc_sentry_patrol;", ""];
+_trg setTriggerStatements ["this", "_unit = thisTrigger getVariable 'unit'; [_unit] join (thisList select 0); _unit setUnitPos 'UP';[position _unit] call prj_fnc_createSentryPatrol;", ""];
 _trg attachTo [_pilot, [0, 0, 0]];
 
 private _enemies = [];
 
-_enemies = _enemies + ([_pos] call prj_fnc_enemy_crowd);
-_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_enemy_patrols);
+_enemies = _enemies + ([_pos] call prj_fnc_createCrowd);
+_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_createPatrol);
 
 {_x lookAt _heli} forEach _enemies;
 

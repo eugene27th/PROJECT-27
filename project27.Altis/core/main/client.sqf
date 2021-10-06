@@ -11,7 +11,7 @@
 	disableSerialization;
 	waitUntil{ !isNull (findDisplay 46) };
 	private _ctrlText = (findDisplay 46) ctrlCreate ["RscStructuredText",-1];
-	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.4.6 | PROJECT 27</t>";
+	private _text = "<t font='PuristaMedium' align='right' size='0.75' shadow='0'><br /><br /><br /><br />1.4.6.2 | PROJECT 27</t>";
 	_ctrlText ctrlSetStructuredText parseText _text;
 	_ctrlText ctrlSetTextColor [1,1,1,0.7];
 	_ctrlText ctrlSetBackgroundColor [0,0,0,0];
@@ -26,7 +26,7 @@
 	true;
 };
 
-player createDiaryRecord ["Diary", [localize "STR_A3_FM_Welcome4","<br/><br/><font color='#33FF9C' size='16'>PROJECT27 1.4.6</font><br/><font color='#33FFF9'>https://github.com/eugene27r/PROJECT-27</font<br/><br/><br/>If you want to help with translation, write to:<br/><font color='#51C1E5'>discord - eugene27#0027</font><br/><font color='#51C1E5'>email - evgen.monreal@gmail.com</font><br/>"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_A3_FM_Welcome4","<br/><br/><font color='#33FF9C' size='16'>PROJECT27 1.4.6.2</font><br/><font color='#33FFF9'>https://github.com/eugene27r/PROJECT-27</font<br/><br/><br/>If you want to help with translation, write to:<br/><font color='#51C1E5'>discord - eugene27#0027</font><br/><font color='#51C1E5'>email - evgen.monreal@gmail.com</font><br/>"], taskNull, "", false];
 
 private _doc_start = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_START_TITLE", localize "STR_DOCUMENTATION_START_DESC"], taskNull, "", false];
 
@@ -101,7 +101,7 @@ player setPos getPos spawn_zone;
 	[
 		["laptopHQ.paa",[laptop_hq],1]
 	]
-] call prj_fnc_set_textures;
+] call prj_fnc_setTextures;
 
 // trashBox EH
 trashBox addEventHandler ["ContainerClosed", {
@@ -164,7 +164,7 @@ laptop_hq addAction ["HQ menu", { call prj_fnc_hq_menu }];
 [trashBox, false] call ace_dragging_fnc_setDraggable;
 [trashBox, false] call ace_dragging_fnc_setCarryable;
 
-if (!isNil "mhqterminal") then {call prj_fnc_add_mhq_action};
+if (!isNil "mhqterminal") then {call prj_fnc_addActionToMHQ};
 
 private "_action";
 if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then {
@@ -182,7 +182,7 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 		"cancel_task",
 		"Cancel task",
 		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
-		{[player call BIS_fnc_taskCurrent] remoteExecCall ["prj_fnc_cancel_task",2]},
+		{[player call BIS_fnc_taskCurrent] remoteExecCall ["prj_fnc_cancelSideTask",2]},
 		{true}
 	] call ace_interact_menu_fnc_createAction;
 
@@ -192,7 +192,7 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 		"task_request",
 		"Task request",
 		"\A3\ui_f\data\igui\cfg\simpleTasks\types\exit_ca.paa",
-		{remoteExecCall ["prj_fnc_create_task",2]},
+		{remoteExecCall ["prj_fnc_createSideTask",2]},
 		{true}
 	] call ace_interact_menu_fnc_createAction;
 
@@ -216,7 +216,7 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 			if (missionNamespace getVariable ["supply_waiting",false]) exitWith {
 				["HQ",localize "STR_PRJ_SUPPLY_REQUEST_DENIED"] remoteExec ["BIS_fnc_showSubtitle",0];
 			};
-			[position player] remoteExecCall ['prj_fnc_request_supply_drop',2]
+			[position player] remoteExecCall ['prj_fnc_requestSupplyDrop',2]
 		},
 		{true}
 	] call ace_interact_menu_fnc_createAction;
@@ -233,7 +233,7 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 			};
 			openMap true;
 			["",localize "STR_PRJ_SELECT_PLACE_ON_MAP"] spawn BIS_fnc_showSubtitle
-			onMapSingleClick "[_pos] remoteExecCall ['prj_fnc_request_supply_drop',2]; onMapSingleClick ''; openMap false; true";
+			onMapSingleClick "[_pos] remoteExecCall ['prj_fnc_requestSupplyDrop',2]; onMapSingleClick ''; openMap false; true";
 			[] spawn {
 				uiSleep 15;
 				onMapSingleClick '';
@@ -261,7 +261,7 @@ if ((getPlayerUID player) in hqUID || player getVariable ["officer",false]) then
 						params ["_projectile"];
 						["HQ",localize "STR_PRJ_WAITING_SMOKE"] spawn BIS_fnc_showSubtitle;
 						uiSleep 10;
-						[position _projectile] remoteExecCall ['prj_fnc_request_supply_drop',2];
+						[position _projectile] remoteExecCall ['prj_fnc_requestSupplyDrop',2];
 					};	
 				};
 			}];
@@ -290,25 +290,25 @@ _action = [
 
 _action = ["Civil_Stop", "STOP", "\A3\ui_f\data\igui\cfg\simpleTasks\types\talk4_ca.paa", {
 	player playActionNow "gestureFreeze";
-	[1,position player] remoteExecCall ["prj_fnc_civ_orders", 2];
+	[1,position player] remoteExecCall ["prj_fnc_giveOrderToCiv", 2];
 }, {vehicle player isEqualTo player}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Civil_Orders"], _action] call ace_interact_menu_fnc_addActionToObject;
 
 _action = ["Civil_Get_down", "DOWN", "\A3\ui_f\data\igui\cfg\simpleTasks\types\talk3_ca.paa", {
 	player playActionNow "gestureCover";
-	[2,position player] remoteExecCall ["prj_fnc_civ_orders", 2];
+	[2,position player] remoteExecCall ["prj_fnc_giveOrderToCiv", 2];
 }, {vehicle player isEqualTo player}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Civil_Orders"], _action] call ace_interact_menu_fnc_addActionToObject;
 
 _action = ["Civil_Go_away", "GO AWAY", "\A3\ui_f\data\igui\cfg\simpleTasks\types\talk2_ca.paa", {
 	player playActionNow "gestureGo";
-	[3,position player] remoteExecCall ["prj_fnc_civ_orders", 2];
+	[3,position player] remoteExecCall ["prj_fnc_giveOrderToCiv", 2];
 }, {vehicle player isEqualTo player}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Civil_Orders"], _action] call ace_interact_menu_fnc_addActionToObject;
 
 _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\types\talk1_ca.paa", {
 	player playActionNow "gestureFreeze";
-	[4,position player] remoteExecCall ["prj_fnc_civ_orders", 2];
+	[4,position player] remoteExecCall ["prj_fnc_giveOrderToCiv", 2];
 }, {vehicle player isEqualTo player}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Civil_Orders"], _action] call ace_interact_menu_fnc_addActionToObject;
 
@@ -366,7 +366,7 @@ _action = ["Civil_Hands_Up", "HANDS UP", "\A3\ui_f\data\igui\cfg\simpleTasks\typ
 
 	_action = ["Ask_Info", "ASK INFO", "\A3\ui_f\data\igui\cfg\simpleTasks\types\talk_ca.paa", 
 	{
-		[position (_this select 0),_this select 0] call prj_fnc_civ_info;
+		[position (_this select 0),_this select 0] call prj_fnc_getCivInfo;
 	}, 
 	{
 		alive (_this select 0) && {[_this select 0] call ace_common_fnc_isAwake} && {side (_this select 0) isEqualTo civilian}

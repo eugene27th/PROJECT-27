@@ -14,7 +14,7 @@ private _radius = _plcount * 30;
 if (_radius > 500) then {_radius = 500};
 private _min_radius = _radius * 0.3;
 
-[_taskID,_pos,"ColorOrange",0.7,[[_radius,_radius],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_pos,"ColorOrange",0.7,[[_radius,_radius],"ELLIPSE"]] call prj_fnc_createMarker;
 
 private _ammo_cache_class = selectRandom box_ammo_cache;
 private _ammo_cache_pos = [_pos, _min_radius, _radius, 3, 0] call BIS_fnc_findSafePos;
@@ -27,13 +27,13 @@ clearWeaponCargoGlobal _ammo_cache;
 clearBackpackCargoGlobal _ammo_cache;
 
 if (prj_debug) then {
-	["side_cache_" + _taskID,_ammo_cache_pos,"ColorBLACK",1,[],"mil_dot","cache"] call prj_fnc_create_marker;
+	["side_cache_" + _taskID,_ammo_cache_pos,"ColorBLACK",1,[],"mil_dot","cache"] call prj_fnc_createMarker;
 };
 
 private _enemies = [];
 
-_enemies = _enemies + ([_pos,true] call prj_fnc_enemy_crowd);
-_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_enemy_patrols);
+_enemies = _enemies + ([_pos,true] call prj_fnc_createCrowd);
+_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_createPatrol);
 
 private _picture = getText(configfile >> "CfgVehicles" >> _ammo_cache_class >> "editorPreview");
 

@@ -7,18 +7,18 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _roadpos = [4] call prj_fnc_select_road_position;
+private _roadpos = [4] call prj_fnc_selectRoadPosition;
 private _pos = _roadpos select 0;
 private _direction = _roadpos select 1;
 
-[_taskID,_pos,"ColorEAST",0.7,[[30,30],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_pos,"ColorEAST",0.7,[[30,30],"ELLIPSE"]] call prj_fnc_createMarker;
 
 private _trg = createTrigger ["EmptyDetector", _pos, true];
 _trg setTriggerArea [30, 30, 0, false, 20];
 _trg setTriggerActivation ["WEST SEIZED", "PRESENT", false];
 _trg setTriggerStatements ["this", "", ""];
 
-private _checkpointData = [_pos,_direction] call prj_fnc_create_checkpoint;
+private _checkpointData = [_pos,_direction] call prj_fnc_createCheckpoint;
 private _vehicles = _checkpointData # 0;
 private _infantry = (_checkpointData # 1) + (_checkpointData # 2);
 

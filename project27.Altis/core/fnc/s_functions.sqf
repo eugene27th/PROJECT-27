@@ -89,13 +89,13 @@ prj_fnc_selectCaptPosition = {
 	_selected_pos
 };
 
-prj_fnc_select_road_position = {
+prj_fnc_selectRoadPosition = {
 	params [["_pos",4],["_radius",3000]];
 
-	private "_returndata";
+	private _returndata = [];
 
-	if (typeName _pos != "ARRAY") then {
-		_pos = [_typelocation] call prj_fnc_selectPosition;
+	if ((typeName _pos) != "ARRAY") then {
+		_pos = [_pos] call prj_fnc_selectPosition;
 	};
 
 	private _roads = _pos nearRoads _radius;
@@ -120,7 +120,7 @@ prj_fnc_select_road_position = {
 	_returndata
 };
 
-prj_fnc_select_road_position_around = {
+prj_fnc_selectRoadPositionAround = {
 	params ["_pos",["_radius",[1000,3000]]];
 
 	private "_returndata";
@@ -147,7 +147,7 @@ prj_fnc_select_road_position_around = {
 	_returndata
 };
 
-prj_fnc_enemy_crowd = {
+prj_fnc_createCrowd = {
     params ["_pos",["_relPos",false],["_radius",[4,15]],["_number_of",[4,8]]];
   
     private _units = [];
@@ -170,10 +170,10 @@ prj_fnc_enemy_crowd = {
     _units
 };
 
-prj_fnc_enemy_patrols = {
+prj_fnc_createPatrol = {
 	params ["_cpos","_radius","_inf",["_voice",false]];
 
-	prj_fnc_number_of_units = {
+	prj_fnc_getNumberOfUnits = {
 		params ["_number"];
 
 		private _number_result = switch (_number) do {
@@ -193,7 +193,7 @@ prj_fnc_enemy_patrols = {
 			private _group = createGroup [independent, true];
 			private _pos = [_cpos, 10, _radius, 1, 0] call BIS_fnc_findSafePos;
 			if (!isNil "_pos") then {
-				for [{private _i = 0 }, { _i < [(_inf # 1)] call prj_fnc_number_of_units }, { _i = _i + 1 }] do {
+				for [{private _i = 0 }, { _i < [(_inf # 1)] call prj_fnc_getNumberOfUnits }, { _i = _i + 1 }] do {
 					private _unit = _group createUnit [selectRandom enemy_infantry, _pos, [], 0, "NONE"];
 					if (!_voice) then {
 						[_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit];
@@ -230,7 +230,7 @@ prj_fnc_enemy_patrols = {
 	_units
 };
 
-prj_fnc_create_checkpoint = {
+prj_fnc_createCheckpoint = {
 	params ["_pos",["_direction",0],["_spawnComposition",false],["_radius",70]];
 
 	private _vehicles = [];
@@ -239,20 +239,20 @@ prj_fnc_create_checkpoint = {
 	_barricadingVehicle setDir _direction + 90;
 	_vehicles pushBack _barricadingVehicle;
 	
-	private _crewUnits = [_barricadingVehicle,enemy_infantry] call prj_fnc_create_crew;
+	private _crewUnits = [_barricadingVehicle,enemy_infantry] call prj_fnc_createCrew;
 	
 	_barricadingVehicle addEventHandler ["FiredNear", {
 		params ["_unit"];
 		_unit removeAllEventHandlers "FiredNear";
 		
-		[position _unit] call prj_fnc_sentry_patrol;
+		[position _unit] call prj_fnc_createSentryPatrol;
 	}];
 
 	for "_i" from 0 to 1 do {
 		private _static = (selectRandom enemy_turrets) createVehicle (_pos findEmptyPosition [(10 * _i), 150, "B_HMG_01_high_F"]);
 		_static setDir _direction + (_i * 180);
 		_vehicles pushBack _static;
-		private _staticCrew = [_static,enemy_infantry] call prj_fnc_create_crew;
+		private _staticCrew = [_static,enemy_infantry] call prj_fnc_createCrew;
 		_crewUnits = _crewUnits + _staticCrew;
 	};
 
@@ -269,8 +269,8 @@ prj_fnc_create_checkpoint = {
 
 	private _enemyInf = [];
 
-	_enemyInf = _enemyInf + ([_pos] call prj_fnc_enemy_crowd);
-	_enemyInf = _enemyInf + ([_pos,_radius,[1,1]] call prj_fnc_enemy_patrols);
+	_enemyInf = _enemyInf + ([_pos] call prj_fnc_createCrowd);
+	_enemyInf = _enemyInf + ([_pos,_radius,[1,1]] call prj_fnc_createPatrol);
 
 	{
 		_x addEventHandler ["GetIn", {
@@ -286,7 +286,7 @@ prj_fnc_create_checkpoint = {
 	[_vehicles,_crewUnits,_enemyInf]
 };
 
-prj_fnc_sentry_patrol = {
+prj_fnc_createSentryPatrol = {
 	params ["_sentryPos",["_type","air"],["_radius",400],["_numPoints",8]];
 
 	switch (_type) do {
@@ -295,7 +295,7 @@ prj_fnc_sentry_patrol = {
 
 			private _vehicle = createVehicle [(selectRandom enemy_heliSentry), _spawnPos, [], 0, "FLY"];
 			
-			private _vehUnits = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
+			private _vehUnits = [_vehicle,enemy_infantry,true] call prj_fnc_createCrew;
 			private _vehGroup = group _vehicle;
 
 			_vehicle flyInHeight 150;
@@ -329,19 +329,19 @@ prj_fnc_sentry_patrol = {
 
 						switch (_enemyCategory) do {
 							case "Soldier": {
-								private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_reinforcement;
+								private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_createReinforcement;
 								// systemChat "пехота";
 							};
 							case "Vehicle": {
 								if (_enemyType isEqualTo "Helicopter" || _enemyType isEqualTo "Plane") then {
-									private _vehicles = [position _nearEnemy,2,"antiAir"] call prj_fnc_reinforcement;
+									private _vehicles = [position _nearEnemy,2,"antiAir"] call prj_fnc_createReinforcement;
 									// systemChat "воздух";
 								} else {
 									if (_enemyType isEqualTo "Car") then {
-										private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_reinforcement;
+										private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_createReinforcement;
 										// systemChat "машинка";
 									} else {
-										private _vehicles = [position _nearEnemy,2,"antiTank"] call prj_fnc_reinforcement;
+										private _vehicles = [position _nearEnemy,2,"antiTank"] call prj_fnc_createReinforcement;
 										// systemChat "шото потяжелее";
 									};
 								};
@@ -354,7 +354,7 @@ prj_fnc_sentry_patrol = {
 					private _heliCrashPos = position _vehicle;
 					_heliCrashPos set [2,0];
 					
-					private _vehicles = [_heliCrashPos,2,"antiInf"] call prj_fnc_reinforcement;
+					private _vehicles = [_heliCrashPos,2,"antiInf"] call prj_fnc_createReinforcement;
 				};
 			};
 
@@ -383,7 +383,7 @@ prj_fnc_sentry_patrol = {
 	};
 };
 
-prj_fnc_reinforcement = {
+prj_fnc_createReinforcement = {
 	params ["_pos",["_number",2],["_type","antiInf"],["_radius",[1500,4000]]];
 
 	_type = switch (_type) do {
@@ -400,7 +400,7 @@ prj_fnc_reinforcement = {
 
 	switch (_type) do {
 		case "groundToInf": {
-			private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
+			private _position_data = [_pos,_radius] call prj_fnc_selectRoadPositionAround;
 
 			private _vehicles = [];
 
@@ -410,7 +410,7 @@ prj_fnc_reinforcement = {
 				private _vehicle = (selectRandom enemy_vehicles_light) createVehicle _safePos;
 				_vehicle setDir (_position_data # 1);
 
-				private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
+				private _crew_units = [_vehicle,enemy_infantry,true] call prj_fnc_createCrew;
 
 				private _vehicle_group = group _vehicle;
 				_vehicle_group setCombatMode "RED";
@@ -427,17 +427,17 @@ prj_fnc_reinforcement = {
 				_vehicles pushBack [_vehicle, _crew_units];
 			};
 
-			[_vehicles] spawn prj_fnc_check_and_delete;
+			[_vehicles] spawn prj_fnc_checkAndDelete;
 			
 			_vehicles
 		};
 
 		case "groundToAir": {
 			if (enemy_vehicles_aa isEqualTo []) exitWith {
-				private _vehicles = [_pos,2,"groundToInf"] call prj_fnc_reinforcement;
+				private _vehicles = [_pos,2,"groundToInf"] call prj_fnc_createReinforcement;
 			};
 
-			private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
+			private _position_data = [_pos,_radius] call prj_fnc_selectRoadPositionAround;
 
 			private _vehicles = [];
 
@@ -447,7 +447,7 @@ prj_fnc_reinforcement = {
 				private _vehicle = (selectRandom enemy_vehicles_aa) createVehicle _safePos;
 				_vehicle setDir (_position_data # 1);
 
-				private _crew_units = [_vehicle,enemy_infantry,false] call prj_fnc_create_crew;
+				private _crew_units = [_vehicle,enemy_infantry,false] call prj_fnc_createCrew;
 
 				private _vehicle_group = group _vehicle;
 				_vehicle_group setCombatMode "RED";
@@ -464,17 +464,17 @@ prj_fnc_reinforcement = {
 				_vehicles pushBack [_vehicle, _crew_units];
 			};
 
-			[_vehicles] spawn prj_fnc_check_and_delete;
+			[_vehicles] spawn prj_fnc_checkAndDelete;
 			
 			_vehicles
 		};
 
 		case "groundToGround": {
 			if (enemy_vehicles_at isEqualTo []) exitWith {
-				private _vehicles = [_pos,2,"groundToInf"] call prj_fnc_reinforcement;
+				private _vehicles = [_pos,2,"groundToInf"] call prj_fnc_createReinforcement;
 			};
 
-			private _position_data = [_pos,_radius] call prj_fnc_select_road_position_around;
+			private _position_data = [_pos,_radius] call prj_fnc_selectRoadPositionAround;
 
 			private _vehicles = [];
 
@@ -484,7 +484,7 @@ prj_fnc_reinforcement = {
 				private _vehicle = (selectRandom enemy_vehicles_at) createVehicle _safePos;
 				_vehicle setDir (_position_data # 1);
 
-				private _crew_units = [_vehicle,enemy_infantry,false] call prj_fnc_create_crew;
+				private _crew_units = [_vehicle,enemy_infantry,false] call prj_fnc_createCrew;
 
 				private _vehicle_group = group _vehicle;
 				_vehicle_group setCombatMode "RED";
@@ -501,14 +501,14 @@ prj_fnc_reinforcement = {
 				_vehicles pushBack [_vehicle, _crew_units];
 			};
 
-			[_vehicles] spawn prj_fnc_check_and_delete;
+			[_vehicles] spawn prj_fnc_checkAndDelete;
 			
 			_vehicles
 		};
 
 		case "airToInf": {
 			if (enemy_heliTransport isEqualTo []) exitWith {
-				private _vehicles = [_pos,2,"groundToInf"] call prj_fnc_reinforcement;
+				private _vehicles = [_pos,2,"groundToInf"] call prj_fnc_createReinforcement;
 			};
 
 			private _finishPos = [_pos, 600, 1800, 5, 0, 0.5, 0, []] call BIS_fnc_findSafePos;
@@ -517,7 +517,7 @@ prj_fnc_reinforcement = {
 			private _spawnPos = [false,false,[]] call prj_fnc_selectCaptPosition;
 
 			private _vehicle = createVehicle [(selectRandom enemy_heliTransport), _spawnPos, [], 0, "FLY"];
-			private _vehUnits = [_vehicle,enemy_infantry,true,false] call prj_fnc_create_crew;
+			private _vehUnits = [_vehicle,enemy_infantry,true,false] call prj_fnc_createCrew;
 
 			private _crewUnits = (_vehUnits # 0) # 0;
 			private _cargoUnits = (_vehUnits # 1) # 0;
@@ -595,13 +595,13 @@ prj_fnc_reinforcement = {
 
 		case "airToGround": {
 			if (enemy_heliHeavy isEqualTo []) exitWith {
-				private _vehicles = [_pos,3,"groundToGround"] call prj_fnc_reinforcement;
+				private _vehicles = [_pos,3,"groundToGround"] call prj_fnc_createReinforcement;
 			};
 
 			private _spawnPos = [false,false,[]] call prj_fnc_selectCaptPosition;
 
 			private _vehicle = createVehicle [(selectRandom enemy_heliHeavy), _spawnPos, [], 0, "FLY"]; 
-			private _vehUnits = [_vehicle,enemy_infantry,false] call prj_fnc_create_crew; 
+			private _vehUnits = [_vehicle,enemy_infantry,false] call prj_fnc_createCrew; 
 
 			private _vehGroup = group _vehicle;
 			_vehGroup setCombatMode "RED";
@@ -635,13 +635,13 @@ prj_fnc_reinforcement = {
 
 		case "airToAir": {
 			if (enemy_fighters isEqualTo []) exitWith {
-				private _vehicles = [_pos,2,"groundToAir"] call prj_fnc_reinforcement;
+				private _vehicles = [_pos,2,"groundToAir"] call prj_fnc_createReinforcement;
 			};
 
 			private _spawnPos = [_pos, 6000, ([0,360] call BIS_fnc_randomInt)] call BIS_fnc_relPos;
 
 			private _vehicle = createVehicle [(selectRandom enemy_fighters), _spawnPos, [], 0, "FLY"]; 
-			private _vehUnits = [_vehicle,enemy_infantry,false] call prj_fnc_create_crew; 
+			private _vehUnits = [_vehicle,enemy_infantry,false] call prj_fnc_createCrew; 
 
 			private _vehGroup = group _vehicle;
 			_vehGroup setCombatMode "RED";
@@ -675,7 +675,7 @@ prj_fnc_reinforcement = {
 	};
 };
 
-prj_fnc_check_and_delete = {
+prj_fnc_checkAndDelete = {
 	params ["_vehicles",["_distance",2500],["_start_time",600],["_interval_time",60]];
 
 	{
@@ -744,7 +744,7 @@ prj_fnc_check_and_delete = {
 	};
 };
 
-prj_fnc_select_house_position = {
+prj_fnc_selectHousePosition = {
 	params [["_pos", [0,0,0]],["_radius", 200]];
 
 	private _buildings = nearestObjects [_pos, ["Building"], _radius];
@@ -762,7 +762,7 @@ prj_fnc_select_house_position = {
 	_pos
 };
 
-prj_fnc_create_trg = {
+prj_fnc_createTrigger = {
 	params ["_position", "_area", "_by", "_type", ["_global",true], ["_activation",""], ["_repeating",false], ["_rectangle",false], ["_angle",0]];
 
 	_area params ["_a", "_b", "_c"];
@@ -775,7 +775,7 @@ prj_fnc_create_trg = {
 	_trg
 };
 
-prj_fnc_create_marker = {
+prj_fnc_createMarker = {
 	params ["_markername","_position","_color","_alpha",["_size_form",[]],["_type",""],["_text",""]];
 
 	_marker = createMarker [_markername,_position];
@@ -795,7 +795,7 @@ prj_fnc_create_marker = {
 	_marker
 };
 
-prj_fnc_create_markers = {
+prj_fnc_createMarkers = {
 	params ["_markers_array"];
 	for [{private _i = 0 }, { _i < (count _markers_array) }, { _i = _i + 1 }] do {
 		_marker = createMarker [((_markers_array select _i) select 0),((_markers_array select _i) select 1)];
@@ -805,7 +805,7 @@ prj_fnc_create_markers = {
 	};
 };
 
-prj_fnc_create_crew = {
+prj_fnc_createCrew = {
 	params ["_vehicle","_units",["_passengers",false],["_oneGroup",true],["_side",independent]];
 
 	//create group
@@ -856,7 +856,7 @@ prj_fnc_create_crew = {
 	
 };
 
-prj_fnc_capt_zone = {
+prj_fnc_zoneСapture = {
 	params ["_capt_trigger"];
 
 	private _parent_trigger = _capt_trigger getVariable "parent_trigger";
@@ -871,9 +871,9 @@ prj_fnc_capt_zone = {
 	_parent_trigger setVariable ["captured", true];
 
 	private _number = [2,3] call BIS_fnc_randomInt;
-	private _vehicles = [_trigger_pos,_number] call prj_fnc_reinforcement;
+	private _vehicles = [_trigger_pos,_number] call prj_fnc_createReinforcement;
 
-	[_trigger_pos] call prj_fnc_sentry_patrol;
+	[_trigger_pos] call prj_fnc_createSentryPatrol;
 
 	if (_trigger_special != "none") exitWith {
 		switch (_trigger_special) do {
@@ -890,7 +890,7 @@ prj_fnc_capt_zone = {
 		{deleteVehicle _x} forEach [_capt_trigger,_parent_trigger];
 	};
 
-	[_markerName,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_create_marker;
+	[_markerName,_trigger_pos,"ColorWEST",0.3,[[_trigger_radius,_trigger_radius],"ELLIPSE"]] call prj_fnc_createMarker;
 
 	[_parent_trigger,_trigger_grid_pos,_trigger_loc_name,_markerName] spawn {
 		params ["_parent_trigger","_trigger_grid_pos","_trigger_loc_name","_markerName"];
@@ -920,7 +920,7 @@ prj_fnc_capt_zone = {
 	};
 };
 
-prj_fnc_civ = {
+prj_fnc_civBehaviour = {
 	private _civ = _this;
 
 	_civ addEventHandler ["FiredNear", {
@@ -1051,7 +1051,7 @@ prj_fnc_civ = {
 	};
 };
 
-prj_fnc_array_delimiter = {
+prj_fnc_arrayDelimiter = {
 	params ["_maxCount","_array"];
 
 	private _coef = ceil ((count _array) / _maxCount);
@@ -1071,7 +1071,7 @@ prj_fnc_array_delimiter = {
 	_returnArray
 };
 
-prj_fnc_http_request = {
+prj_fnc_sendHttpRequest = {
 	params ["_getParams","_data"];
 
 	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaMap/api%1&d=%2|null",_getParams,_data]);
@@ -1085,7 +1085,7 @@ prj_fnc_http_request = {
 	if (_responseCode == 9) then {"Response error" remoteExec ["systemChat"]};
 };
 
-prj_fnc_http_multiple_request = {
+prj_fnc_sendHttpMultipleRequest = {
 	params ["_getParams","_dataArray"];
 
 	private _firstResponse = true;
@@ -1098,98 +1098,37 @@ prj_fnc_http_multiple_request = {
 			_firstResponse = false;
 		};
 
-		[format["%1&c=%2",_getParams,_clear],_x] call prj_fnc_http_request;
+		[format["%1&c=%2",_getParams,_clear],_x] call prj_fnc_sendHttpRequest;
 	} forEach _dataArray;
 };
 
-prj_fnc_webTracker_uploadMarkers = {
-
-	private _BISColors = [
-		['Color1_FD_F', 1],
-		['Color2_FD_F', 2],
-		['Color3_FD_F', 3],
-		['Color4_FD_F', 4],
-		['Color5_FD_F', 5],
-		['Color6_FD_F', 6],
-		['ColorBlack', 7],
-		['ColorBlue', 8],
-		['ColorBrown', 9],
-		['ColorCIV', 10],
-		['ColorEAST', 11],
-		['ColorGUER', 12],
-		['ColorGreen', 13],
-		['ColorGrey', 14],
-		['ColorKhaki', 15],
-		['ColorOrange', 16],
-		['ColorPink', 17],
-		['ColorRed', 18],
-		['ColorUNKNOWN', 19],
-		['ColorWEST', 20],
-		['ColorWhite', 21],
-		['ColorYellow', 22],
-		['Default', 23],
-		['colorBLUFOR', 24],
-		['colorCivilian', 25],
-		['colorIndependent', 26],
-		['colorOPFOR', 27]
-	];
-
-	private _BISMarkerTypes = [
-		['hd_ambush', 1],
-		['hd_arrow', 2],
-		['hd_destroy', 3],
-		['hd_dot', 4],
-		['hd_end', 5],
-		['hd_flag', 6],
-		['hd_join', 7],
-		['hd_objective', 8],
-		['hd_pickup', 9],
-		['hd_start', 10],
-		['hd_unknown', 11],
-		['hd_warning', 12]
-	];
+prj_fnc_uploadMarkersViaHttp = {
 
 	// get player markers
 
-	private _markersArray = [];
+	private _allPlayers = allPlayers;
 
-	for "_i" from 0 to ((count allMapMarkers) - 1) do {
-		private _a = toArray (allMapMarkers # _i);
-		_a resize 15;
+	if ((count _allPlayers) < 1) exitWith {};
 
-		if (toString _a == "_USER_DEFINED #" && markerType (allMapMarkers # _i) != "") then {
-			
-			private _aDb = toArray (allMapMarkers # _i);
-			_aDb deleteRange [0,15];
+	private _playerNetId = parseNumber (((netId (_allPlayers # 0)) splitString ":") # 0);
 
-			private _mData = (toString _aDb) splitString "/";
+	remoteExecCall ["prj_fnc_getAllMapMarkers",_playerNetId];
 
-			private "_mOwnerName";
+	private _markersArray = missionNamespace getVariable ["allMapMarkersArray",[]];
 
-			{
-				if (getPlayerID _x isEqualTo _mData # 0) then {
-					_mOwnerName = name _x;
-				};
-			} forEach allPlayers;
-
-			private _mColor = ((_BISColors select {(_x # 0) == (markerColor (allMapMarkers # _i))}) # 0) # 1;
-			private _mType = ((_BISMarkerTypes select {(_x # 0) == (markerType (allMapMarkers # _i))}) # 0) # 1;
-		
-			_markersArray pushBack (format ["%1:%2;%3;%4;%5;%6;%7;%8",_mOwnerName,_mData # 2,((markerPos (allMapMarkers # _i)) # 0),((markerPos (allMapMarkers # _i)) # 1),markerDir (allMapMarkers # _i),_mType,_mColor,markerText (allMapMarkers # _i)]);
-		};
-	};
+	if ((count _markersArray) < 1) exitWith {};
 
 	private _maxMarkersCount = 100;
 
 	if ((count _markersArray) <= _maxMarkersCount) exitWith {
-		["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=saveMarkers&c=1",_markersArray] call prj_fnc_http_request;
+		["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=saveMarkers&c=1",_markersArray] call prj_fnc_sendHttpRequest;
 	};
 
-	private _divMarkersArray = [_maxMarkersCount,_markersArray] call prj_fnc_array_delimiter;
-	["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=saveMarkers",_divMarkersArray] call prj_fnc_http_multiple_request;
+	private _divMarkersArray = [_maxMarkersCount,_markersArray] call prj_fnc_arrayDelimiter;
+	["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=saveMarkers",_divMarkersArray] call prj_fnc_sendHttpMultipleRequest;
 };
 
-prj_fnc_webTracker_uploadObjects = {
+prj_fnc_uploadObjectsViaHttp = {
 	private _returnData = [];
 
 	// get players
@@ -1265,9 +1204,9 @@ prj_fnc_webTracker_uploadObjects = {
 	private _maxObjectsCount = 30;
 
 	if ((count _returnData) <= _maxObjectsCount) exitWith {
-		["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions&c=1",_returnData] call prj_fnc_http_request;
+		["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions&c=1",_returnData] call prj_fnc_sendHttpRequest;
 	};
 
-	private _divObjectsArray = [_maxObjectsCount,_returnData] call prj_fnc_array_delimiter;
-	["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions",_divObjectsArray] call prj_fnc_http_multiple_request;	
+	private _divObjectsArray = [_maxObjectsCount,_returnData] call prj_fnc_arrayDelimiter;
+	["?k=fnxIUeGv873nVe1iug39e86lkmVL4KJs&t=savePositions",_divObjectsArray] call prj_fnc_sendHttpMultipleRequest;	
 };

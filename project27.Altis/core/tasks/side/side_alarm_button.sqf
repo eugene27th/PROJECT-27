@@ -7,7 +7,7 @@ params ["_taskID","_reward"];
 
 private _taskID = "SIDE_" + str _taskID;
 
-private _roadpos = [1] call prj_fnc_select_road_position;
+private _roadpos = [1] call prj_fnc_selectRoadPosition;
 private _pos = _roadpos select 0;
 private _direction = _roadpos select 1;
 
@@ -15,14 +15,14 @@ private _unit_pos = [_pos, 5, 10, 1, 0] call BIS_fnc_findSafePos;
 
 [west, [_taskID], ["STR_SIDE_ALARM_BUTTON_DESCRIPTION", "STR_SIDE_ALARM_BUTTON_TITLE", ""], _pos, "CREATED", 0, true, "unknown"] call BIS_fnc_taskCreate;
 
-[_taskID,_pos,"ColorCIV",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_pos,"ColorCIV",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_createMarker;
 
 private _idap_vehicle = selectRandom idap_vehicles createVehicle _pos;
 _idap_vehicle setDir _direction;
 
 private _enemy_vehicle_pos = [_pos, 10, 100, 5, 0] call BIS_fnc_findSafePos;
 private _enemy_vehicle = selectRandom (enemy_vehicles_light + enemy_vehicles_heavy) createVehicle _enemy_vehicle_pos;
-private _enemy_vehicle_crew = [_enemy_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
+private _enemy_vehicle_crew = [_enemy_vehicle,enemy_infantry,true] call prj_fnc_createCrew;
 
 private _idap_units = [];
 
@@ -35,8 +35,8 @@ for "_i" from 1 to 2 do {
 
 private _enemies = [];
 
-_enemies = _enemies + ([_pos] call prj_fnc_enemy_crowd);
-_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_enemy_patrols);
+_enemies = _enemies + ([_pos] call prj_fnc_createCrowd);
+_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_createPatrol);
 
 private _trg = createTrigger ["EmptyDetector", _pos, true];
 _trg setTriggerArea [50, 50, 0, false, 20];

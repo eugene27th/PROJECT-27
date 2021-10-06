@@ -21,7 +21,7 @@ _uav_smoke attachTo [_uav, [0, 0, 0]];
 
 [west, [_taskID], ["STR_SIDE_INTEL_UAV_DESCRIPTION", "STR_SIDE_INTEL_UAV_TITLE", ""], _center_pos, "CREATED", 0, true, "intel"] call BIS_fnc_taskCreate;
 
-[_taskID,_center_pos,"ColorWEST",0.7,[[500,500],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_center_pos,"ColorWEST",0.7,[[500,500],"ELLIPSE"]] call prj_fnc_createMarker;
 
 private _trg = createTrigger ["EmptyDetector", position _uav, true];
 _trg setTriggerArea [10, 10, 0, false, 20];
@@ -51,7 +51,7 @@ while {!(_taskID call BIS_fnc_taskCompleted)} do {
 	if (triggerActivated _trg) then {
 
 		private _number = [2,3] call BIS_fnc_randomInt;
-		private _vehicles = [_pos,_number] call prj_fnc_reinforcement;
+		private _vehicles = [_pos,_number] call prj_fnc_createReinforcement;
 
 		for [{private _i = 120 }, { _i > -1  }, { _i = _i - 10 }] do {
 

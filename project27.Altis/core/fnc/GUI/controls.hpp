@@ -512,7 +512,36 @@ class dialogOptionMenu
 			w = 0.142 * safezoneW;
 			h = 0.039375 * safezoneH;
 
-			action = "remoteExec ['prj_fnc_save_game',2]";
+			action = "remoteExec ['prj_fnc_saveGame',2]";
+		};
+
+		class Options_SkipTime_Back: prjRscText {
+			colorBackground[] = { 0, 0, 0, 0.5 };
+			idc = -1;
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.550 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_SkipTime_Pct: prjRscPicture
+		{
+			idc = -1;
+			text = "img\icons\icon_clock.paa";
+			x = 0.415 * safezoneW + safezoneX;
+			y = 0.550 * safezoneH + safezoneY;
+			w = 0.02625 * safezoneW;
+			h = 0.039375 * safezoneH;
+		};
+		class Options_SkipTime_Btn: prjRscButtonHQ
+		{
+			idc = 1032;
+			text = "SKIP TIME (3h)";
+			x = 0.444 * safezoneW + safezoneX;
+			y = 0.550 * safezoneH + safezoneY;
+			w = 0.142 * safezoneW;
+			h = 0.039375 * safezoneH;
+
+			action = "[3] remoteExec ['skipTime',2]";
 		};
 	};
 };

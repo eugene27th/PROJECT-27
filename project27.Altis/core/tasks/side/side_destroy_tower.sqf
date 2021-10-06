@@ -24,19 +24,19 @@ _tower addEventHandler ["FiredNear", {
 	params ["_unit"];
 	_unit removeAllEventHandlers "FiredNear";
 	
-	[position _unit] call prj_fnc_sentry_patrol;
+	[position _unit] call prj_fnc_createSentryPatrol;
 }];
 
 private _enemies = [];
 
-_enemies = _enemies + ([_pos] call prj_fnc_enemy_crowd);
-_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_enemy_patrols);
+_enemies = _enemies + ([_pos] call prj_fnc_createCrowd);
+_enemies = _enemies + ([_pos,100,[1,2]] call prj_fnc_createPatrol);
 
 private _picture = getText(configfile >> "CfgVehicles" >> _tower_class select 0 >> "editorPreview");
 
 [west, [_taskID], [format [localize "STR_SIDE_DESTROY_TOWER_DESCRIPTION", _picture], "STR_SIDE_DESTROY_TOWER_TITLE", ""], _center_pos, "CREATED", 0, true, "destroy"] call BIS_fnc_taskCreate;
 
-[_taskID,_center_pos,"ColorOrange",0.7,[[_radius,_radius],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_center_pos,"ColorOrange",0.7,[[_radius,_radius],"ELLIPSE"]] call prj_fnc_createMarker;
 
 waitUntil {uiSleep 5; !alive _tower || !alive _generator || _taskID call BIS_fnc_taskCompleted};
 

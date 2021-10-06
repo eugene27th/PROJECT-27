@@ -9,7 +9,7 @@ private _taskID = "SIDE_" + str _taskID;
 
 private _centerPos = [false,false,[],["NameCityCapital","NameCity","NameVillage"]] call prj_fnc_selectCaptPosition;
 
-private _roadpos = [_centerPos,500] call prj_fnc_select_road_position;
+private _roadpos = [_centerPos,500] call prj_fnc_selectRoadPosition;
 private _startPos = _roadpos # 0;
 private _direction = _roadpos # 1;
 private _distance_route = round (worldSize / 4);
@@ -21,15 +21,18 @@ _finishPos set [2, 0];
 private _finishGridPos = mapGridPosition _finishPos;
 
 [west, [_taskID], ["STR_SIDE_CONVOY_DESCRIPTION", "STR_SIDE_CONVOY_TITLE", ""], _centerPos, "CREATED", 0, true, "intel"] call BIS_fnc_taskCreate;
-[_taskID,_centerPos,"ColorOPFOR",0.4,[[500,500],"ELLIPSE"]] call prj_fnc_create_marker;
+[_taskID,_centerPos,"ColorOPFOR",0.4,[[500,500],"ELLIPSE"]] call prj_fnc_createMarker;
 
-uiSleep ([800,900] call BIS_fnc_randomInt);
+[_taskID + "_finishPos",_finishPos,"ColorOPFOR",0.7,[[100,100],"RECTANGLE"]] call prj_fnc_createMarker;
+[_taskID + "_finishPosTitle",_finishPos,"ColorBLACK",1,[],"mil_dot","destination sector"] call prj_fnc_createMarker;
+
+uiSleep 1800;
 
 private _allVehicles = [];
 private _allUnits = [];
 private _distanceForOneVehicle = 8;
 
-private _convoyConfig = [[enemy_vehiclesConvoyHeavy,1],[enemy_vehiclesConvoyLight,2],[enemy_vehiclesConvoyHeavy,1]];
+private _convoyConfig = [[enemy_vehiclesConvoyHeavy,2],[enemy_vehiclesConvoyLight,1]];
 
 {
 	for "_i" from 1 to (_x # 1) do {
@@ -51,7 +54,7 @@ private _convoyConfig = [[enemy_vehiclesConvoyHeavy,1],[enemy_vehiclesConvoyLigh
 			_startPos = [_startPos, _distanceForOneVehicle, _direction + 180] call BIS_fnc_relPos;
 		};
 
-		private _units = [_vehicle,enemy_infantry,true] call prj_fnc_create_crew;
+		private _units = [_vehicle,enemy_infantry,true] call prj_fnc_createCrew;
 
 		_allUnits append _units;
 		_allVehicles pushBack _vehicle;
@@ -74,7 +77,7 @@ private _convoyConfig = [[enemy_vehiclesConvoyHeavy,1],[enemy_vehiclesConvoyLigh
 				_unit removeAllEventHandlers "FiredNear";
 				
 				private _number = [2,3] call BIS_fnc_randomInt;
-				private _vehicles = [position _unit,_number] call prj_fnc_reinforcement;
+				private _vehicles = [position _unit,_number] call prj_fnc_createReinforcement;
 			}];
 		};
 
@@ -160,25 +163,18 @@ waitUntil {sleep 5; {(_x distance _startPos) > 200} forEach _allVehicles || _tas
 
 ["side_convoy_start",[_finishGridPos]] remoteExec ["BIS_fnc_showNotification"];
 
-private _gridMarkerData = _finishGridPos call BIS_fnc_gridToPos;
-private _gridMarkerPos = [(_gridMarkerData # 0) # 0,(_gridMarkerData # 0) # 1,0];
-private _gridMarkerSizes = _gridMarkerData # 1;
-
-[_taskID + str "_finishGrid",_gridMarkerPos,"ColorOPFOR",0.7,[[_gridMarkerSizes # 0,_gridMarkerSizes # 1],"RECTANGLE"]] call prj_fnc_create_marker;
-[_taskID + str "_finishGridTitle",_gridMarkerPos,"ColorBLACK",1,[],"mil_flag","destination sector"] call prj_fnc_create_marker;
-
 [_allUnits,_taskID,_reward] spawn {
 	params ["_allUnits","_taskID","_reward"];
 
 	while {!(_taskID call BIS_fnc_taskCompleted)} do {
+		uiSleep 10;
+
 		private _aliveConvoyUnits = _allUnits select {alive _x};
 
 		if ((count _aliveConvoyUnits) < 1 && !(_taskID call BIS_fnc_taskCompleted)) then {
 			[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
 			["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
 		};
-
-		uiSleep 10;
 	};
 };
 
@@ -186,11 +182,12 @@ waitUntil {uiSleep 5; {(_x distance _finishPos) < 300} forEach _allVehicles || _
 
 if ({(_x distance _finishPos) < 300} forEach _allVehicles) then {
 	[_taskID,"FAILED"] call BIS_fnc_taskSetState;
+	uiSleep 2;
 };
 
 {
 	deleteMarker _x;
-} forEach [_taskID,_taskID + str "_finishGrid",_taskID + str "_finishGridTitle"];
+} forEach [_taskID,_taskID + str "_finishPos",_taskID + str "_finishPosTitle"];
 
 [_allVehicles,_allUnits,_taskID] spawn {
 	params ["_allVehicles","_allUnits","_taskID"];
