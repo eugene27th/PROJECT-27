@@ -1154,16 +1154,35 @@ class dialogArsenalShop
 			size = 0.02;
 		};
 
-		class Arsenal_LB_Header_Cat_Text: prjRscText 
+		class Arsenal_Btn_ShopMode: prjRscButton
 		{
-			text = "categories";
-			idc = -1;
-			x = 0.24672 * safezoneW + safezoneX;
-			y = 0.192049 * safezoneH + safezoneY;
-			w = 0.119416 * safezoneW;
-			h = 0.0223961 * safezoneH;
+			idc = 1084;
+			
+			text = "purchase";
+			x = 0.246633 * safezoneW + safezoneX;
+			y = 0.191987 * safezoneH + safezoneY;
+			w = 0.0538213 * safezoneW;
+			h = 0.022401 * safezoneH;
 
-			sizeEx = 0.035;
+			font = "PuristaMedium";
+			colorText[] = {0.2,0.5,0.2,1};
+
+			action = "hint 'buy mode'";
+		};
+		class Arsenal_Btn_SellMode: prjRscButton
+		{
+			idc = 1086;
+
+			text = "sale";
+			x = 0.312285 * safezoneW + safezoneX;
+			y = 0.191987 * safezoneH + safezoneY;
+			w = 0.0538213 * safezoneW;
+			h = 0.022401 * safezoneH;
+
+			font = "PuristaMedium";
+			colorText[] = {1,0.2,0.2,1};
+
+			action = "hint 'sell mode'";
 		};
 
 		class Arsenal_LB_Header_Items_Text: prjRscText 
@@ -1226,27 +1245,42 @@ class dialogArsenalShop
 			x = 0.545932 * safezoneW + safezoneX;
 			y = 0.44681 * safezoneH + safezoneY;
 			w = 0.209973 * safezoneW;
-			h = 0.333173 * safezoneH;
+			h = 0.282811 * safezoneH;
 			font = "EtelkaMonospacePro";
 			size = 0.024;
 		};
 
-		class Arsenal_Btn_Buy: prjRscButton
+		class Arsenal_Btn_BuyAndSell: prjRscButton
 		{
 			idc = 1082;
-			text = "buy";
-			x = 0.54462 * safezoneW + safezoneX;
-			y = 0.79395 * safezoneH + safezoneY;
-			w = 0.211268 * safezoneW;
-			h = 0.0419929 * safezoneH;
+			text = "SELECT ITEM";
+			x = 0.545945 * safezoneW + safezoneX;
+			y = 0.794012 * safezoneH + safezoneY;
+			w = 0.210035 * safezoneW;
+			h = 0.0420018 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 
 			colorText[] = {0.2, 0.5, 0.2, 1};
 
-			action = "call prj_fnc_vehicle_repair";
+			action = "hint 'buy/sell'";
 		};
-		
+
+		class Arsenal_Btn_Open_VArsenal: prjRscButton
+		{
+			idc = 1085;
+			text = "OPEN MY VIRTUAL ARSENAL";
+
+			x = 0.545945 * safezoneW + safezoneX;
+			y = 0.7436 * safezoneH + safezoneY;
+			w = 0.210035 * safezoneW;
+			h = 0.0420018 * safezoneH;
+
+			font = "PuristaMedium";
+			colorText[] = {1,1,1,1};
+
+			action = "call prj_fnc_openVirtualShopArsenal;";
+		};	
 	};
 };

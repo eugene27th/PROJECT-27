@@ -9,12 +9,12 @@ private _taskID = "SIDE_" + str _taskID;
 
 private _centerPos = [false,false,[],["NameCityCapital","NameCity","NameVillage"]] call prj_fnc_selectCaptPosition;
 
-private _roadpos = [_centerPos,500] call prj_fnc_selectRoadPosition;
+private _roadpos = [_centerPos,1000] call prj_fnc_selectRoadPosition;
 private _startPos = _roadpos # 0;
 private _direction = _roadpos # 1;
 private _distance_route = round (worldSize / 4);
 
-private _finishPos = [_startPos, (_distance_route - 1000), (_distance_route + 1000), 0, 0] call BIS_fnc_findSafePos;
+private _finishPos = [_startPos, (_distance_route - 500), (_distance_route + 500), 0, 0] call BIS_fnc_findSafePos;
 _finishPos = getPos ([_finishPos, _distance_route] call BIS_fnc_nearestRoad);
 _finishPos set [2, 0];
 
@@ -75,9 +75,8 @@ private _convoyConfig = [[enemy_vehiclesConvoyHeavy,2],[enemy_vehiclesConvoyLigh
 			_vehicle addEventHandler ["FiredNear", {
 				params ["_unit"];
 				_unit removeAllEventHandlers "FiredNear";
-				
-				private _number = [2,3] call BIS_fnc_randomInt;
-				private _vehicles = [position _unit,_number] call prj_fnc_createReinforcement;
+
+				private _vehicles = [position _unit] call prj_fnc_createReinforcement;
 			}];
 		};
 
@@ -161,19 +160,21 @@ private _iedArray = missionNamespace getVariable ["iedArray",[]];
 
 waitUntil {sleep 5; {(_x distance _startPos) > 200} forEach _allVehicles || _taskID call BIS_fnc_taskCompleted};
 
-["side_convoy_start",[_finishGridPos]] remoteExec ["BIS_fnc_showNotification"];
+if ({(_x distance _startPos) > 200} forEach _allVehicles) then {
+	["side_convoy_start",[_finishGridPos]] remoteExec ["BIS_fnc_showNotification"];
 
-[_allUnits,_taskID,_reward] spawn {
-	params ["_allUnits","_taskID","_reward"];
+	[_allUnits,_taskID,_reward] spawn {
+		params ["_allUnits","_taskID","_reward"];
 
-	while {!(_taskID call BIS_fnc_taskCompleted)} do {
-		uiSleep 10;
+		while {!(_taskID call BIS_fnc_taskCompleted)} do {
+			uiSleep 10;
 
-		private _aliveConvoyUnits = _allUnits select {alive _x};
+			private _aliveConvoyUnits = _allUnits select {alive _x};
 
-		if ((count _aliveConvoyUnits) < 1 && !(_taskID call BIS_fnc_taskCompleted)) then {
-			[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
-			["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
+			if ((count _aliveConvoyUnits) < 1 && !(_taskID call BIS_fnc_taskCompleted)) then {
+				[_taskID,"SUCCEEDED"] call BIS_fnc_taskSetState;
+				["missionNamespace", "money", 0, _reward] call prj_fnc_changePlayerVariableGlobal;
+			};
 		};
 	};
 };

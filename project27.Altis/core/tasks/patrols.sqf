@@ -50,13 +50,7 @@ while {true} do {
 						};
 
 						case (_waitingTime - 60): {
-							systemChat "wtf";
-							if (round (random 1) > 0.35) then {
-								private _number = [2,3] call BIS_fnc_randomInt;
-								private _vehicles = [_pos,_number] call prj_fnc_createReinforcement;
-							} else {
-								[_pos] call prj_fnc_createSentryPatrol;
-							};
+							[_pos] call prj_fnc_createSentryPatrol;
 						};
 
 						case 0: {

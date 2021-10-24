@@ -45,7 +45,7 @@ if (_trigger_special != "none") exitWith {
 	};
 
 	if (_capture_sectores == 1) then {
-		_capt_trg = [_trigger_pos, [_captRadius, _captRadius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_zoneСapture;", false] call prj_fnc_createTrigger;
+		_capt_trg = [_trigger_pos, [_captRadius, _captRadius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_zoneCapture;", false] call prj_fnc_createTrigger;
 		_capt_trg setVariable ["parent_trigger",_trigger];
 	};
 
@@ -80,7 +80,7 @@ if (_trigger_special != "none") exitWith {
 	};
 };
 
-private _distance = 600;
+private _distance = 800;
 private _trigger_radius = ((triggerArea _trigger) # 0) - _distance;
 private _enemy_config = (_trigger getVariable "config") # 0;
 private _civil_config = (_trigger getVariable "config") # 1;
@@ -350,7 +350,7 @@ if (!(_trigger getVariable "captured")) then {
 	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_createStatic;
 
 	if (_capture_sectores == 1) then {
-		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_zoneСapture;", false] call prj_fnc_createTrigger;
+		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_zoneCapture;", false] call prj_fnc_createTrigger;
 		_capt_trg setVariable ["parent_trigger",_trigger];
 	};
 };

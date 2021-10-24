@@ -140,7 +140,7 @@ prj_fnc_requestSupplyDrop = {
 		["HQ",localize "STR_PRJ_SUPPLY_REQUEST_DENIED"] remoteExec ["BIS_fnc_showSubtitle",0];
 	};
 
-	private _check_zone = (position arsenal) nearObjects ["Thing", 100];
+	private _check_zone = (position spawn_zone) nearObjects ["Thing", 100];
 
 	private ["_box","_arrow"];
 
@@ -368,6 +368,13 @@ prj_fnc_getAllMapMarkers = {
 	missionNamespace setVariable ["allMapMarkersArray",_returnMarkersArray,true];
 };
 
+prj_fnc_openVirtualShopArsenal = {
+	closeDialog 2;
+
+	
+
+};
+
 prj_fnc_saveGame = {
 
 	// save general
@@ -414,7 +421,7 @@ prj_fnc_saveGame = {
 
 	// save vehicles
 
-	private _vehs = nearestObjects [position arsenal,["Air","LandVehicle"], 1000];
+	private _vehs = nearestObjects [position spawn_zone,["Air","LandVehicle"], 1000];
 
 	private _vehsArray = [];
 	{_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x]} forEach _vehs;

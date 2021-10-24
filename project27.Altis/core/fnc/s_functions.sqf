@@ -287,7 +287,13 @@ prj_fnc_createCheckpoint = {
 };
 
 prj_fnc_createSentryPatrol = {
-	params ["_sentryPos",["_type","air"],["_radius",400],["_numPoints",8]];
+	params ["_sentryPos",["_forced",false],["_type","air"],["_radius",400],["_numPoints",8]];
+
+	private _chance = ("airVehiclesUsageProbability" call BIS_fnc_getParamValue) / 10;
+
+	if (!_forced && round (random 1) < _chance) exitWith {
+		private _vehicles = [_pos] call prj_fnc_createReinforcement;
+	};
 
 	switch (_type) do {
 		case "air": {
@@ -369,7 +375,7 @@ prj_fnc_createSentryPatrol = {
 
 				params ["_vehicle","_crewUnits","_spawnPos"];
 
-				waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 250};
+				waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 700};
 
 				if (!alive _vehicle) then {
 					sleep 120;
@@ -384,17 +390,23 @@ prj_fnc_createSentryPatrol = {
 };
 
 prj_fnc_createReinforcement = {
-	params ["_pos",["_number",2],["_type","antiInf"],["_radius",[1500,4000]]];
+	params ["_pos",["_number",0],["_type","antiInf"],["_radius",[1500,4000]]];
+
+	if (_number == 0) then {
+		_number = [2,3] call BIS_fnc_randomInt;
+	};
+
+	private _airChance = ("airVehiclesUsageProbability" call BIS_fnc_getParamValue) / 10;
 
 	_type = switch (_type) do {
 		case "antiInf": {
-			if ((random 1) < 0.35) then {"airToInf"} else {"groundToInf"};
+			if ((random 1) < _airChance) then {"airToInf"} else {"groundToInf"};
 		};
 		case "antiAir": {
-			if ((random 1) < 0.4) then {"airToAir"} else {"groundToAir"};
+			if ((random 1) < _airChance) then {"airToAir"} else {"groundToAir"};
 		};
 		case "antiTank": {
-			if ((random 1) < 0.3) then {"airToGround"} else {"groundToGround"};
+			if ((random 1) < _airChance) then {"airToGround"} else {"groundToGround"};
 		};
 	};
 
@@ -856,7 +868,7 @@ prj_fnc_createCrew = {
 	
 };
 
-prj_fnc_zoneСapture = {
+prj_fnc_zoneCapture = {
 	params ["_capt_trigger"];
 
 	private _parent_trigger = _capt_trigger getVariable "parent_trigger";
@@ -870,8 +882,7 @@ prj_fnc_zoneСapture = {
 
 	_parent_trigger setVariable ["captured", true];
 
-	private _number = [2,3] call BIS_fnc_randomInt;
-	private _vehicles = [_trigger_pos,_number] call prj_fnc_createReinforcement;
+	private _vehicles = [_trigger_pos] call prj_fnc_createReinforcement;
 
 	[_trigger_pos] call prj_fnc_createSentryPatrol;
 

@@ -18,9 +18,8 @@ private _enemy = (createGroup [independent, true]) createUnit [selectRandom enem
 _leader addEventHandler ["FiredNear", {
 	params ["_unit"];
 	_unit removeAllEventHandlers "FiredNear";
-	
-	private _number = [2,3] call BIS_fnc_randomInt;
-	private _vehicles = [position _unit,_number] call prj_fnc_createReinforcement;
+
+	private _vehicles = [position _unit] call prj_fnc_createReinforcement;
 }];
 
 [_taskID + "_blue_base",position spawn_zone,"ColorWEST",0.7,[[50,50],"ELLIPSE"]] call prj_fnc_createMarker;

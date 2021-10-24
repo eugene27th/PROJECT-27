@@ -32,21 +32,7 @@
 	example adding your preset (takistan):
 	switch (worldName) do {
 		case "takistan": { // your preset on map "takistan". here is used worldname
-			cities_enemy = [[3,1],[4,1],[2,0.5],[1,0.5],[1,1]];
-			villages_enemy = [[3,1],[3,1],[2,0.5],[1,0.5],[1,1]];
-			local_enemy = [[2,1],[2,1],[1,0.5],[1,0.5],[1,1]];
-			rock_enemy = [[1,1],[2,1],[0],[1,0.2],[1,1]];
-			hills_enemy = [[1,1],[2,1],[0],[1,0.2],[1,1]];
-			vegetation_enemy = [[1,1],[2,1],[1,0.5],[1,0.5],[1,1]];
-			other_enemy = [[2,1],[3,1],[1,0.5],[1,0.5],[1,1]];
-			//civilian
-			cities_civilian = [[3,1],[5,0],[2,0.5]];
-			villages_civilian = [[2,1],[5,0],[2,0.4]];
-			local_civilian = [[0],[2,0],[1,0.4]];
-			rock_civilian = [[0],[0],[0]];
-			hills_civilian = [[0],[0],[0]];
-			vegetation_civilian = [[0],[0],[0]];
-			other_civilian = [[0],[2,0],[1,0.2]];
+			
 		};
 	};
 */
@@ -54,21 +40,16 @@
 switch (worldName) do {
 	default {
 		//enemy
-		cities_enemy = [[4,2],[4,2],[2,0.4],[1,0.5],[1,0.4]];
-		villages_enemy = [[4,2],[3,2],[2,0.4],[1,0.4],[1,0.3]];
-		local_enemy = [[0],[3,2],[1,0.6],[1,0.4],[1,0.4]];
-		rock_enemy = [[0],[1,1],[0],[0],[0]];
+		cities_enemy = [[4,2],[4,2],[2,0.1],[1,0.1],[1,0.3]];
+		villages_enemy = [[3,2],[4,2],[2,0.1],[1,0.1],[1,0.5]];
+		local_enemy = [[0],[4,2],[1,0.2],[1,0.2],[1,0.4]];
 		hills_enemy = [[0],[1,1],[0],[0],[1,1]];
 		vegetation_enemy = [[0],[1,1],[0],[0],[0]];
-		other_enemy = [[0],[1,1],[1,0.5],[1,0.2],[1,0.5]];
+		other_enemy = [[0],[1,1],[1,0.1],[0],[1,0.5]];
 		//civilian
-		cities_civilian = [[0],[3,0],[1,0.4]];
-		villages_civilian = [[0],[3,0],[1,0.2]];
+		cities_civilian = [[0],[3,0],[1,0.2]];
+		villages_civilian = [[0],[3,0],[1,0.1]];
 		local_civilian = [[0],[0],[0]];
-		rock_civilian = [[0],[0],[0]];
-		hills_civilian = [[0],[0],[0]];
-		vegetation_civilian = [[0],[0],[0]];
-		other_civilian = [[0],[0],[0]];
 	};
 };
 

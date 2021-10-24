@@ -3,25 +3,24 @@
 	server only
 */
 
-private _distance = 600; // 600-1000
+private _distance = 800; // 600-1000
 private _safeZone = 1000; // 1500-2000
 
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 
 private _types_locations = [
 	// [location type,radius,array of units,reward],
-	["NameCityCapital",350,[cities_enemy,cities_civilian],3500],
-	["NameCity",300,[cities_enemy,cities_civilian],2500],
-	["NameVillage",250,[villages_enemy,villages_civilian],2000],
-	["NameLocal",150,[local_enemy,local_civilian],1500],
-	["Hill",50,[hills_enemy,hills_civilian],1000]
-	// ["RockArea",125,[rock_enemy,rock_civilian],500],
-	// ["VegetationBroadleaf",175,[vegetation_enemy,vegetation_civilian],500],
-	// ["VegetationFir",175,[vegetation_enemy,vegetation_civilian],500],
-	// ["VegetationPalm",175,[vegetation_enemy,vegetation_civilian],500],
-	// ["VegetationVineyard",175,[vegetation_enemy,vegetation_civilian],500],
-	// ["ViewPoint",150,[other_enemy,other_civilian],1000],
-	// ["BorderCrossing",100,[other_enemy,other_civilian],500]
+	["NameCityCapital",420,[cities_enemy,cities_civilian],3500],
+	["NameCity",380,[cities_enemy,cities_civilian],2500],
+	["NameVillage",350,[villages_enemy,villages_civilian],2000],
+	["NameLocal",250,[local_enemy,local_civilian],1500],
+	["Hill",50,[hills_enemy],1000],
+	["VegetationBroadleaf",175,[vegetation_enemy],500],
+	["VegetationFir",175,[vegetation_enemy],500],
+	["VegetationPalm",175,[vegetation_enemy],500],
+	["VegetationVineyard",175,[vegetation_enemy],500],
+	["ViewPoint",150,[other_enemy],1000],
+	["BorderCrossing",100,[other_enemy],500]
 ];
 
 private _worldSize = worldSize;

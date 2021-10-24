@@ -50,8 +50,7 @@ while {!(_taskID call BIS_fnc_taskCompleted)} do {
 
 	if (triggerActivated _trg) then {
 
-		private _number = [2,3] call BIS_fnc_randomInt;
-		private _vehicles = [_pos,_number] call prj_fnc_createReinforcement;
+		private _vehicles = [_pos] call prj_fnc_createReinforcement;
 
 		for [{private _i = 120 }, { _i > -1  }, { _i = _i - 10 }] do {
 
