@@ -119,7 +119,7 @@ private _convoyConfig = [[enemy_vehiclesConvoyHeavy,2],[enemy_vehiclesConvoyLigh
 
 private _allGrpUnits = _allVehicles + _allUnits;
 
-private _convoyGroup = createGroup [independent, true];
+private _convoyGroup = createGroup [enemySide, true];
 _allGrpUnits joinSilent _convoyGroup;
 
 private _wpConwoy = _convoyGroup addWaypoint [_finishPos, 0];
@@ -128,7 +128,7 @@ _wpConwoy setWaypointType "MOVE";
 _wpConwoy setWaypointFormation "COLUMN";
 
 private _iedArray = missionNamespace getVariable ["iedArray",[]];
-{independent revealMine _x} forEach _iedArray;
+{enemySide revealMine _x} forEach _iedArray;
 
 [_allVehicles,_allUnits,_convoyGroup,_taskID] spawn {
 	params ["_allVehicles","_allUnits","_convoyGroup","_taskID"];

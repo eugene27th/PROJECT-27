@@ -3,22 +3,22 @@
 	server only
 */
 
-private _distance = 800; // 600-1000
+private _distance = 600; // 600-1000
 private _safeZone = 1000; // 1500-2000
 
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
 
 private _types_locations = [
 	// [location type,radius,array of units,reward],
-	["NameCityCapital",420,[cities_enemy,cities_civilian],3500],
-	["NameCity",380,[cities_enemy,cities_civilian],2500],
-	["NameVillage",350,[villages_enemy,villages_civilian],2000],
-	["NameLocal",250,[local_enemy,local_civilian],1500],
+	["NameCityCapital",360,[cities_enemy,cities_civilian],3500],
+	["NameCity",320,[cities_enemy,cities_civilian],2500],
+	["NameVillage",250,[villages_enemy,villages_civilian],2000],
+	["NameLocal",230,[local_enemy,local_civilian],1500],
 	["Hill",50,[hills_enemy],1000],
-	["VegetationBroadleaf",175,[vegetation_enemy],500],
-	["VegetationFir",175,[vegetation_enemy],500],
-	["VegetationPalm",175,[vegetation_enemy],500],
-	["VegetationVineyard",175,[vegetation_enemy],500],
+	// ["VegetationBroadleaf",175,[vegetation_enemy],500],
+	// ["VegetationFir",175,[vegetation_enemy],500],
+	// ["VegetationPalm",175,[vegetation_enemy],500],
+	// ["VegetationVineyard",175,[vegetation_enemy],500],
 	["ViewPoint",150,[other_enemy],1000],
 	["BorderCrossing",100,[other_enemy],500]
 ];
@@ -32,7 +32,6 @@ private _a_delete_locations = [];
 _g_delete_locations = _g_delete_locations + _a_delete_locations;
 
 private _house_ieds = "ied_in_houses" call BIS_fnc_getParamValue;
-private _house_ieds_class = ["rhs_mine_a200_dz35","rhs_mine_stockmine43_2m","APERSTripMine","rhs_mine_mk2_pressure"];
 private _house_ieds_percentage = ("percentage_of_ied_in_houses" call BIS_fnc_getParamValue) * 0.1;
 
 private _triggersArray = [];
@@ -65,7 +64,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 				if ((count _useful) > 5) then {
 					for "_i" from 1 to (round ((count _useful) * _house_ieds_percentage)) do {
 						private _allpositions = (selectRandom _useful) buildingPos -1;
-						private _house_ied = createMine [selectRandom _house_ieds_class, selectRandom _allpositions,[],1];
+						private _house_ied = createMine [selectRandom houseIed, selectRandom _allpositions,[],1];
 						if (prj_debug) then {
 							["house_ied_" + str (position _house_ied),position _house_ied,"ColorWEST",1,[],"mil_dot"] call prj_fnc_createMarker;
 						};
@@ -258,7 +257,7 @@ if (_iedsParam != 0) then {
 		_allRoads deleteAt (_allRoads find _randomRoad);
 
 		private _pos = position _randomRoad;
-		private _ied = createMine [selectRandom ied, _pos,[],3];
+		private _ied = createMine [selectRandom roadIed, _pos,[],3];
 
 		if ((random 1) < 0.7) then {
 			_junk = selectRandom _junk_class createVehicle position _ied;

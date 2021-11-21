@@ -243,8 +243,13 @@
             </Key>
 
             <Key ID="STR_PRJ_TASK_NOT_AVAILABLE">
-                <Original>Задание можно взять один раз в 3 минуты.</Original>
-		        <Russian>Задание можно взять один раз в 3 минуты.</Russian>
+                <Original>Задание можно взять один раз в минуту.</Original>
+		        <Russian>Задание можно взять один раз в минуту.</Russian>
+            </Key>
+
+            <Key ID="STR_PRJ_SAVEGAME_NOT_AVAILABLE">
+                <Original>Сохранение игры доступно раз в минуту.</Original>
+		        <Russian>Сохранение игры доступно раз в минуту.</Russian>
             </Key>
 	    </Container>
 

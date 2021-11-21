@@ -10,10 +10,10 @@ force ace_advanced_ballistics_simulationInterval = 0.05;
 force ace_advanced_fatigue_enabled = true;
 force ace_advanced_fatigue_enableStaminaBar = true;
 force ace_advanced_fatigue_fadeStaminaBar = true;
-force ace_advanced_fatigue_loadFactor 0.75;
+force ace_advanced_fatigue_loadFactor 0.3;
 force ace_advanced_fatigue_performanceFactor = 1;
-force ace_advanced_fatigue_recoveryFactor = 1;
-force ace_advanced_fatigue_swayFactor = 1;
+force ace_advanced_fatigue_recoveryFactor = 2;
+force ace_advanced_fatigue_swayFactor = 0.4;
 force ace_advanced_fatigue_terrainGradientFactor = 0;
 
 // ACE Advanced Throwing
@@ -322,7 +322,7 @@ force ace_nightvision_noiseScaling = 0.25;
 force ace_nightvision_shutterEffects = true;
 
 // ACE Overheating
-force ace_overheating_cookoffCoef = 0.2;
+force ace_overheating_cookoffCoef = 0;
 force ace_overheating_displayTextOnJam = true;
 force ace_overheating_enabled = true;
 force ace_overheating_heatCoef = 0.7;
@@ -620,7 +620,7 @@ force ace_medical_treatment_woundReopenChance = 1;
 force ace_medical_treatment_woundStitchTime = 5;
 
 // ACE Advanced Vehicle Damage
-force ace_vehicle_damage_enableCarDamage = false;
+force ace_vehicle_damage_enableCarDamage = true;
 force ace_vehicle_damage_enabled = true;
 force ace_vehicle_damage_removeAmmoDuringCookoff = false;
 

@@ -92,7 +92,7 @@ addMissionEventHandler ["Entitykilled", {
 					private _itemsArray = ["ACE_Can_Franta","ACE_Can_Spirit","ACE_WaterBottle","ACE_Can_RedGull","ACE_Humanitarian_Ration"];
 					_victim addItemToUniform (selectRandom _itemsArray);
 				};
-				case independent: {
+				case enemySide: {
 					["missionNamespace", "money", 0, 25, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "enemy_killings", 1, 1, getPlayerUID _killer] call prj_fnc_changePlayerVariableLocal;
 					["missionNamespace", "total_kill_enemy", 1] call prj_fnc_changeVariable;

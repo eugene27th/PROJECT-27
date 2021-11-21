@@ -11,7 +11,7 @@ private _center_pos = [1,false] call prj_fnc_selectPosition;
 private _pos = [_center_pos, 200] call prj_fnc_selectHousePosition;
 
 private _hostage = (createGroup [civilian, true]) createUnit [selectRandom hostage_units, _pos, [], 0, "NONE"];
-private _enemy = (createGroup [independent, true]) createUnit [selectRandom enemy_infantry, position _hostage, [], 0, "NONE"];
+private _enemy = (createGroup [enemySide, true]) createUnit [selectRandom enemy_infantry, position _hostage, [], 0, "NONE"];
 [_hostage, true] call ACE_captives_fnc_setHandcuffed;
 _hostage setCaptive true;
 {_x setBehaviour "CARELESS"} forEach [_hostage,_enemy];

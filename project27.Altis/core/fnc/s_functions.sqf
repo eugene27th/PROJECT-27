@@ -156,7 +156,7 @@ prj_fnc_createCrowd = {
 		_pos = [_pos, 80, 150, 3, 0] call BIS_fnc_findSafePos;
 	};
 
-	private _ground_enemies_grp = createGroup [independent, true];
+	private _ground_enemies_grp = createGroup [enemySide, true];
 
     for [{private _i = 0 }, { _i < (_number_of call BIS_fnc_randomInt) }, { _i = _i + 1 }] do {
         private _position = [_pos, _radius call BIS_fnc_randomInt, [0,359] call BIS_fnc_randomInt] call BIS_fnc_relPos;
@@ -190,7 +190,7 @@ prj_fnc_createPatrol = {
 
 	if ((_inf # 0) != 0) then {
 		for [{private _i = 0 }, { _i < (_inf # 0) }, { _i = _i + 1 }] do {
-			private _group = createGroup [independent, true];
+			private _group = createGroup [enemySide, true];
 			private _pos = [_cpos, 10, _radius, 1, 0] call BIS_fnc_findSafePos;
 			if (!isNil "_pos") then {
 				for [{private _i = 0 }, { _i < [(_inf # 1)] call prj_fnc_getNumberOfUnits }, { _i = _i + 1 }] do {
@@ -304,7 +304,7 @@ prj_fnc_createSentryPatrol = {
 			private _vehUnits = [_vehicle,enemy_infantry,true] call prj_fnc_createCrew;
 			private _vehGroup = group _vehicle;
 
-			_vehicle flyInHeight 150;
+			_vehicle flyInHeight 140;
 
 			private _deg = 0;
 			private _degDif = 360 / _numPoints;
@@ -417,7 +417,7 @@ prj_fnc_createReinforcement = {
 			private _vehicles = [];
 
 			for "_i" from 1 to _number do {
-				private _safePos = [(_position_data # 0), 0, 300] call BIS_fnc_findSafePos;
+				private _safePos = [(_position_data # 0), 0, 100] call BIS_fnc_findSafePos;
 
 				private _vehicle = (selectRandom enemy_vehicles_light) createVehicle _safePos;
 				_vehicle setDir (_position_data # 1);
@@ -818,7 +818,7 @@ prj_fnc_createMarkers = {
 };
 
 prj_fnc_createCrew = {
-	params ["_vehicle","_units",["_passengers",false],["_oneGroup",true],["_side",independent]];
+	params ["_vehicle","_units",["_passengers",false],["_oneGroup",true],["_side",enemySide]];
 
 	//create group
 	private _vehCrewGroup = createGroup [_side, true];
@@ -980,7 +980,7 @@ prj_fnc_civBehaviour = {
 
 				if ((random 1) > _chanceCivTransform || !alive _civ || !([_civ] call ace_common_fnc_isAwake)) exitWith {_scan_end = true};
 
-				[_civ] join (createGroup [independent, true]);
+				[_civ] join (createGroup [enemySide, true]);
 
 				uiSleep 3;
 

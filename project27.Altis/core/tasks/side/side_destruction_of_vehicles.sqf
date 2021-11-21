@@ -13,7 +13,7 @@ private _enemies = [];
 private _vehicles = [];
 private _pos = [_center_pos, 100, 550, 5, 0] call BIS_fnc_findSafePos;
 
-private _enemy_grp = createGroup [independent, true];
+private _enemy_grp = createGroup [enemySide, true];
 
 [west, [_taskID], ["STR_SIDE_DESTRUCTION_OF_VEHICLES_DESCRIPTION", "STR_SIDE_DESTRUCTION_OF_VEHICLES_TITLE", ""], _center_pos, "CREATED", 0, true, "destroy"] call BIS_fnc_taskCreate;
 

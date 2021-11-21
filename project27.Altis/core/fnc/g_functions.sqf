@@ -88,6 +88,8 @@ prj_fnc_createSideTask = {
 		[localize "STR_PRJ_TASK_NOT_AVAILABLE"] remoteExec ["systemChat"];
 	};
 
+	missionNamespace setVariable ["task_available",false,true];
+
 	private _taskID = missionNamespace getVariable ["taskID",0];
 	private _oldTaskName = missionNamespace getVariable ["oldTaskName","side_null"];
 	private _selected_task = selectRandom tasksConfig;
@@ -98,10 +100,8 @@ prj_fnc_createSideTask = {
 	missionNamespace setVariable ["taskID",_taskID + 1,true];
 	private _oldTaskName = missionNamespace setVariable ["oldTaskName",_selected_task # 0,true];
 
-	missionNamespace setVariable ["task_available",false,true];
-
 	[] spawn {
-		uiSleep 180;
+		uiSleep 60;
 		missionNamespace setVariable ["task_available",true,true];
 	};
 
@@ -371,11 +371,15 @@ prj_fnc_getAllMapMarkers = {
 prj_fnc_openVirtualShopArsenal = {
 	closeDialog 2;
 
-	
-
 };
 
 prj_fnc_saveGame = {
+
+	if !(missionNamespace getVariable ["savegame_available",true]) exitWith {
+		[localize "STR_PRJ_SAVEGAME_NOT_AVAILABLE"] remoteExec ["systemChat"];
+	};
+
+	missionNamespace setVariable ["savegame_available",false,true];
 
 	// save general
 
@@ -437,6 +441,11 @@ prj_fnc_saveGame = {
 	if (_responseCode != 9) then {"Vehicles are saved" remoteExec ["systemChat"]} else {"Response error" remoteExec ["systemChat"]};
 
 	"Data saved" remoteExec ["systemChat"];
+
+	[] spawn {
+		uiSleep 60;
+		missionNamespace setVariable ["savegame_available",true,true];
+	};
 };
 
 prj_fnc_loadGame = {

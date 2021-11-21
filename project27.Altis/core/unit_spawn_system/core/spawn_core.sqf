@@ -80,7 +80,7 @@ if (_trigger_special != "none") exitWith {
 	};
 };
 
-private _distance = 800;
+private _distance = 600;
 private _trigger_radius = ((triggerArea _trigger) # 0) - _distance;
 private _enemy_config = (_trigger getVariable "config") # 0;
 private _civil_config = (_trigger getVariable "config") # 1;
@@ -343,11 +343,11 @@ private ["_enemy_house_units","_enemy_patrols_units","_enemy_light_vehicles","_e
 
 if (!(_trigger getVariable "captured")) then {
 	
-	_enemy_house_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_createHouseGroups;
-	_enemy_patrols_units = [independent,enemy_infantry,_enemy_config] call prj_fnc_createPatrolGroups;
-	_enemy_light_vehicles = [independent,enemy_infantry,enemy_vehicles_light + civilian_vehicles,_enemy_config] call prj_fnc_createVehicles;
-	_enemy_heavy_vehicles = [independent,enemy_infantry,enemy_vehicles_heavy,_enemy_config,3] call prj_fnc_createVehicles;
-	_enemy_statics = [independent,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_createStatic;
+	_enemy_house_units = [enemySide,enemy_infantry,_enemy_config] call prj_fnc_createHouseGroups;
+	_enemy_patrols_units = [enemySide,enemy_infantry,_enemy_config] call prj_fnc_createPatrolGroups;
+	_enemy_light_vehicles = [enemySide,enemy_infantry,enemy_vehicles_light,_enemy_config] call prj_fnc_createVehicles;
+	_enemy_heavy_vehicles = [enemySide,enemy_infantry,enemy_vehicles_heavy,_enemy_config,3] call prj_fnc_createVehicles;
+	_enemy_statics = [enemySide,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_createStatic;
 
 	if (_capture_sectores == 1) then {
 		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_zoneCapture;", false] call prj_fnc_createTrigger;
