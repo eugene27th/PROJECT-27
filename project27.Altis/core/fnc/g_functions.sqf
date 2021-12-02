@@ -386,7 +386,7 @@ prj_fnc_saveGame = {
 	private _generalDataArray = [];
 	{_generalDataArray pushBack (missionNamespace getVariable [_x,0])} forEach ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
 
-	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveGeneral&d=%1|null",_generalDataArray]);
+	"ArmaRequests" callExtension (format ["0|GET|https://27thsquad.ru/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveGeneral&d=%1|null",_generalDataArray]);
 
 	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
@@ -409,7 +409,7 @@ prj_fnc_saveGame = {
 		private _f = (_playerData # 2) # 1;
 		private _c = (_playerData # 3) # 1;
 
-		"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayer&u=%1&m=%2&e=%3&f=%4&c=%5|null",_u,_m,_e,_f,_c]);
+		"ArmaRequests" callExtension (format ["0|GET|https://27thsquad.ru/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayer&u=%1&m=%2&e=%3&f=%4&c=%5|null",_u,_m,_e,_f,_c]);
 
 		waitUntil {uiSleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
 
@@ -430,7 +430,7 @@ prj_fnc_saveGame = {
 	private _vehsArray = [];
 	{_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x]} forEach _vehs;
 	
-	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveVehicles&d=%1|null",_vehsArray]);
+	"ArmaRequests" callExtension (format ["0|GET|https://27thsquad.ru/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveVehicles&d=%1|null",_vehsArray]);
 
 	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
@@ -453,7 +453,7 @@ prj_fnc_loadGame = {
 
 	// load general
 
-	"ArmaRequests" callExtension "0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadGeneral|null";
+	"ArmaRequests" callExtension "0|GET|https://27thsquad.ru/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadGeneral|null";
 
 	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
@@ -475,7 +475,7 @@ prj_fnc_loadGame = {
 
 	// load players
 
-	"ArmaRequests" callExtension "0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadPlayers|null";
+	"ArmaRequests" callExtension "0|GET|https://27thsquad.ru/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadPlayers|null";
 
 	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
@@ -518,7 +518,7 @@ prj_fnc_loadGame = {
 
 	if (_vehs) then {
 
-		"ArmaRequests" callExtension "0|GET|https://heavens.pro/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadVehicles|null";
+		"ArmaRequests" callExtension "0|GET|https://27thsquad.ru/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadVehicles|null";
 
 		waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 

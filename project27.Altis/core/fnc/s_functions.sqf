@@ -1085,7 +1085,7 @@ prj_fnc_arrayDelimiter = {
 prj_fnc_sendHttpRequest = {
 	params ["_getParams","_data"];
 
-	"ArmaRequests" callExtension (format ["0|GET|https://heavens.pro/armaMap/api%1&d=%2|null",_getParams,_data]);
+	"ArmaRequests" callExtension (format ["0|GET|https://27thsquad.ru/armaMap/api%1&d=%2|null",_getParams,_data]);
 
 	waitUntil {uiSleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
 

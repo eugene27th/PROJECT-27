@@ -34,18 +34,18 @@ enemy_infantry = ["rhs_vdv_grenadier_rpg","rhs_vdv_efreitor","rhs_vdv_engineer",
 
 enemy_turrets = ["rhs_KORD_VDV","rhs_KORD_high_VDV","rhs_Igla_AA_pod_vdv","rhs_Metis_9k115_2_vdv","rhs_SPG9M_VDV","rhs_Kornet_9M133_2_vdv","RHS_AGS30_TriPod_VDV","RHS_NSV_TriPod_VDV","RHS_ZU23_VDV"];
 
-enemy_vehicles_light = ["rhs_tigr_m_vv","rhs_tigr_sts_vv","rhs_tigr_sts_3camo_vv","rhs_tigr_m_3camo_vv"];
+enemy_vehicles_light = ["rhs_tigr_m_vv","rhs_tigr_sts_vv","rhs_tigr_sts_3camo_vv","rhs_tigr_m_3camo_vv","CUP_O_GAZ_Vodnik_BPPU_RU","CUP_O_GAZ_Vodnik_KPVT_RU","CUP_O_GAZ_Vodnik_PK_RU"];
 enemy_vehicles_heavy = ["rhs_bmp2d_vv","rhs_bmp2k_vv","rhs_btr80a_vv","rhs_bmd2m","rhs_bmd4m_vdv","rhs_bmd4ma_vdv"];
 
-enemy_vehicles_aa = ["rhs_gaz66_zu23_vv","rhs_zsu234_aa"];
+enemy_vehicles_aa = ["rhs_gaz66_zu23_vv","rhs_zsu234_aa","CUP_O_2S6M_RU","CUP_O_Ural_ZU23_RU"];
 enemy_vehicles_at = ["rhs_sprut_vdv","rhs_t72bd_tv","rhs_t72be_tv","rhs_t80u45m","rhs_t80um","rhs_t90sab_tv"];
 
-enemy_vehiclesConvoyHeavy = ["rhs_btr80a_vv","rhs_tigr_sts_3camo_vv","rhs_tigr_m_3camo_vv"];
+enemy_vehiclesConvoyHeavy = ["rhs_btr80a_vv","rhs_tigr_sts_3camo_vv","rhs_tigr_m_3camo_vv","CUP_O_GAZ_Vodnik_BPPU_RU","CUP_O_GAZ_Vodnik_KPVT_RU"];
 enemy_vehiclesConvoyLight = ["rhs_tigr_vv","rhs_tigr_3camo_vv","rhs_tigr_m_vv","rhs_tigr_m_3camo_vv"];
 
 enemy_heliSentry = ["rhs_pchela1t_vvsc","RHS_Mi8AMT_vvsc","rhs_ka60_c","RHS_Mi8mt_vvsc","RHS_Mi8MTV3_vvsc"];
 enemy_heliTransport = ["RHS_Mi8AMT_vvsc","rhs_ka60_c","RHS_Mi8mt_vvsc","RHS_Mi8MTV3_vvsc"];
-enemy_heliHeavy = ["RHS_Mi24Vt_vvsc","rhs_mi28n_vvsc","RHS_Ka52_vvsc","RHS_Mi24V_vvsc"];
+enemy_heliHeavy = ["RHS_Mi24Vt_vvsc","rhs_mi28n_vvsc","RHS_Ka52_vvsc","RHS_Mi24V_vvsc","CUP_O_Ka50_DL_RU"];
 
 enemy_fighters = ["rhs_mig29sm_vvsc","rhs_mig29sm_vmf"];
 
