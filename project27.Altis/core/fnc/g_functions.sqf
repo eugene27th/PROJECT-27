@@ -424,11 +424,13 @@ prj_fnc_saveGame = {
 	"Player data saved" remoteExec ["systemChat"];
 
 	// save vehicles
-
+	private _vehsArray = [];
 	private _vehs = nearestObjects [position spawn_zone,["Air","LandVehicle"], 1000];
 
-	private _vehsArray = [];
-	{_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x]} forEach _vehs;
+	{
+		if ((typeOf _x) in vehiclesBlacklist) {continue};
+		_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x];
+	} forEach _vehs;
 	
 	"ArmaRequests" callExtension (format ["0|GET|https://27thsquad.ru/armaExtension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveVehicles&d=%1|null",_vehsArray]);
 
@@ -439,8 +441,6 @@ prj_fnc_saveGame = {
 	private _responseCode = _parsedResponse # 0;
 
 	if (_responseCode != 9) then {"Vehicles are saved" remoteExec ["systemChat"]} else {"Response error" remoteExec ["systemChat"]};
-
-	"Data saved" remoteExec ["systemChat"];
 
 	[] spawn {
 		uiSleep 60;

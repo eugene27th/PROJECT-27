@@ -3,7 +3,7 @@
 	server only
 */
 
-private _distance = 600; // 600-1000
+private _distance = 700; // 600-1000
 private _safeZone = 1000; // 1500-2000
 
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
@@ -14,13 +14,13 @@ private _types_locations = [
 	["NameCity",320,[cities_enemy,cities_civilian],2500],
 	["NameVillage",250,[villages_enemy,villages_civilian],2000],
 	["NameLocal",230,[local_enemy,local_civilian],1500],
-	["Hill",50,[hills_enemy],1000],
+	["Hill",50,[hills_enemy,local_civilian],1000],
 	// ["VegetationBroadleaf",175,[vegetation_enemy],500],
 	// ["VegetationFir",175,[vegetation_enemy],500],
 	// ["VegetationPalm",175,[vegetation_enemy],500],
 	// ["VegetationVineyard",175,[vegetation_enemy],500],
-	["ViewPoint",150,[other_enemy],1000],
-	["BorderCrossing",100,[other_enemy],500]
+	["ViewPoint",150,[other_enemy,local_civilian],1000],
+	["BorderCrossing",100,[other_enemy,local_civilian],500]
 ];
 
 private _worldSize = worldSize;

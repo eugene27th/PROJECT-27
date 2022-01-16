@@ -64,7 +64,7 @@ private _g_garage_depot = createVehicle ["VR_Area_01_circle_4_yellow_F", positio
 			if (_oldSide isEqualTo "empty") then {
 				_x setVariable ["oldSide",side _x,true];
 			} else {
-				if (side group _x != _oldSide) then {
+				if (side _x != _oldSide && _oldSide != enemySide) then {
 					_x setVariable ["oldSide",side _x,true];
 				};
 			};
@@ -187,3 +187,13 @@ if (("time_acceleration" call BIS_fnc_getParamValue) == 1) then {
 
 // auto load
 if (("autoSaveLoad" call BIS_fnc_getParamValue) == 1) then {call prj_fnc_loadGame};
+
+// webUpdateObjectsWhile
+webUpdateObjectsWhile = true;
+
+[] spawn {
+	while {webUpdateObjectsWhile} do { 
+		[] spawn prj_fnc_uploadObjectsViaHttp; 
+		uiSleep 10;
+	};
+};

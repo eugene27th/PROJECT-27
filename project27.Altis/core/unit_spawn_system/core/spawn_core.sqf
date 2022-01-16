@@ -80,7 +80,7 @@ if (_trigger_special != "none") exitWith {
 	};
 };
 
-private _distance = 600;
+private _distance = 700;
 private _trigger_radius = ((triggerArea _trigger) # 0) - _distance;
 private _enemy_config = (_trigger getVariable "config") # 0;
 private _civil_config = (_trigger getVariable "config") # 1;

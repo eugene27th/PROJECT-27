@@ -1114,9 +1114,7 @@ prj_fnc_sendHttpMultipleRequest = {
 };
 
 prj_fnc_uploadMarkersViaHttp = {
-
 	// get player markers
-
 	private _allPlayers = allPlayers;
 
 	if ((count _allPlayers) < 1) exitWith {};
@@ -1143,9 +1141,8 @@ prj_fnc_uploadObjectsViaHttp = {
 	private _returnData = [];
 
 	// get players
-
 	{
-		if ((vehicle _x) != _x) then {continue;};
+		if ((vehicle _x) != _x) then {continue};
 
 		private _pos = position _x;
 		private _gridPos = mapGridPosition _x;
@@ -1158,58 +1155,55 @@ prj_fnc_uploadObjectsViaHttp = {
 	} forEach allPlayers;
 
 	// get vehicles
-
 	{
-		if (((vehicle _x) isKindOf 'Car') || ((vehicle _x) isKindOf 'Tank') || ((vehicle _x) isKindOf 'Air')) then {
-			private _side = side (group _x);
+		if (!((vehicle _x) isKindOf 'Car') && !((vehicle _x) isKindOf 'Tank') && !((vehicle _x) isKindOf 'Air') || (typeOf _x) in vehiclesBlacklist) then {continue};
 
-			private _type = 1;
+		private _side = side (group _x);
+		private _type = 1;
 
-			if ((vehicle _x) isKindOf 'Air') then {
-				_type = 2;
-			};
-
-			private _pos = position _x;
-			private _gridPos = mapGridPosition _x;
-			private _name = getText (configFile >> 'CfgVehicles' >> (typeOf _x) >> 'displayName');
-			private _posX = _pos # 0;
-			private _posY = _pos # 1;
-			private _posZ = str (_pos # 2);
-			private _posZs = str ((getPosASL _x) # 2);
-			private _dir = getDir _x;
-			private _speed = str (speed _x);
-			private _damage = str (damage _x);
-
-			_side = switch (_side) do {
-				case WEST: {1};
-				case INDEPENDENT: {2};
-				case CIVILIAN: {3};
-				default {0};
-			};
-
-			private _vehCrew = fullCrew _x;
-			private _vehCrewReturn = "";
-
-			for "_i" from 0 to ((count _vehCrew) - 1) do {
-				private _unitCrewName = name ((_vehCrew # _i) # 0);
-				private _unitCrewRole = ((_vehCrew # _i) # 1);
-
-				if !(_vehCrewReturn isEqualTo "") then {
-					_vehCrewReturn = _vehCrewReturn + "_";
-				};
-
-				_vehCrewReturn = _vehCrewReturn + _unitCrewRole + "=" + _unitCrewName;
-			};
-
-			private _data = _name + ":" + _vehCrewReturn + ":" + _posZ + "_" + _posZs + ":" + _speed + ":" + _damage;
-
-			if (_damage == "1") then {
-				_data = _name + ":0:0_0:0:1";
-			};
-			
-			_returnData pushBack [_posX,_posY,_gridPos,_type,_dir,_side,_data];
+		if ((vehicle _x) isKindOf 'Air') then {
+			_type = 2;
 		};
 
+		private _pos = position _x;
+		private _gridPos = mapGridPosition _x;
+		private _name = getText (configFile >> 'CfgVehicles' >> (typeOf _x) >> 'displayName');
+		private _posX = _pos # 0;
+		private _posY = _pos # 1;
+		private _posZ = str (_pos # 2);
+		private _posZs = str ((getPosASL _x) # 2);
+		private _dir = getDir _x;
+		private _speed = str (speed _x);
+		private _damage = str (damage _x);
+
+		_side = switch (_side) do {
+			case WEST: {1};
+			case INDEPENDENT: {2};
+			case CIVILIAN: {3};
+			default {0};
+		};
+
+		private _vehCrew = fullCrew _x;
+		private _vehCrewReturn = "";
+
+		for "_i" from 0 to ((count _vehCrew) - 1) do {
+			private _unitCrewName = name ((_vehCrew # _i) # 0);
+			private _unitCrewRole = ((_vehCrew # _i) # 1);
+
+			if !(_vehCrewReturn isEqualTo "") then {
+				_vehCrewReturn = _vehCrewReturn + "_";
+			};
+
+			_vehCrewReturn = _vehCrewReturn + _unitCrewRole + "=" + _unitCrewName;
+		};
+
+		private _data = _name + ":" + _vehCrewReturn + ":" + _posZ + "_" + _posZs + ":" + _speed + ":" + _damage;
+
+		if (_damage == "1") then {
+			_data = _name + ":0:0_0:0:1";
+		};
+		
+		_returnData pushBack [_posX,_posY,_gridPos,_type,_dir,_side,_data];
 	} forEach vehicles;
 
 	private _maxObjectsCount = 30;
