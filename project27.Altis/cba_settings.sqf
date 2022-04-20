@@ -34,7 +34,7 @@ ace_arsenal_fontHeight = 4.5;
 
 // ACE Artillery
 force ace_artillerytables_advancedCorrections = true;
-force ace_artillerytables_disableArtilleryComputer = false;
+force ace_artillerytables_disableArtilleryComputer = true;
 force ace_mk6mortar_airResistanceEnabled = true;
 force ace_mk6mortar_allowCompass = true;
 force ace_mk6mortar_allowComputerRangefinder = false;
@@ -61,9 +61,9 @@ force ace_noradio_enabled = true;
 
 // ACE Crew Served Weapons
 force ace_csw_ammoHandling = 2;
-force ace_csw_defaultAssemblyMode = false;
+force ace_csw_defaultAssemblyMode = true;
 ace_csw_dragAfterDeploy = false;
-force ace_csw_handleExtraMagazines = true;
+force ace_csw_handleExtraMagazines = false;
 force ace_csw_progressBarTimeCoefficent = 1;
 
 // ACE Explosives
@@ -508,14 +508,11 @@ force ace_winddeflection_vehicleEnabled = true;
 // ACEX Field Rations
 force acex_field_rations_affectAdvancedFatigue = true;
 force acex_field_rations_enabled = true;
-force acex_field_rations_hudShowLevel = 60;
-force acex_field_rations_hudTransparency = 0.3;
-force acex_field_rations_hudType = 1;
 force acex_field_rations_hungerSatiated = 1;
 force acex_field_rations_terrainObjectActions = true;
 force acex_field_rations_thirstQuenched = 1;
-force acex_field_rations_timeWithoutFood = 4;
-force acex_field_rations_timeWithoutWater = 3;
+force acex_field_rations_timeWithoutFood = 7;
+force acex_field_rations_timeWithoutWater = 6;
 force acex_field_rations_waterSourceActions = 2;
 
 // ACEX Fortify
@@ -523,7 +520,7 @@ acex_fortify_settingHint = 2;
 
 // ACEX Headless
 force acex_headless_delay = 15;
-force acex_headless_enabled = false;
+force acex_headless_enabled = true;
 force acex_headless_endMission = 0;
 force acex_headless_log = false;
 force acex_headless_transferLoadout = 0;
@@ -620,8 +617,8 @@ force ace_medical_treatment_woundReopenChance = 1;
 force ace_medical_treatment_woundStitchTime = 5;
 
 // ACE Advanced Vehicle Damage
-force ace_vehicle_damage_enableCarDamage = true;
-force ace_vehicle_damage_enabled = true;
+force ace_vehicle_damage_enableCarDamage = false;
+force ace_vehicle_damage_enabled = false;
 force ace_vehicle_damage_removeAmmoDuringCookoff = false;
 
 // Community Base Addons

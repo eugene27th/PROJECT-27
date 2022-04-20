@@ -384,7 +384,7 @@ prj_fnc_option_menu = {
 	if !((getPlayerUID player) in hqUID) then {
 		{
 			ctrlEnable [_x, false];
-		} forEach [1032,1033];
+		} forEach [1033];
 	};
 };
 

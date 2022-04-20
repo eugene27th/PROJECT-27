@@ -36,21 +36,21 @@ private "_enemy";
 if (triggerActivated _trg) then {
 	_enemy = [];
 
-	for [{private _i = 0 }, { _i < [10,20] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
+	for [{private _i = 0 }, { _i < [15,20] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
 		private _grpname = createGroup [enemySide, true];
-		private _position = [position _uav, [350,450] call BIS_fnc_randomInt, [0,359] call BIS_fnc_randomInt] call BIS_fnc_relPos;
+		private _position = [position _uav, [400,600] call BIS_fnc_randomInt, [0,359] call BIS_fnc_randomInt] call BIS_fnc_relPos;
 		private _unit = _grpname createUnit [selectRandom enemy_infantry, _position, [], 0, "NONE"];
 		_enemy pushBack _unit;
 	};
 
 	{_x doMove position _uav} forEach _enemy;
+
+	[_pos] call prj_fnc_createReinforcement;
 };
 
 while {!(_taskID call BIS_fnc_taskCompleted)} do {
 
 	if (triggerActivated _trg) then {
-
-		private _vehicles = [_pos] call prj_fnc_createReinforcement;
 
 		for [{private _i = 120 }, { _i > -1  }, { _i = _i - 10 }] do {
 

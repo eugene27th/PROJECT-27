@@ -3,7 +3,7 @@
 	server only
 */
 
-private _distance = 700; // 600-1000
+private _distance = 600; // 600-1000
 private _safeZone = 1000; // 1500-2000
 
 private _all_locations = ["NameCityCapital","NameCity","NameVillage","NameLocal","Hill","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","BorderCrossing"];
@@ -19,8 +19,8 @@ private _types_locations = [
 	// ["VegetationFir",175,[vegetation_enemy],500],
 	// ["VegetationPalm",175,[vegetation_enemy],500],
 	// ["VegetationVineyard",175,[vegetation_enemy],500],
-	["ViewPoint",150,[other_enemy,local_civilian],1000],
-	["BorderCrossing",100,[other_enemy,local_civilian],500]
+	["ViewPoint",150,[other_enemy,local_civilian],1000]
+	// ["BorderCrossing",100,[other_enemy,local_civilian],500]
 ];
 
 private _worldSize = worldSize;
@@ -48,7 +48,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 		_trigger setTriggerArea [(_distance + _spawn_area),(_distance + _spawn_area),0,false,800]; 
 		_trigger setTriggerActivation ["ANYPLAYER","PRESENT",true];
 		_trigger setTriggerTimeout [3, 3, 3, true];
-		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && (speed _x < 180)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
+		_trigger setTriggerStatements ["{vehicle _x in thisList && isplayer _x && (speed _x < 160)} count playableunits > 0", "[thisTrigger] execVM 'core\unit_spawn_system\core\spawn_core.sqf'", ""];
 		_trigger setVariable ["location",(_types_locations # _i) # 0];
 		_trigger setVariable ["config",(_types_locations # _i) # 2];
 		_trigger setVariable ["reward",(_types_locations # _i) # 3];
@@ -58,6 +58,7 @@ for [{private _i = 0 }, { _i < (count _types_locations) }, { _i = _i + 1 }] do {
 
 		if (_house_ieds == 1) then {
 			private _buildings = nearestObjects [_pos, ["Building"], _spawn_area];
+			
 			if (!(_buildings isEqualTo [])) then {
 				private _useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
 

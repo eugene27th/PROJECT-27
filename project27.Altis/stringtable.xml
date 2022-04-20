@@ -583,8 +583,8 @@
                 <German>Humanitäre Hilfe</German>
             </Key>	
             <Key ID="STR_SIDE_HUMANITARIAN_AID_DESCRIPTION">
-                <Original>Humanitarian Aid is delivered to base.&lt;br/&gt;Our Task: deliver cargo to the meeting point and secure around it for two minutes.</Original>
-		        <Russian>На базу доставили гуманитарную помощь.&lt;br/&gt;Задача: доставить груз в обозначенный сектор и обеспечивать безопасность вокруг в течение двух минут.</Russian>
+                <Original>Humanitarian Aid is delivered to base.&lt;br/&gt;Our Task: deliver cargo to the meeting point.</Original>
+		        <Russian>На базу доставили гуманитарную помощь.&lt;br/&gt;Задача: доставить груз в обозначенный сектор.</Russian>
             </Key>
             <Key ID="STR_SIDE_HUMANITARIAN_AID_CARGO">
                 <Original>Cargo</Original>

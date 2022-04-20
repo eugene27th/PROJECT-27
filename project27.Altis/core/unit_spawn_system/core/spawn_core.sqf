@@ -80,14 +80,12 @@ if (_trigger_special != "none") exitWith {
 	};
 };
 
-private _distance = 700;
+private _distance = 600;
 private _trigger_radius = ((triggerArea _trigger) # 0) - _distance;
 private _enemy_config = (_trigger getVariable "config") # 0;
 private _civil_config = (_trigger getVariable "config") # 1;
 
-if (prj_debug) then {
-	[format ["%1 activated\nenemy - %2\nciv - %3",_trigger,_enemy_config,_civil_config]] remoteExec ["hint",0];
-};
+if (prj_debug) then {[format ["%1 activated\nenemy - %2\nciv - %3",_trigger,_enemy_config,_civil_config]] remoteExec ["hint",0]};
 
 //functions
 prj_fnc_getNumberOfUnits = {
@@ -110,28 +108,39 @@ prj_fnc_createHouseGroups = {
 
 	private "_house_pos";
 	private _house_units = [];
-	private _buildings = nearestObjects [_trigger_pos, ["Building"], _trigger_radius];
-	private _useful = _buildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
+
+	private _allBuildings = nearestObjects [_trigger_pos, ["Building"], _trigger_radius];
+	private _usefulBuildings = _allBuildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
+
+	private _usefulBuildingsPos = [];
+	{_usefulBuildingsPos append (_x buildingPos -1)} forEach _usefulBuildings;
+
+	if (prj_debug) then {[format ["позиций в строениях: %1",count _usefulBuildingsPos]] remoteExec ["systemChat"]};
 
 	for [{private _i = 0 }, { _i < ((_config # 0) # 0) }, { _i = _i + 1 }] do {
+		if (count _usefulBuildingsPos < 1) exitWith {};
+
 		private _group = createGroup [_side, true];
+
 		for [{private _i = 0 }, { _i < [((_config # 0) # 1)] call prj_fnc_getNumberOfUnits }, { _i = _i + 1 }] do {
-			if ((count _useful) > 5) then {
-				_allpositions = (selectRandom _useful) buildingPos -1;
-				_house_pos = selectRandom _allpositions;
-			};
-			if (!isNil "_house_pos") then {
-				private _unit = _group createUnit [selectRandom _class_units, _house_pos, [], 0, "NONE"];
-				doStop _unit;
-				if (_voice) then {
-					[_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit];
-				};
-				_house_units pushBack _unit;
-			};
+			if (count _usefulBuildingsPos < 1) exitWith {};
+
+			private _buildingPos = selectRandom _usefulBuildingsPos;
+
+			private _unit = _group createUnit [selectRandom _class_units, _buildingPos, [], 0, "NONE"];
+			doStop _unit;
+
+			if (_voice) then {[_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit]};
+
+			_house_units pushBack _unit;
+			_usefulBuildingsPos deleteAt (_usefulBuildingsPos find _buildingPos);
+
 			if (prj_debug) then {"юнит создан в доме" remoteExec ["systemChat"]};
+			
 			uiSleep 0.5;
 		};
 	};
+
 	_house_units
 };
 
@@ -145,7 +154,9 @@ prj_fnc_createPatrolGroups = {
 	for [{private _i = 0 }, { _i < ((_config # 1) # 0) }, { _i = _i + 1 }] do {
 		private _group = createGroup [_side, true];
 		private _pos = [_trigger_pos, 10, _trigger_radius, 1, 0] call BIS_fnc_findSafePos;
+		
 		if (!isNil "_pos") then {
+
 			for [{private _i = 0 }, { _i < [((_config # 1) # 1)] call prj_fnc_getNumberOfUnits }, { _i = _i + 1 }] do {
 				private _unit = _group createUnit [selectRandom _class_units, _pos, [], 0, "NONE"];
 				if (!_voice) then {
@@ -155,6 +166,7 @@ prj_fnc_createPatrolGroups = {
 				if (prj_debug) then {"юнит патруля создан" remoteExec ["systemChat"]};
 				uiSleep 0.5;
 			};
+
 			_group setBehaviour "SAFE";
 			_group setSpeedMode "LIMITED";
 			_group setCombatMode "YELLOW";

@@ -428,7 +428,7 @@ prj_fnc_saveGame = {
 	private _vehs = nearestObjects [position spawn_zone,["Air","LandVehicle"], 1000];
 
 	{
-		if ((typeOf _x) in vehiclesBlacklist) {continue};
+		if ((typeOf _x) in vehiclesBlacklist) then {continue};
 		_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x];
 	} forEach _vehs;
 	

@@ -49,7 +49,7 @@ while {true} do {
 							["", "Patrol started. Time: " + str (_waitingTime/60) + " minutes."] remoteExec ["BIS_fnc_showSubtitle",0];
 						};
 
-						case (_waitingTime - 60): {
+						case (_waitingTime - 240): {
 							[_pos] call prj_fnc_createSentryPatrol;
 						};
 

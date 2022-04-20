@@ -287,105 +287,97 @@ prj_fnc_createCheckpoint = {
 };
 
 prj_fnc_createSentryPatrol = {
-	params ["_sentryPos",["_forced",false],["_type","air"],["_radius",400],["_numPoints",8]];
+	params ["_sentryPos",["_forced",false],["_radius",400],["_numPoints",8]];
 
 	private _chance = ("airVehiclesUsageProbability" call BIS_fnc_getParamValue) / 10;
 
-	if (!_forced && round (random 1) < _chance) exitWith {
-		private _vehicles = [_pos] call prj_fnc_createReinforcement;
+	if (enemy_heliSentry isEqualTo [] || (!_forced && round (random 1) < _chance)) exitWith {
+		private _vehicles = [_sentryPos] call prj_fnc_createReinforcement;
+	};
+	
+	private _spawnPos = [false,false,[]] call prj_fnc_selectCaptPosition;
+
+	private _vehicle = createVehicle [(selectRandom enemy_heliSentry), _spawnPos, [], 0, "FLY"];
+	
+	private _vehUnits = [_vehicle,enemy_infantry,true] call prj_fnc_createCrew;
+	private _vehGroup = group _vehicle;
+
+	_vehicle flyInHeight 140;
+
+	private _deg = 0;
+	private _degDif = 360 / _numPoints;
+
+	for "_i" from 1 to _numPoints do {
+		private _wpPos = [_sentryPos, _radius, _deg] call BIS_fnc_relPos;
+
+		private _wpCrew = _vehGroup addWaypoint [_wpPos, 0];
+		_wpCrew setWaypointSpeed "NORMAL";
+		_wpCrew setWaypointType "MOVE";
+
+		_deg = _deg + _degDif;
 	};
 
-	switch (_type) do {
-		case "air": {
-			private _spawnPos = [false,false,[]] call prj_fnc_selectCaptPosition;
+	[_vehicle,_vehUnits] spawn {
+		params ["_vehicle","_vehUnits"];
 
-			private _vehicle = createVehicle [(selectRandom enemy_heliSentry), _spawnPos, [], 0, "FLY"];
-			
-			private _vehUnits = [_vehicle,enemy_infantry,true] call prj_fnc_createCrew;
-			private _vehGroup = group _vehicle;
+		while {alive _vehicle} do {
+			sleep 10;
+			private _unit = _vehUnits # 0;
+			private _nearEnemy = _unit findNearestEnemy (position _unit);
 
-			_vehicle flyInHeight 140;
+			if (!isNull _nearEnemy) exitWith {
+				private _enemyData = _nearEnemy call BIS_fnc_objectType;
 
-			private _deg = 0;
-			private _degDif = 360 / _numPoints;
+				private _enemyCategory = _enemyData # 0;
+				private _enemyType = _enemyData # 1;
 
-			for "_i" from 1 to _numPoints do {
-				private _wpPos = [_sentryPos, _radius, _deg] call BIS_fnc_relPos;
-
-				private _wpCrew = _vehGroup addWaypoint [_wpPos, 0];
-				_wpCrew setWaypointSpeed "NORMAL";
-				_wpCrew setWaypointType "MOVE";
-
-				_deg = _deg + _degDif;
-			};
-
-			[_vehicle,_vehUnits] spawn {
-				params ["_vehicle","_vehUnits"];
-
-				while {alive _vehicle} do {
-					sleep 10;
-					private _unit = _vehUnits # 0;
-					private _nearEnemy = _unit findNearestEnemy (position _unit);
-
-					if (!isNull _nearEnemy) exitWith {
-						private _enemyData = _nearEnemy call BIS_fnc_objectType;
-
-						private _enemyCategory = _enemyData # 0;
-						private _enemyType = _enemyData # 1;
-
-						switch (_enemyCategory) do {
-							case "Soldier": {
+				switch (_enemyCategory) do {
+					case "Soldier": {
+						private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_createReinforcement;
+					};
+					case "Vehicle": {
+						if (_enemyType isEqualTo "Helicopter" || _enemyType isEqualTo "Plane") then {
+							private _vehicles = [position _nearEnemy,2,"antiAir"] call prj_fnc_createReinforcement;
+						} else {
+							if (_enemyType isEqualTo "Car") then {
 								private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_createReinforcement;
-								// systemChat "пехота";
-							};
-							case "Vehicle": {
-								if (_enemyType isEqualTo "Helicopter" || _enemyType isEqualTo "Plane") then {
-									private _vehicles = [position _nearEnemy,2,"antiAir"] call prj_fnc_createReinforcement;
-									// systemChat "воздух";
-								} else {
-									if (_enemyType isEqualTo "Car") then {
-										private _vehicles = [position _nearEnemy,2,"antiInf"] call prj_fnc_createReinforcement;
-										// systemChat "машинка";
-									} else {
-										private _vehicles = [position _nearEnemy,2,"antiTank"] call prj_fnc_createReinforcement;
-										// systemChat "шото потяжелее";
-									};
-								};
+							} else {
+								private _vehicles = [position _nearEnemy,2,"antiTank"] call prj_fnc_createReinforcement;
 							};
 						};
 					};
 				};
-
-				if (!alive _vehicle) then {
-					private _heliCrashPos = position _vehicle;
-					_heliCrashPos set [2,0];
-					
-					private _vehicles = [_heliCrashPos,2,"antiInf"] call prj_fnc_createReinforcement;
-				};
-			};
-
-			private _wpCrew = _vehGroup addWaypoint [_spawnPos, 0];  
-			_wpCrew setWaypointSpeed "FULL";
-			_wpCrew setWaypointType "MOVE";
-
-			//check and vehicle delete
-
-			[_vehicle,_vehUnits,_spawnPos] spawn {
-				sleep 300;
-
-				params ["_vehicle","_crewUnits","_spawnPos"];
-
-				waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 700};
-
-				if (!alive _vehicle) then {
-					sleep 120;
-				};
-
-				_crewUnits pushBack _vehicle;
-				
-				{deleteVehicle _x} forEach _crewUnits;
 			};
 		};
+
+		if (!alive _vehicle) then {
+			private _heliCrashPos = position _vehicle;
+			_heliCrashPos set [2,0];
+			
+			private _vehicles = [_heliCrashPos,2,"antiInf"] call prj_fnc_createReinforcement;
+		};
+	};
+
+	private _wpCrew = _vehGroup addWaypoint [_spawnPos, 0];  
+	_wpCrew setWaypointSpeed "FULL";
+	_wpCrew setWaypointType "MOVE";
+
+	//check and vehicle delete
+
+	[_vehicle,_vehUnits,_spawnPos] spawn {
+		sleep 300;
+
+		params ["_vehicle","_crewUnits","_spawnPos"];
+
+		waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 700};
+
+		if (!alive _vehicle) then {
+			sleep 120;
+		};
+
+		_crewUnits pushBack _vehicle;
+		
+		{deleteVehicle _x} forEach _crewUnits;
 	};
 };
 
@@ -564,7 +556,7 @@ prj_fnc_createReinforcement = {
 
 				params ["_vehicle","_crewUnits","_spawnPos","_helipad"];
 
-				waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 250};
+				waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 400};
 
 				if (!alive _vehicle) then {
 					sleep 120;
@@ -579,7 +571,7 @@ prj_fnc_createReinforcement = {
 			//check and cargos delete
 
 			[_cargoUnits] spawn {
-				sleep 420;
+				sleep 300;
 
 				params ["_cargoUnits"];
 				
@@ -633,7 +625,7 @@ prj_fnc_createReinforcement = {
 
 				params ["_vehicle","_crewUnits","_spawnPos"];
 
-				waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 300};
+				waitUntil {sleep 10; !alive _vehicle || (_spawnPos distance _vehicle) < 400};
 
 				if (!alive _vehicle) then {
 					sleep 120;
@@ -688,7 +680,7 @@ prj_fnc_createReinforcement = {
 };
 
 prj_fnc_checkAndDelete = {
-	params ["_vehicles",["_distance",2500],["_start_time",600],["_interval_time",60]];
+	params ["_vehicles",["_distance",1500],["_start_time",300],["_interval_time",60]];
 
 	{
 		(_x # 0) addEventHandler ["GetIn", {
@@ -1179,7 +1171,8 @@ prj_fnc_uploadObjectsViaHttp = {
 		_side = switch (_side) do {
 			case WEST: {1};
 			case INDEPENDENT: {2};
-			case CIVILIAN: {3};
+			case OPFOR: {3};
+			case CIVILIAN: {4};
 			default {0};
 		};
 

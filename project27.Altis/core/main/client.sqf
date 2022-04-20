@@ -26,7 +26,7 @@
 	true;
 };
 
-player createDiaryRecord ["Diary", [localize "STR_A3_FM_Welcome4","<br/><br/><font color='#33FF9C' size='16'>PROJECT27 1.4.6.5</font><br/><font color='#33FFF9'>https://github.com/eugene27r/PROJECT-27</font<br/><br/><br/>If you want to help with translation, write to:<br/><font color='#51C1E5'>discord - eugene27#0027</font><br/><font color='#51C1E5'>email - evgen.monreal@gmail.com</font><br/>"], taskNull, "", false];
+player createDiaryRecord ["Diary", [localize "STR_A3_FM_Welcome4","<br/><br/><font color='#33FF9C' size='16'>PROJECT27 1.4.6.5</font><br/><font color='#33FFF9'>https://github.com/eugene27r/PROJECT-27</font>"], taskNull, "", false];
 
 private _doc_start = player createDiaryRecord ["Diary", [localize "STR_DOCUMENTATION_START_TITLE", localize "STR_DOCUMENTATION_START_DESC"], taskNull, "", false];
 

@@ -81,7 +81,7 @@ class Params
 		title = "Sector capture mode";
 		values[] = { 0, 1 };
 		texts[] = { "temporary sector capture", "permanent sector capture" };
-		default = 0;
+		default = 1;
 	};
 
 	class divider_tasks
@@ -129,7 +129,7 @@ class Params
 		title = "Probability of using air vehicles";
 		values[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		texts[] = { "The enemy does not use air vehicles", "10%", "20%", "30%", "40%", "50%", "60%", "70%" };
-		default = 0;
+		default = 2;
 	}
 
 	class chanceCivTransform
@@ -145,7 +145,7 @@ class Params
 		title = "Suicide bombers";
 		values[] = { 0, 1 };
 		texts[] = { "Off", "On" };
-		default = 0;
+		default = 1;
 	};
 
 	class checkpoints_on_roads
@@ -153,7 +153,7 @@ class Params
 		title = "Enemy checkpoints on the roads";
 		values[] = { 0, 10, 15, 20, 25, 50 };
 		texts[] = { "Off", "10", "15", "20", "25", "50" };
-		default = 20;
+		default = 25;
 	};
 
 	class divider_ied_roads
@@ -185,7 +185,7 @@ class Params
 		title = "IED in houses";
 		values[] = { 1, 0 };
 		texts[] = { "On", "Off" };
-		default = 1;
+		default = 0;
 	};
 
 	class percentage_of_ied_in_houses
@@ -342,27 +342,6 @@ class CfgSounds
 	{
 		name = "scream_allah";
 		sound[] = {"sound\scream_allah.ogg", db+10, 1};
-		titles[] = {0, ""};
-	};
-
-	class scream_1
-	{
-		name = "scream_1";
-		sound[] = {"sound\scream_1.ogg", db+60, 1};
-		titles[] = {0, ""};
-	};
-
-	class scream_2
-	{
-		name = "scream_2";
-		sound[] = {"sound\scream_2.ogg", db+60, 1};
-		titles[] = {0, ""};
-	};
-
-	class scream_3
-	{
-		name = "scream_3";
-		sound[] = {"sound\scream_3.ogg", db+120, 1};
 		titles[] = {0, ""};
 	};
 

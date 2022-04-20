@@ -10,38 +10,38 @@ arsenal_black_list = ["launch_B_Titan_short_tna_F","launch_B_Titan_short_F","lau
 hqUID = ["76561198141746661","76561198138702011","76561198060515006"];
 
 // additional removal points (radius 100m)
-delete_locations = [[783.883,4860.47,0],[2693.67,6660.53,0],[1457.51,7655.45,0],[1431.02,7842.05,0],[1450.65,7808.99,0]];
+delete_locations = [];
 
 // enemy side
-enemySide = independent;
+enemySide = opfor;
 
 // classnames configuration
 // units and vehicles
-friendly_helicopters = ["RHS_UH60M","RHS_CH_47F","RHS_MELB_MH6M","RHS_MELB_H6M","C_Heli_Light_01_civil_F","CUP_B_UH60M_US","CUP_B_MH47E_USA","CUP_B_AH64D_DL_USA","CUP_B_MH60L_DAP_4x_US","CUP_C_IDAP_412","rhs_uh1h_idap","CUP_C_Merlin_HC3_IDAP_Rescue"];
+friendly_helicopters = ["RHS_UH60M","RHS_CH_47F","RHS_MELB_MH6M","RHS_MELB_H6M","C_Heli_Light_01_civil_F"];
 
 idap_units = ["C_IDAP_Man_AidWorker_01_F","C_IDAP_Man_AidWorker_07_F","C_IDAP_Man_AidWorker_08_F","C_IDAP_Man_AidWorker_09_F","C_IDAP_Man_AidWorker_02_F","C_IDAP_Man_AidWorker_05_F","C_IDAP_Man_AidWorker_06_F","C_IDAP_Man_AidWorker_04_F","C_IDAP_Man_AidWorker_03_F"];
 idap_vehicles = ["C_IDAP_Offroad_02_unarmed_F","C_IDAP_Offroad_01_F","C_IDAP_Van_02_vehicle_F","C_IDAP_Van_02_transport_F","C_IDAP_Truck_02_transport_F","C_IDAP_Truck_02_F","C_IDAP_Truck_02_water_F"];
 
 hostage_units = idap_units + ["C_journalist_F","C_Journalist_01_War_F","C_Man_UtilityWorker_01_F","C_Story_EOD_01_F","LOP_PMC_Infantry_VIP","C_Man_Paramedic_01_F"];
 
-civilian_units = ["CUP_C_TK_Man_04","CUP_C_TK_Man_04_Jack","CUP_C_TK_Man_04_Waist","CUP_C_TK_Man_07","CUP_C_TK_Man_07_Coat","CUP_C_TK_Man_07_Waist","CUP_C_TK_Man_08","CUP_C_TK_Man_08_Jack","CUP_C_TK_Man_08_Waist","CUP_C_TK_Man_05_Coat","CUP_C_TK_Man_05_Jack","CUP_C_TK_Man_05_Waist","CUP_C_TK_Man_06_Coat","CUP_C_TK_Man_06_Jack","CUP_C_TK_Man_06_Waist","CUP_C_TK_Man_02","CUP_C_TK_Man_02_Jack","CUP_C_TK_Man_02_Waist","CUP_C_TK_Man_01_Waist","CUP_C_TK_Man_01_Coat","CUP_C_TK_Man_01_Jack","CUP_C_TK_Man_03_Coat","CUP_C_TK_Man_03_Jack","CUP_C_TK_Man_03_Waist","LOP_Tak_Civ_Man_06","LOP_Tak_Civ_Man_08","LOP_Tak_Civ_Man_07","LOP_Tak_Civ_Man_05","LOP_Tak_Civ_Man_01","LOP_Tak_Civ_Man_10","LOP_Tak_Civ_Man_02","LOP_Tak_Civ_Man_09","LOP_Tak_Civ_Man_11","LOP_Tak_Civ_Man_12","LOP_Tak_Civ_Man_04","LOP_Tak_Civ_Man_14","LOP_Tak_Civ_Man_13","LOP_Tak_Civ_Man_16","LOP_Tak_Civ_Man_15"];
+civilian_units = ["LOP_Tak_Civ_Man_08","LOP_Tak_Civ_Man_07","LOP_Tak_Civ_Man_05","LOP_Tak_Civ_Man_01","LOP_Tak_Civ_Man_10","LOP_Tak_Civ_Man_02","LOP_Tak_Civ_Man_09","LOP_Tak_Civ_Man_11","LOP_Tak_Civ_Man_12","LOP_Tak_Civ_Man_04","LOP_Tak_Civ_Man_14","LOP_Tak_Civ_Man_13","LOP_Tak_Civ_Man_16","LOP_Tak_Civ_Man_15"];
 
-civilian_vehicles = ["CUP_C_Lada_GreenTK_CIV","CUP_C_Lada_TK2_CIV","CUP_C_UAZ_Unarmed_TK_CIV","CUP_C_UAZ_Open_TK_CIV","CUP_O_Hilux_unarmed_TK_CIV","CUP_C_LR_Transport_CTK","CUP_C_Skoda_CR_CIV","CUP_C_Lada_White_CIV","CUP_C_Lada_Red_CIV","CUP_C_Datsun_Covered","CUP_C_Datsun_Tubeframe","CUP_C_TT650_CIV"];
+civilian_vehicles = ["LOP_TKA_BTR60"];
 
-enemy_leaders = ["LOP_ISTS_Infantry_SL","LOP_ISTS_Infantry_Rifleman_6","LOP_ISTS_Infantry_Rifleman_5"];
+enemy_leaders = ["LOP_TKA_Infantry_Corpsman"];
 
-enemy_infantry = ["LOP_AM_Infantry_Engineer","LOP_AM_Infantry_Corpsman","LOP_AM_Infantry_GL","LOP_AM_Infantry_Rifleman_6","LOP_AM_Infantry_Rifleman","LOP_AM_Infantry_Rifleman_4","LOP_AM_Infantry_Rifleman_5","LOP_AM_Infantry_Rifleman_7","LOP_AM_Infantry_Rifleman_8","LOP_AM_Infantry_AR_Asst","LOP_AM_Infantry_AR","LOP_AM_Infantry_AT","LOP_AM_Infantry_Marksman","LOP_AM_Infantry_Rifleman_9","LOP_AM_Infantry_SL","CUP_I_TK_GUE_Soldier_AR","CUP_I_TK_GUE_Guerilla_Medic","CUP_I_TK_GUE_Demo","CUP_I_TK_GUE_Soldier","CUP_I_TK_GUE_Soldier_AK_47S","CUP_I_TK_GUE_Guerilla_Enfield","CUP_I_TK_GUE_Soldier_GL","CUP_I_TK_GUE_Soldier_M16A2","CUP_I_TK_GUE_Soldier_AAT","CUP_I_TK_GUE_Soldier_LAT","CUP_I_TK_GUE_Soldier_AT","CUP_I_TK_GUE_Sniper","CUP_I_TK_GUE_Mechanic","CUP_I_TK_GUE_Soldier_MG","CUP_I_TK_GUE_Soldier_TL","CUP_I_TK_GUE_Commander"];
+enemy_infantry = ["LOP_TKA_Infantry_AA","LOP_TKA_Infantry_Corpsman","LOP_TKA_Infantry_Engineer","LOP_TKA_Infantry_GL","LOP_TKA_Infantry_AT","LOP_TKA_Infantry_AT_Asst","LOP_TKA_Infantry_MG","LOP_TKA_Infantry_MG_Asst","LOP_TKA_Infantry_Marksman","LOP_TKA_Infantry_Officer","LOP_TKA_Infantry_Rifleman","LOP_TKA_Infantry_Rifleman_2","LOP_TKA_Infantry_Rifleman_3","LOP_TKA_Infantry_SL","LOP_TKA_Infantry_TL"];
 
 enemy_turrets = ["rhs_KORD_VDV","rhs_KORD_high_VDV","rhs_SPG9M_VDV","RHS_AGS30_TriPod_VDV","RHS_NSV_TriPod_VDV","RHS_ZU23_VDV"];
 
-enemy_vehicles_light = ["CUP_I_Datsun_PK_TK","CUP_I_Hilux_AGS30_TK","CUP_I_Hilux_DSHKM_TK","CUP_I_Hilux_M2_TK","CUP_I_Hilux_zu23_TK","LOP_ISTS_Nissan_PKM","LOP_ISTS_Landrover_M2","LOP_ISTS_Landrover","CUP_I_BTR40_MG_TKG","rhsgref_tla_g_offroad_armed","CUP_C_Datsun_Covered","CUP_O_Hilux_unarmed_TK_CIV","CUP_C_Datsun_Tubeframe"];
-enemy_vehicles_heavy = ["LOP_ISTS_BMP1","CUP_I_BMP1_TK_GUE","CUP_O_BMP2_ZU_TKA","CUP_O_MTLB_pk_TK_MILITIA"];
+enemy_vehicles_light = ["LOP_TKA_BTR60"];
+enemy_vehicles_heavy = ["LOP_TKA_BTR60","LOP_TKA_BTR70","LOP_TKA_BMP2","LOP_TKA_BMP2D","LOP_TKA_BMP1","LOP_TKA_BMP1D"];
 
 enemy_vehicles_aa = [];
-enemy_vehicles_at = [];
+enemy_vehicles_at = ["LOP_TKA_T55","LOP_SYR_T72BA","LOP_TKA_T72BB"];
 
-enemy_vehiclesConvoyHeavy = ["rhsgref_ins_g_btr70","rhsgref_BRDM2_ins_g","rhsgref_cdf_btr80"];
-enemy_vehiclesConvoyLight = ["CUP_I_Datsun_PK_TK","CUP_I_Hilux_AGS30_TK","CUP_I_Hilux_DSHKM_TK","CUP_I_Hilux_M2_TK","CUP_I_Hilux_zu23_TK","LOP_ISTS_Nissan_PKM","LOP_ISTS_Landrover_M2","CUP_I_BTR40_MG_TKG","rhsgref_tla_g_offroad_armed"];
+enemy_vehiclesConvoyHeavy = ["LOP_TKA_BTR60","LOP_TKA_BTR70"];
+enemy_vehiclesConvoyLight = ["LOP_TKA_BTR60","LOP_TKA_BTR70"];
 
 enemy_heliSentry = [];
 enemy_heliTransport = [];
@@ -242,7 +242,7 @@ shop_land_vehicles = [
 	["Land_WoodenCrate_01_F",500,0],
 	["B_supplyCrate_F",100,0],
 	["C_IDAP_supplyCrate_F",300,0],
-	["C_Quadbike_01_F",0,0],
+	["C_Quadbike_01_F",100,0],
 	["CUP_C_V3S_Open_TKC",500,0],
 	["CUP_C_S1203_CIV_CR",300,0],
 	["CUP_C_Ikarus_TKC",700,0],
@@ -953,8 +953,8 @@ tasksConfig = [
 	["side_intel_uav",5000],
 	["side_liquidation_leader",3000],
 	["side_rescue",5000],
-	["side_convoy",6000]
-	// ["side_humanitarian_aid",3000]
+	// ["side_convoy",6000]
+	["side_humanitarian_aid",3000]
 ];
 
 // tables

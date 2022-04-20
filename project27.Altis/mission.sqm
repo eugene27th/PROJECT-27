@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=2698;
+		nextID=2705;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15204.338,76.443275,17303.539};
-		dir[]={-0.56041735,-0.47624061,-0.67758942};
-		up[]={-0.30352435,0.87931502,-0.3669852};
-		aside[]={-0.7705878,-1.4901161e-008,0.63733399};
+		pos[]={15124.121,21.678175,17224.621};
+		dir[]={0.43478507,-0.35093305,0.82934189};
+		up[]={0.16294357,0.93640053,0.31081083};
+		aside[]={0.88567001,-2.9802322e-008,-0.46431527};
 	};
 };
 binarizationWanted=0;
@@ -304,7 +304,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=21;
+		items=24;
 		class Item0
 		{
 			dataType="Trigger";
@@ -3613,6 +3613,42 @@ class Mission
 				};
 				nAttributes=4;
 			};
+		};
+		class Item21
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={15129.924,17.91,17232.477};
+			};
+			name="hc_1";
+			isPlayable=1;
+			id=2702;
+			type="HeadlessClient_F";
+		};
+		class Item22
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={15129.283,17.91,17231.855};
+			};
+			name="hc_2";
+			isPlayable=1;
+			id=2703;
+			type="HeadlessClient_F";
+		};
+		class Item23
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={15128.621,17.91,17231.186};
+			};
+			name="hc_3";
+			isPlayable=1;
+			id=2704;
+			type="HeadlessClient_F";
 		};
 	};
 	class Connections

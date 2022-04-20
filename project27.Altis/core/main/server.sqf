@@ -50,8 +50,8 @@ if (_arsenal_type == 0) then {
 };
 
 // create any objects
-private _a_garage_depot = createVehicle ["VR_Area_01_circle_4_grey_F", position tr_a_shop, [], 0, "CAN_COLLIDE"];
-private _g_garage_depot = createVehicle ["VR_Area_01_circle_4_yellow_F", position tr_g_shop, [], 0, "CAN_COLLIDE"];
+private _a_garage_depot = createVehicle ["VR_Area_01_circle_4_grey_F", [(position tr_a_shop) # 0, (position tr_a_shop) # 1, 0.05], [], 0, "CAN_COLLIDE"];
+private _g_garage_depot = createVehicle ["VR_Area_01_circle_4_yellow_F", [(position tr_g_shop) # 0, (position tr_g_shop) # 1, 0.05], [], 0, "CAN_COLLIDE"];
 {(_x # 0) setDir ((triggerArea (_x # 1)) # 2)} forEach [[_a_garage_depot,tr_a_shop],[_g_garage_depot,tr_g_shop]];
 
 //create EHs and other system
@@ -192,8 +192,8 @@ if (("autoSaveLoad" call BIS_fnc_getParamValue) == 1) then {call prj_fnc_loadGam
 webUpdateObjectsWhile = true;
 
 [] spawn {
-	while {webUpdateObjectsWhile} do { 
-		[] spawn prj_fnc_uploadObjectsViaHttp; 
-		uiSleep 10;
+	while {webUpdateObjectsWhile} do {
+		[] spawn prj_fnc_uploadObjectsViaHttp;
+		waitUntil {sleep 10; (count allPlayers) > 0};
 	};
 };
