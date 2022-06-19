@@ -1,0 +1,396 @@
+cba_settings_hasSettingsFile = 1;
+
+author			= "eugene27";
+OnLoadName		= "PROJECT 27";
+OnLoadMission	= "Fictional armed conflict. Tactical military sandbox.";
+// loadScreen = __EVAL(["img\logomis.paa", "img\logomis1.paa"] select floor random 2);
+loadScreen = "img\preview.paa";
+overviewText    = "Fictional armed conflict. Tactical military sandbox.";
+overviewPicture = "img\preview.paa";
+
+enableDebugConsole[] = { "76561198141746661", "76561198138702011", "76561198060515006" };
+
+class Params
+{
+	class divider_general
+	{
+		title = "• GENERAL";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class autoSaveLoad
+	{
+		title = "Load save automatically (recommended for dedicated)";
+		values[] = { 1, 0 };
+		texts[] = { "Yes", "No" };
+		default = 1;
+	};
+
+	class roads_safe_radius
+	{
+		title = "Safe radius around base";
+		values[] = { 1500, 2000, 2500, 3000, 3500 };
+		texts[] = { "1500m", "2000m", "2500m", "3000m", "3500m" };
+		default = 1500;
+	};
+
+	class time_acceleration
+	{
+		title = "Time acceleration";
+		values[] = { 0, 1 };
+		texts[] = { "Off", "On" };
+		default = 0;
+	};
+
+	class divider_arsenal
+	{
+		title = "• ARSENAL";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class virtualArsenal
+	{
+		title = "Arsenal";
+		values[] = { 0, 1 };
+		texts[] = { "Virtual arsenal", "Arsenal shop" };
+		default = 0;
+	};
+
+	class divider_sectors
+	{
+		title = "• SECTORS";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class capture_of_sectors
+	{
+		title = "Sectors capturing";
+		values[] = { 1, 0 };
+		texts[] = { "On", "Off" };
+		default = 1;
+	};
+
+	class sectorCaptureMode
+	{
+		title = "Sector capture mode";
+		values[] = { 0, 1 };
+		texts[] = { "temporary sector capture", "permanent sector capture" };
+		default = 1;
+	};
+
+	class divider_tasks
+	{
+		title = "• PATROL TASKS";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class patrols
+	{
+		title = "Patrol tasks";
+		values[] = { 1, 2 };
+		texts[] = { "On", "Off" };
+		default = 1;
+	};
+
+	class patrolTime
+	{
+		title = "Patrol time";
+		values[] = { 300, 600, 900 };
+		texts[] = { "5 minutes", "10 minutes", "15 minutes" };
+		default = 600;
+	};
+
+	class divider_enemy
+	{
+		title = "• ENEMY";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class enemycoef
+	{
+		title = "Enemy numbers";
+		values[] = { 1, 2, 3, 4 };
+		texts[] = { "x1 (recommended)", "x2", "x3", "x4" };
+		default = 1;
+	};
+
+	class airVehiclesUsageProbability
+	{
+		title = "Probability of using air vehicles";
+		values[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		texts[] = { "The enemy does not use air vehicles", "10%", "20%", "30%", "40%", "50%", "60%", "70%" };
+		default = 2;
+	}
+
+	class chanceCivTransform
+	{
+		title = "Chance of civilian transformation";
+		values[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		texts[] = { "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%" };
+		default = 4;
+	};
+
+	class suicide_bombers
+	{
+		title = "Suicide bombers";
+		values[] = { 0, 1 };
+		texts[] = { "Off", "On" };
+		default = 0;
+	};
+
+	class checkpoints_on_roads
+	{
+		title = "Enemy checkpoints on the roads";
+		values[] = { 0, 10, 15, 20, 25, 50 };
+		texts[] = { "Off", "10", "15", "20", "25", "50" };
+		default = 25;
+	};
+
+	class divider_ied_roads
+	{
+		title = "• IED ON THE ROADS";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class ied_on_roads
+	{
+		title = "IED on the roads";
+		values[] = { 0, 10, 25, 50, 100, 150, 200, 250, 300, 400 };
+		texts[] = { "Off", "10", "25", "50", "100", "150", "200", "250", "300", "400" };
+		default = 25;
+	};
+
+	class divider_ied_house
+	{
+		title = "• IED IN THE HOUSES";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class ied_in_houses
+	{
+		title = "IED in houses";
+		values[] = { 1, 0 };
+		texts[] = { "On", "Off" };
+		default = 0;
+	};
+
+	class percentage_of_ied_in_houses
+	{
+		title = "Percentage of IED in houses";
+		values[] = { 1, 2, 3, 4, 5, 6, 7 };
+		texts[] = { "10%", "20%", "30%", "40%", "50%", "60%", "70%" };
+		default = 1;
+	};
+
+	class divider_points
+	{
+		title = "• POINTS";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class player_point_value_on_start
+	{
+		title = "Players' points when they first enter the game";
+		values[] = { 100, 500, 1000, 2000, 3000, 5000, 7000, 10000, 15000, 20000, 100000 };
+		texts[] = { "100" ,"500", "1000", "2000", "3000", "5000", "7000", "10000", "15000", "20000", "100000" };
+		default = 2000;
+	};
+
+	class divider_vehshops
+	{
+		title = "• VEHICLE SHOPS";
+		values[] = { "" };
+		texts[] = { "" };
+		default = 0;
+	};
+
+	class a_garage_level_on_start
+	{
+		title = "Aircraft store level (on start)";
+		values[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		texts[] = { "0" ,"1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+		default = 0;
+	};
+
+	class g_garage_level_on_start
+	{
+		title = "Ground vehicle store level (on start)";
+		values[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		texts[] = { "0" ,"1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+		default = 0;
+	};
+	
+};
+
+#include "taw_vd\GUI.h"
+#include "core\fnc\GUI\defines.hpp"
+#include "core\fnc\GUI\controls.hpp"
+
+class CfgFunctions
+{
+	#include "taw_vd\CfgFunctions.hpp"
+	class SA
+	{
+		class AdvancedTowing
+		{
+			file = "core\fnc";
+			class advancedTowingInit{postInit=1};
+		};
+
+		class AdvancedSlingLoading
+		{
+			file = "core\fnc";
+			class advancedSlingLoadingInit{postInit=1};
+		};
+
+	};
+};
+
+class CfgMusic
+{
+	class start_music_1
+	{
+		name = "start_music_1";
+		sound[] = {"sound\start_music_1.ogg", db+0, 1};
+		titles[] = {0, ""};
+	};
+};
+
+class CfgNotifications
+{
+	class sector_capture
+	{
+		title = $STR_SECTOR_CAPTURED_TITLE;
+		iconPicture = "\A3\ui_f\data\GUI\Cfg\Notifications\tridentEnemy_ca.paa";
+		description = $STR_SECTOR_CAPTURED_DESC;
+		color[] = {1,1,1,1};
+		duration = 7;
+		priority = 0;
+		sound = "taskAssigned";
+		difficulty[] = {};
+	};
+
+	class sector_lost
+	{
+		title = $STR_SECTOR_LOST_TITLE;
+		iconPicture = "\A3\ui_f\data\GUI\Cfg\Notifications\tridentEnemy_ca.paa";
+		description = $STR_SECTOR_LOST_DESC;
+		color[] = {1,1,1,1};
+		duration = 7;
+		priority = 0;
+		sound = "taskAssigned";
+		difficulty[] = {};
+	};
+
+	class camp_capture
+	{
+		title = $STR_CAMP_CAPTURED_TITLE;
+		iconPicture = "\A3\ui_f\data\GUI\Cfg\Notifications\tridentEnemy_ca.paa";
+		description = $STR_CAMP_CAPTURED_DESC;
+		color[] = {1,1,1,1};
+		duration = 7;
+		priority = 0;
+		sound = "taskAssigned";
+		difficulty[] = {};
+	};
+
+	class checkpoint_capture
+	{
+		title = $STR_CHECKPOINT_CAPTURED_TITLE;
+		iconPicture = "\A3\ui_f\data\GUI\Cfg\Notifications\tridentEnemy_ca.paa";
+		description = $STR_CHECKPOINT_CAPTURED_DESC;
+		color[] = {1,1,1,1};
+		duration = 7;
+		priority = 0;
+		sound = "taskAssigned";
+		difficulty[] = {};
+	};
+
+	class side_convoy_start
+	{
+		title = $STR_SIDE_CONVOY_START_TITLE;
+		iconPicture = "\A3\ui_f\data\GUI\Cfg\Notifications\tridentEnemy_ca.paa";
+		description = $STR_SIDE_CONVOY_START_DESCRIPTION;
+		color[] = {1,1,1,1};
+		duration = 7;
+		priority = 0;
+		sound = "taskAssigned";
+		difficulty[] = {};
+	};
+};
+
+class CfgSounds
+{
+
+    class scream_allah
+	{
+		name = "scream_allah";
+		sound[] = {"sound\scream_allah.ogg", db+10, 1};
+		titles[] = {0, ""};
+	};
+
+	class startdnlddronedate
+	{
+		name = "uav_start";
+		sound[] = {"sound\dronemission\start.ogg", db+10, 1};
+		titles[] = {0, ""};
+	};
+
+	class stopdnlddronedate
+	{
+		name = "uav_stop";
+		sound[] = {"sound\dronemission\stop.ogg", db+10, 1};
+		titles[] = {0, ""};
+	};
+
+	class finishdnlddronedate
+	{
+		name = "uav_finish";
+		sound[] = {"sound\dronemission\finish.ogg", db+10, 1};
+		titles[] = {0, ""};
+	};
+
+	class 90dnlddronedate
+	{
+		name = "uav_90s";
+		sound[] = {"sound\dronemission\90.ogg", db+10, 1};
+		titles[] = {0, ""};
+	};
+
+	class 60dnlddronedate
+	{
+		name = "uav_60s";
+		sound[] = {"sound\dronemission\60.ogg", db+10, 1};
+		titles[] = {0, ""};
+	};
+
+	class 30dnlddronedate
+	{
+		name = "uav_30s";
+		sound[] = {"sound\dronemission\30.ogg", db+10, 1};
+		titles[] = {0, ""};
+	};
+
+	class radioIn
+	{
+		name = "in2a";
+		sound[] = {"@A3\Dubbing_Radio_F\sfx\in2a.ogg",db+12,1.1};
+		titles[] = {};
+	};
+};
