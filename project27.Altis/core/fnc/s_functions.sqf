@@ -696,7 +696,7 @@ prj_fnc_checkAndDelete = {
 	uiSleep _start_time;
 
 	while {(count _vehicles) > 0} do {
-		private _deleteIndexs = [];
+		private _deleteArr = [];
 
 		for "_i" from 0 to ((count _vehicles) - 1) do {
 			
@@ -704,7 +704,7 @@ prj_fnc_checkAndDelete = {
 			private _crew = (_vehicles # _i) # 1;
 
 			if (!alive _veh) exitWith {
-				_deleteIndexs pushBack _i;
+				_deleteArr pushBack (_vehicles # _i);
 
 				_crew pushBack _veh;
 
@@ -716,7 +716,7 @@ prj_fnc_checkAndDelete = {
 			};
 
 			if (_veh getVariable ["cannotDeleted",false]) then {
-				_deleteIndexs pushBack _i;
+				_deleteArr pushBack (_vehicles # _i);
 
 				[_crew] spawn {
 					params ["_crew"];
@@ -733,7 +733,7 @@ prj_fnc_checkAndDelete = {
 				} forEach allPlayers;
 
 				if (!_playersNear) then {
-					_deleteIndexs pushBack _i;
+					_deleteArr pushBack (_vehicles # _i);
 
 					_crew pushBack _veh;
 					{deleteVehicle _x} forEach _crew;
@@ -742,7 +742,7 @@ prj_fnc_checkAndDelete = {
 			};
 		};
 
-		{_vehicles deleteAt _x} forEach _deleteIndexs;
+		{_vehicles deleteAt (_vehicles find _x)} forEach _deleteArr;
 
 		uiSleep _interval_time;
 	};
@@ -1077,7 +1077,7 @@ prj_fnc_arrayDelimiter = {
 prj_fnc_sendHttpRequest = {
 	params ["_getParams","_data"];
 
-	"ArmaRequests" callExtension (format ["0|GET|https://27thsquad.ru/armaMap/api%1&d=%2|null",_getParams,_data]);
+	"ArmaRequests" callExtension (format ["0|GET|https://arma.27thsquad.ru/map/api.php%1&d=%2|null",_getParams,_data]);
 
 	waitUntil {uiSleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
 

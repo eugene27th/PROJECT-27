@@ -61,7 +61,7 @@ if (triggerActivated _trg) then {
 	[(_idap_units select 1)] orderGetIn true; 
     [(_idap_units select 1)] allowGetIn true;
 	uiSleep 15;
-    (crew _idap_vehicle) doMove [0,0,0];
+    (crew _idap_vehicle) doMove (position spawn_zone);
 };
 
 [_taskID] call BIS_fnc_deleteTask;

@@ -101,21 +101,23 @@ prj_fnc_getNumberOfUnits = {
 	_number_result
 };
 
+private _usefulBuildingsPos = [];
+
 prj_fnc_createHouseGroups = {
 	params ["_side","_class_units","_config",["_voice",true]];
 
 	if (((_config # 0) # 0) == 0) exitWith {};
 
-	private "_house_pos";
 	private _house_units = [];
 
-	private _allBuildings = nearestObjects [_trigger_pos, ["Building"], _trigger_radius];
-	private _usefulBuildings = _allBuildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
+	if (_usefulBuildingsPos isEqualTo []) then {
+		private _allBuildings = nearestObjects [_trigger_pos, ["Building"], _trigger_radius];
+		private _usefulBuildings = _allBuildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
 
-	private _usefulBuildingsPos = [];
-	{_usefulBuildingsPos append (_x buildingPos -1)} forEach _usefulBuildings;
+		{_usefulBuildingsPos append (_x buildingPos -1)} forEach _usefulBuildings;
 
-	if (prj_debug) then {[format ["позиций в строениях: %1",count _usefulBuildingsPos]] remoteExec ["systemChat"]};
+		if (prj_debug) then {[format ["позиций в строениях: %1",count _usefulBuildingsPos]] remoteExec ["systemChat"]};
+	};
 
 	for [{private _i = 0 }, { _i < ((_config # 0) # 0) }, { _i = _i + 1 }] do {
 		if (count _usefulBuildingsPos < 1) exitWith {};
@@ -355,11 +357,11 @@ private ["_enemy_house_units","_enemy_patrols_units","_enemy_light_vehicles","_e
 
 if (!(_trigger getVariable "captured")) then {
 	
-	_enemy_house_units = [enemySide,enemy_infantry,_enemy_config] call prj_fnc_createHouseGroups;
-	_enemy_patrols_units = [enemySide,enemy_infantry,_enemy_config] call prj_fnc_createPatrolGroups;
 	_enemy_light_vehicles = [enemySide,enemy_infantry,enemy_vehicles_light,_enemy_config] call prj_fnc_createVehicles;
 	_enemy_heavy_vehicles = [enemySide,enemy_infantry,enemy_vehicles_heavy,_enemy_config,3] call prj_fnc_createVehicles;
+	_enemy_patrols_units = [enemySide,enemy_infantry,_enemy_config] call prj_fnc_createPatrolGroups;
 	_enemy_statics = [enemySide,enemy_infantry,enemy_turrets,_enemy_config] call prj_fnc_createStatic;
+	_enemy_house_units = [enemySide,enemy_infantry,_enemy_config] call prj_fnc_createHouseGroups;
 
 	if (_capture_sectores == 1) then {
 		_capt_trg = [_trigger_pos, [_trigger_radius, _trigger_radius, 50], "WEST SEIZED", "PRESENT", false, "[thisTrigger] call prj_fnc_zoneCapture;", false] call prj_fnc_createTrigger;
