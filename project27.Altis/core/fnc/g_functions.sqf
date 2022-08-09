@@ -323,116 +323,51 @@ prj_fnc_getCivInfo = {
 	_civilian setVariable ["interviewed",true,true];
 };
 
-prj_fnc_getAllMapMarkers = {
-
-	/*
-		the function and method exists because the BIS function "allMapMarkers" is broken on dedicated server
-		https://feedback.bistudio.com/T76287
-	*/
-	
-	private _localMarkers = [];
-
-	for "_i" from 0 to ((count allMapMarkers) - 1) do {
-		private _a = toArray (allMapMarkers # _i);
-		_a resize 15;
-
-		if (toString _a == "_USER_DEFINED #" && markerType (allMapMarkers # _i) != "") then {
-			
-			private _aDb = toArray (allMapMarkers # _i);
-			_aDb deleteRange [0,15];
-
-			private _mData = (toString _aDb) splitString "/";
-
-			private "_mOwnerName";
-
-			{
-				if (getPlayerID _x isEqualTo _mData # 0) then {
-					_mOwnerName = name _x;
-				};
-			} forEach allPlayers;
-
-			private _mColor = ((BISColors select {(_x # 0) == (markerColor (allMapMarkers # _i))}) # 0) # 1;
-			private _mType = ((BISMarkerTypes select {(_x # 0) == (markerType (allMapMarkers # _i))}) # 0) # 1;
-		
-			_localMarkers pushBack (format ["%1:%2;%3;%4;%5;%6;%7;%8",_mOwnerName,_mData # 2,((markerPos (allMapMarkers # _i)) # 0),((markerPos (allMapMarkers # _i)) # 1),markerDir (allMapMarkers # _i),_mType,_mColor,markerText (allMapMarkers # _i)]);
-		};
-	};
-
-	if ((count _localMarkers) < 1) exitWith {};
-
-	private _markersArray = missionNamespace getVariable ["allMapMarkersArray",[]];
-	
-	private _returnMarkersArray = _markersArray - _localMarkers;
-	_returnMarkersArray append _localMarkers;
-
-	missionNamespace setVariable ["allMapMarkersArray",_returnMarkersArray,true];
-};
-
-prj_fnc_openVirtualShopArsenal = {
-	closeDialog 2;
-
-};
-
 prj_fnc_saveGame = {
-
 	if !(missionNamespace getVariable ["savegame_available",true]) exitWith {
 		[localize "STR_PRJ_SAVEGAME_NOT_AVAILABLE"] remoteExec ["systemChat"];
 	};
 
-	missionNamespace setVariable ["savegame_available",false,true];
+	missionNamespace setVariable ["savegame_available", false, true];
 
-	// save general
 
-	private _generalDataArray = [];
-	{_generalDataArray pushBack (missionNamespace getVariable [_x,0])} forEach ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
+	private _general = "";
+	
+	{
+		_general = _general + format["""%1"": ""%2"",", _x, missionNamespace getVariable [_x, 0]];
+	} forEach ["intel_score", "g_garage_level", "a_garage_level", "total_kill_enemy", "total_kill_friend", "total_kill_civ"];
 
-	"ArmaRequests" callExtension (format ["0|GET|https://arma.27thsquad.ru/extension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveGeneral&d=%1|null",_generalDataArray]);
 
-	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
-
-	private _response = "ArmaRequests" callExtension "1";
-	private _parsedResponse = parseSimpleArray _response;
-	private _responseCode = _parsedResponse # 0;
-
-	if (_responseCode != 9) then {"General data are saved" remoteExec ["systemChat"]} else {"Response error" remoteExec ["systemChat"]};
-
-	// save players
-
-	private _allUIDs = missionNamespace getVariable ["prj27UIDs",[]];
+	private _players = "";
 
 	{
-		private _playerData = missionNamespace getVariable [_x,0];
+		private _playerData = missionNamespace getVariable [_x, 0];
 
-		private _u = _x;
-		private _m = (_playerData # 0) # 1;
-		private _e = (_playerData # 1) # 1;
-		private _f = (_playerData # 2) # 1;
-		private _c = (_playerData # 3) # 1;
+		_players = _players + format [
+			"""%1"": {""money"": ""%2"",""enemy"": ""%3"",""friend"": ""%4"",""civ"": ""%5""},",
+			_x, (_playerData # 0) # 1, (_playerData # 1) # 1, (_playerData # 2) # 1, (_playerData # 3) # 1
+		];
+	} forEach (missionNamespace getVariable ["prj27UIDs",[]]);
 
-		"ArmaRequests" callExtension (format ["0|GET|https://arma.27thsquad.ru/extension/?k=erj36424523gXeCLiRrergeu734w87ef&t=savePlayer&u=%1&m=%2&e=%3&f=%4&c=%5|null",_u,_m,_e,_f,_c]);
 
-		waitUntil {uiSleep 0.5; "ArmaRequests" callExtension "2" == "OK"};
-
-		private _response = "ArmaRequests" callExtension "1";
-		private _parsedResponse = parseSimpleArray _response;
-		private _responseCode = _parsedResponse # 0;
-
-		if (_responseCode == 9) then {"Response error" remoteExec ["systemChat"]};
-
-	} forEach _allUIDs;
-
-	"Player data saved" remoteExec ["systemChat"];
-
-	// save vehicles
-	private _vehsArray = [];
-	private _vehs = nearestObjects [position spawn_zone,["Air","LandVehicle"], 1000];
+	private _vehicles = "";
 
 	{
 		if ((typeOf _x) in vehiclesBlacklist) then {continue};
-		_vehsArray pushBack [typeOf _x,",",position _x,",",getDir _x];
-	} forEach _vehs;
-	
-	"ArmaRequests" callExtension (format ["0|GET|https://arma.27thsquad.ru/extension/?k=erj36424523gXeCLiRrergeu734w87ef&t=saveVehicles&d=%1|null",_vehsArray]);
+
+		_vehicles = _vehicles + format [
+			"""%1"": {""pos"":""%2"",""dir"":""%3""},",
+			typeOf _x, position _x, getDir _x
+		];
+	} forEach (nearestObjects [position spawn_zone,["Air","LandVehicle"], 1000]);
+
+
+	_general = [_general, 0, (count _general - 2)] call BIS_fnc_trimString;
+	_players = [_players, 0, (count _players - 2)] call BIS_fnc_trimString;
+	_vehicles = [_vehicles, 0, (count _vehicles - 2)] call BIS_fnc_trimString;
+
+
+	"ArmaRequests" callExtension (format ["0|POST|https://api.27thsquad.ru/saveGame|PROJECT27-TOKEN PUBLIC|{""general"": {%1},""players"": {%2},""vehicles"": {%3}}", _general, _players, _vehicles]);
 
 	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
@@ -440,117 +375,73 @@ prj_fnc_saveGame = {
 	private _parsedResponse = parseSimpleArray _response;
 	private _responseCode = _parsedResponse # 0;
 
-	if (_responseCode != 9) then {"Vehicles are saved" remoteExec ["systemChat"]} else {"Response error" remoteExec ["systemChat"]};
+	if (_responseCode != 9) then {
+		"Game saved" remoteExec ["systemChat"];
+	} else {
+		"Response error" remoteExec ["systemChat"];
+	};
+
 
 	[] spawn {
 		uiSleep 60;
-		missionNamespace setVariable ["savegame_available",true,true];
+		missionNamespace setVariable ["savegame_available", true, true];
 	};
 };
 
 prj_fnc_loadGame = {
-	params [["_vehs",true]];
-
-	// load general
-
-	"ArmaRequests" callExtension "0|GET|https://arma.27thsquad.ru/extension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadGeneral|null";
+	"ArmaRequests" callExtension "0|GET|https://api.27thsquad.ru/loadGame|PROJECT27-TOKEN PUBLIC";
 
 	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
 
 	private _response = "ArmaRequests" callExtension "1";
 	private _parsedResponse = parseSimpleArray _response;
 	private _responseCode = _parsedResponse # 0;
-	private _dataArray = (_parsedResponse # 1) splitString ",";
 
 	if (_responseCode != 9) then {
-
-		{
-			missionNamespace setVariable [_x,parseNumber (_dataArray # _forEachIndex),true];
-		} forEach ["intel_score","g_garage_level","a_garage_level","total_kill_enemy","total_kill_friend","total_kill_civ"];
-
-		"General data are loaded" remoteExec ["systemChat"];
+		"Game loaded" remoteExec ["systemChat"];
 	} else {
 		"Response error" remoteExec ["systemChat"];
 	};
 
-	// load players
+	private _responseData = (_parsedResponse # 1) splitString "|";
 
-	"ArmaRequests" callExtension "0|GET|https://arma.27thsquad.ru/extension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadPlayers|null";
 
-	waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
+	private _generalData = (_responseData # 0) splitString ":";
 
-	private _response = "ArmaRequests" callExtension "1";
-	private _parsedResponse = parseSimpleArray _response;
-	private _responseCode = _parsedResponse # 0;
-	private _stringArray = (_parsedResponse # 1) splitString "-";
+	{
+		missionNamespace setVariable [_x, parseNumber (_generalData # _forEachIndex), true];
+	} forEach ["intel_score", "g_garage_level", "a_garage_level", "total_kill_enemy", "total_kill_friend", "total_kill_civ"];
 
-	if (_responseCode != 9) then {
-		
-		{
-			private _playerData = _x splitString ":";
 
-			private _uid = (_playerData # 0);
-			private _money = parseNumber (_playerData # 1);
-			private _enemy = parseNumber (_playerData # 2);
-			private _friend = parseNumber (_playerData # 3);
-			private _civs = parseNumber (_playerData # 4);
-		
-			missionNamespace setVariable [
-				_uid,
-				[
-					["money",_money],
-					["enemy_killings",_enemy],
-					["friend_killings",_friend],
-					["civ_killings",_civs]
-				],
-				true
-			];
+	private _playersData = (_responseData # 1) splitString "/";
 
-		} forEach _stringArray;
+	{
+		private _playerData = _x splitString ":";
+	
+		missionNamespace setVariable [
+			(_playerData # 0),
+			[
+				["money", parseNumber (_playerData # 1)],
+				["enemy_killings", parseNumber (_playerData # 2)],
+				["friend_killings", parseNumber (_playerData # 3)],
+				["civ_killings", parseNumber (_playerData # 4)]
+			],
+			true
+		];
+	} forEach _playersData;
 
-		"All players data are loaded" remoteExec ["systemChat"];
 
-	} else {
-		"Response error" remoteExec ["systemChat"];
-	};
+	{deleteVehicle _x} forEach (nearestObjects [position spawn_zone, ["Air", "LandVehicle"], 1000]);
 
-	// load vehicles
+	private _vehiclesData = (_responseData # 2) splitString "/";
 
-	if (_vehs) then {
+	{
+		private _vehicleData = _x splitString ":";
 
-		"ArmaRequests" callExtension "0|GET|https://arma.27thsquad.ru/extension/?k=erj36424523gXeCLiRrergeu734w87ef&t=loadVehicles|null";
+		private _vehPosStr = (_vehicleData # 1) splitString "[,]";
+		private _vehPosArr = [parseNumber (_vehPosStr # 0), parseNumber (_vehPosStr # 1), parseNumber (_vehPosStr # 2)];
 
-		waitUntil {uiSleep 1; "ArmaRequests" callExtension "2" == "OK"};
-
-		private _response = "ArmaRequests" callExtension "1";
-		private _parsedResponse = parseSimpleArray _response;
-		private _responseCode = _parsedResponse # 0;
-		private _stringArray = (_parsedResponse # 1) splitString "+";
-
-		if (_responseCode != 9) then {
-
-			{deleteVehicle _x} forEach (nearestObjects [position arsenal,["Air","LandVehicle"], 200]);
-
-			{
-				private _vehInfo = _x splitString ":";
-
-				private _vehClass = call (compile (_vehInfo # 0));
-				private _vehPosStr = (_vehInfo # 1) splitString "[,]";
-				private _vehPosArr = [parseNumber (_vehPosStr # 0),parseNumber (_vehPosStr # 1),parseNumber (_vehPosStr # 2)];
-				private _vehDir = parseNumber (_vehInfo # 2);
-			
-				private _veh = createVehicle [_vehClass, _vehPosArr, [], 0, "CAN_COLLIDE"];
-				_veh setDir _vehDir;
-
-			} forEach _stringArray;
-
-			"All vehicles are loaded" remoteExec ["systemChat"];
-
-		} else {
-			"Response error" remoteExec ["systemChat"];
-		};
-	};
-
-	// final message
-	"Data loaded" remoteExec ["systemChat"];
+		private _veh = createVehicle [_vehicleData # 0, _vehPosArr, [], 0, "CAN_COLLIDE"];
+		_veh setDir (parseNumber (_vehicleData # 2));
+	} forEach _vehiclesData;
 };

@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=2705;
+		nextID=2709;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15124.121,21.678175,17224.621};
-		dir[]={0.43478507,-0.35093305,0.82934189};
-		up[]={0.16294357,0.93640053,0.31081083};
-		aside[]={0.88567001,-2.9802322e-008,-0.46431527};
+		pos[]={15160.59,33.85001,17251.176};
+		dir[]={-0.60765892,-0.40821016,-0.68125993};
+		up[]={-0.27172288,0.91288799,-0.30463454};
+		aside[]={-0.74626893,-1.4901161e-008,0.66564453};
 	};
 };
 binarizationWanted=0;
@@ -94,21 +94,21 @@ class AddonsMetaData
 			className="ace_rearm";
 			name="ACE3 - Rearm";
 			author="Команда ACE";
-			url="http://ace3mod.com/";
+			url="https://ace3.acemod.org/";
 		};
 		class Item6
 		{
 			className="ace_cargo";
 			name="ACE3 - Cargo";
 			author="Команда ACE";
-			url="http://ace3mod.com/";
+			url="https://ace3.acemod.org/";
 		};
 		class Item7
 		{
 			className="ace_repair";
 			name="ACE3 - Repair";
 			author="Команда ACE";
-			url="http://ace3mod.com/";
+			url="https://ace3.acemod.org/";
 		};
 		class Item8
 		{
@@ -150,14 +150,14 @@ class AddonsMetaData
 			className="ace_explosives";
 			name="ACE3 - Explosives";
 			author="Команда ACE";
-			url="http://ace3mod.com/";
+			url="https://ace3.acemod.org/";
 		};
 		class Item14
 		{
 			className="ace_parachute";
 			name="ACE3 - Parachute";
 			author="Команда ACE";
-			url="http://ace3mod.com/";
+			url="https://ace3.acemod.org/";
 		};
 		class Item15
 		{
@@ -465,7 +465,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15147.783,19.162502,17191.152};
+				position[]={15147.225,19.265909,17191.719};
 				angles[]={0,3.9059503,0};
 			};
 			side="Empty";
@@ -475,7 +475,7 @@ class Mission
 			};
 			id=842;
 			type="B_Slingload_01_Ammo_F";
-			atlOffset=-0.10953522;
+			atlOffset=-0.0061283112;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -505,7 +505,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15153.549,19.164989,17197.184};
+				position[]={15152.99,19.268482,17197.75};
 				angles[]={0,3.9059503,0};
 			};
 			side="Empty";
@@ -515,7 +515,7 @@ class Mission
 			};
 			id=844;
 			type="B_Slingload_01_Repair_F";
-			atlOffset=-0.10552597;
+			atlOffset=-0.0020332336;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -545,7 +545,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15154.798,23.892179,17190.203};
+				position[]={15154.239,23.999687,17190.77};
 				angles[]={0,0.76510477,0};
 			};
 			side="Empty";
@@ -555,6 +555,7 @@ class Mission
 			};
 			id=1188;
 			type="Land_LampHalogen_F";
+			atlOffset=0.10750771;
 			class CustomAttributes
 			{
 				class Attribute0

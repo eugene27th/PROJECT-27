@@ -187,13 +187,3 @@ if (("time_acceleration" call BIS_fnc_getParamValue) == 1) then {
 
 // auto load
 if (("autoSaveLoad" call BIS_fnc_getParamValue) == 1) then {call prj_fnc_loadGame};
-
-// webUpdateObjectsWhile
-webUpdateObjectsWhile = true;
-
-[] spawn {
-	while {webUpdateObjectsWhile} do {
-		[] spawn prj_fnc_uploadObjectsViaHttp;
-		waitUntil {sleep 10; (count allPlayers) > 0};
-	};
-};
