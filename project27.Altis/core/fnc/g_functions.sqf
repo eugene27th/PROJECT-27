@@ -397,9 +397,7 @@ prj_fnc_loadGame = {
 	private _parsedResponse = parseSimpleArray _response;
 	private _responseCode = _parsedResponse # 0;
 
-	if (_responseCode != 9) then {
-		"Game loaded" remoteExec ["systemChat"];
-	} else {
+	if (_responseCode == 9) exitWith {
 		"Response error" remoteExec ["systemChat"];
 	};
 
@@ -408,40 +406,52 @@ prj_fnc_loadGame = {
 
 	private _generalData = (_responseData # 0) splitString ":";
 
-	{
-		missionNamespace setVariable [_x, parseNumber (_generalData # _forEachIndex), true];
-	} forEach ["intel_score", "g_garage_level", "a_garage_level", "total_kill_enemy", "total_kill_friend", "total_kill_civ"];
+	if (!isNil "_generalData") then {
+		systemChat "Loading general...";
+
+		{
+			missionNamespace setVariable [_x, parseNumber (_generalData # _forEachIndex), true];
+		} forEach ["intel_score", "g_garage_level", "a_garage_level", "total_kill_enemy", "total_kill_friend", "total_kill_civ"];
+	};
 
 
 	private _playersData = (_responseData # 1) splitString "/";
 
-	{
-		private _playerData = _x splitString ":";
-	
-		missionNamespace setVariable [
-			(_playerData # 0),
-			[
-				["money", parseNumber (_playerData # 1)],
-				["enemy_killings", parseNumber (_playerData # 2)],
-				["friend_killings", parseNumber (_playerData # 3)],
-				["civ_killings", parseNumber (_playerData # 4)]
-			],
-			true
-		];
-	} forEach _playersData;
+	if (!isNil "_playersData") then {
+		systemChat "Loading players...";
 
+		{
+			private _playerData = _x splitString ":";
+		
+			missionNamespace setVariable [
+				(_playerData # 0),
+				[
+					["money", parseNumber (_playerData # 1)],
+					["enemy_killings", parseNumber (_playerData # 2)],
+					["friend_killings", parseNumber (_playerData # 3)],
+					["civ_killings", parseNumber (_playerData # 4)]
+				],
+				true
+			];
+		} forEach _playersData;
+	};
 
-	{deleteVehicle _x} forEach (nearestObjects [position spawn_zone, ["Air", "LandVehicle"], 1000]);
 
 	private _vehiclesData = (_responseData # 2) splitString "/";
 
-	{
-		private _vehicleData = _x splitString ":";
+	if (!isNil "_vehiclesData") then {
+		systemChat "Vehicles players...";
 
-		private _vehPosStr = (_vehicleData # 1) splitString "[,]";
-		private _vehPosArr = [parseNumber (_vehPosStr # 0), parseNumber (_vehPosStr # 1), parseNumber (_vehPosStr # 2)];
+		{deleteVehicle _x} forEach (nearestObjects [position spawn_zone, ["Air", "LandVehicle"], 1000]);
 
-		private _veh = createVehicle [_vehicleData # 0, _vehPosArr, [], 0, "CAN_COLLIDE"];
-		_veh setDir (parseNumber (_vehicleData # 2));
-	} forEach _vehiclesData;
+		{
+			private _vehicleData = _x splitString ":";
+
+			private _vehPosStr = (_vehicleData # 1) splitString "[,]";
+			private _vehPosArr = [parseNumber (_vehPosStr # 0), parseNumber (_vehPosStr # 1), parseNumber (_vehPosStr # 2)];
+
+			private _veh = createVehicle [_vehicleData # 0, _vehPosArr, [], 0, "CAN_COLLIDE"];
+			_veh setDir (parseNumber (_vehicleData # 2));
+		} forEach _vehiclesData;
+	};
 };
