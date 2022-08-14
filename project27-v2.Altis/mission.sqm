@@ -19,7 +19,7 @@ class EditorData
 	};
 };
 binarizationWanted=0;
-sourceName="project27";
+sourceName="project27-v2";
 addons[]=
 {
 	"A3_Structures_F_Bootcamp_VR_Helpers",

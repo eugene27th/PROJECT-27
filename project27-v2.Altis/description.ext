@@ -11,6 +11,8 @@ class CfgFunctions {
 			file = "functions\common";
 
 			class getVehicleClassNames {};
+			class createTask {};
+			class cancelTask {};
 		};
 
 		class events {
