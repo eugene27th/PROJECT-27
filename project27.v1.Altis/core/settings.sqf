@@ -10,10 +10,10 @@ arsenal_black_list = ["launch_B_Titan_short_tna_F","launch_B_Titan_short_F","lau
 hqUID = ["76561198141746661","76561198138702011","76561198060515006"];
 
 // additional removal points (radius 100m)
-delete_locations = [];
+delete_locations = [[12845.8,18889.9,0],[6714.96,18364.1,0],[4714.07,15247.1,0]];
 
 // enemy side
-enemySide = opfor;
+enemySide = independent;
 
 // classnames configuration
 // units and vehicles
@@ -24,24 +24,24 @@ idap_vehicles = ["C_IDAP_Offroad_02_unarmed_F","C_IDAP_Offroad_01_F","C_IDAP_Van
 
 hostage_units = idap_units + ["C_journalist_F","C_Journalist_01_War_F","C_Man_UtilityWorker_01_F","C_Story_EOD_01_F","LOP_PMC_Infantry_VIP","C_Man_Paramedic_01_F"];
 
-civilian_units = ["LOP_Tak_Civ_Man_08","LOP_Tak_Civ_Man_07","LOP_Tak_Civ_Man_05","LOP_Tak_Civ_Man_01","LOP_Tak_Civ_Man_10","LOP_Tak_Civ_Man_02","LOP_Tak_Civ_Man_09","LOP_Tak_Civ_Man_11","LOP_Tak_Civ_Man_12","LOP_Tak_Civ_Man_04","LOP_Tak_Civ_Man_14","LOP_Tak_Civ_Man_13","LOP_Tak_Civ_Man_16","LOP_Tak_Civ_Man_15"];
+civilian_units = ["CUP_C_TK_Man_04","CUP_C_TK_Man_04_Jack","CUP_C_TK_Man_04_Waist","CUP_C_TK_Man_07","CUP_C_TK_Man_07_Coat","CUP_C_TK_Man_07_Waist","CUP_C_TK_Man_08","CUP_C_TK_Man_08_Jack","CUP_C_TK_Man_08_Waist","CUP_C_TK_Man_05_Coat","CUP_C_TK_Man_05_Jack","CUP_C_TK_Man_05_Waist","CUP_C_TK_Man_06_Coat","CUP_C_TK_Man_06_Jack","CUP_C_TK_Man_06_Waist","CUP_C_TK_Man_02","CUP_C_TK_Man_02_Jack","CUP_C_TK_Man_02_Waist","CUP_C_TK_Man_01_Waist","CUP_C_TK_Man_01_Coat","CUP_C_TK_Man_01_Jack","CUP_C_TK_Man_03_Coat","CUP_C_TK_Man_03_Jack","CUP_C_TK_Man_03_Waist","LOP_Tak_Civ_Man_06","LOP_Tak_Civ_Man_08","LOP_Tak_Civ_Man_07","LOP_Tak_Civ_Man_05","LOP_Tak_Civ_Man_01","LOP_Tak_Civ_Man_10","LOP_Tak_Civ_Man_02","LOP_Tak_Civ_Man_09","LOP_Tak_Civ_Man_11","LOP_Tak_Civ_Man_12","LOP_Tak_Civ_Man_04","LOP_Tak_Civ_Man_14","LOP_Tak_Civ_Man_13","LOP_Tak_Civ_Man_16","LOP_Tak_Civ_Man_15"];
 
-civilian_vehicles = ["LOP_TKA_BTR60"];
+civilian_vehicles = ["CUP_C_S1203_CIV","CUP_C_Lada_TK_CIV","CUP_C_UAZ_Unarmed_TK_CIV","CUP_O_Hilux_unarmed_TK_CIV","CUP_C_LR_Transport_CTK","CUP_C_Pickup_unarmed_CIV","CUP_C_Octavia_CIV","CUP_C_Skoda_CR_CIV","CUP_C_SUV_CIV","C_Offroad_01_F","C_Quadbike_01_F","C_Offroad_02_unarmed_F"];
 
-enemy_leaders = ["LOP_TKA_Infantry_Corpsman"];
+enemy_leaders = ["LOP_ISTS_Infantry_B_SL","CUP_I_TK_GUE_Soldier_TL","CUP_I_TK_GUE_Commander","LOP_AM_Infantry_SL"];
 
-enemy_infantry = ["LOP_TKA_Infantry_AA","LOP_TKA_Infantry_Corpsman","LOP_TKA_Infantry_Engineer","LOP_TKA_Infantry_GL","LOP_TKA_Infantry_AT","LOP_TKA_Infantry_AT_Asst","LOP_TKA_Infantry_MG","LOP_TKA_Infantry_MG_Asst","LOP_TKA_Infantry_Marksman","LOP_TKA_Infantry_Officer","LOP_TKA_Infantry_Rifleman","LOP_TKA_Infantry_Rifleman_2","LOP_TKA_Infantry_Rifleman_3","LOP_TKA_Infantry_SL","LOP_TKA_Infantry_TL"];
+enemy_infantry = ["LOP_ISTS_Infantry_B_Engineer","LOP_ISTS_Infantry_B_Corpsman","LOP_ISTS_Infantry_B_GL","LOP_ISTS_Infantry_B_Rifleman","LOP_ISTS_Infantry_B_AT","LOP_ISTS_Infantry_B_Marksman","LOP_ISTS_Infantry_B_AR","LOP_ISTS_Infantry_B_AR_Asst","CUP_I_TK_GUE_Soldier_AR","CUP_I_TK_GUE_Guerilla_Medic","CUP_I_TK_GUE_Demo","CUP_I_TK_GUE_Soldier","CUP_I_TK_GUE_Soldier_AK_47S","CUP_I_TK_GUE_Soldier_HAT","CUP_I_TK_GUE_Guerilla_Enfield","CUP_I_TK_GUE_Soldier_GL","CUP_I_TK_GUE_Soldier_M16A2","CUP_I_TK_GUE_Soldier_AAT","CUP_I_TK_GUE_Soldier_LAT","CUP_I_TK_GUE_Soldier_AT","CUP_I_TK_GUE_Sniper","CUP_I_TK_GUE_Mechanic","CUP_I_TK_GUE_Soldier_MG","LOP_AM_Infantry_Engineer","LOP_AM_Infantry_Corpsman","LOP_AM_Infantry_GL","LOP_AM_Infantry_Rifleman_6","LOP_AM_Infantry_Rifleman","LOP_AM_Infantry_Rifleman_4","LOP_AM_Infantry_Rifleman_5","LOP_AM_Infantry_Rifleman_7","LOP_AM_Infantry_Rifleman_8","LOP_AM_Infantry_AR_Asst","LOP_AM_Infantry_AR","LOP_AM_Infantry_AT","LOP_AM_Infantry_Marksman","LOP_AM_Infantry_Rifleman_9"];
 
-enemy_turrets = ["rhs_KORD_VDV","rhs_KORD_high_VDV","rhs_SPG9M_VDV","RHS_AGS30_TriPod_VDV","RHS_NSV_TriPod_VDV","RHS_ZU23_VDV"];
+enemy_turrets = ["rhs_KORD_VDV","rhs_KORD_high_VDV","rhs_SPG9M_VDV","RHS_AGS30_TriPod_VDV","RHS_NSV_TriPod_VDV"];
 
-enemy_vehicles_light = ["LOP_TKA_BTR60"];
-enemy_vehicles_heavy = ["LOP_TKA_BTR60","LOP_TKA_BTR70","LOP_TKA_BMP2","LOP_TKA_BMP2D","LOP_TKA_BMP1","LOP_TKA_BMP1D"];
+enemy_vehicles_light = ["LOP_ISTS_Landrover_M2","LOP_ISTS_Landrover_SPG9","LOP_ISTS_Landrover","CUP_I_Hilux_unarmed_TK","CUP_I_Hilux_AGS30_TK","CUP_I_Hilux_DSHKM_TK","CUP_I_Hilux_M2_TK","CUP_I_Hilux_zu23_TK","CUP_I_Datsun_PK_TK","rhssaf_m1025_olive","rhssaf_m1151_olive","rhssaf_m1151_olive_pkm","rhssaf_m1025_olive_m2","rhssaf_m998_olive_2dr_fulltop","rhssaf_m998_olive_2dr_halftop","rhssaf_m1152_TCV_olive","LOP_PMC_M1025_W","CUP_C_Datsun_4seat"];
+enemy_vehicles_heavy = ["LOP_AM_BTR60","CUP_I_BRDM2_TK_Gue","CUP_I_BTR40_MG_TKG","CUP_I_T55_NAPA","rhsgref_nat_btr70","LOP_UA_BMP2","LOP_UA_BMP1"];
 
 enemy_vehicles_aa = [];
-enemy_vehicles_at = ["LOP_TKA_T55","LOP_SYR_T72BA","LOP_TKA_T72BB"];
+enemy_vehicles_at = ["CUP_I_T55_NAPA","LOP_UA_BMP2","LOP_UA_BMP1"];
 
-enemy_vehiclesConvoyHeavy = ["LOP_TKA_BTR60","LOP_TKA_BTR70"];
-enemy_vehiclesConvoyLight = ["LOP_TKA_BTR60","LOP_TKA_BTR70"];
+enemy_vehiclesConvoyHeavy = ["LOP_ISTS_Landrover_M2","LOP_ISTS_Landrover_SPG9","CUP_I_Hilux_AGS30_TK","CUP_I_Hilux_DSHKM_TK","CUP_I_Hilux_M2_TK","CUP_I_Hilux_zu23_TK","CUP_I_Datsun_PK_TK","rhssaf_m1151_olive_pkm","rhssaf_m1025_olive_m2"];
+enemy_vehiclesConvoyLight = ["LOP_ISTS_Landrover","CUP_I_Hilux_unarmed_TK","rhssaf_m1025_olive","rhssaf_m1151_olive","rhssaf_m998_olive_2dr_fulltop","rhssaf_m998_olive_2dr_halftop","rhssaf_m1152_TCV_olive","LOP_PMC_M1025_W","CUP_C_Datsun_4seat"];
 
 enemy_heliSentry = [];
 enemy_heliTransport = [];

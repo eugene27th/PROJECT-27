@@ -129,7 +129,7 @@ class Params
 		title = "Probability of using air vehicles";
 		values[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		texts[] = { "The enemy does not use air vehicles", "10%", "20%", "30%", "40%", "50%", "60%", "70%" };
-		default = 2;
+		default = 0;
 	}
 
 	class chanceCivTransform
@@ -169,7 +169,7 @@ class Params
 		title = "IED on the roads";
 		values[] = { 0, 10, 25, 50, 100, 150, 200, 250, 300, 400 };
 		texts[] = { "Off", "10", "25", "50", "100", "150", "200", "250", "300", "400" };
-		default = 25;
+		default = 100;
 	};
 
 	class divider_ied_house

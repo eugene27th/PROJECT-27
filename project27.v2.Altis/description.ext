@@ -1,0 +1,67 @@
+cba_settings_hasSettingsFile = 1;
+
+enableDebugConsole[] = {"76561198141746661"};
+
+#include "gui\defines.hpp"
+#include "gui\controls.hpp"
+
+class CfgFunctions {
+	class P27 {
+		class common {
+			file = "functions\common";
+
+			class getVehicleClassNames {};
+		};
+
+		class events {
+			file = "functions\events";
+
+			class unitSideUpdate {};
+			class setMissionEvents {};
+			class setPlayerEvents {};
+		};
+
+		class gui {
+			file = "functions\gui";
+
+			class showGameVersion {};
+			class showVehicleList {};
+			class showVehiclePreview {};
+			class updateVehicleList {};
+			class spawnVehicleAtPlace {};
+		};
+
+		class interaction {
+			file = "functions\interaction";
+
+			class createSelfAction {};
+			class createClassAction {};
+			class setPlayerActions {};
+		};
+
+		class sector {
+			file = "functions\sector";
+
+			class getNumberOfUnits {};
+			class generateSectors {};
+			class createSector {};
+			class clearSector {};
+			class createHouseGroups {};
+			class createPatrolGroups {};
+			class createVehicles {};
+			class createTurrets {};
+		};
+
+		class external {
+			file = "functions\external";
+
+			class advancedTowingInit {
+				postInit = 1
+			};
+
+			class advancedSlingLoadingInit {
+				postInit = 1
+			};
+		};
+	};
+};
