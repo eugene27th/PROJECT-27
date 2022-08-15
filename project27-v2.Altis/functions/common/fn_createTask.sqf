@@ -3,33 +3,28 @@
     Date: 14.08.2022
     
     Example:
-        [] call P27_fnc_createSideTask;
+        [_taskName = random] call P27_fnc_createTask;
     
     Return:
 		nothing
 */
 
 
+params [["_taskName", "random"]];
+
 if !(missionNamespace getVariable ["taskIsAvailable", true]) exitWith {
-	["Task not available."] remoteExec ["systemChat"];
+	["1 minute between creating a task."] remoteExec ["systemChat"];
 };
 
 missionNamespace setVariable ["taskIsAvailable", false, true];
 
-private _taskNames = ["kek", "pek"];
-private _currentTaskName = missionNamespace getVariable ["currentTaskName", "null"];
-
-private _newTaskName = selectRandom _taskNames;
-
-while {_newTaskName == _currentTaskName} do {
-    _newTaskName = selectRandom _taskNames;
+if (_taskName == "random") then {
+    _taskName = selectRandom configTasks;
 };
 
-[] execVM "tasks\ts_" + _newTaskName + ".sqf";
-
-missionNamespace setVariable ["currentTaskName", _newTaskName, true];
+[] execVM "tasks\ts_" + _taskName + ".sqf";
 
 [] spawn {
 	uiSleep 60;
-	missionNamespace setVariable ["taskIsAvailable",true,true];
+	missionNamespace setVariable ["taskIsAvailable", true, true];
 };

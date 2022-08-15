@@ -13,7 +13,7 @@
 params ["_task"];
 
 if (_task isEqualTo "") exitWith {
-	hint "Select task on map.";
+	hint "Select task.";
 };
 
 private _subTasks = _task call BIS_fnc_taskChildren;

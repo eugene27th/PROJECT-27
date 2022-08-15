@@ -12,7 +12,7 @@
 
 params ["_name", "_title", "_img", "_statement", "_condition", "_parents"];
 
-private _action = [_name, _title, "\A3\ui_f\data\igui\cfg\" + _img + ".paa", _statement, _condition] call ace_interact_menu_fnc_createAction;
+private _action = [_name, _title, "\A3\ui_f\data\igui\cfg\simpleTasks\types\" + _img + ".paa", _statement, _condition] call ace_interact_menu_fnc_createAction;
 
 private _actionPath = ["ACE_SelfActions"];
 

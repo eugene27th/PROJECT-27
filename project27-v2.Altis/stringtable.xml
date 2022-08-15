@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project name="PROJECT27">
+    <Package name="SECTOR">
+        <Container name="SECTOR_CAPTURED">
+            <Key ID="STR_SECTOR_CAPTURED_TITLE">
+                <Original>Сектор захвачен.</Original>
+            </Key>
+            <Key ID="STR_SECTOR_CAPTURED_DESC">
+                <Original>Сектор %1 (%2) под контролем.</Original>
+            </Key>
+        </Container>
+    </Package>
+
+    <Package name="TASKS">
+        <Container name="TASK_PATROLS">
+            <Key ID="STR_TASK_PATROL_TITLE">
+                <Original>Патрулирование</Original>
+            </Key>
+            <Key ID="STR_TASK_PATROL_DESCRIPTION">
+                <Original>Патрулирование обозначенного сектора на протяжении &lt;font color='#33FF9C'&gt;%1-ти&lt;/font&gt; минут.</Original>
+            </Key>    
+	    </Container>
+
+        <Container name="TASK_CAPTURE_ZONE">
+            <Key ID="STR_TASK_CAPTURE_ZONE_TITLE">
+                <Original>Захват сектора</Original>
+            </Key>
+            <Key ID="STR_TASK_CAPTURE_ZONE_DESCRIPTION">
+                <Original>Сектор находится под контролем противника. В зоне действий могут присутствовать гражданские.&lt;br/&gt;Задача: захватить и зачистить сектор.</Original>
+            </Key>
+	    </Container>
+		
+		<Container name="TASK_LIQUIDATION_LEADER">	
+            <Key ID="STR_TASK_LIQUIDATION_LEADER_TITLE">
+                <Original>Ликвидация цели</Original>
+            </Key>
+            <Key ID="STR_TASK_LIQUIDATION_LEADER_DESCRIPTION">
+                <Original>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
+            </Key>
+	    </Container>
+		
+		<Container name="TASK_RESCUE">	
+            <Key ID="STR_TASK_RESCUE_TITLE">
+                <Original>Поисковая операция</Original>
+            </Key>
+            <Key ID="STR_TASK_RESCUE_DESCRIPTION">
+                <Original>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+            </Key>
+	    </Container>
+		
+		<Container name="TASK_DESTROY_TOWER">
+            <Key ID="STR_TASK_DESTROY_TOWER_TITLE">
+                <Original>Помехи</Original>
+            </Key>		
+            <Key ID="STR_TASK_DESTROY_TOWER_DESCRIPTION">
+                <Original>В обозначенном секторе зафиксированы помехи, доставляющие нам некоторые проблемы.&lt;br/&gt;Задача: найти и уничтожить источник помех.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+            </Key>
+	    </Container>
+		
+		<Container name="TASK_ALARM_BUTTON">
+            <Key ID="STR_TASK_ALARM_BUTTON_TITLE">
+                <Original>Тревожная кнопка</Original>
+            </Key>
+            <Key ID="STR_TASK_ALARM_BUTTON_DESCRIPTION">
+                <Original>Активирована тревожная кнопка сотрудника IDAP. Его местоположение отмечено на карте.&lt;br/&gt;Задача: освободить машину IDAP.</Original>
+            </Key>
+	    </Container>
+
+        <Container name="TASK_AMMO_CACHE">
+            <Key ID="STR_TASK_AMMO_CACHE_TITLE">
+                <Original>Боеприпасы</Original>
+            </Key>
+            <Key ID="STR_TASK_AMMO_CACHE_DESCRIPTION">
+                <Original>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+            </Key>
+	    </Container>
+
+        <Container name="TASK_HOSTAGE">
+            <Key ID="STR_TASK_HOSTAGE_TITLE">
+                <Original>Заложник</Original>
+            </Key>
+            <Key ID="STR_TASK_HOSTAGE_DESCRIPTION">
+                <Original>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+            </Key>
+	    </Container>
+
+        <Container name="TASK_CAPTURE_LEADER">
+            <Key ID="STR_TASK_CAPTURE_LEADER_TITLE">
+                <Original>Захват лидера</Original>
+            </Key>
+            <Key ID="STR_TASK_CAPTURE_LEADER_DESCRIPTION">
+                <Original>Обнаружен лидер одного из НВФ. Необходим захват цели и доставка на базу.&lt;br/&gt;Задача: захватить лидера и доставить его на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
+            </Key>
+	    </Container>
+ 
+        <Container name="TASK_CHECKPOINT">
+            <Key ID="STR_TASK_CHECKPOINT_TITLE">
+                <Original>Блокпост</Original>
+            </Key>
+            <Key ID="STR_TASK_CHECKPOINT_DESCRIPTION">
+                <Original>Замечен блокпост противника.&lt;br/&gt;Задача: нейтрализовать блокпост.</Original>
+            </Key>
+	    </Container>
+
+        <Container name="TASK_DESTRUCTION_OF_VEHICLES">
+            <Key ID="STR_TASK_DESTRUCTION_OF_VEHICLES_TITLE">
+                <Original>Техника противника</Original>
+            </Key>
+            <Key ID="STR_TASK_DESTRUCTION_OF_VEHICLES_DESCRIPTION">
+                <Original>Скопление техники противника было обнаружено в обозначенном секторе.&lt;br/&gt;Задача: найти и уничтожить технику противника.</Original>
+            </Key>
+	    </Container>
+    </Package>
+</Project>

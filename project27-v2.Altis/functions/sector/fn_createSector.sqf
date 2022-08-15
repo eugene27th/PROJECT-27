@@ -49,7 +49,7 @@ if (!_sectorIsCaptured) then {
 		_triggerPosition,
 		"AREA:", [_sectorRadius, _sectorRadius, 0, false],
 		"ACT:", ["WEST SEIZED", "PRESENT", true],
-		"STATE:", ["this", "[thisTrigger]", ""]
+		"STATE:", ["this", "[thisTrigger] call P27_fnc_setSectorState", ""]
 	] call CBA_fnc_createTrigger;
 
 	(_captureTrigger # 0) setVariable ["sectorTrigger", _sectorTrigger];

@@ -59,3 +59,7 @@ configUnits = [
 		["C_SUV_01_F", "C_Hatchback_01_F"] // vehs
 	]
 ];
+
+configTasks = [
+	"captureZone"
+];

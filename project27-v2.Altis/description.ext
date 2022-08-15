@@ -45,6 +45,8 @@ class CfgFunctions {
 			file = "functions\sector";
 
 			class getNumberOfUnits {};
+			class selectRandomSectorPos {};
+			class setSectorCaptureState {};
 			class generateSectors {};
 			class createSector {};
 			class clearSector {};
@@ -65,5 +67,18 @@ class CfgFunctions {
 				postInit = 1
 			};
 		};
+	};
+};
+
+class CfgNotifications {
+	class sectorCaptured {
+		title = $STR_SECTOR_CAPTURED_TITLE;
+		description = $STR_SECTOR_CAPTURED_DESC;
+		iconPicture = "\A3\ui_f\data\GUI\Cfg\Notifications\tridentEnemy_ca.paa";
+		color[] = {1, 1, 1, 1};
+		duration = 7;
+		priority = 0;
+		sound = "taskAssigned";
+		difficulty[] = {};
 	};
 };
