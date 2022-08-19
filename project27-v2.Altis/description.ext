@@ -11,6 +11,10 @@ class CfgFunctions {
 			file = "functions\common";
 
 			class getVehicleClassNames {};
+			class giveOrderToCivilian {};
+			class getConfigPathFromClass {};
+			class vehicleService {};
+
 			class createTask {};
 			class cancelTask {};
 		};
@@ -27,10 +31,16 @@ class CfgFunctions {
 			file = "functions\gui";
 
 			class showGameVersion {};
+
 			class showVehicleList {};
 			class showVehiclePreview {};
 			class updateVehicleList {};
 			class spawnVehicleAtPlace {};
+
+			class showVehicleService {};
+			class updateItemsList {};
+			class updateInvLoadBar {};
+			class loadItemToCargo {};
 		};
 
 		class interaction {
@@ -46,10 +56,13 @@ class CfgFunctions {
 
 			class getNumberOfUnits {};
 			class selectRandomSectorPos {};
-			class setSectorCaptureState {};
+			
 			class generateSectors {};
+
 			class createSector {};
 			class clearSector {};
+			class setSectorCaptureState {};
+
 			class createHouseGroups {};
 			class createPatrolGroups {};
 			class createVehicles {};

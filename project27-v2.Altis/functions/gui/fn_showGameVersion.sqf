@@ -3,7 +3,7 @@
     Date: 13.08.2022
     
     Example:
-        [] spawn/call P27_fnc_showGameVersion;
+        [] call P27_fnc_showGameVersion;
     
     Return:
 		nothing

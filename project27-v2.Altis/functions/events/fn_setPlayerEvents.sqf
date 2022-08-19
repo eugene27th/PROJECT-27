@@ -3,7 +3,7 @@
     Date: 13.08.2022
     
     Example:
-        [] spawn/call P27_fnc_setPlayerEvents;
+        [] call P27_fnc_setPlayerEvents;
     
     Return:
 		nothing

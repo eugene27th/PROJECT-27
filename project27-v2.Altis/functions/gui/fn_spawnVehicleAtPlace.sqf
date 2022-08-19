@@ -17,6 +17,15 @@ private _vehicleClass = _ctrlListBox lbData _listBoxIndex;
 
 closeDialog 1;
 
+private _ctrlHelpText = (findDisplay 46) ctrlCreate ["RscStructuredText", -1];
+
+_ctrlHelpText ctrlSetStructuredText (parseText ("<t font='PuristaMedium' align='center'>ESC: cancel | Space: spawn | Mouse wheel: rotate"));
+_ctrlHelpText ctrlSetPosition [safezoneX, 0.807961 * safezoneH + safezoneY, safezoneW, 0.0279964 * safezoneH];
+_ctrlHelpText ctrlCommit 0;
+
+player setVariable ["ctrlHelpText", _ctrlHelpText];
+
+
 private _localVehicle = _vehicleClass createVehicleLocal (position player);
 _localVehicle attachTo [player, [0, 5, 2]];
 _localVehicle setDir 90;
@@ -53,15 +62,25 @@ private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown",
 
 			private _spawnedVehicle = createVehicle [_className, _spawnPosition, [], 0, "CAN_COLLIDE"];
 			_spawnedVehicle setDir _direction;
+
+			clearItemCargoGlobal _spawnedVehicle;
+			clearMagazineCargoGlobal _spawnedVehicle;
+			clearWeaponCargoGlobal _spawnedVehicle;
+			clearBackpackCargoGlobal _spawnedVehicle;
 		};
 	};
 
+	ctrlDelete (player getVariable "ctrlHelpText");
 	deleteVehicle _localVehicle;
 
 	(findDisplay 46) displayRemoveEventHandler ["MouseZChanged", player getVariable "scrollEventIndex"];
 	(findDisplay 46) displayRemoveEventHandler ["keyDown", player getVariable "keyDownEventIndex"];
 
 	{player setVariable [_x, nil]} forEach ["localVehicle", "scrollEventIndex", "keyDownEventIndex"];
+
+	if (_key == 1) then {
+		true;
+	};
 }];
 
 player setVariable ["keyDownEventIndex", _keyDownEventIndex];
