@@ -46,7 +46,7 @@ player setVariable ["scrollEventIndex", _scrollEventIndex];
 private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown", {
 	params ["_displayOrControl", "_key", "_shift", "_ctrl", "_alt"];
 
-	if (_key != 57 && _key != 1) exitWith {};
+	if !(_key in [57, 1]) exitWith {};
 
 	private _localVehicle = player getVariable "localVehicle";
 
@@ -67,7 +67,22 @@ private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown",
 			clearMagazineCargoGlobal _spawnedVehicle;
 			clearWeaponCargoGlobal _spawnedVehicle;
 			clearBackpackCargoGlobal _spawnedVehicle;
+
+			if (_className == "Land_DataTerminal_01_F") then {
+				if (!isNil "mhqTerminal") then {
+					systemChat "New terminal";
+					deleteVehicle mhqTerminal;
+				};
+				
+				mhqTerminal = _spawnedVehicle;
+
+				[_spawnedVehicle, 3] call ace_cargo_fnc_setSize;
+				[_spawnedVehicle, "blue", "orange", "green"] call BIS_fnc_DataTerminalColor;
+				[_spawnedVehicle, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
+			};
 		};
+
+		true;
 	};
 
 	ctrlDelete (player getVariable "ctrlHelpText");

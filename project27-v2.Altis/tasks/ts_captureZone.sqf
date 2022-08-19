@@ -10,7 +10,7 @@ private _taskName = "ts_" + str serverTime;
 private _sectorPosition = [false, true] call P27_fnc_selectRandomSectorPos;
 
 [_taskName, _sectorPosition, "ELLIPSE", [250, 250], "COLOR:", "ColorEAST", "ALPHA:", 0.5, "PERSIST"] call CBA_fnc_createMarker;
-[west, [_taskName], ["STR_TASK_CAPTUREZONE_DESCRIPTION", "STR_TASK_CAPTUREZONE_TITLE", ""], _sectorPosition, "CREATED", 0, true, "attack"] call BIS_fnc_taskCreate;
+[west, [_taskName], ["STR_P27_TASK_DESCRIPTION_CAPTUREZONE", "STR_P27_TASK_TITLE_CAPTUREZONE", ""], _sectorPosition, "CREATED", 0, true, "attack"] call BIS_fnc_taskCreate;
 ([_sectorPosition, "AREA:", [250, 250, 20, false], "ACT:", ["WEST SEIZED", "PRESENT", true], "STATE:", ["this", "", ""]] call CBA_fnc_createTrigger) params ["_taskTrigger", "_triggerParams"];
 
 waitUntil {uiSleep 5; triggerActivated _taskTrigger || _taskName call BIS_fnc_taskCompleted};

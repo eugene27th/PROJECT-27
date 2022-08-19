@@ -64,6 +64,8 @@ configTasks = [
 	"captureZone"
 ];
 
+additionalClassesToVehicleSpawnList = ["Land_dataTerminal_01_F", "Land_CanisterFuel_F", "ACE_Wheel", "ACE_Track", "Land_WoodenCrate_01_F"];
+
 configLoadoutItems = [
 	[
 		"Medicine",

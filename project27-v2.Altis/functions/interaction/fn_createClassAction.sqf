@@ -18,7 +18,7 @@ if !(_img isEqualTo "") then {
 
 private _action = [_name, _title, _img, _statement, _condition] call ace_interact_menu_fnc_createAction;
 
-private _actionPath = ["ACE_SelfActions"];
+private _actionPath = ["ACE_MainActions"];
 
 if (!isNil "_parents") then {
 	_actionPath append _parents;

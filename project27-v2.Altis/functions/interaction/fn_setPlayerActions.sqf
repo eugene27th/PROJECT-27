@@ -18,7 +18,7 @@
 
 {
     private _task = _x;
-    ["ts_" + _task, localize ("STR_TASK_" + _task + "_TITLE"), "", {[_task] remoteExecCall ["P27_fnc_createTask", 2]}, {true}, ["taskManagement", "requestTask"]] call P27_fnc_createSelfAction;
+    ["ts_" + _task, localize ("STR_P27_TASK_TITLE_" + (toUpper _task)), "", {[_task] remoteExecCall ["P27_fnc_createTask", 2]}, {true}, ["taskManagement", "requestTask"]] call P27_fnc_createSelfAction;
 } forEach configTasks;
 
 
@@ -35,11 +35,32 @@
 ["fullHealLocal", "Heal yourself", "", {[player] call ace_medical_treatment_fnc_fullHealLocal}, {(player distance respawn) < 100}] call P27_fnc_createSelfAction;
 
 
+// teleport to mhq
+["tpToMhq", "To MHQ", "", {[] call P27_fnc_teleportToMhq}, {!(isNil "mhqTerminal")}] call P27_fnc_createSelfAction;
+
+// mhq actions
+["mhqDeploy", "Deploy MHQ", "", "Land_DataTerminal_01_F", {
+    params ["_target"];
+
+    [_target, 3] call BIS_fnc_dataTerminalAnimate;
+    [_target, -1] call ace_cargo_fnc_setSize;
+    [_target, false, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
+}, {true}] call P27_fnc_createClassAction;
+
+["mhqUndeploy", "Undeploy MHQ", "", "Land_DataTerminal_01_F", {
+    params ["_target"];
+
+    [_target, 0] call BIS_fnc_dataTerminalAnimate;
+    [_target, 3] call ace_cargo_fnc_setSize;
+    [_target, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
+}, {true}] call P27_fnc_createClassAction;
+
+
 // civil orders (radius)
 ["civilOrders", "Civil orders", "", {true}, {(vehicle player) == player}] call P27_fnc_createSelfAction;
 
-["civilStop", "STOP", "", {[player, "STOP"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
-["civilGetDown", "DOWN", "", {[player, "DOWN"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
-["civilGoAway", "GO AWAY", "", {[player, "GOAWAY"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
-["civilHandsUp", "HANDS UP", "", {[player, "HANDSUP"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
-["civilGetOut", "GET OUT", "", {[player, "GETOUT"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
+["civilStop", "STOP", "", {["STOP"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
+["civilGetDown", "DOWN", "", {["DOWN"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
+["civilGoAway", "GO AWAY", "", {["GOAWAY"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
+["civilHandsUp", "HANDS UP", "", {["HANDSUP"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
+["civilGetOut", "GET OUT", "", {["GETOUT"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;

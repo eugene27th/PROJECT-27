@@ -20,6 +20,10 @@ lbClear _ctrlListBox;
 
 private _classNames = [_vehicleType] call P27_fnc_getVehicleClassNames;
 
+if (!isNil "additionalClassesToVehicleSpawnList") then {
+	_classNames = additionalClassesToVehicleSpawnList + _classNames;
+};
+
 {
 	private _displayName = (getText(configFile >> "CfgVehicles" >> _x >> "displayName"));
 

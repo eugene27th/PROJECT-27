@@ -3,21 +3,21 @@
     Date: 13.08.2022
     
     Example:
-        [_player, _order] call P27_fnc_giveOrderToCivilian;
+        [_order] call P27_fnc_giveOrderToCivilian;
     
     Return:
 		nothing
 */
 
 
-params ["_player", "_order"];
+params ["_order"];
 
-private _position = position _player;
+private _position = position player;
 private _nearUnits = (_position nearEntities [["Man"], 60]) select {!(_x isEqualTo player) && ((side _x) isEqualTo civilian)};
 
 player playActionNow "gestureFreeze";
 
-if (isNil _nearUnits || _nearUnits isEqualTo []) exitWith {};
+if (isNil "_nearUnits" || _nearUnits isEqualTo []) exitWith {};
 
 {
 	(group _x) setBehaviour "CARELESS";
