@@ -23,7 +23,7 @@ if (_vehicleLoad > 1) then {
 private _loadBarW = _vehicleLoad * _fullWidth;
 private _loadBarColor = [1, 1, 1, 1];
 
-if (_vehicleLoad > 0.5) then {
+if (_vehicleLoad > 0.6) then {
 	_loadBarColor = [1, 1, 0, 1];
 };
 

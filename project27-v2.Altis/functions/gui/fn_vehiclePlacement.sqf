@@ -3,7 +3,7 @@
     Date: 13.08.2022
     
     Example:
-        [] call P27_fnc_spawnVehicleAtPlace;
+        [] call P27_fnc_vehiclePlacement;
     
     Return:
 		nothing
@@ -27,17 +27,29 @@ player setVariable ["ctrlHelpText", _ctrlHelpText];
 
 
 private _localVehicle = _vehicleClass createVehicleLocal (position player);
-_localVehicle attachTo [player, [0, 5, 2]];
-_localVehicle setDir 90;
+_localVehicle enableSimulation false;
+_localVehicle lockInventory true;
+_localVehicle allowDamage false;
+_localVehicle lock true;
 
 player setVariable ["localVehicle", _localVehicle];
+
+
+private _updateVehiclePlacement = addMissionEventHandler ["EachFrame", {
+	private _localVehicle = player getVariable "localVehicle";
+
+	private _newPosition = (getPos player) getPos [5, getDir player]; 
+	_localVehicle setPos _newPosition;
+}];
+
+player setVariable ["updateVehiclePlacement", _updateVehiclePlacement];
 
 
 private _scrollEventIndex = (findDisplay 46) displayAddEventHandler ["MouseZChanged", {
 	params ["_displayOrControl", "_scroll"];
 
 	private _localVehicle = player getVariable "localVehicle";
-	_localVehicle setDir ((getDir _localVehicle) - (getDir player)) + (_scroll * 2);
+	_localVehicle setDir ((getDir _localVehicle) + _scroll);
 }];
 
 player setVariable ["scrollEventIndex", _scrollEventIndex];
@@ -52,7 +64,7 @@ private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown",
 
 	if (_key == 57) then {
 		private _className = typeOf _localVehicle;
-		private _spawnPosition = (position player) getPos [5, getDir player];
+		private _spawnPosition = getPos _localVehicle;
 		private _direction = getDir _localVehicle;
 
 		[_className, _spawnPosition, _direction] spawn {
@@ -88,6 +100,7 @@ private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown",
 	ctrlDelete (player getVariable "ctrlHelpText");
 	deleteVehicle _localVehicle;
 
+	removeMissionEventHandler ["EachFrame", player getVariable "updateVehiclePlacement"];
 	(findDisplay 46) displayRemoveEventHandler ["MouseZChanged", player getVariable "scrollEventIndex"];
 	(findDisplay 46) displayRemoveEventHandler ["keyDown", player getVariable "keyDownEventIndex"];
 

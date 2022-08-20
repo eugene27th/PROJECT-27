@@ -43,7 +43,7 @@ configSectors = [
 ];
 
 configUnits = [
-	[
+	[ // enemy
 		independent,
 		[
 			["I_E_Officer_F"], // leaders
@@ -54,7 +54,7 @@ configUnits = [
 			["I_C_HMG_02_high_F", "B_T_Static_AT_F"] // static
 		]
 	],
-	[
+	[ // civ
 		["C_Man_formal_4_F", "C_Man_casual_3_F", "C_Man_casual_8_F"], // units
 		["C_SUV_01_F", "C_Hatchback_01_F"] // vehs
 	]
@@ -62,6 +62,13 @@ configUnits = [
 
 configTasks = [
 	"captureZone"
+];
+
+configObjects = [
+	[ // road ied
+		["ACE_IEDUrbanBig_Range","ACE_IEDLandBig_Range","ACE_IEDUrbanSmall_Range","ACE_IEDLandSmall_Range","ACE_SLAMBottomMine","CUP_MineE","CUP_Mine","rhs_mine_pfm1","rhs_uxo_ao1_1","rhs_uxo_ptab1m_1","rhs_uxo_ptab25ko_1","rhs_uxo_ptab25m_1","BombCluster_01_UXO1_F","BombCluster_03_UXO1_F","rhsusf_uxo_blu97"],
+		["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"]
+	]
 ];
 
 additionalClassesToVehicleSpawnList = ["Land_dataTerminal_01_F", "Land_CanisterFuel_F", "ACE_Wheel", "ACE_Track", "Land_WoodenCrate_01_F"];

@@ -72,7 +72,7 @@ class dialogVehicleList {
 			font = "PuristaMedium";
 			text = "SPAWN";
 
-			action = "call P27_fnc_spawnVehicleAtPlace";
+			action = "call P27_fnc_vehiclePlacement";
 		};
 
 		class typeList: RscCombo {
