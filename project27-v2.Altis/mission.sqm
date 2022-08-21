@@ -8,14 +8,14 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=87;
+		nextID=89;
 	};
 	class Camera
 	{
-		pos[]={15237.324,28.244413,17277.746};
-		dir[]={-0.66605151,-0.47180521,0.5777328};
-		up[]={-0.35640875,0.8817029,0.30914879};
-		aside[]={0.65524668,1.4901161e-008,0.75541502};
+		pos[]={15235.872,28.244413,17286.16};
+		dir[]={-0.77712834,-0.50618839,0.37395841};
+		up[]={-0.45612577,0.86242294,0.21949022};
+		aside[]={0.43361372,0,0.90109885};
 	};
 };
 binarizationWanted=0;
@@ -23,13 +23,15 @@ sourceName="project27-v2";
 addons[]=
 {
 	"A3_Structures_F_Bootcamp_VR_Helpers",
-	"A3_Characters_F"
+	"A3_Characters_F",
+	"A3_Characters_F_Kart",
+	"cba_xeh"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=2;
+		items=3;
 		class Item0
 		{
 			className="A3_Structures_F_Bootcamp";
@@ -44,7 +46,18 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item2
+		{
+			className="A3_Characters_F_Kart";
+			name="Arma 3 Karts - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
+};
+dlcs[]=
+{
+	"Kart"
 };
 randomSeed=14250439;
 class ScenarioData
@@ -177,7 +190,7 @@ class Mission
 		class Item1
 		{
 			dataType="Group";
-			side="West";
+			side="Civilian";
 			class Entities
 			{
 				items=1;
@@ -186,24 +199,23 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={15225.54,17.957399,17291.48};
-						angles[]={0,3.8294847,0};
+						position[]={15224.355,17.956335,17291.867};
 					};
-					side="West";
+					side="Civilian";
 					flags=7;
 					class Attributes
 					{
 						isPlayer=1;
 					};
-					id=55;
-					type="B_medic_F";
+					id=88;
+					type="C_Driver_1_F";
 					atlOffset=-1.9073486e-006;
 				};
 			};
 			class Attributes
 			{
 			};
-			id=54;
+			id=87;
 			atlOffset=-1.9073486e-006;
 		};
 	};

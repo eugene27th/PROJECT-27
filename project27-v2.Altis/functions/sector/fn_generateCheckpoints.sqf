@@ -12,7 +12,7 @@
 
 params [["_count", 10]];
 
-private _roadPositions = [_count] call P27_fnc_getRandomRoadPosition;
+private _roadPositions = [_count] call P27_fnc_getRandomRoadPositions;
 
 private _allTriggers = [];
 
@@ -34,12 +34,11 @@ for [{private _i = 0 }, { _i < (count _roadPositions) }, { _i = _i + 1 }] do {
 	];
 
 	_trg setVariable ["isActive", false];
-	_trg setVariable ["isCaptured", false];
 
 	_allTriggers pushBack _trg;
 
 	if (debugMode) then {
-		["checkpoint_" + str _roadPosition, _roadPosition, "ELLIPSE", [100, 100], "COLOR:", "ColorBlack", "ALPHA:", 0.3, "PERSIST"] call CBA_fnc_createMarker;
+		["checkpoint_" + (str _roadPosition), _roadPosition, "ELLIPSE", [50, 50], "COLOR:", "ColorBlack", "ALPHA:", 0.7, "PERSIST"] call CBA_fnc_createMarker;
 	};
 };
 

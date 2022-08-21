@@ -7,7 +7,7 @@
 
 
 private _taskName = "ts_" + str serverTime;
-private _sectorPosition = [false, true] call P27_fnc_selectRandomSectorPos;
+private _sectorPosition = [false, true] call P27_fnc_getRandomSectorPos;
 
 [_taskName, _sectorPosition, "ELLIPSE", [250, 250], "COLOR:", "ColorEAST", "ALPHA:", 0.5, "PERSIST"] call CBA_fnc_createMarker;
 [west, [_taskName], ["STR_P27_TASK_DESCRIPTION_CAPTUREZONE", "STR_P27_TASK_TITLE_CAPTUREZONE", ""], _sectorPosition, "CREATED", 0, true, "attack"] call BIS_fnc_taskCreate;

@@ -17,6 +17,13 @@ class CfgFunctions {
 			class vehicleService {};
 			class teleportToMhq {};
 
+			class createIedOnRoads {};
+			class createHouseUnits {};
+			class createPatrolUnits {};
+			class createCrowdUnits {};
+			class createPatrolVehicles {};
+			class createTurrets {};
+
 			class createTask {};
 			class cancelTask {};
 		};
@@ -27,6 +34,7 @@ class CfgFunctions {
 			class unitSideUpdate {};
 			class setMissionEvents {};
 			class setPlayerEvents {};
+			class addSpawnTriggerEventToVehicles {};
 		};
 
 		class gui {
@@ -57,21 +65,17 @@ class CfgFunctions {
 			file = "functions\sector";
 
 			class getNumberOfUnits {};
-			class selectRandomSectorPos {};
+			class getRandomSectorPos {};
 			
 			class generateSectors {};
 			class createSector {};
-			class clearSector {};
 			class setSectorCaptureState {};
 
 			class generateCheckpoints {};
 			class createCheckpoint {};
+			class setCheckpointCaptureState {};
 
-			class createIedOnRoads {};
-			class createHouseGroups {};
-			class createPatrolGroups {};
-			class createVehicles {};
-			class createTurrets {};
+			class clearSector {};
 		};
 
 		class external {

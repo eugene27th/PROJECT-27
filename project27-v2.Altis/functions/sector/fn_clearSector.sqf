@@ -23,7 +23,7 @@ if (!isNil "_captureTrigger") then {
 
 
 {
-    private _unitSectorTrigger = _x getVariable "sectorTrigger";
+    private _unitSectorTrigger = _x getVariable "spawnTrigger";
 
     if (isNil "_unitSectorTrigger") then {
         continue;

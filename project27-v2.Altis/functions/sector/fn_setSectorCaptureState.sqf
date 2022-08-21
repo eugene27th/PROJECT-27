@@ -12,7 +12,7 @@
 
 params ["_captureTrigger"];
 
-private _sectorTrigger = _captureTrigger getVariable "sectorTrigger";
+private _sectorTrigger = _captureTrigger getVariable "spawnTrigger";
 
 if (isNil "_sectorTrigger") exitWith {};
 

@@ -39,26 +39,26 @@ private _enemyClasses = _enemyConfig # 1;
 private _civClasses = configUnits # 1;
 
 if (!_sectorIsCaptured) then {
-	[_enemyClasses # 1, _spawnEnemyConfig # 0, _sectorTrigger, _sectorRadius, _enemySide] spawn P27_fnc_createHouseGroups;
-	[_enemyClasses # 1, _spawnEnemyConfig # 1, _sectorTrigger, _sectorRadius, _enemySide] spawn P27_fnc_createPatrolGroups;
-	[(_enemyClasses # 2) + (_enemyClasses # 3), _enemyClasses # 1, _spawnEnemyConfig # 2, _sectorTrigger, _sectorRadius, _enemySide] spawn P27_fnc_createVehicles;
-	[_enemyClasses # 4, _enemyClasses # 1, _spawnEnemyConfig # 3, _sectorTrigger, _sectorRadius, _enemySide] spawn P27_fnc_createVehicles;
-	[_enemyClasses # 5, _enemyClasses # 1, _spawnEnemyConfig # 4, _sectorTrigger, _sectorRadius, _enemySide] spawn P27_fnc_createTurrets;
+	[_sectorTrigger, _sectorRadius, _enemyClasses # 1, _enemySide, _spawnEnemyConfig # 0] spawn P27_fnc_createHouseUnits;
+	[_sectorTrigger, _sectorRadius, _enemyClasses # 1, _enemySide, _spawnEnemyConfig # 1] spawn P27_fnc_createPatrolUnits;
+	[_sectorTrigger, _sectorRadius, (_enemyClasses # 2) + (_enemyClasses # 3), _enemyClasses # 1, _enemySide, _spawnEnemyConfig # 2] spawn P27_fnc_createPatrolVehicles;
+	[_sectorTrigger, _sectorRadius, _enemyClasses # 4, _enemyClasses # 1, _enemySide, _spawnEnemyConfig # 3] spawn P27_fnc_createPatrolVehicles;
+	[_sectorTrigger, _sectorRadius, _enemyClasses # 5, _enemyClasses # 1, _enemySide, _spawnEnemyConfig # 4] spawn P27_fnc_createTurrets;
 
-	private _captureTrigger = [
+	([
 		_triggerPosition,
 		"AREA:", [_sectorRadius, _sectorRadius, 0, false],
 		"ACT:", ["WEST SEIZED", "PRESENT", true],
 		"STATE:", ["this", "[thisTrigger] call P27_fnc_setSectorCaptureState", ""]
-	] call CBA_fnc_createTrigger;
+	] call CBA_fnc_createTrigger) params ["_captureTrigger", "_captureTriggerOptions"];;
 
-	(_captureTrigger # 0) setVariable ["sectorTrigger", _sectorTrigger];
-	_sectorTrigger setVariable ["captureTrigger", (_captureTrigger # 0)];
+	_captureTrigger setVariable ["spawnTrigger", _sectorTrigger];
+	_sectorTrigger setVariable ["captureTrigger", _captureTrigger];
 };
 
-[_civClasses # 0, _spawnCivConfig # 0, _sectorTrigger, _sectorRadius, civilian] spawn P27_fnc_createHouseGroups;
-[_civClasses # 0, _spawnCivConfig # 1, _sectorTrigger, _sectorRadius, civilian] spawn P27_fnc_createPatrolGroups;
-[_civClasses # 1, _civClasses # 0, _spawnCivConfig # 2, _sectorTrigger, _sectorRadius, civilian] spawn P27_fnc_createVehicles;
+[_sectorTrigger, _sectorRadius, _civClasses # 0, civilian, _spawnCivConfig # 0] spawn P27_fnc_createHouseUnits;
+[_sectorTrigger, _sectorRadius, _civClasses # 0, civilian, _spawnCivConfig # 1] spawn P27_fnc_createPatrolUnits;
+[_sectorTrigger, _sectorRadius, _civClasses # 1, _civClasses # 0, civilian, _spawnCivConfig # 2] spawn P27_fnc_createPatrolVehicles;
 
 
 [_sectorTrigger] spawn P27_fnc_clearSector;

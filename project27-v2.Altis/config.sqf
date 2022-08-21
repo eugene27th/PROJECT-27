@@ -51,7 +51,7 @@ configUnits = [
 			["I_G_Offroad_01_F", "I_C_Offroad_02_unarmed_F"], // light vehicles
 			["I_G_Offroad_01_armed_F", "I_C_Offroad_02_LMG_F"], // armed vehicles
 			["I_E_APC_tracked_03_cannon_F", "I_APC_Wheeled_03_cannon_F"], // heavy vehicles
-			["I_C_HMG_02_high_F", "B_T_Static_AT_F"] // static
+			["I_C_HMG_02_high_F", "B_T_Static_AT_F"] // turrets
 		]
 	],
 	[ // civ
@@ -66,7 +66,7 @@ configTasks = [
 
 configObjects = [
 	[ // road ied
-		["ACE_IEDUrbanBig_Range","ACE_IEDLandBig_Range","ACE_IEDUrbanSmall_Range","ACE_IEDLandSmall_Range","ACE_SLAMBottomMine","CUP_MineE","CUP_Mine","rhs_mine_pfm1","rhs_uxo_ao1_1","rhs_uxo_ptab1m_1","rhs_uxo_ptab25ko_1","rhs_uxo_ptab25m_1","BombCluster_01_UXO1_F","BombCluster_03_UXO1_F","rhsusf_uxo_blu97"],
+		["ACE_IEDUrbanBig_Range","ACE_IEDLandBig_Range","ACE_IEDUrbanSmall_Range","ACE_IEDLandSmall_Range","ACE_SLAMBottomMine","BombCluster_01_UXO1_F","BombCluster_03_UXO1_F"],
 		["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"]
 	]
 ];
