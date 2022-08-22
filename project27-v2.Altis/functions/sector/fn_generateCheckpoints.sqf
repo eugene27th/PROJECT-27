@@ -3,10 +3,7 @@
     Date: 21.08.2022
     
     Example:
-        [_count] call P27_fnc_generateCheckpoints;
-    
-    Return:
-		nothing
+        [] call P27_fnc_generateCheckpoints
 */
 
 

@@ -3,10 +3,7 @@
     Date: 19.08.2022
     
     Example:
-        [_vehicle, _count] call P27_fnc_loadItemToCargo;
-    
-    Return:
-		nothing
+        [] call P27_fnc_loadItemToCargo
 */
 
 

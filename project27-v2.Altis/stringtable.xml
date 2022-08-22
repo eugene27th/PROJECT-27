@@ -1,13 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Project name="PROJECT27">
-    <Package name="SECTOR">
+    <Package name="SECTORS">
         <Container name="SECTOR_CAPTURED">
-            <Key ID="STR_SECTOR_CAPTURED">
+            <Key ID="STR_P27_SECTOR_CAPTURED_TITLE">
                 <Original>Сектор захвачен.</Original>
             </Key>
-            <Key ID="STR_SECTOR_CAPTURED_DESC">
+            <Key ID="STR_P27_SECTOR_CAPTURED_DESCRIPTION">
                 <Original>Сектор %1 (%2) под контролем.</Original>
+            </Key>
+        </Container>
+
+        <Container name="SECTOR_CAPTURED">
+            <Key ID="STR_P27_CHECKPOINT_CAPTURED_TITLE">
+                <Original>Блокпост захвачен.</Original>
+            </Key>
+            <Key ID="STR_P27_CHECKPOINT_CAPTURED_DESCRIPTION">
+                <Original>Блокпост %1 (%2) под контролем.</Original>
             </Key>
         </Container>
     </Package>

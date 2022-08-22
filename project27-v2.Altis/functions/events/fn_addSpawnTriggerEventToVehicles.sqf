@@ -3,9 +3,7 @@
     Date: 21.08.2022
     
     Example:
-    
-    Return:
-		nothing
+		[] call P27_fnc_addSpawnTriggerEventToVehicles
 */
 
 

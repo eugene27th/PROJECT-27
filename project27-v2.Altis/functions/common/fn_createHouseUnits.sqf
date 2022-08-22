@@ -3,26 +3,24 @@
     Date: 11.08.2022
     
     Example:
-    
-    Return:
-		nothing
+		[] call P27_fnc_createHouseUnits
 */
 
 
-params ["_positionOrTrigger", ["_sectorRadius", 100], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0], ["_spawnConfig", [1, 1]]];
+params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
 
 if ((_spawnConfig # 0) == 0) exitWith {};
 
 
-private ["_sectorTrigger", "_centerPosition"];
+private ["_sectorTrigger"];
 
 if (typeName _positionOrTrigger != "ARRAY") then {
 	_sectorTrigger = _positionOrTrigger;
-	_centerPosition = position _sectorTrigger;
+	_positionOrTrigger = position _sectorTrigger;
 };
 
 
-private _allBuildings = nearestObjects [_centerPosition, ["Building"], _sectorRadius];
+private _allBuildings = nearestObjects [_positionOrTrigger, ["Building"], _sectorRadius];
 private _usefulBuildings = _allBuildings select {!((_x buildingPos -1) isEqualTo []) && {damage _x isEqualTo 0}};
 
 private _freeBuildingPositions = [];

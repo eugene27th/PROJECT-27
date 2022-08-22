@@ -3,10 +3,7 @@
     Date: 21.08.2022
     
     Example:
-        [_count] call P27_fnc_getRandomRoadPositions;
-    
-    Return:
-		nothing
+        [] call P27_fnc_getRandomRoadPositions
 */
 
 
@@ -23,13 +20,17 @@ if (isNil "_centerPosition") then {
 
 private _allRoads = (_centerPosition nearRoads _radius) - ((position respawn) nearRoads (configSectors # 0));
 
+if ((count _allRoads) < _count) exitWith {
+	[_centerPosition, 0, _radius, 5, 0] call BIS_fnc_findSafePos;
+};
+
 for [{private _i = 0 }, { _i < _count }, { _i = _i + 1 }] do {
 	private _randomRoad = selectRandom _allRoads;
 
 	private _roadPosition = getPos _randomRoad;
 	private _roadDirection = _randomRoad getDir ((roadsConnectedTo _randomRoad) select 0);
 
-	if (isNil "_direction") then {
+	if (isNil "_roadDirection") then {
 		_roadDirection = 0;
 	};
 

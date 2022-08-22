@@ -3,10 +3,7 @@
     Date: 11.08.2022
     
     Example:
-        [_number] call P27_fnc_getNumberOfUnits;
-    
-    Return:
-		number of units
+        [] call P27_fnc_getNumberOfUnits
 */
 
 params ["_number"];

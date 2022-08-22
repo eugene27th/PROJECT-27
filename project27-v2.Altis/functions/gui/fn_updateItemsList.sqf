@@ -3,10 +3,7 @@
     Date: 19.08.2022
     
     Example:
-        [_count] call P27_fnc_updateItemsList;
-    
-    Return:
-		nothing
+        [_count] call P27_fnc_updateItemsList
 */
 
 

@@ -3,28 +3,26 @@
     Date: 11.08.2022
     
     Example:
-    
-    Return:
-		nothing
+		[] call P27_fnc_createPatrolVehicles
 */
 
 
-params ["_positionOrTrigger", ["_sectorRadius", 100], ["_vehClassNames", ((configUnits # 0) # 1) # 2], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0], ["_spawnConfig", [1, 1]]];
+params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_vehClassNames", ((configUnits # 0) # 1) # 2], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
 
 if ((_spawnConfig # 0) == 0) exitWith {};
 
 
-private ["_sectorTrigger", "_centerPosition"];
+private ["_sectorTrigger"];
 
 if (typeName _positionOrTrigger != "ARRAY") then {
 	_sectorTrigger = _positionOrTrigger;
-	_centerPosition = position _sectorTrigger;
+	_positionOrTrigger = position _sectorTrigger;
 };
 
 
 private _vehicles = [];
 
-private _roads = ((_centerPosition) nearRoads _sectorRadius) select {isOnRoad _x};
+private _roads = ((_positionOrTrigger) nearRoads _sectorRadius) select {isOnRoad _x};
 
 for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 
@@ -32,80 +30,27 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 		continue;
 	};
 
-	([1, _centerPosition, _sectorRadius] call P27_fnc_getRandomRoadPositions) params ["_roadPosition", "_roadDirection"];
+	([1, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions) params ["_spawnPosition", "_spawnDirection"];
 
 
-	private _vehicle = (selectRandom _vehClassNames) createVehicle _roadPosition;
+	private _vehicle = (selectRandom _vehClassNames) createVehicle _spawnPosition;
 	_vehicle setVariable ["spawnTrigger", _sectorTrigger];
-	_vehicle setDir _roadDirection;
+	_vehicle setDir _spawnDirection;
 	_vehicles pushBack _vehicle;
 
 	uiSleep 0.5;
 
 
-	private _grp = createGroup [_unitSide, true];
+	private _vehicleCrew = [_vehicle, _unitClassNames, _unitSide] call P27_fnc_createCrew;
 
-	if ((_vehicle emptyPositions "commander") != 0) then {
-		private _unit = _grp createUnit [selectRandom _unitClassNames, _roadPosition, [], 0, "NONE"];
-		
-		if (!isNil "_sectorTrigger") then {
-			_unit setVariable ["spawnTrigger", _sectorTrigger];
-		};
-
-		_unit moveInCommander _vehicle;
+	if (!isNil "_sectorTrigger") then {
+		{_x setVariable ["spawnTrigger", _sectorTrigger]} forEach _vehicleCrew;
 	};
 
-	if ((_vehicle emptyPositions "gunner") != 0) then {
-		private _unit = _grp createUnit [selectRandom _unitClassNames, _roadPosition, [], 0, "NONE"];
-		
-		if (!isNil "_sectorTrigger") then {
-			_unit setVariable ["spawnTrigger", _sectorTrigger];
-		};
-
-		_unit moveInGunner _vehicle;
-	};
-
-	if ((_vehicle emptyPositions "driver") != 0) then {
-		private _unit = _grp createUnit [selectRandom _unitClassNames, _roadPosition, [], 0, "NONE"];
-		
-		if (!isNil "_sectorTrigger") then {
-			_unit setVariable ["spawnTrigger", _sectorTrigger];
-		};
-
-		_unit moveInDriver _vehicle;
-	};
+	private _grp = group (_vehicleCrew # 0);
 	
-	uiSleep 0.5;
-
-
-	private _emptySeats = round (random (_vehicle emptyPositions "cargo"));
-
-	for "_i" from 1 to _emptySeats do {
-		private _unit = _grp createUnit [selectRandom _unitClassNames, _roadPosition, [], 0, "NONE"];
-		
-		if (!isNil "_sectorTrigger") then {
-			_unit setVariable ["spawnTrigger", _sectorTrigger];
-		};
-
-		_unit moveInCargo _vehicle;
-		uiSleep 0.5;
-	};
-
-	_grp setBehaviour "SAFE";
-	_grp setSpeedMode "LIMITED";
-	_grp setCombatMode "YELLOW";
-
-
 	for "_i" from 1 to 3 do {
-		private "_wpPosition";
-
-		if ((count _roads) > 5) then {
-			private _road = selectRandom _roads;
-			_wpPosition = getPos _road;
-			_wpPosition set [2, 0];
-		} else {
-			_wpPosition = [_centerPosition, 0, _sectorRadius, 5, 0] call BIS_fnc_findSafePos;
-		};
+		([1, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions) params ["_wpPosition"];
 
 		private _wp = _grp addWaypoint [_wpPosition, 0];
 		_wp setWaypointCompletionRadius 20;

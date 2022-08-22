@@ -3,10 +3,7 @@
     Date: 19.08.2022
     
     Example:
-        [_class] call P27_fnc_getConfigPathFromClass;
-    
-    Return:
-		config path
+        [] call P27_fnc_getConfigPathFromClass
 */
 
 

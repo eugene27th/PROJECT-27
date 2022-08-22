@@ -3,10 +3,7 @@
     Date: 13.08.2022
     
     Example:
-        [] call P27_fnc_setPlayerEvents;
-    
-    Return:
-		nothing
+        [] call P27_fnc_setPlayerEvents
 */
 
 

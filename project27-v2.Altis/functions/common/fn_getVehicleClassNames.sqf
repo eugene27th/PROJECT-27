@@ -3,10 +3,7 @@
     Date: 14.08.2022
     
     Example:
-        [_type] call P27_fnc_getVehicleClassNames;
-    
-    Return:
-		array of classNames
+        [] call P27_fnc_getVehicleClassNames
 */
 
 

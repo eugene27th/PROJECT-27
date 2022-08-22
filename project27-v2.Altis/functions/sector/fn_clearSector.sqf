@@ -3,10 +3,7 @@
     Date: 12.08.2022
     
     Example:
-        [_sectorTrigger] spawn P27_fnc_clearSector;
-    
-    Return:
-		nothing
+        [] spawn P27_fnc_clearSector
 */
 
 params ["_sectorTrigger"];

@@ -3,10 +3,7 @@
     Date: 19.08.2022
     
     Example:
-        [] call P27_fnc_updateInvLoadBar;
-    
-    Return:
-		nothing
+        [] call P27_fnc_updateInvLoadBar
 */
 
 

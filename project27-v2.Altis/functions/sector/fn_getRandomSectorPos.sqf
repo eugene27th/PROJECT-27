@@ -3,10 +3,7 @@
     Date: 15.08.2022
     
     Example:
-        [_includeCaptured = false, _nearest = false] call P27_fnc_getRandomSectorPos;
-    
-    Return:
-		sector position
+        [] call P27_fnc_getRandomSectorPos
 */
 
 

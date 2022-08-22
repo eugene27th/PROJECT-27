@@ -3,10 +3,7 @@
     Date: 14.08.2022
     
     Example:
-        [_task] call P27_fnc_cancelTask;
-    
-    Return:
-		nothing
+        [] call P27_fnc_cancelTask
 */
 
 

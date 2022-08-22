@@ -3,27 +3,25 @@
     Date: 11.08.2022
     
     Example:
-    
-    Return:
-		nothing
+		[] call P27_fnc_createPatrolUnits
 */
 
 
-params ["_positionOrTrigger", ["_sectorRadius", 100], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0], ["_spawnConfig", [1, 1]]];
+params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
 
 if ((_spawnConfig # 0) == 0) exitWith {};
 
 
-private ["_sectorTrigger", "_centerPosition"];
+private ["_sectorTrigger"];
 
 if (typeName _positionOrTrigger != "ARRAY") then {
 	_sectorTrigger = _positionOrTrigger;
-	_centerPosition = position _sectorTrigger;
+	_positionOrTrigger = position _sectorTrigger;
 };
 
 
 for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
-	private _spawnPosition = [_centerPosition, 10, _sectorRadius, 1, 0] call BIS_fnc_findSafePos;
+	private _spawnPosition = [_positionOrTrigger, 10, _sectorRadius, 1, 0] call BIS_fnc_findSafePos;
 	private _grp = createGroup [_unitSide, true];
 	
 	if (isNil "_spawnPosition") then {
@@ -47,7 +45,7 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 	_grp setFormation "STAG COLUMN";
 
 	for "_i" from 1 to 7 do {
-		private _wpPosition = [_centerPosition, 10, _sectorRadius, 1, 0] call BIS_fnc_findSafePos;
+		private _wpPosition = [_positionOrTrigger, 10, _sectorRadius, 1, 0] call BIS_fnc_findSafePos;
 		
 		private _wp = _grp addWaypoint [_wpPosition, 0];
 		_wp setWaypointCompletionRadius 10;

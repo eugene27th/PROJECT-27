@@ -3,10 +3,7 @@
     Date: 13.08.2022
     
     Example:
-        [_name, _title, _img, _statement, _condition, [_parents]] call P27_fnc_createSelfAction;
-    
-    Return:
-		nothing
+        [] call P27_fnc_createSelfAction
 */
 
 

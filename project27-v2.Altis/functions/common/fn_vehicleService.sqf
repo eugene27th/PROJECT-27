@@ -3,10 +3,7 @@
     Date: 19.08.2022
     
     Example:
-        [_vehicle, _type] call P27_fnc_vehicleService;
-    
-    Return:
-		nothing
+        [] call P27_fnc_vehicleService
 */
 
 

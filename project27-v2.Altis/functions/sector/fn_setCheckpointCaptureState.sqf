@@ -3,10 +3,7 @@
     Date: 16.08.2022
     
     Example:
-        [_captureTrigger] call P27_fnc_setCheckpointCaptureState;
-    
-    Return:
-		nothing
+        [] call P27_fnc_setCheckpointCaptureState
 */
 
 

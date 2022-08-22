@@ -3,10 +3,7 @@
     Date: 13.08.2022
     
     Example:
-        [] spawn P27_fnc_unitSideUpdate;
-    
-    Return:
-		nothing
+        [] spawn P27_fnc_unitSideUpdate
 */
 
 

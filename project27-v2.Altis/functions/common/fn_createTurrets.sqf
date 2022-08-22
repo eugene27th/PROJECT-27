@@ -3,22 +3,20 @@
     Date: 11.08.2022
     
     Example:
-    
-    Return:
-		nothing
+		[] call P27_fnc_createTurrets
 */
 
 
-params ["_positionOrTrigger", ["_sectorRadius", 100], ["_turretClassNames", ((configUnits # 0) # 1) # 5], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0], ["_spawnConfig", [1, 1]]];
+params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_turretClassNames", ((configUnits # 0) # 1) # 5], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
 
 if ((_spawnConfig # 0) == 0) exitWith {};
 
 
-private ["_sectorTrigger", "_centerPosition"];
+private ["_sectorTrigger"];
 
 if (typeName _positionOrTrigger != "ARRAY") then {
 	_sectorTrigger = _positionOrTrigger;
-	_centerPosition = position _sectorTrigger;
+	_positionOrTrigger = position _sectorTrigger;
 };
 
 
@@ -30,7 +28,7 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 		continue;
 	};
 
-	private _spawnPosition = [_centerPosition, 0, _sectorRadius, 5, 0] call BIS_fnc_findSafePos;
+	private _spawnPosition = [_positionOrTrigger, 0, _sectorRadius, 5, 0] call BIS_fnc_findSafePos;
 
 	if (isNil "_spawnPosition") then {
 		continue;

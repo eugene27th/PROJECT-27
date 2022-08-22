@@ -3,72 +3,66 @@
     Date: 13.08.2022
     
     Example:
-        [_order] call P27_fnc_giveOrderToCivilian;
-    
-    Return:
-		nothing
+        [] call P27_fnc_giveOrderToCivilian
 */
 
 
 params ["_order"];
 
-private _position = position player;
-private _nearUnits = (_position nearEntities [["Man", "Car"], 60]) select {!(_x isEqualTo player) && ((side _x) isEqualTo civilian)};
+private _nearUnits = ((position player) nearEntities [["Man", "Car"], 60]) select {!(_x isEqualTo player) && ((side _x) isEqualTo civilian)};
 
 player playActionNow "gestureFreeze";
 
-if (isNil "_nearUnits" || _nearUnits isEqualTo []) exitWith {};
+if (isNil "_nearUnits" || _nearUnits isEqualTo []) exitWith {
+	systemChat "no near units";
+};
 
 {
-	if (_x isKindOf "Car") exitWith {
-		private _driver = driver _x;
-		private _crew = crew _x;
+	if (_x isKindOf "Man") exitWith {
+		systemChat format ["MAN: %1", _order];
 
 		switch (_order) do {
-			case "GOAWAY": {
-				systemChat "CAR: DOWN";
-				[_driver] call ace_interaction_fnc_sendAway;
+			case "DOWN": {
+				if ((animationState _x) == "amovpercmstpssurwnondnon") then {
+					[_x, "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"] remoteExec ["switchMove", 0];
+				};
+				_x setUnitPos "DOWN";
 			};
 			case "STOP": {
-				systemChat "CAR: STOP";
-				doStop _driver;
+				doStop _x;
 			};
-			case "GETOUT": {
-				systemChat "CAR: GETOUT";
-				systemChat format ["%1 / %2", _x, vehicle _x];
-				for [{private _i = 0 }, { _i < (count _crew) }, { _i = _i + 1 }] do {
-					unassignVehicle (_crew # _i);
+			case "GOAWAY": {
+				if ((animationState _x) == "amovpercmstpssurwnondnon") then {
+					[_x, "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"] remoteExec ["switchMove", 0];
 				};
-				_crew allowGetIn false;
+				_x setUnitPos "UP";
+				[_x] call ace_interaction_fnc_sendAway;
+			};
+			case "HANDSUP": {
+				[_x, "AmovPercMstpSsurWnonDnon"] remoteExec ["playMove", 0];
 			};
 		};
 	};
 
-	(group _x) setBehaviour "CARELESS";
+	private _crew = crew _x;
 
-	if (_order == "DOWN") then {
-		systemChat "DOWN";
-		_x setUnitPos "DOWN";
-	} else {
-		systemChat "UP";
-		_x setUnitPos "UP";
-	};
+	if ((count _crew) < 1) exitWith {};
 
-	if (_order == "HANDSUP") then {
-		systemChat "HANDSUP";
-		[_x, "AmovPercMstpSsurWnonDnon"] remoteExec ["playMove", 0];
-	};
+	systemChat format ["CAR: %1", _order];
 
-	if (_order == "GOAWAY") then {
-		systemChat "GOAWAY";
-		if ((animationState _x) == "amovpercmstpssurwnondnon") then {
-			[_x, "AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"] remoteExec ["switchMove", 0];
+	switch (_order) do {
+		case "GOAWAY": {
+			[driver _x] call ace_interaction_fnc_sendAway;
 		};
-
-		(group _x) setSpeedMode "FULL";
-		[_x] call ace_interaction_fnc_sendAway;
-	} else {
-		systemChat "STOP";
-		doStop _x;
+		case "STOP": {
+			doStop (driver _x);
+		};
+		case "GETOUT": {
+			for [{private _i = 0 }, { _i < (count _crew) }, { _i = _i + 1 }] do {
+				(_crew # _i) leaveVehicle _x;
+				unassignVehicle (_crew # _i);
+			};
+			_crew allowGetIn false;
+		};
 	};
 } forEach _nearUnits;

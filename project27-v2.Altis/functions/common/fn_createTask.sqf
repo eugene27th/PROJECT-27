@@ -3,10 +3,7 @@
     Date: 14.08.2022
     
     Example:
-        [_taskName = random] call P27_fnc_createTask;
-    
-    Return:
-		nothing
+        [] call P27_fnc_createTask
 */
 
 
