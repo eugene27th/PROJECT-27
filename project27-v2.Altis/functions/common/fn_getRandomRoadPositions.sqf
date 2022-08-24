@@ -38,8 +38,4 @@ for [{private _i = 0 }, { _i < _count }, { _i = _i + 1 }] do {
 	_returnArray pushBack [_roadPosition, _roadDirection];
 };
 
-if (_count == 1) exitWith {
-	_returnArray # 0
-};
-
 _returnArray

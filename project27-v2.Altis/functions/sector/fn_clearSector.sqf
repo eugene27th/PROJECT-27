@@ -19,17 +19,11 @@ if (!isNil "_captureTrigger") then {
 };
 
 
+private _allObjects = (allUnits + vehicles) select {(_x getVariable ["spawnTrigger", ""]) isEqualTo _sectorTrigger};
+
 {
-    private _unitSectorTrigger = _x getVariable "spawnTrigger";
-
-    if (isNil "_unitSectorTrigger") then {
-        continue;
-    };
-
-    if (_unitSectorTrigger == _sectorTrigger) then {
-        deleteVehicle _x;
-    };
-} forEach (allUnits + vehicles);
+    deleteVehicle _x;
+} forEach _allObjects;
 
 
 _sectorTrigger setVariable ["isActive", false];

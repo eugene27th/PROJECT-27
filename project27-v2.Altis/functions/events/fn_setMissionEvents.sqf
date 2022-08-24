@@ -32,15 +32,12 @@ addMissionEventHandler ["Entitykilled", {
 	switch (_victimSide) do {
 		case (_enemySide): {
 			_playerStat set [0, (_playerStat # 0) + 1];
-			systemChat "убил противника";
 		};
 		case (side _killer): {
 			_playerStat set [1, (_playerStat # 1) + 1];
-			systemChat "убил своего";
 		};
 		case civilian: {
 			_playerStat set [2, (_playerStat # 2) + 1];
-			systemChat "убил гражданского";
 		};
 	};
 

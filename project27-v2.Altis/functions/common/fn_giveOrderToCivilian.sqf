@@ -13,14 +13,10 @@ private _nearUnits = ((position player) nearEntities [["Man", "Car"], 60]) selec
 
 player playActionNow "gestureFreeze";
 
-if (isNil "_nearUnits" || _nearUnits isEqualTo []) exitWith {
-	systemChat "no near units";
-};
+if (isNil "_nearUnits" || _nearUnits isEqualTo []) exitWith {};
 
 {
 	if (_x isKindOf "Man") exitWith {
-		systemChat format ["MAN: %1", _order];
-
 		switch (_order) do {
 			case "DOWN": {
 				if ((animationState _x) == "amovpercmstpssurwnondnon") then {
@@ -47,8 +43,6 @@ if (isNil "_nearUnits" || _nearUnits isEqualTo []) exitWith {
 	private _crew = crew _x;
 
 	if ((count _crew) < 1) exitWith {};
-
-	systemChat format ["CAR: %1", _order];
 
 	switch (_order) do {
 		case "GOAWAY": {

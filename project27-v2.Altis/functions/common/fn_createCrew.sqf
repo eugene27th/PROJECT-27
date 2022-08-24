@@ -46,5 +46,4 @@ for "_i" from 1 to _emptySeats do {
 	_unit moveInCargo _vehicle;
 };
 
-
 _crew

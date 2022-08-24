@@ -79,7 +79,6 @@ private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown",
 
 			if (_className == "Land_DataTerminal_01_F") then {
 				if (!isNil "mhqTerminal") then {
-					systemChat "New terminal";
 					deleteVehicle mhqTerminal;
 				};
 				

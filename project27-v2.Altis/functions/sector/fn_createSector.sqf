@@ -36,11 +36,11 @@ private _enemyClasses = _enemyConfig # 1;
 private _civClasses = configUnits # 1;
 
 if (!_sectorIsCaptured) then {
-	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 0, _enemyClasses # 1, _enemySide] spawn P27_fnc_createHouseUnits;
-	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 1, _enemyClasses # 1, _enemySide] spawn P27_fnc_createPatrolUnits;
-	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 2, (_enemyClasses # 2) + (_enemyClasses # 3), _enemyClasses # 1, _enemySide] spawn P27_fnc_createPatrolVehicles;
-	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 3, _enemyClasses # 4, _enemyClasses # 1, _enemySide] spawn P27_fnc_createPatrolVehicles;
-	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 4, _enemyClasses # 5, _enemyClasses # 1, _enemySide] spawn P27_fnc_createTurrets;
+	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 0] spawn P27_fnc_createHouseUnits;
+	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 1] spawn P27_fnc_createPatrolUnits;
+	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 2, (_enemyClasses # 2) + (_enemyClasses # 3)] spawn P27_fnc_createPatrolVehicles;
+	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 3, _enemyClasses # 4] spawn P27_fnc_createPatrolVehicles;
+	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 4] spawn P27_fnc_createTurrets;
 
 	([
 		_triggerPosition,

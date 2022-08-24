@@ -11,8 +11,6 @@ params ["_captureTrigger"];
 
 private _sectorTrigger = _captureTrigger getVariable "sectorTrigger";
 
-systemChat str _sectorTrigger;
-
 if (isNil "_sectorTrigger") exitWith {};
 
 _sectorTrigger setVariable ["isCaptured", true];
@@ -24,5 +22,7 @@ private _sectorGrid = mapGridPosition _captureTrigger;
 
 ["captured_" + str _sectorTrigger, _sectorPosition, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorWEST", "ALPHA:", 0.3, "PERSIST"] call CBA_fnc_createMarker;
 ["sectorCaptured", [_sectorGrid, _sectorName]] remoteExec ["BIS_fnc_showNotification"];
+
+[_sectorPosition, [2, 2]] call P27_fnc_createReinforcements;
 
 deleteVehicle _captureTrigger;

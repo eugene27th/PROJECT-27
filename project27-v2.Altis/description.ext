@@ -10,6 +10,7 @@ class CfgFunctions {
 		class common {
 			file = "functions\common";
 
+			class getNumberOfUnits {};
 			class getRandomRoadPositions {};
 			class getVehicleClassNames {};
 			class giveOrderToCivilian {};
@@ -19,6 +20,8 @@ class CfgFunctions {
 
 			class createCrew {};
 			class createIedOnRoads {};
+			class createReinforcements {};
+			class removeReinforcements {};
 			class createHouseUnits {};
 			class createPatrolUnits {};
 			class createCrowdUnits {};
@@ -65,7 +68,6 @@ class CfgFunctions {
 		class sector {
 			file = "functions\sector";
 
-			class getNumberOfUnits {};
 			class getRandomSectorPos {};
 			
 			class generateSectors {};

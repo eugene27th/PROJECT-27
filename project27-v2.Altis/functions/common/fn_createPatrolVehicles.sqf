@@ -7,7 +7,7 @@
 */
 
 
-params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_vehClassNames", ((configUnits # 0) # 1) # 2], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
+params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_vehClassNames", ((configUnits # 0) # 1) # 3], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
 
 if ((_spawnConfig # 0) == 0) exitWith {};
 
@@ -30,7 +30,7 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 		continue;
 	};
 
-	([1, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions) params ["_spawnPosition", "_spawnDirection"];
+	(([1, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions) # 0) params ["_spawnPosition", "_spawnDirection"];
 
 
 	private _vehicle = (selectRandom _vehClassNames) createVehicle _spawnPosition;
@@ -50,7 +50,7 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 	private _grp = group (_vehicleCrew # 0);
 	
 	for "_i" from 1 to 3 do {
-		([1, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions) params ["_wpPosition"];
+		(([1, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions) # 0) params ["_wpPosition"];
 
 		private _wp = _grp addWaypoint [_wpPosition, 0];
 		_wp setWaypointCompletionRadius 20;
