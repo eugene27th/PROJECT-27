@@ -17,7 +17,7 @@ waitUntil {uiSleep 5; triggerActivated _taskTrigger || _taskName call BIS_fnc_ta
 
 if (triggerActivated _taskTrigger) then {
     [_taskName, "SUCCEEDED"] call BIS_fnc_taskSetState;
-    [_sectorPosition, [2, 2]] call P27_fnc_createReinforcements;
+    [_sectorPosition, [2, 2]] spawn P27_fnc_createReinforcements;
     uiSleep 2;
 };
 

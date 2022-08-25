@@ -7,7 +7,7 @@
 */
 
 
-params ["_vehicle", ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
+params ["_vehicle", ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0], ["_minCargo", 6]];
 
 private _grp = createGroup [_unitSide, true];
 private _spawnPosition = position _vehicle;
@@ -38,12 +38,16 @@ if ((_vehicle emptyPositions "driver") != 0) then {
 };
 
 
-private _emptySeats = round (random (_vehicle emptyPositions "cargo"));
+private _emptySeats = _vehicle emptyPositions "cargo";
+
+if (_emptySeats > _minCargo) then {
+	_emptySeats = [_minCargo, _emptySeats] call BIS_fnc_randomInt;
+};
 
 for "_i" from 1 to _emptySeats do {
 	private _unit = _grp createUnit [selectRandom _unitClassNames, _spawnPosition, [], 0, "NONE"];
-	_crew pushBack _unit;
 	_unit moveInCargo _vehicle;
+	_crew pushBack _unit;
 };
 
 _crew

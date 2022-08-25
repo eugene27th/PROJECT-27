@@ -44,7 +44,8 @@ configUnits = [
 			["I_G_Offroad_01_F", "I_C_Offroad_02_unarmed_F"], // light vehicles
 			["I_G_Offroad_01_armed_F", "I_C_Offroad_02_LMG_F"], // armed vehicles
 			["I_E_APC_tracked_03_cannon_F", "I_APC_Wheeled_03_cannon_F"], // heavy vehicles
-			["I_C_HMG_02_high_F", "B_T_Static_AT_F"] // turrets
+			["I_C_HMG_02_high_F", "B_T_Static_AT_F"], // turrets
+			["I_Heli_light_03_unarmed_F"] // transport helicopters
 		]
 	],
 	[ // civ

@@ -18,6 +18,6 @@ private _sectorGrid = mapGridPosition _checkpointTrigger;
 
 ["checkpointCaptured", [_sectorGrid, _sectorName]] remoteExec ["BIS_fnc_showNotification"];
 
-[position _checkpointTrigger, [2, 2]] call P27_fnc_createReinforcements;
+[position _checkpointTrigger, [2, 2]] spawn P27_fnc_createReinforcements;
 
 {deleteVehicle _x} forEach [_checkpointTrigger, _captureTrigger];

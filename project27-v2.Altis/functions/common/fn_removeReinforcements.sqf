@@ -7,7 +7,7 @@
 */
 
 
-params ["_reinforcementsId", ["_distanceFromPlayers", 1000], ["_sleepBeforeChecking", 60], ["_intervalSleep", 10]];
+params ["_reinforcementsId", ["_distanceToPlayers", 1500], ["_sleepBeforeChecking", 300], ["_intervalSleep", 30]];
 
 uiSleep _sleepBeforeChecking;
 
@@ -16,16 +16,13 @@ while {true} do {
 
 	if ((count _allObjects) < 1) exitWith {};
 
-	systemChat (str _allObjects);
-
 	for [{private _i = 0 }, { _i < (count _allObjects) }, { _i = _i + 1 }] do {
 		private _object = _allObjects # _i;
+		private _nearPlayers = allPlayers select {(_x distance _object) < _distanceToPlayers};
 
-		{
-			if ((_x distance _object) > _distanceFromPlayers) then {
-				deleteVehicle _object;
-			};
-		} forEach allPlayers;
+		if ((count _nearPlayers) < 1) then {
+			deleteVehicle _object;
+		};
 	};
 
 	uiSleep _intervalSleep;
