@@ -44,16 +44,5 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 	_grp setCombatMode "YELLOW";
 	_grp setFormation "STAG COLUMN";
 
-	for "_i" from 1 to 7 do {
-		private _wpPosition = [_positionOrTrigger, 10, _sectorRadius, 1, 0] call BIS_fnc_findSafePos;
-		
-		private _wp = _grp addWaypoint [_wpPosition, 0];
-		_wp setWaypointCompletionRadius 10;
-
-		if (_i == 7) exitWith {
-			_wp setWaypointType "CYCLE";
-		};
-
-		_wp setWaypointType "MOVE";
-	};
+	[_grp, _positionOrTrigger, _sectorRadius] call BIS_fnc_taskPatrol;
 };

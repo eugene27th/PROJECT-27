@@ -37,4 +37,6 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
         
         uiSleep 0.5;
     };
+
+    [_grp, _positionOrTrigger] call BIS_fnc_taskDefend;
 };

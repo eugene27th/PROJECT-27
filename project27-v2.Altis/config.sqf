@@ -54,9 +54,7 @@ configUnits = [
 	]
 ];
 
-configTasks = [
-	"captureZone"
-];
+configTasks = ["sectorCapture"];
 
 configObjects = [
 	[ // road ied

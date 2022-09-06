@@ -24,6 +24,7 @@ player setVariable ["ctrlHelpText", _ctrlHelpText];
 
 
 private _localVehicle = _vehicleClass createVehicleLocal (position player);
+_localVehicle disableCollisionWith player;
 _localVehicle enableSimulation false;
 _localVehicle lockInventory true;
 _localVehicle allowDamage false;
@@ -46,7 +47,7 @@ private _scrollEventIndex = (findDisplay 46) displayAddEventHandler ["MouseZChan
 	params ["_displayOrControl", "_scroll"];
 
 	private _localVehicle = player getVariable "localVehicle";
-	_localVehicle setDir ((getDir _localVehicle) + _scroll);
+	_localVehicle setDir ((getDir _localVehicle) + (_scroll * 3));
 }];
 
 player setVariable ["scrollEventIndex", _scrollEventIndex];

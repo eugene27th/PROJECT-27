@@ -16,15 +16,20 @@ class CfgFunctions {
 			class getNumberOfUnits {};
 			class getRandomRoadPositions {};
 			class getVehicleClassNames {};
-			class giveOrderToCivilian {};
 			class getConfigPathFromClass {};
+
+			class giveOrderToCivilian {};
 			class vehicleService {};
 			class teleportToMhq {};
 
 			class createCrew {};
+
 			class createIedOnRoads {};
+			class generateAmbientTraffic {};
+
 			class createReinforcements {};
 			class removeReinforcements {};
+
 			class createHouseUnits {};
 			class createPatrolUnits {};
 			class createCrowdUnits {};

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Project name="PROJECT27">
-    <Package name="SECTORS">
+    <Package name="NOTIFICATIONS">
         <Container name="SECTOR_CAPTURED">
             <Key ID="STR_P27_SECTOR_CAPTURED_TITLE">
                 <Original>Сектор захвачен.</Original>
@@ -11,7 +11,7 @@
             </Key>
         </Container>
 
-        <Container name="SECTOR_CAPTURED">
+        <Container name="CHECKPOINT_CAPTURED">
             <Key ID="STR_P27_CHECKPOINT_CAPTURED_TITLE">
                 <Original>Блокпост захвачен.</Original>
             </Key>
@@ -31,12 +31,21 @@
             </Key>    
 	    </Container>
 
-        <Container name="TASK_CAPTUREZONE">
-            <Key ID="STR_P27_TASK_TITLE_CAPTUREZONE">
+        <Container name="TASK_SECTORCAPTURE">
+            <Key ID="STR_P27_TASK_TITLE_SECTORCAPTURE">
                 <Original>Захват сектора</Original>
             </Key>
-            <Key ID="STR_P27_TASK_DESCRIPTION_CAPTUREZONE">
+            <Key ID="STR_P27_TASK_DESCRIPTION_SECTORCAPTURE">
                 <Original>Сектор находится под контролем противника. В зоне действий могут присутствовать гражданские.&lt;br/&gt;Задача: захватить сектор.</Original>
+            </Key>
+	    </Container>
+
+        <Container name="TASK_SECTORDEFEND">
+            <Key ID="STR_P27_TASK_TITLE_SECTORDEFEND">
+                <Original>Оборона сектора</Original>
+            </Key>
+            <Key ID="STR_P27_TASK_DESCRIPTION_SECTORDEFEND">
+                <Original>Противник планирует захватить данный сектор. У вас есть 20 минут на подготовку.&lt;br/&gt;Задача: не дать противнику захватить сектор.</Original>
             </Key>
 	    </Container>
 		
@@ -57,24 +66,6 @@
                 <Original>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
             </Key>
 	    </Container>
-		
-		<Container name="TASK_DESTROY_TOWER">
-            <Key ID="STR_P27_TASK_TITLE_DESTROYTOWER">
-                <Original>Помехи</Original>
-            </Key>		
-            <Key ID="STR_P27_TASK_DESCRIPTION_DESTROYTOWER">
-                <Original>В обозначенном секторе зафиксированы помехи, доставляющие нам некоторые проблемы.&lt;br/&gt;Задача: найти и уничтожить источник помех.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
-            </Key>
-	    </Container>
-		
-		<Container name="TASK_ALARMBUTTON">
-            <Key ID="STR_P27_TASK_TITLE_ALARMBUTTON">
-                <Original>Тревожная кнопка</Original>
-            </Key>
-            <Key ID="STR_P27_TASK_DESCRIPTION_ALARMBUTTON">
-                <Original>Активирована тревожная кнопка сотрудника IDAP. Его местоположение отмечено на карте.&lt;br/&gt;Задача: освободить машину IDAP.</Original>
-            </Key>
-	    </Container>
 
         <Container name="TASK_AMMOCACHE">
             <Key ID="STR_P27_TASK_TITLE_AMMOCACHE">
@@ -91,33 +82,6 @@
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_HOSTAGE">
                 <Original>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
-            </Key>
-	    </Container>
-
-        <Container name="TASK_CAPTURELEADER">
-            <Key ID="STR_P27_TASK_TITLE_CAPTURELEADER">
-                <Original>Захват лидера</Original>
-            </Key>
-            <Key ID="STR_P27_TASK_DESCRIPTION_CAPTURELEADER">
-                <Original>Обнаружен лидер одного из НВФ. Необходим захват цели и доставка на базу.&lt;br/&gt;Задача: захватить лидера и доставить его на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
-            </Key>
-	    </Container>
- 
-        <Container name="TASK_CHECKPOINT">
-            <Key ID="STR_P27_TASK_TITLE_CHECKPOINT">
-                <Original>Блокпост</Original>
-            </Key>
-            <Key ID="STR_P27_TASK_DESCRIPTION_CHECKPOINT">
-                <Original>Замечен блокпост противника.&lt;br/&gt;Задача: нейтрализовать блокпост.</Original>
-            </Key>
-	    </Container>
-
-        <Container name="TASK_DESTRUCTIONVEHICLES">
-            <Key ID="STR_P27_TASK_TITLE_DESTRUCTIONVEHICLES">
-                <Original>Техника противника</Original>
-            </Key>
-            <Key ID="STR_P27_TASK_DESCRIPTION_DESTRUCTIONVEHICLES">
-                <Original>Скопление техники противника было обнаружено в обозначенном секторе.&lt;br/&gt;Задача: найти и уничтожить технику противника.</Original>
             </Key>
 	    </Container>
     </Package>

@@ -3,13 +3,13 @@
     Date: 12.08.2022
     
     Example:
-        [] spawn P27_fnc_clearSector
+        [] call P27_fnc_clearSector
 */
+
 
 params ["_sectorTrigger"];
 
-waitUntil {uiSleep 5; !triggerActivated _sectorTrigger};
-
+waitUntil {uiSleep 30; !triggerActivated _sectorTrigger};
 
 private _captureTrigger = _sectorTrigger getVariable "captureTrigger";
 
@@ -18,12 +18,6 @@ if (!isNil "_captureTrigger") then {
     _sectorTrigger setVariable ["captureTrigger", nil];
 };
 
-
-private _allObjects = (allUnits + vehicles) select {(_x getVariable ["spawnTrigger", ""]) isEqualTo _sectorTrigger};
-
-{
-    deleteVehicle _x;
-} forEach _allObjects;
-
+{deleteVehicle _x} forEach ((allUnits + vehicles) select {(_x getVariable ["spawnTrigger", ""]) isEqualTo _sectorTrigger});
 
 _sectorTrigger setVariable ["isActive", false];
