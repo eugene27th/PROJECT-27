@@ -7,7 +7,7 @@
 */
 
 
-params [["_includeCaptured", false], ["_nearest", false]];
+params [["_includeCaptured", false], ["_nearest", false], ["_returnArray", false], ["_returnOriginal", false]];
 
 private _sectorTriggers = missionNamespace getVariable "sectorTriggers";
 
@@ -18,10 +18,29 @@ if (!_includeCaptured) then {
 };
 
 if (_nearest) then {
-    [_sectorTriggers, [], {(position respawn) distance (position _x)}, "ASCEND"] call BIS_fnc_sortBy;
-    _sectorTriggers resize 5;
+    _sectorTriggers = [_sectorTriggers, [], {(position respawn) distance (position _x)}, "ASCEND"] call BIS_fnc_sortBy;
+
+    if (!_returnArray) then {
+        _sectorTriggers resize 5;
+    };
 };
 
-private _returnPosition = position (selectRandom _sectorTriggers);
+private "_result";
 
-_returnPosition
+if (!_returnArray) then {
+    private _randomSector = selectRandom _sectorTriggers;
+    
+    if (_returnOriginal) then {
+        _result = _randomSector;
+    } else {
+        _result = position _randomSector;
+    };
+} else {
+    if (_returnOriginal) then {
+        _result = _sectorTriggers;
+    } else {
+        _result = _sectorTriggers apply {position _x};
+    };
+};
+
+_result

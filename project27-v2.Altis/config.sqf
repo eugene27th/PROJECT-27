@@ -54,7 +54,14 @@ configUnits = [
 	]
 ];
 
-configTasks = ["sectorCapture"];
+configTasks = [
+	["ammoCache"], // [task name (without "ts_" prefix), in/around nearest sectors, in/around captured sectors]
+	["sectorCapture", true],
+	["sectorDefend", true, true],
+	["hostageRescue"],
+	["crewRescue"],
+	["highValueTarget"]
+];
 
 configObjects = [
 	[ // road ied

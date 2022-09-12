@@ -9,45 +9,37 @@
 
 params ["_vehicle", ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0], ["_minCargo", 6]];
 
-private _grp = createGroup [_unitSide, true];
 private _spawnPosition = position _vehicle;
-private _crew = [];
+private _vehicleCrewIndexes = (typeof _vehicle) call BIS_fnc_vehicleCrewTurrets;
+
+private _grp = createGroup [_unitSide, true];
 
 _grp setBehaviour "SAFE";
 _grp setSpeedMode "LIMITED";
 _grp setCombatMode "YELLOW";
 
-
-if ((_vehicle emptyPositions "commander") != 0) then {
+private _createUnit = {
 	private _unit = _grp createUnit [selectRandom _unitClassNames, _spawnPosition, [], 0, "NONE"];
 	_crew pushBack _unit;
-	_unit moveInCommander _vehicle;
+	_unit;
 };
 
-if ((_vehicle emptyPositions "gunner") != 0) then {
-	private _unit = _grp createUnit [selectRandom _unitClassNames, _spawnPosition, [], 0, "NONE"];
+private _crew = [];
 
-	_crew pushBack _unit;
-	_unit moveInGunner _vehicle;
+{(call _createUnit) moveInAny _vehicle} forEach _vehicleCrewIndexes;
+
+private _emptyCargoSeats = 0;
+
+if (_minCargo != 0) then {
+	_emptyCargoSeats = _vehicle emptyPositions "cargo";
+
+	if (_emptyCargoSeats > _minCargo && _minCargo != -1) then {
+		_emptyCargoSeats = [_minCargo, _emptyCargoSeats] call BIS_fnc_randomInt;
+	};
 };
 
-if ((_vehicle emptyPositions "driver") != 0) then {
-	private _unit = _grp createUnit [selectRandom _unitClassNames, _spawnPosition, [], 0, "NONE"];
-	_crew pushBack _unit;
-	_unit moveInDriver _vehicle;
-};
-
-
-private _emptySeats = _vehicle emptyPositions "cargo";
-
-if (_emptySeats > _minCargo) then {
-	_emptySeats = [_minCargo, _emptySeats] call BIS_fnc_randomInt;
-};
-
-for "_i" from 1 to _emptySeats do {
-	private _unit = _grp createUnit [selectRandom _unitClassNames, _spawnPosition, [], 0, "NONE"];
-	_unit moveInCargo _vehicle;
-	_crew pushBack _unit;
+for "_i" from 1 to _emptyCargoSeats do {
+	(call _createUnit) moveInCargo _vehicle;
 };
 
 _crew

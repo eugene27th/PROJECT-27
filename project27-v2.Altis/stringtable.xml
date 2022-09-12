@@ -49,21 +49,36 @@
             </Key>
 	    </Container>
 		
-		<Container name="TASK_LIQUIDATIONLEADER">
-            <Key ID="STR_P27_TASK_TITLE_LIQUIDATIONLEADER">
+		<Container name="TASK_HIGHVALUETARGET">
+            <Key ID="STR_P27_TASK_TITLE_HIGHVALUETARGET">
                 <Original>Ликвидация цели</Original>
             </Key>
-            <Key ID="STR_P27_TASK_DESCRIPTION_LIQUIDATIONLEADER">
+            <Key ID="STR_P27_TASK_DESCRIPTION_HIGHVALUETARGET">
+                <Original>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.</Original>
+            </Key>
+            <Key ID="STR_P27_TASK_DESCRIPTION_HIGHVALUETARGET_IMAGE">
                 <Original>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
             </Key>
 	    </Container>
 		
-		<Container name="TASK_RESCUE">	
-            <Key ID="STR_P27_TASK_TITLE_RESCUE">
+		<Container name="TASK_CREWRESCUE">	
+            <Key ID="STR_P27_TASK_TITLE_CREWRESCUE">
                 <Original>Поисковая операция</Original>
             </Key>
-            <Key ID="STR_P27_TASK_DESCRIPTION_RESCUE">
+            <Key ID="STR_P27_TASK_DESCRIPTION_CREWRESCUE">
+                <Original>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.</Original>
+            </Key>
+            <Key ID="STR_P27_TASK_DESCRIPTION_CREWRESCUE_IMAGE">
                 <Original>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+            </Key>
+            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_LESS_3">
+                <Original>3</Original>
+            </Key>
+            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_LESS_2">
+                <Original>2</Original>
+            </Key>
+            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_LESS_1">
+                <Original>1</Original>
             </Key>
 	    </Container>
 
@@ -72,15 +87,21 @@
                 <Original>Боеприпасы</Original>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_AMMOCACHE">
+                <Original>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.</Original>
+            </Key>
+            <Key ID="STR_P27_TASK_DESCRIPTION_AMMOCACHE_IMAGE">
                 <Original>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
             </Key>
 	    </Container>
 
-        <Container name="TASK_HOSTAGE">
-            <Key ID="STR_P27_TASK_TITLE_HOSTAGE">
+        <Container name="TASK_HOSTAGERESCUE">
+            <Key ID="STR_P27_TASK_TITLE_HOSTAGERESCUE">
                 <Original>Заложник</Original>
             </Key>
-            <Key ID="STR_P27_TASK_DESCRIPTION_HOSTAGE">
+            <Key ID="STR_P27_TASK_DESCRIPTION_HOSTAGERESCUE">
+                <Original>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.</Original>
+            </Key>
+            <Key ID="STR_P27_TASK_DESCRIPTION_HOSTAGERESCUE_IMAGE">
                 <Original>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
             </Key>
 	    </Container>

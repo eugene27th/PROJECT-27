@@ -22,6 +22,9 @@ class CfgFunctions {
 			class vehicleService {};
 			class teleportToMhq {};
 
+			class createTask {};
+			class cancelTask {};
+
 			class createCrew {};
 
 			class createIedOnRoads {};
@@ -35,9 +38,6 @@ class CfgFunctions {
 			class createCrowdUnits {};
 			class createPatrolVehicles {};
 			class createTurrets {};
-
-			class createTask {};
-			class cancelTask {};
 		};
 
 		class events {
@@ -53,15 +53,16 @@ class CfgFunctions {
 			file = "functions\gui";
 
 			class showGameVersion {};
-
+			class showTaskDisplay {};
 			class showVehicleList {};
 			class showVehiclePreview {};
-			class updateVehicleList {};
-			class vehiclePlacement {};
-
 			class showVehicleService {};
+
+			class updateVehicleList {};
 			class updateItemsList {};
 			class updateInvLoadBar {};
+
+			class vehiclePlacement {};
 			class loadItemToCargo {};
 		};
 

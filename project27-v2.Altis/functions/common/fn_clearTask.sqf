@@ -3,7 +3,7 @@
     Date: 27.08.2022
     
     Example:
-		[] call P27_fnc_clearTask
+		[] spawn P27_fnc_clearTask
 */
 
 
@@ -11,6 +11,7 @@ params ["_task", ["_objects", []], ["_markers", []], ["_sleepObjects", []], ["_s
 
 if (isNil "_task") exitWith {};
 
+uiSleep 1;
 
 [_task] call BIS_fnc_deleteTask;
 
