@@ -71,14 +71,14 @@
             <Key ID="STR_P27_TASK_DESCRIPTION_CREWRESCUE_IMAGE">
                 <Original>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
             </Key>
-            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_LESS_3">
-                <Original>3</Original>
+            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_FULL">
+                <Original>Все на базе. Отлично!</Original>
             </Key>
-            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_LESS_2">
-                <Original>2</Original>
+            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_MORE_THAN_FULL">
+                <Original>Вытащили ребят, хорошо.</Original>
             </Key>
-            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_LESS_1">
-                <Original>1</Original>
+            <Key ID="STR_P27_TASK_HQ_NOTIFICATION_LESS_THAN_HALF">
+                <Original>Плохо, парни.</Original>
             </Key>
 	    </Container>
 

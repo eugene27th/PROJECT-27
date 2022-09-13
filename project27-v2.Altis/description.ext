@@ -22,8 +22,12 @@ class CfgFunctions {
 			class vehicleService {};
 			class teleportToMhq {};
 
+			class allObjectsAreDead {};
+			class allObjectsInRadius {};
+
 			class createTask {};
 			class cancelTask {};
+			class clearTask {};
 
 			class createCrew {};
 

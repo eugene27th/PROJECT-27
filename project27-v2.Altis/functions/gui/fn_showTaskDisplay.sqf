@@ -11,8 +11,6 @@ if !(missionNamespace getVariable ["taskIsAvailable", true]) exitWith {
 	["1 minute between creating a task."] remoteExec ["systemChat"];
 };
 
-missionNamespace setVariable ["taskIsAvailable", false, true];
-
 private _taskList = [];
 private _allSectors = [true, true, true, true] call P27_fnc_getRandomSectorPos;
 
@@ -43,7 +41,9 @@ private _allSectors = [true, true, true, true] call P27_fnc_getRandomSectorPos;
 	_taskList pushBack [
 		_sectorPosition,
 		{
-			systemChat format ["start %1", _this # 9];
+			if (debugMode) then {
+				systemChat format ["start %1", _this # 9];
+			};
 			[(_this # 9) # 0, (_this # 9) # 1] remoteExecCall ["P27_fnc_createTask", 2];
 		},
 		localize (format ["STR_P27_TASK_TITLE_%1", toUpper _taskName]),
@@ -57,9 +57,4 @@ private _allSectors = [true, true, true, true] call P27_fnc_getRandomSectorPos;
 	_availableSectors deleteAt (_availableSectors find _selectedSector);
 } forEach configTasks;
 
-[findDisplay 46, position player, _taskList, [], ["respawn"], [], 0, false, 10, true] spawn BIS_fnc_strategicMapOpen;
-
-[] spawn {
-	uiSleep 60;
-	missionNamespace setVariable ["taskIsAvailable", true, true];
-};
+[findDisplay 46, position player, _taskList, [], ["respawn"], [], 0.1, false, 0, true] spawn BIS_fnc_strategicMapOpen;

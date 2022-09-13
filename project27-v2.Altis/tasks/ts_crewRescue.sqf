@@ -23,7 +23,6 @@ private _heliWreckage = _heliClass createVehicle _heliSpawnPosition;
 _heliWreckage allowDamage false;
 _heliWreckage setDamage 0.7;
 _heliWreckage setFuel 0;
-_heliWreckage lock true;
 
 uiSleep 3;
 
@@ -37,36 +36,40 @@ private _heliPicture = getText(configfile >> "CfgVehicles" >> _heliClass >> "edi
 [west, [_taskId], [format [localize "STR_P27_TASK_DESCRIPTION_CREWRESCUE_IMAGE", _heliPicture], "STR_P27_TASK_TITLE_CREWRESCUE", ""], _taskPosition, "CREATED", 0, true, "search"] call BIS_fnc_taskCreate;
 
 private _crewUnitClass = getText(configFile >> "CfgVehicles" >> _heliClass >> "crew");
-private _heliCrew = [_heliWreckage, [_crewUnitClass], civilian, 0] call P27_fnc_createCrew;
+private _heliCrew = [_heliWreckage, [_crewUnitClass], west, 0] call P27_fnc_createCrew;
 
-{ _x setCaptive true} forEach _heliCrew;
+{
+    _x setCaptive true;
+    for "_i" from 0 to 3 do {
+        [_x, random(0.3), selectRandom ["Body", "LeftArm", "RightArm", "LeftLeg", "RightLeg"]] call ace_medical_fnc_addDamageToUnit;
+    };
+} forEach _heliCrew;
 
 [_taskId, _taskPosition, "ELLIPSE", [900, 900], "COLOR:", "ColorWEST", "ALPHA:", 0.7, "PERSIST"] call CBA_fnc_createMarker;
 
 private _triggerStateFnc = '
-    private _heliCrew = thisTrigger getVariable "heliCrew";
-    {
-        [_x] join (thisList # 0);
-        _x setCaptive false;
-        _x action ["GetOut", vehicle _x];
-    } forEach _heliCrew;
-    [position thisTrigger] call P27_fnc_createReinforcements;
+    {[_x] join (thisList # 0); _x setCaptive false; _x action ["GetOut", vehicle _x]} forEach (thisTrigger getVariable "heliCrew");
+    [position thisTrigger] spawn P27_fnc_createReinforcements;
 ';
 
-([_heliPosition, "AREA:", [10, 10, 0, false], "ACT:", ["ANYPLAYER", "PRESENT", true], "STATE:", ["this", _triggerStateFnc, ""]] call CBA_fnc_createTrigger) params ["_taskTrigger", "_triggerParams"];
-_taskTrigger setVariable ["heliCrew", _heliCrew];
+([_heliPosition, "AREA:", [20, 20, 0, false], "ACT:", ["ANYPLAYER", "PRESENT", false], "STATE:", ["this", _triggerStateFnc, ""]] call CBA_fnc_createTrigger) params ["_heliTrigger", "_triggerParams"];
+_heliTrigger setVariable ["heliCrew", _heliCrew];
+
+([_heliPosition, "AREA:", [1000, 1000, 0, false], "ACT:", ["ANYPLAYER", "PRESENT", false], "STATE:", ["this", "[position thisTrigger] spawn P27_fnc_createReinforcements;", ""]] call CBA_fnc_createTrigger) params ["_reinforcementTrigger", "_triggerParams"];
 
 
-waitUntil {uiSleep 5; {!alive _x} forEach _heliCrew || {(_x distance (position respawn)) < 50} forEach _heliCrew || _taskId call BIS_fnc_taskCompleted};
+waitUntil {uiSleep 5; [_heliCrew] call P27_fnc_allObjectsAreDead || [_heliCrew select {alive _x}, position respawn] call P27_fnc_allObjectsInRadius || _taskId call BIS_fnc_taskCompleted};
 
-private _aliveHeliCrewCount = _heliCrew select {alive _x};
-systemChat str _aliveHeliCrewCount;
+private _deleteObjects = [_heliTrigger, _reinforcementTrigger, _heliSmoke] + _heliCrew;
 
-if ((count _aliveHeliCrewCount) < 1 || _taskId call BIS_fnc_taskCompleted) exitWith {
+private _aliveCount = count (_heliCrew select {alive _x});
+private _allCrewCount = count _heliCrew;
+
+if (_aliveCount < 1 || _taskId call BIS_fnc_taskCompleted) exitWith {
     if !(_taskId call BIS_fnc_taskCompleted) then {
         [_taskId, "FAILED"] call BIS_fnc_taskSetState;
     };
-    [_taskId, [_taskTrigger, _heliSmoke] + _heliCrew, [_taskId]] spawn P27_fnc_clearTask;
+    [_taskId, _deleteObjects, [_taskId]] spawn P27_fnc_clearTask;
 };
 
 
@@ -77,6 +80,18 @@ if ((count _aliveHeliCrewCount) < 1 || _taskId call BIS_fnc_taskCompleted) exitW
     _x action ["GetOut", vehicle _x];
 } forEach _heliCrew;
 
-[west, "HQ"] sideChat (localize (format ["STR_P27_TASK_HQ_NOTIFICATION_LESS_", count _aliveHeliCrewCount]));
 
-[_taskId, [_taskTrigger, _heliSmoke] + _heliCrew, [_taskId]] spawn P27_fnc_clearTask;
+private _notificationResult = "FULL";
+
+if (_aliveCount != _allCrewCount && _aliveCount > (_allCrewCount / 2)) then {
+    _notificationResult = "MORE_THAN_FULL";
+};
+
+if (_aliveCount < (_allCrewCount / 2)) then {
+    _notificationResult = "LESS_THAN_HALF";
+};
+
+[west, "Base"] sideChat (localize (format ["STR_P27_TASK_HQ_NOTIFICATION_%1", _notificationResult]));
+
+
+[_taskId, _deleteObjects, [_taskId]] spawn P27_fnc_clearTask;
