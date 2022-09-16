@@ -54,3 +54,23 @@
 ["civilGoAway", "GO AWAY", "", {["GOAWAY"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
 ["civilHandsUp", "HANDS UP", "", {["HANDSUP"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
 ["civilGetOut", "GET OUT", "", {["GETOUT"] call P27_fnc_giveOrderToCivilian}, {true}, ["civilOrders"]] call P27_fnc_createSelfAction;
+
+
+// environment
+["environmentSettings", "Environment", "", {true}, {(player distance respawn) < 100}] call P27_fnc_createSelfAction;
+
+// set time
+["skipTime", "Skip time", "", {true}, {true}, ["environmentSettings"]] call P27_fnc_createSelfAction;
+
+["skipTime1", "1h", "", {["current", 1] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "skipTime"]] call P27_fnc_createSelfAction;
+["skipTime2", "2h", "", {["current", 2] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "skipTime"]] call P27_fnc_createSelfAction;
+["skipTime4", "4h", "", {["current", 4] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "skipTime"]] call P27_fnc_createSelfAction;
+["skipTime6", "6h", "", {["current", 6] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "skipTime"]] call P27_fnc_createSelfAction;
+
+// set weather
+["setWeather", "Set weather", "", {true}, {true}, ["environmentSettings"]] call P27_fnc_createSelfAction;
+
+["setWeatherClean", "Clean", "", {["clean"] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "setWeather"]] call P27_fnc_createSelfAction;
+["setWeatherCloudy", "Cloudy", "", {["cloudy"] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "setWeather"]] call P27_fnc_createSelfAction;
+["setWeatherRain", "Rain", "", {["rain"] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "setWeather"]] call P27_fnc_createSelfAction;
+["setWeatherRainstorm", "Rainstorm", "", {["rainstorm"] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "setWeather"]] call P27_fnc_createSelfAction;

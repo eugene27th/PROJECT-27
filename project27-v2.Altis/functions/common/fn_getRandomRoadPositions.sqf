@@ -21,7 +21,7 @@ if (isNil "_centerPosition") then {
 private _allRoads = (_centerPosition nearRoads _radius) - ((position respawn) nearRoads (configSectors # 0));
 
 if ((count _allRoads) < _count) exitWith {
-	[[_centerPosition, 0, _radius, 5, 0] call BIS_fnc_findSafePos, [0, 359] call BIS_fnc_randomInt];
+	[[_centerPosition, 0, _radius, 5, 0] call BIS_fnc_findSafePos, [0, 359] call BIS_fnc_randomInt]
 };
 
 for [{private _i = 0 }, { _i < _count }, { _i = _i + 1 }] do {

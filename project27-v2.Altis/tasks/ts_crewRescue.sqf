@@ -30,6 +30,7 @@ private _heliPosition = position _heliWreckage;
 
 private _heliSmoke = createVehicle ["test_EmptyObjectForSmoke", _heliPosition, [], 0, "CAN_COLLIDE"];
 _heliSmoke attachTo [_heliWreckage, [0, 0, 0]];
+_heliWreckage allowDamage true;
 
 private _heliPicture = getText(configfile >> "CfgVehicles" >> _heliClass >> "editorPreview");
 
@@ -52,10 +53,10 @@ private _triggerStateFnc = '
     [position thisTrigger] spawn P27_fnc_createReinforcements;
 ';
 
-([_heliPosition, "AREA:", [20, 20, 0, false], "ACT:", ["ANYPLAYER", "PRESENT", false], "STATE:", ["this", _triggerStateFnc, ""]] call CBA_fnc_createTrigger) params ["_heliTrigger", "_triggerParams"];
+([_heliPosition, "AREA:", [20, 20, 10, false], "ACT:", ["ANYPLAYER", "PRESENT", false], "STATE:", ["this", _triggerStateFnc, ""]] call CBA_fnc_createTrigger) params ["_heliTrigger", "_triggerParams"];
 _heliTrigger setVariable ["heliCrew", _heliCrew];
 
-([_heliPosition, "AREA:", [1000, 1000, 0, false], "ACT:", ["ANYPLAYER", "PRESENT", false], "STATE:", ["this", "[position thisTrigger] spawn P27_fnc_createReinforcements;", ""]] call CBA_fnc_createTrigger) params ["_reinforcementTrigger", "_triggerParams"];
+([_heliPosition, "AREA:", [500, 500, 200, false], "ACT:", ["ANYPLAYER", "PRESENT", false], "STATE:", ["this", "[position thisTrigger] spawn P27_fnc_createReinforcements;", ""]] call CBA_fnc_createTrigger) params ["_reinforcementTrigger", "_triggerParams"];
 
 
 waitUntil {uiSleep 5; [_heliCrew] call P27_fnc_allObjectsAreDead || [_heliCrew select {alive _x}, position respawn] call P27_fnc_allObjectsInRadius || _taskId call BIS_fnc_taskCompleted};

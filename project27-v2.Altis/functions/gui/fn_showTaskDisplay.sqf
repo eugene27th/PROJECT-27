@@ -54,7 +54,7 @@ private _allSectors = [true, true, true, true] call P27_fnc_getRandomSectorPos;
 		[_taskName, _sectorPosition]
 	];
 
-	_availableSectors deleteAt (_availableSectors find _selectedSector);
+	_allSectors deleteAt (_allSectors find _selectedSector);
 } forEach configTasks;
 
 [findDisplay 46, position player, _taskList, [], ["respawn"], [], 0.1, false, 0, true] spawn BIS_fnc_strategicMapOpen;
