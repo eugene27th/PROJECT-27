@@ -8,14 +8,14 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=120;
+		nextID=125;
 	};
 	class Camera
 	{
-		pos[]={15229.367,22.27199,17296.178};
-		dir[]={-0.68095303,-0.25147131,-0.68779731};
-		up[]={-0.17692569,0.96786469,-0.17870398};
-		aside[]={-0.71063364,0,0.70356208};
+		pos[]={15228.491,30.25058,17255.557};
+		dir[]={-0.55931628,-0.41236496,0.71911097};
+		up[]={-0.2531698,0.91101873,0.32549953};
+		aside[]={0.78934813,0,0.61394596};
 	};
 };
 binarizationWanted=0;
@@ -23,8 +23,8 @@ sourceName="project27-v2";
 addons[]=
 {
 	"A3_Structures_F_Bootcamp_VR_Helpers",
-	"A3_Characters_F",
-	"A3_Modules_F_Curator_Curator"
+	"A3_Modules_F_Curator_Curator",
+	"A3_Characters_F"
 };
 class AddonsMetaData
 {
@@ -40,15 +40,15 @@ class AddonsMetaData
 		};
 		class Item1
 		{
-			className="A3_Characters_F";
-			name="Arma 3 Alpha - Characters and Clothing";
+			className="A3_Modules_F_Curator";
+			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
 		class Item2
 		{
-			className="A3_Modules_F_Curator";
-			name="Arma 3 Zeus Update - Scripted Modules";
+			className="A3_Characters_F";
+			name="Arma 3 Alpha - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -164,35 +164,6 @@ class Mission
 		};
 		class Item1
 		{
-			dataType="Group";
-			side="West";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15223.092,17.955677,17292.637};
-					};
-					side="West";
-					flags=7;
-					class Attributes
-					{
-						isPlayer=1;
-					};
-					id=90;
-					type="B_Soldier_GL_F";
-				};
-			};
-			class Attributes
-			{
-			};
-			id=89;
-		};
-		class Item2
-		{
 			dataType="Logic";
 			class PositionInfo
 			{
@@ -256,6 +227,35 @@ class Mission
 				};
 				nAttributes=4;
 			};
+		};
+		class Item2
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15208.905,17.941439,17273.943};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=124;
+					type="C_man_p_fugitive_F";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=123;
 		};
 	};
 };

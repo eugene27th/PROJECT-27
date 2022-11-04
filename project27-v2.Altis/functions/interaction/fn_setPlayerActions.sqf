@@ -19,6 +19,8 @@
 // vehicle actions
 ["openVehicleSpawner", "Get vehicle", "", {[] call P27_fnc_showVehicleList}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) == player}] call P27_fnc_createSelfAction;
 ["openVehicleService", "Vehicle service", "", {[] call P27_fnc_showVehicleService}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player}] call P27_fnc_createSelfAction;
+["openConfigurePylons", "Configure pylons", "", {[vehicle player] call ace_pylons_fnc_showDialog}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player}] call P27_fnc_createSelfAction;
+["openConfigurePylons2", "Configure pylons 2", "", {[vehicle player] call P27_fnc_showAircraftLoadout}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player}] call P27_fnc_createSelfAction;
 
 
 // treatment

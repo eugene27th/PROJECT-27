@@ -23,6 +23,7 @@ if (typeName _positionOrTrigger != "ARRAY") then {
 private _vehicles = [];
 
 private _roads = ((_positionOrTrigger) nearRoads _sectorRadius) select {isOnRoad _x};
+private _roadPositions = [_spawnConfig # 0, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions;
 
 for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 
@@ -30,8 +31,8 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 		continue;
 	};
 
-	(([1, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions) # 0) params ["_spawnPosition", "_spawnDirection"];
-
+	private _spawnPosition = (_roadPositions # _i) # 0;
+	private _spawnDirection = (_roadPositions # _i) # 1;
 
 	private _vehicle = (selectRandom _vehClassNames) createVehicle _spawnPosition;
 	_vehicle setVariable ["spawnTrigger", _sectorTrigger];
@@ -48,14 +49,13 @@ for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {
 	};
 
 	private _grp = group (_vehicleCrew # 0);
+	private _wpPositions = [3, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions;
 	
-	for "_i" from 1 to 3 do {
-		(([1, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions) # 0) params ["_wpPosition"];
-
-		private _wp = _grp addWaypoint [_wpPosition, 0];
+	for "_i" from 0 to 2 do {
+		private _wp = _grp addWaypoint [(_wpPositions # _i) # 0, 0];
 		_wp setWaypointCompletionRadius 20;
 
-		if (_i == 3) exitWith {
+		if (_i == 2) exitWith {
 			_wp setWaypointType "CYCLE";
 		};
 

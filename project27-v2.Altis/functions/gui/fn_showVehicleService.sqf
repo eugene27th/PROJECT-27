@@ -17,4 +17,4 @@ private _ctrlCombo = (findDisplay 3001) displayCtrl 2001;
 
 _ctrlCombo lbSetCurSel 0;
 
-[] call P27_fnc_updateInvLoadBar
+[] call P27_fnc_updateInvLoadBar;

@@ -35,6 +35,9 @@ private _enemySide = _enemyConfig # 0;
 private _enemyClasses = _enemyConfig # 1;
 private _civClasses = configUnits # 1;
 
+
+[_sectorTrigger, _sectorRadius] spawn P27_fnc_createParkedVehicles;
+
 if (!_sectorIsCaptured) then {
 	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 0] spawn P27_fnc_createHouseUnits;
 	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 1] spawn P27_fnc_createPatrolUnits;

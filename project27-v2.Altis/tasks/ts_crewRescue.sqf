@@ -92,7 +92,7 @@ if (_aliveCount < (_allCrewCount / 2)) then {
     _notificationResult = "LESS_THAN_HALF";
 };
 
-[west, "Base"] sideChat (localize (format ["STR_P27_TASK_HQ_NOTIFICATION_%1", _notificationResult]));
+[west, "Base"] sideChat (localize (format ["STR_P27_TASK_HQ_NOTIFICATION_CREWRESCUE_%1", _notificationResult]));
 
 
 [_taskId, _deleteObjects, [_taskId]] spawn P27_fnc_clearTask;

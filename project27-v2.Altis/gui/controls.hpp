@@ -1,6 +1,5 @@
 class dialogVehicleList {
 	idd = 3000;
-	movingEnable = true;
 
 	class ControlsBackground {
 		class headerBlock: RscText {
@@ -11,7 +10,7 @@ class dialogVehicleList {
 			w = 0.66 * safezoneW;
 			h = 0.025 * safezoneH;
 
-			colorBackground[] = { 0, 0.7, 0, 0.7 };
+			colorBackground[] = {0, 0.7, 0, 0.7};
 		};
 
 		class headerText: RscText {
@@ -34,7 +33,7 @@ class dialogVehicleList {
 			w = 0.66 * safezoneW;
 			h = 0.6 * safezoneH;
 
-			colorBackground[] = { 0, 0, 0, 0.7 };
+			colorBackground[] = {0, 0, 0, 0.7};
 		};
 	};
 	
@@ -90,7 +89,6 @@ class dialogVehicleList {
 
 class dialogVehicleService {
 	idd = 3001;
-	movingEnable = true;
 
 	class ControlsBackground {
 		class headerBlock: RscText {
@@ -101,7 +99,7 @@ class dialogVehicleService {
 			w = 0.246567 * safezoneW;
 			h = 0.025 * safezoneH;
 
-			colorBackground[] = { 0, 0.7, 0, 0.7 };
+			colorBackground[] = {0, 0.7, 0, 0.7};
 		};
 
 		class headerText: RscText {
@@ -124,7 +122,7 @@ class dialogVehicleService {
 			w = 0.246746 * safezoneW;
 			h = 0.618721 * safezoneH;
 
-			colorBackground[] = { 0, 0, 0, 0.7 };
+			colorBackground[] = {0, 0, 0, 0.7};
 		};
 
 		class loadBarBackground: IGUIBack {
@@ -276,6 +274,59 @@ class dialogVehicleService {
 			text = "DELETE";
 
 			action = "[vehicle player, 'delete'] call P27_fnc_vehicleService";
+		};
+	};
+};
+
+class dialogConfigurePylons {
+	idd = 3002;
+
+	class ControlsBackground {
+		class headerBlock: RscText {
+			idc = -1;
+
+			x = 0.29079 * safezoneW + safezoneX;
+			y = 0.180001 * safezoneH + safezoneY;
+			w = 0.419994 * safezoneW;
+			h = 0.025 * safezoneH;
+
+			colorBackground[] = {0, 0.7, 0, 0.7};
+		};
+
+		class headerText: RscText {
+			idc = -1;
+			
+			x = 0.29079 * safezoneW + safezoneX;
+			y = 0.180001 * safezoneH + safezoneY;
+			w = 0.419994 * safezoneW;
+			h = 0.025 * safezoneH;
+
+			sizeEx = 0.025;
+			text = "esc to back";
+		};
+
+		class mainBackground: RscText {
+			idc = -1;
+
+			x = 0.29079 * safezoneW + safezoneX;
+			y = 0.202398 * safezoneH + safezoneY;
+			w = 0.419994 * safezoneW;
+			h = 0.621521 * safezoneH;
+
+			colorBackground[] = {0, 0, 0, 0.7};
+		};
+	};
+
+	class Controls {
+		class aircraftPicture: RscPicture {
+			idc = 3000;
+
+			x = 0.29919 * safezoneW + safezoneX;
+			y = 0.217236 * safezoneH + safezoneY;
+			w = 0.402931 * safezoneW;
+			h = 0.590727 * safezoneH;
+
+			colorBackground[] = {1,1,1,0.1};
 		};
 	};
 };

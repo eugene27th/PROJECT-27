@@ -25,6 +25,7 @@ class CfgFunctions {
 
 			class allObjectsAreDead {};
 			class allObjectsInRadius {};
+			class canConfigurePylons {};
 
 			class createTask {};
 			class cancelTask {};
@@ -62,6 +63,7 @@ class CfgFunctions {
 			class showVehicleList {};
 			class showVehiclePreview {};
 			class showVehicleService {};
+			class showAircraftLoadout {};
 
 			class updateVehicleList {};
 			class updateItemsList {};
@@ -91,6 +93,8 @@ class CfgFunctions {
 			class generateCheckpoints {};
 			class createCheckpoint {};
 			class setCheckpointCaptureState {};
+
+			class createParkedVehicles {};
 
 			class clearSector {};
 		};

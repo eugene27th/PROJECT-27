@@ -3,7 +3,7 @@
     Date: 24.08.2022
     
     Example:
-        [] spawn P27_fnc_clearReinforcements
+        [] spawn P27_fnc_removeReinforcements
 */
 
 

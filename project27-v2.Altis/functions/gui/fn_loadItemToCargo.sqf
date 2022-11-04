@@ -15,9 +15,7 @@ private _listBoxIndex = lbCurSel _ctrlListBox;
 private _itemClass = _ctrlListBox lbData _listBoxIndex;
 private _itemType = _itemClass call BIS_fnc_itemType;
 
-if !(_vehicle canAdd [_itemClass, _count]) exitWith {
-	_vehicle vehicleChat "Not enough space.";
-};
+if !(_vehicle canAdd [_itemClass, _count]) exitWith {};
 
 switch (_itemType # 0) do {
 	case "Item": {
