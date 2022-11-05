@@ -47,5 +47,5 @@ addMissionEventHandler ["Entitykilled", {
 		_playerStats set [_playerIndex, [_playerUID, _playerStat]];
 	};
 	
-	missionNamespace setVariable ["playerStats", _playerStats];
+	missionNamespace setVariable ["playerStats", _playerStats, true];
 }];

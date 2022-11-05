@@ -19,8 +19,7 @@
 // vehicle actions
 ["openVehicleSpawner", "Get vehicle", "", {[] call P27_fnc_showVehicleList}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) == player}] call P27_fnc_createSelfAction;
 ["openVehicleService", "Vehicle service", "", {[] call P27_fnc_showVehicleService}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player}] call P27_fnc_createSelfAction;
-["openConfigurePylons", "Configure pylons", "", {[vehicle player] call ace_pylons_fnc_showDialog}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player}] call P27_fnc_createSelfAction;
-["openConfigurePylons2", "Configure pylons 2", "", {[vehicle player] call P27_fnc_showAircraftLoadout}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player}] call P27_fnc_createSelfAction;
+["openConfigurePylons", "Configure pylons", "", {[vehicle player] call P27_fnc_showAircraftLoadout}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player && (((vehicle player) call BIS_fnc_objectType) # 1) in ["Helicopter", "Plane"]}] call P27_fnc_createSelfAction;
 
 
 // treatment
@@ -76,3 +75,7 @@
 ["setWeatherCloudy", "Cloudy", "", {["cloudy"] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "setWeather"]] call P27_fnc_createSelfAction;
 ["setWeatherRain", "Rain", "", {["rain"] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "setWeather"]] call P27_fnc_createSelfAction;
 ["setWeatherRainstorm", "Rainstorm", "", {["rainstorm"] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "setWeather"]] call P27_fnc_createSelfAction;
+
+
+// other
+["getPlayerStats", "My statistics", "", {[true] call P27_fnc_getPlayerStats}, {true}] call P27_fnc_createSelfAction;

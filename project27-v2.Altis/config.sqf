@@ -1,8 +1,8 @@
 debugMode = true;
 
 configSectors = [
-	1500, // safe distance
-	600, // distance
+	1500,
+	600,
 	[
 		[
 			"NameCityCapital",
@@ -43,11 +43,11 @@ configSectors = [
 ];
 
 customSectors = [
-	[ // add sectors
+	[
 		[
-			[0, 0, 0], // sector position
-			360, // sector radius
-			[ // sector config
+			[0, 0, 0],
+			360,
+			[
 				[[7,2],[3,1],[1,1],[1,1],[1,1]], [[1,1],[3,0],[1,1]]
 			]
 		],
@@ -59,16 +59,16 @@ customSectors = [
 			]
 		]
 	], 
-	[ // delete sectors
+	[
 		[
-			[4000, 0, 0], // position
-			500 // radius
+			[4000, 0, 0],
+			500
 		]
 	]
 ];
 
 configUnits = [
-	[ // enemy
+	[
 		independent,
 		[
 			["I_E_Officer_F"], // leaders
@@ -80,7 +80,7 @@ configUnits = [
 			["I_Heli_light_03_unarmed_F"] // transport helicopters
 		]
 	],
-	[ // civ
+	[
 		["C_Man_formal_4_F", "C_Man_casual_3_F", "C_Man_casual_8_F"], // units
 		["C_SUV_01_F", "C_Hatchback_01_F"] // vehs
 	]

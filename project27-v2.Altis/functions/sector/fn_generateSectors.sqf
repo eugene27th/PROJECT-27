@@ -91,7 +91,7 @@ for [{private _a = 0 }, { _a < (count _allLocations) }, { _a = _a + 1 }] do {
 	private _sectorRadius = _locationConfig # 1;
 	private _trgRadius = _sectorDistance + _sectorRadius;
 
-	private _nearLocations = _allLocations select {((_x distance _location) < _trgRadius) && !(_x isEqualTo _location)};
+	private _nearLocations = _allLocations select {((_x distance _location) < (_trgRadius + 150)) && !(_x isEqualTo _location)};
 
 	if ((count _nearLocations) > 0) then {
 		private _spawnAllowed = true;
@@ -100,12 +100,8 @@ for [{private _a = 0 }, { _a < (count _allLocations) }, { _a = _a + 1 }] do {
 			private _locationTypeIndex = _allLocationsTypes find _locationType;
 			private _nearLocationTypeIndex = _allLocationsTypes find (type _x);
 
-			if (_locationTypeIndex == _nearLocationTypeIndex) exitWith {
+			if (_locationTypeIndex >= _nearLocationTypeIndex) exitWith {
 				_allLocations set [(_allLocations find _location), [0, 0, 0]];
-				_spawnAllowed = false;
-			};
-
-			if (_locationTypeIndex > _nearLocationTypeIndex) exitWith {
 				_spawnAllowed = false;
 			};
 		} forEach _nearLocations;
@@ -119,7 +115,7 @@ for [{private _a = 0 }, { _a < (count _allLocations) }, { _a = _a + 1 }] do {
 	[_locationPos, _trgRadius, _locationConfig # 2] call _createSectorTrigger;
 
 	if (debugMode) then {
-		["sector#" + str _locationPos, _locationPos, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorOPFOR", "PERSIST"] call CBA_fnc_createMarker;
+		["sector#" + str _locationPos, _locationPos, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorWhite", "PERSIST"] call CBA_fnc_createMarker;
 		["sectorTrigger#" + str _locationPos, _locationPos, "ELLIPSE", [_trgRadius, _trgRadius], "COLOR:", "ColorBLUFOR", "PERSIST"] call CBA_fnc_createMarker;
 	};	
 };
@@ -134,7 +130,7 @@ if ((count (customSectors # 0)) > 0) then {
 		[_locationPos, _trgRadius, _x # 2] call _createSectorTrigger;
 
 		if (debugMode) then {
-			["customSector#" + str _locationPos, _locationPos, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorOPFOR", "PERSIST"] call CBA_fnc_createMarker;
+			["customSector#" + str _locationPos, _locationPos, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorWhite", "PERSIST"] call CBA_fnc_createMarker;
 			["customSectorTrigger#" + str _locationPos, _locationPos, "ELLIPSE", [_trgRadius, _trgRadius], "COLOR:", "ColorBLUFOR", "PERSIST"] call CBA_fnc_createMarker;
 		};
 	} forEach (customSectors # 0);

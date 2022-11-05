@@ -10,22 +10,20 @@ class CfgFunctions {
 		class common {
 			file = "functions\common";
 
-			class loadGameProgress {};
-			class saveGameProgress {};
-
 			class getNumberOfUnits {};
 			class getRandomRoadPositions {};
 			class getVehicleClassNames {};
 			class getConfigPathFromClass {};
+			class getPlayerStats {};
 
 			class changeEnvironment {};
 			class giveOrderToCivilian {};
-			class vehicleService {};
 			class teleportToMhq {};
+			
+			class vehicleService {};
 
 			class allObjectsAreDead {};
 			class allObjectsInRadius {};
-			class canConfigurePylons {};
 
 			class createTask {};
 			class cancelTask {};
@@ -64,10 +62,13 @@ class CfgFunctions {
 			class showVehiclePreview {};
 			class showVehicleService {};
 			class showAircraftLoadout {};
-
+			
 			class updateVehicleList {};
 			class updateItemsList {};
 			class updateInvLoadBar {};
+
+			class configurePylons {};
+			class resetPylons {};
 
 			class vehiclePlacement {};
 			class loadItemToCargo {};

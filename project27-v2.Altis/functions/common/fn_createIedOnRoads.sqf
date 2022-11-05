@@ -28,7 +28,7 @@ for [{private _i = 0 }, { _i < (count _roadIedPositions) }, { _i = _i + 1 }] do 
 	_allRoadIed pushBack _ied;
 	
 	if (debugMode) then {
-		["ied_" + (str _roadPosition), _roadPosition, "ELLIPSE", [5, 5], "COLOR:", "ColorRed", "ALPHA:", 1, "PERSIST"] call CBA_fnc_createMarker;
+		["ied_" + (str _roadPosition), _roadPosition, "ELLIPSE", [20, 20], "COLOR:", "ColorBlue", "ALPHA:", 1, "PERSIST"] call CBA_fnc_createMarker;
 	};
 };
 

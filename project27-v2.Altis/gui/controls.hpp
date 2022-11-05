@@ -46,7 +46,7 @@ class dialogVehicleList {
 			w = 0.236247 * safezoneW;
 			h = 0.531932 * safezoneH;
 
-			onLBSelChanged = "call P27_fnc_showVehiclePreview";
+			onLBSelChanged = "[] call P27_fnc_showVehiclePreview";
 		};
 
 		class preview: RscPicture {
@@ -71,7 +71,7 @@ class dialogVehicleList {
 			font = "PuristaMedium";
 			text = "SPAWN";
 
-			action = "call P27_fnc_vehiclePlacement";
+			action = "[] call P27_fnc_vehiclePlacement";
 		};
 
 		class typeList: RscCombo {
@@ -82,7 +82,7 @@ class dialogVehicleList {
 			w = 0.137811 * safezoneW;
 			h = 0.0279964 * safezoneH;
 
-			onLBSelChanged = "call P27_fnc_updateVehicleList";
+			onLBSelChanged = "[] call P27_fnc_updateVehicleList";
 		};
 	};
 };
@@ -146,7 +146,7 @@ class dialogVehicleService {
 			w = 0.236254 * safezoneW;
 			h = 0.0307961 * safezoneH;
 
-			onLBSelChanged = "call P27_fnc_updateItemsList";
+			onLBSelChanged = "[] call P27_fnc_updateItemsList";
 		};
 
 		class itemsList: RscListbox {
@@ -286,9 +286,9 @@ class dialogConfigurePylons {
 			idc = -1;
 
 			x = 0.29079 * safezoneW + safezoneX;
-			y = 0.180001 * safezoneH + safezoneY;
+			y = 0.205198 * safezoneH + safezoneY;
 			w = 0.419994 * safezoneW;
-			h = 0.025 * safezoneH;
+			h = 0.0277996 * safezoneH;
 
 			colorBackground[] = {0, 0.7, 0, 0.7};
 		};
@@ -296,10 +296,10 @@ class dialogConfigurePylons {
 		class headerText: RscText {
 			idc = -1;
 			
-			x = 0.29079 * safezoneW + safezoneX;
-			y = 0.180001 * safezoneH + safezoneY;
+			x = 0.290002 * safezoneW + safezoneX;
+			y = 0.208841 * safezoneH + safezoneY;
 			w = 0.419994 * safezoneW;
-			h = 0.025 * safezoneH;
+			h = 0.0222004 * safezoneH;
 
 			sizeEx = 0.025;
 			text = "esc to back";
@@ -309,24 +309,80 @@ class dialogConfigurePylons {
 			idc = -1;
 
 			x = 0.29079 * safezoneW + safezoneX;
-			y = 0.202398 * safezoneH + safezoneY;
+			y = 0.233194 * safezoneH + safezoneY;
 			w = 0.419994 * safezoneW;
-			h = 0.621521 * safezoneH;
+			h = 0.531932 * safezoneH;
 
 			colorBackground[] = {0, 0, 0, 0.7};
 		};
 	};
 
 	class Controls {
+		class aircraftPictureBackground: RscText {
+			idc = -1;
+
+			x = 0.303127 * safezoneW + safezoneX;
+			y = 0.262026 * safezoneH + safezoneY;
+			w = 0.393744 * safezoneW;
+			h = 0.421523 * safezoneH;
+
+			colorBackground[] = {0.5, 0.5, 0.5, 1};
+		};
+		
 		class aircraftPicture: RscPicture {
 			idc = 3000;
 
-			x = 0.29919 * safezoneW + safezoneX;
-			y = 0.217236 * safezoneH + safezoneY;
-			w = 0.402931 * safezoneW;
-			h = 0.590727 * safezoneH;
+			x = 0.303127 * safezoneW + safezoneX;
+			y = 0.262026 * safezoneH + safezoneY;
+			w = 0.393744 * safezoneW;
+			h = 0.421523 * safezoneH;
 
-			colorBackground[] = {1,1,1,0.1};
+			style = 48 + 0x800;
+		};
+
+		class applyButton: RscButton {
+			idc = 3001;
+			
+			x = 0.303127 * safezoneW + safezoneX;
+			y = 0.709975 * safezoneH + safezoneY;
+			w = 0.0656244 * safezoneW;
+			h = 0.0307968 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "APPLY";
+
+			action = "[] call P27_fnc_configurePylons";
+		};
+
+		class resetButton: RscButton {
+			idc = 3002;
+			
+			x = 0.381878 * safezoneW + safezoneX;
+			y = 0.709975 * safezoneH + safezoneY;
+			w = 0.0656244 * safezoneW;
+			h = 0.0307968 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "RESET";
+
+			action = "[] call P27_fnc_resetPylons";
+		};
+
+		class cancelButton: RscButton {
+			idc = 3003;
+			
+			x = 0.631204 * safezoneW + safezoneX;
+			y = 0.709971 * safezoneH + safezoneY;
+			w = 0.0656244 * safezoneW;
+			h = 0.0307968 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "CANCEL";
+
+			action = "closeDialog 1";
 		};
 	};
 };
