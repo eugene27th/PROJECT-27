@@ -21,8 +21,6 @@ if (typeName _positionOrTrigger != "ARRAY") then {
 
 
 private _vehicles = [];
-
-private _roads = ((_positionOrTrigger) nearRoads _sectorRadius) select {isOnRoad _x};
 private _roadPositions = [_spawnConfig # 0, _positionOrTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions;
 
 for [{private _i = 0 }, { _i < (_spawnConfig # 0) }, { _i = _i + 1 }] do {

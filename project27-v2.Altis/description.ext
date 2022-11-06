@@ -1,5 +1,12 @@
 cba_settings_hasSettingsFile = 1;
 
+author			= "eugene27";
+OnLoadName		= "PROJECT27";
+OnLoadMission	= "Sandbox. That's it.";
+// loadScreen = "img\preview.paa";
+overviewText    = "Sandbox. That's it.";
+// overviewPicture = "img\preview.paa";
+
 enableDebugConsole[] = {"76561198141746661"};
 
 #include "gui\defines.hpp"
@@ -24,6 +31,7 @@ class CfgFunctions {
 
 			class allObjectsAreDead {};
 			class allObjectsInRadius {};
+			class removeFollowingVehicles {};
 
 			class createTask {};
 			class cancelTask {};

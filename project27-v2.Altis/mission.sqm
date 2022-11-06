@@ -12,10 +12,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15187.139,43.20797,17277.781};
-		dir[]={0.56101102,-0.59057009,-0.58008075};
-		up[]={0.41055998,0.80698639,-0.42451566};
-		aside[]={-0.71882355,-1.4901161e-008,-0.69519269};
+		pos[]={15235.328,35.682137,17269.027};
+		dir[]={-0.67486155,-0.47287804,0.56652296};
+		up[]={-0.36218035,0.88112789,0.3040379};
+		aside[]={0.64295202,0,0.76590651};
 	};
 };
 binarizationWanted=0;
@@ -24,18 +24,13 @@ addons[]=
 {
 	"A3_Structures_F_Bootcamp_VR_Helpers",
 	"A3_Modules_F_Curator_Curator",
-	"A3_Characters_F",
-	"A3_Air_F_Heli_Light_01",
-	"ace_realisticnames",
-	"A3_Air_F_EPC_Plane_CAS_01",
-	"A3_Air_F_Beta_Heli_Attack_02",
-	"A3_Armor_F_Beta_APC_Wheeled_02"
+	"A3_Characters_F"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=7;
+		items=3;
 		class Item0
 		{
 			className="A3_Structures_F_Bootcamp";
@@ -57,43 +52,11 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item3
-		{
-			className="A3_Air_F";
-			name="Arma 3 Alpha - Aircraft";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item4
-		{
-			className="A3_Air_F_EPC";
-			name="Arma 3 Win Episode - Aircraft";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item5
-		{
-			className="A3_Air_F_Beta";
-			name="Arma 3 Beta - Aircraft";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item6
-		{
-			className="A3_Armor_F_Beta";
-			name="Arma 3 Beta - Armored Land Vehicles";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
 	};
 };
 randomSeed=14250439;
 class ScenarioData
 {
-	author="eugene27";
-	overviewText="Sandbox. That's it.";
-	overviewTextLocked="Sandbox. That's it.";
-	onLoadMission="Sandbox. That's it.";
 	debriefing=0;
 	saving=0;
 	respawnDialog=0;
@@ -161,7 +124,6 @@ class Mission
 {
 	class Intel
 	{
-		briefingName="PROJECT 27";
 		resistanceWest=0;
 		timeOfChanges=1800.0002;
 		startWeather=0.49573812;
@@ -181,7 +143,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=7;
+		items=3;
 		class Item0
 		{
 			dataType="Object";
@@ -295,71 +257,6 @@ class Mission
 			};
 			id=186;
 			atlOffset=-1.9073486e-006;
-		};
-		class Item3
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={15244.797,19.772589,17296.049};
-				angles[]={6.2765174,2.1650195,0.0013372133};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-			};
-			id=188;
-			type="B_Heli_Light_01_dynamicLoadout_F";
-		};
-		class Item4
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={15233.986,20.331388,17280.699};
-				angles[]={6.2818937,2.3370771,0};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-			};
-			id=189;
-			type="B_Plane_CAS_01_dynamicLoadout_F";
-			atlOffset=-1.9073486e-006;
-		};
-		class Item5
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={15218.087,21.1507,17265.27};
-				angles[]={6.2818937,2.3852663,0};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-			};
-			id=190;
-			type="O_Heli_Attack_02_dynamicLoadout_F";
-		};
-		class Item6
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={15206.169,20.475952,17256.828};
-				angles[]={6.2818937,2.6605384,0};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-			};
-			id=198;
-			type="O_APC_Wheeled_02_rcws_v2_F";
 		};
 	};
 };

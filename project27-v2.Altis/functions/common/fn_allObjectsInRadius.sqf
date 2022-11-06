@@ -12,7 +12,7 @@ params ["_objects", "_center", ["_distance", 50]];
 private _allInRadius = true;
 
 {
-    if ((_x distance _center) > 50) exitWith {
+    if ((_x distance _center) > _distance) exitWith {
         _allInRadius = false;
     };
 } forEach _objects;
