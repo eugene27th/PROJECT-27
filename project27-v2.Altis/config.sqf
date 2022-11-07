@@ -71,8 +71,8 @@ configUnits = [
 	[
 		independent,
 		[
-			["I_E_Officer_F"], // leaders
-			["I_L_Looter_SMG_F","I_L_Looter_Rifle_F","I_L_Looter_SG_F","I_L_Looter_Pistol_F"], // infantry
+			["I_E_Officer_F"], // leaders 
+			["I_L_Looter_SMG_F","I_L_Looter_Rifle_F","I_L_Looter_SG_F","I_L_Looter_Pistol_F", "I_Soldier_AA_F", "I_Soldier_AT_F", "I_E_Soldier_AA_F", "I_E_Soldier_AT_F", "I_E_Soldier_LAT_F", "I_Soldier_LAT_F"], // infantry
 			["I_G_Offroad_01_F", "I_C_Offroad_02_unarmed_F"], // light vehicles
 			["I_G_Offroad_01_armed_F", "I_C_Offroad_02_LMG_F"], // armed vehicles
 			["I_E_APC_tracked_03_cannon_F", "I_APC_Wheeled_03_cannon_F"], // heavy vehicles

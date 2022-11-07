@@ -29,7 +29,9 @@ _spawnedVehicles pushBack _checkPointVehicle;
 
 
 for "_i" from 0 to 1 do {
-	private _turret = (selectRandom (_configEnemy # 5)) createVehicle (_checkpointPosition findEmptyPosition [10, 50, "B_HMG_01_high_F"]);
+	private _turretPosition = _checkpointPosition getPos [10, _checkpointDirection + (_i * 180)];
+
+	private _turret = createVehicle [selectRandom (_configEnemy # 5), _turretPosition, [], 0, "CAN_COLLIDE"];
 	_turret setDir (_checkpointDirection + (_i * 180));
 
 	_spawnedVehicles pushBack _turret;

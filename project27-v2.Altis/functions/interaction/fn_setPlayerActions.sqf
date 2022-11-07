@@ -17,9 +17,9 @@
 
 
 // vehicle actions
-["openVehicleSpawner", "Get vehicle", "", {[] call P27_fnc_showVehicleList}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) == player}] call P27_fnc_createSelfAction;
-["openVehicleService", "Vehicle service", "", {[] call P27_fnc_showVehicleService}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player}] call P27_fnc_createSelfAction;
-["openConfigurePylons", "Configure pylons", "", {[vehicle player] call P27_fnc_showAircraftLoadout}, {!visibleMap && (player distance respawn) < 100 && (vehicle player) != player && (((vehicle player) call BIS_fnc_objectType) # 1) in ["Helicopter", "Plane"]}] call P27_fnc_createSelfAction;
+["openVehicleSpawner", "Get vehicle", "", {[] call P27_fnc_showVehicleList}, {!visibleMap && (player distance respawn) < 700 && (vehicle player) == player}] call P27_fnc_createSelfAction;
+["openVehicleService", "Vehicle service", "", {[] call P27_fnc_showVehicleService}, {!visibleMap && (player distance respawn) < 700 && (vehicle player) != player}] call P27_fnc_createSelfAction;
+["openConfigurePylons", "Configure pylons", "", {[vehicle player] call P27_fnc_showAircraftLoadout}, {!visibleMap && (player distance respawn) < 700 && (vehicle player) != player && (((vehicle player) call BIS_fnc_objectType) # 1) in ["Helicopter", "Plane"]}] call P27_fnc_createSelfAction;
 
 
 // treatment
@@ -27,7 +27,7 @@
 
 
 // teleport to mhq
-["tpToMhq", "To MHQ", "", {[] call P27_fnc_teleportToMhq}, {!visibleMap && !(isNil "mhqTerminal")}] call P27_fnc_createSelfAction;
+["tpToMhq", "To MHQ", "", {[] call P27_fnc_teleportToMhq}, {!visibleMap && !(isNil "mhqTerminal") && (player distance respawn) < 100}] call P27_fnc_createSelfAction;
 
 // mhq actions
 ["mhqDeploy", "Deploy MHQ", "", "Land_DataTerminal_01_F", {

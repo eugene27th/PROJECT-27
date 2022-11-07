@@ -45,6 +45,45 @@ if (!_sectorIsCaptured) then {
 	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 3, _enemyClasses # 4] spawn P27_fnc_createPatrolVehicles;
 	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 4] spawn P27_fnc_createTurrets;
 
+	private _nearPlayers = allPlayers select {(_x distance _sectorTrigger) < (_triggerRadius * 1.5)};
+	private _nearTargets = [];
+
+	{
+		private _playerVehicle = vehicle _x;
+
+		if (_playerVehicle in _nearTargets) then {
+			continue;
+		};
+
+		private _vehicleType = (_playerVehicle call BIS_fnc_objectType) # 1;
+		
+		private "_neededUnitsType";
+
+		if (_vehicleType in ["WheeledAPC", "TrackedAPC", "Tank"]) then {
+			_neededUnitsType = "AT";
+		};
+
+		if (_vehicleType in ["Helicopter", "Plane"]) then {
+			_neededUnitsType = "AA";
+		};
+
+		if (isNil "_neededUnitsType") then {
+			continue;
+		};
+
+		_nearTargets pushBack _playerVehicle;
+
+		private _unitClasses = [_neededUnitsType] call P27_fnc_getConfigUnitClassesByType;
+
+		if ((count _unitClasses) > 0 && (random 1) < 0.7) then {
+			[_sectorTrigger, _sectorRadius, [1, 0], _unitClasses] spawn P27_fnc_createPatrolUnits;
+
+			if (debugMode) then {
+				systemChat format ["Additional %1 units spawned in the sector.", _neededUnitsType];
+			};
+		};
+	} forEach _nearPlayers;
+
 	([
 		_triggerPosition,
 		"AREA:", [_sectorRadius, _sectorRadius, 0, false],

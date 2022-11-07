@@ -20,6 +20,7 @@ class CfgFunctions {
 			class getNumberOfUnits {};
 			class getRandomRoadPositions {};
 			class getVehicleClassNames {};
+			class getConfigUnitClassesByType {};
 			class getConfigPathFromClass {};
 			class getPlayerStats {};
 

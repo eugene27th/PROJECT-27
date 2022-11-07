@@ -17,7 +17,7 @@ while {true} do {
 
 	private _allObjects = (allUnits + vehicles) select {(_x getVariable ["spawnTrigger", ""]) isEqualTo _spawnTriggerId};
 
-	if ([_allObjects, _finishPos, _distanceAroundFinish] call P27_fnc_allObjectsInRadius || [_allObjects] call P27_fnc_allObjectsAreDead) exitWith {
+	if ((count _allObjects) < 1 || [_allObjects, _finishPos, _distanceAroundFinish] call P27_fnc_allObjectsInRadius || [_allObjects] call P27_fnc_allObjectsAreDead) exitWith {
 		{deleteVehicle _x} forEach _allObjects;
 
 		if (debugMode) then {

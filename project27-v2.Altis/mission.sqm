@@ -8,14 +8,14 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=199;
+		nextID=240;
 	};
 	class Camera
 	{
-		pos[]={15235.328,35.682137,17269.027};
-		dir[]={-0.67486155,-0.47287804,0.56652296};
-		up[]={-0.36218035,0.88112789,0.3040379};
-		aside[]={0.64295202,0,0.76590651};
+		pos[]={15211.167,25.189678,17268.166};
+		dir[]={0.74416107,-0.31133577,0.59101129};
+		up[]={0.24380085,0.95029992,0.19362617};
+		aside[]={0.62192076,0,-0.7830801};
 	};
 };
 binarizationWanted=0;
@@ -239,7 +239,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={15220.617,17.947123,17276.814};
+						position[]={15220.684,17.949316,17278.459};
 					};
 					side="West";
 					flags=7;
@@ -247,15 +247,15 @@ class Mission
 					{
 						isPlayer=1;
 					};
-					id=187;
-					type="B_soldier_AR_F";
+					id=227;
+					type="B_soldier_AA_F";
 					atlOffset=-1.9073486e-006;
 				};
 			};
 			class Attributes
 			{
 			};
-			id=186;
+			id=226;
 			atlOffset=-1.9073486e-006;
 		};
 	};
