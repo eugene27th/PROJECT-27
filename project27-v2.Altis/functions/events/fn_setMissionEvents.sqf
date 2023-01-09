@@ -17,7 +17,7 @@ addMissionEventHandler ["Entitykilled", {
 
 	if (isNil "_victimSide") exitWith {};
 
-	private _playerUID = getPlayerUID player;
+	private _playerUID = getPlayerUID _killer;
 	private _playerStats = missionNamespace getVariable ["playerStats", []];
 	private _playerIndex = _playerStats findIf {(_x # 0) == _playerUID};
 

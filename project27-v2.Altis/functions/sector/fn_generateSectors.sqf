@@ -14,7 +14,7 @@ private _createSectorTrigger = {
 	private _trg = createTrigger ["EmptyDetector", _pos, false];
 	_trg setTriggerArea [_radius, _radius, 0, false, 800];
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	_trg setTriggerTimeout [10, 10, 10, true];
+	_trg setTriggerTimeout [5, 5, 5, true];
 	_trg setTriggerStatements [
 		"{vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0",
 		"[thisTrigger] call P27_fnc_createSector",
@@ -25,7 +25,7 @@ private _createSectorTrigger = {
 	_trg setVariable ["isCaptured", false];
 	_trg setVariable ["spawnConfig", _config];
 
-	_allTriggers pushBack _trg;
+	sectorTriggers pushBack _trg;
 };
 
 
@@ -51,6 +51,7 @@ private _spawnLocations = configSectors # 2;
 private _worldSize = worldSize;
 private _worldCenter = [_worldSize / 2, _worldSize / 2, 0];
 
+
 private _allLocations = (nearestLocations [_worldCenter, _allLocationsTypes, _worldSize * 1.5]) - (nearestLocations [position respawn, _allLocationsTypes, _safeDistance]);
 
 if ((count (customSectors # 1)) > 0) then {
@@ -64,7 +65,39 @@ if ((count (customSectors # 1)) > 0) then {
 };
 
 
-private _allTriggers = [];
+if (debugMode) then {
+	["_safeDistance", position respawn, "ELLIPSE", [_safeDistance, _safeDistance], "COLOR:", "ColorOrange", "PERSIST"] call CBA_fnc_createMarker;
+};
+
+
+sectorTriggers = [];
+
+if ((count (customSectors # 0)) > 0) then {
+	{
+		private _locationPos = _x # 0;
+		private _sectorRadius = _x # 1;
+		private _trgRadius = _sectorDistance + _sectorRadius;
+
+		[_locationPos, _trgRadius, _x # 2] call _createSectorTrigger;
+
+		if (debugMode) then {
+			["customSector#" + str _locationPos, _locationPos, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorWhite", "PERSIST"] call CBA_fnc_createMarker;
+			["customSectorTrigger#" + str _locationPos, _locationPos, "ELLIPSE", [_trgRadius, _trgRadius], "COLOR:", "ColorBLUFOR", "PERSIST"] call CBA_fnc_createMarker;
+		};
+	} forEach (customSectors # 0);
+};
+
+
+if ((count _spawnLocations) < 1) exitWith {
+	missionNamespace setVariable ["sectorTriggers", sectorTriggers];
+	[] call P27_fnc_updateSectorPositions;
+
+	if (debugMode) then {
+		diag_log "[PROJECT 27] WARNING: Spawn locations in config not found.";
+		systemChat "WARNING: Spawn locations in config not found."
+	};
+};
+
 
 for [{private _a = 0 }, { _a < (count _allLocations) }, { _a = _a + 1 }] do {
 	private _location = _allLocations # _a;
@@ -80,6 +113,7 @@ for [{private _a = 0 }, { _a < (count _allLocations) }, { _a = _a + 1 }] do {
 
 	if (isNil "_locationConfig") then {
 		if (debugMode) then {
+			diag_log (format ["[PROJECT 27] WARNING: Config not found for: %1.", _locationType]);
 		 	systemChat format ["Config not found for: %1", _locationType];
 		};
 
@@ -120,25 +154,10 @@ for [{private _a = 0 }, { _a < (count _allLocations) }, { _a = _a + 1 }] do {
 	};	
 };
 
+missionNamespace setVariable ["sectorTriggers", sectorTriggers];
+[] call P27_fnc_updateSectorPositions;
 
-if ((count (customSectors # 0)) > 0) then {
-	{
-		private _locationPos = _x # 0;
-		private _sectorRadius = _x # 1;
-		private _trgRadius = _sectorDistance + _sectorRadius;
-
-		[_locationPos, _trgRadius, _x # 2] call _createSectorTrigger;
-
-		if (debugMode) then {
-			["customSector#" + str _locationPos, _locationPos, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorWhite", "PERSIST"] call CBA_fnc_createMarker;
-			["customSectorTrigger#" + str _locationPos, _locationPos, "ELLIPSE", [_trgRadius, _trgRadius], "COLOR:", "ColorBLUFOR", "PERSIST"] call CBA_fnc_createMarker;
-		};
-	} forEach (customSectors # 0);
+if ((count sectorTriggers) < 1 && debugMode) then {
+	diag_log "[PROJECT 27] WARNING: No sectors have been created.";
+	systemChat "WARNING: No sectors have been created."
 };
-
-
-if (debugMode) then {
-	["_safeDistance", position respawn, "ELLIPSE", [_safeDistance, _safeDistance], "COLOR:", "ColorOrange", "PERSIST"] call CBA_fnc_createMarker;
-};
-
-missionNamespace setVariable ["sectorTriggers", _allTriggers];

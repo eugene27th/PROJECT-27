@@ -1,5 +1,9 @@
 debugMode = true;
 
+numberOfIedOnRoads = 20;
+numberOfCheckpoints = 10;
+numberOfMaximumParkedVehiclesInSector = 4;
+
 configSectors = [
 	1500,
 	600,

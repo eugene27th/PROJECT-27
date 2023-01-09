@@ -71,6 +71,7 @@ private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown",
 			sleep 0.1;
 
 			private _spawnedVehicle = createVehicle [_className, _spawnPosition, [], 0, "CAN_COLLIDE"];
+			
 			_spawnedVehicle setDir _direction;
 
 			clearItemCargoGlobal _spawnedVehicle;
@@ -84,6 +85,7 @@ private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown",
 				};
 				
 				mhqTerminal = _spawnedVehicle;
+				publicVariable "mhqTerminal";
 
 				[_spawnedVehicle, 3] call ace_cargo_fnc_setSize;
 				[_spawnedVehicle, "blue", "orange", "green"] call BIS_fnc_DataTerminalColor;

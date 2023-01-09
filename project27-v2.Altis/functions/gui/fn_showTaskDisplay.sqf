@@ -3,43 +3,46 @@
     Date: 13.09.2022
     
     Example:
-        [] call P27_fnc_showTaskDisplay
+        [] spawn P27_fnc_showTaskDisplay
 */
 
 
 if !(missionNamespace getVariable ["taskIsAvailable", true]) exitWith {
-	["1 minute between creating a task."] remoteExec ["systemChat"];
+	systemChat "1 minute between creating a task.";
 };
 
 private _taskList = [];
-private _allSectors = [true, true, true, true] call P27_fnc_getRandomSectorPos;
+private _allSectorPositions = missionNamespace getVariable "sectorPositions";
+
+if (isNil "_allSectorPositions") exitWith {
+	systemChat "No tasks available.";
+};
 
 {
 	_x params ["_taskName", ["_inNearestSectors", false], ["_inCapturedSectors", false]];
 	
-	private _availableSectors = _allSectors;
+	private _availablePositions = _allSectorPositions # 1;
 
 	if (_inCapturedSectors) then {
-		_availableSectors = _availableSectors select {_x getVariable "isCaptured"};
+		_availablePositions = _allSectorPositions # 0;
 	};
 
-	if ((count _availableSectors) < 1) then {
+	if ((count _availablePositions) < 1) then {
 		continue;
 	};
 
 	if (_inNearestSectors) then {
-		_availableSectors = _availableSectors select [0,5];
+		_availablePositions = _availablePositions select [0,5];
 	};
 
-	private _selectedSector = selectRandom _availableSectors;
-	private _sectorPosition = position _selectedSector;
+	private _taskPosition = selectRandom _availablePositions;
 
 	if (debugMode) then {
-		systemChat format ["%1 / %2 / %3 / %4", _taskName, _inNearestSectors, _inCapturedSectors, _sectorPosition];
+		systemChat format ["%1 / %2 / %3 / %4", _taskName, _inNearestSectors, _inCapturedSectors, _taskPosition];
 	};
 
 	_taskList pushBack [
-		_sectorPosition,
+		_taskPosition,
 		{
 			if (debugMode) then {
 				systemChat format ["start %1", _this # 9];
@@ -51,10 +54,21 @@ private _allSectors = [true, true, true, true] call P27_fnc_getRandomSectorPos;
         "",
 		"",
 		1,
-		[_taskName, _sectorPosition]
+		[_taskName, _taskPosition]
 	];
 
-	_allSectors deleteAt (_allSectors find _selectedSector);
+	{
+		private _index = _x find _taskPosition;
+
+		if (_index != -1) then {
+			_x deleteAt _index;
+		};
+	} forEach _allSectorPositions;
+	
 } forEach configTasks;
+
+if ((count _taskList) < 1) exitWith {
+	systemChat "No tasks available.";
+};
 
 [findDisplay 46, position player, _taskList, [], ["respawn"], [], 0.1, false, 0, true] spawn BIS_fnc_strategicMapOpen;

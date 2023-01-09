@@ -1,3 +1,5 @@
+call compile preprocessFileLineNumbers "config.sqf";
+
 ["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
 
 [] spawn P27_fnc_showGameVersion;

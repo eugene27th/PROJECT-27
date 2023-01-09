@@ -63,7 +63,6 @@
 
 [] spawn {
     private _aaUnits = ["AA"] call P27_fnc_getConfigUnitClassesByType;
-    systemChat str _aaUnits;
 
     if ((count _aaUnits) > 0) then {
         while {true} do {

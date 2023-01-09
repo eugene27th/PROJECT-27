@@ -9,9 +9,9 @@
 
 params ["_sectorTrigger", ["_sectorRadius", 100]];
 
-private _roadPositions = [[2, 5] call BIS_fnc_randomInt, position _sectorTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions;
+private _roadPositions = [[1, numberOfMaximumParkedVehiclesInSector] call BIS_fnc_randomInt, position _sectorTrigger, _sectorRadius] call P27_fnc_getRandomRoadPositions;
 
-if ((count _roadPositions) < 2 && (random 1) < 0.5) exitWith {};
+if ((count _roadPositions) < 2 && (random 1) < 0.4) exitWith {};
 
 
 private _availableVehicles = (configUnits # 1) # 1;

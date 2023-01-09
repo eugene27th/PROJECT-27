@@ -16,8 +16,6 @@ ASL_Advanced_Sling_Loading_Install = {
 if(!isNil "ASL_ROPE_INIT") exitWith {};
 ASL_ROPE_INIT = true;
 
-diag_log "Advanced Sling Loading Loading...";
-
 ASL_Rope_Get_Lift_Capability = {
 	params ["_vehicle"];
 	private ["_slingLoadMaxCargoMass"];
@@ -1162,8 +1160,6 @@ SA_Rope_Action_Check = {false};
 SA_Rope_Pickup_Rope_Action_Check = {false};
 SA_Rope_Drop_Rope_Action_Check = {false};
 SA_Rope_Attach_Rope_Action_Check = {false};
-
-diag_log "Advanced Sling Loading Loaded";
 
 };
 

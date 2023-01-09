@@ -55,8 +55,6 @@ SA_Advanced_Towing_Install = {
 if(!isNil "SA_TOW_INIT") exitWith {};
 SA_TOW_INIT = true;
 
-diag_log "Advanced Towing Loading...";
-
 SA_Simulate_Towing_Speed = {
 	
 	params ["_vehicle"];
@@ -386,7 +384,6 @@ SA_Attach_Tow_Ropes = {
 SA_Take_Tow_Ropes = {
 	params ["_vehicle","_player"];
 	if(local _vehicle) then {
-		diag_log format ["Take Tow Ropes Called %1", _this];
 		private ["_existingTowRopes","_hitchPoint","_rope"];
 		_existingTowRopes = _vehicle getVariable ["SA_Tow_Ropes",[]];
 		if(count _existingTowRopes == 0) then {
@@ -862,8 +859,6 @@ if(isServer) then {
 	remoteExecCall ["SA_Advanced_Towing_Install", -2,true];
 	
 };
-
-diag_log "Advanced Towing Loaded";
 
 };
 

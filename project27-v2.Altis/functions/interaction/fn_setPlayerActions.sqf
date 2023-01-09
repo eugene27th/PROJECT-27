@@ -9,7 +9,7 @@
 
 // task actions
 ["cancelTask", "Cancel task", "", {[player call BIS_fnc_taskCurrent] remoteExecCall ["P27_fnc_cancelTask", 2]}, {visibleMap}] call P27_fnc_createSelfAction;
-["createTask", "Request task", "", {[] call P27_fnc_showTaskDisplay}, {true}] call P27_fnc_createSelfAction;
+["createTask", "Request task", "", {[] spawn P27_fnc_showTaskDisplay}, {true}] call P27_fnc_createSelfAction;
 
 
 // arsenal action

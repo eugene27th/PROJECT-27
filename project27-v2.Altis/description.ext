@@ -7,7 +7,7 @@ OnLoadMission	= "Sandbox. That's it.";
 overviewText    = "Sandbox. That's it.";
 // overviewPicture = "img\preview.paa";
 
-enableDebugConsole[] = {"76561198141746661"};
+enableDebugConsole[] = { "76561198141746661", "76561198138702011", "76561198060515006" };
 
 #include "gui\defines.hpp"
 #include "gui\controls.hpp"
@@ -93,9 +93,9 @@ class CfgFunctions {
 
 		class sector {
 			file = "functions\sector";
-
-			class getRandomSectorPos {};
 			
+			class updateSectorPositions {};
+
 			class generateSectors {};
 			class createSector {};
 			class setSectorCaptureState {};
