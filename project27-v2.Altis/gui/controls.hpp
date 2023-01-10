@@ -386,3 +386,199 @@ class dialogConfigurePylons {
 		};
 	};
 };
+
+class dialogViewSettings {
+	idd = 3003;
+
+	class ControlsBackground {
+		class headerBlock: RscText {
+			idc = -1;
+
+			x = 0.35563 * safezoneW + safezoneX;
+			y = 0.399212 * safezoneH + safezoneY;
+			w = 0.288565 * safezoneW;
+			h = 0.025 * safezoneH;
+
+			colorBackground[] = {0, 0.7, 0, 0.7};
+		};
+
+		class headerText: RscText {
+			idc = -1;
+			
+			x = 0.357861 * safezoneW + safezoneX;
+			y = 0.398373 * safezoneH + safezoneY;
+			w = 0.284628 * safezoneW;
+			h = 0.025 * safezoneH;
+
+			sizeEx = 0.025;
+			text = "esc to back";
+		};
+
+		class mainBackground: RscText {
+			idc = -1;
+
+			x = 0.35563 * safezoneW + safezoneX;
+			y = 0.42441 * safezoneH + safezoneY;
+			w = 0.288745 * safezoneW;
+			h = 0.145581 * safezoneH;
+
+			colorBackground[] = {0, 0, 0, 0.7};
+		};
+
+
+		class viewDistanceText: RscText {
+			idc = -1;
+
+			x = 0.37 * safezoneW + safezoneX;
+			y = 0.438408 * safezoneH + safezoneY;
+			w = 0.052 * safezoneW;
+			h = 0.0280001 * safezoneH;
+
+			text = "Distance:";
+		};
+
+		class objectsText: RscText {
+			idc = -1;
+
+			x = 0.37 * safezoneW + safezoneX;
+			y = 0.477603 * safezoneH + safezoneY;
+			w = 0.052 * safezoneW;
+			h = 0.0280001 * safezoneH;
+
+			text = "Objects:";
+		};
+		
+
+		class terrainText: RscText {
+			idc = -1;
+
+			x = 0.37 * safezoneW + safezoneX;
+			y = 0.527996 * safezoneH + safezoneY;
+			w = 0.052 * safezoneW;
+			h = 0.0280001 * safezoneH;
+
+			text = "Terrain:";
+		};
+	};
+
+	class Controls {
+		class sliderViewDistance: RscXSliderH {
+			idc = 4000;
+
+			x = 0.421253 * safezoneW + safezoneX;
+			y = 0.438408 * safezoneH + safezoneY;
+			w = 0.164057 * safezoneW;
+			h = 0.0280001 * safezoneH;
+
+			sliderRange[] = {500, 12000};
+			sliderStep = 100;
+			sliderPosition = 1600;
+
+			onSliderPosChanged = "params ['_control', '_newValue']; (findDisplay 3003) displayCtrl ((ctrlIDC _control) + 1) ctrlSetText (str _newValue); setViewDistance _newValue;"
+		};
+
+		class editViewDistance: RscEdit {
+			idc = 4001;
+			
+			x = 0.591872 * safezoneW + safezoneX;
+			y = 0.438408 * safezoneH + safezoneY;
+			w = 0.0393736 * safezoneW;
+			h = 0.0252005 * safezoneH;
+
+			text = "1600";
+			maxChars = 5;
+
+			onKeyUp = "params ['_displayOrControl', '_key', '_shift', '_ctrl', '_alt']; private _newValue = (ctrlText _displayOrControl) call BIS_fnc_parseNumber; if (_newValue < 500) exitWith {}; (findDisplay 3003) displayCtrl ((ctrlIDC _displayOrControl) - 1) sliderSetPosition _newValue; setViewDistance _newValue;"
+		};
+
+		class sliderObjectsViewDistance: RscXSliderH {
+			idc = 4002;
+
+			x = 0.421253 * safezoneW + safezoneX;
+			y = 0.477603 * safezoneH + safezoneY;
+			w = 0.164057 * safezoneW;
+			h = 0.0280001 * safezoneH;
+
+			sliderRange[] = {500, 12000};
+			sliderStep = 100;
+			sliderPosition = 1600;
+
+			onSliderPosChanged = "params ['_control', '_newValue']; (findDisplay 3003) displayCtrl ((ctrlIDC _control) + 1) ctrlSetText (str _newValue); setObjectViewDistance _newValue;"
+		};
+
+		class editObjectsViewDistance: RscEdit {
+			idc = 4003;
+			
+			x = 0.591872 * safezoneW + safezoneX;
+			y = 0.477603 * safezoneH + safezoneY;
+			w = 0.0393736 * safezoneW;
+			h = 0.0280001 * safezoneH;
+
+			text = "1600";
+			maxChars = 5;
+
+			onKeyUp = "params ['_displayOrControl', '_key', '_shift', '_ctrl', '_alt']; private _newValue = (ctrlText _displayOrControl) call BIS_fnc_parseNumber; if (_newValue < 500) exitWith {}; (findDisplay 3003) displayCtrl ((ctrlIDC _displayOrControl) - 1) sliderSetPosition _newValue; setObjectViewDistance _newValue;"
+		};
+
+
+		class terrainNone: RscButton {
+			idc = 4004;
+
+			x = 0.421253 * safezoneW + safezoneX;
+			y = 0.525197 * safezoneH + safezoneY;
+			w = 0.0485608 * safezoneW;
+			h = 0.0335957 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "None";
+
+			action = "setTerrainGrid 50";
+		};
+
+		class terrainLow: RscButton {
+			idc = 4005;
+			
+			x = 0.473751 * safezoneW + safezoneX;
+			y = 0.525197 * safezoneH + safezoneY;
+			w = 0.0498732 * safezoneW;
+			h = 0.0335957 * safezoneH;
+			
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "Low";
+
+			action = "setTerrainGrid 30";
+		};
+
+		class terrainNormal: RscButton {
+			idc = 4006;
+			
+			x = 0.527562 * safezoneW + safezoneX;
+			y = 0.525197 * safezoneH + safezoneY;
+			w = 0.0498732 * safezoneW;
+			h = 0.0335957 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "Normal";
+
+			action = "setTerrainGrid 12.5";
+		};
+
+		class terrainHigh: RscButton {
+			idc = 4007;
+			
+			x = 0.581372 * safezoneW + safezoneX;
+			y = 0.525197 * safezoneH + safezoneY;
+			w = 0.0498732 * safezoneW;
+			h = 0.0335957 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "High";
+
+			action = "setTerrainGrid 3.125";
+		};
+	};
+};

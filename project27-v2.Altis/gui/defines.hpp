@@ -46,7 +46,7 @@
 class RscEdit {
 	idc = -1;
 	type = 2;
-	style = "16";
+	style = 0x00 + 0x40;
 	x = 0;
 	y = 0;
 	h = 0.2;
@@ -57,11 +57,11 @@ class RscEdit {
 	canModify = true; 
 	maxChars = 10;
 	forceDrawCaret = false;
-	colorSelection[] = {0,1,0,0.5};
+	colorSelection[] = {0, 1, 0, 0.5};
 	colorText[] = {1, 1, 1, 1};
-	colorDisabled[] = {1,0,0,1}; 
-	colorBackground[] = {0,0,0,0.5}; 
-	text = "";
+	colorDisabled[] = {1, 0, 0, 1}; 
+	colorBackground[] = {0, 0,0, 1};
+	align = "center";
 };
 
 class RscText {
@@ -288,6 +288,23 @@ class RscCombo {
 	arrowFull = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_active_ca.paa";
 	wholeHeight = 0.45;
 	colorActive[] = {1, 0, 0, 1};
+};
+
+class RscXSliderH {
+	style = 1024;
+	type = 43;
+	shadow = 2;
+	x = 0;
+	y = 0;
+	h = 0.029412;
+	w = 0.400000;
+	color[] = {1, 1, 1, 0.7};
+	colorActive[] = {1, 1, 1, 1};
+	colorDisabled[] = {1, 1, 1, 0.500000};
+	arrowEmpty = "\A3\ui_f\data\gui\cfg\slider\arrowEmpty_ca.paa";
+	arrowFull = "\A3\ui_f\data\gui\cfg\slider\arrowFull_ca.paa";
+	border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
+	thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
 };
 
 class IGUIBack {

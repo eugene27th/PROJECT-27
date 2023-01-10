@@ -4,19 +4,23 @@
     <Package name="NOTIFICATIONS">
         <Container name="SECTOR_CAPTURED">
             <Key ID="STR_P27_SECTOR_CAPTURED_TITLE">
-                <Original>Сектор захвачен.</Original>
+                <Original>Sector is captured.</Original>
+				<Russian>Сектор захвачен.</Russian>
             </Key>
             <Key ID="STR_P27_SECTOR_CAPTURED_DESCRIPTION">
-                <Original>Сектор %1 (%2) под контролем.</Original>
+                <Original>Sector %1 (%2) is under our control.</Original>
+				<Russian>Сектор %1 (%2) под контролем.</Russian>
             </Key>
         </Container>
 
         <Container name="CHECKPOINT_CAPTURED">
             <Key ID="STR_P27_CHECKPOINT_CAPTURED_TITLE">
-                <Original>Блокпост захвачен.</Original>
+                <Original>Roadblock is captured.</Original>
+				<Russian>Блокпост захвачен.</Russian>
             </Key>
             <Key ID="STR_P27_CHECKPOINT_CAPTURED_DESCRIPTION">
-                <Original>Блокпост %1 (%2) под контролем.</Original>
+                <Original>Roadblock %1 (%2) is under our control.</Original>
+				<Russian>Блокпост %1 (%2) под контролем.</Russian>
             </Key>
         </Container>
     </Package>
@@ -24,85 +28,106 @@
     <Package name="TASKS">
         <Container name="TASK_PATROL">
             <Key ID="STR_P27_TASK_TITLE_PATROL">
-                <Original>Патрулирование</Original>
+                <Original>Patrol</Original>
+				<Russian>Патрулирование</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_PATROL">
-                <Original>Патрулирование обозначенного сектора на протяжении &lt;font color='#33FF9C'&gt;%1-ти&lt;/font&gt; минут.</Original>
+                <Original>Patrol inside the marked sector &lt;font color='#33FF9C'&gt;%1&lt;/font&gt; minutes.</Original>
+				<Russian>Патрулирование обозначенного сектора на протяжении &lt;font color='#33FF9C'&gt;%1-ти&lt;/font&gt; минут.</Russian>
             </Key>    
 	    </Container>
 
         <Container name="TASK_SECTORCAPTURE">
             <Key ID="STR_P27_TASK_TITLE_SECTORCAPTURE">
-                <Original>Захват сектора</Original>
+                <Original>Capture the sector</Original>
+				<Russian>Захват сектора</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_SECTORCAPTURE">
-                <Original>Сектор находится под контролем противника. В зоне действий могут присутствовать гражданские.&lt;br/&gt;Задача: захватить сектор.</Original>
+                <Original>The sector is under enemy's control. Civilians can be in the Area of Operation.&lt;br/&gt;Your task: Capture the sector.</Original>
+				<Russian>Сектор находится под контролем противника. В зоне действий могут присутствовать гражданские.&lt;br/&gt;Задача: захватить сектор.</Russian>
             </Key>
 	    </Container>
 
         <Container name="TASK_SECTORDEFEND">
             <Key ID="STR_P27_TASK_TITLE_SECTORDEFEND">
-                <Original>Оборона сектора</Original>
+                <Original>Defend the sector</Original>
+				<Russian>Оборона сектора</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_SECTORDEFEND">
-                <Original>Противник планирует захватить данный сектор. У вас есть 20 минут на подготовку.&lt;br/&gt;Задача: не дать противнику захватить сектор.</Original>
+                <Original>Enemy plans to capture this sector. You have 20 minutes to get ready.&lt;br/&gt;Your task: prevent the sector capturing by enemies.</Original>
+				<Russian>Противник планирует захватить данный сектор. У вас есть 20 минут на подготовку.&lt;br/&gt;Задача: не дать противнику захватить сектор.</Russian>
             </Key>
 	    </Container>
 		
 		<Container name="TASK_HIGHVALUETARGET">
             <Key ID="STR_P27_TASK_TITLE_HIGHVALUETARGET">
-                <Original>Ликвидация цели</Original>
+                <Original>Eliminate HVT</Original>
+				<Russian>Ликвидация цели</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_HIGHVALUETARGET">
-                <Original>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.</Original>
+                <Original>Our intelligence located enemy commander.&lt;br/&gt;Your task: neutralize enemy commander.</Original>
+				<Russian>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_HIGHVALUETARGET_IMAGE">
-                <Original>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
+                <Original>Our intelligence located enemy commander.&lt;br/&gt;Your task: neutralize enemy commander.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
+				<Russian>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Russian>
             </Key>
 	    </Container>
 		
 		<Container name="TASK_CREWRESCUE">	
             <Key ID="STR_P27_TASK_TITLE_CREWRESCUE">
-                <Original>Поисковая операция</Original>
+                <Original>Search and Rescue</Original>
+				<Russian>Поисковая операция</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_CREWRESCUE">
-                <Original>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.</Original>
+                <Original>Friendly helicopter is crashed. We know only approximate sector of the crash.&lt;br/&gt;Your task: Find pilots and brim them back to base.</Original>
+				<Russian>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_CREWRESCUE_IMAGE">
-                <Original>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+                <Original>Friendly helicopter is crashed. We know only approximate sector of the crash.&lt;br/&gt;Your task: Find pilots and brim them back to base.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+				<Russian>Союзный вертолёт потерпел крушение. Нам известен лишь приблизительный сектор падения вертолёта.&lt;br/&gt;Задача: найти пилота и доставить на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
             </Key>
             <Key ID="STR_P27_TASK_HQ_NOTIFICATION_CREWRESCUE_FULL">
-                <Original>Все на базе. Отлично!</Original>
+                <Original>Everyone is back to base. Good job!</Original>
+				<Russian>Все на базе. Отлично!</Russian>
             </Key>
             <Key ID="STR_P27_TASK_HQ_NOTIFICATION_CREWRESCUE_MORE_THAN_FULL">
-                <Original>Вытащили ребят, хорошо.</Original>
+                <Original>Our guys are safe now.</Original>
+				<Russian>Вытащили ребят, хорошо.</Russian>
             </Key>
             <Key ID="STR_P27_TASK_HQ_NOTIFICATION_CREWRESCUE_LESS_THAN_HALF">
-                <Original>Плохо, парни.</Original>
+                <Original>That is not good enough.</Original>
+				<Russian>Плохо, парни.</Russian>
             </Key>
 	    </Container>
 
         <Container name="TASK_AMMOCACHE">
             <Key ID="STR_P27_TASK_TITLE_AMMOCACHE">
-                <Original>Боеприпасы</Original>
+                <Original>Ammunition</Original>
+				<Russian>Боеприпасы</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_AMMOCACHE">
-                <Original>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.</Original>
+                <Original>Enemy convoy dropped ammunition in marked sector.&lt;br/&gt;Your task: Search and destroy ammo boxes.</Original>
+				<Russian>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_AMMOCACHE_IMAGE">
-                <Original>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+                <Russian>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
+				<Russian>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
             </Key>
 	    </Container>
 
         <Container name="TASK_HOSTAGERESCUE">
             <Key ID="STR_P27_TASK_TITLE_HOSTAGERESCUE">
-                <Original>Заложник</Original>
+                <Original>Hostage</Original>
+				<Russian>Заложник</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_HOSTAGERESCUE">
-                <Original>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.</Original>
+                <Original>Some enemy fighters has taken a civilian as a hostage and demand a ransom.&lt;br/&gt;Your task: find the hostage and bring him back to base.</Original>
+				<Russian>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_HOSTAGERESCUE_IMAGE">
-                <Original>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+                <Original>Some enemy fighters has taken a civilian as a hostage and demand a ransom.&lt;br/&gt;Your task: find the hostage and bring him back to base.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
+				<Russian>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
             </Key>
 	    </Container>
     </Package>

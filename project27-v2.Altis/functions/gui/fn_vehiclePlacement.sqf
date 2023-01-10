@@ -14,14 +14,7 @@ private _vehicleClass = _ctrlListBox lbData _listBoxIndex;
 
 closeDialog 1;
 
-private _ctrlHelpText = (findDisplay 46) ctrlCreate ["RscStructuredText", -1];
-
-_ctrlHelpText ctrlSetStructuredText (parseText ("<t font='PuristaMedium' align='center'>ESC: cancel | Space: spawn | Mouse wheel: rotate"));
-_ctrlHelpText ctrlSetPosition [safezoneX, 0.807961 * safezoneH + safezoneY, safezoneW, 0.0279964 * safezoneH];
-_ctrlHelpText ctrlCommit 0;
-
-player setVariable ["ctrlHelpText", _ctrlHelpText];
-
+[["interaction", "vehiclePlacement"], 10, "", 30, "", true, true] call BIS_fnc_advHint;
 
 private _localVehicle = _vehicleClass createVehicleLocal (position player);
 _localVehicle disableCollisionWith player;
@@ -87,16 +80,15 @@ private _keyDownEventIndex = (findDisplay 46) displayAddEventHandler ["keyDown",
 				mhqTerminal = _spawnedVehicle;
 				publicVariable "mhqTerminal";
 
-				[_spawnedVehicle, 3] call ace_cargo_fnc_setSize;
-				[_spawnedVehicle, "blue", "orange", "green"] call BIS_fnc_DataTerminalColor;
-				[_spawnedVehicle, true, [0, 1.4, 0], 90] call ace_dragging_fnc_setDraggable;
+				[_spawnedVehicle, 3] remoteExecCall ["ace_cargo_fnc_setSize", 0, true];
+				[_spawnedVehicle, "blue", "orange", "green"] remoteExec ["BIS_fnc_DataTerminalColor", 0, true];
+				[_spawnedVehicle, true, [0, 1.4, 0], 90] remoteExecCall ["ace_dragging_fnc_setDraggable", 0, true];
 			};
 		};
 
 		true;
 	};
 
-	ctrlDelete (player getVariable "ctrlHelpText");
 	deleteVehicle _localVehicle;
 
 	removeMissionEventHandler ["EachFrame", player getVariable "updateVehiclePlacement"];

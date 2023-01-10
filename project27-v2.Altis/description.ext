@@ -71,6 +71,7 @@ class CfgFunctions {
 			class showVehiclePreview {};
 			class showVehicleService {};
 			class showAircraftLoadout {};
+			class showViewSettings {};
 			
 			class updateVehicleList {};
 			class updateItemsList {};
@@ -144,5 +145,24 @@ class CfgNotifications {
 		priority = 0;
 		sound = "taskAssigned";
 		difficulty[] = {};
+	};
+};
+
+class CfgHints {
+	class interaction {
+		displayName = "Interaction";
+
+		class vehiclePlacement {
+			displayName = "vehicle placement";
+			description = "Control keys:<br/><img image='\A3\ui_f\data\igui\rscingameui\Rschint\indent_square.paa' size = '0.25' shadow = '0'/> Press %11 for spawn vehicle.<br/><img image='\A3\ui_f\data\igui\rscingameui\Rschint\indent_square.paa' size = '0.25' shadow = '0'/> Press %12 for cancel.<br/><img image='\A3\ui_f\data\igui\rscingameui\Rschint\indent_square.paa' size = '0.25' shadow = '0'/> Rotate vehicle with %13.<br/>";
+
+			arguments[] = {
+				{{57}},
+				{{1}},
+				{"mouse wheel"}
+			};
+
+			dlc = -1;
+		};
 	};
 };

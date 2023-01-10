@@ -79,3 +79,4 @@
 
 // other
 ["getPlayerStats", "My statistics", "", {[true] call P27_fnc_getPlayerStats}, {true}] call P27_fnc_createSelfAction;
+["changeViewSettings", "View settings", "", {[] call P27_fnc_showViewSettings}, {true}] call P27_fnc_createSelfAction;
