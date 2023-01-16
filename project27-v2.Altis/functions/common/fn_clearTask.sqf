@@ -7,25 +7,18 @@
 */
 
 
-params ["_task", ["_objects", []], ["_markers", []], ["_sleepObjects", []], ["_sleepMarkers", []]];
+params ["_taskId", ["_deleteObjects", true], ["_deleteMarkers", true]];
 
-if (isNil "_task") exitWith {};
+if (isNil "_taskId") exitWith {};
 
 uiSleep 1;
 
-[_task] call BIS_fnc_deleteTask;
+[_taskId] call BIS_fnc_deleteTask;
 
-{deleteVehicle _x} forEach _objects;
-{deleteMarker _x} forEach _markers;
+if (_deleteObjects) then {
+	{deleteVehicle _x} forEach ((allUnits + vehicles + allMissionObjects "EmptyDetector") select {(_x getVariable ["spawnTrigger", ""]) isEqualTo _taskId});
+};
 
-
-if (_sleepObjects isEqualTo [] && _sleepMarkers isEqualTo []) exitWith {};
-
-[_sleepObjects, _sleepMarkers] spawn {
-	params ["_sleepObjects", "_sleepMarkers"];
-
-	uiSleep 300;
-
-	{deleteVehicle _x} forEach _sleepObjects;
-	{deleteMarker _x} forEach _sleepMarkers;
+if (_deleteMarkers) then {
+	deleteMarker _taskId;
 };

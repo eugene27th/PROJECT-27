@@ -17,7 +17,7 @@ if ((count _roadPositions) < 2 && (random 1) < 0.4) exitWith {};
 private _availableVehicles = (configUnits # 1) # 1;
 
 if (!(_sectorTrigger getVariable ["isCaptured", false])) then {
-	_availableVehicles = _availableVehicles + ((configUnits # 0) # 1) # 2;
+	_availableVehicles = _availableVehicles + ((configUnits # 0) # 1) # 1;
 };
 
 

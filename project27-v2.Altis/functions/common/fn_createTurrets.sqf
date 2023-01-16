@@ -7,7 +7,7 @@
 */
 
 
-params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_turretClassNames", ((configUnits # 0) # 1) # 5], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
+params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_turretClassNames", ((configUnits # 0) # 1) # 4], ["_unitClassNames", ((configUnits # 0) # 1) # 0], ["_unitSide", (configUnits # 0) # 0]];
 
 if ((_spawnConfig # 0) == 0) exitWith {};
 

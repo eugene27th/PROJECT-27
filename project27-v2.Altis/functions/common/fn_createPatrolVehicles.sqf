@@ -7,7 +7,7 @@
 */
 
 
-params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_vehClassNames", ((configUnits # 0) # 1) # 3], ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0]];
+params ["_positionOrTrigger", ["_sectorRadius", 100], ["_spawnConfig", [1, 1]], ["_vehClassNames", ((configUnits # 0) # 1) # 2], ["_unitClassNames", ((configUnits # 0) # 1) # 0], ["_unitSide", (configUnits # 0) # 0]];
 
 if ((_spawnConfig # 0) == 0) exitWith {};
 
@@ -17,6 +17,9 @@ private ["_sectorTrigger"];
 if (typeName _positionOrTrigger != "ARRAY") then {
 	_sectorTrigger = _positionOrTrigger;
 	_positionOrTrigger = position _sectorTrigger;
+} else {
+	_sectorTrigger = _positionOrTrigger # 1;
+	_positionOrTrigger = _positionOrTrigger # 0;
 };
 
 

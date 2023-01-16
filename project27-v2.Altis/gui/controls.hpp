@@ -429,7 +429,7 @@ class dialogViewSettings {
 		class viewDistanceText: RscText {
 			idc = -1;
 
-			x = 0.37 * safezoneW + safezoneX;
+			x = 0.36 * safezoneW + safezoneX;
 			y = 0.438408 * safezoneH + safezoneY;
 			w = 0.052 * safezoneW;
 			h = 0.0280001 * safezoneH;
@@ -440,7 +440,7 @@ class dialogViewSettings {
 		class objectsText: RscText {
 			idc = -1;
 
-			x = 0.37 * safezoneW + safezoneX;
+			x = 0.36 * safezoneW + safezoneX;
 			y = 0.477603 * safezoneH + safezoneY;
 			w = 0.052 * safezoneW;
 			h = 0.0280001 * safezoneH;
@@ -452,7 +452,7 @@ class dialogViewSettings {
 		class terrainText: RscText {
 			idc = -1;
 
-			x = 0.37 * safezoneW + safezoneX;
+			x = 0.36 * safezoneW + safezoneX;
 			y = 0.527996 * safezoneH + safezoneY;
 			w = 0.052 * safezoneW;
 			h = 0.0280001 * safezoneH;

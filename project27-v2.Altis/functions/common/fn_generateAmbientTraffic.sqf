@@ -40,14 +40,14 @@
 
         private _roadPositions = [1, _startSectorPos, 500] call P27_fnc_getRandomRoadPositions;
 
-        private _vehicle = (selectRandom (((configUnits # 0) # 1) # 3)) createVehicle ((_roadPositions # 0) # 0);
+        private _vehicle = (selectRandom (((configUnits # 0) # 1) # 2)) createVehicle ((_roadPositions # 0) # 0);
         _vehicle setVariable ["spawnTrigger", "trafficVehicle"];
         _vehicle setDir (_startSectorPos getDir _finishSectorPos);
 
         [[_vehicle]] call P27_fnc_addSpawnTriggerEventToVehicles;
 
 
-        private _vehicleCrew = [_vehicle, ((configUnits # 0) # 1) # 1, (configUnits # 0) # 0] call P27_fnc_createCrew;
+        private _vehicleCrew = [_vehicle, ((configUnits # 0) # 1) # 0, (configUnits # 0) # 0] call P27_fnc_createCrew;
         {_x setVariable ["spawnTrigger", "trafficVehicle"]} forEach _vehicleCrew;
 
         private _grp = group (_vehicleCrew # 0);
@@ -103,8 +103,8 @@
                     continue;
                 };
 
-                if (_sectorsCount > 3) then {
-                    _sectorsCount = 3;
+                if (_sectorsCount > 2) then {
+                    _sectorsCount = 2;
                 };
 
                 for [{private _s = 0 }, { _s < _sectorsCount }, { _s = _s + 1 }] do {

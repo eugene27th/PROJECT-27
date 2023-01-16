@@ -22,7 +22,7 @@ private _ctrlY = (safezoneH - 2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 2
 private _ctrlW = 20 * (((safezoneW / safezoneH) min 1.2) / 40);
 private _ctrlH = 5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
 
-_ctrlText ctrlSetStructuredText (parseText (format ["<t font='PuristaMedium' align='right' size='0.75' shadow='0'>A2.0.2 b3 | %1%2", _firstSymbolsUID, _lastSymbolsUID]));
+_ctrlText ctrlSetStructuredText (parseText (format ["<t font='PuristaMedium' align='right' size='0.75' shadow='0'>A2.0.2 b4 | %1%2", _firstSymbolsUID, _lastSymbolsUID]));
 _ctrlText ctrlSetPosition [_ctrlX, _ctrlY, _ctrlW, _ctrlH];
 _ctrlText ctrlSetFade 0.2;
 _ctrlText ctrlCommit 0;

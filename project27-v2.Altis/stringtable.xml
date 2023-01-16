@@ -61,16 +61,16 @@
 		
 		<Container name="TASK_HIGHVALUETARGET">
             <Key ID="STR_P27_TASK_TITLE_HIGHVALUETARGET">
-                <Original>Eliminate HVT</Original>
-				<Russian>Ликвидация цели</Russian>
+                <Original>High value target</Original>
+				<Russian>Особо важная цель</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_HIGHVALUETARGET">
-                <Original>Our intelligence located enemy commander.&lt;br/&gt;Your task: neutralize enemy commander.</Original>
-				<Russian>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.</Russian>
+                <Original>Our intelligence located enemy commander.&lt;br/&gt;Your task: deliver to the base or neutralize enemy commander.</Original>
+				<Russian>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: доставить на базу или нейтрализовать цель.</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_HIGHVALUETARGET_IMAGE">
-                <Original>Our intelligence located enemy commander.&lt;br/&gt;Your task: neutralize enemy commander.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
-				<Russian>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: нейтрализовать цель.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Russian>
+                <Original>Our intelligence located enemy commander.&lt;br/&gt;Your task: deliver to the base or neutralize enemy commander.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Original>
+				<Russian>Разведка обнаружила примерное местоположение командира одного из отрядов НВФ.&lt;br/&gt;Задача: доставить на базу или нейтрализовать цель.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='197'/&gt;</Russian>
             </Key>
 	    </Container>
 		
@@ -111,7 +111,7 @@
 				<Russian>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_AMMOCACHE_IMAGE">
-                <Russian>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
+                <Original>Enemy convoy dropped ammunition in marked sector.&lt;br/&gt;Your task: Search and destroy ammo boxes.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Original>
 				<Russian>Конвой противника, перевозивший боеприпасы, сбросил груз в обозначенном месте.&lt;br/&gt;Задача: найти и уничтожить ящики с боеприпасами.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
             </Key>
 	    </Container>

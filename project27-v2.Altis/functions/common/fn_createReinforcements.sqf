@@ -14,7 +14,7 @@ _spawnConfig params ["_maxCountSectors", "_maxCountVehicles"];
 if (_maxCountSectors < 1 || _maxCountVehicles < 1 || !(_type in ["ground", "air", "random"])) exitWith {};
 
 
-private _allSectorTriggers = (missionNamespace getVariable "sectorTriggers") select {!(_x getVariable "isCaptured") && !(_x getVariable "isActive")};
+private _allSectorTriggers = (missionNamespace getVariable "sectorTriggers") select {!(_x getVariable "isCaptured") && !(_x getVariable "isActive") && ((_x distance _sadPosition) > 500)};
 
 if ((count _allSectorTriggers) < 1) exitWith {};
 
@@ -38,7 +38,7 @@ if (_type == "ground") then {
 		private _roadPositions = [[1, _maxCountVehicles] call BIS_fnc_randomInt, position (_allSectorTriggers # _i), 300] call P27_fnc_getRandomRoadPositions;
 
 		{
-			private _vehicle = (selectRandom (((configUnits # 0) # 1) # 2)) createVehicle (_x # 0);
+			private _vehicle = (selectRandom ((((configUnits # 0) # 1) # 1) + (((configUnits # 0) # 1) # 2))) createVehicle (_x # 0);
 			_vehicle setVariable ["spawnTrigger", _reinforcementsId];
 			_vehicle setDir (_x # 1);
 
@@ -60,7 +60,7 @@ if (_type == "ground") then {
 };
 
 if (_type == "air") then {
-	private _heliClasses = ((configUnits # 0) # 1) # 6;
+	private _heliClasses = ((configUnits # 0) # 1) # 5;
 
 	if (isNil "_heliClasses" || _heliClasses isEqualTo []) exitWith {
 		[_sadPosition, _spawnConfig, "ground"] spawn P27_fnc_createReinforcements;

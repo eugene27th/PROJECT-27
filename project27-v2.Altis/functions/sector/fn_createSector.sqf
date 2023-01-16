@@ -41,8 +41,8 @@ private _civClasses = configUnits # 1;
 if (!_sectorIsCaptured) then {
 	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 0] spawn P27_fnc_createHouseUnits;
 	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 1] spawn P27_fnc_createPatrolUnits;
-	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 2, (_enemyClasses # 2) + (_enemyClasses # 3)] spawn P27_fnc_createPatrolVehicles;
-	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 3, _enemyClasses # 4] spawn P27_fnc_createPatrolVehicles;
+	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 2, (_enemyClasses # 1) + (_enemyClasses # 2)] spawn P27_fnc_createPatrolVehicles;
+	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 3, _enemyClasses # 3] spawn P27_fnc_createPatrolVehicles;
 	[_sectorTrigger, _sectorRadius, _spawnEnemyConfig # 4] spawn P27_fnc_createTurrets;
 
 	private _nearPlayers = allPlayers select {(_x distance _sectorTrigger) < (_triggerRadius * 1.5)};

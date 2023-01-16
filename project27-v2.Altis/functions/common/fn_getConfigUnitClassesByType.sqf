@@ -40,7 +40,7 @@ if (isNil "_typeWeapons") exitWith {
             _unitClasses pushBack _x;
         };
     };
-} forEach ((configUnits # 0) # 1) # 1;
+} forEach ((configUnits # 0) # 1) # 0;
 
 missionNamespace setVariable ["specUnitClasses#" + _unitType, _unitClasses];
 

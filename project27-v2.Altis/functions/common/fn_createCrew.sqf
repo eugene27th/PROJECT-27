@@ -7,7 +7,7 @@
 */
 
 
-params ["_vehicle", ["_unitClassNames", ((configUnits # 0) # 1) # 1], ["_unitSide", (configUnits # 0) # 0], ["_minCargo", 6]];
+params ["_vehicle", ["_unitClassNames", ((configUnits # 0) # 1) # 0], ["_unitSide", (configUnits # 0) # 0], ["_minCargo", 6]];
 
 private _spawnPosition = position _vehicle;
 private _vehicleCrewIndexes = (typeof _vehicle) call BIS_fnc_vehicleCrewTurrets;

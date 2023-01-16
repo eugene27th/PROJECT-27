@@ -14,7 +14,7 @@ private _vehicleClass = _ctrlListBox lbData _listBoxIndex;
 
 closeDialog 1;
 
-[["interaction", "vehiclePlacement"], 10, "", 30, "", true, true] call BIS_fnc_advHint;
+hint parseText "<t size='1.3'>Vehicle placement.</t><br/><br/><t align='left'>Control keys:</t><br/><img align='left' image='\A3\ui_f\data\igui\rscingameui\Rschint\indent_square.paa' size = '0.25' shadow = '0'/> <t align='left'> Press <t color='#03C128'>[Space]</t> for spawn vehicle.</t><br/><img align='left' image='\A3\ui_f\data\igui\rscingameui\Rschint\indent_square.paa' size = '0.25' shadow = '0'/> <t align='left'> Press <t color='#03C128'>[Escape]</t> for cancel.</t><br/><img align='left' image='\A3\ui_f\data\igui\rscingameui\Rschint\indent_square.paa' size = '0.25' shadow = '0'/> <t align='left'> Rotate vehicle with <t color='#03C128'>[Mouse wheel]</t>.</t>";
 
 private _localVehicle = _vehicleClass createVehicleLocal (position player);
 _localVehicle disableCollisionWith player;

@@ -14,7 +14,7 @@ private _createSectorTrigger = {
 	private _trg = createTrigger ["EmptyDetector", _pos, false];
 	_trg setTriggerArea [_radius, _radius, 0, false, 800];
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	_trg setTriggerTimeout [5, 5, 5, true];
+	_trg setTriggerTimeout [3, 3, 3, true];
 	_trg setTriggerStatements [
 		"{vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0",
 		"[thisTrigger] call P27_fnc_createSector",
@@ -141,7 +141,10 @@ for [{private _a = 0 }, { _a < (count _allLocations) }, { _a = _a + 1 }] do {
 		} forEach _nearLocations;
 
 		if (!_spawnAllowed) then {
-			["sectorBlack#" + str _locationPos, _locationPos, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorRED", "PERSIST"] call CBA_fnc_createMarker;
+			if (debugMode) then {
+				["sectorBlack#" + str _locationPos, _locationPos, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorRED", "PERSIST"] call CBA_fnc_createMarker;
+			};
+
 			continue;
 		};
 	};
