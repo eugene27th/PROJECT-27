@@ -94,7 +94,8 @@ configTasks = [
 	["sectorCapture"],
 	["hostageRescue"],
 	["crewRescue"],
-	["highValueTarget"]
+	["highValueTarget"],
+	["mineClearance"]
 ];
 
 configObjects = [

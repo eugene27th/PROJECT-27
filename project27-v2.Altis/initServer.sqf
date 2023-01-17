@@ -5,7 +5,7 @@ call compile preprocessFileLineNumbers "config.sqf";
 [] spawn P27_fnc_unitSideUpdate;
 [] spawn P27_fnc_setMissionEvents;
 [] call P27_fnc_generateSectors;
-[numberOfIedOnRoads] call P27_fnc_createIedOnRoads;
+[numberOfIedOnRoads] call P27_fnc_createMinesOnRoads;
 [numberOfCheckpoints] call P27_fnc_generateCheckpoints;
 [] call P27_fnc_generateAmbientTraffic;
 

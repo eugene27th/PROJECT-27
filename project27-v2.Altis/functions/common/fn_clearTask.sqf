@@ -7,7 +7,7 @@
 */
 
 
-params ["_taskId", ["_deleteObjects", true], ["_deleteMarkers", true]];
+params ["_taskId", ["_deleteObjects", true], ["_deleteMarkers", true], ["_numOfMarkers", 0]];
 
 if (isNil "_taskId") exitWith {};
 
@@ -21,4 +21,10 @@ if (_deleteObjects) then {
 
 if (_deleteMarkers) then {
 	deleteMarker _taskId;
+
+	if (_numOfMarkers > 0) then {
+		for [{ private _i = 0 }, { _i < _numOfMarkers }, { _i = _i + 1 }] do {
+			deleteMarker (format ["%1#%2", _taskId, _i]);
+		};
+	};
 };

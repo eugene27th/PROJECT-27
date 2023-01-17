@@ -33,19 +33,20 @@ class CfgFunctions {
 
 			class allObjectsAreDead {};
 			class allObjectsInRadius {};
-			class removeFollowingVehicles {};
-
+			class allMinesNotActive {};
+			
 			class createTask {};
 			class cancelTask {};
 			class clearTask {};
 
 			class createCrew {};
 
-			class createIedOnRoads {};
+			class createMinesOnRoads {};
 			class generateAmbientTraffic {};
 
 			class createReinforcements {};
 			class removeReinforcements {};
+			class removeFollowingVehicles {};
 
 			class createHouseUnits {};
 			class createPatrolUnits {};

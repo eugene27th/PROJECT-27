@@ -130,5 +130,16 @@
 				<Russian>Несколько бойцов НВФ взяли в заложники человека и требуют за него выкуп.&lt;br/&gt;Задача: найти и доставить заложника на базу.&lt;br/&gt;&lt;br/&gt;&lt;img image='%1' width='275' height='170'/&gt;</Russian>
             </Key>
 	    </Container>
+        
+        <Container name="TASK_MINECLEARANCE">
+            <Key ID="STR_P27_TASK_TITLE_MINECLEARANCE">
+                <Original>Разминирование</Original>
+				<Russian>Разминирование</Russian>
+            </Key>
+            <Key ID="STR_P27_TASK_DESCRIPTION_MINECLEARANCE">
+                <Original>Нам поступило сообщение о заминированных дорогах.&lt;br/&gt;Задача: разминировать сектор.</Original>
+				<Russian>Нам поступило сообщение о заминированных дорогах.&lt;br/&gt;Задача: разминировать сектор.</Russian>
+            </Key>
+	    </Container>
     </Package>
 </Project>
