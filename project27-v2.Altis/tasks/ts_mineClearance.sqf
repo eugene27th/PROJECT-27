@@ -27,7 +27,7 @@ private _mines = [];
 		createVehicle [selectRandom ((configObjects # 0) # 1), _x # 0, [], 0, "NONE"];
 	};
 	
-	[format ["%1#%2", _taskId, _forEachIndex], _x # 0, "ELLIPSE", [20, 20], "COLOR:", "ColorEAST", "ALPHA:", 0.5, "PERSIST"] call CBA_fnc_createMarker;
+	[format ["%1#%2", _taskId, _forEachIndex], _x # 0, "ELLIPSE", [50, 50], "COLOR:", "ColorEAST", "ALPHA:", 0.5, "PERSIST"] call CBA_fnc_createMarker;
 } forEach _roadPositions;
 
 

@@ -20,7 +20,7 @@ if (isNil "_centerPosition") then {
 
 private _allRoads = (_centerPosition nearRoads _radius) - ((position respawn) nearRoads (configSectors # 0));
 
-if ((count _allRoads) < _count) exitWith {
+if ((count _allRoads) < 1) exitWith {
 	[[[_centerPosition, 0, _radius, 5, 0] call BIS_fnc_findSafePos, [0, 359] call BIS_fnc_randomInt]]
 };
 
