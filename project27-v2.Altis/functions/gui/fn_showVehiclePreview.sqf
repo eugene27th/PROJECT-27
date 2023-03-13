@@ -11,4 +11,6 @@ private _lisBoxIndex = lbCurSel 1000;
 private _className = lbData [1000, _lisBoxIndex];
 
 private _preview = getText(configfile >> "CfgVehicles" >> _className >> "editorPreview");
+
 ctrlSetText [1001, _preview];
+ctrlSetText [1005, _className];

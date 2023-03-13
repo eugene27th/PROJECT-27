@@ -21,13 +21,23 @@ if ((count _pylons) < 1) exitWith {};
 
 _ctrlUiPicture ctrlSetText (getText (_pylonComponent >> "uiPicture"));
 
+private _getUiPos = {
+    params ["_uiPos"];
+    
+    if (_uiPos isEqualType 0) exitWith {
+        _uiPos
+    };
+
+    call compile _uiPos
+};
+
 {
 	private _ctrlPylon = _display ctrlCreate ["RscCombo", -1, (findDisplay 3002) displayCtrl 3004];
 
     private _uiPicturePos = ctrlPosition _ctrlUiPicture;
     private _uiPos = getArray (_x >> "UIposition");
 
-    _ctrlPylon ctrlSetPosition [0.079 + (_uiPos # 0), 0.167 + (_uiPos # 1), 0.1 * safezoneW, 0.028 * safezoneH];
+    _ctrlPylon ctrlSetPosition [0.079 + ([_uiPos # 0] call _getUiPos), 0.167 + ([_uiPos # 1] call _getUiPos), 0.1 * safezoneW, 0.028 * safezoneH];
     _ctrlPylon ctrlCommit 0;
 
     _ctrlPylon lbAdd "empty";

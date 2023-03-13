@@ -506,10 +506,10 @@ force ace_winddeflection_simulationInterval = 0.05;
 force ace_winddeflection_vehicleEnabled = true;
 
 // ACEX Field Rations
-force acex_field_rations_affectAdvancedFatigue = true;
-force acex_field_rations_enabled = true;
+force acex_field_rations_affectAdvancedFatigue = false;
+force acex_field_rations_enabled = false;
 force acex_field_rations_hungerSatiated = 1;
-force acex_field_rations_terrainObjectActions = true;
+force acex_field_rations_terrainObjectActions = false;
 force acex_field_rations_thirstQuenched = 1;
 force acex_field_rations_timeWithoutFood = 7;
 force acex_field_rations_timeWithoutWater = 6;

@@ -60,6 +60,18 @@ class dialogVehicleList {
 			text = "";
 		};
 
+		class className: RscText {
+			idc = 1005;
+
+			x = 0.412067 * safezoneW + safezoneX;
+			y = 0.225636 * safezoneH + safezoneY;
+			w = 0.413315 * safezoneW;
+			h = 0.0335963 * safezoneH;
+
+			font = "PuristaMedium";
+			text = "";
+		};
+
 		class spawnButton: RscButton {
 			idc = 1002;
 			
@@ -83,6 +95,22 @@ class dialogVehicleList {
 			h = 0.0279964 * safezoneH;
 
 			onLBSelChanged = "[] call P27_fnc_updateVehicleList";
+		};
+
+		class searchInput: RscEdit {
+			idc = 1004;
+
+			x = 0.416003 * safezoneW + safezoneX;
+			y = 0.7638 * safezoneH + safezoneY;
+			w = 0.170632 * safezoneW;
+			h = 0.0282 * safezoneH;
+
+			maxChars = 64;
+
+			font = "PuristaMedium";
+			text = "";
+
+			onKeyUp = "[] call P27_fnc_updateVehicleList";
 		};
 	};
 };

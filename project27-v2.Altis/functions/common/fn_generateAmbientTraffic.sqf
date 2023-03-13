@@ -34,6 +34,10 @@
             continue;
         };
 
+        if (debugMode) then {
+            systemChat "Traffic created.";
+        };
+
         private _startSectorPos = position _startSector;
         private _finishSectorPos = position (selectRandom _nearestSectorsAroundFinishPos);
 
@@ -63,6 +67,10 @@
 
 [] spawn {
     private _aaUnits = ["AA"] call P27_fnc_getConfigUnitClassesByType;
+
+    if (debugMode) then {
+        systemChat format ["AA units founded: %1.", count _aaUnits];
+    };
 
     if ((count _aaUnits) > 0) then {
         while {true} do {

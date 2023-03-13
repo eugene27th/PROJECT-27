@@ -11,28 +11,26 @@
 params ["_sectorPosition"];
 
 private _taskId = "ts#mineClearance#" + str serverTime;
-private _taskRadius = 300;
+private _taskRadius = 350;
 
-private _roadPositions = [3, _sectorPosition, _taskRadius] call P27_fnc_getRandomRoadPositions;
+private _roadPositions = [4, _sectorPosition, _taskRadius] call P27_fnc_getRandomRoadPositions;
 
 
 private _mines = [];
 
 {
-	for [{ private _i = 0 }, { _i < [4,6] call BIS_fnc_randomInt }, { _i = _i + 1 }] do {
-		_mines pushBack (createMine [selectRandom ((configObjects # 0) # 0), _x # 0, [], 15]);
-	};
+	_mines pushBack (createMine [selectRandom ((configObjects # 0) # 0), _x # 0, [], 1]);
 
 	if ((random 1) < 0.7) then {
 		createVehicle [selectRandom ((configObjects # 0) # 1), _x # 0, [], 0, "NONE"];
 	};
 	
-	[format ["%1#%2", _taskId, _forEachIndex], _x # 0, "ELLIPSE", [50, 50], "COLOR:", "ColorEAST", "ALPHA:", 0.5, "PERSIST"] call CBA_fnc_createMarker;
+	[format ["%1#%2", _taskId, _forEachIndex], _x # 0, "ELLIPSE", [30, 30], "COLOR:", "ColorEAST", "ALPHA:", 0.5, "PERSIST"] call CBA_fnc_createMarker;
 } forEach _roadPositions;
 
 
 private _reinforcementMines = _mines select [(floor ((count _mines) / 2)) - 1, [1,3] call BIS_fnc_randomInt];
-	
+
 {
 	_x addEventHandler ["Deleted", {
 		params ["_entity"];
@@ -53,4 +51,4 @@ if ([_mines] call P27_fnc_allMinesNotActive) then {
     uiSleep 2;
 };
 
-[_taskId, true, true, 3] spawn P27_fnc_clearTask;
+[_taskId, true, true, 4] spawn P27_fnc_clearTask;

@@ -1,3 +1,5 @@
+version = "A2.0.2 b6";
+
 debugMode = true;
 
 numberOfIedOnRoads = 20;
