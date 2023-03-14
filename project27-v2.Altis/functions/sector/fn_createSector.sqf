@@ -6,6 +6,7 @@
         [] spawn P27_fnc_createSector
 */
 
+
 params ["_sectorTrigger"];
 
 private _triggerIsActive = _sectorTrigger getVariable ["isActive", false];

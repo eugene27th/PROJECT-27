@@ -41,10 +41,10 @@ class dialogVehicleList {
 		class listBox: RscListbox {
 			idc = 1000;
 
-			x = 0.173191 * safezoneW + safezoneX;
-			y = 0.220036 * safezoneH + safezoneY;
+			x = 0.173199 * safezoneW + safezoneX;
+			y = 0.268 * safezoneH + safezoneY;
 			w = 0.236247 * safezoneW;
-			h = 0.531932 * safezoneH;
+			h = 0.475 * safezoneH;
 
 			onLBSelChanged = "[] call P27_fnc_showVehiclePreview";
 		};
@@ -52,9 +52,9 @@ class dialogVehicleList {
 		class preview: RscPicture {
 			idc = 1001;
 			
-			x = 0.417051 * safezoneW + safezoneX;
-			y = 0.274069 * safezoneH + safezoneY;
-			w = 0.402933 * safezoneW;
+			x = 0.417053 * safezoneW + safezoneX;
+			y = 0.268 * safezoneH + safezoneY;
+			w = 0.402934 * safezoneW;
 			h = 0.425546 * safezoneH;
 
 			text = "";
@@ -63,8 +63,8 @@ class dialogVehicleList {
 		class className: RscText {
 			idc = 1005;
 
-			x = 0.412067 * safezoneW + safezoneX;
-			y = 0.225636 * safezoneH + safezoneY;
+			x = 0.412066 * safezoneW + safezoneX;
+			y = 0.705 * safezoneH + safezoneY;
 			w = 0.413315 * safezoneW;
 			h = 0.0335963 * safezoneH;
 
@@ -75,9 +75,9 @@ class dialogVehicleList {
 		class spawnButton: RscButton {
 			idc = 1002;
 			
-			x = 0.173191 * safezoneW + safezoneX;
+			x = 0.173199 * safezoneW + safezoneX;
 			y = 0.763166 * safezoneH + safezoneY;
-			w = 0.0918739 * safezoneW;
+			w = 0.091874 * safezoneW;
 			h = 0.0279964 * safezoneH;
 
 			font = "PuristaMedium";
@@ -89,9 +89,9 @@ class dialogVehicleList {
 		class typeList: RscCombo {
 			idc = 1003;
 
-			x = 0.271628 * safezoneW + safezoneX;
+			x = 0.271633 * safezoneW + safezoneX;
 			y = 0.763166 * safezoneH + safezoneY;
-			w = 0.137811 * safezoneW;
+			w = 0.137812 * safezoneW;
 			h = 0.0279964 * safezoneH;
 
 			onLBSelChanged = "[] call P27_fnc_updateVehicleList";
@@ -100,10 +100,10 @@ class dialogVehicleList {
 		class searchInput: RscEdit {
 			idc = 1004;
 
-			x = 0.416003 * safezoneW + safezoneX;
-			y = 0.7638 * safezoneH + safezoneY;
-			w = 0.170632 * safezoneW;
-			h = 0.0282 * safezoneH;
+			x = 0.174511 * safezoneW + safezoneX;
+			y = 0.222837 * safezoneH + safezoneY;
+			w = 0.23492 * safezoneW;
+			h = 0.03 * safezoneH;
 
 			maxChars = 64;
 

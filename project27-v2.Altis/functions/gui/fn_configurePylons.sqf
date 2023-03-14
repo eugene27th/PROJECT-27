@@ -32,6 +32,8 @@ private _pylonsConfig = [];
 	if (_magazineName == "empty") then {
 		_magazineName = "";
 	};
+
+	systemChat str (getText (configFile >> "CfgMagazines" >> (_currentPylonMagazines # _forEachIndex) >> "pylonWeapon"));
 	
 	_vehicle removeWeapon (getText (configFile >> "CfgMagazines" >> (_currentPylonMagazines # _forEachIndex) >> "pylonWeapon"));
 	_vehicle setPylonLoadout [_forEachIndex + 1, _magazineName, true];

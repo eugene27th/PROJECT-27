@@ -90,7 +90,11 @@
                 private _vehiclePlayer = vehicle (_allPlayers # _i);
                 private _vehicleType = (_vehiclePlayer call BIS_fnc_objectType) # 1;
 
-                if (!(_vehicleType in ["Helicopter", "Plane"]) || (random 1) > 0.7) then {
+                if (!(_vehicleType in ["Helicopter", "Plane"])) then {
+                    continue;
+                };
+
+                if ((random 1) > 0.5) {
                     continue;
                 };
 

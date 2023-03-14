@@ -9,7 +9,7 @@
 
 params ["_sectorTrigger", ["_deleteDelay", 0]];
 
-waitUntil {uiSleep 30; !triggerActivated _sectorTrigger};
+waitUntil {uiSleep 10; !triggerActivated _sectorTrigger};
 
 private _captureTrigger = _sectorTrigger getVariable "captureTrigger";
 

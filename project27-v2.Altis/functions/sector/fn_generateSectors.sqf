@@ -1,7 +1,6 @@
 /*
     Author: eugene27
     Date: 11.08.2022
-	Update: 04.11.2022
     
     Example:
         [] call P27_fnc_generateSectors
@@ -16,7 +15,7 @@ private _createSectorTrigger = {
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trg setTriggerTimeout [3, 3, 3, true];
 	_trg setTriggerStatements [
-		"{vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0",
+		"(({vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0) || ('Land_DataTerminal_01_F' in (((position thisTrigger) nearObjects ((triggerArea thisTrigger) # 0)) apply { typeOf _x })))",
 		"[thisTrigger] call P27_fnc_createSector",
 		""
 	];

@@ -1,4 +1,4 @@
-version = "A2.0.2 b6";
+version = "A2.0.2 b7";
 
 debugMode = true;
 
@@ -107,7 +107,7 @@ configObjects = [
 	]
 ];
 
-additionalClassesToVehicleSpawnList = ["Land_dataTerminal_01_F", "Land_CanisterFuel_F", "ACE_Wheel", "ACE_Track", "Land_WoodenCrate_01_F"];
+additionalClassesToVehicleSpawnList = ["Land_DataTerminal_01_F", "Land_CanisterFuel_F", "ACE_Wheel", "ACE_Track", "Land_WoodenCrate_01_F"];
 
 configLoadoutItems = [
 	[
