@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=108;
+		nextID=176;
 	};
 	class MarkerIDProvider
 	{
@@ -16,18 +16,18 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15131.518,23.220819,17190.072};
-		dir[]={0.34412757,-0.2649475,0.90076679};
-		up[]={0.094554827,0.9642629,0.24750102};
-		aside[]={0.93415064,6.9499947e-008,-0.35688138};
+		pos[]={15149.03,21.50663,17214.547};
+		dir[]={-0.65011555,-0.39357826,0.64995843};
+		up[]={-0.27833548,0.91929108,0.27826822};
+		aside[]={0.7070213,0,0.70719218};
 	};
 };
 binarizationWanted=0;
-sourceName="p27_helitrain";
+sourceName="p27-training";
 addons[]=
 {
-	"rhsusf_c_troops",
-	"rhsusf_c_melb"
+	"rhs_c_a2port_air",
+	"rhs_c_troops"
 };
 class AddonsMetaData
 {
@@ -36,15 +36,15 @@ class AddonsMetaData
 		items=2;
 		class Item0
 		{
-			className="rhsusf_c_troops";
-			name="RHSUSF Infantry & Equipment";
+			className="rhs_c_a2port_air";
+			name="A2 ported air";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
 		class Item1
 		{
-			className="rhsusf_c_melb";
-			name="MELB";
+			className="rhs_c_troops";
+			name="AFRF Infantry & Equipment";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
 		};
@@ -52,7 +52,7 @@ class AddonsMetaData
 };
 dlcs[]=
 {
-	"RHS_USAF"
+	"RHS_AFRF"
 };
 randomSeed=16052202;
 class ScenarioData
@@ -79,13 +79,7 @@ class CustomAttributes
 			{
 				class data
 				{
-					class type
-					{
-						type[]=
-						{
-							"ARRAY"
-						};
-					};
+					singleType="ARRAY";
 				};
 			};
 		};
@@ -102,13 +96,7 @@ class CustomAttributes
 			{
 				class data
 				{
-					class type
-					{
-						type[]=
-						{
-							"BOOL"
-						};
-					};
+					singleType="BOOL";
 					value=1;
 				};
 			};
@@ -142,11 +130,27 @@ class Mission
 	};
 	class Entities
 	{
-		items=2;
+		items=3;
 		class Item0
 		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15137.109,21.175001,17222.07};
+				angles[]={-0,2.3645203,0};
+			};
+			side="East";
+			flags=6;
+			class Attributes
+			{
+			};
+			id=145;
+			type="RHS_Mi8AMTSh_vvsc";
+		};
+		class Item1
+		{
 			dataType="Group";
-			side="West";
+			side="East";
 			class Entities
 			{
 				items=2;
@@ -155,31 +159,33 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={15139.436,17.911438,17203.965};
+						position[]={15137.11,17.911438,17222.25};
+						angles[]={-0,2.3491902,0};
 					};
-					side="West";
+					side="East";
 					flags=6;
 					class Attributes
 					{
 						isPlayer=1;
 					};
-					id=106;
-					type="rhsusf_army_ucp_helipilot";
+					id=173;
+					type="rhs_pilot_combat_heli";
 				};
 				class Item1
 				{
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={15139.436,19.851612,17203.965};
+						position[]={15154.429,21.086182,17244.416};
+						angles[]={-0,2.3491902,0};
 					};
-					side="West";
-					flags=4;
+					side="East";
 					class Attributes
 					{
 					};
-					id=107;
-					type="rhsusf_army_ucp_helipilot";
+					id=174;
+					type="rhs_pilot_combat_heli";
+					atlOffset=3.1747437;
 				};
 			};
 			class Attributes
@@ -197,8 +203,8 @@ class Mission
 					class Item0
 					{
 						linkID=0;
-						item0=106;
-						item1=105;
+						item0=173;
+						item1=145;
 						class CustomData
 						{
 							role=1;
@@ -207,8 +213,8 @@ class Mission
 					class Item1
 					{
 						linkID=1;
-						item0=107;
-						item1=105;
+						item0=174;
+						item1=172;
 						class CustomData
 						{
 							role=2;
@@ -217,25 +223,23 @@ class Mission
 					};
 				};
 			};
-			id=104;
+			id=171;
 		};
-		class Item1
+		class Item2
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15138.88,19.850174,17200.082};
+				position[]={15158.044,21.084743,17244.012};
+				angles[]={-0,2.3491902,0};
 			};
-			side="West";
-			flags=6;
+			side="East";
+			flags=4;
 			class Attributes
 			{
-				reportRemoteTargets=1;
-				receiveRemoteTargets=1;
-				reportOwnPosition=1;
 			};
-			id=105;
-			type="RHS_MELB_AH6M";
+			id=172;
+			type="RHS_Mi24P_vvsc";
 		};
 	};
 };

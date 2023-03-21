@@ -32,12 +32,24 @@ addMissionEventHandler ["Entitykilled", {
 	switch (_victimSide) do {
 		case (_enemySide): {
 			_playerStat set [0, (_playerStat # 0) + 1];
+
+			if (_killer getVariable ["killReports", false]) then {
+				["Enemy killed!"] remoteExec ["systemChat", owner _killer];
+			};
 		};
 		case (side _killer): {
 			_playerStat set [1, (_playerStat # 1) + 1];
+
+			if (_killer getVariable ["killReports", false]) then {
+				["Friendly killed! Why?"] remoteExec ["systemChat", owner _killer];
+			};
 		};
 		case civilian: {
 			_playerStat set [2, (_playerStat # 2) + 1];
+
+			if (_killer getVariable ["killReports", false]) then {
+				["Looks like a war crime..."] remoteExec ["systemChat", owner _killer];
+			};
 		};
 	};
 
@@ -48,4 +60,10 @@ addMissionEventHandler ["Entitykilled", {
 	};
 	
 	missionNamespace setVariable ["playerStats", _playerStats, true];
+}];
+
+addMissionEventHandler ["PlayerDisconnected", {
+	params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
+
+	[_uid call BIS_fnc_getUnitByUID] call P27_fnc_deleteUnitsFromPlayerCrew;
 }];

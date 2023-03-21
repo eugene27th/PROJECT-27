@@ -883,3 +883,7 @@ Animation for automatic wall avoidance = 0;
 force Change the position recovery from left click to right click. = true;
 force Enable automatic wall avoidance. = true;
 force Lookahead for corner detection (in m) = "0.05";
+
+// VCOM SETTINGS
+force VCM_MINEENABLED = false;
+force VCM_StealVeh = false;

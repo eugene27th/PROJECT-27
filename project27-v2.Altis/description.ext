@@ -3,9 +3,7 @@ cba_settings_hasSettingsFile = 1;
 author			= "eugene27";
 OnLoadName		= "PROJECT27";
 OnLoadMission	= "Sandbox. That's it.";
-// loadScreen = "img\preview.paa";
 overviewText    = "Sandbox. That's it.";
-// overviewPicture = "img\preview.paa";
 
 enableDebugConsole[] = { "76561198141746661", "76561198138702011", "76561198060515006" };
 
@@ -53,6 +51,9 @@ class CfgFunctions {
 			class createCrowdUnits {};
 			class createPatrolVehicles {};
 			class createTurrets {};
+
+			class createUnitToPlayerCrew {};
+			class deleteUnitsFromPlayerCrew {};
 		};
 
 		class events {

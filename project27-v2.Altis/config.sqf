@@ -1,4 +1,4 @@
-version = "A2.0.2 b7";
+version = "A2.0.2 b9";
 
 debugMode = true;
 

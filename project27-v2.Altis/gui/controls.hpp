@@ -122,9 +122,9 @@ class dialogVehicleService {
 		class headerBlock: RscText {
 			idc = -1;
 
-			x = 0.377545 * safezoneW + safezoneX;
-			y = 0.180001 * safezoneH + safezoneY;
-			w = 0.246567 * safezoneW;
+			x = 0.377417 * safezoneW + safezoneX;
+			y = 0.154804 * safezoneH + safezoneY;
+			w = 0.246746 * safezoneW;
 			h = 0.025 * safezoneH;
 
 			colorBackground[] = {0, 0.7, 0, 0.7};
@@ -133,9 +133,9 @@ class dialogVehicleService {
 		class headerText: RscText {
 			idc = -1;
 			
-			x = 0.377545 * safezoneW + safezoneX;
-			y = 0.180001 * safezoneH + safezoneY;
-			w = 0.246567 * safezoneW;
+			x = 0.377417 * safezoneW + safezoneX;
+			y = 0.154804 * safezoneH + safezoneY;
+			w = 0.246746 * safezoneW;
 			h = 0.025 * safezoneH;
 
 			sizeEx = 0.025;
@@ -145,10 +145,10 @@ class dialogVehicleService {
 		class mainBackground: RscText {
 			idc = -1;
 
-			x = 0.377418 * safezoneW + safezoneX;
-			y = 0.202419 * safezoneH + safezoneY;
+			x = 0.377417 * safezoneW + safezoneX;
+			y = 0.180001 * safezoneH + safezoneY;
 			w = 0.246746 * safezoneW;
-			h = 0.618721 * safezoneH;
+			h = 0.663515 * safezoneH;
 
 			colorBackground[] = {0, 0, 0, 0.7};
 		};
@@ -157,7 +157,7 @@ class dialogVehicleService {
 			idc = -1;
 
 			x = 0.5 * safezoneW + safezoneX;
-			y = 0.73517 * safezoneH + safezoneY;
+			y = 0.712773 * safezoneH + safezoneY;
 			w = 0.119436 * safezoneW;
 			h = 0.0307961 * safezoneH;
 
@@ -169,9 +169,9 @@ class dialogVehicleService {
 		class categoryList: RscCombo {
 			idc = 2001;
 
-			x = 0.383189 * safezoneW + safezoneX;
-			y = 0.216396 * safezoneH + safezoneY;
-			w = 0.236254 * safezoneW;
+			x = 0.383192 * safezoneW + safezoneX;
+			y = 0.193999 * safezoneH + safezoneY;
+			w = 0.236253 * safezoneW;
 			h = 0.0307961 * safezoneH;
 
 			onLBSelChanged = "[] call P27_fnc_updateItemsList";
@@ -180,10 +180,10 @@ class dialogVehicleService {
 		class itemsList: RscListbox {
 			idc = 2002;
 
-			x = 0.383189 * safezoneW + safezoneX;
-			y = 0.253636 * safezoneH + safezoneY;
+			x = 0.383192 * safezoneW + safezoneX;
+			y = 0.234034 * safezoneH + safezoneY;
 			w = 0.236247 * safezoneW;
-			h = 0.470338 * safezoneH;
+			h = 0.470337 * safezoneH;
 
 			onLBSelChanged = "";
 		};
@@ -191,10 +191,10 @@ class dialogVehicleService {
 		class itemLoadx1: RscButton {
 			idc = 2003;
 			
-			x = 0.383188 * safezoneW + safezoneX;
-			y = 0.735171 * safezoneH + safezoneY;
-			w = 0.0249364 * safezoneW;
-			h = 0.030796 * safezoneH;
+			x = 0.383192 * safezoneW + safezoneX;
+			y = 0.712773 * safezoneH + safezoneY;
+			w = 0.0249363 * safezoneW;
+			h = 0.0307961 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = 0.035;
@@ -206,10 +206,10 @@ class dialogVehicleService {
 		class itemLoadx2: RscButton {
 			idc = 2004;
 
-			x = 0.411878 * safezoneW + safezoneX;
-			y = 0.735171 * safezoneH + safezoneY;
-			w = 0.0249364 * safezoneW;
-			h = 0.030796 * safezoneH;
+			x = 0.411934 * safezoneW + safezoneX;
+			y = 0.712773 * safezoneH + safezoneY;
+			w = 0.0249363 * safezoneW;
+			h = 0.0307961 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = 0.035;
@@ -221,10 +221,10 @@ class dialogVehicleService {
 		class itemLoadx5: RscButton {
 			idc = 2005;
 			
-			x = 0.439626 * safezoneW + safezoneX;
-			y = 0.735171 * safezoneH + safezoneY;
-			w = 0.0249364 * safezoneW;
-			h = 0.030796 * safezoneH;
+			x = 0.439627 * safezoneW + safezoneX;
+			y = 0.712773 * safezoneH + safezoneY;
+			w = 0.0249363 * safezoneW;
+			h = 0.0307961 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = 0.035;
@@ -236,10 +236,10 @@ class dialogVehicleService {
 		class itemLoadx10: RscButton {
 			idc = 2006;
 			
-			x = 0.4685 * safezoneW + safezoneX;
-			y = 0.735171 * safezoneH + safezoneY;
-			w = 0.0249364 * safezoneW;
-			h = 0.030796 * safezoneH;
+			x = 0.468501 * safezoneW + safezoneX;
+			y = 0.712773 * safezoneH + safezoneY;
+			w = 0.0249363 * safezoneW;
+			h = 0.0307961 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = 0.035;
@@ -252,7 +252,7 @@ class dialogVehicleService {
 			idc = 2007;
 
 			x = 0.502153 * safezoneW + safezoneX;
-			y = 0.739779 * safezoneH + safezoneY;
+			y = 0.717382 * safezoneH + safezoneY;
 			w = 0;
 			h = 0.0223972 * safezoneH;
 
@@ -262,14 +262,17 @@ class dialogVehicleService {
 		class repairAndRearm: RscButton {
 			idc = 2008;
 			
-			x = 0.383189 * safezoneW + safezoneX;
-			y = 0.774366 * safezoneH + safezoneY;
-			w = 0.0918739 * safezoneW;
-			h = 0.0335956 * safezoneH;
+			x = 0.383192 * safezoneW + safezoneX;
+			y = 0.754767 * safezoneH + safezoneY;
+			w = 0.091874 * safezoneW;
+			h = 0.0335957 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = 0.035;
 			text = "REPAIR & REARM";
+
+			colorBackground[] = {0, 0.60, 0.1, 0.35};
+			colorBackgroundActive[] = {0, 0.60, 0.1, 0.8};
 
 			action = "[vehicle player] call P27_fnc_vehicleService";
 		};
@@ -277,14 +280,17 @@ class dialogVehicleService {
 		class clearInventory: RscButton {
 			idc = 2009;
 			
-			x = 0.48031 * safezoneW + safezoneX;
-			y = 0.774364 * safezoneH + safezoneY;
+			x = 0.480313 * safezoneW + safezoneX;
+			y = 0.754767 * safezoneH + safezoneY;
 			w = 0.0748114 * safezoneW;
-			h = 0.0335956 * safezoneH;
+			h = 0.0335957 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = 0.035;
 			text = "CLEAR INVENT";
+
+			colorBackground[] = {0, 0.2, 1, 0.35};
+			colorBackgroundActive[] = {0, 0.2, 1, 0.8};
 
 			action = "[vehicle player, 'clear'] call P27_fnc_vehicleService";
 		};
@@ -292,16 +298,55 @@ class dialogVehicleService {
 		class deleteVehicle: RscButton {
 			idc = 2010;
 			
-			x = 0.560356 * safezoneW + safezoneX;
-			y = 0.774366 * safezoneH + safezoneY;
+			x = 0.560373 * safezoneW + safezoneX;
+			y = 0.754767 * safezoneH + safezoneY;
 			w = 0.0590614 * safezoneW;
-			h = 0.0335956 * safezoneH;
+			h = 0.0335957 * safezoneH;
 
 			font = "PuristaMedium";
 			sizeEx = 0.035;
 			text = "DELETE";
 
+			colorBackground[] = {1, 0, 0, 0.35};
+			colorBackgroundActive[] = {1, 0, 0, 0.8};
+
 			action = "[vehicle player, 'delete'] call P27_fnc_vehicleService";
+		};
+
+		class addUnit: RscButton {
+			idc = 2011;
+			
+			x = 0.383191 * safezoneW + safezoneX;
+			y = 0.799559 * safezoneH + safezoneY;
+			w = 0.127301 * safezoneW;
+			h = 0.0335957 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "ADD UNIT TO CREW";
+
+			colorBackground[] = {1, 0.8, 0, 0.35};
+			colorBackgroundActive[] = {1, 0.8, 0, 0.7};
+
+			action = "[] call P27_fnc_createUnitToPlayerCrew";
+		};
+
+		class deleteUnits: RscButton {
+			idc = 2012;
+			
+			x = 0.515741 * safezoneW + safezoneX;
+			y = 0.799559 * safezoneH + safezoneY;
+			w = 0.103685 * safezoneW;
+			h = 0.0335957 * safezoneH;
+
+			font = "PuristaMedium";
+			sizeEx = 0.035;
+			text = "DELETE UNITS";
+
+			colorBackground[] = {1, 0, 0, 0.35};
+			colorBackgroundActive[] = {1, 0, 0, 0.8};
+
+			action = "[] call P27_fnc_deleteUnitsFromPlayerCrew";
 		};
 	};
 };
@@ -423,8 +468,8 @@ class dialogViewSettings {
 			idc = -1;
 
 			x = 0.35563 * safezoneW + safezoneX;
-			y = 0.399212 * safezoneH + safezoneY;
-			w = 0.288565 * safezoneW;
+			y = 0.3996 * safezoneH + safezoneY;
+			w = 0.288745 * safezoneW;
 			h = 0.025 * safezoneH;
 
 			colorBackground[] = {0, 0.7, 0, 0.7};
@@ -433,9 +478,9 @@ class dialogViewSettings {
 		class headerText: RscText {
 			idc = -1;
 			
-			x = 0.357861 * safezoneW + safezoneX;
-			y = 0.398373 * safezoneH + safezoneY;
-			w = 0.284628 * safezoneW;
+			x = 0.35563 * safezoneW + safezoneX;
+			y = 0.3996 * safezoneH + safezoneY;
+			w = 0.288745 * safezoneW;
 			h = 0.025 * safezoneH;
 
 			sizeEx = 0.025;

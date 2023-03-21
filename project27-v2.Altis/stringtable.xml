@@ -133,11 +133,11 @@
         
         <Container name="TASK_MINECLEARANCE">
             <Key ID="STR_P27_TASK_TITLE_MINECLEARANCE">
-                <Original>Разминирование</Original>
+                <Original>Demining</Original>
 				<Russian>Разминирование</Russian>
             </Key>
             <Key ID="STR_P27_TASK_DESCRIPTION_MINECLEARANCE">
-                <Original>Нам поступило сообщение о заминированных дорогах.&lt;br/&gt;Задача: разминировать сектор.</Original>
+                <Original>We received a report of mined roads.&lt;br/&gt;Task: clear the sector.</Original>
 				<Russian>Нам поступило сообщение о заминированных дорогах.&lt;br/&gt;Задача: разминировать сектор.</Russian>
             </Key>
 	    </Container>

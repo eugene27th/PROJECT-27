@@ -15,10 +15,12 @@ private _createSectorTrigger = {
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trg setTriggerTimeout [3, 3, 3, true];
 	_trg setTriggerStatements [
-		"(({vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0) || ('Land_DataTerminal_01_F' in (((position thisTrigger) nearObjects ((triggerArea thisTrigger) # 0)) apply { typeOf _x })))",
+		"{vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0",
 		"[thisTrigger] call P27_fnc_createSector",
 		""
 	];
+
+	// "(({vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0) || ('Land_DataTerminal_01_F' in (((position thisTrigger) nearObjects ((triggerArea thisTrigger) # 0)) apply { typeOf _x })))",
 
 	_trg setVariable ["isActive", false];
 	_trg setVariable ["isCaptured", false];

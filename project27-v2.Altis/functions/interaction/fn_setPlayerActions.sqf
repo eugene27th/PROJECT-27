@@ -77,6 +77,17 @@
 ["setWeatherRainstorm", "Rainstorm", "", {["rainstorm"] remoteExecCall ["P27_fnc_changeEnvironment", 2]}, {true}, ["environmentSettings", "setWeather"]] call P27_fnc_createSelfAction;
 
 
+// player stats
+["playerStats", "My statistics", "", {true}, {true}] call P27_fnc_createSelfAction;
+
+["getPlayerStats", "Get my stats", "", {[true] call P27_fnc_getPlayerStats}, {true}, ["playerStats"]] call P27_fnc_createSelfAction;
+["toggleKillMessage", "Switch kill reports", "", {
+    private _state = !(player getVariable ["killReports", false]);
+
+    player setVariable ["killReports", _state, true];
+    systemChat format ["Show kill reports: %1.", _state];
+}, {true}, ["playerStats"]] call P27_fnc_createSelfAction;
+
+
 // other
-["getPlayerStats", "My statistics", "", {[true] call P27_fnc_getPlayerStats}, {true}] call P27_fnc_createSelfAction;
 ["changeViewSettings", "View settings", "", {[] call P27_fnc_showViewSettings}, {true}] call P27_fnc_createSelfAction;

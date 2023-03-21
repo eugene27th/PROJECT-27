@@ -94,7 +94,7 @@
                     continue;
                 };
 
-                if ((random 1) > 0.5) {
+                if ((random 1) > 0.5) then {
                     continue;
                 };
 
