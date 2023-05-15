@@ -8,16 +8,16 @@
 
 
 addMissionEventHandler ["Entitykilled", {
-	params ["_victim", "_killer"];
+	params ["_victim", "_killer", "_instigator"];
 
-	if (!isPlayer _killer || _victim == _killer) exitWith {};
+	if (!isPlayer _instigator || _victim == _instigator) exitWith {};
 
 	private _victimSide = _victim getVariable "unitSide";
 	private _enemySide = ((configUnits # 0) # 0);
 
 	if (isNil "_victimSide") exitWith {};
 
-	private _playerUID = getPlayerUID _killer;
+	private _playerUID = getPlayerUID _instigator;
 	private _playerStats = missionNamespace getVariable ["playerStats", []];
 	private _playerIndex = _playerStats findIf {(_x # 0) == _playerUID};
 
@@ -33,22 +33,22 @@ addMissionEventHandler ["Entitykilled", {
 		case (_enemySide): {
 			_playerStat set [0, (_playerStat # 0) + 1];
 
-			if (_killer getVariable ["killReports", false]) then {
-				["Enemy killed!"] remoteExec ["systemChat", owner _killer];
+			if (_instigator getVariable ["killReports", false]) then {
+				["Enemy killed!"] remoteExec ["systemChat", owner _instigator];
 			};
 		};
-		case (side _killer): {
+		case (side _instigator): {
 			_playerStat set [1, (_playerStat # 1) + 1];
 
-			if (_killer getVariable ["killReports", false]) then {
-				["Friendly killed! Why?"] remoteExec ["systemChat", owner _killer];
+			if (_instigator getVariable ["killReports", false]) then {
+				["Friendly killed! Why?"] remoteExec ["systemChat", owner _instigator];
 			};
 		};
 		case civilian: {
 			_playerStat set [2, (_playerStat # 2) + 1];
 
-			if (_killer getVariable ["killReports", false]) then {
-				["Looks like a war crime..."] remoteExec ["systemChat", owner _killer];
+			if (_instigator getVariable ["killReports", false]) then {
+				["Looks like a war crime..."] remoteExec ["systemChat", owner _instigator];
 			};
 		};
 	};

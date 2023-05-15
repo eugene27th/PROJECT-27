@@ -1,73 +1,121 @@
-version = "A2.0.2 b9";
+version = "A2.0.3 b1";
 
 debugMode = true;
+
 
 numberOfIedOnRoads = 20;
 numberOfCheckpoints = 10;
 numberOfMaximumParkedVehiclesInSector = 4;
 
+ambientTraffic = true;
+coefBetweenInfAndVehAmbientTraffic  = 0.5;
+
+junkOnMines = true;
+
+
 configSectors = [
+	// safe radius around base
 	1500,
+	// distance from edge of sector
 	600,
+	// locations
 	[
 		[
+			// location
 			"NameCityCapital",
+			// radius
 			360,
+			// spawn configuration
 			[
-				[[7,2],[3,1],[1,1],[1,1],[1,1]], [[1,1],[3,0],[1,1]]
+				[ // enemy spawn configuration. // can be [0] if no one is there
+                    [2,2], // [number of groups in buildings, group size (0 - 1 unit, 1 - 2-4 units, 2 - 4-8 units, 3 - 8-12 units)]
+                    [3,1], // [number of patrol teams, group size (0 - 1 unit, 1 - 2-4 units, 2 - 4-8 units, 3 - 8-12 units)]
+                    [1,0.6], // [number of light vehicles, probability (0-1)]
+                    [1,0.2], // [number of heavy vehicles, probability (0-1)]
+                    [1,1] // [number of turrets, probability]
+                ], 
+                [ // civ spawn configuration. // can be [0] if no one is there
+                    [1,1], // [number of groups in buildings, group size (0 - 1 unit, 1 - 2-4 units, 2 - 4-8 units, 3 - 8-12 units)]
+                    [3,0], // [number of walking teams, group size (0-3)]
+                    [1,0.1] // [number of light vehicles, probability (0-1)]
+                ]
 			]
 		],
 		[
 			"NameCity",
 			320,
 			[
-				[[7,2],[3,1],[1,1],[1,1],[1,1]], [[1,1],[3,0],[1,1]]
+				[[2,2],[3,1],[1,0.6],[1,0.2],[1,1]], [[1,1],[3,0],[1,0.1]]
 			]
 		],
 		[
 			"NameVillage",
 			250,
 			[
-				[[7,2],[3,1],[1,1],[1,1],[1,1]], [[1,1],[3,0],[1,1]]
+				[[2,2],[3,1],[1,0.6],[1,0.2],[1,0.8]], [[1,1],[3,0],[1,0.1]]
 			]
 		],
 		[
 			"NameLocal",
 			150,
 			[
-				[[7,2],[3,1],[1,1],[1,1],[1,1]], [[1,1],[3,0],[1,1]]
+				[[2,1],[3,1],[1,0.4],[1,0.1],[1,1]], [[0],[0],[0]]
 			]
 		],
 		[
 			"Hill",
 			50,
 			[
-				[[7,2],[3,1],[1,1],[1,1],[1,1]], [[1,1],[3,0],[1,1]]
+				[[1,1],[3,1],[0],[0],[2,1]], [[0],[0],[0]]
 			]
 		]
 	]
 ];
 
 customSectors = [
+	// add custom sectors
 	[
 		[
-			[0, 0, 0],
-			360,
+			// position
+			[3000, 350, 0],
+			// radius
+			350,
+			// spawn configuration
 			[
-				[[7,2],[3,1],[1,1],[1,1],[1,1]], [[1,1],[3,0],[1,1]]
+				[[2,2],[3,1],[1,0.6],[1,0.2],[1,0.8]], [[1,1],[3,0],[1,0.1]]
 			]
 		],
 		[
-			[2000, 0, 0],
+			[5000, 200, 0],
 			200,
 			[
-				[[7,2],[3,1],[1,1],[1,1],[1,1]], [[1,1],[3,0],[1,1]]
+				[[2,1],[3,1],[1,0.4],[1,0.1],[1,1]], [[0],[0],[0]]
 			]
 		]
-	], 
+	],
+	// add custom sectors by markers
 	[
 		[
-			[4000, 0, 0],
+			// marker tag in name. ex. markers name: "customSectorMarkerTagSmall_1", "customSectorMarkerTagSmall_2", ...
+			"customSectorMarkerTagBig",
+			// spawn configuration
+			[
+				[[2,2],[3,1],[1,0.6],[1,0.2],[1,0.8]], [[1,1],[3,0],[1,0.1]]
+			]
+		],
+		[
+			"customSectorMarkerTagSmall",
+			[
+				[[2,1],[3,1],[1,0.4],[1,0.1],[1,1]], [[0],[0],[0]]
+			]
+		]
+	],
+	// delete some sectors. if you want to use only custom sectors, remove locations from the array "configSectors # 2" - ex.: [1500, 600, []]
+	[
+		[
+			// position around which sectors will be deleted
+			[7000, 250, 0],
+			// radius
 			500
 		]
 	]
@@ -75,24 +123,34 @@ customSectors = [
 
 configUnits = [
 	[
+		// side
 		independent,
 		[
-			["I_L_Looter_SMG_F","I_L_Looter_Rifle_F","I_L_Looter_SG_F","I_L_Looter_Pistol_F", "I_Soldier_AA_F", "I_Soldier_AT_F", "I_E_Soldier_AA_F", "I_E_Soldier_AT_F", "I_E_Soldier_LAT_F", "I_Soldier_LAT_F"], // infantry
-			["I_G_Offroad_01_F", "I_C_Offroad_02_unarmed_F"], // light vehicles
-			["I_G_Offroad_01_armed_F", "I_C_Offroad_02_LMG_F"], // armed vehicles
-			["I_E_APC_tracked_03_cannon_F", "I_APC_Wheeled_03_cannon_F"], // heavy vehicles
-			["I_C_HMG_02_high_F", "B_T_Static_AT_F"], // turrets
-			["I_Heli_light_03_unarmed_F"] // transport helicopters
+			// infantry
+			["I_L_Looter_SMG_F","I_L_Looter_Rifle_F","I_L_Looter_SG_F","I_L_Looter_Pistol_F", "I_Soldier_AA_F", "I_Soldier_AT_F", "I_E_Soldier_AA_F", "I_E_Soldier_AT_F", "I_E_Soldier_LAT_F", "I_Soldier_LAT_F"],
+			// light vehicles
+			["I_G_Offroad_01_F", "I_C_Offroad_02_unarmed_F"],
+			// armed vehicles
+			["I_G_Offroad_01_armed_F", "I_C_Offroad_02_LMG_F"],
+			// heavy vehicles
+			["I_E_APC_tracked_03_cannon_F", "I_APC_Wheeled_03_cannon_F"],
+			// turrets
+			["I_C_HMG_02_high_F", "B_T_Static_AT_F"],
+			// transport helicopters
+			["I_Heli_light_03_unarmed_F"]
 		]
 	],
 	[
-		["C_Man_formal_4_F", "C_Man_casual_3_F", "C_Man_casual_8_F"], // units
-		["C_SUV_01_F", "C_Hatchback_01_F"] // vehs
+		// units
+		["C_Man_formal_4_F", "C_Man_casual_3_F", "C_Man_casual_8_F"],
+		// vehicles
+		["C_SUV_01_F", "C_Hatchback_01_F"]
 	]
 ];
 
 configTasks = [
-	["ammoCache"], // [task name (without "ts_" prefix), in nearest sectors, in captured sectors]
+	// [task name (without "ts_" prefix), in nearest sectors, in captured sectors],
+	["ammoCache"],
 	["sectorCapture"],
 	["hostageRescue"],
 	["crewRescue"],
@@ -101,17 +159,24 @@ configTasks = [
 ];
 
 configObjects = [
-	[ // road ied
+	// road ied
+	[
+		// mines
 		["ACE_IEDUrbanBig_Range","ACE_IEDLandBig_Range","ACE_IEDUrbanSmall_Range","ACE_IEDLandSmall_Range","ACE_SLAMBottomMine","BombCluster_01_UXO1_F","BombCluster_03_UXO1_F"],
+		// junk/garbage
 		["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"]
 	]
 ];
 
-additionalClassesToVehicleSpawnList = ["Land_DataTerminal_01_F", "Land_CanisterFuel_F", "ACE_Wheel", "ACE_Track", "Land_WoodenCrate_01_F"];
+additionalClassesToVehicleSpawnList = [
+	"Land_DataTerminal_01_F", "Land_CanisterFuel_F", "ACE_Wheel", "ACE_Track", "Land_WoodenCrate_01_F"
+];
 
 configLoadoutItems = [
 	[
+		// category
 		"Medicine",
+		// items
 		[
 			"ACE_adenosine",
 			"ACE_epinephrine",

@@ -17,7 +17,7 @@ private _buildingPositions = [_sectorPosition, _taskRadius] call P27_fnc_getBuil
 private _spawnPosition = selectRandom _buildingPositions;
 
 
-private _hvtClass = selectRandom ["I_L_Looter_SMG_F"];
+private _hvtClass = selectRandom (((configUnits # 0) # 1) # 0);
 private _hvtPreview = getText(configfile >> "CfgVehicles" >> _hvtClass >> "editorPreview");
 
 private _hvtUnit = (createGroup [((configUnits # 0) # 0), true]) createUnit [_hvtClass, _spawnPosition, [], 0, "NONE"];

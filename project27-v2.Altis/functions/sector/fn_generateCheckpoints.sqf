@@ -9,6 +9,8 @@
 
 params [["_count", 10]];
 
+if (_count < 1) exitWith {};
+
 private _roadPositions = [_count] call P27_fnc_getRandomRoadPositions;
 
 private _allTriggers = [];

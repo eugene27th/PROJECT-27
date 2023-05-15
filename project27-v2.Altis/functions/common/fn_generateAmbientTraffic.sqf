@@ -8,8 +8,10 @@
 
 
 [] spawn {
+    if (!ambientTraffic) exitWith {};
+    
     while {true} do {
-        uiSleep 900; 
+        uiSleep 900;
 
         private _allPlayers = allPlayers select {(_x distance respawn) > (configSectors # 0)};
         private _allSectorTriggers = (missionNamespace getVariable ["sectorTriggers", []]) select {!(_x getVariable "isCaptured") && !(_x getVariable "isActive")};
@@ -19,6 +21,12 @@
         };
 
         private _randomPlayer = selectRandom _allPlayers;
+
+        if ((random 1) < coefBetweenInfAndVehAmbientTraffic) then {
+            [position _randomPlayer, [6,12], "infantry"] spawn P27_fnc_createReinforcements;
+            continue;
+        };
+
         private _nearestSectors = _allSectorTriggers select {(_x distance _randomPlayer) < 3000 && (_x distance _randomPlayer) > 1500};
 
         if ((count _nearestSectors) < 1) then {
@@ -72,72 +80,72 @@
         systemChat format ["AA units founded: %1.", count _aaUnits];
     };
 
-    if ((count _aaUnits) > 0) then {
-        while {true} do {
-            uiSleep 600;
+    if ((count _aaUnits) < 1) exitWith {};
 
-            private _allPlayers = allPlayers select {(_x distance respawn) > (configSectors # 0)};
-            private _allSectorTriggers = (missionNamespace getVariable ["sectorTriggers", []]) select {!(_x getVariable "isCaptured") && !(_x getVariable "isActive")};
+    while {true} do {
+        uiSleep 600;
 
-            if ((count _allSectorTriggers) < 1 || (count _allPlayers) < 1) then {
+        private _allPlayers = allPlayers select {(_x distance respawn) > (configSectors # 0)};
+        private _allSectorTriggers = (missionNamespace getVariable ["sectorTriggers", []]) select {!(_x getVariable "isCaptured") && !(_x getVariable "isActive")};
+
+        if ((count _allSectorTriggers) < 1 || (count _allPlayers) < 1) then {
+            continue;
+        };
+
+        private _allUnits = [];
+        private _reinforcementsId = "reinforcements#" + (str serverTime);
+
+        for [{private _i = 0 }, { _i < (count _allPlayers) }, { _i = _i + 1 }] do {
+            private _vehiclePlayer = vehicle (_allPlayers # _i);
+            private _vehicleType = (_vehiclePlayer call BIS_fnc_objectType) # 1;
+
+            if (!(_vehicleType in ["Helicopter", "Plane"])) then {
                 continue;
             };
 
-            private _allUnits = [];
-            private _reinforcementsId = "reinforcements#" + (str serverTime);
+            if ((random 1) > 0.5) then {
+                continue;
+            };
 
-            for [{private _i = 0 }, { _i < (count _allPlayers) }, { _i = _i + 1 }] do {
-                private _vehiclePlayer = vehicle (_allPlayers # _i);
-                private _vehicleType = (_vehiclePlayer call BIS_fnc_objectType) # 1;
-
-                if (!(_vehicleType in ["Helicopter", "Plane"])) then {
-                    continue;
+            private _distanceToSectors = switch (_vehicleType) do {
+                case "Helicopter": {
+                    [1000, 3000]
                 };
-
-                if ((random 1) > 0.5) then {
-                    continue;
-                };
-
-                private _distanceToSectors = switch (_vehicleType) do {
-                    case "Helicopter": {
-                        [1000, 3000]
-                    };
-                    case "Plane": {
-                        [2000, 4000]
-                    };
-                };
-
-                private _vehiclePlayer2D = [(position _vehiclePlayer) # 0, (position _vehiclePlayer) # 1];
-                private _availableSectors = _allSectorTriggers select {(_x distance _vehiclePlayer2D) > (_distanceToSectors # 0) && (_x distance _vehiclePlayer2D) < (_distanceToSectors # 1)};
-                private _sectorsCount = count _availableSectors;
-
-                if (_sectorsCount < 1) then {
-                    continue;
-                };
-
-                if (_sectorsCount > 2) then {
-                    _sectorsCount = 2;
-                };
-
-                for [{private _s = 0 }, { _s < _sectorsCount }, { _s = _s + 1 }] do {
-                    private _pos = [position (_availableSectors # _s), 100, 500] call BIS_fnc_findSafePos;
-
-                    private _grp = createGroup [(configUnits # 0) # 0, true];
-                    private _unit = _grp createUnit [selectRandom _aaUnits, _pos, [], 0, "NONE"];
-
-                    _unit setDir (_unit getDir _vehiclePlayer);
-                    _unit setVariable ["spawnTrigger", _reinforcementsId];
-
-                    _allUnits pushBack _unit;
+                case "Plane": {
+                    [2000, 4000]
                 };
             };
 
-            if ((count _allUnits) > 0) then {
-                [_reinforcementsId] spawn P27_fnc_removeReinforcements;
+            private _vehiclePlayer2D = [(position _vehiclePlayer) # 0, (position _vehiclePlayer) # 1];
+            private _availableSectors = _allSectorTriggers select {(_x distance _vehiclePlayer2D) > (_distanceToSectors # 0) && (_x distance _vehiclePlayer2D) < (_distanceToSectors # 1)};
+            private _sectorsCount = count _availableSectors;
 
-                if (debugMode) then {
-                    systemChat format ["Air vehicle has been spotted. %1 AA units have spawned around.", count _allUnits];
-                };
+            if (_sectorsCount < 1) then {
+                continue;
+            };
+
+            if (_sectorsCount > 2) then {
+                _sectorsCount = 2;
+            };
+
+            for [{private _s = 0 }, { _s < _sectorsCount }, { _s = _s + 1 }] do {
+                private _pos = [position (_availableSectors # _s), 100, 500] call BIS_fnc_findSafePos;
+
+                private _grp = createGroup [(configUnits # 0) # 0, true];
+                private _unit = _grp createUnit [selectRandom _aaUnits, _pos, [], 0, "NONE"];
+
+                _unit setDir (_unit getDir _vehiclePlayer);
+                _unit setVariable ["spawnTrigger", _reinforcementsId];
+
+                _allUnits pushBack _unit;
+            };
+        };
+
+        if ((count _allUnits) > 0) then {
+            [_reinforcementsId] spawn P27_fnc_removeReinforcements;
+
+            if (debugMode) then {
+                systemChat format ["Air vehicle has been spotted. %1 AA units have spawned around.", count _allUnits];
             };
         };
     };
