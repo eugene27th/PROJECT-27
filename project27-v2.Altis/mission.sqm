@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=473;
+		nextID=481;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15174.06,40.913883,17244.363};
-		dir[]={-0.88876301,-0.44449666,0.1119175};
-		up[]={-0.44101387,0.89578068,0.055534679};
-		aside[]={0.12493831,-1.6880222e-008,0.99216557};
+		pos[]={12900.563,25.138985,393.36304};
+		dir[]={-1.2363449e-007,-0.70710683,0.70710683};
+		up[]={-1.2363449e-007,0.70710671,0.70710683};
+		aside[]={1,0,1.7484557e-007};
 	};
 };
 binarizationWanted=0;
@@ -30,14 +30,13 @@ addons[]=
 	"A3_Modules_F_Curator_Curator",
 	"A3_Characters_F",
 	"A3_Weapons_F",
-	"ace_explosives",
-	"A3_Ui_F"
+	"ace_explosives"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=6;
+		items=5;
 		class Item0
 		{
 			className="A3_Structures_F_Bootcamp";
@@ -72,13 +71,6 @@ class AddonsMetaData
 			name="ACE3 - Explosives";
 			author="Команда ACE";
 			url="https://ace3.acemod.org/";
-		};
-		class Item5
-		{
-			className="A3_Ui_F";
-			name="Arma 3 - User Interface";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
 		};
 	};
 };
@@ -2071,53 +2063,55 @@ class Mission
 		};
 		class Item3
 		{
-			dataType="Marker";
+			dataType="Trigger";
 			position[]={16400,-185.97,400};
-			name="customSectorMarkerTagBig";
-			markerType="ELLIPSE";
-			type="";
-			colorName="ColorOrange";
-			a=400;
-			b=400;
-			id=469;
+			class Attributes
+			{
+				name="customSectorTriggerTagBig";
+				sizeA=400;
+				sizeB=400;
+			};
+			id=473;
+			type="EmptyDetectorAreaR50";
 		};
 		class Item4
 		{
-			dataType="Marker";
+			dataType="Trigger";
 			position[]={18400,-185.97,400};
-			name="customSectorMarkerTagBig_1";
-			markerType="ELLIPSE";
-			type="";
-			colorName="ColorOrange";
-			a=400;
-			b=400;
-			id=470;
+			class Attributes
+			{
+				name="customSectorTriggerTagBig_1";
+				sizeA=400;
+				sizeB=400;
+			};
+			id=474;
+			type="EmptyDetectorAreaR50";
 		};
 		class Item5
 		{
-			dataType="Marker";
-			position[]={11150,-169.905,150};
-			name="customSectorMarkerTagSmall";
-			markerType="ELLIPSE";
-			type="";
-			colorName="ColorBlue";
-			a=150;
-			b=150;
-			id=471;
-			atlOffset=16.065002;
+			dataType="Trigger";
+			position[]={13150,-185.97,150};
+			class Attributes
+			{
+				name="customSectorTriggerTagSmall_1";
+				sizeA=150;
+				sizeB=150;
+			};
+			id=479;
+			type="EmptyDetectorAreaR250";
 		};
 		class Item6
 		{
-			dataType="Marker";
-			position[]={13150,-169.875,150};
-			name="customSectorMarkerTagSmall_1";
-			markerType="ELLIPSE";
-			type="";
-			colorName="ColorBlue";
-			a=150;
-			b=150;
-			id=472;
-			atlOffset=16.095001;
+			dataType="Trigger";
+			position[]={11150,-185.97,150};
+			class Attributes
+			{
+				name="customSectorTriggerTagSmall";
+				sizeA=150;
+				sizeB=150;
+			};
+			id=480;
+			type="EmptyDetectorAreaR250";
 		};
 	};
 };

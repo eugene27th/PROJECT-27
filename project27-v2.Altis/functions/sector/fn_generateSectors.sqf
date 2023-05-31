@@ -20,8 +20,6 @@ private _createSectorTrigger = {
 		""
 	];
 
-	// "(({vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0) || ('Land_DataTerminal_01_F' in (((position thisTrigger) nearObjects ((triggerArea thisTrigger) # 0)) apply { typeOf _x })))",
-
 	_trg setVariable ["isActive", false];
 	_trg setVariable ["isCaptured", false];
 	_trg setVariable ["spawnConfig", _config];
@@ -72,6 +70,39 @@ if (debugMode) then {
 
 sectorTriggers = [];
 
+if ((count (customSectors # 1)) > 0) then {
+	private _allMapTriggers = allMissionObjects "EmptyDetector";	
+
+	if ((count _allMapTriggers) < 1) exitWith {};
+
+	{
+		private _tag = _x # 0;
+		
+		private _triggers = _allMapTriggers select {((str _x) find _tag) > -1};
+
+		if ((count _triggers) < 1) then {
+			continue;
+		};
+
+		for [{private _i = 0 }, { _i < (count _triggers) }, { _i = _i + 1 }] do {
+			private _trigger = _triggers # _i;
+
+			private _position = position _trigger;
+			private _sectorRadius = (triggerArea _trigger) # 0;
+			private _triggerRadius = _sectorDistance + _sectorRadius;
+
+			[_position, _triggerRadius, _x # 1] call _createSectorTrigger;
+
+			deleteVehicle _trigger;
+
+			if (debugMode) then {
+				["customSector#" + str _position, _position, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorWhite", "PERSIST"] call CBA_fnc_createMarker;
+				["customSectorTrigger#" + str _position, _position, "ELLIPSE", [_triggerRadius, _triggerRadius], "COLOR:", "ColorBLUFOR", "PERSIST"] call CBA_fnc_createMarker;
+			};
+		};
+	} forEach (customSectors # 1);
+};
+
 if ((count (customSectors # 0)) > 0) then {
 	{
 		private _position = _x # 0;
@@ -85,37 +116,6 @@ if ((count (customSectors # 0)) > 0) then {
 			["customSectorTrigger#" + str _position, _position, "ELLIPSE", [_triggerRadius, _triggerRadius], "COLOR:", "ColorBLUFOR", "PERSIST"] call CBA_fnc_createMarker;
 		};
 	} forEach (customSectors # 0);
-};
-
-if ((count (customSectors # 1)) > 0) then {
-	private _allMapMarkers = allMapMarkers;
-
-	{
-		private _tag = _x # 0;
-		
-		private _markers = _allMapMarkers select {(_x find _tag) > -1};
-
-		if ((count _markers) < 1) then {
-			continue;
-		};
-
-		for [{private _i = 0 }, { _i < (count _markers) }, { _i = _i + 1 }] do {
-			private _marker = _markers # _i;
-
-			private _position = getMarkerPos _marker;
-			private _sectorRadius = (getMarkerSize _marker) # 0;
-			private _triggerRadius = _sectorDistance + _sectorRadius;
-
-			[_position, _triggerRadius, _x # 1] call _createSectorTrigger;
-
-			deleteMarker _marker;
-
-			if (debugMode) then {
-				["customSector#" + str _position, _position, "ELLIPSE", [_sectorRadius, _sectorRadius], "COLOR:", "ColorWhite", "PERSIST"] call CBA_fnc_createMarker;
-				["customSectorTrigger#" + str _position, _position, "ELLIPSE", [_triggerRadius, _triggerRadius], "COLOR:", "ColorBLUFOR", "PERSIST"] call CBA_fnc_createMarker;
-			};
-		};
-	} forEach (customSectors # 1);
 };
 
 if ((count (configSectors # 2)) > 0) then {

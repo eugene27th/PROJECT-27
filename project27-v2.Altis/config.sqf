@@ -1,4 +1,4 @@
-version = "A2.0.3 b1";
+version = "A2.0.3 b2";
 
 debugMode = true;
 
@@ -8,7 +8,7 @@ numberOfCheckpoints = 10;
 numberOfMaximumParkedVehiclesInSector = 4;
 
 ambientTraffic = true;
-coefBetweenInfAndVehAmbientTraffic  = 0.5;
+coefBetweenInfAndVehAmbientTraffic = 0.5;
 
 junkOnMines = true;
 
@@ -18,7 +18,7 @@ configSectors = [
 	1500,
 	// distance from edge of sector
 	600,
-	// locations
+	// locations. if you want to use only custom sectors, remove locations - ex.: [1500, 600, []]
 	[
 		[
 			// location
@@ -27,14 +27,16 @@ configSectors = [
 			360,
 			// spawn configuration
 			[
-				[ // enemy spawn configuration. // can be [0] if no one is there
+				// enemy spawn configuration. // can be [0] if no one is there
+				[
                     [2,2], // [number of groups in buildings, group size (0 - 1 unit, 1 - 2-4 units, 2 - 4-8 units, 3 - 8-12 units)]
                     [3,1], // [number of patrol teams, group size (0 - 1 unit, 1 - 2-4 units, 2 - 4-8 units, 3 - 8-12 units)]
                     [1,0.6], // [number of light vehicles, probability (0-1)]
                     [1,0.2], // [number of heavy vehicles, probability (0-1)]
                     [1,1] // [number of turrets, probability]
                 ], 
-                [ // civ spawn configuration. // can be [0] if no one is there
+                [
+					// civ spawn configuration. // can be [0] if no one is there
                     [1,1], // [number of groups in buildings, group size (0 - 1 unit, 1 - 2-4 units, 2 - 4-8 units, 3 - 8-12 units)]
                     [3,0], // [number of walking teams, group size (0-3)]
                     [1,0.1] // [number of light vehicles, probability (0-1)]
@@ -93,18 +95,18 @@ customSectors = [
 			]
 		]
 	],
-	// add custom sectors by markers
+	// add custom sectors by triggers
 	[
 		[
-			// marker tag in name. ex. markers name: "customSectorMarkerTagSmall_1", "customSectorMarkerTagSmall_2", ...
-			"customSectorMarkerTagBig",
+			// trigger tag in name. ex. triggers name: "customSectorTriggerTagSmall_1", "customSectorTriggerTagSmall_2", ...
+			"customSectorTriggerTagBig",
 			// spawn configuration
 			[
 				[[2,2],[3,1],[1,0.6],[1,0.2],[1,0.8]], [[1,1],[3,0],[1,0.1]]
 			]
 		],
 		[
-			"customSectorMarkerTagSmall",
+			"customSectorTriggerTagSmall",
 			[
 				[[2,1],[3,1],[1,0.4],[1,0.1],[1,1]], [[0],[0],[0]]
 			]
