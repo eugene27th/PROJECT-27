@@ -27,7 +27,7 @@ for [{private _i = 0 }, { _i < (count _roadPositions) }, { _i = _i + 1 }] do {
 	_trg setTriggerTimeout [3, 3, 3, true];
 	_trg setDir _roadDirection;
 	_trg setTriggerStatements [
-		"{vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0",
+		"{vehicle _x in thisList && (((position _x) # 2) < 1000)} count allPlayers > 0",
 		"[thisTrigger] spawn P27_fnc_createCheckpoint",
 		""
 	];

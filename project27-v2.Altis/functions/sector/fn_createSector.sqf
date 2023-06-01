@@ -45,6 +45,7 @@ if (debugMode) then {
 	systemChat format["Starting spawn in sector (%1).", _sectorTrigger];
 };
 
+
 private _allSpawnedEntities = [[], []];
 
 private _enemyConfig = configUnits # 0;
