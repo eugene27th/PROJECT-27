@@ -24,11 +24,11 @@ for [{private _i = 0 }, { _i < (count _roadPositions) }, { _i = _i + 1 }] do {
 	private _trg = createTrigger ["EmptyDetector", _roadPosition, false];
 	_trg setTriggerArea [_trgRadius, _trgRadius, 0, false, 800];
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	_trg setTriggerTimeout [10, 10, 10, true];
+	_trg setTriggerTimeout [3, 3, 3, true];
 	_trg setDir _roadDirection;
 	_trg setTriggerStatements [
 		"{vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0",
-		"[thisTrigger] call P27_fnc_createCheckpoint",
+		"[thisTrigger] spawn P27_fnc_createCheckpoint",
 		""
 	];
 

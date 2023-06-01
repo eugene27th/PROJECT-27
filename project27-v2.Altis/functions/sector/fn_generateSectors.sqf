@@ -15,8 +15,8 @@ private _createSectorTrigger = {
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trg setTriggerTimeout [3, 3, 3, true];
 	_trg setTriggerStatements [
-		"{vehicle _x in thisList && (speed _x < 160)} count allPlayers > 0",
-		"[thisTrigger] call P27_fnc_createSector",
+		"{vehicle _x in thisList && (((position _x) # 2) < 1000)} count allPlayers > 0",
+		"[thisTrigger] spawn P27_fnc_createSector",
 		""
 	];
 

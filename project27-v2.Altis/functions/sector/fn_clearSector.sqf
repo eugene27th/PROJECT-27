@@ -7,7 +7,9 @@
 */
 
 
-params ["_sectorTrigger", ["_deleteDelay", 0]];
+params ["_sectorTrigger", ["_delay", 0]];
+
+uiSleep _delay;
 
 waitUntil {uiSleep 10; !triggerActivated _sectorTrigger};
 
@@ -18,8 +20,10 @@ if (!isNil "_captureTrigger") then {
     _sectorTrigger setVariable ["captureTrigger", nil];
 };
 
+{deleteVehicle _x} forEach ((allUnits + vehicles) select {(_x getVariable ["spawnTrigger", ""]) isEqualTo _sectorTrigger});
+
 _sectorTrigger setVariable ["isActive", false];
 
-uiSleep _deleteDelay;
-
-{deleteVehicle _x} forEach ((allUnits + vehicles) select {(_x getVariable ["spawnTrigger", ""]) isEqualTo _sectorTrigger});
+if (debugMode) then {
+	systemChat format["Sector (%1) is deactivated.", _sectorTrigger];
+};

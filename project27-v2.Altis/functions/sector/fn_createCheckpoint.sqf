@@ -7,16 +7,36 @@
 */
 
 
-params ["_checkpointTrigger"];
+params ["_sectorTrigger"];
 
-private _triggerIsActive = _checkpointTrigger getVariable ["isActive", false];
+private _triggerIsActive = _sectorTrigger getVariable ["isActive", false];
 
 if (_triggerIsActive) exitWith {};
 
-_checkpointTrigger setVariable ["isActive", true];
 
-private _checkpointPosition = position _checkpointTrigger;
-private _checkpointDirection = getDir _checkpointTrigger;
+_sectorTrigger setVariable ["isActive", true];
+
+if (debugMode) then {
+	systemChat format["Sector (%1) is activated.", _sectorTrigger];
+};
+
+uiSleep 15;
+
+if ((count (allPlayers inAreaArray _sectorTrigger)) < 1) exitWith {
+	if (debugMode) then {
+		systemChat format["Nobody in area. Sector (%1) is deactivated.", _sectorTrigger];
+	};
+	
+	_sectorTrigger setVariable ["isActive", false];
+};
+
+if (debugMode) then {
+	systemChat format["Starting spawn in sector (%1).", _sectorTrigger];
+};
+
+
+private _checkpointPosition = position _sectorTrigger;
+private _checkpointDirection = getDir _sectorTrigger;
 private _configEnemy = (configUnits # 0) # 1;
 
 
@@ -36,17 +56,16 @@ for "_i" from 0 to 1 do {
 
 	_spawnedVehicles pushBack _turret;
 
-	private _vehicleCrew = [_turret] call P27_fnc_createCrew;
-	{_x setVariable ["spawnTrigger", _checkpointTrigger]} forEach _vehicleCrew;
+	{_x setVariable ["spawnTrigger", _sectorTrigger]} forEach ([_turret] call P27_fnc_createCrew);
 };
 
 
-[_checkpointTrigger, 100] spawn P27_fnc_createPatrolUnits;
-[_checkpointTrigger, 20, [1,2]] spawn P27_fnc_createCrowdUnits;
+[_sectorTrigger, 100] spawn P27_fnc_createPatrolUnits;
+[_sectorTrigger, 20, [1,2]] spawn P27_fnc_createCrowdUnits;
 
 
 {
-	_x setVariable ["spawnTrigger", _checkpointTrigger];
+	_x setVariable ["spawnTrigger", _sectorTrigger];
 } forEach _spawnedVehicles;
 
 [_spawnedVehicles] call P27_fnc_addSpawnTriggerEventToVehicles;
@@ -59,8 +78,8 @@ for "_i" from 0 to 1 do {
 	"STATE:", ["this", "[thisTrigger] call P27_fnc_setCheckpointCaptureState", ""]
 ] call CBA_fnc_createTrigger) params ["_captureTrigger", "_captureTriggerOptions"];
 
-_captureTrigger setVariable ["checkpointTrigger", _checkpointTrigger];
-_checkpointTrigger setVariable ["captureTrigger", _captureTrigger];
+_captureTrigger setVariable ["checkpointTrigger", _sectorTrigger];
+_sectorTrigger setVariable ["captureTrigger", _captureTrigger];
 
 
-[_checkpointTrigger, 120] spawn P27_fnc_clearSector;
+[_sectorTrigger, 60] spawn P27_fnc_clearSector;

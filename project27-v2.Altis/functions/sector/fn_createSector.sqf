@@ -27,6 +27,23 @@ private _spawnCivConfig = _spawnConfig # 1;
 
 _sectorTrigger setVariable ["isActive", true];
 
+if (debugMode) then {
+	systemChat format["Sector (%1) is activated.", _sectorTrigger];
+};
+
+uiSleep 15;
+
+if ((count (allPlayers inAreaArray _sectorTrigger)) < 1) exitWith {
+	if (debugMode) then {
+		systemChat format["Nobody in area. Sector (%1) is deactivated.", _sectorTrigger];
+	};
+	
+	_sectorTrigger setVariable ["isActive", false];
+};
+
+if (debugMode) then {
+	systemChat format["Starting spawn in sector (%1).", _sectorTrigger];
+};
 
 private _allSpawnedEntities = [[], []];
 
@@ -101,4 +118,4 @@ if (!_sectorIsCaptured) then {
 [_sectorTrigger, _sectorRadius, _spawnCivConfig # 2, _civClasses # 1, _civClasses # 0, civilian] spawn P27_fnc_createPatrolVehicles;
 
 
-[_sectorTrigger] spawn P27_fnc_clearSector;
+[_sectorTrigger, 20] spawn P27_fnc_clearSector;
